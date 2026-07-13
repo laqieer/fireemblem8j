@@ -21,45 +21,65 @@
  *                 (Its neighbour sub_80D6378 `svc 7; bx lr` is the DivArm *quotient* == v/m
  *                 == the >>12 the sibling documents. Both are baseline-incbin BIOS stubs.)
  *
- * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-11; still not byte-exact) ----
- * A compiler-researched spill seed now reproduces the JP allocation anchors that the old
- * 0x1DC-byte staging body missed. It uses hard registers only for roles directly observed
- * in the ROM (`i`=r9, `dtime`=sl, `ltimesp`=r8), an empty `+r` lifetime fence, and
- * GCC-2.95-compatible `+m` barriers for `count`, `t`, `out`, and `outp`. The Makefile
- * applies `-fno-rerun-cse-after-loop` to this staging object only.
+ * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-13; still not byte-exact) ----
+ * The retained follow-up keeps the 2026-07-11 scoped search alias and changes only its
+ * first materialisation:
  *
- *   anchor                    JP ROM target              retained seed
+ *   register struct SplineCtrlPoint *pts_r7 asm("r7");
+ *   asm volatile("" : "=r"(pts_r7) : "0"(pts));
+ *
+ * This is an empty, tied output/input allocator constraint: it emits no instruction of
+ * its own and does not hard-pin the formal `pts` parameter. Compared with the previous
+ * `= pts; asm("" : "+r"(pts_r7));` form, the volatile allocation point changes later
+ * block coloring enough to improve the positional byte residual by 11. Existing r9/sl/r8
+ * roles, the ordered `limit`, stack-home barriers, and the per-object
+ * `-fno-rerun-cse-after-loop` flag remain unchanged.
+ *
+ *   anchor                    JP ROM target              retained candidate
  *   ------------------------  -------------------------  -------------------------
  *   .text extent / frame      0x1F4 / sub sp,#0x3C      0x1F4 / sub sp,#0x3C
- *   stack arrays              lout@24                   lout@24
  *   forced homes              count@2C,t@30,out@34      count@2C,t@30,out@34
  *   `outp == &lout` home      [sp,#0x38]                [sp,#0x38]
  *   high-register roles       i=r9,ltimesp=r8,dtime=sl  i=r9,ltimesp=r8,dtime=sl
- *   remaining root residual   pts=r7                    pts=r5
+ *   entry / search pts        r7 at +0x0C               formal r6 at +0x0C;
+ *                                                          search alias r7 at +0x1A
+ *   loop flag test            lsl; cmp                   lsl; lsr; alias-copy; cmp
+ *   loop setup                ti=r3,limit=r2,ip live     ti=r1,limit=r3,no ip
+ *   loop/open selector        direct beq                 direct beq
  *
- * The unresolved `pts` r5->r7 choice cascades through the low-register coloring and setup
- * schedule. In particular, JP reloads `count-2` before materialising ltimesp/outp and emits
- * a direct `beq` to the open-spline arm; this seed materialises ltimesp/outp first and needs
- * the expanded `bne; b` form. Do NOT hard-pin `pts`: that form is already known to miscompile
- * this reconstruction. Only declaration/barrier ordering was varied.
+ * Remaining blocker: the target has one continuous pts-in-r7 lifetime from entry through
+ * each search and only then reuses r7 as the signed-load scratch. Here the formal survives
+ * in r6, agbcc zero-normalises the u8 loop flag, and the scoped alias is copied into r7 only
+ * after the parameter homes. All-pts tied variants did produce the desired `adds r7,r0,#0`,
+ * but only after those homes and with 415+ byte residuals. The formal parameter itself is
+ * therefore still never hard-pinned.
  *
- * Objective improvement over the trusted prior C (target comparison includes size delta):
- *   prior:  extent 0x1DC, frame 0x34, 441/500 positional byte mismatches,
- *           234/250 positional halfword mismatches.
- *   seed:   extent 0x1F4, frame 0x3C, 422/500 positional byte mismatches,
- *           221/250 positional halfword mismatches, plus every stack/high-reg anchor above.
+ * Objective target comparison (size delta included):
+ *   prior retained V12: 0x1F4, 405/500 byte mismatches, 223/250 halfword mismatches
+ *   retained tied form: 0x1F4, 394/500 byte mismatches, 224/250 halfword mismatches
+ *   decomp.me Sp10a:    hosted 10140 -> candidate compile 10100
  *
- * Bounded follow-up variants (maximum four, none reached score 0):
- *   1. declare `ti` before i/j/slot                         -> identical (422 bytes)
- *   2. swap j/slot declaration order                       -> identical (422 bytes)
- *   3. split/reorder parameter-vs-outp `+m` barriers       -> worse (424 bytes)
- *   4. move the ltimesp `+r` fence before outp assignment  -> identical (422 bytes)
+ * Bounded 2026-07-13 campaign:
+ *   PATH L source archaeology       2 candidates; best 432/496
+ *   PATH M forced-inline extraction 12 variants; every helper inlined, best 454/488
+ *   PATH N tied ABI-copy synthesis  24 probes; N2/N16 best 394/500
+ *   PATH O declaration/frame search 12 variants; best tied 394/500
+ * Live harvest found one Sp10a family member, no forks. GitHub/FE8U/FE7J/FE6J searches
+ * found no genuine counterpart; the FE7J 0805BF2C BinDiff suggestion is unrelated banim.
  *
- * Semantic evidence for the retained seed:
- *   prove_nonmatching.py sub_800A594              -> PROVEN-BOUNDED(1)
- *   differential_test.py sub_800A594 --trials 60 -> EQUIV
- *      (signature kept on one line so the harness models all five args:
- *       ptr,val,val,ptr,val).
+ * RTL evidence for the retained form: formal pts pseudo r22 has 8 refs/live-length 143
+ * and crosses the wrap call; it conflicts with ti r38 (14/77), limit r39 (5/43),
+ * j r33 (15/108), and slot r34 (38/174). The fixed r7 tied pseudo remains distinct,
+ * explaining the surviving r6->r7 copy and setup rotation.
+ *
+ * Semantic evidence for the retained tied form:
+ *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py
+ *       sub_800A594                                -> PROVEN-BOUNDED(1)
+ *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py
+ *       sub_800A594 --trials 60                   -> EQUIV 60/60
+ *       ret4B args=['ptr','val','val','ptr','val'] (all five arguments modeled).
+ * The project and Sp10a function bodies are byte-identical source text
+ * (SHA-256 071c7ed094e5a0d836904a7f9915ca11941fe8b0ecd0e73b790aabed44a38055).
  *
  * Historical attempts retained for provenance: plain -O2 was 0x1DC; -mjp-promote was
  * identical; volatile count was worse (0x208); the old 3471-iteration permuter run
@@ -96,100 +116,112 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, s
     register u16 *ltimesp asm("r8");
     int *outp;
     unsigned int ti;
+    int limit;
 
-    if (loop)
     {
-        t = sub_80D6384(pts[count - 1].time << 12, t);
-        ti = t >> 12;
-        i = 0;
-        ltimesp = ltimes;
-        outp = lout;
-        asm("" : "+r"(ltimesp));
-        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+        register struct SplineCtrlPoint *pts_r7 asm("r7");
 
-        if (count - 2 > 0 && (ti < pts[0].time || ti >= pts[1].time))
+        asm volatile("" : "=r"(pts_r7) : "0"(pts));
+
+        if (loop)
         {
-            do
+            t = sub_80D6384(pts_r7[count - 1].time << 12, t);
+            ti = t >> 12;
+            i = 0;
+            limit = count - 2;
+            ltimesp = ltimes;
+            outp = lout;
+            asm("" : "+r"(ltimesp));
+            asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+            asm("" : "+r"(pts_r7));
+
+            if (limit > 0 && (ti < pts_r7[0].time || ti >= pts_r7[1].time))
             {
-                i++;
-                if (i >= count - 2)
-                    break;
+                do
+                {
+                    i++;
+                    if (i >= limit)
+                        break;
+                    asm("" : "+r"(pts_r7));
+                }
+                while (ti < pts_r7[i].time || ti >= pts_r7[i + 1].time);
             }
-            while (ti < pts[i].time || ti >= pts[i + 1].time);
-        }
 
-        if (i == 0)
-        {
-            dtime = pts[count - 1].time - pts[count - 2].time;
-            lpts[0] = pts[count - 2].x;
-            lpts[1] = pts[count - 2].y;
-            ltimesp[0] = i;
-            j = 0;
-            for (slot = 1; slot <= 2; slot++)
+            if (i == 0)
             {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time + dtime;
-                if (j < count - 1)
+                dtime = pts[count - 1].time - pts[limit].time;
+                lpts[0] = pts[limit].x;
+                lpts[1] = pts[limit].y;
+                ltimesp[0] = i;
+                j = 0;
+                for (slot = 1; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time + dtime;
+                    if (j < count - 1)
+                        j++;
+                }
+                t += dtime << 12;
+            }
+            else
+            {
+                j = i - 1;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
                     j++;
-            }
-            t += dtime << 12;
-        }
-        else
-        {
-            j = i - 1;
-            for (slot = 0; slot <= 2; slot++)
-            {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                j++;
-            }
-        }
-    }
-    else
-    {
-        ti = t >> 12;
-        i = 0;
-        ltimesp = ltimes;
-        outp = lout;
-        asm("" : "+r"(ltimesp));
-        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
-        dtime = count - 1;
-
-        if (dtime > 0 && (ti < pts[0].time || ti >= pts[1].time))
-        {
-            do
-            {
-                i++;
-                if (i >= dtime)
-                    break;
-            }
-            while (ti < pts[i].time || ti >= pts[i + 1].time);
-        }
-
-        if (i == 0)
-        {
-            j = 0;
-            for (slot = 0; slot <= 2; slot++)
-            {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                if (slot < dtime)
-                    j++;
+                }
             }
         }
         else
         {
-            j = i - 1;
-            for (slot = 0; slot <= 2; slot++)
+            ti = t >> 12;
+            i = 0;
+            ltimesp = ltimes;
+            outp = lout;
+            asm("" : "+r"(ltimesp));
+            asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+            dtime = count - 1;
+            asm("" : "+r"(pts_r7));
+
+            if (dtime > 0 && (ti < pts_r7[0].time || ti >= pts_r7[1].time))
             {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                if (j < dtime)
-                    j++;
+                do
+                {
+                    i++;
+                    if (i >= dtime)
+                        break;
+                    asm("" : "+r"(pts_r7));
+                }
+                while (ti < pts_r7[i].time || ti >= pts_r7[i + 1].time);
+            }
+
+            if (i == 0)
+            {
+                j = 0;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
+                    if (slot < dtime)
+                        j++;
+                }
+            }
+            else
+            {
+                j = i - 1;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
+                    if (j < dtime)
+                        j++;
+                }
             }
         }
     }
