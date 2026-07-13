@@ -458,7 +458,8 @@ scripts/tools/decompme/sync_improvement.py <owned-base> \
   --source src/nonmatching/<fn>.c \
   --compiler-settings-from <improved-fork> \
   --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
-  --local-score <local-score> --local-residual "<linked-residual>" --dry-run
+  --local-score <local-score> --local-residual "<linked-residual>" \
+  --proof-result "PROVEN-BOUNDED(n)" --equiv-result "EQUIV 60/60" --dry-run
 
 # Authenticated PATCH + normalized-source/toolchain-record verification.
 scripts/tools/decompme/sync_improvement.py <owned-base> \
@@ -466,6 +467,7 @@ scripts/tools/decompme/sync_improvement.py <owned-base> \
   --compiler-settings-from <improved-fork> \
   --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
   --local-score <local-score> --local-residual "<linked-residual>" \
+  --proof-result "PROVEN-BOUNDED(n)" --equiv-result "EQUIV 60/60" \
   --expected-score <dry-run-score>
 ```
 
@@ -490,6 +492,14 @@ The remote score may be equal or worse because it measures a different compiler
 configuration. **Score monotonicity is not proof of synchronization.** The proof
 is matching normalized source hashes plus the verified metadata record. Older
 adopted seeds must add the guard and be backfilled with this same sequence.
+
+**Confirmed fallback (`J1ka1`, `sub_807D3BC`).** The exact project flags fail
+decomp.me preflight with `"Invalid option 'jp-promote'"`; no compatible hosted
+compiler is exposed. The expected fallback retains the exact normalized source,
+uses hosted stock `-O2`, and records local score **655**, linked residual
+**82/392**, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`, hosted score **10499**, and both
+flag sets. The `J1ka1` registry row remains active. This is a successful source
+sync with a documented toolchain mismatch, not a score regression failure.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
 

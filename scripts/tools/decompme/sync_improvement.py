@@ -16,11 +16,18 @@ not directly comparable.
 Usage:
   sync_improvement.py <owned_slug> --source src/nonmatching/<fn>.c \
     --local-score <score> --local-residual <residual> --local-flags <flags> \
+    --proof-result <PROVEN-BOUNDED(n)> --equiv-result <EQUIV-trials> \
     [--compiler-settings-from <fork>] [--compiler-flags <remote-flags>] --dry-run
   sync_improvement.py <owned_slug> --source src/nonmatching/<fn>.c \
     --local-score <score> --local-residual <residual> --local-flags <flags> \
+    --proof-result <PROVEN-BOUNDED(n)> --equiv-result <EQUIV-trials> \
     [--compiler-settings-from <fork>] [--compiler-flags <remote-flags>] \
     --expected-score <dry-run-score>
+
+Confirmed fallback fixture: J1ka1 rejects local ``-mjp-promote`` and has no
+compatible hosted compiler. The stock ``-O2`` sync records local score 655,
+82/392 residual, PROVEN-BOUNDED(1), EQUIV 60/60, and hosted score 10499 while
+retaining the registry row.
 """
 
 import argparse
@@ -170,7 +177,17 @@ def candidate_settings(target, source, compiler_source=None, compiler_flags=None
     return settings
 
 
-def sync_description(existing, source, local_score, local_residual, local_flags, score, settings):
+def sync_description(
+    existing,
+    source,
+    local_score,
+    local_residual,
+    local_flags,
+    proof_result,
+    equiv_result,
+    score,
+    settings,
+):
     local_flags_normalized = " ".join(local_flags.split())
     remote_flags_normalized = " ".join(settings["compiler_flags"].split())
     comparable = local_flags_normalized == remote_flags_normalized
@@ -179,6 +196,8 @@ def sync_description(existing, source, local_score, local_residual, local_flags,
         "local_score": local_score,
         "local_residual": local_residual,
         "local_compiler_flags": local_flags_normalized,
+        "proof_result": proof_result,
+        "equivalence_result": equiv_result,
         "decompme_score": score,
         "decompme_compiler": settings["compiler"],
         "decompme_compiler_flags": remote_flags_normalized,
@@ -289,6 +308,8 @@ def main(argv=None):
     parser.add_argument("--local-score", required=True)
     parser.add_argument("--local-residual", required=True)
     parser.add_argument("--local-flags", required=True)
+    parser.add_argument("--proof-result", required=True)
+    parser.add_argument("--equiv-result", required=True)
     parser.add_argument("--expected-score", type=int)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
@@ -324,6 +345,8 @@ def main(argv=None):
         args.local_score,
         args.local_residual,
         args.local_flags,
+        args.proof_result,
+        args.equiv_result,
         new_score,
         settings,
     )
@@ -336,11 +359,13 @@ def main(argv=None):
     local_flags = " ".join(args.local_flags.split())
     remote_flags = " ".join(settings["compiler_flags"].split())
     print(
-        "record: local_score=%s local_residual=%s local_flags=%r "
+        "record: local_score=%s local_residual=%s proof=%s equiv=%s local_flags=%r "
         "decompme_score=%d decompme_compiler=%s decompme_flags=%r"
         % (
             args.local_score,
             args.local_residual,
+            args.proof_result,
+            args.equiv_result,
             local_flags,
             new_score,
             settings["compiler"],
