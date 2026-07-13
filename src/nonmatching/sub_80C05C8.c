@@ -24,6 +24,12 @@
  * target boundary as `add r7,r2; mov r8,r3`; the r4/r5 clobber still preserves
  * the exact AP_Update r7/r6 carriers. decomp.me R7AaX: 1380 -> 1175.
  *
+ * 2026-07-13 pressure follow-up: phase-1 indexes unk_34 directly with phaseRole,
+ * while a real phase-role alias becomes the signed X carrier and X/Y are kept
+ * live across the screen-position call by a zero-byte input. Together with the
+ * point-scoped r7 and AP r4/r5 masks this removes the phase-1 sp+8 spill, keeps
+ * both solved anchors, and reaches the target 544-byte size. R7AaX: 1175 -> 480.
+ *
  * On a 0-score fork: move to src/GmapScreen2_Loop.c, flip carved_rom row to
  * src/GmapScreen2_Loop.o(.text), delete asm. `make compare` is the ONLY oracle.
  */
@@ -46,6 +52,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 {
     int chr;
     uintptr_t phaseRole;
+    int phaseAlias;
     struct GmNodeIconDisplayProc * new_var2;
     s16 local_2c;
     const struct NodeIcon * new_var;
@@ -69,28 +76,33 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
     for (phaseRole = 0; (int) phaseRole < 0x1D; phaseRole++)
     {
         s16 x1;
-        s16 y1;
+        int y1;
+
+        phaseAlias = (int) phaseRole;
+        asm("" ::: "r7");
 
         if (!(gGMData.nodes[(int) phaseRole].state & 1))
         {
             continue;
         }
 
-        node = &((int) phaseRole)[gWMNodeData];
+        node = &phaseAlias[gWMNodeData];
         icon = gWMNodeIconData + ((gGMData.nodes[(int) phaseRole].state & 2) ? (node->iconPreClear) : (node->iconPostClear));
 
-        local_28 = (int) phaseRole;
         new_var = icon;
         ;
         new_var4 = 0xF;
         ;
+        phaseAlias = (s16) (node->x - new_var->xCenter);
+        y1 = (s16) ((*node).y - new_var->yCenter);
 
-        if (GmapScreen2_GetNodeScreenPos(proc->pScreenProc, node->x - new_var->xCenter, (*node).y - new_var->yCenter, &local_2c, &local_2a))
+        if (GmapScreen2_GetNodeScreenPos(proc->pScreenProc, phaseAlias, y1, &local_2c, &local_2a))
         {
+            asm("" : : "r"(phaseAlias), "r"(y1));
             local_2c = local_2c & 0x01FF;
             local_2a = local_2a & 0x00FF;
 
-            if (proc->unk_34[local_28 / 0x20] & (1 << ((int) phaseRole & 0x1F)))
+            if (proc->unk_34[(int) phaseRole / 0x20] & (1 << ((int) phaseRole & 0x1F)))
             {
                 local_2a |= 0x0400;
             }
