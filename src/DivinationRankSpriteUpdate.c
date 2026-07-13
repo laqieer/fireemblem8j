@@ -19,7 +19,7 @@ extern const u16 * const gUnk_08A95478[];
 
 void sub_80A2E4C(int);
 
-#define DIVINATION_COS_0 (*(const s16 *) 0x080DC1DC)
+#define DIVINATION_COS_0 gSinLookup[0x40]
 
 struct DivinationSpriteProc
 {
@@ -94,8 +94,7 @@ void DivinationRankSpriteUpdate(struct DivinationSpriteProc * proc)
 
         i = 0;
         scale = 0x100;
-        /* 0x080DC15C is gSinLookup; this pointer spelling preserves the JP role. */
-        data = (const u16 * const *) 0x080DC15C;
+        data = (const u16 * const *)gSinLookup;
 
         while (i <= 4)
         {
