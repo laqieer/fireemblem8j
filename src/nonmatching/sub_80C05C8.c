@@ -11,6 +11,12 @@
  *   prove_nonmatching.py sub_80C05C8 -> PROVEN-BOUNDED(2)
  *   differential_test.py sub_80C05C8 --trials 60 -> EQUIV
  *
+ * 2026-07-13 allocator trace: a point-scoped, zero-byte clobber after the
+ * phase-2 OAM coordinates are defined makes only those two pseudos conflict
+ * with r4/r5. GCC 2.95 therefore assigns yOam0 to r6 and xOam1 to r7, matching
+ * the AP_Update carriers without disturbing proc=r9, i=r8, or outX=sl.
+ * decomp.me R7AaX: 1410 -> 1380.
+ *
  * On a 0-score fork: move to src/GmapScreen2_Loop.c, flip carved_rom row to
  * src/GmapScreen2_Loop.o(.text), delete asm. `make compare` is the ONLY oracle.
  */
@@ -122,6 +128,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 
             xOam1 = local_2c & 0x01FF;
             yOam0 = local_2a & 0x00FF;
+            asm("" ::: "r4", "r5");
             new_var2 = proc;
 
             if (new_var2->unk_34[new_var2->nodeId / 0x20] & (1 << (proc->nodeId & 0x1F)))
