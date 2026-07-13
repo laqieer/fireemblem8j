@@ -117,11 +117,13 @@ LOCAL_FLAGS="<exact make-nonmatching compiler flags>"
 scripts/tools/decompme/sync_improvement.py <registry_slug> \
   --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> \
   --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
-  --local-score <local-score> --local-residual "<linked-residual>" --dry-run
+  --local-score <local-score> --local-residual "<linked-residual>" \
+  --proof-result "PROVEN-BOUNDED(n)" --equiv-result "EQUIV 60/60" --dry-run
 scripts/tools/decompme/sync_improvement.py <registry_slug> \
   --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> \
   --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
   --local-score <local-score> --local-residual "<linked-residual>" \
+  --proof-result "PROVEN-BOUNDED(n)" --equiv-result "EQUIV 60/60" \
   --expected-score <dry-run-score>
 ```
 Try the exact local flags first. If stock decomp.me rejects a project-only flag
@@ -141,6 +143,13 @@ without successful upstream synchronization is **incomplete**. Revert if a
 local proof/EQUIV gate fails; if only the exact remote flags are unsupported,
 retain the source, use the supported fallback, record the mismatch, and keep
 the registry row.
+
+**Confirmed fallback — J1ka1 (`sub_807D3BC`):** exact `-mjp-promote` preflight
+fails with `"Invalid option 'jp-promote'"`, and decomp.me exposes no compatible
+compiler. Synchronize the same normalized source under hosted stock `-O2` and
+record: local score **655**, linked residual **82/392**,
+`PROVEN-BOUNDED(1)`, `EQUIV 60/60`, hosted score **10499**, and both flag sets.
+Keeping the `J1ka1` registry row is the expected successful fallback.
 
 ## 3. Learn — save the pattern to the cookbook (ALWAYS after a new match)
 Diff the matched source against the old `src/nonmatching/<fn>.c` (from git):
@@ -210,6 +219,7 @@ scripts/tools/decompme/sync_improvement.py <registry_slug> \
   --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> \
   --local-score <local-score> --local-residual "<linked-residual>" \
   --local-flags "<exact local flags>" \
+  --proof-result "PROVEN-BOUNDED(n)" --equiv-result "EQUIV 60/60" \
   --expected-score <dry-run-score>
 ```
 Refresh the axis-2 figures (`python3 scripts/calcprogress.py`) into
