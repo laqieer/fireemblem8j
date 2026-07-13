@@ -13,16 +13,37 @@ ASM="$ROOT/asm/$FN.s"
 CBMC=${CBMC:-"$ROOT/.cbmc-spike-tools/root/usr/bin/cbmc"}
 COMMON="--32 --unwind 17 --unwinding-assertions --bounds-check --pointer-check --signed-overflow-check --slice-formula --stop-on-fail"
 
-echo "== provenance: candidate source and JP asm hashes =="
+# Recorded at authoring time against origin/main commit 5c210a85c99fb20d222b1d398dca3d22f015c2b1
+# (see README.md "Provenance"). This package's ref_fn/impl_fn are a hand-audit
+# of THESE EXACT bytes -- if either file has drifted, the transcription is
+# stale and the verdict below must be withheld, not silently re-printed.
+EXPECT_SRC_SHA256=6812f3ae518024464e7356a1f09fdd13dc6bbc51ee5602af2ee2c10c8c520dfd
+EXPECT_ASM_SHA256=e295cbb70533729bf5083c769b6c62b68bea92259314c13a2cd0f3de36953ca6
+
+fail_closed() {
+    echo "FAIL-CLOSED: $1" >&2
+    echo "UNKNOWN (verdict withheld -- provenance mismatch, not re-derived from stale snapshot)" >&2
+    exit 2
+}
+
+echo "== provenance: hash-pinning candidate source and JP asm =="
 if [ ! -f "$SRC" ]; then
-    echo "FAIL-CLOSED: UNKNOWN -- $SRC missing (candidate source moved/renamed)"
-    exit 1
+    fail_closed "$SRC missing (candidate source moved/renamed)"
 fi
 if [ ! -f "$ASM" ]; then
-    echo "FAIL-CLOSED: UNKNOWN -- $ASM missing (JP byte source moved/renamed)"
-    exit 1
+    fail_closed "$ASM missing (JP byte source moved/renamed)"
 fi
-sha256sum "$SRC" "$ASM"
+ACTUAL_SRC_SHA256=$(sha256sum "$SRC" | cut -d' ' -f1)
+ACTUAL_ASM_SHA256=$(sha256sum "$ASM" | cut -d' ' -f1)
+echo "$ACTUAL_SRC_SHA256  $SRC"
+echo "$ACTUAL_ASM_SHA256  $ASM"
+if [ "$ACTUAL_SRC_SHA256" != "$EXPECT_SRC_SHA256" ]; then
+    fail_closed "$SRC sha256 $ACTUAL_SRC_SHA256 != pinned $EXPECT_SRC_SHA256 (candidate source moved; this package's impl_fn transcription is stale, re-derive before trusting the verdict below)"
+fi
+if [ "$ACTUAL_ASM_SHA256" != "$EXPECT_ASM_SHA256" ]; then
+    fail_closed "$ASM sha256 $ACTUAL_ASM_SHA256 != pinned $EXPECT_ASM_SHA256 (byte source moved; this package's ref_fn provenance claim is stale, re-derive before trusting the verdict below)"
+fi
+echo "OK: asm/src bytes match the hashes this package's harnesses were derived from"
 git -C "$ROOT" log -1 --format='base repo HEAD: %H %ci' -- . 2>/dev/null || true
 
 echo
