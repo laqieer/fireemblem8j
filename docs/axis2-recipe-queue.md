@@ -1,4 +1,31 @@
-# Axis #2 (matching-C) — 4 still-asm functions, ranked recipe queue
+# Axis #2 (matching-C) — final 4 still-asm status (matching stopped)
+
+> **[FINAL CURRENT STATUS 2026-07-13.]** This session byte-matched **11
+> functions**, then integrated two proven nonmatching seed improvements. Because
+> neither seed replaced its asm byte provider, the aggregate remains **99.95%
+> (8688/8692), 4 still-asm**. This file is now a status/evidence record, not an
+> instruction to launch more matching work.
+>
+> 1. `sub_800A34C` — score **60**, real five-argument solver ABI,
+>    `PROVEN-BOUNDED(3)`, active
+>    [`ABtKz`](https://decomp.me/scratch/ABtKz). Only GCC costly-argument
+>    precompute/load order remains; **46,080 targeted trees** found no lower
+>    candidate.
+> 2. `sub_800A594` — integrated local **369/500 bytes, 208/250 halfwords**,
+>    `PROVEN-BOUNDED(1)`, `EQUIV 60/60`; active
+>    [`Sp10a`](https://decomp.me/scratch/Sp10a) has exact source/provenance and
+>    hosted score **8906** under stock flags. Hosted and local scores are
+>    different toolchain metrics.
+> 3. `sub_807D3BC` — integrated local **550**, linked residual **61/392**,
+>    size 392/frame 0x90, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`; active
+>    [`J1ka1`](https://decomp.me/scratch/J1ka1) has the exact function body but
+>    hosted score **10499** because decomp.me lacks project `-mjp-promote`.
+>    Compaction is matched; reject/register ordering remains.
+> 4. `sub_80C05C8` — integrated hosted **480** / local **230**, exact target
+>    size **544 B**, `PROVEN-BOUNDED(2)`; active
+>    [`R7AaX`](https://decomp.me/scratch/R7AaX) has exact source/provenance.
+>    The phase-1 spill is removed and phase/AP anchors are exact; remaining
+>    differences are allocator/scheduling residuals outside those anchors.
 
 > **[UPDATE 2026-07-13 — `sub_800FAD0` MATCHED; axis-2 is now 4 still-asm
 > (matching-C 99.95%, 8688/8692).]**
@@ -30,7 +57,7 @@
 > score 0 upstream, and the exact registry rows are retired. The release also
 > carries the `.rom`-section guard for shiftcheck debug relocations. See D369.
 >
-> **Current ranked queue (authoritative `src/nonmatching/*.c` set):**
+> **Historical pre-stop ranked queue (superseded by the final status above):**
 > 1. `sub_80C05C8` — clean JP-vs-US coloring divergence; re-poll R7AaX before
 >    trying exact pins (the prior blind r7/r6 pin attempt regressed).
 > 2. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
@@ -59,16 +86,16 @@
 > **rtMN6** (TsilaAllaoui) and banked — see `docs/agbcc_codegen_levers.md` fork table (row 9) +
 > the "pull & integrate / symbol-mapping gotcha" section in `docs/agbcc-matching-playbook.md §7`.
 >
-> **Community-harvest status (2026-07-07):** `scripts/tools/decompme/decomp_status.py` was run
+> **Historical community-harvest status (2026-07-07):** `scripts/tools/decompme/decomp_status.py` was run
 > across all still-asm functions. **0 of the 15 have a score-0 decomp.me fork to harvest** — all
 > are `DECOMP_THEN_UPDATE` (posted, unmatched). rtMN6 was the only free win available. Best
-> remaining fork scores (lower = closer): **sub_80A6E4C 300** (fork XOT5k — a `_call_via_rN`
+> then-remaining fork scores (lower = closer): **sub_80A6E4C 300** (fork XOT5k — a `_call_via_rN`
 > veneer-register wall per its `src/nonmatching` header), sub_80C05C8 1410, sub_80A2E64 1945,
 > sub_80A6F1C 2665, sub_80A6D34 3290, sub_80A3528 4070, sub_800E1FC 5281, sub_807C8DC 5841,
 > sub_800A594 7613, sub_807D3BC 8821, sub_80A3300 10700, sub_800FAD0 11920,
-> sub_800A34C 12152. Next free win = re-poll this queue (a new community fork
-> appearing at score 0 is a zero-effort integrate); creating a new match is the compute/permuter
-> path (`register asm("rN")` pins + §5a widen recipe), low-ROI per `docs/unmatched_functions_report.md`.
+> sub_800A34C 12152. **These are historical scores, all superseded by the final
+> status at the top of this file.** The then-recommended next move was to re-poll
+> this queue or continue compute/permuter work.
 >
 > **Applied-lever attempts (post-sub_8057F80, 2026-07-07):** tried the sub_8057F80 register-pin
 > lever on **sub_80C05C8** (GmapScreen2_Loop — the cleanest "structure byte-exact, JP-vs-US

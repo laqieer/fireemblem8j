@@ -756,7 +756,7 @@ The .bin count held (these carve real code/pointers out of source-form data, not
   `frontier_df4_menu_037/038` → relocatable `.4byte Sym+0x1` (coincidental constants + the 038 descriptor
   table's 72 mostly-coincidental words correctly SKIPPED for a future typed data-extraction task).
 
-## CURRENT STATE (authoritative, 2026-07-03, main 1897e694f — main CI GREEN)
+## CURRENT STATE (authoritative, 2026-07-13, main 5b35c7635a847b70cca70f4bff77418801a209b6 — exact-SHA CI/Pages + secret scan GREEN)
 - **`.bin` frontier: MISS=3 / FLOOR=1401 / UNCERTAIN=226** (`FE8U=../fireemblem8u python3 scripts/audit_bin_forms.py`).
   The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
   **[refreshed 2026-07-10, D360: live `docs/bin_audit.md` now reads MISS=0 / FLOOR=1407 / UNCERTAIN=34. The 3
@@ -813,7 +813,23 @@ Exact partitions, hashes, and reproduction evidence are recorded in D368.
 
 > **Code-byte companion (frogress/decomp.dev `code` measure, source-form):** **99.78%** (899,408 / 901,428 bytes); **0.22% = 2,020 bytes** remains descriptive asm. Verbatim from `python3 scripts/calcprogress.py`; see D343/D369/D370/D371.
 
-### Code frontier — the 4 remaining functions (axis-2 = 22 → 4; 18 matches banked)
+### Code frontier — the 4 remaining functions (11 byte-matched this session; final seeds integrated)
+
+> **Final 2026-07-13 nonmatching-seed landings (no axis movement):**
+> `sub_800A594` local score-369 seed landed as
+> `42a562774ce82b52ee20bcf19235c0543f4ef2e8`; `sub_80C05C8` hosted
+> score-480/local-score-230 seed landed as
+> `5b35c7635a847b70cca70f4bff77418801a209b6`. Both exact-SHA CI/Pages and
+> secret scans are green. They improve the authoritative `src/nonmatching`
+> reconstructions but **do not replace the asm byte providers**, so matching-C
+> remains **8688/8692 with 4 still-asm**.
+>
+> This session's **11 byte matches** are `AddAttr2dBitMap`,
+> `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`,
+> `PutDivinationRankSprite`, `Event18_ColorFade`, `AdjustNewUnitPosition`,
+> `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`,
+> `DecodeAndVerifyArenaRecord`, `DecodeLinkArenaRecordHeader`, and
+> `GetUnitDefinitionFormEventScr`.
 
 > **2026-07-13 `sub_800FAD0` deterministic match:** `GetUnitDefinitionFormEventScr`
 > (464 B) now compiles byte-exact under its existing per-TU `-mjp-promote`
@@ -884,11 +900,35 @@ claim: the separator emits zero instructions but changes the local-alloc basic-b
 Treat all remaining wall labels as evidence-backed working classifications, not proofs that no
 source lever can exist; `make compare` remains the only match oracle.
 
-Per-function (name — current blocking-diff seed):
-1. **sub_800A34C** — worldmap coeff/segment-search; whole-function reg-coloring wall; `-fno-gcse` gives exact size 0x248 but **536/584 bytes differ**. — decomp.me: https://decomp.me/scratch/ABtKz
-2. **sub_800A594** — sibling of sub_800A34C; spill-decision / reg-coloring wall (JP spills `count`, keeps `pts` in r7). — decomp.me: https://decomp.me/scratch/Sp10a
-3. **sub_807D3BC** — SelectSummonPos; `-mjp-promote`; extra spill-slot/frame-layout decision. — decomp.me: https://decomp.me/scratch/J1ka1
-4. **sub_80C05C8** — GmapScreen2_Loop; clean JP-vs-US coloring divergence. — decomp.me: https://decomp.me/scratch/R7AaX
+Per-function current evidence (local and hosted scores are named separately
+where toolchains differ):
+1. **sub_800A34C** — proven score **60**; exact size 0x248/frame 0x78 and the
+   corrected real five-argument `sub_800A194` ABI are covered by
+   `PROVEN-BOUNDED(3)`. Active
+   [`ABtKz`](https://decomp.me/scratch/ABtKz). The sole residual is GCC's
+   costly-argument precompute/load order immediately before the solver call;
+   **46,080 targeted trees** found no lower candidate.
+2. **sub_800A594** — integrated local **369/500 bytes, 208/250 halfwords**,
+   `PROVEN-BOUNDED(1)`, `EQUIV 60/60`. Active
+   [`Sp10a`](https://decomp.me/scratch/Sp10a) contains exact guarded source and
+   provenance at hosted score **8906** under stock hosted flags. Hosted 8906 is
+   not the project-local 369 metric (`-fno-rerun-cse-after-loop` is local-only).
+   Remaining wall: early `pts` allocation and resulting register/schedule order.
+3. **sub_807D3BC** — integrated local score **550**, linked residual
+   **61/392**, exact size 392/frame 0x90, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`.
+   Active [`J1ka1`](https://decomp.me/scratch/J1ka1) has function-body identity
+   with the project source (normalized body SHA-256
+   `f1845c7ccf949205fd81497acd4609ec04a9cec014120f23cf67495a5855d987`);
+   the source header preserves the campaign provenance and the registry row is
+   active. Hosted score is **10499** because decomp.me lacks project
+   `-mjp-promote`. The compaction core matches; reject materialization and
+   outer-loop register order remain.
+4. **sub_80C05C8** — integrated hosted score **480** / local score **230**,
+   target and candidate **544 B**, `PROVEN-BOUNDED(2)`. Active
+   [`R7AaX`](https://decomp.me/scratch/R7AaX) contains exact guarded source and
+   provenance. The phase-1 spill is removed and the phase/AP anchors are exact;
+   the remaining bytes are allocator/scheduling residuals outside those solved
+   anchors.
 
 **Password-codec remainder = none.**
 The password header decoder, encoder, and decode/verify entry point are all matching C.

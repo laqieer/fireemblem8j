@@ -1,6 +1,46 @@
 # The 4 remaining unmatched functions — understanding report
 
-> **UPDATE 2026-07-13 (`sub_800FAD0` resolved).**
+> **FINAL CURRENT SNAPSHOT 2026-07-13 (`origin/main`
+> `5b35c7635a847b70cca70f4bff77418801a209b6`).**
+> The final two campaign changes are **proven nonmatching seed improvements, not
+> matching-C promotions**: `sub_800A594` landed at
+> `42a562774ce82b52ee20bcf19235c0543f4ef2e8`, then `sub_80C05C8` landed at
+> `5b35c7635a847b70cca70f4bff77418801a209b6`; both exact-SHA CI/Pages and
+> secret-scan runs are green. Therefore axis-2 remains **99.95% (8688/8692),
+> 4 still-asm**.
+>
+> This session byte-matched **11 functions**:
+> `AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`,
+> `PutDivinationRankSprite`, `Event18_ColorFade`, `AdjustNewUnitPosition`,
+> `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`,
+> `DecodeAndVerifyArenaRecord`, `DecodeLinkArenaRecordHeader`, and
+> `GetUnitDefinitionFormEventScr`.
+>
+> Current proven state of the four survivors:
+> - `sub_800A34C`: score **60**, real five-argument solver ABI,
+>   `PROVEN-BOUNDED(3)`, active `ABtKz`; only the costly-argument
+>   precompute/load ordering before `sub_800A194` remains. **46,080** targeted
+>   trees found no lower candidate.
+> - `sub_800A594`: local **369/500 bytes, 208/250 halfwords**,
+>   `PROVEN-BOUNDED(1)`, `EQUIV 60/60`; active `Sp10a` holds the exact guarded
+>   project source and provenance at hosted score **8906** under stock hosted
+>   flags. Local 369 and hosted 8906 are different toolchain metrics.
+> - `sub_807D3BC`: local score **550**, linked residual **61/392**, exact
+>   size **392** and frame **0x90**, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`.
+>   Active `J1ka1` hosts score **10499** because decomp.me lacks the project's
+>   `-mjp-promote`; its function body is diff-zero against the integrated source.
+> - `sub_80C05C8`: local score **230**, hosted `R7AaX` score **480**, target and
+>   candidate size **544 B**, `PROVEN-BOUNDED(2)`. The phase-1 spill is removed,
+>   the phase transition and AP_Update r7/r6 carriers are exact, and the active
+>   scratch contains exact source/provenance. Remaining differences are
+>   allocator/scheduling residuals outside those solved anchors.
+>
+> For Sp10a and R7AaX, decomp.me transport strips exactly one final newline
+> from the generated context. Source text, context lines, provenance, flags,
+> compile score, family response, and active registry rows were independently
+> verified; this canonicalization is not source drift.
+>
+> **PRIOR UPDATE 2026-07-13 (`sub_800FAD0` resolved).**
 > `GetUnitDefinitionFormEventScr` now compiles byte-exact from C. The P23 match
 > uses an ABI-wide fifth argument with a delayed `(s8)` local re-narrow, direct
 > `arg2` lifetime, explicit `[sp,#0x40]/[sp,#0x44]` stack homes, and an r5 tail
@@ -159,9 +199,17 @@ JP-only DEAD spline island
 - **Callers (1):** `SplineSampleAtTime` only (internal call site `_0800A758`).
 - **Verdict:** **DEAD** — its sole caller is the unreferenced root #3, so the whole island is
   unreachable.
-- **Why still asm:** deep whole-function register-coloring / spill divergence (`pts`↔`coeffA`
-  color swap; GCSE hoists tx/ty). 515/600 bytes differ under plain `-O2` — a coloring
-  *permutation*, not extra work.
+- **Current proven seed / why still asm:** active scratch
+  [`ABtKz`](https://decomp.me/scratch/ABtKz) scores **60** with the target
+  0x248-byte extent, frame 0x78, stack map, coloring, control flow, and
+  relocations. The corrected source and proof use the real five-argument
+  `sub_800A194(int *, int *, int *, struct SplineVec2 *, int)` ABI; the fifth
+  argument is genuinely passed at `[sp]`, not supplied accidentally by a local.
+  `PROVEN-BOUNDED(3)` and the differential harness cover all five arguments.
+  The sole residual is GCC's costly-argument precompute/load ordering immediately
+  before the solver call: the candidate reloads `tx` before placing `count` at
+  `[sp]`, while JP materializes r0-r2 first. A bounded **46,080-tree** targeted
+  search found no lower candidate.
 
 ## 3. SplineSampleAtTime — `0x0800A594`  (DEAD — unreferenced root)
 
@@ -181,8 +229,17 @@ JP-only DEAD spline island
   reaches. Almost certainly a JP-only left-over Catmull-Rom implementation superseded by the
   `spline.c` easing library the game actually uses (`Spline_Ease` is called from
   `GetEasedProgress`/bmlib). *Understanding value only — there is no runtime behaviour.*
-- **Why still asm:** spill/reg-coloring (`count` spilled to stack in the JP build vs kept in
-  `sl` here; frame 60 vs 52). 421/500 bytes differ.
+- **Current proven seed / why still asm:** the integrated candidate has the
+  target **500-byte extent** and frame/stack anchors, with local residual
+  **369/500 bytes (208/250 halfwords)**, `PROVEN-BOUNDED(1)`, and
+  `EQUIV 60/60` with all five arguments modeled. Active scratch
+  [`Sp10a`](https://decomp.me/scratch/Sp10a) contains the exact guarded source
+  plus provenance and compiles at hosted score **8906** with stock
+  `-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`. The project-local
+  score 369 uses the additional per-TU `-fno-rerun-cse-after-loop`; therefore
+  **369 and 8906 are not directly comparable**. The remaining root is
+  allocator/scheduling: JP has the direct early r0→r7 `pts` placement, while the
+  retained safe source reaches r7 later and leaves a register-role permutation.
 
 ## Resolved study #4. Event18_ColorFade — `0x0800E1FC`  ✅ MATCHED 2026-07-11
 
@@ -285,9 +342,16 @@ JP-only DEAD spline island
 - **Callees:** `DivRem`, `CanUnitCrossTerrain` (`sub_8019174`), `AdvanceGetLCGRNValue`.
 - **Callers:** 1 direct `BL` — `SelSumPosAndMoveCamera`.
 - **Verdict:** **LIVE** — summon-spell target positioning.
-- **Why still asm:** agbcc register-allocation micro-decision (a `0xff` reject-constant hoist
-  forces an extra `iy` spill → frame 140 vs 144, cascading the register renumber).
-  `-mjp-promote`; JP-specific reimplementation.
+- **Current proven seed / why still asm:** local score **550**, linked residual
+  **61/392**, exact size **392**, and exact frame **0x90** under the required
+  project `-mjp-promote`; `PROVEN-BOUNDED(1)` and `EQUIV 60/60` pass. The
+  compaction core now matches (scan r1, index r5, j r6); the remaining wall is
+  reject materialization/register order — the candidate forms `0xff` in r2 at
+  +0x30, while JP does so at +0x3A after loading `gBmMapSize`, rotating the outer
+  loop's remaining register roles. Active scratch
+  [`J1ka1`](https://decomp.me/scratch/J1ka1) has a function body diff-zero against
+  the integrated source and remains registered; its hosted score is **10499**
+  because stock decomp.me agbcc does not implement `-mjp-promote`.
 
 ## Resolved study #9. DivinationRankSpriteUpdate — `0x080A2E64`  ✅ MATCHED 2026-07-11
 
@@ -476,9 +540,15 @@ JP-only DEAD spline island
 - **Callers:** ProcScr **`ProcScr_GmNodeIconDisplay`** (`+0x24` — a `PROC_REPEAT(GmapScreen2_Loop)`);
   also referenced from a `src/data/frontier_df4_ending` ProcScr.
 - **Verdict:** **LIVE** — the worldmap node-icon display loop.
-- **Why still asm:** a **clean register-coloring NEAR** — the *same* C compiles to a matching
-  coloring on the US axis (fe8u's `worldmap_screen2.s` matches the US ROM) but a different JP
-  coloring: a genuine agbcc JP-vs-US divergence, not a source problem. Default flags.
+- **Current proven seed / why still asm:** authoritative local score **230** and
+  hosted [`R7AaX`](https://decomp.me/scratch/R7AaX) score **480**, with target
+  and candidate size both **544 B** and `PROVEN-BOUNDED(2)`. The final source
+  removes the phase-1 `sp+8` spill, makes the phase transition exact, and keeps
+  the AP_Update r7/r6 carriers exact. R7AaX contains the exact guarded source,
+  provenance, and active registry row. The residual is still an agbcc
+  allocator/scheduling divergence elsewhere in the two paths; the final
+  source/header does not establish a narrower single root, so no more specific
+  cause is claimed here.
 
 ---
 

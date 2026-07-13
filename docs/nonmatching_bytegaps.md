@@ -1,6 +1,18 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **UPDATE 2026-07-13:** axis-2 is now **99.95% (8688/8692), 4 still-asm**.
+> **FINAL CURRENT SNAPSHOT 2026-07-13:** axis-2 is **99.95% (8688/8692),
+> 4 still-asm**. The final A594/C05C8 changes are nonmatching seed
+> improvements, so this aggregate does not move.
+>
+> | function | current project metric | hosted metric / active scratch |
+> |---|---|---|
+> | `sub_800A34C` | proven score **60**; corrected five-argument ABI; only costly-arg precompute/load order remains; 46,080 targeted trees found no lower form | [`ABtKz`](https://decomp.me/scratch/ABtKz) **60** |
+> | `sub_800A594` | **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`, `EQUIV 60/60` | exact-source/provenance [`Sp10a`](https://decomp.me/scratch/Sp10a) **8906** under stock flags; not comparable to local 369 |
+> | `sub_807D3BC` | local **550**, linked **61/392**, size 392/frame 0x90; compaction matched, reject/register order remains | function-body-exact [`J1ka1`](https://decomp.me/scratch/J1ka1) **10499** because hosted agbcc lacks `-mjp-promote` |
+> | `sub_80C05C8` | local **230**, size **544 B**; phase-1 spill removed, phase/AP anchors exact | exact-source/provenance [`R7AaX`](https://decomp.me/scratch/R7AaX) **480** |
+>
+> **PRIOR UPDATE 2026-07-13:** axis-2 became **99.95% (8688/8692),
+> 4 still-asm** when `sub_800FAD0` matched.
 > `GetUnitDefinitionFormEventScr` (`sub_800FAD0`) matched byte-exact through
 > P23: direct arg2, ABI-wide fifth argument with delayed `(s8)` narrowing,
 > target stack homes at `[sp,#0x40]/[sp,#0x44]`, and r5 build-flag readback.
@@ -34,11 +46,13 @@
 > source-invariant; it proved only that the explored mutation vocabulary missed
 > this block-structure lever.
 
-Complete measurement of every `src/nonmatching/*.c` reconstruction base against the
+**Historical 2026-06-26 measurement (not the current score table).** Complete
+measurement of every then-current `src/nonmatching/*.c` reconstruction base against the
 ROM, taken 2026-06-26. **Purpose: kill the unreliable `// FLAGS: ... EXACT / N-byte`
 header annotations** — those conflate structural closeness with byte-closeness and have
 repeatedly sent sessions down dead carves (sub_800A34C's "EXACT" was 536/584 differing).
-`make compare` is the only oracle; this table is the honest permuter-priority list.
+`make compare` is the only oracle; this table is retained as a dated measurement,
+not as the current priority list.
 
 Method: `agbcc -O2 -fhex-asm <FLAGS-hint>` standalone, `objcopy --only-section=.text`,
 byte-diff vs `baserom.gba[start:end]`. Standalone is an **upper bound** (it lacks the
@@ -49,7 +63,7 @@ show why this table is a historical baseline, not an impossibility proof.
 
 | base | JP range | size | differ / total | header claim (UNRELIABLE) |
 |---|---|---|---|---|
-| sub_800A34C | 0A34C..0A594 | 584 | **536/584** | "-fno-gcse EXACT" — FALSE |
+| sub_800A34C | 0A34C..0A594 | 584 | **536/584 (historical; current proven score 60)** | "-fno-gcse EXACT" — FALSE |
 | sub_800E1FC (Event18_ColorFade) | 0E1FC..0E2C8 | 204 | 107/204 | **[MATCHED 2026-07-11 via uVVvN]** |
 | sub_8056890 (EfxAdvanceFrameLut) | 56890..56914 | 132 | 87/132 (+4) | "2-insn" |
 | sub_807C8DC (AdjustNewUnitPosition) | 7C8DC..7CA10 | 308 | 92/308 (+4) | **[MATCHED 2026-07-11 via gdTId]** |
@@ -94,7 +108,7 @@ PutWMFaceOnBg) are already carved to `src/`.
 | sub_80A3528 | 2590 | **[MATCHED 2026-07-11 via vdXu7]** |
 | sub_80A2E64 | 4045 | **[MATCHED 2026-07-11 via l4bts/P13]** |
 | sub_80A73D4 | 4835 | **[MATCHED 2026-07-03, banked]** |
-| sub_800A34C | 10155 | far (matches the 536/584 byte measurement) |
+| sub_800A34C | 10155 | **historical** pre-score-60 baseline; superseded by the current table above |
 
 **Takeaway (corrected):** a plateau is evidence about the tested mutation set, not a
 proof of a permanent agbcc ceiling. Some remaining functions are still compute/community

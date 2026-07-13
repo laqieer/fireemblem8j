@@ -243,9 +243,10 @@ asm/<fn>.s           base.c          src/nonmatching/      nonmatchings/    src/
 
 ---
 
-## Help wanted — decomp.me scratches (start here to match the remaining 4)
+## Current active decomp.me scratches (campaign stopped; status only)
 
-These scratches are **work-in-progress starting points**, not byte-match claims. The
+These scratches are **active status/evidence records**, not byte-match claims or
+authorization to resume matching. The
 owned `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) families were
 closed upstream on 2026-07-10 with decomp.me's supported `match_override` (“matched
 elsewhere”) semantics after their local sources passed the ROM oracle; their registry
@@ -269,12 +270,17 @@ identical to the promoted project source, and its registry row is retired.
 P23 source passed the linked ROM oracle and owned family `eZzgG` exposed
 effective score 0 through the supported `match_override` state.
 
-| # | function | name | decomp.me scratch |
-|---:|---|---|---|
-| 1 | `sub_800A34C` | worldmap coeff/segment-search | https://decomp.me/scratch/ABtKz |
-| 2 | `sub_800A594` | worldmap coeff/segment-search sibling | https://decomp.me/scratch/Sp10a |
-| 3 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 |
-| 4 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
+The final 2026-07-13 integrations improve two staging sources but do not change
+the function count: **8688/8692 matching-C, 4 still descriptive asm**. Local and
+hosted scores below are deliberately separate; different compiler flags make
+them non-comparable.
+
+| function | current project evidence | hosted scratch evidence | remaining block |
+|---|---|---|---|
+| `sub_800A34C` | score **60**; exact 0x248 size/frame/stack/coloring; corrected real five-argument ABI; `PROVEN-BOUNDED(3)` | active [`ABtKz`](https://decomp.me/scratch/ABtKz), score **60** | sole costly-argument precompute/load order before `sub_800A194`; 46,080 targeted trees found no lower form |
+| `sub_800A594` | integrated local **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`Sp10a`](https://decomp.me/scratch/Sp10a), exact guarded source/provenance, hosted **8906** under stock flags | early `pts` allocation and resulting register/schedule permutation; local uses `-fno-rerun-cse-after-loop` |
+| `sub_807D3BC` | integrated local **550**, linked **61/392**, size 392/frame 0x90; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`J1ka1`](https://decomp.me/scratch/J1ka1), function body diff-zero, hosted **10499** because stock decomp.me lacks `-mjp-promote` | compaction core matches; reject materialization and outer-loop register order remain |
+| `sub_80C05C8` | integrated local **230**, size **544 B**, `PROVEN-BOUNDED(2)`; phase-1 spill removed and phase/AP anchors exact | active [`R7AaX`](https://decomp.me/scratch/R7AaX), exact guarded source/provenance, hosted **480** | remaining allocator/scheduling residual outside the solved anchors |
 
 
 ## Metrics
@@ -285,7 +291,8 @@ masquerade as a match. Honesty is mandatory (PUA: no fake matches).
 `calcprogress.py` today (verified): bytes come from carved_rom rows by section
 name (`.text` ⇒ code), and functions are counted **only** from text symbols of
 `src/*.o` objects that appear in a carved_rom row (the oracle, matching C).
-`US_TOTALS["functions"] = 8528`.
+The current JP denominator is **8692** functions: **8688 matching-C + 4
+nonmatching/still-asm**. Do not use the smaller US-ROM function count.
 
 | Metric | Source | Effect of NON_MATCHING C | Change |
 |---|---|---|---|

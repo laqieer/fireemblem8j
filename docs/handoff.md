@@ -1,7 +1,40 @@
 # FE8J handoff — next-session entry point
 
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
-[`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
+[`docs/maintenance.md`](maintenance.md).** Final campaign refresh: 2026-07-13.
+
+> **[FINAL REFRESH 2026-07-13 — matching campaign stopped.]**
+> Current `origin/main` is `5b35c7635a847b70cca70f4bff77418801a209b6`.
+> This session byte-matched **11 functions**; the final A594 and C05C8 changes
+> are proven nonmatching seed improvements, not promotions. Ground truth remains
+> matching-C **99.95% (8688/8692, 4 still-asm)**, source-form code
+> **899,408/901,428 bytes (99.78%)**, self-containment/data **100%**, and named
+> symbols **100% (12688/12688)**.
+>
+> Final seed commits and publication evidence:
+> - `sub_800A594`: `42a562774ce82b52ee20bcf19235c0543f4ef2e8`;
+>   local 369/500 bytes and 208/250 halfwords, `PROVEN-BOUNDED(1)`,
+>   `EQUIV 60/60`; exact-source/provenance `Sp10a` hosted score 8906 under stock
+>   flags. CI/Pages run 29236425303 and secret scan 29236425357 are green.
+> - `sub_80C05C8`: `5b35c7635a847b70cca70f4bff77418801a209b6`;
+>   hosted R7AaX 480/local 230, exact 544-byte size, phase-1 spill removed and
+>   phase/AP anchors exact, `PROVEN-BOUNDED(2)`; exact source/provenance active.
+>   CI/Pages run 29237437754 and secret scan 29237437894 are green.
+>
+> The four remaining functions are:
+> 1. `sub_800A34C` — score 60; real five-argument ABI/proof; active ABtKz;
+>    sole costly-arg precompute/load-order residual; 46,080 targeted trees found
+>    no lower candidate.
+> 2. `sub_800A594` — local 369, hosted 8906; early `pts` allocator/scheduling
+>    wall. Do not conflate the two toolchain metrics.
+> 3. `sub_807D3BC` — local 550, residual 61/392, frame 0x90/size 392; active
+>    J1ka1 hosted 10499 because stock decomp.me lacks `-mjp-promote`; compaction
+>    matches, reject/register order remains.
+> 4. `sub_80C05C8` — hosted 480/local 230; remaining allocator/scheduling
+>    residual outside the solved spill/phase/AP anchors.
+>
+> **No matching/research work is in flight. Keep issue #165 open as the record of
+> these four unmatched functions; do not redispatch without a new user order.**
 
 > **[REFRESH 2026-07-13 — `sub_800FAD0` serial promotion.]**
 > The repaired release history after the already-landed score-85 seed promotes
