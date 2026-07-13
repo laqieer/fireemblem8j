@@ -2396,13 +2396,13 @@ u32 frontier_df4_banim_a_res10[] __attribute__((section(".data.frontier_df4_bani
     0x00000001, (u32)&frontier_df4_misc_lo_007_0E1870 + 0x490, 0x00000003, (u32)&Loop6C_efxThunder, 0x00000000, 0x00000000,
 };
 struct ProcCmd ProcScr_efxThunderBG[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = {
-    PROC_NAME((const void*)0x080E1D0C), PROC_REPEAT(EfxThunderBGMain), PROC_END,
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_007_0E1870 + 0x49C)), PROC_REPEAT(EfxThunderBGMain), PROC_END,
 };
 u32 frontier_df4_banim_a_res11[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = {
     (u32)&Tsa_EfxThuderBg1, (u32)&Tsa_EfxThuderBg2, (u32)&Tsa_EfxThuderBg1, (u32)&Tsa_EfxThuderBg2,
 };
 struct ProcCmd ProcScr_efxThunderBGCOL[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = {
-    PROC_NAME((const void*)0x080E1D24), PROC_MARK(0xA), PROC_REPEAT(EfxThunderBGCOL_Loop), PROC_END,
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_007_0E1870 + 0x4B4)), PROC_MARK(0xA), PROC_REPEAT(EfxThunderBGCOL_Loop), PROC_END,
 };
 struct ProcCmd ProcScr_efxThunderOBJ[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = {
     PROC_NAME((void*)((u8*)frontier_df4_misc_lo_007_0E1870 + 0x508)), PROC_REPEAT(EfxThunderOBJMain), PROC_END,
@@ -2417,7 +2417,7 @@ struct ProcCmd ProcScr_efxFireBG[] __attribute__((section(".data.frontier_df4_ba
    every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 extern const u32 frontier_df4_banim_a_010_5FF7C8 __attribute__((alias("ProcScr_efxFireOBJ")));
 struct ProcCmd ProcScr_efxFireOBJ[] __attribute__((section(".data.frontier_df4_banim_a.gap10"))) = {
-    PROC_NAME((const void*)0x080E1DCC), PROC_REPEAT(EfxFireOBJ_Loop), PROC_END,
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_007_0E1870 + 0x55C)), PROC_REPEAT(EfxFireOBJ_Loop), PROC_END,
 };
 struct ProcCmd ProcScr_efxFireHITBG[] __attribute__((section(".data.frontier_df4_banim_a.gap10"))) = {
     PROC_NAME((void*)((u8*)frontier_df4_misc_lo_007_0E1870 + 0x568)), PROC_REPEAT(EfxFireHitBG_Loop), PROC_END,
