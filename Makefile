@@ -571,6 +571,17 @@ shiftcheck-selfrefs: $(RELOCS_ELF) $(ELF) $(ROM)
 graphicscheck-relocs: $(RELOCS_ELF) $(ELF)
 	$(PYTHON) scripts/audit_graphics_forms.py --relocs-check --elf $(ELF) --relocs-elf $(RELOCS_ELF)
 
+# Layer 1e: structural glyph relocation audit (#143) -- walks the ACTUAL
+# TextGlyphs_System/TextGlyphs_Talk linked lists in the built ROM (schema-known
+# fields only: table-head slots + struct Glyph.sjisNext) and requires a real
+# R_ARM_ABS32 relocation at every non-null pointer word. Catches the exact blind
+# spot scan_relocs.py / audit_pointer_classification.py miss: a plain numeric
+# `u32[]` C initializer, which agbcc never relocates and a `.4byte`-token regex
+# never sees.
+shiftcheck-glyphs: $(RELOCS_ELF) $(ROM) $(ELF)
+	$(PYTHON) $(SHIFTCHECK)/audit_glyph_relocs.py --elf $(ELF) --relocs-elf $(RELOCS_ELF) \
+	    --gba $(ROM) --prefix $(PREFIX)
+
 # Focused unit tests for the relocation scanners. Keep these in the normal gate:
 # path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
 shiftcheck-tests: $(RELOCS_ELF) $(ELF) $(ROM)
@@ -586,16 +597,17 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
 # + packed talk-table false-relocation scan + pointer-classification audit +
-# graphics-payload relocation-slot audit + the graphics audit's own unit tests.
+# graphics-payload relocation-slot audit + the graphics audit's own unit tests
+# + structural glyph relocation audit.
 # `graphicscheck-tests` has NO dependency on $(RELOCS_ELF)/$(ELF) (pure Python,
 # no toolchain), so it runs independently of -- never racing -- the other
 # layers; make's default parallelism-within-a-recipe-list still runs each
 # prerequisite's RECIPE exactly once (this is a plain prerequisite list, not a
 # duplicate inclusion anywhere else), so CI's single `make shiftcheck` call
 # exercises the scripts/test_audit_graphics_forms.py cases exactly once.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-selfrefs graphicscheck-relocs graphicscheck-tests shiftcheck-tests
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-selfrefs graphicscheck-relocs graphicscheck-tests shiftcheck-glyphs shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-selfrefs shiftcheck-tests shiftcheck-diff graphicscheck-relocs graphicscheck-tests
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-selfrefs shiftcheck-glyphs shiftcheck-tests shiftcheck-diff graphicscheck-relocs graphicscheck-tests
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a

@@ -56,6 +56,7 @@ result is recorded in the V1 PR.
 | `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish, plus (from `fireemblem8_relocs.elf`) false ROM ABS32 decodes: non-entry `STT_FUNC` targets, named zero-size semantic resources with addends ≥`0x10000`, proven packed scalars, and every unaudited relocation resolving inside the cartridge header. Header-domain targets fail closed unless they are exact typed FUNC/OBJECT pointers or explicitly audited pinned slots; known TileAnimations3, LZ, and nested DACS-image source domains always fail. |
 | `make shiftcheck-codeliterals` | 1e | Lexically tokenizes every linked code C source (excluding `src/data/**`) for standalone hex integer literals, then rejects numeric values in `[0x08000000, 0x0A000000)`. This catches 7/8/extra-leading-zero and suffixed spellings of agbcc literal-pool words emitted **without** `R_ARM_ABS32`; only the three declaration/call-scoped packed-value contexts documented by D377 are accepted. |
 | `make shiftcheck-selfrefs` | 1f | Decodes every structureless-opaque symbol's built-ROM bytes for self-referential words and checks each hit against a narrow evidence manifest (`scripts/shiftcheck/opaque_selfref_evidence.json`); unresolved candidates or evidence drift fail `scripts/audit_pointers.py --true-debt --gate`. Zero-size symbols are never extended to the next global. |
+| `make shiftcheck-glyphs` | 1g | Structural glyph-table audit (issue #143): walks the ACTUAL `TextGlyphs_System`/`TextGlyphs_Talk` linked lists in the built ROM (schema-known 0xC0 heads + `struct Glyph.sjisNext` chains, cycle-detected, ROM-range-checked) and requires a real relocation at every non-null pointer word. Catches a blind spot Layers 1 and 1d both miss: a raw literal in a single-glyph residue object never looks "MIXED" to the Layer-1 classifier, and a plain C `u32[]` numeric initializer (agbcc never relocates it) is invisible to Layer 1d's `.4byte`-token text scan. `--shifted-gba` adds an optional A/B proof against a `+shift` ROM (`build_shifted_rom.sh`): every reachable glyph's links track `+shift` and its payload bytes stay identical. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
 | `make shiftcheck` | static + tests | The complete non-emulator gate above. |
@@ -253,6 +254,14 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
   sized-provider AREA scalar, all twelve proven header-domain failures,
   TileAnimations3 frame-pointer controls, typed header pointers, pinned cases,
   and intentional raw-domain handling.
+- `audit_glyph_relocs.py` — Layer 1g: structural `TextGlyphs_System`/`TextGlyphs_Talk`
+  relocation audit (issue #143) + optional `--shifted-gba` A/B proof (links track
+  `+shift`, payload bytes identical). Locates the tables from the reference ELF
+  (never hardcoded); walks only the two schema-known pointer fields (table heads,
+  `struct Glyph.sjisNext`), so it can never misclassify arbitrary packed data.
+- `test_audit_glyph_relocs.py` — focused tests (synthetic ROM fixtures, no
+  toolchain needed) for missing-relocation, cycle, malformed-target/truncated-read,
+  and clean-chain traversal behavior.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"
