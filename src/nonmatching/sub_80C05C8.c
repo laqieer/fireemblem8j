@@ -17,6 +17,13 @@
  * the AP_Update carriers without disturbing proc=r9, i=r8, or outX=sl.
  * decomp.me R7AaX: 1410 -> 1380.
  *
+ * 2026-07-13 follow-up: `uintptr_t phaseRole` is one GCC user pseudo across
+ * both phases (greg pseudo 24, 21 refs / live length 396) and therefore keeps
+ * r8 when its role changes from loop index to `&proc->nodeId`. A short r3
+ * nodeId-address scratch plus destination readback of `&gGMData` orders the
+ * target boundary as `add r7,r2; mov r8,r3`; the r4/r5 clobber still preserves
+ * the exact AP_Update r7/r6 carriers. decomp.me R7AaX: 1380 -> 1175.
+ *
  * On a 0-score fork: move to src/GmapScreen2_Loop.c, flip carved_rom row to
  * src/GmapScreen2_Loop.o(.text), delete asm. `make compare` is the ONLY oracle.
  */
@@ -38,7 +45,7 @@ extern s8 GmapScreen2_GetNodeScreenPos(struct GmScreenProc * proc, s16 xIn, s16 
 void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 {
     int chr;
-    int i;
+    uintptr_t phaseRole;
     struct GmNodeIconDisplayProc * new_var2;
     s16 local_2c;
     const struct NodeIcon * new_var;
@@ -49,6 +56,8 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
     struct GmNodeIconDisplayProc * new_var3;
     const struct GMapNodeData * node;
     const struct NodeIcon * icon;
+    const u8 * nodeIdAddr;
+    struct GMapData * gm;
 
     if (!proc->skip)
     {
@@ -57,20 +66,20 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 
     chr = proc->chr / 0x20;
 
-    for (i = 0; i < 0x1D; i++)
+    for (phaseRole = 0; (int) phaseRole < 0x1D; phaseRole++)
     {
         s16 x1;
         s16 y1;
 
-        if (!(gGMData.nodes[i].state & 1))
+        if (!(gGMData.nodes[(int) phaseRole].state & 1))
         {
             continue;
         }
 
-        node = &i[gWMNodeData];
-        icon = gWMNodeIconData + ((gGMData.nodes[i].state & 2) ? (node->iconPreClear) : (node->iconPostClear));
+        node = &((int) phaseRole)[gWMNodeData];
+        icon = gWMNodeIconData + ((gGMData.nodes[(int) phaseRole].state & 2) ? (node->iconPreClear) : (node->iconPostClear));
 
-        local_28 = i;
+        local_28 = (int) phaseRole;
         new_var = icon;
         ;
         new_var4 = 0xF;
@@ -81,7 +90,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
             local_2c = local_2c & 0x01FF;
             local_2a = local_2a & 0x00FF;
 
-            if (proc->unk_34[local_28 / 0x20] & (1 << (i & 0x1F)))
+            if (proc->unk_34[local_28 / 0x20] & (1 << ((int) phaseRole & 0x1F)))
             {
                 local_2a |= 0x0400;
             }
@@ -98,8 +107,12 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 
     if (proc->merge_next_node)
     {
-        node = &proc->nodeId[gWMNodeData];
-        icon = gWMNodeIconData + ((gGMData.nodes[proc->nodeId].state & 2) ? (node->iconPreClear) : (node->iconPostClear));
+        nodeIdAddr = &proc->nodeId;
+        node = &(*nodeIdAddr)[gWMNodeData];
+        new_var4 = gGMData.nodes[*nodeIdAddr].state & 2;
+        gm = &gGMData;
+        phaseRole = (uintptr_t) nodeIdAddr;
+        icon = gWMNodeIconData + (new_var4 ? (node->iconPreClear) : (node->iconPostClear));
 
         *(&local_28) = proc->pScreenProc->x;
         *(&local_26) = proc->pScreenProc->y;
@@ -114,8 +127,8 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 
             do
             {
-                gGMData.nodes[i].state += 0;
-                if (gGMData.nodes[proc->nodeId].state & 2)
+                gm->nodes[*(u8 *) phaseRole].state += 0;
+                if (gm->nodes[*(u8 *) phaseRole].state & 2)
                 {
                     xOam1 = local_2c & 0x01FF;
                 }
@@ -131,7 +144,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
             asm("" ::: "r4", "r5");
             new_var2 = proc;
 
-            if (new_var2->unk_34[new_var2->nodeId / 0x20] & (1 << (proc->nodeId & 0x1F)))
+            if (new_var2->unk_34[*(u8 *) phaseRole / 0x20] & (1 << (*(u8 *) phaseRole & 0x1F)))
             {
                 yOam0 |= 0x0400;
             }
