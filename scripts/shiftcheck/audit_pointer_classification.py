@@ -134,7 +134,7 @@ def iter_4byte_values():
                         sym = ms.group(1)
                         off = int(ms.group(2), 0) if ms.group(2) else 0
                         yield rel, ln, "sym", ms.group(0), sym, off, False
-        except (IsADirectoryError, PermissionError):
+        except (FileNotFoundError, IsADirectoryError, PermissionError):
             continue
 
 

@@ -4,12 +4,14 @@
 # tilemap) or a JASC .pal; the Makefile rebuilds .lz (gbagfx) byte-identical.
 # Region-different assets (btl_bg_0..8, 52..60, 63, 66-68) extracted 2026-06-13
 # via gbagfx -mindist 2 (all round-trip byte-perfect at mindist=2).
+# btl_bg_1's palette is generated from its PNG; btl_bg_64.pal matches FE8U.
 
 src/data/btl_bg/data_btl_bg_p0.o: \
   graphics/btl_bg/btl_bg_0.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_0.gbapal.lz \
   graphics/btl_bg/btl_bg_0.fetsa3.bin.lz \
-  graphics/btl_bg/btl_bg_1.feimg3.bin.lz
+  graphics/btl_bg/btl_bg_1.feimg3.bin.lz \
+  graphics/btl_bg/btl_bg_1.gbapal.lz
 
 src/data/btl_bg/data_btl_bg_p1.o: \
   graphics/btl_bg/btl_bg_1.fetsa3.bin.lz \
@@ -64,7 +66,8 @@ src/data/btl_bg/data_btl_bg_p14.o: \
   graphics/btl_bg/btl_bg_60.fetsa3.bin.lz
 
 src/data/btl_bg/data_btl_bg_p15.o: \
-  graphics/btl_bg/btl_bg_63.gbapal.lz
+  graphics/btl_bg/btl_bg_63.gbapal.lz \
+  graphics/btl_bg/btl_bg_64.gbapal.lz
 
 src/data/btl_bg/data_btl_bg_p16.o: \
   graphics/btl_bg/btl_bg_66.gbapal.lz \

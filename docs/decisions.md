@@ -11259,3 +11259,24 @@ zero-byte placeholders fail repository consistency checks.
 **Result.** The active assembly set drops from 38 to 18 objects: 16 nonempty
 tracked sources plus generated `asm/baserom.o` and `asm/jp_syms.o`. No ROM or
 progress-axis bytes change.
+
+## D375 — identify and reroot the final `data/residual` palettes (2026-07-13)
+
+**Identification.** `data_087AEA64_0.pal` and `data_087E1718_0.pal` are valid
+160-color JASC palettes. Their compressed ROM symbols are respectively
+`btl_bg_1_palette` (164 bytes) and `btl_bg_64_palette` (248 bytes). Both IDA and
+Ghidra trace them through entries 1 and 64 of `gBattleBGDataTable`; the third
+pointer of each 12-byte entry is decompressed by `PutBanimBgPAL`.
+
+**Source proof.** `btl_bg_1.png` generates the first palette's 320-byte
+`.gbapal` exactly, including the same 164-byte LZ stream. The second JASC file
+is byte-identical to FE8U's canonical `graphics/btl_bg/btl_bg_64.pal` and
+generates the same 248-byte stream.
+
+**Decision.** Generate `btl_bg_1.gbapal.lz` directly from its PNG, move the
+second source to `graphics/btl_bg/btl_bg_64.pal`, and fold both definitions into
+their adjacent `src/data/btl_bg` objects (`p0` and `p15`). Delete the two
+address-named providers and layout fragments. No live tracked source remains
+under `data/residual`. The pointer-classification audit now also skips source
+paths deleted in the working tree but not yet removed from the Git index, so
+pre-commit shiftcheck remains usable during source consolidation.

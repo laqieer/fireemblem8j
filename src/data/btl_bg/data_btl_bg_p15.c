@@ -5,3 +5,4 @@
  */
 
 u8 btl_bg_63_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_63.gbapal.lz");
+u8 btl_bg_64_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_64.gbapal.lz");
