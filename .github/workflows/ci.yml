@@ -42,6 +42,9 @@ jobs:
       - name: Layout consistency (every linked object has committed source)
         run: python3 scripts/check_layout.py
 
+      - name: No tracked zero-byte files
+        run: python3 scripts/check_no_empty_files.py
+
       - name: INCBIN build-dep guard (clean-build asset ordering)
         # Catches the class that broke CI on 2026-06-15: a src/data INCBIN of a
         # generated (gitignored) asset with no make-dependency -> a clean parallel

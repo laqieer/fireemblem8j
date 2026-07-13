@@ -962,6 +962,7 @@ clean:
 # builds locally (stale .o) but fails CI's fresh checkout. Also enforced in CI.
 check:
 	$(PYTHON) scripts/check_layout.py
+	$(PYTHON) scripts/check_no_empty_files.py
 
 # Keep chained asset intermediates (e.g. the .4bpp produced en route from PNG to
 # .4bpp.lz) instead of letting make treat them as deletable intermediates and

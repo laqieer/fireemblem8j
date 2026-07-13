@@ -11241,3 +11241,21 @@ superseded provider in the same change. Never retain an unlinked assembly twin
 and never reintroduce an exclusion list. This is ROM-neutral: the active
 assembly object set remains exactly the prior 38 objects (36 tracked sources
 plus `asm/baserom.o` and `asm/jp_syms.o`).
+
+## D374 — delete every tracked zero-byte file and gate against recurrence (2026-07-13)
+
+**Problem.** After D373 exposed every committed `asm/*.s` as active input,
+`asm/stranded_bmbattle.s` and 19 sibling stranded stubs were visibly empty.
+A repository-wide audit found **1,235 tracked zero-byte files**: 20 empty
+assembly stubs, 1,199 exhausted layout fragments, and 16 empty generated
+`m2c.stderr.txt` logs. None carried data or layout rows, and no layout manifest
+referenced an empty assembly object.
+
+**Decision.** Delete all 1,235 zero-byte files. Keep the three nonzero
+whitespace-valued `.map.bin` assets: they contain real binary bytes and are not
+empty. Add `scripts/check_no_empty_files.py` to `make check` and CI so future
+zero-byte placeholders fail repository consistency checks.
+
+**Result.** The active assembly set drops from 38 to 18 objects: 16 nonempty
+tracked sources plus generated `asm/baserom.o` and `asm/jp_syms.o`. No ROM or
+progress-axis bytes change.
