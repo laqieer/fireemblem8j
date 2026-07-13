@@ -22,8 +22,8 @@
  *   Callees: DivRem=DivRem, CanUnitCrossTerrain=sub_8019174.
  * ============================================================================
  *
- * MATCH STATUS (2026-07-11 bounded 3x20k campaign): NOT byte-exact, but the best
- *   proven staging source is now 82/392 differing linked bytes, exact size 392
+ * MATCH STATUS (2026-07-12 bounded H/I/J/K campaign): NOT byte-exact, but the best
+ *   proven staging source is now 80/392 differing linked bytes, exact size 392
  *   and exact `sub sp,#144` frame. Progression from the committed v7 baseline:
  *     331 -> 210  destination readback + scoped empty-register barrier
  *     210 -> 201  scope `reject` inside the outer loop
@@ -31,7 +31,9 @@
  *     138 -> 109  do-while signed-pointer zero-fill (removes the pre-test)
  *     109 -> 82   move the reject fence to the fail path after the OR, plus a
  *                 zero-instruction do-while separator around the zero-fill store
- *   Semantics of this 82-byte candidate:
+ *      82 -> 80   initialize compaction `i` before `j`; this moves the array-scan
+ *                 base from r2 to target r1 and fixes three bytes for one new byte
+ *   Semantics of this 80-byte candidate:
  *     prove_nonmatching.py = PROVEN-BOUNDED(1)
  *     differential_test.py --trials 60 = EQUIV (60/60)
  *
@@ -48,8 +50,9 @@
  *   2. ZERO-FILL SHAPE IS CORRECT, but setup ordering/coloring still differs.
  *      Both emit the exact decrementing `strb; subs; cmp; bge` loop. Mine computes
  *      the end pointer before count+1; JP computes count+1 first. The following
- *      compaction loop remains a clean register rotation
- *      (mine r1/r3/r4/r5 vs JP r5/r2/r3/r4).
+ *      compaction loop remains a clean register rotation: i-first initialization
+ *      fixes the scan base to target r1, but mine keeps i in r2 while JP uses r5,
+ *      and the promoted accumulators remain rotated (mine r3/r4/r5 vs JP r2/r3/r4).
  *
  * BOUNDED COMPUTE CAMPAIGN:
  *   J1ka1 harvest: NONE (family base/best 8821).
@@ -60,9 +63,18 @@
  *     countdown zero-fill: score 1700 -> 820, linked residual 176.
  *   No score 0. No unbounded run, remote execution, or raw-opcode asm.
  *
+ * H/I/J/K FOLLOW-UP (2026-07-12, deterministic caps respected):
+ *   Mandatory live harvest found only owned J1ka1 (no forks), hosted stock score
+ *   10499 because `-mjp-promote` is unsupported. Tested H=6 archaeology/CFG
+ *   candidates, I=9 composite frame layouts, J=10 forced-inline/macro-like phase
+ *   forms, and K=12 target-CFG forms. The sole strict improvement was K11:
+ *   `for (i = 0, j = 0; ...)`, local score 645 (from 655), linked residual
+ *   80/392 (from 82), size 392, frame 0x90, PROVEN-BOUNDED(1), EQUIV 60/60.
+ *
  * VERDICT: UNSOLVED, objectively improved and proven-equivalent. The next useful
- * lever must delay the r2 materialization to JP's +0x3A while preserving the
- * 0x90 frame and exact fail path; do not regress to the old 331-byte experiments.
+ * lever must still delay reject materialization from +0x28 to JP's +0x3A and
+ * seat compaction i in r5 without losing the newly-correct r1 scan base, while
+ * preserving the 0x90 frame and exact fail path.
  */
 
 #include "global.h"
@@ -122,7 +134,7 @@ s8 sub_807D3BC(int x, int y, struct SumThing* result)
         } while (0);
     } while ((int) zero >= (int) indices);
 
-    for (j = 0, i = 0; i < count; i++) {
+    for (i = 0, j = 0; i < count; i++) {
         if (array[i].boolAvailable == 1) {
             indices[j] = i;
             j++;
