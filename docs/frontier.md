@@ -806,9 +806,12 @@ pointers across seven functions. Those 18 source occurrences collapse to
 All 18 live values now use typed object symbols/interior addends. The new
 `shiftcheck-codeliterals` gate scans **6,208 linked code C sources**, keeps the
 three allowlisted contexts declaration/call scoped, and reports **259
-classified / 0 unexplained**; its focused suite raises total shiftcheck tests to
-**9**. Object plus linked-ELF evidence shows `R_ARM_ABS32` at **15/15** affected
-slots, `make compare` is OK, and the dedicated `+0x40000` A/B moves every slot
+classified / 0 unexplained**. Pre-integration hardening tokenizes general
+standalone C hex integers by numeric value, so 7/8/extra-leading-zero,
+uppercase, and suffixed spellings cannot bypass the gate. Its focused suite
+raises total shiftcheck tests to **10**. Object plus linked-ELF evidence shows
+`R_ARM_ABS32` at **15/15** affected slots, `make compare` is OK, and the
+dedicated `+0x40000` A/B moves every slot
 and value by exactly `+0x40000` while all seven normalized function ranges stay
 otherwise byte-identical. This lane is complete and regression-guarded; it does
 **not** close reopened issue #143 as a whole.

@@ -11341,12 +11341,16 @@ preprocessor expressions; and reports path, line, token, and source context.
 Its allowlist is declaration/call-context scoped to the three packed-value
 classes above, never whole-file scoped. Focused tests cover stripping, all
 three valid contexts, forbidden casts/assignments/macros, numeric suffixes, and
-linked-source filtering.
+linked-source filtering. Pre-integration adversarial review further hardened the
+lexer to tokenize every standalone C hex integer and classify by numeric value,
+closing bypasses such as omitted or extra leading zeroes and uppercase/suffixed
+spellings without substring-matching identifiers, longer integers, or hex
+floating literals.
 
 **Proof.** The new gate classifies **259** packed tokens and reports
 **0 unexplained** code literals. Object disassembly and the emitted-relocation
 ELF show `R_ARM_ABS32` at all **15/15** affected pool slots. `make compare`
-reports `fireemblem8.gba: OK`; complete `make shiftcheck` passes with **9**
+reports `fireemblem8.gba: OK`; complete `make shiftcheck` passes with **10**
 tests, zero pointer-classification suspects, and zero HIGH relocation suspects.
 The dedicated `+0x40000` shifted build moves every affected pool location and
 value by exactly `+0x40000`; after normalizing relocated ROM words, all seven
