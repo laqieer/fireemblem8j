@@ -1,0 +1,2 @@
+# fn<TAB>slug<TAB>reason
+sub_800A34C	BVOBw	Declares/calls real five-argument sub_800A194 with only four arguments and relies on a coincidental outgoing-stack local.
