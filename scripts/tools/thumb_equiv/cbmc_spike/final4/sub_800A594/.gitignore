@@ -1,0 +1,3 @@
+# run.sh scratch: full CBMC traces (evidence for local debugging only;
+# run.sh always prints the compact verdict to stdout).
+.run_*.log
