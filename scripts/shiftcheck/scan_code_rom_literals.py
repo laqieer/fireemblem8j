@@ -9,7 +9,9 @@ stale in a shifted-ROM link.
 This scanner covers every linked ``src/**/*.c`` translation unit except
 ``src/data/**``.  It removes comments plus string/character literals while
 preserving byte offsets and newlines, so ordinary code and preprocessor
-expressions (including ``#define`` bodies) remain visible.
+expressions (including ``#define`` bodies) remain visible.  Standalone C hex
+integer tokens are parsed numerically, so omitted/extra leading zeroes,
+uppercase spellings, and integer suffixes cannot bypass the ROM-range check.
 
 Only three proven packed-value contexts are accepted:
 
@@ -27,11 +29,24 @@ import subprocess
 import sys
 
 
-ROM_LITERAL_RE = re.compile(
-    r"(?<![A-Za-z0-9_])"
-    r"(?P<core>0[xX]0[89][0-9A-Fa-f]{6})"
-    r"(?P<suffix>[uUlL]*)"
-    r"(?![A-Za-z0-9_])"
+ROM_LO = 0x08000000
+ROM_HI = 0x0A000000
+
+HEX_CORE_PATTERN = r"0[xX][0-9A-Fa-f]+"
+INTEGER_SUFFIX_PATTERN = (
+    r"(?:[uU](?:[lL]{1,2})?|[lL]{1,2}[uU]?)?"
+)
+HEX_INTEGER_TOKEN_PATTERN = HEX_CORE_PATTERN + INTEGER_SUFFIX_PATTERN
+
+C_HEX_INTEGER_RE = re.compile(
+    r"(?<![A-Za-z0-9_.])"
+    r"(?P<core>" + HEX_CORE_PATTERN + r")"
+    r"(?P<suffix>" + INTEGER_SUFFIX_PATTERN + r")"
+    r"(?![A-Za-z0-9_.])"
+)
+HEX_INTEGER_FULL_RE = re.compile(
+    r"(?P<core>" + HEX_CORE_PATTERN + r")"
+    r"(?P<suffix>" + INTEGER_SUFFIX_PATTERN + r")"
 )
 
 ALLOW_HUFFMAN = "gMsgHuffmanTable packed values"
@@ -157,12 +172,19 @@ def _inside(offset, span):
 def _palette_literal_offsets(clean):
     pattern = re.compile(
         r"\bCpuFastFill\s*\(\s*"
-        r"(?P<token>0[xX]08A708A7)\s*,\s*"
+        r"(?P<token>" + HEX_INTEGER_TOKEN_PATTERN + r")\s*,\s*"
         r"PAL_BG\s*\(\s*0[xX]E\s*\)\s*,\s*"
         r"0[xX]20\s*\)",
         re.IGNORECASE,
     )
-    return {match.start("token") for match in pattern.finditer(clean)}
+    offsets = set()
+    for match in pattern.finditer(clean):
+        token_match = HEX_INTEGER_FULL_RE.fullmatch(match.group("token"))
+        if token_match is None:
+            continue
+        if int(token_match.group("core"), 16) == 0x08A708A7:
+            offsets.add(match.start("token"))
+    return offsets
 
 
 def _source_context(text, start, end, limit=180):
@@ -204,21 +226,24 @@ def scan_source(path, text):
     findings = []
     allowed = Counter()
 
-    for match in ROM_LITERAL_RE.finditer(clean):
-        core = match.group("core").lower()
+    for match in C_HEX_INTEGER_RE.finditer(clean):
+        value = int(match.group("core"), 16)
+        if not (ROM_LO <= value < ROM_HI):
+            continue
+
         label = None
 
         if path == "src/msg_data.c" and _inside(match.start(), huffman_span):
             label = ALLOW_HUFFMAN
         elif (
             path == "src/worldmap_mapmu_080C2224.c"
-            and core == "0x08001000"
+            and value == 0x08001000
             and _inside(match.start(), worldmap_span)
         ):
             label = ALLOW_WORLDMAP
         elif (
             path == "src/opsubtitle_080C9644.c"
-            and core == "0x08a708a7"
+            and value == 0x08A708A7
             and match.start() in palette_offsets
         ):
             label = ALLOW_OPSUBTITLE
