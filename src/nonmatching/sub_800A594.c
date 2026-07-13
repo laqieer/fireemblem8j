@@ -21,19 +21,18 @@
  *                 (Its neighbour sub_80D6378 `svc 7; bx lr` is the DivArm *quotient* == v/m
  *                 == the >>12 the sibling documents. Both are baseline-incbin BIOS stubs.)
  *
- * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-13; still not byte-exact) ----
- * The retained follow-up keeps the 2026-07-11 scoped search alias and changes only its
- * first materialisation:
+ * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-13; score 371) ----
+ * The retained bounded entry-allocator follow-up adds two semantics-neutral source levers:
  *
  *   register struct SplineCtrlPoint *pts_r7 asm("r7");
- *   asm volatile("" : "=r"(pts_r7) : "0"(pts));
+ *   asm volatile("" : "=r"(pts_r7) : "0"(pts) : "r5", "r6");
+ *   ...
+ *   call_out = outp;
  *
- * This is an empty, tied output/input allocator constraint: it emits no instruction of
- * its own and does not hard-pin the formal `pts` parameter. Compared with the previous
- * `= pts; asm("" : "+r"(pts_r7));` form, the volatile allocation point changes later
- * block coloring enough to improve the positional byte residual by 11. Existing r9/sl/r8
- * roles, the ordered `limit`, stack-home barriers, and the per-object
- * `-fno-rerun-cse-after-loop` flag remain unchanged.
+ * The empty tied asm emits zero bytes and does not pin the formal `pts` parameter. Its
+ * point-scoped r5/r6 clobbers only change allocation: formal pts moves from r6 to r4, then
+ * reload copies r4->r7 at +0x1A. The real tail alias is used for the evaluator call and
+ * both result loads; it aligns that BL with the target at +0x1D0.
  *
  *   anchor                    JP ROM target              retained candidate
  *   ------------------------  -------------------------  -------------------------
@@ -41,45 +40,33 @@
  *   forced homes              count@2C,t@30,out@34      count@2C,t@30,out@34
  *   `outp == &lout` home      [sp,#0x38]                [sp,#0x38]
  *   high-register roles       i=r9,ltimesp=r8,dtime=sl  i=r9,ltimesp=r8,dtime=sl
- *   entry / search pts        r7 at +0x0C               formal r6 at +0x0C;
- *                                                          search alias r7 at +0x1A
- *   loop flag test            lsl; cmp                   lsl; lsr; alias-copy; cmp
- *   loop setup                ti=r3,limit=r2,ip live     ti=r1,limit=r3,no ip
- *   loop/open selector        direct beq                 direct beq
+ *   entry / search pts        r7 at +0x0C               r4 at +0x0C; r7 at +0x1A
+ *   evaluator BL              +0x1D0                     +0x1D0
+ *   residual / hosted score   0                          371/500 (208/250); Sp10a 9946
  *
- * Remaining blocker: the target has one continuous pts-in-r7 lifetime from entry through
- * each search and only then reuses r7 as the signed-load scratch. Here the formal survives
- * in r6, agbcc zero-normalises the u8 loop flag, and the scoped alias is copied into r7 only
- * after the parameter homes. All-pts tied variants did produce the desired `adds r7,r0,#0`,
- * but only after those homes and with 415+ byte residuals. The formal parameter itself is
- * therefore still never hard-pinned.
+ * Exact allocator trace: assign_parms emits pts r22=r0 at UID4, count/t/out homes at
+ * UIDs6/8/10, and u8 loop normalisation at UIDs12/15/16 before tied asm UID26. Baseline
+ * global allocation orders the long allocnos ...r34,r38,r33,r39,r22,r248: r22 has
+ * 8 refs/live-length 143, crosses one call, prefers LO_REGS, takes r6, while outp reload
+ * r248 (5/87) takes r7; reload UID927 inserts r7=r6. The retained clobbers add hard
+ * conflicts r5/r6 to r22, yielding r22->r4, r34->r5, r33->r6 and reload UID924 r7=r4.
+ * A {r4,r5,r6} mask did force direct r0->r7 at +0x0C but worsened to 428/496.
  *
- * Objective target comparison (size delta included):
- *   prior retained V12: 0x1F4, 405/500 byte mismatches, 223/250 halfword mismatches
- *   retained tied form: 0x1F4, 394/500 byte mismatches, 224/250 halfword mismatches
- *   decomp.me Sp10a:    hosted 10140 -> candidate compile 10100
+ * Bounded probes: 8 zero-byte entry-clobber candidates (best 371), 6 temporary-r6
+ * entry-pressure forms (best 394), and 6 pseudo-order variants (best 376; none changed
+ * the entry home). Live Sp10a harvest found one family member and no forks.
  *
- * Bounded 2026-07-13 campaign:
- *   PATH L source archaeology       2 candidates; best 432/496
- *   PATH M forced-inline extraction 12 variants; every helper inlined, best 454/488
- *   PATH N tied ABI-copy synthesis  24 probes; N2/N16 best 394/500
- *   PATH O declaration/frame search 12 variants; best tied 394/500
- * Live harvest found one Sp10a family member, no forks. GitHub/FE8U/FE7J/FE6J searches
- * found no genuine counterpart; the FE7J 0805BF2C BinDiff suggestion is unrelated banim.
- *
- * RTL evidence for the retained form: formal pts pseudo r22 has 8 refs/live-length 143
- * and crosses the wrap call; it conflicts with ti r38 (14/77), limit r39 (5/43),
- * j r33 (15/108), and slot r34 (38/174). The fixed r7 tied pseudo remains distinct,
- * explaining the surviving r6->r7 copy and setup rotation.
- *
- * Semantic evidence for the retained tied form:
+ * Semantic and build evidence for the retained form:
  *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py
  *       sub_800A594                                -> PROVEN-BOUNDED(1)
  *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py
  *       sub_800A594 --trials 60                   -> EQUIV 60/60
  *       ret4B args=['ptr','val','val','ptr','val'] (all five arguments modeled).
- * The project and Sp10a function bodies are byte-identical source text
- * (SHA-256 071c7ed094e5a0d836904a7f9915ca11941fe8b0ecd0e73b790aabed44a38055).
+ *   make check-nonmatching; make nonmatching; make check; make compare; make shiftcheck
+ *       -> all pass, fireemblem8.gba: OK, no stale compile errors, 0 HIGH.
+ * Project and Sp10a bodies are byte-identical (SHA-256
+ * 86f9c30aec45e792d9435eb3e18160dc73fb747d8b0e1c6d0acd02c1266862e5);
+ * the Sp10a registry row remains active.
  *
  * Historical attempts retained for provenance: plain -O2 was 0x1DC; -mjp-promote was
  * identical; volatile count was worse (0x208); the old 3471-iteration permuter run
@@ -115,13 +102,14 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, s
     register int dtime asm("sl");
     register u16 *ltimesp asm("r8");
     int *outp;
+    int *call_out;
     unsigned int ti;
     int limit;
 
     {
         register struct SplineCtrlPoint *pts_r7 asm("r7");
 
-        asm volatile("" : "=r"(pts_r7) : "0"(pts));
+        asm volatile("" : "=r"(pts_r7) : "0"(pts) : "r5", "r6");
 
         if (loop)
         {
@@ -226,8 +214,9 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, s
         }
     }
 
-    sub_800A34C(lpts, outp, ltimesp, t, 3);
-    out->x = outp[0];
-    out->y = outp[1];
+    call_out = outp;
+    sub_800A34C(lpts, call_out, ltimesp, t, 3);
+    out->x = call_out[0];
+    out->y = call_out[1];
     return i;
 }
