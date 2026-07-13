@@ -219,7 +219,7 @@ primary evidence) against its matched fork yields a reusable lever set. These ex
 commanding agbcc's register allocator / instruction selector without changing behaviour.
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
 sweeps could not. Four local-oracle matches add clean/scoped source levers:
-`AddAttr2dBitMap` (P9), `Augury_InitResultScreen` (P12), and
+`AddAttr2dBitMap` (P9), `Augury_InitResultScreen` (P12),
 `DecodeAndVerifyArenaRecord` (P1/P4/P13), and
 `DecodeLinkArenaRecordHeader` (P14).
 

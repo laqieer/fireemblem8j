@@ -11079,3 +11079,72 @@ Accept the complete feature history and publish it to `main` only with
 fast-forward landing plus exact-pushed-SHA `CI` (including deploy where present)
 and `Secret scan` success. Mirror the final public SHA/evidence on the existing
 issue #14 project item without reopening or closing it.
+
+## D371 — promote `DecodeLinkArenaRecordHeader` with P14; matching-C 99.94% (8687/8692), 5 remain (2026-07-13)
+
+**Provenance and serial integration.** The authoritative score-zero follow-up is
+`58fd4cf528a57b53f9889143fdfd6708b4cd96e7`, whose sole parent is the score-495
+seed `00b86b22d57e210ad59e9ac08f3052b57344c4a1` (original base
+`5a224c41c9858fc574b0b64f628718821e494bf4`). The seed was already represented
+on serialized main by `73f2f92c30208d9de4aa0957e59d3b950c49e75a`: both commits have stable patch-id
+`d00ca02831e49dc676ee162b221066faaa03bc0f`, and their
+`src/nonmatching/sub_80A6D34.c` blob is identical
+(`74902cee8511f42070e7b6c44c4d44451d26ca10`). Therefore the integrator
+transplanted only the follow-up delta. A direct cherry-pick onto
+`bc50112a0fcb13ef6977add36c570d67dd8477ef` required progress-doc conflict
+resolution because D370 had already serialized `sub_80A6F1C`; the resulting
+promotion commit `89b16651927506de3a4f4e031dd4a1f7a8d68577` preserves the original
+author, message, and Co-Authored-By trailer without squash, amend, rebase, or
+seed duplication.
+
+**Matching mechanism and provenance.** FE6J `func_fe6_08083180`, FE7J
+`sub_809E4D0`, FE7U `func_0809DAB8`, and FE8J `sub_80A6D34` all have the same
+13-basic-block branch shape and ten static call sites. FE7J/FE7U and FE8J use
+the 30-round bound; FE6J uses 28. FE6J/FE7J/FE7U byte-load the mask, while FE8J
+uses the full-width mask load. This isolates the remaining FE8J delta to
+allocation/data-flow choices rather than a different algorithm. P14 expresses
+the ROM's two-address DAG directly: an r0 checksum-address accumulator, an r2
+byte-address accumulator, r1 delta/mask roles, and an r1 struct alias that keeps
+the `seed`/`checksum_a`/`checksum_b` accesses at immediate offsets. The source
+retains the real helper calls and contains twelve empty lifetime constraints;
+there is no raw opcode, scripted branch, fake call, fixed-callee substitute, or
+callback change.
+
+**Independent semantic and upstream evidence.** The committed pre-promotion
+source reruns as `PROVEN-BOUNDED(3)` with
+`prove_nonmatching.py sub_80A6D34`. The committed differential harness's
+existing link-codec clamp, explicitly bound to this function, reports
+`EQUIV (60 trials)` / `EQUIV: 1/1`; running the default CLI without that binding
+correctly yields zero in-domain trials and is not evidence. Owned decomp.me
+scratch `9myLi` was updated before the registry-removal commit finalized. Live
+API and compile endpoints report owner `laqieer`, raw score **0**,
+`match_override=false`, and no compiler error. Its raw source SHA-256 is
+`0d93290fbf11f0798c1dc0562b8e1716b7f82823bc3c98cc1844d6151119ee7b`;
+after excluding the required decomp.me-only `.set` preamble and project-only
+`#include "global.h"`, the function payload SHA-256 is
+`91fe20af7ca411dfdc24c4f20935e56c7dc96ccf4c7354358ac99c20318e9a59`
+on both the scratch and project source. The active registry/worklist contains no
+`9myLi`/`sub_80A6D34` row.
+
+**Lifecycle and local gates.** The exact range
+`0x080A6D34..0x080A6E4C` now comes from
+`src/DecodeLinkArenaRecordHeader.o(.text)`; the old asm, gbadisasm fragment, and
+nonmatching staging file are removed. The rebuilt object is exactly 280 bytes,
+defines only `DecodeLinkArenaRecordHeader`, and the final ELF has one definition
+at `0x080A6D34` with no `sub_80A6D34` alias or baseline drop. The linked range
+has SHA-256 `f0bf81c5f0775c7d28593ec60d6f5b52d5924fe096c88a582d84bde8026c6f13`
+on both the built ROM and baserom. Incremental and cold `make compare` report
+`fireemblem8.gba: OK`; `make shiftcheck` reports no high-confidence suspects;
+`make check-nonmatching` reports exactly five valid staging files; and the
+self-contained, baseline-dedup, and baserom-gap gates leave zero tracked
+maintenance changes.
+
+**Measured result and decision.** `scripts/calcprogress.py` reports matching-C
+**99.94% (8687/8692)**, source-form code **898,944/901,428 bytes (99.72%)**,
+named symbols **12713/12713**, and exactly five still-asm/nonmatching targets:
+`sub_800A34C`, `sub_800A594`, `sub_800FAD0`, `sub_807D3BC`, and
+`sub_80C05C8`. Accept the promotion plus one minimal progress-doc reconciliation
+commit. Publish by fast-forward only, then require exact-pushed-main-SHA `CI`
+(including deploy) and `Secret scan` success before declaring D371 complete.
+Mirror the final public SHA/evidence on the existing issue #14 project item
+without reopening or closing it.

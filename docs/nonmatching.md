@@ -26,7 +26,7 @@ NON_MATCHING C **unblocks documentation and readability of the remaining
 hard functions WITHOUT ever touching `make compare`**. (For the current count
 of genuinely unmatched functions, see `docs/frontier.md` — the single source of
 truth. The ~5942 figure above is a historical snapshot from when this document
-was written; matching-C is now at 99.93% with 6 staged functions.) It is an *enhancement*,
+was written; matching-C is now at 99.94% with 5 staged functions.) It is an *enhancement*,
 not a goal change: CLAUDE.md already accepts descriptive asm as "real source"
 for the final goal. NON_MATCHING C is a staging area for future matching plus
 living documentation of intent — never a byte-match claim.
@@ -243,7 +243,7 @@ asm/<fn>.s           base.c          src/nonmatching/      nonmatchings/    src/
 
 ---
 
-## Help wanted — decomp.me scratches (start here to match the remaining 6)
+## Help wanted — decomp.me scratches (start here to match the remaining 5)
 
 These scratches are **work-in-progress starting points**, not byte-match claims. The
 owned `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) families were
@@ -261,6 +261,10 @@ show NEAR progress that cannot reproduce project-local compiler context, so
 `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) was then matched locally and published
 back to owned h2W8F at raw score 0. Its registry row was removed only after the
 upstream score check and the full project oracle/shiftcheck gates passed.
+`DecodeLinkArenaRecordHeader` (`sub_80A6D34`) followed via FE6J/FE7J/FE7U
+block alignment and P14 two-address accumulator steering. Owned 9myLi compiles
+at raw score 0 with `match_override=false`; its canonical function payload is
+identical to the promoted project source, and its registry row is retired.
 
 | # | function | name | decomp.me scratch |
 |---:|---|---|---|
@@ -268,8 +272,7 @@ upstream score check and the full project oracle/shiftcheck gates passed.
 | 2 | `sub_800A594` | worldmap coeff/segment-search sibling | https://decomp.me/scratch/Sp10a |
 | 3 | `sub_800FAD0` | GetUnitDefinitionFormEventScr | https://decomp.me/scratch/eZzgG |
 | 4 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 |
-| 5 | `sub_80A6D34` | password/header decode | https://decomp.me/scratch/9myLi |
-| 6 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
+| 5 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
 
 
 ## Metrics

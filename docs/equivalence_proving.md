@@ -191,7 +191,7 @@ function; the highest loop-unroll depth that proves is reported):
 | `sub_80A3300` | **PROVEN-BOUNDED(3)** | 2 calls (`PutSpriteExt`), 2 loops |
 | `sub_80A3528` | **PROVEN-BOUNDED(3)** | 48 calls |
 | `sub_80A390C` | **PROVEN-BOUNDED(3); MATCHED 2026-07-10** | destination readback + branch polarity closed the codegen gap |
-| `sub_80A6D34` | **PROVEN-BOUNDED(3); MATCHED 2026-07-11** | password-header decoder; P14 two-address accumulators + phase-local struct alias |
+| `sub_80A6D34` | **PROVEN-BOUNDED(3); MATCHED 2026-07-13** | password-header decoder; P14 two-address accumulators + phase-local struct alias |
 | `sub_80A6E4C` | **PROVEN-BOUNDED(3)** | link-arena encode mirror |
 | `sub_800E1FC` | **PROVEN-BOUNDED(3)** | proven once `EventStartFade` is shown (interprocedurally) to consume 0 args |
 | `sub_807C8DC` | **PROVEN-BOUNDED(2)** | JP calls a helper directly, the C via a function pointer — same callee once names de-truncate |

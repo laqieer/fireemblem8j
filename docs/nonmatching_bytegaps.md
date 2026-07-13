@@ -1,6 +1,12 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **UPDATE 2026-07-11:** axis-2 is now **99.93% (8686/8692), 6 still-asm**.
+> **UPDATE 2026-07-13:** axis-2 is now **99.94% (8687/8692), 5 still-asm**.
+> `DecodeLinkArenaRecordHeader` (`sub_80A6D34`) matched byte-exact after
+> FE6J/FE7J/FE7U block alignment reduced the residual to P14 two-address
+> accumulator and struct-alias choices. Owned 9myLi reports raw score 0 with no
+> match override, and the registry row is retired.
+>
+> **PRIOR UPDATE 2026-07-12:** axis-2 was **99.93% (8686/8692), 6 still-asm**.
 > `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) matched byte-exact after the
 > paired-halfword stack shape, phase-local register aliases, and explicit
 > fenced r1-to-r2 mask copy reproduced the final allocator decisions. h2W8F
@@ -52,7 +58,7 @@ decomp.me community. AddAttr and other later wins show that conclusion described
 known lever set, not the full source-shape space. The historical **16** still-asm without a base were big region-different
 reconstructions (e.g. `sub_8057F80`/PrepareBattleGraphicsMaybe = 2936 B) or have a live
 permuter. — [SUPERSEDED 2026-07-03: was "22" at this doc's 2026-06-26 measurement; 6 have since
-matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 7.]
+matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 5.]
 See [`frontier.md`](frontier.md).
 
 ## Live permuter best-score state (2026-06-26, from `nonmatchings/<fn>/output-<score>-*`)

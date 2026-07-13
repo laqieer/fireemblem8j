@@ -101,7 +101,8 @@ augury / divination result screen  (占い)  — LIVE
 
 password record codec  — ENCODE live, DECODE dead
   menu ProcScr ──► sub_80A74D4 ──► EncodeLinkArenaRecord [MATCHED 2026-07-11]
-  (no caller) ✗ DecodeAndVerifyArenaRecord [MATCHED 2026-07-11] ──► sub_80A6D34 [13]
+  (no caller) ✗ DecodeAndVerifyArenaRecord [MATCHED 2026-07-12]
+                 ──► DecodeLinkArenaRecordHeader [MATCHED 2026-07-13]
 
 JP-only DEAD spline island
   (no caller) ✗ SplineSampleAtTime [3] ──► SplineEvalCatmullRom [2]
@@ -370,7 +371,7 @@ JP-only DEAD spline island
   the behaviorally equivalent duplicate-arm test as `index == 0` to match JP branch
   polarity and downstream block/pool layout. No register pins or inline asm.
 
-## Resolved study #13. DecodeLinkArenaRecordHeader — `0x080A6D34`  ✅ MATCHED 2026-07-11
+## Resolved study #13. DecodeLinkArenaRecordHeader — `0x080A6D34`  ✅ MATCHED 2026-07-13
 
 - **fe8u twin:** **none.** At the *same numeric address range* the US ROM has completely
   different code — `fireemblem8.map` shows `0x080a6d34 = bmsave_null_false2` and the
@@ -419,7 +420,7 @@ JP-only DEAD spline island
   buffer/bound/offset/count pins plus one empty loop-base fence reproduce the remaining
   lifetime and spill choices.
 
-## Resolved study #15. DecodeAndVerifyArenaRecord — `0x080A6F1C`  ✅ MATCHED 2026-07-11
+## Resolved study #15. DecodeAndVerifyArenaRecord — `0x080A6F1C`  ✅ MATCHED 2026-07-12
 
 - **fe8u twin:** **none** (JP-only link-arena record DECODE + VERIFY; US region = `bmsave-xmap`).
 - **Purpose:** the decode/verify counterpart of #14 — unpacks a received/stored record and
@@ -430,7 +431,7 @@ JP-only DEAD spline island
   lets the caller read the plaintext; `chk2 = checksum(plaintext)`; **return
   `hdr[1] == ((chk2+a)&0x3FF) && hdr[2] == ((chk+b)&0x3FF)`** — packet valid iff both 10-bit
   verify tags reconstruct.
-- **Callees:** `sub_80A6D34` (#13, header decode), `sub_80A6C20` (checksum), `sub_80A6AA8`
+- **Callees:** `DecodeLinkArenaRecordHeader` (#13, header decode), `sub_80A6C20` (checksum), `sub_80A6AA8`
   (LCG), and the `consume` callback.
 - **Callers:** **none.** Zero Thumb/ARM `BL`, zero pointer words (`0x080A6F1C`/`0x080A6F1D`),
   zero literal-pool references anywhere in the ROM.
