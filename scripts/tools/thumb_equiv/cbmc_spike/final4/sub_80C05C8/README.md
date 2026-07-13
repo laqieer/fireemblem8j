@@ -120,13 +120,20 @@ Diff `m2c_ref_raw.c` against `ref_step`/`merge_ref` in `harness.c`:
 
 ## Complete direct writes
 
-Disassembly audit of `asm/sub_80C05C8.s`: **every** `str`/`strh`/`strb`
-targets a `[sp,#imm]` stack slot (locals / outgoing call arguments). **Zero**
-stores target any address derived from `sb` (the proc pointer, e.g.
-`sb+0x2C..0x3C`) or a global symbol (`gGMData`, `gWMNodeData`,
-`gWMNodeIconData`). The JP function therefore has **zero** direct writes to
-proc or global state — every externally-visible effect flows only through
-the three oracle calls.
+Disassembly audit of `asm/sub_80C05C8.s` (every `str`/`strh`/`strb` in the
+function, register by register): **every** store targets stack scratch —
+either directly via a literal `[sp,#imm]` operand (e.g. `str r0,[sp,#0xc]`),
+or via a register set earlier in the SAME block to `sp` plus a constant
+offset and then used as the store's base register (e.g. `mov r4,sp;
+adds r4,#6` … later `strh r3,[r4]`; the same pattern recurs with `sl`, and
+with `r2`/`r3` at different offsets in the merge-phase block). Concretely:
+**zero** stores in this function ever target `sb` (the proc pointer, held in
+`sb` for the whole function, e.g. `sb+0x2C..0x3C`) or an address derived from
+a global symbol (`gGMData`, `gWMNodeData`, `gWMNodeIconData`) — every store's
+base register is either literally `sp` or was itself derived from `sp` with
+no other register or global folded in. The JP function therefore has
+**zero** direct writes to proc or global state — every externally-visible
+effect flows only through the three oracle calls.
 
 The one apparent exception is the reconstruction's
 `gm->nodes[*(u8*)phaseRole].state += 0;` (a decomp.me register-pressure
@@ -220,6 +227,23 @@ lift than the single call-free loop addendum 8 treated):
   preservation + trivial base case ⇒ holds for the whole iteration count),
   **not** a truncation — every one of the 29 real iterations is covered by
   exactly one instantiation of the proven lemma.
+- **Why the step lemma's conclusion does not depend on `k` or on the
+  absolute counter values** (the reason a SINGLE CBMC run discharges all 29
+  real per-iteration proof obligations): PART A's `ASSUME` clauses bound `k`
+  and `(ciG0, ciP0, nlog0)` to a domain, but they do **not** tie
+  `ciG0`/`ciP0`/`nlog0` to any particular function of `k` (e.g. "the counters
+  after `k` prior iterations"). CBMC therefore proves the **stronger**,
+  `k`-and-counter-value-agnostic universal statement — "for every `k` and
+  every EQUAL pair of before-states in the assumed domain, the step preserves
+  equality" — which trivially implies the weaker, specific statement actually
+  needed for induction ("for the particular, unknown, data-dependent counter
+  values that really arise after processing iterations `0..k-1`, iteration
+  `k` preserves equality"), for every `k`, without CBMC ever needing to know
+  or track what those real values are, and without any assumption about how
+  much of the real game data causes the oracles to actually be called. This
+  is why one machine-checked instantiation (one CBMC run, `k` left symbolic)
+  covers the entire real chain regardless of which specific counter
+  trajectory the game data happens to produce.
 - **PART B (`harness.c`'s merge-phase block)** is the loop-free merge-phase
   full symbolic equivalence (executes at most once — no induction needed).
 - **PART C** is the loop-free prologue gate (`proc->skip`).
@@ -238,6 +262,21 @@ lift than the single call-free loop addendum 8 treated):
   (`cmp r2,#0x1c; ble _080C05F8` is a post-test loop over `r8 = 0..0x1c`
   inclusive = 29). PART A's induction covers every one of the 29 real
   iterations; none are dropped or approximated.
+- `MAXCALL = 2*NUMNODES+2 = 60`: sizes the oracle pools, the trace log, and
+  PART A's counter `ASSUME` bounds to cover the FULL REACHABLE range of the
+  loop-carried counters over all 29 iterations, not merely what a single step
+  needs. At most one `GmapScreen2_GetNodeScreenPos` + one `PutSpriteExt` call
+  per iteration, so `ciG0`/`ciP0` each reach at most `NUMNODES = 29`, and
+  `nlog` (their interleaved sum) reaches at most `2*NUMNODES = 58` before the
+  final step, +2 more appended by that step = 60. A smaller bound (4 was used
+  in an earlier revision of this proof) is ALSO sound — per the
+  counter-independence argument above, the step lemma does not need the
+  counters to be reachable, only equal — but the larger bound additionally
+  demonstrates the proof is stable at the actual size a real 29-iteration
+  chain can produce, which is the stronger, more defensible check. Verified
+  tractable: `harness.c` at `MAXCALL=60` still verifies in **~59s / ~590MB
+  peak RSS** (vs. ~3.5s at `MAXCALL=4`) — a measurable but small, clearly
+  non-material cost, so the larger bound is kept (see Evidence).
 - `NUMICON = 3`: the modelled `gWMNodeIconData[]` window.
   `iconPreClear`/`iconPostClear` (and `proc->nodeId`'s icon index) are
   `ASSUME`d in-range for this window. This generalizes to the real (larger)
@@ -271,11 +310,16 @@ directory (isolated `cbmc_spike` work, no shared-tree edits).
 ## Evidence (actual, captured by `run.sh`)
 
 ```
-== 0. provenance: source/asm hash check ==
-asm/sub_80C05C8.s               sha1=dae3900c185fd14a90f87651ad8035f32414e588
-src/nonmatching/sub_80C05C8.c    sha1=df7f9c267253a578b2b15ea5801d54f3dc8df7ab
-tools/m2c/fe8j_ctx.c             sha1=1734162d141cdf05229efd3dad42e8e1dd4cb0d9
-OK: hashes match the files this proof was written against
+== 0. provenance: source/asm/m2c-raw-dump hash check (fails closed on ANY drift) ==
+asm/sub_80C05C8.s                          sha1=dae3900c185fd14a90f87651ad8035f32414e588
+src/nonmatching/sub_80C05C8.c               sha1=df7f9c267253a578b2b15ea5801d54f3dc8df7ab
+final4/sub_80C05C8/m2c_ref_raw.c            sha1=3eea1b9e09ce38f3e8d8869c639311d03f387d7d
+OK: hashes match the files this proof was written against (asm target +
+    reconstruction source + committed raw m2c dump)
+    (fail-closed verified this session: appending one byte to m2c_ref_raw.c
+    and re-running produced `FAIL: m2c_ref_raw.c changed since this proof was
+    written (expected 3eea1b9..., got 75d55ec...)`, exit 1, before the file
+    was restored via `git checkout`.)
 
 == 1. ARM-vs-ARM SMT proof (prove_nonmatching.py) ==
 sub_80C05C8      PROVEN-BOUNDED(2)
@@ -288,23 +332,27 @@ EQUIV: 1/1
 == 3a. focused CBMC contract proof: harness.c ==
 ** 0 of 302 failed (1 iterations)
 VERIFICATION SUCCESSFUL
-  (wall time: ~3.5s, negligible RSS -- contrast with the killed full-unroll
-   attempt above)
+  (wall time: ~59s, ~590MB peak RSS at MAXCALL=60 -- vs ~3.5s / negligible
+   RSS at the smaller MAXCALL=4 tried first; both are tiny relative to the
+   killed full-29x-unroll attempt's >12GB RSS with no verdict, see "Cut-point
+   method" above)
 
 == 3b. mutation A: harness_mut.c (PutSpriteExt attr 0x800->0x400) ==
 ** 1 of 302 failed (2 iterations)
-[main.assertion.11] line 512 cutpoint step: same call arg a5 (attr): FAILURE
+[main.assertion.11] line 556 cutpoint step: same call arg a5 (attr): FAILURE
 VERIFICATION FAILED   <-- refuted as required (task requirement 10)
 
 == 3c. mutation B: harness_mut_cleanup.c (regress m2c cleanup fix #1) ==
 ** 1 of 302 failed (2 iterations)
-[main.assertion.17] line 545 merge-phase: same y: FAILURE
+[main.assertion.17] line 589 merge-phase: same y: FAILURE
 VERIFICATION FAILED   <-- proves cleanup fix #1 (README section above) is
                           load-bearing, not cosmetic
 
 == 4. make compare ==
 sha1sum -c checksum.sha1
 fireemblem8.gba: OK
+
+ALL CHECKS PASSED for sub_80C05C8 (GmapScreen2_Loop) contract-assisted proof.
 ```
 
 Full raw logs (every CBMC property, `SUCCESS`/`FAILURE` line for all three

@@ -1,7 +1,8 @@
 #!/bin/sh
 # Contract-assisted relational equivalence proof driver for sub_80C05C8
 # (GmapScreen2_Loop). Reproduces every claim in README.md:
-#   1. source/asm hash checks (provenance -- fails closed if either file
+#   1. source/asm/m2c-raw-dump hash checks (provenance -- fails closed if the
+#      asm target, the reconstruction source, OR the committed raw m2c dump
 #      changed since this proof was written, since the harnesses are hand
 #      transcriptions of their exact current content);
 #   2. the current ARM-vs-ARM SMT proof (prove_nonmatching.py) +
@@ -25,18 +26,20 @@ COMMON="--32 --bounds-check --pointer-check --pointer-overflow-check --div-by-ze
 
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
-echo "== 0. provenance: source/asm hash check =="
+echo "== 0. provenance: source/asm/m2c-raw-dump hash check (fails closed on ANY drift) =="
 ASM_SHA=$(sha1sum "$ROOT/asm/sub_80C05C8.s" | awk '{print $1}')
 SRC_SHA=$(sha1sum "$ROOT/src/nonmatching/sub_80C05C8.c" | awk '{print $1}')
-CTX_SHA=$(sha1sum "$ROOT/tools/m2c/fe8j_ctx.c" | awk '{print $1}')
-echo "asm/sub_80C05C8.s               sha1=$ASM_SHA"
-echo "src/nonmatching/sub_80C05C8.c    sha1=$SRC_SHA"
-echo "tools/m2c/fe8j_ctx.c             sha1=$CTX_SHA"
+M2C_SHA=$(sha1sum "$DIR/m2c_ref_raw.c" | awk '{print $1}')
+echo "asm/sub_80C05C8.s                          sha1=$ASM_SHA"
+echo "src/nonmatching/sub_80C05C8.c               sha1=$SRC_SHA"
+echo "final4/sub_80C05C8/m2c_ref_raw.c            sha1=$M2C_SHA"
 EXPECT_ASM=dae3900c185fd14a90f87651ad8035f32414e588
 EXPECT_SRC=df7f9c267253a578b2b15ea5801d54f3dc8df7ab
+EXPECT_M2C=3eea1b9e09ce38f3e8d8869c639311d03f387d7d
 [ "$ASM_SHA" = "$EXPECT_ASM" ] || fail "asm/sub_80C05C8.s changed since this proof was written (expected $EXPECT_ASM, got $ASM_SHA) -- re-audit harness.c/m2c_ref_raw.c before trusting the result"
 [ "$SRC_SHA" = "$EXPECT_SRC" ] || fail "src/nonmatching/sub_80C05C8.c changed since this proof was written (expected $EXPECT_SRC, got $SRC_SHA) -- re-audit impl_step/merge_impl before trusting the result"
-echo "OK: hashes match the files this proof was written against"
+[ "$M2C_SHA" = "$EXPECT_M2C" ] || fail "m2c_ref_raw.c changed since this proof was written (expected $EXPECT_M2C, got $M2C_SHA) -- re-audit ref_step/merge_ref (and the m2c cleanup log) before trusting the result"
+echo "OK: hashes match the files this proof was written against (asm target + reconstruction source + committed raw m2c dump)"
 
 echo
 echo "== 1. ARM-vs-ARM SMT proof (prove_nonmatching.py) =="
