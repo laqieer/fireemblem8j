@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1415 | 97.7% |
-| **UNCERTAIN** | 33 | 2.3% |
-| **TOTAL** | 1448 | 100.0% |
+| **FLOOR** | 1415 | 97.9% |
+| **UNCERTAIN** | 30 | 2.1% |
+| **TOTAL** | 1445 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -53,7 +53,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 33 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 30 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1524,9 +1524,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (33) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (30) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>33 entries</summary>
+<details><summary>30 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1560,9 +1560,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_tail_B3AFF4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/map/data_0819EADC.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `graphics/map/data_081A00C8.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `graphics/map/data_081A6774.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 
 </details>
 

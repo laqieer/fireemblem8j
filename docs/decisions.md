@@ -11280,3 +11280,32 @@ address-named providers and layout fragments. No live tracked source remains
 under `data/residual`. The pointer-classification audit now also skips source
 paths deleted in the working tree but not yet removed from the Git index, so
 pre-commit shiftcheck remains usable during source consolidation.
+
+## D376 — migrate three content-proven map blobs to MARTOMAP source (2026-07-13)
+
+**Proof.** FE8J's own `scripts/mar_to_map.py` reproduces the three committed
+address-named map binaries exactly from FE8U's canonical `.mar` + `.json`
+sources: `AnotherShrineMap` = 302 B,
+SHA-256 `9d66bcf7d881e9d620688c278e70c50b2a1ba915cded463c59e914057882951f`;
+`LordsSplitMap` = 10 B,
+`238db10b315dafe8994486c9092edf40f65de65a4236b3581c0023b5a20c6c57`;
+and `Ch5TownMapPast` = 632 B,
+`edf74e1e45c2d824b44a51cd72262861a6d4afa4ced194c823326036f6a03cae`.
+The normal LZ rule also reproduces the prior ROM streams byte-for-byte at
+256/12/444 B respectively.
+
+**Decision.** Commit the six editable map-layout sources, repoint the existing
+`data_0819EADC`, `data_081A00C8`, and `data_081A6774` providers to the
+descriptive generated `.bin.lz` paths, and delete the superseded raw `.bin`
+files. Preserve all C symbol names, sections, addresses, and layout rows.
+Correct the three coincident `gChDAsset_*` comments to record the
+content-verified JP identities rather than treating the US same-table-index
+labels as content proof.
+
+**Result and scope.** The generated dependency checker passes; the regenerated
+binary audit moves `UNCERTAIN 33 → 30` and `TOTAL 1448 → 1445` with
+`MISS=0` and `FLOOR=1415` unchanged. A clean `make compare` reports
+`fireemblem8.gba: OK`, and `make shiftcheck` reports no high-confidence
+shiftability suspects. This resolves only these three fully proven map
+migrations from issue #143; it does not claim the wider `.incbin` review is
+closed.
