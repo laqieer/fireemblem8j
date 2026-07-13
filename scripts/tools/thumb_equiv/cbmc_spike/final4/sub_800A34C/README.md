@@ -146,7 +146,11 @@ live, symbolic-input-dependent paths in the same bounded run.
   which is sound under the stated anti-masking argument-equality checks but
   does not independently verify those callees' own behavior (out of scope:
   they are unchanged baseline/library code, not part of this candidate).
-  `make compare` remains the project's only byte oracle and is unaffected by
+  `run.sh` hard-pins the candidate/asm SHA-256 hashes and fails closed
+  (exit `2`, prints `UNKNOWN`) rather than silently re-printing a stale
+  verdict if either file drifts from what this audit was performed against
+  (verified: a deliberately corrupted pin on either hash aborts before any
+  proof runs). `make compare` remains the project's only byte oracle and is unaffected by
   any of this (isolated worktree, see below).
 
 ## Line-by-line audit (current candidate ⇄ current JP asm)
@@ -206,9 +210,10 @@ base commit `5c210a85c`:
 
 ```sh
 $ ./run.sh
-== provenance: candidate source and JP asm hashes ==
+== provenance: hash-pinning candidate source and JP asm ==
 6812f3ae518024464e7356a1f09fdd13dc6bbc51ee5602af2ee2c10c8c520dfd  .../src/nonmatching/sub_800A34C.c
 e295cbb70533729bf5083c769b6c62b68bea92259314c13a2cd0f3de36953ca6  .../asm/sub_800A34C.s
+OK: asm/src bytes match the hashes this package's harnesses were derived from
 base repo HEAD: 5c210a85c99fb20d222b1d398dca3d22f015c2b1 2026-07-13 13:31:47 +0000
 
 == stage 1: real ARM-vs-ARM machine-code proof (project oracle-adjacent) ==
@@ -228,6 +233,18 @@ ARM-vs-ARM: PROVEN-BOUNDED(3)
 CBMC anchor: VERIFICATION SUCCESSFUL (see harness_out.txt)
 CBMC mutation: VERIFICATION FAILED on out[1] equal (non-vacuous, see harness_mut_out.txt)
 ```
+
+`run.sh` hard-pins `EXPECT_SRC_SHA256`/`EXPECT_ASM_SHA256` (the exact hashes
+above, recorded against base commit `5c210a85c`) and fails closed — printing
+`FAIL-CLOSED: ...` plus `UNKNOWN (verdict withheld ...)` on stderr and exiting
+`2` — if either the candidate source or the JP asm has drifted from those
+pinned values, mirroring the sibling `sub_800A594`/`sub_807D3BC` packages'
+provenance gate. Verified by deliberately corrupting each pinned constant in
+turn (`EXPECT_SRC_SHA256`/`EXPECT_ASM_SHA256` set to a dummy all-zero/all-one
+hash) and re-running: both mismatches correctly abort at the provenance stage
+before any proof is attempted, with exit code `2` and the `UNKNOWN` verdict
+printed; both were reverted immediately after confirming the fail-closed
+behavior (no proof stage ever ran under a mismatched hash).
 
 Standalone equivalents (same flags `run.sh` uses,
 `COMMON="--32 --unwind 17 --unwinding-assertions --bounds-check --pointer-check --signed-overflow-check --slice-formula --stop-on-fail"`):
