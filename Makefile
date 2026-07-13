@@ -516,6 +516,13 @@ shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 shiftcheck-ptraudit: $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) --fail-on-suspects
 
+# Layer 1e: reject raw ROM-address-shaped numeric literals in linked C code.
+# agbcc emits these as literal-pool words without R_ARM_ABS32, so the linked-ELF
+# relocation scanners cannot see this class. Three narrow packed-value contexts
+# are classified explicitly by the source scanner.
+shiftcheck-codeliterals: $(OBJECTS_LST)
+	$(PYTHON) $(SHIFTCHECK)/scan_code_rom_literals.py --objects-list $(OBJECTS_LST)
+
 # Focused unit tests for the relocation scanners. Keep these in the normal gate:
 # path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
 shiftcheck-tests:
@@ -531,9 +538,9 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
 # + packed talk-table false-relocation scan + pointer-classification audit.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-tests shiftcheck-diff
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a

@@ -17,9 +17,10 @@ two things changed (see `docs/decisions.md` D313):
 
 1. **The CI gate is the STATIC layers only: `make shiftcheck = shiftcheck-build +
    shiftcheck-static + shiftcheck-offsets + shiftcheck-talk +
-   shiftcheck-ptraudit + shiftcheck-tests`.** These read the linked ROM + the
-   `--emit-relocs` ELF + the `.map`, audit packed talk metadata and source pointer
-   classifications, and run focused scanner tests.
+   shiftcheck-ptraudit + shiftcheck-codeliterals + shiftcheck-tests`.** These
+   read the linked ROM + the `--emit-relocs` ELF + the `.map`, audit packed talk
+   metadata and source pointer classifications, lexically reject raw numeric C
+   literal-pool pointers that have no relocation, and run focused scanner tests.
 
 2. **Layer 2 (`shiftcheck-diff`) and Layer 3 (`shiftcheck-run`) are NON-gating and,
    for Layer 2, NOT APPLICABLE to fe8j as-is.** fe8u's differential shift injects
@@ -50,6 +51,7 @@ result is recorded in the V1 PR.
 | `make shiftcheck-offsets` | 1b | Of the words that *do* relocate, flags any relocated against the **wrong base symbol** — `ResourceA + hardcoded offset` that lands at the start of a different resource B (`scan_offsets.py`). |
 | `make shiftcheck-talk` | 1c | Rejects ABS32 relocations in packed battle/defeat-talk fields other than the real event-pointer member. It parses only relocations **sourced from `.rom`**; `.debug_*` offsets that merely overlap the GBA numeric range are excluded. |
 | `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish. |
+| `make shiftcheck-codeliterals` | 1e | Lexically scans every linked code C source (excluding `src/data/**`) for raw 8-digit `0x08`/`0x09` literals. This catches agbcc literal-pool words emitted **without** `R_ARM_ABS32`; only the three declaration/call-scoped packed-value contexts documented by D376 are accepted. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
 | `make shiftcheck` | static + tests | The complete non-emulator gate above. |
@@ -76,10 +78,14 @@ shared classifier (`_classify.py`) buckets findings so the signal isn't drowned:
   data, e.g. a banim palette), not a typed pointer table.
 
 Coincidental values in the cartridge header range (`< 0x08000100`) and `.text`
-literal pools are filtered out. (fe8u buckets pinned-region `≥ 0x08C00000` words
-separately; fe8j has no absolute-pinned-block-with-slack, so `_classify.py` sets
-`PIN = ROM_HI` and **nothing** is silenced as "pinned" — the whole 16 MB ROM stays
-in scope, including the real carved data above `0x08C00000`.)
+literal pools are filtered out by the relocation-ranking layer. D376 closes
+that deliberate `.text` blind spot at the source level:
+`shiftcheck-codeliterals` distinguishes the three proven packed contexts from
+raw numeric C pointers before agbcc can lower them to unrelocated pool words.
+(fe8u buckets pinned-region `≥ 0x08C00000` words separately; fe8j has no
+absolute-pinned-block-with-slack, so `_classify.py` sets `PIN = ROM_HI` and
+**nothing** is silenced as "pinned" — the whole 16 MB ROM stays in scope,
+including the real carved data above `0x08C00000`.)
 
 ## Validation case (now fixed)
 

@@ -11280,3 +11280,49 @@ address-named providers and layout fragments. No live tracked source remains
 under `data/residual`. The pointer-classification audit now also skips source
 paths deleted in the working tree but not yet removed from the Git index, so
 pre-commit shiftcheck remains usable during source consolidation.
+
+## D376 — lexically gate code-side raw ROM literal pools (issue #143 lane) (2026-07-13)
+
+**False-zero root cause.** The linked relocation scanners do not cover a raw
+numeric C constant that agbcc lowers directly into a `.text` literal-pool word:
+the object contains the correct original-ROM bytes but no `R_ARM_ABS32`, so the
+existing source/ELF audits could report zero while a shifted link kept a stale
+pointer. At baseline `c1608ecbe`, a comment/string/character-stripped sweep of
+linked code C found **277** `0x08xxxxxx`/`0x09xxxxxx` tokens across **10** files.
+Exactly **259** are proven packed values: **257** inside
+`gMsgHuffmanTable`, the OpSubtitle palette fill word `0x08A708A7`, and the
+`gWorldmapMapmu_1` spline coefficient `0x08001000`. The other **18** source
+tokens across seven functions are live ROM pointers. Repeated assignments share
+pool entries, so those 18 tokens produce **15** unique raw pool slots; the
+`gSinLookup + 0x80` value itself appears in two pools.
+
+**Decision.** Express all 18 live values through typed symbols and object-symbol
+interior addends. Where direct reuse of a base address made GCC retain the base
+across `Proc_Start` and changed the matching register allocation, use a
+translation-unit-local symbolic `.set interior, base + addend` alias plus a
+typed extern. The assembled result is still an `R_ARM_ABS32 base` relocation
+with the addend in the pool, while preserving the original instruction stream
+and shared literal slot.
+
+Add `scripts/shiftcheck/scan_code_rom_literals.py` and make
+`shiftcheck-codeliterals` part of `make shiftcheck`. It scans the **6,208**
+linked `src/**/*.c` sources selected by `objects.lst`, excluding
+`src/data/**`; strips comments and string/character literals without removing
+preprocessor expressions; and reports path, line, token, and source context.
+Its allowlist is declaration/call-context scoped to the three packed-value
+classes above, never whole-file scoped. Focused tests cover stripping, all
+three valid contexts, forbidden casts/assignments/macros, numeric suffixes, and
+linked-source filtering.
+
+**Proof.** The new gate classifies **259** packed tokens and reports
+**0 unexplained** code literals. Object disassembly and the emitted-relocation
+ELF show `R_ARM_ABS32` at all **15/15** affected pool slots. `make compare`
+reports `fireemblem8.gba: OK`; complete `make shiftcheck` passes with **9**
+tests, zero pointer-classification suspects, and zero HIGH relocation suspects.
+The dedicated `+0x40000` shifted build moves every affected pool location and
+value by exactly `+0x40000`; after normalizing relocated ROM words, all seven
+function ranges are otherwise byte-identical.
+
+**Scope.** This closes and guards only the **code-side raw numeric C literal**
+lane of reopened issue #143. It does not claim that every other pointer class or
+the issue as a whole is closed.
