@@ -4,7 +4,7 @@
 	.section .data.residue.0857AC54, "aw", %progbits
 	.global SjisGlyphs_0857AC54
 SjisGlyphs_0857AC54:
-	.4byte 0x08585094
+	.4byte frontier_df3_fontgrp_se_009_582F1C + 0x2178
 	.4byte 0x00000882
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -40,7 +40,7 @@ SjisGlyphs_0857AC54:
 	.4byte 0x00000EB0
 	.4byte 0x000003C0
 	.4byte 0x00000000
-	.4byte 0x08580E34
+	.4byte frontier_df3_fontgrp_se_005_580B1C + 0x318
 	.4byte 0x00000782
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -58,7 +58,7 @@ SjisGlyphs_0857AC54:
 	.4byte 0x00003AC0
 	.4byte 0x00000F00
 	.4byte 0x00000000
-	.4byte 0x085815CC
+	.4byte frontier_df3_fontgrp_se_006_5814AC + 0x120
 	.4byte 0x00000782
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -76,7 +76,7 @@ SjisGlyphs_0857AC54:
 	.4byte 0x0000EAAC
 	.4byte 0x00003FF0
 	.4byte 0x00000000
-	.4byte 0x0857EC2C
+	.4byte frontier_df3_fontgrp_se_000_57E884 + 0x3A8
 	.4byte 0x00000882
 	.4byte 0x00000000
 	.4byte 0x00000000

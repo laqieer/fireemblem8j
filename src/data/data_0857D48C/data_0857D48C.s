@@ -4,7 +4,7 @@
 	.section .data.residue.0857D48C, "aw", %progbits
 	.global SjisGlyphs_0857D48C
 SjisGlyphs_0857D48C:
-	.4byte 0x0858459C
+	.4byte frontier_df3_fontgrp_se_009_582F1C + 0x1680
 	.4byte 0x00000682
 	.4byte 0x00000000
 	.4byte 0x00000000

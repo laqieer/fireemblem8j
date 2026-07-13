@@ -516,6 +516,17 @@ shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 shiftcheck-ptraudit: $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) --fail-on-suspects
 
+# Layer 1e: structural glyph relocation audit (#143) -- walks the ACTUAL
+# TextGlyphs_System/TextGlyphs_Talk linked lists in the built ROM (schema-known
+# fields only: table-head slots + struct Glyph.sjisNext) and requires a real
+# R_ARM_ABS32 relocation at every non-null pointer word. Catches the exact blind
+# spot scan_relocs.py / audit_pointer_classification.py miss: a plain numeric
+# `u32[]` C initializer, which agbcc never relocates and a `.4byte`-token regex
+# never sees.
+shiftcheck-glyphs: $(RELOCS_ELF) $(ROM) $(ELF)
+	$(PYTHON) $(SHIFTCHECK)/audit_glyph_relocs.py --elf $(ELF) --relocs-elf $(RELOCS_ELF) \
+	    --gba $(ROM) --prefix $(PREFIX)
+
 # Focused unit tests for the relocation scanners. Keep these in the normal gate:
 # path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
 shiftcheck-tests:
@@ -530,10 +541,11 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 	    --outdir $(SHIFTDIR) --allowlist $(SHIFTCHECK)/allowlist.txt
 
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
-# + packed talk-table false-relocation scan + pointer-classification audit.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests
+# + packed talk-table false-relocation scan + pointer-classification audit
+# + structural glyph relocation audit.
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-glyphs shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-glyphs shiftcheck-tests shiftcheck-diff
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a

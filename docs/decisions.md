@@ -11280,3 +11280,88 @@ address-named providers and layout fragments. No live tracked source remains
 under `data/residual`. The pointer-classification audit now also skips source
 paths deleted in the working tree but not yet removed from the Git index, so
 pre-commit shiftcheck remains usable during source consolidation.
+
+## D376 — false-zero shiftability gate: 10 unrelocated `TextGlyphs_System` links (CP932 97 CE 緑 fallback), a four-C-initializer blind spot, and a new structural glyph-relocation gate (2026-07-13)
+
+**The bug (issue #143, reopened).** In the `+0x40000` shifted ROM, system-font
+characters such as CP932 `97 CE` (緑) render as the fallback/heart glyph.
+`TextGlyphs_System`/`TextGlyphs_Talk` are `struct Glyph *[0xC0]` tables
+(`include/fontgrp.h`): slot `i` heads a linked list for SJIS trail byte
+`i + 0x40`, walked via `struct Glyph.sjisNext` (offset 0 of the 0x48-byte
+record) comparing `sjisByte1` (the lead byte, offset 4) until a match. A
+non-null `sjisNext` written as a raw ROM literal instead of `&symbol [+ off]`
+carries no `R_ARM_ABS32` relocation: it reads correctly in the byte-identical
+build (the literal already equals the unshifted address) but does not move
+under a ROM shift, so it silently corrupts the rest of that trail byte's chain
+— including every lead byte reachable only past the break, e.g. 緑 (lead
+`0x97`) four hops past the first broken link on trail `0xCE`.
+
+**Why the existing gates falsely reported clean.** Two independent heuristics
+already exist and both have a blind spot for this exact class:
+- `scan_relocs.py`'s coherent-table classifier only ranks an unrelocated
+  ROM-pointer word HIGH-confidence when it shares an object with an
+  already-relocated pointer (a "MIXED object"); these six per-symbol
+  `asm/data_<addr>.s` residue files and four `u32[]` `data_<addr>.c` residue
+  files carry exactly one glyph record each, so the raw literal is the only
+  pointer-shaped word in its object — never MIXED, never HIGH.
+- `audit_pointer_classification.py`'s source scan looks for the literal text
+  `.4byte`/`.word`; a plain C `u32 arr[] = { 0x0857E644, ... };` numeric
+  initializer contains neither token, so the four `.c` cases were invisible to
+  it. Separately, **agbcc does not emit an `R_ARM_ABS32` relocation for a plain
+  integer initializer** — only for a `&symbol [+ off]` pointer expression —
+  so even a byte-identical rebuild of those four files was silently
+  non-shiftable regardless of what the source scanner could see.
+
+**The fix (10 links, all in `TextGlyphs_System`; `TextGlyphs_Talk` had none).**
+Six assembly literals became `SYM + off` (already this repo's established
+per-file idiom — several of the same six files already carried adjacent
+`.4byte SYM [+ off]` entries for other glyphs in the same object):
+`data_0857AC54.s` (4 literals: `frontier_df3_fontgrp_se_{009,005,006,000}_*`),
+`data_0857DEF4.s`, `data_0857D48C.s`. The four `.c` residue files were
+retyped from a raw `u32[]` numeric-initializer array to a one-element
+`struct Glyph[]` with `.sjisNext = &SYM[idx]` (`idx = off / 0x48`, all ten
+offsets are exact `struct Glyph` multiples) plus decoded `.sjisByte1`/`.width`/
+`.bitmap` fields — the same typed-`struct Glyph` idiom already used by
+`frontier_fontgrp_ui.c` — so the pointer expression, not an integer, is what
+agbcc compiles, and `ld` emits the relocation. All ten target symbols already
+existed in-tree (`frontier_df3_fontgrp_se_*`, `frontier_df4_uistuff_006_57E4DC`);
+none needed new plumbing. `make compare` stays OK (byte-identical: the encoded
+`.sjisByte1`/`.width`/`.bitmap` words are unchanged, only the `sjisNext` word's
+*expression* changed from literal to symbol+offset, same emitted bytes).
+
+**The new gate (`scripts/shiftcheck/audit_glyph_relocs.py`, wired as
+`shiftcheck-glyphs` into `make shiftcheck`).** Unlike the two heuristics above,
+this walks the ACTUAL linked lists in the built ROM — locating
+`TextGlyphs_System`/`TextGlyphs_Talk` from the reference ELF (never
+hardcoded), traversing the schema-known 0xC0 heads and `sjisNext` chains with
+cycle detection and ROM-range checks — and requires a real `R_ARM_ABS32`
+relocation (from `fireemblem8_relocs.elf`, `.rom`-section-scoped like
+`scan_talk_table_relocs.py` to avoid `.debug_info` offset collisions) at every
+non-null pointer word it actually reads. It never classifies an arbitrary
+ROM-interior word as a pointer — only these two schema-known consumer fields —
+so packed graphics/audio/OAM data cannot become a false positive. Fixed-tree
+result: **system 1488/1488/1488/0, talk 2085/2085/2085/0** (unique/slots/
+relocated/missing); before the fix, `system` was `1488/1488/1478/10` with the
+missing set exactly the ten literals above (empirically re-verified against
+the pre-fix source via a scratch `fireemblem8_relocs.elf` rebuild). 13 focused
+unit tests (`test_audit_glyph_relocs.py`, synthetic ROM fixtures, no toolchain
+needed) cover missing-relocation, cycle, out-of-range/truncated-read
+malformed chains, and clean-chain cases.
+
+**Shifted A/B proof.** The same script's `--shifted-gba` mode reuses the
+identical baseline traversal against a `+0x40000` ROM built by
+`build_shifted_rom.sh` and proves, for all 1488 + 2085 reachable glyphs: every
+table-head and `sjisNext` link equals `baseline_target + shift` (or stays
+NULL), and all 0x44 payload bytes (`sjisByte1`/`width`/`bitmap`, i.e. the
+record minus its own `sjisNext` field) are byte-identical at `record+4` vs.
+`shifted_record+shift+4`. Result: **0 mismatches** on both tables. Directly
+confirmed: CP932 `97 CE` (緑, trail `0xCE`, four hops past the fixed
+`data_0857AC54.s` link) is reachable at baseline `0x085822BC` and shifted
+`0x085C22BC`.
+
+**Scope note.** This is a targeted class-wide closure (glyph-table
+shiftability), not a new numeric scorecard axis — `docs/frontier.md`'s
+axis-5 (Shiftability) gate count is unaffected (the coarse gates it reports
+were already at 0; this closes a blind spot those gates could not see, the
+same shape as D368's banim closure). No `calcprogress.py` axis (2/3/4/6)
+changes.
