@@ -90,7 +90,12 @@ equal observables: return value, callee-saved regs + sp restored, data memory,
 and the ordered call/MMIO trace. Call targets are compared by **resolved
 address** (so `CpuSet` == `sub_80D6370`), `_call_via_rN` veneers as indirect
 calls (register choice is not a diff), and ROM is served read-only from the
-cartridge image (immune to call-havoc).
+cartridge image (immune to call-havoc). Unknown callees compare the live
+`r0-r3` inputs; explicit ABI metadata records and compares later stack words
+too. The `sub_800A34C -> sub_800A194` entry is the first five-word case:
+four pointers in `r0-r3` plus `n` at `[sp]`. Both proof and differential entry
+points reject a reconstruction whose required callee declaration/call has the
+wrong arity before running.
 
 Status labels (honest — see review):
 | label | meaning |
@@ -139,4 +144,3 @@ dead return) and `sub_800FAD0` (full observable, 200 trials) which SMT could not
 decide. `sub_80A6F1C` = 118/120 in-domain trials identical (`INCONCLUSIVE-CB`);
 `sub_8057F80` needs a live battle-anim frame (research-grade). This never touches
 the build path — `make compare` stays green and remains the sole oracle.
-

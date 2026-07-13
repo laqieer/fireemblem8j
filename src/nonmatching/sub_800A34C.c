@@ -72,7 +72,14 @@
  * baseline_syms thumb entry @0x080D6378 before any future carve. */
 #include "global.h"
 
-extern int sub_800A194(int *a, int *b, int *c, int *d, int n);
+struct SplineVec2
+{
+    int x;
+    int y;
+};
+
+extern void sub_800A194(
+    int *a, int *b, int *c, struct SplineVec2 *d, int n);
 extern int sub_80D6378(int a, int b);
 
 int sub_800A34C(int *pts, int *out, u16 *times, unsigned int t, int count)
@@ -143,7 +150,7 @@ int sub_800A34C(int *pts, int *out, u16 *times, unsigned int t, int count)
     tx[2 * last] = -3 * (ep0[0] - ep1[0]);
     ty[2 * last] = -3 * (ep0[1] - ep1[1]);
 
-    sub_800A194(coeffA, coeffB, sub, tx, count);
+    sub_800A194(coeffA, coeffB, sub, (struct SplineVec2 *)tx, count);
 
     if (i >= last)
     {

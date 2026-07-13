@@ -27,6 +27,7 @@ import time
 
 import z3
 
+import abi_signatures as ABI
 import cfg_exec
 from cfg_exec import CallOracle, Engine, Fn, LiftError, State, bits
 
@@ -347,7 +348,7 @@ def callee_arg_regs(rom, entry, _visiting=None, _depth=0):
 
 
 def obs_differ(a, b):
-    rom = rom_image()
+    rom = None
     terms = []
     terms.append(a.regs[0] != b.regs[0])
     for r in CALLEE_SAVED:
@@ -372,7 +373,8 @@ def obs_differ(a, b):
         if na[0] == 'name' or nb[0] == 'name':
             if ta != tb:
                 return z3.BoolVal(True)
-            argset = {0, 1, 2, 3}
+            signature = ABI.signature_for_target(ta)
+            argset = None if signature is not None else {0, 1, 2, 3}
         else:
             terms.append((na[1] & ~1) != (nb[1] & ~1))
             ca_addr = None
@@ -383,10 +385,24 @@ def obs_differ(a, b):
                     sv = z3.simplify(t[1])
                     if z3.is_bv_value(sv):
                         ca_addr = sv.as_long() & ~1; break
-            argset = callee_arg_regs(rom, ca_addr) if ca_addr is not None else {0, 1, 2, 3}
-        for j in range(4):
-            if j in argset:
-                terms.append(ca["args"][j] != cb["args"][j])
+            signature = ABI.signature_for_target(ca_addr)
+            if signature is not None:
+                argset = None
+            else:
+                if rom is None:
+                    rom = rom_image()
+                argset = callee_arg_regs(
+                    rom, ca_addr
+                ) if ca_addr is not None else {0, 1, 2, 3}
+        if len(ca["args"]) != len(cb["args"]):
+            return z3.BoolVal(True)
+        if argset is None:
+            for aa, ab in zip(ca["args"], cb["args"]):
+                terms.append(aa != ab)
+        else:
+            for j in range(min(4, len(ca["args"]))):
+                if j in argset:
+                    terms.append(ca["args"][j] != cb["args"][j])
     # mmio trace
     if len(a.mmio) != len(b.mmio):
         return z3.BoolVal(True)
@@ -457,6 +473,11 @@ def rom_image():
 
 def prove(fn, loop_bound=3, verbose=True, time_budget=90, product_cap=4000):
     deadline = time.time() + time_budget
+    source_path = os.path.join(NMDIR, fn + ".c")
+    with open(source_path, encoding="utf-8", errors="replace") as source_file:
+        abi_errors = ABI.validate_source(fn, source_file.read())
+    if abi_errors:
+        return "INVALID-ABI:" + "; ".join(abi_errors)
     vma, tsize, csize = func_vma_size(fn)
     if not tsize or not csize:
         return "UNKNOWN:no-size"
@@ -467,8 +488,20 @@ def prove(fn, loop_bound=3, verbose=True, time_budget=90, product_cap=4000):
     oracle = CallOracle()
     enum_deadline = min(deadline, time.time() + max(10, time_budget * 0.5))
     try:
-        et = Engine(Fn(vma, tcode, tcall, "tgt", rom=rom), oracle, "T", loop_bound=loop_bound, deadline=enum_deadline)
-        ec = Engine(Fn(vma, ccode, ccall, "C", rom=rom), oracle, "C", loop_bound=loop_bound, deadline=enum_deadline)
+        et = Engine(
+            Fn(
+                vma, tcode, tcall, "tgt", rom=rom,
+                call_signatures=ABI.CALL_SIGNATURES_BY_ADDRESS,
+            ),
+            oracle, "T", loop_bound=loop_bound, deadline=enum_deadline,
+        )
+        ec = Engine(
+            Fn(
+                vma, ccode, ccall, "C", rom=rom,
+                call_signatures=ABI.CALL_SIGNATURES_BY_ADDRESS,
+            ),
+            oracle, "C", loop_bound=loop_bound, deadline=enum_deadline,
+        )
         lt = et.run(mk_state(regs, data, stack, flags), vma)
         lc = ec.run(mk_state(regs, data, stack, flags), vma)
     except LiftError as e:

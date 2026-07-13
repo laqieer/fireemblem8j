@@ -17,11 +17,13 @@ Soundness contract (see the review write-up for detail):
     and the ordered call/MMIO event trace. Private stack scratch is a separate
     array (no stack/pointer aliasing assumed).
   * Calls: at the k-th call on a path both functions share fresh symbols
-    (ret_k, mem_k, clobber_k); the observable includes each call's
-    (target, r0-r3), so equivalence is only concluded when the two functions make
-    the *same calls with the same arguments in the same order* — then identical
-    results follow. `_call_via_rN` veneers are modelled as an indirect call whose
-    target is the pointer in rN (so a different veneer register is NOT a diff).
+    (ret_k, mem_k, clobber_k); the observable includes each call's target and
+    argument words. Unknown callees conservatively use r0-r3; callees with
+    explicit ABI metadata also record stack-passed words at [sp], [sp+4], ...
+    Equivalence is only concluded when the two functions make the same calls
+    with the same arguments in the same order — then identical results follow.
+    `_call_via_rN` veneers are modelled as an indirect call whose target is the
+    pointer in rN (so a different veneer register is NOT a diff).
   * Flags at function exit are not required (C ABI); they are tracked because
     conditional branches consume them.
 """
@@ -93,13 +95,15 @@ class Fn:
     `rom`/`rom_base` give the full read-only ROM image so literal pools and ROM
     tables anywhere in cart space resolve to their true constant bytes."""
 
-    def __init__(self, base, code, callmap, name="fn", rom=None, rom_base=0x08000000):
+    def __init__(self, base, code, callmap, name="fn", rom=None,
+                 rom_base=0x08000000, call_signatures=None):
         self.base = base
         self.code = code
         self.callmap = callmap   # instr_addr -> target symbol string
         self.name = name
         self.rom = rom
         self.rom_base = rom_base
+        self.call_signatures = call_signatures or {}
 
     def hw(self, addr):
         off = addr - self.base
@@ -279,7 +283,15 @@ class Engine:
             target = tgt                          # canonical: an int address
         k = len(st.calls)
         self.oracle._mk(k)
-        args = [st.regs[i] for i in range(4)]
+        signature = None
+        if isinstance(target, int):
+            signature = self.fn.call_signatures.get(target & ~1)
+        elif isinstance(target, str):
+            signature = self.fn.call_signatures.get(target)
+        arg_words = signature.arg_words if signature is not None else 4
+        args = [st.regs[i] for i in range(min(4, arg_words))]
+        for i in range(4, arg_words):
+            args.append(self._aload(st.stack, st.regs[SP] + 4 * (i - 4), 4))
         st.calls.append({"target": target, "args": args})
         st.regs[0] = self.oracle.ret[k]
         for r, sv in self.oracle.clob[k].items():

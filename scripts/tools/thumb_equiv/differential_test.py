@@ -88,14 +88,16 @@ def parse_sig(fn):
     """(ret_bytes|0 for void, [arg_kind...]) from the reconstruction's C
     signature. arg_kind: 'ptr' | 'fnptr' | 'val'."""
     c = os.path.join(P.NMDIR, fn + ".c")
-    txt = open(c, encoding="utf-8", errors="replace").read().splitlines()
+    with open(c, encoding="utf-8", errors="replace") as source_file:
+        txt = source_file.read().splitlines()
     inb = False
     line = None
+    target = re.compile(r"\b" + re.escape(fn) + r"\s*\(")
     for l in txt:
         if "*/" in l:
             inb = True
             continue
-        if inb and re.match(r"^[A-Za-z].*\(", l) and ";" not in l:
+        if inb and target.search(l) and ";" not in l:
             line = l
             break
     if line is None:
@@ -356,6 +358,11 @@ def candidate_linked(fn, vma, tsize):
 
 
 def diff_test(fn, trials=300, verbose=False):
+    source_path = os.path.join(P.NMDIR, fn + ".c")
+    with open(source_path, encoding="utf-8", errors="replace") as source_file:
+        abi_errors = P.ABI.validate_source(fn, source_file.read())
+    if abi_errors:
+        raise ValueError("INVALID-ABI: " + "; ".join(abi_errors))
     vma, tsize, csize = P.func_vma_size(fn)
     rb, kinds = parse_sig(fn)
     ccode = candidate_linked(fn, vma, tsize)
