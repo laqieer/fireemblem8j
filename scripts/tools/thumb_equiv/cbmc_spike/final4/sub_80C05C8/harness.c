@@ -57,6 +57,30 @@
  *   count), NOT a truncation: every one of the 29 real iterations is covered
  *   by exactly one instantiation of the proven step lemma.
  *
+ *   WHY THE STEP LEMMA'S CONCLUSION DOES NOT DEPEND ON k OR ON THE ABSOLUTE
+ *   COUNTER VALUES (the reason finite induction over 29 iterations is valid
+ *   from a SINGLE CBMC run): the step lemma in PART A is stated and proven
+ *   for k and (ciG0, ciP0, nlog0) as INDEPENDENT free symbolic values -- the
+ *   ASSUME clauses bound them to a domain, they do NOT tie ciG0/ciP0/nlog0 to
+ *   any particular function of k (e.g. "the counters after k prior
+ *   iterations"). The proof is therefore of the STRONGER, k-and-counter-
+ *   value-agnostic universal statement "for every k and every EQUAL pair of
+ *   before-states in the assumed domain, the step preserves equality" --
+ *   which trivially implies the WEAKER, specific statement needed for
+ *   induction ("for the particular (unknown, data-dependent) counter values
+ *   that actually arise after processing iterations 0..k-1, iteration k
+ *   preserves equality"), for every k, without CBMC ever needing to know or
+ *   track what those actual realized values are. This is precisely why a
+ *   SINGLE machine-checked instantiation (one CBMC run, k universally
+ *   quantified by being left symbolic) discharges all 29 real per-iteration
+ *   proof obligations: the lemma does not merely hold "at the values that
+ *   happen to occur" -- it holds at EVERY value in the assumed domain, so it
+ *   certainly holds at whichever ones occur. The finite induction over
+ *   k = 0..28 chains 29 applications of this ALREADY-UNIVERSAL lemma; no
+ *   re-verification per index is needed, and no assumption is made about
+ *   what the real game data (which determines how many of the 29 iterations
+ *   actually call the oracles) happens to be.
+ *
  *   PART B is the loop-free MERGE-PHASE full symbolic equivalence (no
  *   induction needed -- it executes at most once).
  *
@@ -144,11 +168,20 @@
  *    (abstracted callees, out of scope here).
  *
  * DIRECT WRITES (compare ALL direct proc/global writes). Disasm audit of
- * asm/sub_80C05C8.s: every `str`/`strh`/`strb` targets a `[sp,#imm]` stack
- * slot (function-local scratch / outgoing call args) -- ZERO stores target
- * any address derived from `sb` (the proc pointer) or a global symbol. The
- * JP function itself has ZERO direct writes to proc or global state; all
- * externally-visible effects flow ONLY through the three oracle calls. The
+ * asm/sub_80C05C8.s (every `str`/`strh`/`strb` in the function, register by
+ * register): every one of them targets stack scratch -- either directly via
+ * a literal `[sp,#imm]` operand (e.g. `str r0,[sp,#0xc]`), or via a register
+ * set earlier in the SAME block to `sp` plus a constant offset and then used
+ * as the store's base register (e.g. `mov r4,sp; adds r4,#6` ... later
+ * `strh r3,[r4]`; the same pattern recurs with `sl`, and with `r2`/`r3` at
+ * different offsets in the merge-phase block). Concretely: ZERO stores in
+ * this function ever target `sb` (the proc pointer, held in `sb` for the
+ * whole function) or an address derived from a global symbol (`gGMData`,
+ * `gWMNodeData`, `gWMNodeIconData`) -- every store's base register is either
+ * literally `sp` or was itself derived from `sp` with no other register or
+ * global folded in. The JP function itself has ZERO direct writes to proc or
+ * global state; all externally-visible effects flow ONLY through the three
+ * oracle calls. The
  * ONE apparent exception is the reconstruction's
  * `gm->nodes[*(u8*)phaseRole].state += 0;` (decomp.me register-pressure
  * scaffolding per the source's 2026-07-13 comments) -- a self-write-back of
@@ -189,8 +222,19 @@ static s16 nondet_s16(void) { return (s16) nondet_int(); }
 
 #define NUMNODES 29 /* real JP loop trip count: r8/phaseRole = 0..0x1c inclusive */
 #define NUMICON 3   /* modelled gWMNodeIconData[] window; see SCOPE above */
-#define MAXCALL 4   /* room for up to 2 new trace entries appended by one PART A step,
-                     * or the single AP_Update possibly appended by PART B */
+/* MAXCALL sizes the oracle pools / trace log / counter ASSUME bounds to cover
+ * the FULL REACHABLE range of PART A's loop-carried counters over all 29
+ * iterations, not just what one step needs: at most one GETPOS + one
+ * PUTSPRITE call per iteration, so ciG0/ciP0 each reach at most NUMNODES=29
+ * and nlog (their sum, interleaved) reaches at most 2*NUMNODES=58 before the
+ * last step, +2 more appended by that step = 60. 2*NUMNODES+2 = 60. (A
+ * smaller bound, e.g. 4, was tried first and is also sound -- the step lemma
+ * doesn't need the counters to be reachable, only equal, see the
+ * counter-independence note above -- but this larger bound additionally
+ * demonstrates the proof is stable at the size an actual realized 29-
+ * iteration chain could produce, which is the stronger, more defensible
+ * check; solver cost stayed negligible, see Evidence.) */
+#define MAXCALL (2 * NUMNODES + 2)
 
 enum
 {
