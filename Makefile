@@ -510,11 +510,12 @@ shiftcheck-offsets: $(RELOCS_ELF) $(ROM) $(MAP)
 shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/scan_talk_table_relocs.py --elf $(RELOCS_ELF) --ref-elf $(ELF)
 
-# Layer 1d: reject source-level pointer-classification mistakes that the relocated
-# ELF cannot distinguish (packed words symbolized as pointers, and real pointers
-# left as raw ROM literals).
-shiftcheck-ptraudit: $(ELF)
-	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) --fail-on-suspects
+# Layer 1d: reject source-level pointer-classification mistakes plus any ROM ABS32
+# relocation to an STT_FUNC symbol that resolves anywhere except the exact even/Thumb
+# entry. The latter must use the relocation-bearing final ELF, not source-text guesses.
+shiftcheck-ptraudit: $(RELOCS_ELF) $(ELF)
+	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) \
+	    --relocs-elf $(RELOCS_ELF) --fail-on-suspects
 
 # Layer 1e: reject raw ROM-address-shaped numeric literals in linked C code.
 # agbcc emits these as literal-pool words without R_ARM_ABS32, so the linked-ELF
