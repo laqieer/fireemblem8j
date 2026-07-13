@@ -121,6 +121,7 @@ src/nonmatching/sub_807C8DC.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_807D3BC.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_8057F80.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_800A594.o: CC1FLAGS += -fno-rerun-cse-after-loop
+src/nonmatching/sub_800A34C.o: CC1FLAGS += -fno-gcse
 src/DivinationRankSpriteUpdate.o: CC1FLAGS += -fno-gcse
 src/efxSPDQuake_Loop.o: CC1FLAGS += -mjp-promote
 src/efxLunaOBJ_Loop_D.o: CC1FLAGS += -mjp-promote
