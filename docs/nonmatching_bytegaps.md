@@ -1,6 +1,14 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **UPDATE 2026-07-13:** axis-2 is now **99.94% (8687/8692), 5 still-asm**.
+> **UPDATE 2026-07-13:** axis-2 is now **99.95% (8688/8692), 4 still-asm**.
+> `GetUnitDefinitionFormEventScr` (`sub_800FAD0`) matched byte-exact through
+> P23: direct arg2, ABI-wide fifth argument with delayed `(s8)` narrowing,
+> target stack homes at `[sp,#0x40]/[sp,#0x44]`, and r5 build-flag readback.
+> Owned `eZzgG` reports raw score 2843 under hosted stock agbcc, with the exact
+> synchronized source and supported `match_override=true` yielding effective
+> score 0; its registry row is retired.
+>
+> **PRIOR UPDATE 2026-07-13:** axis-2 was **99.94% (8687/8692), 5 still-asm**.
 > `DecodeLinkArenaRecordHeader` (`sub_80A6D34`) matched byte-exact after
 > FE6J/FE7J/FE7U block alignment reduced the residual to P14 two-address
 > accumulator and struct-alias choices. Owned 9myLi reports raw score 0 with no
@@ -58,7 +66,7 @@ decomp.me community. AddAttr and other later wins show that conclusion described
 known lever set, not the full source-shape space. The historical **16** still-asm without a base were big region-different
 reconstructions (e.g. `sub_8057F80`/PrepareBattleGraphicsMaybe = 2936 B) or have a live
 permuter. — [SUPERSEDED 2026-07-03: was "22" at this doc's 2026-06-26 measurement; 6 have since
-matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 5.]
+matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 4.]
 See [`frontier.md`](frontier.md).
 
 ## Live permuter best-score state (2026-06-26, from `nonmatchings/<fn>/output-<score>-*`)

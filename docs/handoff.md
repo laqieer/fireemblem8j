@@ -13,7 +13,8 @@
 > pass. Owned `eZzgG` exposes effective score 0 via `match_override`, and its
 > registry row is retired. Ground truth becomes matching-C **99.95%
 > (8688/8692, 4 still-asm)** and source-form code **899,408/901,428 bytes
-> (99.78%)**.
+> (99.78%)**, source-form data **100%**, and named symbols **100%
+> (12688/12688)**.
 >
 > The remaining four are `sub_800A34C`, `sub_800A594`, `sub_807D3BC`, and
 > `sub_80C05C8`. Do not redispatch `sub_800FAD0`, `sub_80A6D34`, or

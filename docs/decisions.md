@@ -11148,3 +11148,70 @@ commit. Publish by fast-forward only, then require exact-pushed-main-SHA `CI`
 (including deploy) and `Secret scan` success before declaring D371 complete.
 Mirror the final public SHA/evidence on the existing issue #14 project item
 without reopening or closing it.
+
+## D372 — promote `GetUnitDefinitionFormEventScr` with P23; matching-C 99.95% (8688/8692), 4 remain (2026-07-13)
+
+**Provenance and serial integration.** The repaired authoritative branch is
+`feat/sub_800FAD0-q7r9` at
+`9315281c38c8d1f01f51b4966c5d462100f493c4`, with the linear sequence
+`f7e92d933706704defff698498481cbeb603574f` →
+`76a3d0f9ae97bd6d4db5bd8c4ed3f582581cfc33` →
+`c2c777b22fa00ba3ad8f6475a40037c26710f02e` →
+`9315281c38c8d1f01f51b4966c5d462100f493c4`. The score-85 seed was already
+represented on serialized main by
+`bc50112a0fcb13ef6977add36c570d67dd8477ef`: both seed commits have stable
+patch-id `641c16c2b74ab784df9d893a73fc1e9af8d51963`, and both carry the identical
+`src/nonmatching/sub_800FAD0.c` blob
+`7d0e7c568b8805d298cc3dd190047de681c93d51`. The integrator therefore
+transplanted only the three descendants as `c977f4d0e09a012e112c27a3b828e41f3e6f90f9`,
+`057978c5e71e12582cea992a8609b7f779a24f95`, and
+`61d6298a525634718254552744185bbb3e22b1a4`, preserving normal commit messages,
+authors, and Co-Authored-By trailers without squash, amend, rebase, or duplicate
+seed history.
+
+**Matching mechanism.** P23 keeps `arg2` direct, declares the stacked fifth ABI
+argument as `int`, and delays the sole `(s8)` re-narrow until after `buildFlag`
+receives `[sp,#0x40]`. A word-sized `iSpill` occupies `[sp,#0x44]` across
+`NextRN_N`, while a final r5 readback preserves the build-flag carrier. The
+compiled object is exactly 464 bytes. Its disassembly shows the required
+`str r3,[sp,#0x40]`, `str/ldr r3,[sp,#0x44]`, and
+`ldr r5,[sp,#0x40]` sequence. All inline assembly is empty allocation/lifetime
+constraint text; there is no raw opcode, scripted branch, fake call, or
+fixed-callee substitute. This P23 designation is distinct from and preserves
+the genuine `DecodeLinkArenaRecordHeader` P14 two-address-accumulator lever.
+
+**Independent semantic and upstream evidence.** Live owned scratch `eZzgG` is
+named `SOLVED (matched elsewhere)` and reports compiler `agbcc`, flags exactly
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`, raw score **2843**,
+and `match_override=true` (effective score 0 / effective family match). Its
+source SHA-256 is
+`c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`;
+the one-member family has the same owner and override state. The registry
+contains no `sub_800FAD0`/`eZzgG` row. Focused CBMC reports **0 of 374 failed**
+and `VERIFICATION SUCCESSFUL`; the return mutation fails 1/374 and the selected-
+flag mutation fails 2/374, so both are refuted. The current promoted object also
+passes the Unicorn differential harness for **EQUIV 200/200** full-observable
+trials.
+
+**Lifecycle and local gates.** The range
+`0x0800FAD0..0x0800FCA0` now comes from
+`src/sub_800FAD0.o(.text)`. The old asm, gbadisasm fragment, and nonmatching
+staging source are removed; the final ELF has exactly one
+`GetUnitDefinitionFormEventScr` definition at `0x0800FAD0`. The linked 464-byte
+range and baserom both hash to
+`83d27e3fba44432181438c2c9288c98ed6fa6840795b6feda84e85f6e41463f2`.
+`make layout`, targeted object/range/symbol checks, warm and cold
+`make compare`, `make shiftcheck` (0 HIGH), and `make check-nonmatching`
+(exactly four) pass. `check_selfcontained.py` reports zero baserom incbins;
+baseline dedup regenerates with no tracked delta, and baserom-gap closure finds
+zero gaps.
+
+**Measured result and decision.** `scripts/calcprogress.py` reports matching-C
+**99.95% (8688/8692)**, source-form code **899,408/901,428 bytes (99.78%)**,
+named symbols **12688/12688**, and exactly four still-asm/nonmatching targets:
+`sub_800A34C`, `sub_800A594`, `sub_807D3BC`, and `sub_80C05C8`. Accept the
+promotion plus the minimal progress-doc reconciliation commit. Publish by
+fast-forward only, then require exact-pushed-main-SHA `CI` (including deploy)
+and `Secret scan` success before declaring D372 complete. Mirror the final
+public SHA/evidence on the existing issue #14 project item without reopening or
+closing it.
