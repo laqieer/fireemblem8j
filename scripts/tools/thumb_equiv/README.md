@@ -144,3 +144,50 @@ dead return) and `sub_800FAD0` (full observable, 200 trials) which SMT could not
 decide. `sub_80A6F1C` = 118/120 in-domain trials identical (`INCONCLUSIVE-CB`);
 `sub_8057F80` needs a live battle-anim frame (research-grade). This never touches
 the build path — `make compare` stays green and remains the sole oracle.
+
+## Final-four contract-assisted CBMC packages (`cbmc_spike/final4/`)
+
+The four functions still in `src/nonmatching/*.c` (`sub_800A34C`, `sub_800A594`,
+`sub_807D3BC`, `sub_80C05C8`) each have a self-contained, fail-closed
+contract-assisted relational-equivalence package under
+`scripts/tools/thumb_equiv/cbmc_spike/final4/<function>/`, using
+[CBMC](https://www.cprover.org/cbmc/) instead of Z3 to discharge a *relational*
+proof between the candidate reconstruction and an independent hand-derived
+reference transcription of the JP asm, plus a mutation harness that must
+refute. See `docs/equivalence_proving.md`'s "final four contract-assisted
+validation" table for the exact per-target results.
+
+Run one package (sequentially — CBMC is memory-heavy, do **not** run more than
+one at a time):
+
+```bash
+scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A34C/run.sh
+scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A594/run.sh
+scripts/tools/thumb_equiv/cbmc_spike/final4/sub_807D3BC/run.sh
+scripts/tools/thumb_equiv/cbmc_spike/final4/sub_80C05C8/run.sh
+```
+
+Each `run.sh` is fail-closed: it first hash-pins its own `src/nonmatching/*.c`
+and `asm/*.s` inputs (a mismatch aborts with `UNKNOWN` rather than silently
+reprinting a stale verdict), then re-runs the ARM-vs-ARM bounded proof/
+differential test, the CBMC relational proof (expect `VERIFICATION
+SUCCESSFUL`), one or more CBMC mutation harnesses (expect `VERIFICATION
+FAILED` — a non-refuting mutation harness would mean the proof is vacuous),
+and finally `make compare` (expect `fireemblem8.gba: OK`, unaffected since
+`src/nonmatching/*.c` is never part of the checksum build). `sub_807D3BC`'s
+package explicitly retains a disclosed bounded-domain/trust-boundary caveat
+label (`UNSOLVED` byte-match / `PROVEN-BOUNDED-CBMC-CVC` only for the modeled
+domain) — see its `README.md`.
+
+Run the shared adversarial trust gate (12 synthetic PROVEN/REFUTED/BOUNDED/
+UNKNOWN cases plus 3 real-function regression cases) to sanity-check the CBMC
+binary and flag vocabulary before trusting any package's verdict:
+
+```bash
+python3 scripts/tools/thumb_equiv/cbmc_spike/run_cbmc_spike.py
+```
+
+Needs the local CBMC binary — `cbmc` on `PATH`, or set `CBMC=/path/to/cbmc`, or
+rely on a locally-installed copy at `.cbmc-spike-tools/root/usr/bin/cbmc`
+(gitignored, not vendored; each `run.sh` and `run_cbmc_spike.py` fall back to
+that path automatically).

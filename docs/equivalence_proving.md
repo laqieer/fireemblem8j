@@ -22,18 +22,46 @@ stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
 oracle.
 
-> **Cohort status (2026-07-11):** this document records the original
-> 16-function proof cohort. Ten members have since graduated to byte-matching C:
-> `PrepareBattleGraphicsMaybe`, `AddAttr2dBitMap`, `Augury_InitResultScreen`,
-> `DivinationRankSpriteUpdate`, `PutDivinationRankSprite`, `Event18_ColorFade`,
-> `AdjustNewUnitPosition`, `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`, and
-> `DecodeAndVerifyArenaRecord`. The live `src/nonmatching/` frontier is now **6**;
-> the 16-based proof ratios below remain historical results for that fixed cohort.
-> For the final decoder source, the current compiled-vs-ROM tools now report
-> `PROVEN-BOUNDED(3)` and differential EQUIV for 60/60 trials; the existing
-> bounded shared-oracle CBMC harness remains successful at 0/409 assertions, with
-> both adversarial mutations refuting as intended. Commit `6aa5f35fa` also passes
-> the stronger full-ROM `make compare` oracle.
+> **Cohort status (2026-07-13, updated from the 2026-07-11 note below):** this
+> document records the original 16-function proof cohort. Twelve members have
+> since graduated to byte-matching C: `PrepareBattleGraphicsMaybe`,
+> `AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`,
+> `PutDivinationRankSprite`, `Event18_ColorFade`, `AdjustNewUnitPosition`,
+> `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`, `DecodeAndVerifyArenaRecord`,
+> `DecodeLinkArenaRecordHeader`, and `GetUnitDefinitionFormEventScr`. The live
+> `src/nonmatching/` frontier is now **4** (verified: `find src/nonmatching
+> -maxdepth 1 -name '*.c'` returns `sub_800A34C`, `sub_800A594`,
+> `sub_807D3BC`, `sub_80C05C8` — see the authoritative list in
+> `docs/frontier.md`); the 16-based proof ratios below remain historical
+> results for that fixed cohort. The stale (2026-07-11) note previously said
+> "frontier is now 6" — superseded by the two further graduations above.
+>
+> **Final four contract-assisted validation (2026-07-13).** Each of the four
+> remaining `src/nonmatching/*.c` reconstructions now has an independent,
+> mutation-tested CBMC contract-assisted relational-equivalence package under
+> `scripts/tools/thumb_equiv/cbmc_spike/final4/<function>/`, following the same
+> Discussion #149 method as the rest of this document. All four packages were
+> re-run against `origin/main` commit `5c210a85c99fb20d222b1d398dca3d22f015c2b1`
+> (the integration base) inside an isolated worktree; every stage produced
+> exactly its documented expected verdict, and the shared adversarial trust
+> gate (`scripts/tools/thumb_equiv/cbmc_spike/run_cbmc_spike.py`) passed all 12
+> cases with no wrong expected verdict. **All four functions remain unmatched**
+> (`UNSOLVED` under `make compare`); nothing here changes the byte-match
+> frontier or the oracle.
+>
+> | function | ARM-vs-ARM result | CBMC proposition / domain | mutation result | differential evidence | trust / caveat label | package |
+> |---|---|---|---|---|---|---|
+> | `sub_800A34C` (SplineEvalCatmullRom) | `PROVEN-BOUNDED(3)` | relational contract, `harness.c`, unwind 17 — `0 of 681 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c`: `VERIFICATION FAILED` on `out[1] equal` (non-vacuous) | — (ARM-vs-ARM bounded proof is the differential evidence for this package) | `PROVEN-BOUNDED-CBMC-CVC` (relational, contract-assisted); fail-closed SHA-256 source/asm provenance pinning | [`final4/sub_800A34C/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A34C/README.md) |
+> | `sub_800A594` | `PROVEN-BOUNDED(1)` | `harness.c`, unwind 10, count in `[4,5]` — `0 of 841 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c` (output-copy swap): `VERIFICATION FAILED`; `harness_mut_arg.c` (callee-argument corruption): `VERIFICATION FAILED` at the oracle's own anti-masking assert | `EQUIV` (100 trials, `ret4B` args=[]) | `PROVEN-BOUNDED` (ARM-vs-ARM, unwind=1) + `PROVEN-BOUNDED-CBMC-CVC` (C-vs-C) | [`final4/sub_800A594/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A594/README.md) |
+> | `sub_807D3BC` (SelectSummonPos) | `PROVEN-BOUNDED(1)` | `harness.c` — `0 of 257 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c`: `VERIFICATION FAILED` on `result.y equal` | `EQUIV` (100 trials, `ret1B` args=['val','val','ptr']) | **`UNSOLVED` (byte-match) / `PROVEN-BOUNDED-CBMC-CVC` for the modeled domain — disclosed domain-bounds and trust-boundary caveats retained (bounded 9-cell neighborhood + bounded call-trace domain; see the package README "Exact proposition" and "caveats" sections)** | [`final4/sub_807D3BC/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_807D3BC/README.md) |
+> | `sub_80C05C8` (GmapScreen2_Loop) | `PROVEN-BOUNDED(2)` | `harness.c` — `VERIFICATION SUCCESSFUL` | `harness_mut.c` (attr `0x800`→`0x400`): `VERIFICATION FAILED`; `harness_mut_cleanup.c` (regressed m2c cleanup fix): `VERIFICATION FAILED` (`1 of 302 failed`) | `EQUIV` (60 trials, `ret4B` args=[], dead-ret: mem-effects only) | `PROVEN-BOUNDED-CBMC-CVC` (relational, contract-assisted) | [`final4/sub_80C05C8/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_80C05C8/README.md) |
+>
+> Every package's `run.sh` also re-ran `make compare`, which stayed
+> `fireemblem8.gba: OK` throughout — this validation strictly adds evidence
+> *below* the byte-match oracle and never touches `src/nonmatching/*.c` or the
+> checksum build. See each package's `README.md` for the full proposition
+> statement, provenance hashes, and (for `sub_807D3BC`) the explicit disclosed
+> bounds this package's claim is scoped to.
 
 ## The exact proposition posed to Z3 (the proof obligation)
 
@@ -360,7 +388,7 @@ bounded-proven or stronger; 1 (`sub_8057F80`) remains at the dynamic tier.**
 
 | tier | how | which of the 16 |
 | --- | --- | --- |
-| byte-matching | in `make compare` (SHA-1) | 10 of the original 16 have graduated, including `sub_80A6F1C`; 6 remain |
+| byte-matching | in `make compare` (SHA-1) | 10 of the original 16 have graduated, including `sub_80A6F1C`; 6 remained at the time this table was written. **[Updated 2026-07-13]** 2 more (`DecodeLinkArenaRecordHeader`, `GetUnitDefinitionFormEventScr`) have since graduated; the live frontier is now **4** — see the "Cohort status" note and "final four contract-assisted validation" table near the top of this document |
 | **unbounded-proven** (cut-point / loop-invariant) | CBMC loop contracts, ∀-iterations | `sub_80A6F1C` (de-obf loop, full u16 domain) — first at this tier |
 | **bounded-proven** (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM, compiler-free) + `PROVEN-BOUNDED-CBMC-CVC` (CBMC C-vs-C, trusts m2c+agbcc) | **14**: 12 ARM-vs-ARM + `sub_800A34C` + `sub_800FAD0` (CBMC C-vs-C); (`sub_80A6F1C` also has a bounded proof but sits above at unbounded) |
 | differential / dynamic | mGBA live-state | `sub_8057F80` (115/115 writes+ret; a *sound* bounded CBMC proof is a solver-sink — full write-set observable + 204-call anti-masking blows up, narrower closes are degenerate; documented in `focused/sub_8057F80/README.md`) |
