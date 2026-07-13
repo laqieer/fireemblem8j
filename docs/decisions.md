@@ -11309,3 +11309,46 @@ binary audit moves `UNCERTAIN 33 → 30` and `TOTAL 1448 → 1445` with
 shiftability suspects. This resolves only these three fully proven map
 migrations from issue #143; it does not claim the wider `.incbin` review is
 closed.
+
+## D377 — reject function-interior ABS32 targets as false pointer decodes (2026-07-13)
+
+**Finding.** A full linked-ELF sweep of ROM-backed `R_ARM_ABS32` relocations found
+59,503 records. Of the 5,679 whose exact relocation symbol-table entry was
+`STT_FUNC`, 5,672 linked to the normal Thumb entry, 6 linked to the even entry,
+and exactly one linked into a function interior:
+`slot=0x08AC2830`, `linked=0x08050201`,
+`MenuStdHelpBox S_even=0x080501CC`, delta `+0x35`.
+
+**Classification and fix.** The slot is the absolute alias `gWorldmapRadar_1`;
+the next word is `gWorldmapRadar_2` at `0x08AC2834`. FE8U types these as
+`const s8[]` resources `{1,2,5,8}` and `{5,2,1,0}`, and
+`GMapRadar_SlideIn/Out` index the bytes before calling `PutWmMinimapGfx`.
+Therefore `0x08050201` is packed little-endian data, not a callable address.
+Replace `(u32)&MenuStdHelpBox + 0x34` with the intentional non-relocating raw
+word `0x08050201`; preserve the neighboring `0x00010205`. The matching ROM
+remains byte-identical.
+
+**Class-wide gate.** Extend Layer 1d
+(`scripts/shiftcheck/audit_pointer_classification.py`) with
+`--relocs-elf fireemblem8_relocs.elf`. A small dependency-free ELF32 reader uses
+the retained relocation section's target-section context, exact symbol-table
+index/type, and final linked word. For every ROM-backed `R_ARM_ABS32` whose
+symbol is `STT_FUNC`, accept only `S_even` or `S_even|1`; any other value fails
+`--fail-on-suspects` and reports slot, linked value, symbol, and delta.
+Non-ALLOC/debug relocation sections are ignored even when their offsets
+numerically overlap the ROM window. An `STT_OBJECT` interior is not rejected by
+this function-specific rule. Focused tests cover Thumb entry, even entry,
+function interior, OBJECT interior, debug/non-ROM filtering, and rejection of an
+ELF with zero ROM ABS32 records (which would otherwise silently disable the gate).
+
+**Proof and scope.** Before the data fix the new rule reports exactly one
+function-interior relocation. After it, the relocation-bearing ELF reports
+59,502 ROM ABS32 records, 5,678 FUNC targets, 5,672 Thumb entries, 6 even
+entries, and zero interiors. `make compare` is OK and `make shiftcheck` passes.
+A dedicated post-header `+0x40000` shifted ROM keeps
+`gWorldmapRadar_1=0x08050201` and `gWorldmapRadar_2=0x00010205`; the old symbolic
+expression would evaluate to `0x080901CD + 0x34 = 0x08090201`.
+All 5,678 legitimate function-entry relocations track their target placement
+(5,656 shift by `+0x40000`; 22 target the deliberately unshifted 0xC0-byte ROM
+header and remain unchanged). This decision fixes and gates one reopened
+issue-#143 false-positive class only; it does not declare the issue fully closed.
