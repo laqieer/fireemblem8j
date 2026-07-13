@@ -389,34 +389,43 @@ includes.
 
 ```sh
 # Read-only preflight: compile and score the exact adopted local file upstream.
-scripts/tools/decompme/sync_improvement.py <owned-base> \
-  --source src/nonmatching/<fn>.c \
-  --compiler-settings-from <improved-fork> --dry-run
-
-# Authenticated PATCH + source/settings/score verification.
+LOCAL_FLAGS="<exact make-nonmatching compiler flags>"
 scripts/tools/decompme/sync_improvement.py <owned-base> \
   --source src/nonmatching/<fn>.c \
   --compiler-settings-from <improved-fork> \
+  --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
+  --local-score <local-score> --local-residual "<linked-residual>" --dry-run
+
+# Authenticated PATCH + normalized-source/toolchain-record verification.
+scripts/tools/decompme/sync_improvement.py <owned-base> \
+  --source src/nonmatching/<fn>.c \
+  --compiler-settings-from <improved-fork> \
+  --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
+  --local-score <local-score> --local-residual "<linked-residual>" \
   --expected-score <dry-run-score>
 ```
 
 The helper never executes downloaded source locally. It uses the established
 browser-UA/Referer and `setup_auth.sh` credential file, verifies ownership,
 preflight-compiles the exact local text, and rolls the remote scratch back if
-the PATCH response or fresh GET does not preserve the expected source/settings/
-nonzero score. Commit the local adoption only after this succeeds. Keep the
-registry row active and do **not** set SOLVED or `match_override` while score>0.
+the PATCH response or fresh GET does not preserve normalized source identity,
+settings, nonzero score, and the metadata record. That record contains the local
+score/residual/compiler flags and decomp.me score/compiler/flags. Commit the
+local adoption only after this succeeds. Keep the registry row active and do
+**not** set SOLVED or `match_override` while score>0.
 
 For a locally discovered improvement, omit `--compiler-settings-from` to retain
-the owned base's compiler settings, or pass `--compiler-flags "..."` when the
-staging object uses an additional decomp.me-supported flag. The context is always
-regenerated from the current local project headers; remote fork source is never
-executed. Older adopted seeds must add the guard and be backfilled with the same
-dry-run/update sequence. `--allow-same-score` is only for an exact-text migration
-whose owned scratch already reports the same nonzero score; it is not permission
-to adopt a non-improvement. A local-only flag that stock decomp.me rejects cannot
-be uploaded; use the supported base flags, record the verified upstream score,
-and do not claim that the remote score measures the custom local compiler.
+the owned base's compiler settings. Always try the exact local flags through
+`--compiler-flags "$LOCAL_FLAGS"` first. If stock decomp.me rejects a project-only
+flag such as `-mjp-promote`, rerun without that override or with a supported
+subset, while leaving `--local-flags "$LOCAL_FLAGS"` unchanged. The helper then
+retains the exact source, records the toolchain mismatch, verifies the score
+decomp.me actually produced, and keeps the row active.
+
+The remote score may be equal or worse because it measures a different compiler
+configuration. **Score monotonicity is not proof of synchronization.** The proof
+is matching normalized source hashes plus the verified metadata record. Older
+adopted seeds must add the guard and be backfilled with this same sequence.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
 

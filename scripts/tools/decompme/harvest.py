@@ -14,7 +14,9 @@ Classifications (per still-asm function that has a registry scratch):
                          (run scripts/prove_nonmatching.py / differential_test.py
                          before adopting; decomp.me score alone is not proof),
                          then sync the exact adopted file back to the owned base
-                         with sync_improvement.py and keep its registry row.
+                         with sync_improvement.py, record both toolchains'
+                         score/flags, and keep its registry row. A different or
+                         worse remote score does not disprove source identity.
   * NONE              -- no member beats our base; keep grinding / permute.
   * STALE             -- function is no longer still-asm (already carved) but a
                          scratch is still open -> MARK-SOLVED on decomp.me so
@@ -117,7 +119,8 @@ def classify(fn, slug):
         return {"fn": fn, "slug": slug, "status": "IMPROVED", "base_score": base,
                 "best": best[1], "matched_slug": best[0], "matched_by": best[2],
                 "detail": f"fork {best[0]} ({best[2]}) score {best[1]} < base {base}"
-                          f" -> ADOPT+SYNC if prove_nonmatching/differential_test pass"}
+                          f" -> ADOPT+SYNC exact source if proof/EQUIV pass"
+                          f" (remote score may differ)"}
     return {"fn": fn, "slug": slug, "status": "NONE", "base_score": base,
             "best": best[1] if best else None,
             "detail": "no member beats base; permute/apply-lever"}
@@ -183,7 +186,8 @@ def main():
     elif counts.get("IMPROVED"):
         print("\n  ACTIONABLE: review IMPROVED fork(s); prove-equivalent -> adopt as "
               "src/nonmatching/<fn>.c, sync the exact file to the owned base with "
-              "sync_improvement.py, and keep the registry row active.")
+              "sync_improvement.py, record local+remote score/toolchain data, and "
+              "keep the registry row active.")
     else:
         print("\n  No free harvest. Next: apply learned levers to same-pattern "
               "still-asm functions (real make-compare attempts), or permute.")
