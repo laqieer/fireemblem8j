@@ -11365,3 +11365,94 @@ axis-5 (Shiftability) gate count is unaffected (the coarse gates it reports
 were already at 0; this closes a blind spot those gates could not see, the
 same shape as D368's banim closure). No `calcprogress.py` axis (2/3/4/6)
 changes.
+
+## D377 — second false-zero shiftability class: 3 unrelocated `PROC_NAME` pointers in `ProcCmd` scripts, a structural gate for the whole consumer class, and a scan_offsets.py false-positive fix surfaced along the way (2026-07-13)
+
+**The bug (issue #143, same-scope follow-up to D376).** `struct ProcCmd { short
+opcode; short dataImm; const void* dataPtr; }` (`include/proc.h`) is an 8-byte
+script-command record; several opcodes (`PROC_NAME`, `PROC_CALL`,
+`PROC_REPEAT`, `PROC_SET_END_CB`, `PROC_START_CHILD*`, `PROC_WHILE_EXISTS`,
+`PROC_END_EACH`, `PROC_BREAK_EACH`, `PROC_JUMP`, `PROC_WHILE`, `PROC_CALL_2`,
+`PROC_CALL_ARG`) carry a real ROM pointer in `dataPtr`. Three `PROC_NAME`
+slots in `src/data/frontier_df4_banim_a/frontier_df4_banim_a.c`
+(`ProcScr_efxThunderBG`, `ProcScr_efxThunderBGCOL`, `ProcScr_efxFireOBJ`) held
+`(const void*)0x080E1D0C` / `0x080E1D24` / `0x080E1DCC` raw literals instead of
+the `(void*)((u8*)frontier_df4_misc_lo_007_0E1870 + off)` idiom every
+neighboring entry in the SAME file already uses — carrying no `R_ARM_ABS32`
+relocation, correct only because the byte-identical build sits at its
+original address. Same root class as D376 (a second consumer of the identical
+mistake pattern), found by an independent structural audit of every
+source-declared linked `struct ProcCmd` array.
+
+**Fix.** All three literals became `(void*)((u8*)frontier_df4_misc_lo_007_0E1870
++ 0x49C/0x4B4/0x55C)`, matching the file's own established idiom exactly
+(byte-identical: `make compare` OK).
+
+**The new gate (`scripts/shiftcheck/audit_procscr_relocs.py`, wired as
+`shiftcheck-procscr` into `make shiftcheck`).** For every GLOBAL
+source-declared `struct ProcCmd NAME[] = { ... }` DEFINITION (a paren-aware
+source-text scan that correctly excludes a bare `extern struct ProcCmd
+NAME[];` forward declaration — some symbols, e.g. `sCpProcData`, are
+`extern`-declared as `struct ProcCmd` in one file while their REAL definition
+elsewhere is a plain `u32[]` used only as a `PROC_NAME` string target; naively
+counting those inflated a first-pass source scan from ~467 to 914 names),
+resolve `(address, size)` from the reference ELF and require a real
+`R_ARM_ABS32` relocation at every non-null pointer-bearing `dataPtr` field.
+Only GLOBAL definitions are audited — two independent `static` arrays in
+different translation units may legitimately share a local symbol name (found
+two: `sProc_BMVSync`/`sProc_DelayedBMapDispResume` in `src/bmio_08030B90.c`
+and `src/bmio_08030344.c`), and `nm` alone cannot disambiguate that reliably;
+routing around it entirely avoids a false "malformed" report unrelated to
+shiftability. Fixed-tree result: **506 arrays / 4,798 records / 2,903
+pointer-bearing slots, 2,903 relocated, 0 missing, 0 malformed** (0 unexpected
+relocations on non-pointer/null fields, 0 unknown opcodes, 0 out-of-range).
+Before the fix: 2,900 relocated, exactly the 3 literals above missing
+(re-verified against a scratch pre-fix rebuild). This repo's own count differs
+from the reported 467/4,338/2,637 baseline, most likely because that audit's
+population was narrower (e.g. a stricter "genuinely-linked / reachable"
+notion); both audits independently converge on the SAME 3 missing links and a
+clean 0-malformed floor after the fix, which is the property that matters. 18
+focused unit tests (`test_audit_procscr_relocs.py`, synthetic fixtures, no
+toolchain needed) cover missing-relocation, unknown-opcode, bad-size,
+out-of-range array/pointer, unexpected-relocation-on-non-pointer-field, and
+clean-array cases, plus the opcode-table mirrors `include/proc.h`.
+
+**Shifted A/B proof.** `--shifted-gba` mode reuses the identical baseline scan
+against a `+0x40000` ROM built by `build_shifted_rom.sh` and proves all 2,903
+pointer-bearing `dataPtr` fields equal `baseline_target + shift` (or stay
+NULL): **0 mismatches**. Directly confirmed all three fixed targets
+(`0x080E1D0C`/`0x080E1D24`/`0x080E1DCC`) shift to
+`0x08121D0C`/`0x08121D24`/`0x08121DCC`.
+
+**A genuine gate false-positive surfaced and fixed in passing
+(`scan_offsets.py`, Layer 1b).** Turning the three raw literals into real
+relocations made them visible to the pre-existing cross-resource-offset
+scanner for the first time (it only inspects RELOCATED words) — and two of
+the three (`+0x4B4`, `+0x55C`) landed EXACTLY on the start address of
+`frame_config.18`/`frame_config.39`, function-scoped `static const u16
+frame_config[]` locals in unrelated files (`src/banim-efxmagic-thunder.c`,
+`src/banim-efxmagic-fire.c`) that only exist as compiler-assigned `.N`-suffixed
+disambiguation labels. The scanner's HIGH bucket assumed "reaches another
+symbol's exact start" always means "should have referenced that symbol
+directly" — true for the real bug class it was built to catch (a stored
+pointer that should read `&gOpenLimitViewImgLut` instead of `Img_A + 0x280`),
+but false here: a `static`-scoped local has internal linkage and literally
+cannot be `extern`'d from a different translation unit, so `base +
+hardcoded_offset` is the only expressible form, and the exact-start landing is
+an unavoidable coincidence of ROM layout, not a wrong-base bug. Fixed
+`parse_syms()` to additionally track which addresses have a GLOBAL (nm
+uppercase-type) symbol, and split the former binary HIGH/REVIEW classification
+into HIGH / REVIEW / a new **`[C] LOCAL-TARGET`** bucket (non-gating,
+informational) for exact-start landings on non-global-only targets. This is a
+narrow, targeted fix: the two known real-bug precedents this scanner exists
+to catch (both referenced named GLOBAL data symbols) remain HIGH-classified;
+only exact-start coincidences on non-nameable compiler-local symbols move to
+the new bucket. `shiftcheck-offsets` returns to `RESULT: no HIGH cross-resource
+hardcoded offsets` (was failing solely because of this newly-surfaced pair).
+
+**Scope note.** Same as D376: a targeted class-wide closure across a second
+consumer, not a new numeric scorecard axis. `docs/frontier.md` axis-5 already
+records the D376 closure; no additional edit needed there since the coarse
+gate count stays at 0 and no `calcprogress.py` axis changes.
+
+Tracked on the same issue #143 thread as D376.

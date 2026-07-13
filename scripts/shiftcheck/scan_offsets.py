@@ -63,7 +63,21 @@ def parse_relocs(elf, readelf):
 
 
 def parse_syms(elf, nm):
+    """Return (syms, section_names, has_global_at).
+
+    `has_global_at[addr]` is True if ANY symbol AT that exact address has
+    GLOBAL (uppercase nm type) linkage -- used to distinguish a genuinely
+    "reference the target symbol directly" actionable HIGH from a coincidental
+    landing on a compiler-local disambiguation symbol (`nm`'s lowercase type,
+    e.g. a function-scoped `static const ... name[]` that gets an auto ".N"
+    suffix): a `static`/local symbol has internal linkage and literally CANNOT
+    be named from a different translation unit, so `base + hardcoded_offset`
+    is the only expressible form there -- it is not the "A + off = &B" bug
+    shape this scanner exists to catch (see module docstring), it is an
+    unavoidable coincidence of ROM layout. See docs/decisions.md D377.
+    """
     syms, section_names = [], set()
+    has_global_at = {}
     for ln in sh([nm, elf]).splitlines():
         p = ln.split()
         if len(p) < 3:
@@ -77,8 +91,12 @@ def parse_syms(elf, nm):
             syms.append((a, name))
             if typ in ("a", "N") or name.startswith(".") or name in SECTION_SYMS:
                 section_names.add(name)
+            if typ.isupper():
+                has_global_at[a] = True
+            else:
+                has_global_at.setdefault(a, False)
     syms.sort()
-    return syms, section_names
+    return syms, section_names, has_global_at
 
 
 def parse_map_text_ranges(path):
@@ -107,7 +125,7 @@ def main():
 
     import numpy as np
     words = np.frombuffer(open(args.gba, "rb").read(), dtype="<u4")
-    syms, section_names = parse_syms(args.ref_elf, args.prefix + "nm")
+    syms, section_names, has_global_at = parse_syms(args.ref_elf, args.prefix + "nm")
     starts = [s[0] for s in syms]
     text = parse_map_text_ranges(args.map)
     tstarts = [t[0] for t in text]
@@ -120,7 +138,7 @@ def main():
         i = bisect.bisect_right(tstarts, o) - 1
         return i >= 0 and text[i][0] <= o < text[i][1]
 
-    high, review = {}, {}
+    high, review, local_target = {}, {}, {}
     for off, sv, nm in parse_relocs(args.elf, args.prefix + "readelf"):
         # Skip relocations whose BASE is a section symbol: binutils collapses
         # local / asm-label / NOLOAD-overlay targets onto the section symbol, losing
@@ -142,8 +160,19 @@ def main():
             continue  # offset stays within the base symbol -> safe (relative)
         rec = dict(off=off, sv=sv, w=w, addend=w - sv, base=nm, tgt=t_name,
                    tdelta=w - t_start)
-        actionable = (w == t_start and not in_text(off) and (w - sv) > 0)
-        (high if actionable else review).setdefault((nm, t_name), []).append(rec)
+        exact_start = w == t_start and not in_text(off) and (w - sv) > 0
+        # A target that lands exactly on another symbol's start is only an
+        # actionable "should have referenced it directly" bug if that target
+        # is actually NAMEABLE from the base's translation unit -- i.e. it has
+        # GLOBAL linkage. A function-scoped `static const ... name[]` gets an
+        # auto ".N" nm suffix but internal linkage: it cannot be `extern`'d
+        # from a different TU, so `base + hardcoded_offset` is the only
+        # expressible form, and the exact-start coincidence is unavoidable
+        # ROM-layout luck, not a wrong-base bug. See docs/decisions.md D377.
+        if exact_start and not has_global_at.get(t_start, False):
+            local_target.setdefault((nm, t_name), []).append(rec)
+        else:
+            (high if exact_start else review).setdefault((nm, t_name), []).append(rec)
 
     def dump(d, title):
         n = sum(len(v) for v in d.values())
@@ -160,6 +189,8 @@ def main():
     print("=" * 78)
     n_high = dump(high, "[A] HIGH (data pointer reaches a different resource's START)")
     dump(review, "[B] REVIEW (compiler bias-base / .text reuse / mid-symbol -- usually benign)")
+    dump(local_target, "[C] LOCAL-TARGET (exact-start landing on a non-nameable compiler-local "
+                        "symbol; base+offset is the only expressible form -- not actionable)")
     print("\n" + "=" * 78)
     if n_high:
         print(f"RESULT: {n_high} HIGH cross-resource offset(s) -> reference the target "
