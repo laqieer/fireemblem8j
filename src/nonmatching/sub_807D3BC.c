@@ -22,8 +22,9 @@
  *   Callees: DivRem=DivRem, CanUnitCrossTerrain=sub_8019174.
  * ============================================================================
  *
- * MATCH STATUS (2026-07-12 bounded H/I/J/K campaign): NOT byte-exact, but the best
- *   proven staging source is now 80/392 differing linked bytes, exact size 392
+ * MATCH STATUS (2026-07-13 bounded Path 1/Path 2 continuation): NOT byte-exact,
+ *   but the best proven staging source is now 73/392 differing linked bytes,
+ *   exact size 392
  *   and exact `sub sp,#144` frame. Progression from the committed v7 baseline:
  *     331 -> 210  destination readback + scoped empty-register barrier
  *     210 -> 201  scope `reject` inside the outer loop
@@ -33,7 +34,10 @@
  *                 zero-instruction do-while separator around the zero-fill store
  *      82 -> 80   initialize compaction `i` before `j`; this moves the array-scan
  *                 base from r2 to target r1 and fixes three bytes for one new byte
- *   Semantics of this 80-byte candidate:
+ *      80 -> 73   initialize inner-loop `ix` before `reject` in one combined
+ *                 for-init; this delays reject materialization from +0x28 to
+ *                 +0x30 without changing score, size, frame, or anchor registers
+ *   Semantics of this 73-byte candidate:
  *     prove_nonmatching.py = PROVEN-BOUNDED(1)
  *     differential_test.py --trials 60 = EQUIV (60/60)
  *
@@ -41,8 +45,8 @@
  *
  *   1. The reject lifetime and fail path are now correct: both carry 0xff in r2
  *      through the call spill and emit `ldrb; orrs r0,r2; strb` with no stack
- *      reload. Mine still materializes `movs r2,#0xff` 18 bytes too early at
- *      +0x28; JP emits it at +0x3A after loading gBmMapSize. Mine consequently
+ *      reload. Mine now materializes `movs r2,#0xff` 10 bytes too early at
+ *      +0x30; JP emits it at +0x3A after loading gBmMapSize. Mine consequently
  *      keeps x+2 in r9 instead of sl, keeps iy in sl instead of r9, and swaps
  *      ix/array-pointer r4/r5. The remaining outer-loop body is otherwise a
  *      clean register-role permutation.
@@ -71,8 +75,21 @@
  *   `for (i = 0, j = 0; ...)`, local score 645 (from 655), linked residual
  *   80/392 (from 82), size 392, frame 0x90, PROVEN-BOUNDED(1), EQUIV 60/60.
  *
+ * PATH 1/PATH 2 CONTINUATION (2026-07-13, deterministic caps respected):
+ *   Live family harvest found only owned J1ka1 (no forks), hosted stock score
+ *   10499; its normalized function body was byte-identical to fccbb5cfe.
+ *   Path 1 tested 12 initialization/materialization schedules. Four exact forms
+ *   produced the same strict linked improvement to 73/392; the retained minimal
+ *   form declares reject without initialization and combines
+ *   `ix = x - 1, reject = 0xff`. It moves reject to +0x30 in r2 while preserving
+ *   score 645, size 392, frame 0x90, fail-path r2, and compaction scan base r1.
+ *   Path 2 tested 12 assignment-chain/readback/tied-constraint forms. None put
+ *   compaction i in target r5 without regressing the r1 scan base or frame; the
+ *   non-regressing forms reproduced score 645/residual 73 with i still in r2.
+ *   The retained result re-passed PROVEN-BOUNDED(1) and EQUIV 60/60.
+ *
  * VERDICT: UNSOLVED, objectively improved and proven-equivalent. The next useful
- * lever must still delay reject materialization from +0x28 to JP's +0x3A and
+ * lever must still delay reject materialization from +0x30 to JP's +0x3A and
  * seat compaction i in r5 without losing the newly-correct r1 scan base, while
  * preserving the 0x90 frame and exact fail path.
  */
@@ -101,9 +118,9 @@ s8 sub_807D3BC(int x, int y, struct SumThing* result)
     s8* zero;
 
     for (iy = y - 1; iy < y + 2; iy++) {
-        int reject = 0xff;
+        int reject;
 
-        for (ix = x - 1; ix < x + 2; ix++) {
+        for (ix = x - 1, reject = 0xff; ix < x + 2; ix++) {
             array[count].x = ix;
             array[count].y = iy;
 
