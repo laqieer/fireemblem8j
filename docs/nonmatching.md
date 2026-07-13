@@ -266,7 +266,7 @@ block alignment and P14 two-address accumulator steering. Owned 9myLi compiles
 at raw score 0 with `match_override=false`; its canonical function payload is
 identical to the promoted project source, and its registry row is retired.
 `GetUnitDefinitionFormEventScr` (`sub_800FAD0`) was then retired after its local
-P14 source passed the linked ROM oracle and owned family `eZzgG` exposed
+P23 source passed the linked ROM oracle and owned family `eZzgG` exposed
 effective score 0 through the supported `match_override` state.
 
 | # | function | name | decomp.me scratch |

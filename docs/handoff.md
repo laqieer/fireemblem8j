@@ -5,7 +5,7 @@
 
 > **[REFRESH 2026-07-13 — `sub_800FAD0` serial promotion.]**
 > The repaired release history after the already-landed score-85 seed promotes
-> `GetUnitDefinitionFormEventScr` from descriptive asm to matching C. P14 keeps
+> `GetUnitDefinitionFormEventScr` from descriptive asm to matching C. P23 keeps
 > arg2 direct, widens the fifth ABI argument to `int`, delays its `(s8)` local
 > re-narrow, preserves the `[sp,#0x40]/[sp,#0x44]` stack homes, and steers the
 > tail build-flag readback through r5. Linked range, normal/cold `make compare`,
