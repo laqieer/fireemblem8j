@@ -450,8 +450,37 @@ NONMATCH_OBJECTS := $(NONMATCH_CFILES:.c=.o)
 all: $(ROM)
 	@$(SHASUM) -c checksum.sha1
 
-# `make compare` is the build's only test: SHA-1 of the built ROM vs the original.
-compare: $(ROM)
+# Deterministic graphics/source-format invariant audit (issue #143,
+# scripts/audit_graphics_forms.py): the SHA-1 oracle below proves the ROM's
+# BYTES are right, but says nothing about whether the committed EDITABLE
+# SOURCE that produced them is itself well-formed (right PNG mode/dims, a
+# per-tile pixel index a 4bpp/FETSATOOL pack would silently truncate, a JASC
+# .pal with a wrong declared count, a corrupt .tsa.bin/.map.bin header, ...).
+# Depends on $(ROM) (not just the individual asset rules) so it always runs
+# against a FULLY built tree -- every generic %.4bpp/%.gbapal/FETSATOOL
+# %.feimgN.bin+%.fetsaN.bin intermediate the build actually uses is guaranteed
+# to already exist on disk (they are gitignored .SECONDARY intermediates, see
+# the asset-pipeline comments above) before the audit inspects them, so it
+# never races asset generation under `make -j`. compare depends on THIS
+# target (not $(ROM) directly) so the two can never run concurrently either.
+graphicscheck: $(ROM)
+	$(PYTHON) scripts/audit_graphics_forms.py
+
+# Focused unit tests for the audit itself (tile order, JASC/.pal, .tsa.bin
+# exact/+2/named-exception, .map.bin, FETSATOOL per-tile bank/mask invariants,
+# num_tiles, unknown-classification). No toolchain / no ROM needed. These
+# exercise FAILURE fixtures too (a corrupt/mismatched input MUST be rejected),
+# not just the current tree's passing assets.
+graphicscheck-tests:
+	cd scripts && $(PYTHON) -m unittest -v test_audit_graphics_forms
+
+.PHONY: graphicscheck graphicscheck-tests
+
+# `make compare` is the build's only BYTE test (SHA-1 of the built ROM vs the
+# original); `graphicscheck` is the accompanying SOURCE-FORMAT test. Both are
+# BLOCKING: a source-format defect fails `compare` even if the bytes happen to
+# still be correct this build.
+compare: $(ROM) graphicscheck
 	$(SHASUM) -c checksum.sha1
 
 #### Shiftability harness (scripts/shiftcheck/) ####
