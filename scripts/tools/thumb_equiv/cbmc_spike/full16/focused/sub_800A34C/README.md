@@ -16,6 +16,13 @@ also shared call-indexed oracles whose full scalar arguments are recorded and as
 equal.  Thus an index-based shared return cannot mask a divergence in call order or call
 arguments; it refutes at the post/inline argument checks instead.
 
+`sub_800A194` has five ABI words: four pointers in `r0-r3` and `n` at `[sp]`.
+The project ARM-vs-ARM oracle now carries explicit signature metadata for this call,
+records the stack word, and rejects source that declares or calls it with four
+arguments.  The focused Python regression models the unsafe BVOBw shape (a manual
+`[sp]` local plus a four-argument declaration/call) and requires an `INVALID-ABI`
+rejection before proof or differential testing.
+
 Scope is deliberately labelled below the byte oracle: bounded C-vs-C equivalence,
 trusting m2c/spec shape, agbcc/codegen relevance, and these shared-oracle abstractions.
 `make compare` remains the stronger project oracle.
