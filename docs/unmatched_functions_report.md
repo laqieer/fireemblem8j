@@ -1,7 +1,7 @@
 # The 6 remaining unmatched functions — understanding report
 
 > **UPDATE 2026-07-11 (`sub_800FAD0` resolved).**
-> `GetUnitDefinitionFormEventScr` now compiles byte-exact from C. The P14 match
+> `GetUnitDefinitionFormEventScr` now compiles byte-exact from C. The P23 match
 > uses an ABI-wide fifth argument with a delayed `(s8)` local re-narrow, direct
 > `arg2` lifetime, explicit `[sp,#0x40]/[sp,#0x44]` stack homes, and an r5 tail
 > readback. Axis-2 is **99.93% (8686/8692), 6 still-asm**.
@@ -214,7 +214,7 @@ JP-only DEAD spline island
   "load units" command).
 - **Verdict:** **LIVE** — used whenever an event loads/generates units (e.g. reinforcements,
   summons defined in-script).
-- **Resolution:** P14 declares the stacked fifth argument ABI-wide and narrows it
+- **Resolution:** P23 declares the stacked fifth argument ABI-wide and narrows it
   locally only after `arg3` receives its target stack home. Direct `arg2`, scoped
   word-sized RNG spill/reload constraints, and an r5 tail readback reproduce the
   four formerly differing clusters. Linked range and whole-ROM comparisons are exact.

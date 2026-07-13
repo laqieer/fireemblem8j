@@ -258,7 +258,7 @@ Br4VJ/uVVvN/gdTId/vdXu7/XOT5k fork verified raw score 0. Stock decomp.me may sti
 show NEAR progress that cannot reproduce project-local compiler context, so
 `make compare` remains the final oracle.
 `GetUnitDefinitionFormEventScr` (`sub_800FAD0`) was then retired after its local
-P14 source passed the linked ROM oracle and owned family `eZzgG` exposed effective
+P23 source passed the linked ROM oracle and owned family `eZzgG` exposed effective
 score 0 through the supported `match_override` state.
 
 | # | function | name | decomp.me scratch |

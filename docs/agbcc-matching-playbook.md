@@ -267,7 +267,7 @@ proc-field addresses while rematerializing the tilemap base at use sites, and XO
 keeps a caller-supplied callback in r3 so the compiler selects `_call_via_r3`.
 These are allocation levers, not permission to replace real calls or pointers.
 
-### 5e. ABI-wide stacked narrow args + proven stack-home/readback carriers [verified-in-repo, P14]
+### 5e. ABI-wide stacked narrow args + proven stack-home/readback carriers [verified-in-repo, P23]
 
 **Symptom.** A fifth or later `s8`/`u8` argument already arrives as an ABI word,
 but JP narrows it on the opposite side of another local's stack-home write. The
@@ -306,12 +306,14 @@ to a concrete target live range and stack offset.
 `iSpill@[sp,#0x44]`, delayed `(s8)arg4`, and an r5 tail readback. The exact
 flattened scorer source synchronized to owned scratch `eZzgG` has SHA-256
 `c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`.
-Its hosted raw score is 2843 because stock decomp.me agbcc lacks the
-project-local `-mjp-promote` flag; after local linked-ROM byte identity,
-`match_override=true` gives the supported effective score 0 and the registry
-row is retired. The flattened scorer source is exact to the upstream upload,
-but intentionally is not text-identical to the project-form source with real
-includes and naming.
+Its hosted compiler is `agbcc` with
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`; raw score 2843 is
+expected because stock decomp.me agbcc lacks the project-local `-mjp-promote`
+flag. After local linked-ROM byte identity, CBMC 0/374, and differential EQUIV
+over 200 trials, `match_override=true` gives the supported effective score 0
+and the registry row is retired. The flattened scorer source is exact to the
+upstream upload, but intentionally is not text-identical to the project-form
+source with real includes and naming.
 
 ---
 
@@ -332,7 +334,7 @@ as the asm-differ target (survey §4.3) so a literal-pool-only delta is visibly
 | 4 | **`bl` to a local `_08…`/`.L` label** | A `bl` where you expected a branch | §4: it's a widened long branch, **not** a near-miss. Verify the target is in-function and move on — do not restructure. |
 | 5 | **`lsr` where ROM has `asr` (or vice-versa) on an s16** | `lsl;lsr` vs `lsl;asr` at an s16 narrowing | §5a: widen the s16 to `int` before first use; add an explicit `(s16)` cast; for params, change the prototype to `s16`. If store-only, decompile the JP's real (signed) logic. |
 | 6 | **Only instruction ORDERING differs** | Same instructions, permuted order (arg-load order, save order, batched vs inline) | §5b/§5d + cookbook P9/P12/P13: first try a zero-instruction `do { } while (0);` separator, destination-field or pointer-role readback, explicit next-IV/argument temps, signed-load live-range splits, and deliberate address hoist/rematerialization. Add an empty fence only when disassembly proves a value must remain live. These can change allocation/block order without changing behavior (`AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`, `PutDivinationRankSprite`, `DrawAuguryResultPanel`). Only then park it as a permuter target. |
-| 7 | **Stacked narrow arg extends on the wrong side of a proven spill/readback** | Fifth+ arg shift pair is reordered; two stack homes swap; final reload uses the wrong register | §5e / cookbook P14: preserve the narrow caller prototype, use an ABI-wide callee parameter, delay the cast to its semantic use, and add only the target-proven word stack home/tied reload/readback carrier. Validate semantics, then use linked `make compare`. |
+| 7 | **Stacked narrow arg extends on the wrong side of a proven spill/readback** | Fifth+ arg shift pair is reordered; two stack homes swap; final reload uses the wrong register | §5e / cookbook P23: preserve the narrow caller prototype, use an ABI-wide callee parameter, delay the cast to its semantic use, and add only the target-proven word stack home/tied reload/readback carrier. Validate semantics, then use linked `make compare`. |
 
 **After any candidate fix:** rebuild and run `make compare` (incremental, ~0.3 s
 — D7). `OK` graduates the function: move the C up to `src/<owner>.c`, delete

@@ -5,7 +5,7 @@
 
 > **[REFRESH 2026-07-11 — `sub_800FAD0` score-0 follow-up candidate.]**
 > Branch `feat/sub_800FAD0-q7r9` now promotes
-> `GetUnitDefinitionFormEventScr` from descriptive asm to matching C. P14 widens
+> `GetUnitDefinitionFormEventScr` from descriptive asm to matching C. P23 widens
 > the fifth ABI argument to `int`, re-narrows it as `s8` after the build flag's
 > `[sp,#0x40]` stack-home write, and preserves the RNG selection count at
 > `[sp,#0x44]`; the tail reload is steered through r5. Linked range, normal and

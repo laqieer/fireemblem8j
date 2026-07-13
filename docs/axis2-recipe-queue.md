@@ -1,7 +1,7 @@
 # Axis #2 (matching-C) — 6 still-asm functions, ranked recipe queue
 
 > **[UPDATE 2026-07-11 — `sub_800FAD0` MATCHED.]**
-> `GetUnitDefinitionFormEventScr` is a byte-exact P14 local-oracle match:
+> `GetUnitDefinitionFormEventScr` is a byte-exact P23 local-oracle match:
 > ABI-wide fifth arg + delayed `(s8)` re-narrow, direct arg2 lifetime, paired
 > `[sp,#0x40]/[sp,#0x44]` stack homes, and r5 tail readback. Normal/cold compare,
 > shiftcheck, CBMC, and differential gates pass; `eZzgG` exposes effective score
@@ -88,7 +88,7 @@ Retained for provenance; the seven-entry queue above is the current work list.
   data alias. JP precomputed-class-name-table pattern (shared w/ sub_80D1844).
 - **#8/#30 sub_80A73D4** (256B, divination): sequential PutNumber/PutNumberOrBlank, NO control
   flow — reconstruct directly from asm. EASIEST augury fn. — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo, banked.]
-- **#26 sub_800FAD0** (464B) — **[RESOLVED 2026-07-11, P14 score-0]**: fe8u eventscr.c NONMATCHING GetUnitDefinitionFormEventScr body +
+- **#26 sub_800FAD0** (464B) — **[RESOLVED 2026-07-11, P23 score-0]**: fe8u eventscr.c NONMATCHING GetUnitDefinitionFormEventScr body +
   JP arg-sign (arg2 u8/lsrs, arg3/4 s8/asrs) + -mjp-promote.
   WIRING: sub_800FAD0 already HAS the `GetUnitDefinitionFormEventScr` baseline alias
   (0800FAD0, layout/baseline_syms.d/Event2C_LoadUnits-0e52685b.tsv) — carving must DROP that

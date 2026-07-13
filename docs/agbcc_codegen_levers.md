@@ -242,7 +242,7 @@ The 17 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | XOT5k `EncodeLinkArenaRecord` (sub_80A6E4C, 208 B) | 8 | 1 | 0 | 0 | Pin the **real callback** to r3 and call it normally so agbcc emits `_call_via_r3`; scoped base/count lifetimes + one fence |
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
-| local `GetUnitDefinitionFormEventScr` (sub_800FAD0, 464 B) | 2 | 3 | 2 | 0 | **P14** ABI-wide stacked arg + delayed local re-narrow; direct arg2 lifetime; paired stack homes; r5 tail readback |
+| local `GetUnitDefinitionFormEventScr` (sub_800FAD0, 464 B) | 2 | 3 | 2 | 0 | **P23** ABI-wide stacked arg + delayed local re-narrow; direct arg2 lifetime; paired stack homes; r5 tail readback |
 
 **LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
 The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
@@ -445,7 +445,10 @@ preserve the pointer's role and lifetime. Highest-transfer remaining targets are
 `sub_80A6D34` (phase-local codec bases), and `sub_80C05C8` (node/table address
 roles). Harvest any score-0 family member before applying the lever locally.
 
-**P14 — widen a stacked narrow ABI arg, then re-narrow it after the required
+**Numbering note:** P14 remains the genuine `DecodeLinkArenaRecordHeader`
+two-address-accumulator / phase-local-struct-alias lever. The FAD0 lever is P23.
+
+**P23 — widen a stacked narrow ABI arg, then re-narrow it after the required
 stack-home write.** A fifth `s8` argument is already passed as a promoted word.
 When JP loads that word early but delays its `lsl#24;asr#24` until after another
 parameter has been spilled, declare the callee-side parameter as `int` and make
@@ -466,9 +469,12 @@ raw-score this project-local `-mjp-promote` match, so owned family `eZzgG` is
 closed with the supported `match_override` state. The synchronized flattened
 scorer source has SHA-256
 `c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`;
-its hosted raw score is 2843 and `match_override=true` is the valid effective
-score 0 after local linked-ROM byte identity. The flattened upload and the
-project-form source are deliberately not text-identical.
+its hosted compiler is `agbcc` with
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`, its raw score is
+2843, and `match_override=true` is the valid effective score 0 after local
+linked-ROM byte identity, CBMC 0/374, and differential EQUIV over 200 trials.
+The flattened upload and the project-form source are deliberately not
+text-identical.
 
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
