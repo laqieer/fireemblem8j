@@ -942,7 +942,7 @@ SELF_TEST_NOTES = [
     "`*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).",
     "`Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).",
     "`graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).",
-    "`graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2).",
+    "`graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2), EXCEPT the two RE'd-and-extracted TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` (issue #143), which are correctly **FLOOR** by the `.tsa.bin`-suffix rule (proven real ABS consumers in `src/sub_8021AFC.c` / `src/sub_8022200.c`).",
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
     "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",
@@ -1061,7 +1061,13 @@ def run_self_tests(by_path):
     expect("/Tsa_", "FLOOR")            # bug #1: TSA by name -> FLOOR
     expect("_map.bin", "FLOOR")         # bug #1: tilemaps -> FLOOR
     expect("graphics/gfx_data_bg/", "FLOOR")
-    expect("graphics/frontier_df4_uistuff/", "UNCERTAIN")  # bug #2
+    # issue #143: the two sub_8021AFC/Sub8022200 TSA companions were RE'd and
+    # extracted to named `.tsa.bin` (real ABS consumers proven) -> correctly
+    # FLOOR now (see the `.tsa.bin` FLOOR expect() above). Narrow bug #2's
+    # blanket UNCERTAIN assertion to the genuinely-still-unRE'd remainder.
+    expect("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", "UNCERTAIN")  # bug #2
+    expect("graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin", "FLOOR")  # #143
+    expect("graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin", "FLOOR")  # #143
     expect("graphics/banim/efx", "FLOOR")
     expect("data/sound/gMPlayTable.bin", "MISS")
     # D326: verified 30x20 u16 banim screen tilemaps -> FLOOR (fe8u keeps binary)
