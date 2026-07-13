@@ -3,8 +3,6 @@
 # byte-identical at the pinned -mindist); raw palette -> JASC .pal; everything else ->
 # verbatim .bin incbin'd directly. baserom.gba is out of the build graph. Oracle: make compare.
 
-asm/frontier_df4_uistuff.o: \
-  graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.4bpp.lz
 
 # PNG-extracted LZ sheets (proven byte-exact at -mindist 2). The first LZ77 sheet of
 # each blob is now an editable PNG (png -> .4bpp -> .4bpp.lz); the trailing palette +

@@ -4,13 +4,6 @@
 # everything else -> verbatim .bin incbin'd directly. baserom.gba is out of the build
 # graph. Oracle: make compare.
 
-asm/frontier_df4_ending.o: \
-  graphics/frontier_df4_ending/frontier_df4_ending_004_ACC378.4bpp.lz \
-  graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.4bpp.lz \
-  graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.4bpp.lz \
-  graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.4bpp.lz \
-  graphics/frontier_df4_ending/frontier_df4_ending_019_B8B998.4bpp.lz \
-  graphics/frontier_df4_ending/frontier_df4_ending_020_BAA2E0.4bpp.lz
 
 # wave-reopened: 009/014 were mis-classified as non-reproducible LZ floors (an
 # off-by-4-padding measurement error). Each is a GBA-BIOS-LZ77 sheet -> editable PNG

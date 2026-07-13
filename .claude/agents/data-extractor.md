@@ -1,6 +1,6 @@
 ---
 name: data-extractor
-description: Read-only FE8J DATA-frontier researcher (data is ~94% of the ROM). Given an asm/dat_*.s residual-incbin region or a region-same data range, it produces a typed-INCBIN MIGRATION RECIPE — the variables.h base type + dims, the INCBIN_U8/U16/U32 line, the manifest repoint, and the DATA_INCBIN_ASM_EXCLUDE edit — for the integrator to apply and make-compare. Does NOT build/commit/edit the shared tree.
+description: Read-only FE8J DATA-frontier researcher. Given a live src/data residual-incbin provider or a region-same data range, it produces a typed-INCBIN MIGRATION RECIPE — the variables.h base type + dims, the INCBIN_U8/U16/U32 line, the manifest repoint, and removal of any superseded provider — for the integrator to apply and make-compare. Does NOT build/commit/edit the shared tree.
 disallowedTools: Edit, Write, NotebookEdit
 color: blue
 ---
@@ -13,13 +13,13 @@ recipe the integrator applies; you never build or commit the shared tree (D99 si
   pattern, `docs/frontier.md` (worklist source of truth — NOT `layout/nofuncmap_*.tsv`).
 
 ## Recipe contents
-- `range`: the JP data range + the `asm/dat_*.s` label(s) it lives under (read the real addresses;
+- `range`: the JP data range + its live `src/data` provider or baseline symbol (read the real addresses;
   `git show HEAD:layout/...` for the carved range — don't guess).
 - `typing`: the matching declaration in `include/**/variables.h` (or fe8u's) — base TYPE + dims.
   Emit `INCBIN_U8`/`U16`/`U32` to MATCH that base type and dims (CONST_DATA = section, not `const`).
-- `repoint`: the manifest row(s) to move from incbin to `src/data/*.c`, and the
-  `DATA_INCBIN_ASM_EXCLUDE` edit (LAST entry takes NO trailing backslash, or crt0/IrqMain go
-  undefined — a known footgun).
+- `repoint`: the manifest row(s) to move to the typed `src/data` object and any superseded source
+  file to delete. Every committed `asm/*.s` is active build input; never create a dead mirror or
+  reintroduce an assembly-exclusion list.
 - `caveats`: struct-pointer arrays and dot-in-name labels are the known ceiling — flag them rather
   than forcing. Compressed assets must keep the verified INCBIN unless a bit-exact recompressor is
   PROVEN.

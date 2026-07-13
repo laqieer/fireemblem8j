@@ -1,5 +1,0 @@
-	.section .rodata.dat_const_data_unit_icon_move_p85, "a", %progbits
-@ src/data/unit_icon/const_data_unit_icon_move.o: region-same content at JP 0x081eb974 (US 0x081fbfbc, shift -0x10648); incbin baserom.gba
-	.global unit_icon_move_Demon_King_sheet
-unit_icon_move_Demon_King_sheet:
-	.incbin "graphics/unit_icon/move/unit_icon_move_Demon_King_sheet.4bpp.lz"

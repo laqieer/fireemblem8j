@@ -7,9 +7,11 @@ followed by exactly one FULL `.incbin "path"` (no offset/length args). Bails
 loudly on anything else (partial incbins, multi-incbin symbols, multi-section)
 so it never silently produces wrong bytes. `make compare` is the oracle.
 
-Usage: python3 scripts/asmgfx2c.py asm/dat_data_map_anim_frames.c_out_dir <subdir>
-  e.g. python3 scripts/asmgfx2c.py asm/dat_data_map_anim_frames.s mapanim
-prints the generated C to stdout (caller redirects to src/data/<subdir>/<name>.c).
+Usage:
+  python3 scripts/asmgfx2c.py <active-asm-file> > src/data/<subdir>/<name>.c
+
+After repointing the layout to the generated C object, delete the superseded
+assembly source. Every committed asm/*.s is active build input.
 """
 import re, sys, glob, os
 

@@ -10,8 +10,8 @@
 #   *_card     -> .4bpp.lz (PNG -> 4bpp -> LZ77, gbagfx default mindist 2)
 #   *_tileset  -> .4bpp.fk (PNG -> 4bpp -> FE fake-comp header, %.fk rule)
 # All LZ assets use gbagfx's DEFAULT -mindist 2, so NO per-asset pins are needed
-# (verified byte-exact by scripts/extract_graphics.py's 1/2/3 sweep). Ported by
-# scripts/extract_graphics.py; see docs/tools/gbagfx.md.
+# (verified byte-exact by the original 1/2/3 mindist sweep). See
+# docs/tools/gbagfx.md.
 #
 # The generated .4bpp[.lz/.fk] must be rebuilt from the committed PNGs before the
 # .c is compiled (preproc reads them during INCBIN_U8 expansion), so derive the

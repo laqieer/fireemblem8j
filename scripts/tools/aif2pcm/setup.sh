@@ -6,7 +6,7 @@
 # into the raw GBA direct-sound sample blob (`.bin`) the ROM contains: an 0x10
 # byte header (loop flag, pitch tune, loop point, length) + signed-8-bit PCM. It
 # is the SOURCE-of-truth tool for FE8's 439 direct-sound samples (the 3.12 MB
-# `asm/direct_sound_data.s` blob). With the committed `.aif` + this tool the
+# `src/data/sound_pcm/direct_sound_data.c` section). With the committed `.aif` + this tool the
 # whole sample blob is reproduced from source — no `.incbin "baserom.gba"`.
 # See docs/tools/aif2pcm.md and docs/sound.md.
 #

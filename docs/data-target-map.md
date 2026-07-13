@@ -40,7 +40,9 @@ already extracted per D36). Residual = voicegroup/songtable structure.
 `data_08BB8E94.bin` (42.9 KB), `data_08FE0000.bin` (16 KB), other `data_08*.bin`. Unclassified; classify before extract.
 
 ## Tier 5 — banim (battle animation)  (VOLUME: 4.5 M · RISK: high)
-`gConstDataBanim*`, banim OAM. `scripts/extract_banim_oam.py` exists. Large, structured-but-gnarly.
+`gConstDataBanim*`, banim OAM. The completed one-shot extractor was removed after
+the live providers moved under `src/data/banim`; the data remains large and
+structured-but-gnarly.
 
 ## CTO read
 - **Volume** is dominated by **Tier 2 (graphics) + Tier 5 (banim)** → Soil's graphics focus is the right %-mover.

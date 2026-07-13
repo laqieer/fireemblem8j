@@ -1,4 +1,4 @@
-# carve_graphics_subsys.py per-subsystem region-different graphics (parallel-safe fragment)
+# data_bg table-pinned region-different graphics (parallel-safe fragment)
 926B14	92A588	src/data/gfx_data_bg/gfx_data_bg.o(.data.data_bg.gap0)	data_bg bg_House_tiles region-diff graphics (14964 B, table-pinned)
 92A588	92AA3C	src/data/gfx_data_bg/gfx_data_bg.o(.data.data_bg.gap1)	data_bg bg_House_map region-diff graphics (1204 B, table-pinned)
 92AB3C	92E924	src/data/gfx_data_bg/gfx_data_bg.o(.data.data_bg.gap2)	data_bg bg_Caer_Pelyn_tiles region-diff graphics (15848 B, table-pinned)

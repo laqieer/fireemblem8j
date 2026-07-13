@@ -785,13 +785,9 @@ def main():
             if allowed is None:
                 allowed = (lambda O: False)   # no fe8u data -> EXACT-only (off==0) fallback
         if cpath is None:
-            # D299: every asm/dat_*.s that incbins residual data is an EXCLUDED
-            # placeholder (DATA_INCBIN_ASM_EXCLUDE) -- the symbol is LINKED from
-            # src/data/<name>/<name>.c. Editing the asm file is a DEAD no-op that
-            # still passes make compare but de-points NOTHING. Skip it. The correct
-            # mechanism is the sliced src/data INCBIN_U8 rewriter (TODO), gated by
-            # effectiveness verification against the linker object list.
-            print("SKIP %s: asm-placeholder is excluded (de-point src/data instead -- D299)" % name)
+            # Residual data must have a live src/data provider. D373 removed the
+            # excluded asm mirrors, so there is no safe fallback target to edit.
+            print("SKIP %s: no linked src/data provider" % name)
             continue
         c, stats = emit_c(name, binp, section, addrs, by_addr, safe_only, allowed)
         if c is None:

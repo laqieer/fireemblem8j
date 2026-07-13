@@ -12,12 +12,17 @@ copy FE8U byte-matches its LZ assets with. The C is identical across pret
 projects, but the US copy is the one whose LZ compressor (with the `-mindist`
 knob) was proven against the GBA Fire Emblem ROMs.
 
+> **Current source layout (D373).** The `asm/dat_*.s` paths and one-shot
+> extraction commands below document the historical extraction campaign. Their
+> live providers now reside under `src/data/`, generated-asset prerequisites are
+> in `layout/data_incbin_deps.mk`, and the dead assembly mirrors were removed.
+
 ## Why it matters: baserom out of the build graph
 
 The real definition of "decomp complete" (see
 `docs/decomp-completion-standard.md`) is that the ROM rebuilds **byte-for-byte
-from committed source with `baserom.gba` removed**. Today ~83% of the ROM is
-`.incbin "baserom.gba"`. gbagfx is what lets a graphics region instead build as:
+from committed source with `baserom.gba` removed**. Historically, ~83% of the ROM
+was `.incbin "baserom.gba"`. gbagfx is what lets a graphics region instead build as:
 
 ```
 graphics/.../foo.png  (committed source)
@@ -125,16 +130,15 @@ The first FE8J region reproduced from a committed source asset instead of
   160 original ROM bytes; `make compare`, `make clean && make compare`, and
   `make check` all pass.
 
-This proves the whole loop — `png → 4bpp → lz → incbin → ROM` reproduces exact
-bytes with baserom out of the loop. The same recipe scales to the ~3,400 LZ
-graphics still incbin'd from the ROM.
+This proved the whole loop — `png → 4bpp → lz → incbin → ROM` reproduces exact
+bytes with baserom out of the loop. The same recipe was then applied across the
+graphics corpus.
 
 ## Phase-1 batch 1 (proven at scale): item icons + unit-icon WAIT sheets
 
-The first scaled extraction, driven by **`scripts/extract_graphics.py`** (point it
-at a `dat_*.s` graphics file + the matching US `graphics/` dir; it ports the US
-committed source by symbol name, sweeps `-mindist` 1/2/3 per LZ asset, byte-verifies
-each entry against the ROM, rewrites the incbins, and prints the per-asset pins).
+The first scaled extraction ported US committed assets by symbol name, swept
+`-mindist` 1/2/3 per LZ asset, byte-verified each entry against the ROM, and
+recorded the per-asset pins. The completed one-shot extractor was removed in D373.
 
 Both regions are **region-SAME** (JP bytes == US bytes), so the US committed PNG /
 `.agbpal` *is* the JP source — no fresh extraction needed.
@@ -195,9 +199,10 @@ mirrors `../fireemblem8u`'s `%.fk: %`:
 	$(PYTHON) -c "import sys,struct;d=open(sys.argv[1],'rb').read();open(sys.argv[2],'wb').write(struct.pack('<I',(len(d)+4)<<8)+d)" $< $@
 ```
 
-So a tileset builds `png → 4bpp → 4bpp.fk → .incbin → ROM`. `extract_graphics.py`
-tries uncompressed `.4bpp`, then `.4bpp.fk`, then LZ at `-mindist` 1/2/3, and picks
-the one that byte-matches the ROM blob. `*.fk` is a gitignored build intermediate.
+So a tileset builds `png → 4bpp → 4bpp.fk → .incbin → ROM`. The original
+extraction sweep tried uncompressed `.4bpp`, `.4bpp.fk`, and LZ at
+`-mindist` 1/2/3, selecting the byte-identical form. `*.fk` is a gitignored build
+intermediate.
 
 ## Phase-1 batch 2 (proven at scale): portraits + unit-icon MOVE sheets
 

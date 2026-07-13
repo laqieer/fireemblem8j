@@ -11215,3 +11215,29 @@ fast-forward only, then require exact-pushed-main-SHA `CI` (including deploy)
 and `Secret scan` success before declaring D372 complete. Mirror the final
 public SHA/evidence on the existing issue #14 project item without reopening or
 closing it.
+
+## D373 — delete the excluded-asm mirror layer; every committed `asm/*.s` is active (2026-07-13)
+
+**Problem.** `DATA_INCBIN_ASM_EXCLUDE` had grown into a 1,703-entry negative
+build list. Of those entries, 1,565 files were still tracked, 138 named files
+already deleted, and 1,343 tracked mirrors contained `.incbin` paths whose
+assets no longer existed. The live bytes had long since moved to `src/data`,
+but the dead mirrors kept misleading audits and humans; editing them was a
+byte-neutral no-op.
+
+**Decision and cleanup.** Delete all 1,565 tracked excluded mirrors and remove
+the exclusion mechanism entirely. `ASM_OBJECTS` now contains every committed
+`asm/*.s` plus the two generated layout objects, so a future dangling assembly
+source fails the normal build instead of being silently hidden. Remove the 310
+dead `asm/*.o` graphics dependency rules, 19 comments-only `*.mk` remnants,
+and 28 completed one-shot extraction/exclude-management tools. Live generated
+asset prerequisites remain in `layout/data_incbin_deps.mk`; subsystem `*.mk`
+files retain only active dependencies and encoding flags. The one active
+assembly-producing maintenance path, `close_baserom_gaps.py`, keeps precise
+`asm/gap_*.o` to `data/residual/gap_*.bin` prerequisites.
+
+**Invariant.** A source migration must repoint the manifest and delete the
+superseded provider in the same change. Never retain an unlinked assembly twin
+and never reintroduce an exclusion list. This is ROM-neutral: the active
+assembly object set remains exactly the prior 38 objects (36 tracked sources
+plus `asm/baserom.o` and `asm/jp_syms.o`).

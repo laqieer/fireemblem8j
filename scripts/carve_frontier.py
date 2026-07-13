@@ -6,8 +6,8 @@ shows ~1.9 MB of *real* (non-padding, non-zero-fill) data still living in the
 raw-ROM incbin baseline, scattered across ~30 mid-sized blocks. These are
 region-different assets: their leaf payloads are *unnamed* US symbols, so no code
 literal points straight at them, but each block is indexed by a per-subsystem
-POINTER TABLE that code *does* reference. This carver follows that table exactly
-like scripts/carve_graphics_subsys.py (the data_bg template), generalised:
+POINTER TABLE that code *does* reference. This carver generalises the
+table-following pattern originally proven on the data_bg region:
 
     code literal (read live from JP ROM via IDA)  ->  JP table base
     read the JP table from baserom                ->  exact JP start of every asset
@@ -282,7 +282,7 @@ def rd_word(rom, addr):
 
 def carved_ranges(exclude_basename):
     """Every [start, end) already carved in carved_rom — the shared monolith plus
-    every per-task fragment EXCEPT our own. Mirrors carve_graphics_subsys.py."""
+    every per-task fragment EXCEPT our own."""
     out = []
     paths = []
     if os.path.exists("layout/carved_rom.tsv"):

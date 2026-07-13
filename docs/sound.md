@@ -19,12 +19,14 @@ four classes from committed source (no baserom): `.aif`+aif2pcm for samples,
 
 ## DONE — direct-sound PCM samples (3.12 MB) build from committed `.aif`
 
-`asm/direct_sound_data.s` (the single biggest `.incbin "baserom.gba"` blob in the
-repo, ~20% of build self-containment) is now reproduced **byte-for-byte from
+The former `asm/direct_sound_data.s` blob (historically the largest
+`.incbin "baserom.gba"` region, ~20% of the ROM) is now provided by
+`src/data/sound_pcm/direct_sound_data.c` and reproduced **byte-for-byte from
 committed AIFF source** via `tools/aif2pcm`, exactly as FE8U does it:
 
 ```
-foo.aif (committed) --aif2pcm--> foo.bin (gitignored) --.incbin--> direct_sound_data.o --> ROM
+foo.aif (committed) --aif2pcm--> foo.bin (gitignored)
+    --INCBIN_U8--> src/data/sound_pcm/direct_sound_data.o --> ROM
 ```
 
 **Why it is byte-exact (verified, not assumed).** Every one of FE8J's **439**
@@ -37,19 +39,18 @@ inter-sample alignment pad. A trailing `.align 2` after the last sample supplies
 its own pad so the section is exactly 3,272,220 bytes and nothing downstream
 shifts.
 
-**Proven self-contained.** With `baserom.gba` removed, `make asm/direct_sound_data.o`
-rebuilds the section and it is byte-identical to the ROM region 0x216064..0x534E80.
-`make compare` and `make clean && make compare` stay `OK`.
+**Proven self-contained.** With `baserom.gba` removed,
+`make src/data/sound_pcm/direct_sound_data.o` rebuilds the section byte-identically
+to ROM range 0x216064..0x534E80.
 
 **Tooling.** `tools/aif2pcm` is vendored via `scripts/tools/aif2pcm/setup.sh`
 (built from `../fireemblem8u/tools/aif2pcm`). The Makefile rule is
-`sound/%.bin: sound/%.aif ; $(AIF2PCM) $< $@`, with `asm/direct_sound_data.o`
-depending on every `sound/direct_sound_samples/*.bin`. The committed `.aif` are
-the source of truth; the `.bin` are gitignored build intermediates.
+`sound/%.bin: sound/%.aif ; $(AIF2PCM) $< $@`; the generated object prerequisites
+live in `layout/data_incbin_deps.mk`. The committed `.aif` are the source of
+truth; the `.bin` are gitignored build intermediates.
 
-**Reproduce / re-extract.** `scripts/sound/extract_direct_sound_samples.py`
-content-matches each JP sample to a US `.aif`, copies it under the JP symbol name,
-and rewrites `asm/direct_sound_data.s`.
+The completed one-shot asm rewriter was removed with the obsolete assembly
+mirrors. The committed AIFF files and live C provider are now the source of truth.
 
 ---
 
@@ -63,10 +64,9 @@ CODE TUs (`m4a_1`, `stranded_m4a`, `stranded_soundwrapper`,
 (one symbol-named blob per incbin), exactly the `data/banim/*.bin` model: a
 committed `.bin` is the self-contained source of truth for region-different /
 table-pinned opaque data (and region-same-shifted code, descriptively carried).
-baserom.gba is no longer in the sound build chain.
-`scripts/sound/reroot_sound_incbin.py` does the extraction + `.s` rewrite; the
-Makefile adds one flagged dependency block (`SOUND_DATA_BINS`). **0 sound
-`.incbin "baserom.gba"` remain.**
+baserom.gba is no longer in the sound build chain. The completed one-shot
+rerooting tool was removed after its outputs moved to live source providers.
+**0 sound `.incbin "baserom.gba"` remain.**
 
 ## S1 — m4a engine tables converted from opaque `.bin` to editable fe8u-form `.s`
 

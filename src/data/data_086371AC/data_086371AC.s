@@ -3,7 +3,7 @@
  * emitted as relocatable .4byte Sym(+addend) (ROM stays SHIFTABLE); the remaining
  * 1 inline-data words stay raw .4byte. Byte-identical to baserom (make compare);
  * self-verified against the original .bin before wiring. Supersedes the raw INCBIN
- * and the dead asm/data_086371AC.s (excluded via DATA_INCBIN_ASM_EXCLUDE). */
+ * and its removed asm/data_086371AC.s mirror. */
 	.section .data.residue.086371AC, "aw", %progbits
 	.global data_086371AC
 data_086371AC:

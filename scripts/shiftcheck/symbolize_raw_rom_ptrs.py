@@ -57,10 +57,6 @@ CONFIG = {
         {"mid": ("region", 0x085C5E00, 0x085C5E60), "mid_max_off": 0x100},
     "src/data/gap_0001B9B0/gap_0001B9B0.s": {"mid": None},
     "src/data/rom_header_080000C0/rom_header_080000C0.s": {"mid": None},
-    "asm/sub_8057F80.s": {"mid": "pool"},
-    "asm/sub_80A2E64.s": {"mid": "pool"},
-    "asm/sub_80A3528.s": {"mid": "pool"},
-    "asm/sub_80A390C.s": {"mid": "pool"},
     "asm/sub_80C05C8.s": {"mid": "pool"},
 }
 

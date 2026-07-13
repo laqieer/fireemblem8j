@@ -2,7 +2,7 @@
 # Auto-included by the root Makefile via `-include $(GRAPHICS_MK)`. See
 # graphics/misc/misc.mk for the convention.
 #
-# asm/dat_ending_cg_p0.s .incbins the ending-credits CG gallery (10 CGs x 10 tile
+# src/data/ending/ending_cg.c includes the ending-credits CG gallery (10 CGs x 10 tile
 # parts + 1 tilemap + 1 palette each). Region-SAME with US (JP 0x08ad247c ==
 # US 0x08a4d1e8). Per asset class:
 #   cg_N_part_M_tiles -> graphics/ending_cg/cg_N_part_M.4bpp.lz
@@ -19,7 +19,7 @@
 # 1/2/3 sweep), so NO per-asset -mindist pins are needed.
 #
 # The generated .4bpp.lz / .gbapal must be rebuilt from the committed PNG/.pal
-# before the .s is assembled, so derive the dep lists from the committed sources.
+# before the C object is compiled, so derive the dep lists from the committed sources.
 ENDING_CG_TILES_LZ := $(patsubst %.png,%.4bpp.lz,$(wildcard graphics/ending_cg/cg_*_part_*.png))
 ENDING_CG_PAL      := $(patsubst %.pal,%.gbapal,$(wildcard graphics/ending_cg/cg_*.pal))
 src/data/ending/ending_cg.o: $(ENDING_CG_TILES_LZ) $(ENDING_CG_PAL)

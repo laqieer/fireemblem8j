@@ -3,7 +3,7 @@
  * relocatable .4byte Sym(+addend) (ROM stays SHIFTABLE); the remaining 8
  * inline-data words stay raw .4byte. Byte-identical to baserom (make compare);
  * self-verified against the original .bin before wiring. Supersedes the raw INCBIN
- * and the dead asm/data_0869C14C.s (excluded via DATA_INCBIN_ASM_EXCLUDE). */
+ * and its removed asm/data_0869C14C.s mirror. */
 	.section .data.residue.0869C14C, "aw", %progbits
 	.global AnimSprite_EfxPurge_20
 AnimSprite_EfxPurge_20:

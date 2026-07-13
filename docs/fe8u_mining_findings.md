@@ -100,7 +100,8 @@ Routing legend: → target doc. Confidence [HIGH/MED/LOW]. NEW vs CONFIRM vs COR
   that have no standard asset form — better than opaque `.incbin`. → carve_data note
 - **D-ST3 [HIGH] CONFIRM. Banim pointer table = 12 modes/char** (close/crit/ranged/
   dodge/stand/missed variants); each char refs sheet+OAM_L+OAM_R+pal+script (all LZ).
-  Blank sheets share one `blank.4bpp.lz`. (matches our extract_banim_oam.py) → data-map
+  Blank sheets share one `blank.4bpp.lz`. This matched the historical FE8J OAM
+  extraction result. → data-map
 - **D-ST4 [HIGH] NEW. CG (event/ending art) = 1 pal + 1 TSA + up to 10 part
   tilemaps** via `dump_cgs.py`; tiles `.4bpp.lz`, TSA raw `.tsa.bin`. → gfxtools note
 

@@ -106,11 +106,11 @@ def classify(ptr, addrs, addr2name, addr2size):
 
 _SRCDATA_INCBIN_BINS = None
 def _srcdata_incbin_bins():
-    """Residual .bin basenames still INCBIN'd by a LINKED source. Only src/data/
-    objects are linked for residual data (every asm/dat_*.s is an EXCLUDED
-    placeholder via DATA_INCBIN_ASM_EXCLUDE -- editing one does NOT change the
-    ROM, a trap that previously fooled this metric). A .bin is raw debt iff its
-    bytes enter the link verbatim = it is INCBIN'd by a linked src/data .c."""
+    """Residual .bin basenames still INCBIN'd by a linked src/data provider.
+
+    The obsolete excluded asm mirrors were removed, so a .bin is raw debt iff
+    its bytes enter the link verbatim from a live src/data source.
+    """
     global _SRCDATA_INCBIN_BINS
     if _SRCDATA_INCBIN_BINS is None:
         out = subprocess.run(
