@@ -11141,7 +11141,7 @@ maintenance changes.
 
 **Measured result and decision.** `scripts/calcprogress.py` reports matching-C
 **99.94% (8687/8692)**, source-form code **898,944/901,428 bytes (99.72%)**,
-named symbols **12713/12713**, and exactly five still-asm/nonmatching targets:
+named symbols **12689/12689**, and exactly five still-asm/nonmatching targets:
 `sub_800A34C`, `sub_800A594`, `sub_800FAD0`, `sub_807D3BC`, and
 `sub_80C05C8`. Accept the promotion plus one minimal progress-doc reconciliation
 commit. Publish by fast-forward only, then require exact-pushed-main-SHA `CI`

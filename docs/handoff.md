@@ -11,7 +11,7 @@
 > Ground truth from `python3 scripts/calcprogress.py` is matching-C
 > **99.94% (8687/8692, 5 still-asm)**, source-form code
 > **898,944/901,428 bytes (99.72%)**, source-form data **100%**, and named
-> symbols **100% (12713/12713)**.
+> symbols **100% (12689/12689)**.
 >
 > `DecodeLinkArenaRecordHeader` now matches through FE6J `func_fe6_08083180`,
 > FE7J `sub_809E4D0`, and FE7U `sub_809DAB8` block alignment plus P14
