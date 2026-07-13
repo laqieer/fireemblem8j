@@ -113,21 +113,34 @@ python3 scripts/differential_test.py <fn> --trials 60  # EQUIV
 If all three local gates pass, synchronize that **exact adopted file** to the
 owned registry scratch before committing:
 ```sh
-scripts/tools/decompme/sync_improvement.py <registry_slug> \
-  --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> --dry-run
+LOCAL_FLAGS="<exact make-nonmatching compiler flags>"
 scripts/tools/decompme/sync_improvement.py <registry_slug> \
   --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> \
+  --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
+  --local-score <local-score> --local-residual "<linked-residual>" --dry-run
+scripts/tools/decompme/sync_improvement.py <registry_slug> \
+  --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> \
+  --compiler-flags "$LOCAL_FLAGS" --local-flags "$LOCAL_FLAGS" \
+  --local-score <local-score> --local-residual "<linked-residual>" \
   --expected-score <dry-run-score>
 ```
-The helper flattens the trusted project headers referenced by that exact file
-with the Makefile's CPP flags (it never executes downloaded source),
-preflight-compiles the local file on decomp.me, requires a nonzero improvement,
-PATCHes only after authenticating ownership, and verifies the exact source,
-settings, and score; it restores the original scratch if verification fails.
-Keep the registry row active and do **not** mark a score>0 scratch solved. This
-does **not** touch the oracle — `make nonmatching` only. Local adoption or commit
-without successful upstream synchronization is **incomplete**. If any local or
-upstream gate fails, revert it and treat the fn as a step-4 target.
+Try the exact local flags first. If stock decomp.me rejects a project-only flag
+(notably `-mjp-promote`), rerun the dry-run/live pair without
+`--compiler-flags` or with a supported subset; keep `--local-flags` unchanged so
+the mismatch is recorded. The helper flattens trusted project headers (it never
+executes downloaded source), PATCHes only after authenticating ownership, and
+verifies **normalized source identity**, settings, score, and the recorded local
+score/residual plus both toolchains' flags. It restores the original scratch if
+verification fails.
+
+The decomp.me score may stay equal or become worse under its different compiler;
+score monotonicity is neither source-sync proof nor a completion gate. Keep the
+registry row active and do **not** mark a score>0 scratch solved. This does
+**not** touch the oracle — `make nonmatching` only. Local adoption or commit
+without successful upstream synchronization is **incomplete**. Revert if a
+local proof/EQUIV gate fails; if only the exact remote flags are unsupported,
+retain the source, use the supported fallback, record the mismatch, and keep
+the registry row.
 
 ## 3. Learn — save the pattern to the cookbook (ALWAYS after a new match)
 Diff the matched source against the old `src/nonmatching/<fn>.c` (from git):
@@ -185,8 +198,9 @@ the most applicable existing cookbook lever or a bounded permuter attempt.
   mark the owned scratch solved, verify the family reports the match, then remove
   its registry row so community effort is not wasted.
 - **IMPROVED (score > 0):** upload the exact adopted `src/nonmatching/<fn>.c`,
-  verify its upstream source/settings/nonzero score, and keep its registry row
-  active for further community work. Never mark a nonzero improvement solved.
+  verify normalized source identity, record local score/residual/flags plus the
+  decomp.me score/compiler/flags, and keep its registry row active for further
+  community work. Never mark a nonzero improvement solved.
 ```sh
 # score 0: verify solved, then remove the row
 scripts/tools/decompme/mark_solved.sh <registry_slug> --from-scratch <matched_slug>
@@ -194,6 +208,8 @@ scripts/tools/decompme/mark_solved.sh <registry_slug> --from-scratch <matched_sl
 # score > 0: verify synchronized, keep the row
 scripts/tools/decompme/sync_improvement.py <registry_slug> \
   --source src/nonmatching/<fn>.c --compiler-settings-from <fork_slug> \
+  --local-score <local-score> --local-residual "<linked-residual>" \
+  --local-flags "<exact local flags>" \
   --expected-score <dry-run-score>
 ```
 Refresh the axis-2 figures (`python3 scripts/calcprogress.py`) into
@@ -211,9 +227,11 @@ Refresh the axis-2 figures (`python3 scripts/calcprogress.py`) into
 - A pulled MATCHED base scratch or family fork is incomplete until its owned
   registry scratch is marked solved with that score-0 solution and its registry
   row is removed.
-- A proven nonzero adoption is incomplete until the owned registry scratch
-  contains the exact adopted source and its nonzero score is verified. Keep that
-  row active; score>0 must never be labeled SOLVED or removed from the registry.
+- A proven nonzero adoption is incomplete until the owned registry scratch has
+  the same normalized source and records local score/residual/flags beside the
+  verified decomp.me score/compiler/flags. A better remote score is not proof,
+  and a worse remote score is not failure when toolchains differ. Keep the row
+  active; score>0 must never be labeled SOLVED or removed from the registry.
 - Never execute downloaded scratch/fork source locally. Review and adopt it as
   text, run the formal local proof/equivalence gates, and let
   `sync_improvement.py` send only the adopted local file to decomp.me.

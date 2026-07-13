@@ -8,13 +8,19 @@ previous scratch when no concurrent change is present. Score 0 must instead use
 
 Project includes must be wrapped in ``#ifndef FE8J_DECOMPME_CONTEXT``; this tool
 flattens those trusted local headers into the remote context. It never executes
-downloaded source locally.
+downloaded source locally. Every sync records the normalized source hash, local
+score/residual/flags, and decomp.me score/compiler/flags in the scratch
+description. A worse remote score is allowed because different toolchains are
+not directly comparable.
 
 Usage:
   sync_improvement.py <owned_slug> --source src/nonmatching/<fn>.c \
-    [--compiler-settings-from <fork>] --dry-run
+    --local-score <score> --local-residual <residual> --local-flags <flags> \
+    [--compiler-settings-from <fork>] [--compiler-flags <remote-flags>] --dry-run
   sync_improvement.py <owned_slug> --source src/nonmatching/<fn>.c \
-    [--compiler-settings-from <fork>] --expected-score <dry-run-score>
+    --local-score <score> --local-residual <residual> --local-flags <flags> \
+    [--compiler-settings-from <fork>] [--compiler-flags <remote-flags>] \
+    --expected-score <dry-run-score>
 """
 
 import argparse
@@ -46,6 +52,8 @@ DEFAULTS = {
 }
 MARKER = "FE8J_DECOMPME_CONTEXT"
 PREAMBLE = "#define %s 1\n" % MARKER
+SYNC_START = "<!-- FE8J_NONZERO_SYNC\n"
+SYNC_END = "\nFE8J_NONZERO_SYNC -->"
 CPPFLAGS = (
     "-I",
     "tools/agbcc/include",
@@ -60,6 +68,14 @@ CPPFLAGS = (
 
 class SyncError(Exception):
     pass
+
+
+def normalize_source(source):
+    return re.sub(r"\r\n?", "\n", source)
+
+
+def source_digest(source):
+    return hashlib.sha256(normalize_source(source).encode()).hexdigest()
 
 
 def request(path, data=None, method="GET", cookie=None, csrf=None, fresh=False):
@@ -150,10 +166,33 @@ def candidate_settings(target, source, compiler_source=None, compiler_flags=None
             settings[field] = compiler_source.get(field, DEFAULTS[field])
     if compiler_flags is not None:
         settings["compiler_flags"] = compiler_flags
-    if "-mjp-promote" in settings["compiler_flags"].split():
-        raise SyncError("-mjp-promote is unsupported by stock decomp.me agbcc")
     settings["context"] = project_context(source)
     return settings
+
+
+def sync_description(existing, source, local_score, local_residual, local_flags, score, settings):
+    local_flags_normalized = " ".join(local_flags.split())
+    remote_flags_normalized = " ".join(settings["compiler_flags"].split())
+    comparable = local_flags_normalized == remote_flags_normalized
+    record = {
+        "normalized_source_sha256": source_digest(source),
+        "local_score": local_score,
+        "local_residual": local_residual,
+        "local_compiler_flags": local_flags_normalized,
+        "decompme_score": score,
+        "decompme_compiler": settings["compiler"],
+        "decompme_compiler_flags": remote_flags_normalized,
+        "scores_directly_comparable": comparable,
+    }
+    if not comparable:
+        record["toolchain_note"] = (
+            "Local and decomp.me flags differ; the remote score does not measure "
+            "the project-only toolchain."
+        )
+    block = SYNC_START + json.dumps(record, ensure_ascii=False, sort_keys=True) + SYNC_END
+    pattern = re.compile(re.escape(SYNC_START) + r".*?" + re.escape(SYNC_END), re.DOTALL)
+    description = pattern.sub("", existing or "").rstrip()
+    return (description + "\n\n" if description else "") + block
 
 
 def compile_score(slug, source, settings):
@@ -169,20 +208,27 @@ def compile_score(slug, source, settings):
     return diff["current_score"], diff.get("max_score")
 
 
-def payload(source, settings, match_override=False):
-    result = {"source_code": source, "match_override": match_override}
+def payload(source, settings, description, match_override=False):
+    result = {
+        "source_code": source,
+        "description": description,
+        "match_override": match_override,
+    }
     result.update(settings)
     return result
 
 
-def verify(scratch, source, settings, score):
+def verify(scratch, source, settings, description, score):
     problems = []
-    if scratch.get("source_code") != source:
-        got = hashlib.sha256((scratch.get("source_code") or "").encode()).hexdigest()
-        want = hashlib.sha256(source.encode()).hexdigest()
-        problems.append("source hash %s != %s" % (got, want))
+    if normalize_source(scratch.get("source_code") or "") != normalize_source(source):
+        problems.append(
+            "normalized source hash %s != %s"
+            % (source_digest(scratch.get("source_code") or ""), source_digest(source))
+        )
     if scratch.get("score") != score:
         problems.append("score %r != %r" % (scratch.get("score"), score))
+    if scratch.get("description") != description:
+        problems.append("sync metadata description differs")
     if scratch.get("match_override"):
         problems.append("match_override became true")
     for field, expected in settings.items():
@@ -198,23 +244,25 @@ def fingerprint(scratch):
         "score": scratch.get("score"),
         "match_override": scratch.get("match_override"),
         "last_updated": scratch.get("last_updated"),
+        "description": scratch.get("description"),
     }
     state.update(raw_settings(scratch))
     return json.dumps(state, sort_keys=True, ensure_ascii=False)
 
 
-def has_candidate_content(scratch, source, settings):
+def has_candidate_content(scratch, source, settings, description):
     return (
-        scratch.get("source_code") == source
+        normalize_source(scratch.get("source_code") or "") == normalize_source(source)
+        and scratch.get("description") == description
         and not scratch.get("match_override")
         and all(scratch.get(field, DEFAULTS[field]) == value for field, value in settings.items())
     )
 
 
-def patch_and_verify(slug, body, source, settings, score, cookie, csrf):
+def patch_and_verify(slug, body, source, settings, description, score, cookie, csrf):
     updated = request(scratch_path(slug), data=body, method="PATCH", cookie=cookie, csrf=csrf)
-    verify(updated, source, settings, score)
-    verify(get_scratch(slug, fresh=True), source, settings, score)
+    verify(updated, source, settings, description, score)
+    verify(get_scratch(slug, fresh=True), source, settings, description, score)
 
 
 def auth_cookie():
@@ -238,8 +286,10 @@ def main(argv=None):
     parser.add_argument("--source", required=True)
     parser.add_argument("--compiler-settings-from", metavar="SLUG")
     parser.add_argument("--compiler-flags")
+    parser.add_argument("--local-score", required=True)
+    parser.add_argument("--local-residual", required=True)
+    parser.add_argument("--local-flags", required=True)
     parser.add_argument("--expected-score", type=int)
-    parser.add_argument("--allow-same-score", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
 
@@ -268,24 +318,47 @@ def main(argv=None):
         compiler_source = get_scratch(settings_slug)
     settings = candidate_settings(target, source, compiler_source, args.compiler_flags)
     new_score, max_score = compile_score(args.slug, source, settings)
-    digest = hashlib.sha256(source.encode()).hexdigest()
+    description = sync_description(
+        target.get("description"),
+        source,
+        args.local_score,
+        args.local_residual,
+        args.local_flags,
+        new_score,
+        settings,
+    )
+    digest = source_digest(source)
     print(
-        "preflight %s: current=%d candidate=%d max=%s source_sha256=%s settings=%s"
+        "preflight %s: current=%d candidate=%d max=%s "
+        "normalized_source_sha256=%s settings=%s"
         % (args.slug, old_score, new_score, max_score, digest, settings_slug)
     )
+    local_flags = " ".join(args.local_flags.split())
+    remote_flags = " ".join(settings["compiler_flags"].split())
+    print(
+        "record: local_score=%s local_residual=%s local_flags=%r "
+        "decompme_score=%d decompme_compiler=%s decompme_flags=%r"
+        % (
+            args.local_score,
+            args.local_residual,
+            local_flags,
+            new_score,
+            settings["compiler"],
+            remote_flags,
+        )
+    )
+    if local_flags != remote_flags:
+        print("NOTE: toolchain flags differ; local and decomp.me scores are not comparable")
+    if new_score >= old_score:
+        print(
+            "NOTE: non-improving decomp.me score is allowed; "
+            "normalized source identity is the gate"
+        )
 
     if new_score <= 0:
         raise SyncError("candidate score %d belongs to the score-0 lifecycle" % new_score)
     if args.expected_score is not None and new_score != args.expected_score:
         raise SyncError("candidate score %d != expected %d" % (new_score, args.expected_score))
-    if new_score > old_score:
-        raise SyncError("candidate regresses score %d -> %d" % (old_score, new_score))
-    if new_score == old_score and not args.allow_same_score:
-        if target.get("source_code") == source and raw_settings(target) == settings:
-            verify(target, source, settings, new_score)
-            print("already synchronized; registry row remains active")
-            return 0
-        raise SyncError("unchanged score requires --allow-same-score for migration")
     if args.dry_run:
         print("DRY-RUN: no PATCH sent; registry row remains active")
         return 0
@@ -301,11 +374,26 @@ def main(argv=None):
         raise SyncError("owned scratch changed during preflight; rerun")
     original_source = latest.get("source_code") or ""
     original_settings = raw_settings(latest)
-    original = payload(original_source, original_settings, bool(latest.get("match_override")))
-    candidate = payload(source, settings)
+    original_description = latest.get("description") or ""
+    original = payload(
+        original_source,
+        original_settings,
+        original_description,
+        bool(latest.get("match_override")),
+    )
+    candidate = payload(source, settings, description)
 
     try:
-        patch_and_verify(args.slug, candidate, source, settings, new_score, cookie, csrf)
+        patch_and_verify(
+            args.slug,
+            candidate,
+            source,
+            settings,
+            description,
+            new_score,
+            cookie,
+            csrf,
+        )
     except Exception as update_error:
         try:
             current = get_scratch(args.slug, fresh=True)
@@ -316,7 +404,7 @@ def main(argv=None):
             )
         if fingerprint(current) == fingerprint(latest):
             raise SyncError("update failed; original scratch is unchanged: %s" % update_error)
-        if not has_candidate_content(current, source, settings):
+        if not has_candidate_content(current, source, settings, description):
             raise SyncError(
                 "update failed with concurrent/unknown state; no rollback: %s"
                 % update_error
@@ -327,6 +415,7 @@ def main(argv=None):
                 original,
                 original_source,
                 original_settings,
+                original_description,
                 old_score,
                 cookie,
                 csrf,
@@ -338,8 +427,9 @@ def main(argv=None):
         raise SyncError("update failed and original scratch was restored: %s" % update_error)
 
     print(
-        "SYNCED %s: score %d -> %d; exact source verified; "
-        "registry row kept; NOT marked solved" % (args.slug, old_score, new_score)
+        "SYNCED %s: score %d -> %d; normalized source identity and "
+        "toolchain record verified; registry row kept; NOT marked solved"
+        % (args.slug, old_score, new_score)
     )
     return 0
 
