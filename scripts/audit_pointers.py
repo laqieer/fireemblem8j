@@ -21,13 +21,16 @@ classifies each:
 Headline metric = un-relocated pointer words remaining. Target: 0.
 This is ungameable: it reads the bytes that actually land in the ROM.
 """
-import os, sys, struct, glob, subprocess, bisect, re
+import os, sys, struct, glob, subprocess, bisect, re, json, hashlib
 
 IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")  # valid C identifier
 
 ROM_LO, ROM_HI = 0x08000000, 0x09000000
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ELF = os.path.join(ROOT, "fireemblem8.elf")
+RELOCS_ELF = os.path.join(ROOT, "fireemblem8_relocs.elf")
+SELFREF_EVIDENCE = os.path.join(
+    ROOT, "scripts", "shiftcheck", "opaque_selfref_evidence.json")
 RESID_GLOBS = [
     os.path.join(ROOT, "data", "residual", "*.bin"),
 ]
@@ -299,41 +302,516 @@ def scan_macro_raw_ptr_debt(addrs, a2n, a2s):
     return real
 
 
-def scan_opaque_selfref_suspects(addrs, a2n, a2s, opaque_syms, rom):
-    """Read the built-ROM bytes of every STRUCTURELESS opaque symbol and flag aligned words
-    that point INSIDE the symbol's own [addr, addr+size) range (SELF-REFERENTIAL). A random
-    pixel/sample/OAM word landing exactly in its own blob is astronomically unlikely, so a
-    self-ref inside a raw-INCBIN blob is a candidate BAKED self-pointer -- the frontier_df4_
-    ending_000 failure (D362): 2 baked self-pointers in a graphics/ .bin that carried no
-    reloc and sat outside the data/residual glob, invisible to the word-level auditor.
+def _int(v):
+    return int(v, 0) if isinstance(v, str) else int(v)
 
-    Reported as REVIEW SUSPECTS, not auto-counted in the hard gate: BOTH genuine embedded-data
-    self-refs (compressed .4bpp.lz graphics, sound PCM, pure-OAM AnimSpriteData) AND real baked
-    pointers (the AnimScr *tails* of OAM/AnimScr hybrid tables, e.g. AnimSprite_EfxMantBatabata6_L_7
-    -- the D345/D346 banim frontier) can appear here, so a self-ref is only a CANDIDATE: the
-    consumer's use settles it (OAM = copied to OAM buffer, never derefed; AnimScr = frame pointers
-    followed). Do a de-pointer round-trip + deref check per hit (D363/D365). A blob that carries a
-    REAL *relocated* pointer array emits an R_ARM_ABS32 -> it is not opaque -> excluded here.
-    Returns [(sym, addr, size, nrefs), ...] sorted by nrefs."""
-    saddrs = sorted(addrs)
-    out = []
-    for ad in saddrs:
+
+def _sha256(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def _hit_sha256(hits):
+    raw = "".join(f"{off:08X}:{value:08X}\n" for off, value in hits).encode()
+    return _sha256(raw)
+
+
+def _selfref_hits(blob, addr):
+    return [
+        (off, struct.unpack_from("<I", blob, off)[0])
+        for off in range(0, len(blob) - 3, 4)
+        if addr <= struct.unpack_from("<I", blob, off)[0] < addr + len(blob)
+    ]
+
+
+def load_opaque_selfref_evidence(path=SELFREF_EVIDENCE):
+    with open(path, encoding="utf-8") as f:
+        evidence = json.load(f)
+    if evidence.get("version") != 1:
+        raise ValueError(f"{path}: unsupported opaque-selfref evidence version")
+    if not isinstance(evidence.get("resolved"), dict):
+        raise ValueError(f"{path}: missing resolved evidence map")
+    if not isinstance(evidence.get("exact_extents"), dict):
+        raise ValueError(f"{path}: missing exact_extents evidence map")
+    return evidence
+
+
+def _strip_source_comments(txt):
+    txt = re.sub(r"/\*.*?\*/", " ", txt, flags=re.S)
+    txt = re.sub(r"//[^\n]*", " ", txt)
+    txt = re.sub(r"(?m)^\s*@.*$", " ", txt)
+    return txt
+
+
+def _validate_incbin_provider(symbol, entry):
+    errors = []
+    provider = os.path.join(ROOT, entry["provider"])
+    asset = entry["asset"]
+    macro = entry["incbin_macro"]
+    try:
+        with open(provider, errors="replace") as f:
+            txt = _strip_source_comments(f.read())
+    except OSError as e:
+        return [f"provider unreadable: {entry['provider']}: {e}"]
+    pattern = (r"\b" + re.escape(symbol) + r"\s*\[\s*\].{0,600}?=\s*"
+               + re.escape(macro) + r'\(\s*"' + re.escape(asset) + r'"\s*\)\s*;')
+    if not re.search(pattern, txt, re.S):
+        errors.append(
+            f"provider no longer defines {symbol} with {macro}(\"{asset}\")")
+    return errors
+
+
+def _gba_lz77_decode(data):
+    """Decode a BIOS-format 0x10 LZ stream; return (decoded, consumed input bytes)."""
+    if len(data) < 4 or data[0] != 0x10:
+        raise ValueError("missing GBA LZ77 0x10 header")
+    decoded_size = int.from_bytes(data[1:4], "little")
+    if decoded_size <= 0:
+        raise ValueError("zero decoded size")
+    out = bytearray()
+    pos = 4
+    while len(out) < decoded_size:
+        if pos >= len(data):
+            raise ValueError("truncated flag byte")
+        flags = data[pos]
+        pos += 1
+        for bit in range(7, -1, -1):
+            if len(out) >= decoded_size:
+                break
+            if flags & (1 << bit):
+                if pos + 2 > len(data):
+                    raise ValueError("truncated back-reference")
+                a, b = data[pos], data[pos + 1]
+                pos += 2
+                count = (a >> 4) + 3
+                distance = (((a & 0x0F) << 8) | b) + 1
+                if distance > len(out):
+                    raise ValueError("back-reference precedes decoded buffer")
+                for _ in range(count):
+                    out.append(out[-distance])
+                    if len(out) >= decoded_size:
+                        break
+            else:
+                if pos >= len(data):
+                    raise ValueError("truncated literal")
+                out.append(data[pos])
+                pos += 1
+    return bytes(out), pos
+
+
+def _validate_common_selfref_facts(record, entry):
+    errors = []
+    expected_addr = _int(entry["address"])
+    expected_size = _int(entry["size"])
+    if record["address"] != expected_addr:
+        errors.append(
+            f"address changed: expected 0x{expected_addr:08X}, "
+            f"got 0x{record['address']:08X}")
+    if record["size"] != expected_size:
+        errors.append(
+            f"size changed: expected 0x{expected_size:X}, got 0x{record['size']:X}")
+    if len(record["hits"]) != int(entry["hit_count"]):
+        errors.append(
+            f"hit count changed: expected {entry['hit_count']}, got {len(record['hits'])}")
+    got_hit_hash = _hit_sha256(record["hits"])
+    if got_hit_hash != entry["hit_sha256"]:
+        errors.append(
+            f"hit set changed: expected sha256 {entry['hit_sha256']}, got {got_hit_hash}")
+    if "hits" in entry:
+        expected_hits = [(_int(off), _int(value)) for off, value in entry["hits"]]
+        if record["hits"] != expected_hits:
+            errors.append("explicit hit offsets/values changed")
+    return errors
+
+
+def _validate_file_hash(path, expected, label):
+    try:
+        with open(os.path.join(ROOT, path), "rb") as f:
+            data = f.read()
+    except OSError as e:
+        return None, [f"{label} unreadable: {path}: {e}"]
+    actual = _sha256(data)
+    if actual != expected:
+        return data, [f"{label} hash changed: {path}: expected {expected}, got {actual}"]
+    return data, []
+
+
+def _validate_lz_selfref(record, entry):
+    errors = _validate_incbin_provider(record["symbol"], entry)
+    asset, hash_errors = _validate_file_hash(
+        entry["asset"], entry["asset_sha256"], "compressed asset")
+    errors.extend(hash_errors)
+    _, source_errors = _validate_file_hash(
+        entry["source_asset"], entry["source_asset_sha256"], "source image")
+    errors.extend(source_errors)
+    if asset is None:
+        return errors
+    if asset != record["bytes"]:
+        errors.append("linked symbol bytes differ from the compressed asset")
+    try:
+        decoded, consumed = _gba_lz77_decode(asset)
+    except ValueError as e:
+        errors.append(f"invalid GBA LZ77 stream: {e}")
+        return errors
+    if len(decoded) != _int(entry["decoded_size"]):
+        errors.append(
+            f"decoded size changed: expected 0x{_int(entry['decoded_size']):X}, "
+            f"got 0x{len(decoded):X}")
+    if _sha256(decoded) != entry["decoded_sha256"]:
+        errors.append("decoded payload hash changed")
+    if consumed != _int(entry["consumed_size"]):
+        errors.append(
+            f"compressed bytes consumed changed: expected 0x{_int(entry['consumed_size']):X}, "
+            f"got 0x{consumed:X}")
+    for off, _ in record["hits"]:
+        if off < 4 or off + 4 > consumed:
+            errors.append(
+                f"hit +0x{off:X} is not wholly inside the consumed compressed byte stream")
+    return errors
+
+
+def _validate_pcm_selfref(record, entry):
+    errors = _validate_incbin_provider(record["symbol"], entry)
+    asset, hash_errors = _validate_file_hash(
+        entry["asset"], entry["asset_sha256"], "PCM asset")
+    errors.extend(hash_errors)
+    _, source_errors = _validate_file_hash(
+        entry["source_asset"], entry["source_asset_sha256"], "AIFF source")
+    errors.extend(source_errors)
+    if asset is None:
+        return errors
+    if asset != record["bytes"]:
+        errors.append("linked symbol bytes differ from the generated PCM asset")
+    if len(asset) < 17:
+        errors.append("DirectSound WaveData is shorter than its 16-byte header + data[1]")
+        return errors
+    wave_type_status, freq, loop_start, sample_count = struct.unpack_from("<4I", asset)
+    expected_header = (
+        _int(entry["wave_type_status"]),
+        _int(entry["frequency"]),
+        _int(entry["loop_start"]),
+        _int(entry["sample_count"]),
+    )
+    if (wave_type_status, freq, loop_start, sample_count) != expected_header:
+        errors.append("DirectSound WaveData header changed")
+    if len(asset) != 17 + sample_count:
+        errors.append(
+            f"WaveData extent changed: size=0x{len(asset):X}, "
+            f"expected data[1]+size = 0x{17 + sample_count:X}")
+    if loop_start > sample_count:
+        errors.append("WaveData loopStart exceeds sample count")
+    header = os.path.join(ROOT, "include", "gba", "m4a_internal.h")
+    try:
+        with open(header, errors="replace") as f:
+            htxt = _strip_source_comments(f.read())
+    except OSError as e:
+        errors.append(f"WaveData type definition unreadable: {e}")
+    else:
+        if not re.search(
+                r"struct\s+WaveData\s*\{[^}]*u32\s+size\s*;"
+                r"[^}]*s8\s+data\s*\[\s*1\s*\]\s*;", htxt, re.S):
+            errors.append("struct WaveData no longer proves a 16-byte header + PCM byte payload")
+    payload_end = 17 + sample_count
+    for off, _ in record["hits"]:
+        if off < 16 or off + 4 > payload_end:
+            errors.append(
+                f"hit +0x{off:X} is not wholly inside the DirectSound sample payload")
+    return errors
+
+
+def _source_identifier_uses(symbol):
+    proc = subprocess.run(
+        ["git", "-C", ROOT, "grep", "-l", "-w", symbol, "--", "src", "include", "asm"],
+        capture_output=True, text=True, errors="replace")
+    paths = proc.stdout.splitlines()
+    uses = []
+    ident = re.compile(r"\b" + re.escape(symbol) + r"\b")
+    for rel in paths:
+        path = os.path.join(ROOT, rel)
+        try:
+            with open(path, errors="replace") as f:
+                txt = f.read()
+        except OSError:
+            continue
+        txt = _strip_source_comments(txt)
+        txt = re.sub(r'"(?:\\.|[^"\\])*"', '""', txt)
+        txt = re.sub(r"'(?:\\.|[^'\\])*'", "''", txt)
+        count = len(ident.findall(txt))
+        if count:
+            uses.append((rel, count))
+    return uses
+
+
+def _runtime_relocations_to_symbol(symbol):
+    """Return non-debug relocations whose ROM slot targets symbol.
+
+    Prefer the relocation-bearing final ELF used by shiftcheck. Its debug relocation
+    offsets can numerically be enormous (the historical gUnkData_108 false consumer);
+    only non-debug relocation sections with an r_offset in the ROM window count.
+    """
+    if not os.path.exists(RELOCS_ELF):
+        return []
+    out = subprocess.run(
+        ["arm-none-eabi-readelf", "-rW", RELOCS_ELF],
+        capture_output=True, text=True, errors="replace").stdout
+    current = ""
+    hits = []
+    target_re = re.compile(r"(?:^|\s)" + re.escape(symbol) + r"(?:\s|$)")
+    for line in out.splitlines():
+        m = re.match(r"Relocation section '([^']+)'", line)
+        if m:
+            current = m.group(1)
+            continue
+        if not target_re.search(line) or ".debug" in current:
+            continue
+        parts = line.split()
+        if not parts:
+            continue
+        try:
+            offset = int(parts[0], 16)
+        except ValueError:
+            continue
+        if ROM_LO <= offset < ROM_HI:
+            hits.append((current, offset, line.strip()))
+    return hits
+
+
+def _object_runtime_relocations_to_symbol(object_path, symbol):
+    out = subprocess.run(
+        ["arm-none-eabi-objdump", "-r", object_path],
+        capture_output=True, text=True, errors="replace").stdout
+    current = ""
+    hits = []
+    target_re = re.compile(r"(?:^|\s)" + re.escape(symbol) + r"(?:[+\s]|$)")
+    for line in out.splitlines():
+        if line.startswith("RELOCATION RECORDS FOR ["):
+            lb, rb = line.find("["), line.rfind("]")
+            current = line[lb + 1:rb] if lb >= 0 and rb > lb else ""
+            continue
+        if ".debug" in current or not target_re.search(line):
+            continue
+        if "R_ARM_" in line:
+            hits.append((current, line.strip()))
+    return hits
+
+
+def _validate_orphan_selfref(record, entry, rom):
+    errors = []
+    provider = os.path.join(ROOT, entry["provider"])
+    try:
+        with open(provider, errors="replace") as f:
+            txt = _strip_source_comments(f.read())
+    except OSError as e:
+        errors.append(f"orphan provider unreadable: {entry['provider']}: {e}")
+    else:
+        size = _int(entry["size"])
+        pat = (r"\bu8\s+" + re.escape(record["symbol"]) + r"\s*\[\s*"
+               + re.escape(f"0x{size:X}") + r"\s*\][^=;]*=\s*\{")
+        if not re.search(pat, txt, re.S):
+            errors.append("provider is no longer an inline flat u8[] definition")
+    if _sha256(record["bytes"]) != entry["bytes_sha256"]:
+        errors.append("linked orphan byte hash changed")
+
+    uses = _source_identifier_uses(record["symbol"])
+    if uses != [(entry["provider"], 1)]:
+        errors.append(f"source consumers changed: expected definition only, got {uses}")
+
+    if os.path.exists(RELOCS_ELF):
+        relocs = _runtime_relocations_to_symbol(record["symbol"])
+    else:
+        provider_obj = os.path.splitext(provider)[0] + ".o"
+        if not os.path.exists(provider_obj):
+            errors.append(
+                "cannot prove orphan relocation absence: neither "
+                "fireemblem8_relocs.elf nor provider object exists")
+            relocs = []
+        else:
+            relocs = _object_runtime_relocations_to_symbol(
+                provider_obj, record["symbol"])
+    if relocs:
+        errors.append(f"runtime ROM relocations now target orphan: {relocs}")
+
+    raw_base_slots = []
+    for off in range(0, len(rom) - 3, 4):
+        if struct.unpack_from("<I", rom, off)[0] == record["address"]:
+            absolute = ROM_LO + off
+            if not (record["address"] <= absolute < record["address"] + record["size"]):
+                raw_base_slots.append(absolute)
+    if raw_base_slots:
+        errors.append(
+            "raw aligned ROM words now target orphan base at "
+            + ", ".join(f"0x{x:08X}" for x in raw_base_slots))
+
+    fe8u_path = os.path.normpath(os.path.join(ROOT, entry["fe8u_provider"]))
+    try:
+        with open(fe8u_path, errors="replace") as f:
+            fe8u = _strip_source_comments(f.read())
+    except OSError as e:
+        errors.append(f"fe8u analogue unreadable: {entry['fe8u_provider']}: {e}")
+    else:
+        fe8u_size = _int(entry["fe8u_size"])
+        fe8u_pat = (r"\bCONST_DATA\s+u8\s+" + re.escape(record["symbol"])
+                    + r"\s*\[\s*" + re.escape(f"0x{fe8u_size:X}") + r"\s*\]\s*=\s*\{")
+        if not re.search(fe8u_pat, fe8u, re.S):
+            errors.append("fe8u analogue is no longer a flat inline u8[]")
+    return errors
+
+
+def _object_section_size(path, section):
+    out = subprocess.run(
+        ["arm-none-eabi-objdump", "-h", path],
+        capture_output=True, text=True, errors="replace").stdout
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) >= 3 and parts[1] == section:
+            try:
+                return int(parts[2], 16)
+            except ValueError:
+                return None
+    return None
+
+
+def _layout_addr(value):
+    addr = int(value, 16)
+    return addr if addr >= ROM_LO else ROM_LO + addr
+
+
+def _validate_exact_extent(record, entry):
+    errors = _validate_common_selfref_facts(record, entry)
+    layout_path = os.path.join(ROOT, entry["layout"])
+    expected_obj = f"{entry['object']}({entry['section']})"
+    row_ok = False
+    try:
+        with open(layout_path, errors="replace") as f:
+            for line in f:
+                if not line.strip() or line.lstrip().startswith("#"):
+                    continue
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) >= 3:
+                    if (_layout_addr(parts[0]) == record["address"]
+                            and _layout_addr(parts[1]) == record["address"] + record["size"]
+                            and parts[2] == expected_obj):
+                        row_ok = True
+                        break
+    except OSError as e:
+        errors.append(f"exact-extent layout unreadable: {entry['layout']}: {e}")
+    if not row_ok:
+        errors.append("exact provider layout row changed")
+    obj_path = os.path.join(ROOT, entry["object"])
+    obj_size = _object_section_size(obj_path, entry["section"])
+    if obj_size != record["size"]:
+        errors.append(
+            f"provider object section extent changed: expected 0x{record['size']:X}, "
+            f"got {None if obj_size is None else hex(obj_size)}")
+    if not os.path.exists(os.path.join(ROOT, entry["source"])):
+        errors.append(f"exact-extent source missing: {entry['source']}")
+    if _sha256(record["bytes"]) != entry["bytes_sha256"]:
+        errors.append("exact-extent linked byte hash changed")
+    return errors
+
+
+def scan_opaque_selfref_candidates(addrs, a2n, a2s, opaque_syms, rom, evidence):
+    """Return exact records, unresolved-size skips, and every positive self-ref candidate.
+
+    Critically, a zero-size ELF symbol is NEVER extended to the next unrelated global.
+    A zero-size symbol is scanned only when `exact_extents` independently pins its source
+    file, manifest row, object section and byte hash (currently sBanimEkrPopupProcNames).
+    """
+    tracked = set(evidence["resolved"]) | set(evidence["exact_extents"])
+    records = {}
+    skipped = []
+    candidates = []
+    for ad in sorted(addrs):
         nm = a2n[ad]
         if nm not in opaque_syms:
             continue
         size = a2s.get(ad, 0)
         if not size:
-            i = bisect.bisect_right(saddrs, ad)
-            size = (saddrs[i] - ad) if i < len(saddrs) else 0
+            exact = evidence["exact_extents"].get(nm)
+            if exact is None:
+                skipped.append((nm, ad))
+                continue
+            size = _int(exact["size"])
         fo = ad - ROM_LO
-        if size < 8 or fo < 0 or fo + size > len(rom):
+        if size < 4 or fo < 0 or fo + size > len(rom):
+            if nm in tracked:
+                records[nm] = {
+                    "symbol": nm, "address": ad, "size": size, "bytes": b"", "hits": []}
             continue
-        refs = sum(1 for o in range(0, size - 3, 4)
-                   if ad <= struct.unpack_from("<I", rom, fo + o)[0] < ad + size)
-        if refs:
-            out.append((nm, ad, size, refs))
-    out.sort(key=lambda t: t[3])
-    return out
+        blob = rom[fo:fo + size]
+        hits = _selfref_hits(blob, ad)
+        record = {
+            "symbol": nm, "address": ad, "size": size, "bytes": blob, "hits": hits}
+        if hits or nm in tracked:
+            records[nm] = record
+        if hits:
+            candidates.append(record)
+    candidates.sort(key=lambda r: (len(r["hits"]), r["address"]))
+    return records, skipped, candidates
+
+
+def classify_opaque_selfrefs(records, skipped, candidates, evidence, rom):
+    resolved = []
+    unresolved = []
+    candidate_names = {r["symbol"] for r in candidates}
+
+    for symbol, entry in evidence["exact_extents"].items():
+        record = records.get(symbol)
+        if record is None:
+            unresolved.append({
+                "symbol": symbol, "address": _int(entry["address"]),
+                "size": _int(entry["size"]), "hits": [],
+                "errors": ["exact-size evidence symbol is no longer observable"]})
+            continue
+        errors = _validate_exact_extent(record, entry)
+        if errors:
+            item = dict(record)
+            item["errors"] = errors
+            unresolved.append(item)
+
+    for record in candidates:
+        symbol = record["symbol"]
+        entry = evidence["resolved"].get(symbol)
+        if entry is None:
+            item = dict(record)
+            item["errors"] = ["no narrow evidence-manifest entry"]
+            unresolved.append(item)
+            continue
+        errors = _validate_common_selfref_facts(record, entry)
+        category = entry.get("category")
+        if category == "gba-lz77":
+            errors.extend(_validate_lz_selfref(record, entry))
+        elif category == "direct-sound-pcm":
+            errors.extend(_validate_pcm_selfref(record, entry))
+        elif category == "unreferenced-opaque-orphan":
+            errors.extend(_validate_orphan_selfref(record, entry, rom))
+        else:
+            errors.append(f"unknown evidence category: {category!r}")
+        item = dict(record)
+        item["category"] = category
+        item["provider"] = entry.get("provider")
+        item["asset"] = entry.get("asset")
+        if errors:
+            item["errors"] = errors
+            unresolved.append(item)
+        else:
+            resolved.append(item)
+
+    for symbol, entry in evidence["resolved"].items():
+        if symbol in candidate_names:
+            continue
+        record = records.get(symbol)
+        item = dict(record) if record is not None else {
+            "symbol": symbol, "address": _int(entry["address"]),
+            "size": _int(entry["size"]), "hits": []}
+        item["errors"] = ["expected hit set disappeared or symbol is no longer opaque"]
+        unresolved.append(item)
+
+    return resolved, unresolved, skipped
+
+
+def selfref_gate_count(unresolved):
+    # Evidence drift with zero currently-observed words must still fail closed.
+    return sum(max(1, len(item.get("hits", []))) for item in unresolved)
 
 
 def main():
@@ -402,9 +880,11 @@ def main():
         print()
         emit_metrics(grand)
 
+    true_debt_gate = 0
     if "--true-debt" in sys.argv:
         print()
-        emit_true_debt()
+        true_debt_gate = emit_true_debt()
+    return 1 if "--gate" in sys.argv and true_debt_gate else 0
 
 
 # ---- formal tracked metrics (axes #5 SHIFTABILITY and #6 ASSET EDITABILITY) ----
@@ -693,18 +1173,35 @@ def emit_true_debt():
     # word loop (typed C, no .bin) AND the .4byte-literal scan (an EA macro, not `.4byte`).
     # Scan them directly; each resolving to a linked symbol is REAL relocatable debt.
     macro_real = scan_macro_raw_ptr_debt(elfaddrs, _a2n, _a2s)
-    # BLIND SPOT (found 2026-07-10, D362 follow-up): a raw-INCBIN blob (any dir, incl.
-    # graphics/, outside the data/residual glob) can BAKE self-pointers in its own .bin
-    # interior with no reloc. Decode every opaque symbol's ROM bytes for self-referential
-    # words; report as review-suspects (embedded-data self-refs exist, so not hard-gated).
+    # BLIND SPOT (found 2026-07-10, D362 follow-up): a raw-INCBIN/opaque byte provider
+    # (any dir, incl. graphics/) can BAKE self-pointers in its own interior with no reloc.
+    # Decode every positive-size opaque symbol, then require each hit-set to match narrow,
+    # reproducible evidence. Unknown hit-sets and any evidence drift are hard-gated.
+    # Never invent a zero-size symbol extent by stretching it to the next global.
     _rom = None
     for _rp in (os.path.join(ROOT, "fireemblem8.gba"), os.path.join(ROOT, "baserom.gba")):
         if os.path.exists(_rp):
             _rom = open(_rp, "rb").read(); break
-    selfref_suspects = (scan_opaque_selfref_suspects(elfaddrs, _a2n, _a2s, opaque_syms, _rom)
-                        if _rom else [])
+    selfref_resolved = []
+    selfref_unresolved = []
+    selfref_skipped = []
+    if _rom:
+        selfref_evidence = load_opaque_selfref_evidence()
+        selfref_records, selfref_skipped, selfref_candidates = (
+            scan_opaque_selfref_candidates(
+                elfaddrs, _a2n, _a2s, opaque_syms, _rom, selfref_evidence))
+        selfref_resolved, selfref_unresolved, selfref_skipped = classify_opaque_selfrefs(
+            selfref_records, selfref_skipped, selfref_candidates, selfref_evidence, _rom)
+    else:
+        selfref_unresolved = [{
+            "symbol": "<ROM unavailable>", "address": 0, "size": 0, "hits": [],
+            "errors": ["cannot scan opaque self-references without fireemblem8.gba/baserom.gba"]}]
+    resolved_selfref_words = sum(len(item["hits"]) for item in selfref_resolved)
+    unresolved_selfref_words = sum(len(item["hits"]) for item in selfref_unresolved)
+    selfref_gate = selfref_gate_count(selfref_unresolved)
     # completion gate: confirmed-real + unclassified DATA-pointer debt (code-axis excluded)
-    gate = real + blind_data + blind_exact + blind_unres + len(stuck_real) + len(macro_real)
+    gate = (real + blind_data + blind_exact + blind_unres + len(stuck_real)
+            + len(macro_real) + selfref_gate)
     print("== SHIFTABILITY true debt (fe8u oracle + structural classification) ==")
     print(f"  raw 0x08xxxxxx words classified                      : {len(blindhits)+coinc+real}")
     print(f"  coincidental constants (never relocatable)           : {struct_coinc}")
@@ -718,11 +1215,15 @@ def emit_true_debt():
           f"(auditor-blind until 2026-06-27)")
     print(f"  MACRO-form raw ptr in typed carves, REAL             : {len(macro_real)}  "
           f"(auditor-blind until 2026-07-10, D363)")
+    print(f"  opaque SELF-REF embedded-data floors, RESOLVED       : "
+          f"{len(selfref_resolved)} symbols / {resolved_selfref_words} hit words")
+    print(f"  opaque SELF-REF unresolved review candidates, GATED  : "
+          f"{len(selfref_unresolved)} symbols / {unresolved_selfref_words} hit words")
+    print(f"  zero-size opaque symbols skipped (no exact extent)   : {len(selfref_skipped)}")
     print(f"  => COMPLETION GATE (confirmed-real + unclassified)    : {gate}")
-    print(f"  opaque-blob SELF-REF suspects (verify embedded-data)  : {len(selfref_suspects)}  "
-          f"(D362; not gated -- de-pointer round-trip to confirm)")
-    print(f"  NOTE: this gate still cannot count pointers inside COMPRESSED data (Huffman")
-    print(f"  text, LZ77 banim/gfx) -- those need typed-asset extraction (D306), not .4byte.")
+    print(f"  NOTE: aligned words inside consumed LZ/PCM input are payload bytes, not")
+    print(f"  pointer slots. The evidence manifest validates format, provenance, byte hash,")
+    print(f"  exact size and hit set; any drift becomes unresolved and fails this gate.")
     if "--gate" in sys.argv:
         print("  -- residual real/unclassified DATA-pointer words (.bin) --")
         for (n, O, v, sym, off) in real_data:
@@ -734,9 +1235,25 @@ def emit_true_debt():
         print("  -- MACRO-form raw ROM-addr pointers still not symbolized --")
         for (rp, macro, v, sym, off) in macro_real:
             print(f"     {rp}: {macro}(0x{v:08X}) -> {sym}+0x{off:X}")
-        print("  -- opaque-blob self-ref suspects (verify each is embedded data) --")
-        for (sym, ad, size, nrefs) in selfref_suspects:
-            print(f"     {sym} @0x{ad:08X} size=0x{size:X} self-ref-words={nrefs}")
+        print("  -- evidence-resolved opaque embedded-data self-refs --")
+        for item in selfref_resolved:
+            asset = f" asset={item['asset']}" if item.get("asset") else ""
+            print(f"     [{item['category']}] {item['symbol']} "
+                  f"@0x{item['address']:08X} size=0x{item['size']:X} "
+                  f"provider={item.get('provider')}{asset}")
+            for off, value in item["hits"]:
+                print(f"        +0x{off:X} value=0x{value:08X} "
+                      f"(self+0x{value - item['address']:X})")
+        print("  -- UNRESOLVED opaque self-ref candidates (gate failures) --")
+        for item in selfref_unresolved:
+            print(f"     {item['symbol']} @0x{item['address']:08X} "
+                  f"size=0x{item['size']:X}")
+            for off, value in item.get("hits", []):
+                print(f"        +0x{off:X} value=0x{value:08X} "
+                      f"(self+0x{value - item['address']:X})")
+            for error in item["errors"]:
+                print(f"        ERROR: {error}")
+    return gate
 
 
 def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re, opaque_syms=None):
@@ -789,4 +1306,4 @@ def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re, opaque_sy
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
