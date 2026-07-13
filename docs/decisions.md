@@ -10645,14 +10645,18 @@ caught immediately by a 1-byte `make compare` FAIL (element math gave base+0x70,
 
 **Finding 2 — raw-INCBIN / opaque-blob self-pointers (SURFACED as review-suspects).** The D362
 follow-up: decode every *structureless-opaque* symbol's built-ROM bytes for self-referential words
-(covers `graphics/` and any dir, not just the old `data/residual/` glob). 12 suspects. Empirically
-classified (not trusted):
-- **Embedded data / fe8u-parity floors (9, SAFE):** `gUnkData_108` (region-different opaque orphan
+(covers `graphics/` and any dir, not just the old `data/residual/` glob). The first implementation
+printed 12 suspects, but **D376 corrects that to 11 actual-range candidates**: it wrongly stretched
+the zero-size ELF symbol `sBanimEkrPopupProcNames` to the next unrelated global and invented a
+`0x5BC20` (375 KB) range. Its committed provider
+`src/data/data_080ED67C/data_080ED67C.s` and layout row cover exactly
+`[0x080ED67C, 0x080ED7F4)` = `0x178` bytes, whose aligned scan contains **zero**
+self-references.
+- **Embedded data / fe8u-parity floors (8, SAFE):** `gUnkData_108` (region-different opaque orphan
   whose fe8u analog is raw `u8[]`), `ObjectType4` + `TowerOfValniObjectType` (`.4bpp.lz` compressed
-  gfx), `Img_FenrirBg_1`, `bg_Village_Clear_tiles` (tile gfx), `DirectSoundData_*` ×3 (sound
-  samples), `sBanimEkrPopupProcNames` (6 self-refs in 375 KB = 0.006% density, mixed parity,
-  scattered — coincidental). A self-ref inside an LZ stream / PCM sample / raw-u8 blob is not a
-  relocatable pointer.
+  gfx), `Img_FenrirBg_1`, `bg_Village_Clear_tiles` (compressed tile gfx), and
+  `DirectSoundData_*` ×3 (DirectSound PCM samples). A self-ref inside a consumed LZ stream /
+  PCM sample / proven-unreferenced raw-u8 orphan is not a relocatable pointer.
 - **Initially mis-called "REAL baked frame-pointers" (3) — CORRECTED same-session to OAM data,
   SAFE:** `AnimSprite_EfxMantBatabata6_L_7` / `_EfxBerserk2_15` / `_EfxIvald1_55` are raw `u32[]`
   battle-anim sprite tables whose in-range / self-ref words (`0x0861F64E`, `0x1861F7FC` = base |
@@ -10664,27 +10668,32 @@ classified (not trusted):
   words are OAM header/coord data, coincidentally in ROM range — relocating them would CORRUPT a
   shifted game. This corrects the first draft of this very entry: a self-ref alone is a *candidate*,
   never proof; only the consumer's use settles it (the user's standing lesson — empirically
-  re-derive, do not trust a heuristic). Net: **all 12 self-ref suspects are embedded data; the
-  self-ref scan surfaced 0 new real pointer debt.** Shiftability's real residual is unchanged — the
-  already-empirically-bounded **D346 gba-kit A/B result** (11 tables truly block a shift; 73 remain
-  for typed-C decomp completeness, a separate axis), not a new "banim frame-pointer" class.
+  re-derive, do not trust a heuristic). **D365 later superseded this OAM-only verdict:** the three
+  tables are OAM/AnimScr hybrids whose script tails carry real frame pointers, and they left the
+  opaque review set when typed. After that correction and D376's removal of the false popup
+  extent, the current opaque set is the eight evidence-resolved byte-stream/orphan floors above.
 
 **Auditor changes (`scripts/audit_pointers.py`, script-only, byte-neutral):**
 - `scan_macro_raw_ptr_debt()` — the Finding-1 scanner; its count is **added to the completion
   gate** (now 0; it was silently missing 15). Comments / `//` / string-literals stripped first
   (the `frontier_df3_eventscr_ch` `STT_OBJECT(0x08A602F0)` mention is in a comment).
-- `scan_opaque_selfref_suspects()` — the Finding-2 scanner; reported as **review-suspects, not
-  hard-gated** (genuine embedded-data self-refs exist, so each needs a de-pointer round-trip check).
-- `--true-debt --gate` now prints "MACRO-form raw ptr … REAL: 0" and the 12-item suspect list.
+- `scan_opaque_selfref_suspects()` — the Finding-2 scanner; originally reported review suspects
+  without gating them. **D376 replaces that perpetual review bucket** with exact-size scanning,
+  a narrow evidence manifest, and two outputs: evidence-resolved embedded-data floors vs
+  unresolved candidates. Unresolved candidates and evidence drift now fail the real gate.
+- Current `--true-debt --gate` prints **8 resolved symbols / 267 exact hit words / 0 unresolved**;
+  `sBanimEkrPopupProcNames` is absent because its independently-derived `0x178` extent has zero
+  hits. Zero-size symbols are never extended to the next global.
 
-Metrics: `audit_pointers.py --true-debt --gate` = **0** (macro-form debt cleared; the gate never
-counted the banim self-refs, and still doesn't — they're surfaced separately). No 4-axis number
-moves (`calcprogress` unaffected); this is a shiftability-correctness + auditor-coverage win.
+Metrics at D363: `audit_pointers.py --true-debt --gate` = **0** (macro-form debt cleared while
+self-refs were still only surfaced). **D376 supersedes that gate behavior:** unresolved self-refs
+and evidence drift now count; validated embedded-data floors do not. No 4-axis number moves
+(`calcprogress` unaffected); this is a shiftability-correctness + auditor-coverage win.
 `make compare` OK, `make shiftcheck` 0 HIGH, pre-commit gate passed. Single-owner serial
 integration; `main` green (103e10856). The Finding-1 macro de-pointer (15 words) is the real,
-verified win; `scan_opaque_selfref_suspects()` is retained as a *detector* (it found ending_000's
-class), but a self-ref is only a candidate — every current suspect resolves to OAM/gfx/sound/raw
-embedded data, so shiftability stays at its established D344/D346 floor.
+verified win; D376 replaces `scan_opaque_selfref_suspects()` with exact-size candidate scanning
+and fail-closed evidence classification. A self-ref remains only a candidate until its consumer or
+byte format settles it.
 
 Tracked on project board **#14**.
 
@@ -11280,3 +11289,57 @@ address-named providers and layout fragments. No live tracked source remains
 under `data/residual`. The pointer-classification audit now also skips source
 paths deleted in the working tree but not yet removed from the Git index, so
 pre-commit shiftcheck remains usable during source consolidation.
+
+## D376 — hard-gate opaque self-reference evidence; correct the zero-size extent false positive (2026-07-13)
+
+**Problem.** `audit_pointers.py --true-debt --gate` reported completion gate 0
+while leaving nine opaque self-reference rows outside the gate. One was not a
+real scan at all: ELF symbol `sBanimEkrPopupProcNames` has size 0, and the
+auditor invented a `0x5BC20` extent by stretching it to the next unrelated
+global. The committed provider and layout row prove the only valid extent is
+`[0x080ED67C, 0x080ED7F4)` (`0x178` bytes); those bytes contain zero self-refs.
+Never infer an opaque symbol extent from the next global.
+
+**Decision.** Replace the perpetual suspect bucket with two explicit classes:
+evidence-resolved embedded-data floors and unresolved review candidates. Add
+`scripts/shiftcheck/opaque_selfref_evidence.json`, keyed by exact symbol and
+provider, with expected address, size, source/asset hashes, and canonical
+offset/value hit-set hashes. Any new candidate, missing candidate, provider
+change, size/hash drift, or hit-set drift is unresolved and contributes at
+least one unit to the real completion gate. Zero-size symbols are skipped unless
+an independent exact provider extent is validated; the popup provider's layout
+row, object section size, linked-byte hash, and zero-hit set are pinned.
+
+**Resolved evidence (8 symbols / 267 coincidental words).**
+
+- Four GBA `0x10` LZ streams: `TowerOfValniObjectType`, `ObjectType4`,
+  `Img_FenrirBg_1`, and `bg_Village_Clear_tiles`. For each, linked bytes equal
+  the named `.4bpp.lz` asset; the committed PNG provenance hash is pinned; full
+  BIOS-format decode succeeds and matches the expected decoded hash/size; every
+  hit lies wholly inside compressed bytes consumed by the decoder, not trailing
+  padding or a pointer-bearing table.
+- Three `struct WaveData` DirectSound streams:
+  `DirectSoundData_k_strings_13k_c4`,
+  `DirectSoundData_k_brassorc_c4_13k`, and
+  `DirectSoundData_k_brass2_c4_13k`. Linked bytes equal the generated `.bin`,
+  the committed AIFF provenance hash and WaveData header are pinned, and each
+  hit lies deep inside the `s8 data[]` PCM payload rather than the 16-byte
+  header.
+- `gUnkData_108`: the exact `u8[0xAB30]` linked-byte and 260-hit hashes are
+  pinned. The only non-comment source occurrence is its definition; the
+  relocation-bearing ELF has no ROM-section relocation to it (the sole
+  `.rel.debug_info` relocation has `r_offset` outside ROM and is ignored);
+  no aligned raw word targets its base; and fe8u keeps its region-different
+  analogue as a flat inline `u8[0xA788]`. This is a narrow unreferenced opaque
+  orphan classification, not a name-based exemption.
+
+**Gate and regressions.** The real `make shiftcheck` invocation now runs the
+hardened `audit_pointers.py --true-debt --gate`. Regression tests cover:
+zero-size symbols never extending to the next symbol; real LZ/PCM/orphan
+resolution; the exact popup extent; provider or hit-set drift failing closed;
+and a synthetic unknown self-ref becoming unresolved and gating. Baseline is
+**8 resolved / 267 hit words / 0 unresolved / completion gate 0**.
+
+This completes the reopened opaque-self-reference audit checklist item only.
+It does **not** declare issue #143 fully closed; the issue remains the umbrella
+for any other still-open pointer-classification or shifted-ROM evidence items.

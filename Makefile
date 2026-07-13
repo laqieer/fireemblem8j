@@ -516,9 +516,15 @@ shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 shiftcheck-ptraudit: $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) --fail-on-suspects
 
+# Layer 1e: decode self-referential words in structureless opaque providers. Known
+# LZ/PCM/orphan byte floors must match their narrow evidence manifest exactly; any
+# new candidate or evidence drift is unresolved pointer debt and fails the real gate.
+shiftcheck-selfrefs: $(RELOCS_ELF) $(ELF) $(ROM)
+	$(PYTHON) scripts/audit_pointers.py --true-debt --gate
+
 # Focused unit tests for the relocation scanners. Keep these in the normal gate:
 # path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
-shiftcheck-tests:
+shiftcheck-tests: $(RELOCS_ELF) $(ELF) $(ROM)
 	$(PYTHON) -m unittest discover -s $(SHIFTCHECK) -p 'test_*.py'
 
 # Layer 2: differential two-shift build (NON-gating; not applicable to fe8j's packed
@@ -531,9 +537,9 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
 # + packed talk-table false-relocation scan + pointer-classification audit.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-selfrefs shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-selfrefs shiftcheck-tests shiftcheck-diff
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a

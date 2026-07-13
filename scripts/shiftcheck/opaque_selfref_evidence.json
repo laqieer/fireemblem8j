@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "hit_hash_format": "%08X:%08X\\n ordered by ascending slot offset",
+  "exact_extents": {
+    "sBanimEkrPopupProcNames": {
+      "address": "0x080ED67C",
+      "size": "0x178",
+      "source": "src/data/data_080ED67C/data_080ED67C.s",
+      "layout": "layout/carved_rom.d/data_080ED67C.tsv",
+      "object": "src/data/data_080ED67C/data_080ED67C.o",
+      "section": ".data.residue.080ED67C",
+      "bytes_sha256": "1bb8ef8b39e111227b6561d27a1857f3c85f9c65127df95727ff30f48701ebe3",
+      "hit_count": 0,
+      "hit_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "resolved": {
+    "TowerOfValniObjectType": {
+      "category": "gba-lz77",
+      "address": "0x081504B8",
+      "size": "0x55C0",
+      "provider": "src/data/const_data_chapter_maps/dat_const_data_chapter_maps_p0.c",
+      "incbin_macro": "INCBIN_U8",
+      "asset": "graphics/map/TowerOfValniObjectType.4bpp.lz",
+      "asset_sha256": "8b83081a7297146eed88db82051ffaaf11f5ceb183df49b33c4dfdfb3f59558b",
+      "source_asset": "graphics/map/TowerOfValniObjectType.png",
+      "source_asset_sha256": "d263a5227a2c8d52774060dab14868674f5ba152cb4bc28b222d8da7a13210a3",
+      "decoded_size": "0x7A00",
+      "decoded_sha256": "2582dfeb94b39a574ea8b273f99927545f81f9b165de55126a1cdf97e95ec658",
+      "consumed_size": "0x55BD",
+      "hit_count": 1,
+      "hit_sha256": "c45574a79df42b7f108343eb3cbe25da8dd6e03d79cc25280b73abfb953b9914",
+      "hits": [
+        ["0x76C", "0x08153F58"]
+      ]
+    },
+    "ObjectType4": {
+      "category": "gba-lz77",
+      "address": "0x08174C50",
+      "size": "0x6748",
+      "provider": "src/data/const_data_chapter_maps/dat_const_data_chapter_maps_p1.c",
+      "incbin_macro": "INCBIN_U8",
+      "asset": "graphics/map/ObjectType4.4bpp.lz",
+      "asset_sha256": "8aa6227c8da403952bd78f87149f30c4b1094af2c54025d8fc89800f7a28864c",
+      "source_asset": "graphics/map/ObjectType4.png",
+      "source_asset_sha256": "a62dc9081f5364fca22872ad0db70d841745cce095a45010551f2e3d192d2ac2",
+      "decoded_size": "0x72C0",
+      "decoded_sha256": "c2991495dec5e1180b9194a9213af5448f2d30c6b283918135864c08f0f862f0",
+      "consumed_size": "0x6747",
+      "hit_count": 1,
+      "hit_sha256": "7a9c0e6e0946cff0208dda59e21f01c4da2521afdfb36d5c3c0b249228545fdb",
+      "hits": [
+        ["0x4944", "0x08176662"]
+      ]
+    },
+    "DirectSoundData_k_strings_13k_c4": {
+      "category": "direct-sound-pcm",
+      "address": "0x0821B18C",
+      "size": "0x8174",
+      "provider": "src/data/sound_pcm/direct_sound_data.c",
+      "incbin_macro": "INCBIN_U8",
+      "asset": "sound/direct_sound_samples/k_strings_13k_c4.bin",
+      "asset_sha256": "71b579ef1de8c1ee338b989eda01a697985b8e309361c9b7b7f5448a1b74ebf3",
+      "source_asset": "sound/direct_sound_samples/k_strings_13k_c4.aif",
+      "source_asset_sha256": "fcefec52268f9f08ebed48f2c5f192f14c842cb79d26543b489693729c30cbc8",
+      "wave_type_status": "0x40000000",
+      "frequency": "0x00D10C00",
+      "loop_start": "0x334D",
+      "sample_count": "0x8163",
+      "hit_count": 1,
+      "hit_sha256": "c562c37164ef82d60cd462f531057b16bae0c52725bcaa2d5a753f061ca3b7f0",
+      "hits": [
+        ["0x7844", "0x0822271C"]
+      ]
+    },
+    "DirectSoundData_k_brassorc_c4_13k": {
+      "category": "direct-sound-pcm",
+      "address": "0x0825CC80",
+      "size": "0x7F75",
+      "provider": "src/data/sound_pcm/direct_sound_data.c",
+      "incbin_macro": "INCBIN_U8",
+      "asset": "sound/direct_sound_samples/k_brassorc_c4_13k.bin",
+      "asset_sha256": "a244a2c0a99398fabb9cdbed2b7d2fa4937cc9134f3a77afe8f8d9b748f0ec5d",
+      "source_asset": "sound/direct_sound_samples/k_brassorc_c4_13k.aif",
+      "source_asset_sha256": "569f120ee10670a4640be033ca81430bca8afdd8bcebb6f46d36e90dc7729291",
+      "wave_type_status": "0x40000000",
+      "frequency": "0x00D10C00",
+      "loop_start": "0x50AA",
+      "sample_count": "0x7F64",
+      "hit_count": 1,
+      "hit_sha256": "b963bbe2e444cb63e321aaa6705a54b9984e1df573ca9c08d748664fdb662af8",
+      "hits": [
+        ["0x1CCC", "0x08264356"]
+      ]
+    },
+    "DirectSoundData_k_brass2_c4_13k": {
+      "category": "direct-sound-pcm",
+      "address": "0x082A3C04",
+      "size": "0x6510",
+      "provider": "src/data/sound_pcm/direct_sound_data.c",
+      "incbin_macro": "INCBIN_U8",
+      "asset": "sound/direct_sound_samples/k_brass2_c4_13k.bin",
+      "asset_sha256": "254510dda12cac4813a7b4a139691ed4a2ab5ca6d9807cab2bb625da1efbcd9b",
+      "source_asset": "sound/direct_sound_samples/k_brass2_c4_13k.aif",
+      "source_asset_sha256": "f2d034819848b8da3677c3090a606f85f80c3f93bcafe89733ccbde0f6458361",
+      "wave_type_status": "0x40000000",
+      "frequency": "0x00D10C00",
+      "loop_start": "0x362E",
+      "sample_count": "0x64FF",
+      "hit_count": 1,
+      "hit_sha256": "822cbbdcadf6a521c59c91864d7979d0a5dff54e7789d93a2e8792f1e3ab3356",
+      "hits": [
+        ["0x52AC", "0x082A4044"]
+      ]
+    },
+    "Img_FenrirBg_1": {
+      "category": "gba-lz77",
+      "address": "0x08680738",
+      "size": "0x1350",
+      "provider": "src/data/banim/dat_data_banim_p113.c",
+      "incbin_macro": "INCBIN_U16",
+      "asset": "graphics/banim/_us/banim/assets/img/00653B60_Img_08653B60.4bpp.lz",
+      "asset_sha256": "729ce571cf92f912276f14b0753e8a9d4c31e69ca619f730d7290fac0ec85cdf",
+      "source_asset": "graphics/banim/_us/banim/assets/img/00653B60_Img_08653B60.png",
+      "source_asset_sha256": "1b33a03627e18ce935d8744975624d8b6c4ffbe514613df15bbdada9d0aa1c30",
+      "decoded_size": "0x1C00",
+      "decoded_sha256": "5454b03b4181a2564028a5854cf5f039b51f6557377f51155853ce1d8f6dfaa8",
+      "consumed_size": "0x134D",
+      "hit_count": 1,
+      "hit_sha256": "a11ff664f052f515d8542b07ae0272f9de9cd99b9436861fb1b6607ce7c29291",
+      "hits": [
+        ["0x4D8", "0x08681801"]
+      ]
+    },
+    "bg_Village_Clear_tiles": {
+      "category": "gba-lz77",
+      "address": "0x08932A64",
+      "size": "0x32D8",
+      "provider": "src/data/gfx_data_bg/gfx_data_bg.c",
+      "incbin_macro": "INCBIN_U8",
+      "asset": "graphics/gfx_data_bg/gfx_data_bg_006_bg_Village_Clear_tiles.4bpp.lz",
+      "asset_sha256": "2017f9156b0a035c9d331ce865017d91126b9b32ba73a86cf40838b1c2001da5",
+      "source_asset": "graphics/gfx_data_bg/gfx_data_bg_006_bg_Village_Clear_tiles.png",
+      "source_asset_sha256": "d81060a3bcf0187941d635a635208f9c36f9ccccd27301a742aa22cd3ffdec04",
+      "decoded_size": "0x5000",
+      "decoded_sha256": "1e4cfd6f824061f9cc2e58bf5ffe82fc1ae396d718e1f3e359af0b05b2f29c97",
+      "consumed_size": "0x32D5",
+      "hit_count": 1,
+      "hit_sha256": "842359695f0e65e461c601853b90cc6ca99cf7990c618b1136e60f61a35872f2",
+      "hits": [
+        ["0x20A8", "0x089344A9"]
+      ]
+    },
+    "gUnkData_108": {
+      "category": "unreferenced-opaque-orphan",
+      "address": "0x08BB8ED0",
+      "size": "0xAB30",
+      "provider": "src/data/data_08BB8E94/data_08BB8E94.c",
+      "bytes_sha256": "c4de1f279bdb0b8562154b7df261cb4900ce2f6a6ff56caf014f70169b31e340",
+      "fe8u_provider": "../fireemblem8u/src/data_B1FE7C.c",
+      "fe8u_size": "0xA788",
+      "hit_count": 260,
+      "hit_sha256": "3e21cd6bcbadfe09362a6d2161808bdb15eceae3565668e1dd25bab9a9bde830"
+    }
+  }
+}
