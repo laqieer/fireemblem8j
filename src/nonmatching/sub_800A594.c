@@ -21,45 +21,62 @@
  *                 (Its neighbour sub_80D6378 `svc 7; bx lr` is the DivArm *quotient* == v/m
  *                 == the >>12 the sibling documents. Both are baseline-incbin BIOS stubs.)
  *
- * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-11; still not byte-exact) ----
- * A compiler-researched spill seed now reproduces the JP allocation anchors that the old
- * 0x1DC-byte staging body missed. It uses hard registers only for roles directly observed
- * in the ROM (`i`=r9, `dtime`=sl, `ltimesp`=r8), an empty `+r` lifetime fence, and
- * GCC-2.95-compatible `+m` barriers for `count`, `t`, `out`, and `outp`. The Makefile
- * applies `-fno-rerun-cse-after-loop` to this staging object only.
+ * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-13; score 369) ----
+ * A deterministic allocator-state superoptimizer retained this semantics-real form:
  *
- *   anchor                    JP ROM target              retained seed
+ *   pts_r7 = pts;
+ *   asm volatile("" : "+r"(pts_r7));
+ *   ...
+ *   setup_out = lout;
+ *   outp = setup_out;
+ *   ...
+ *   asm volatile("" : "+r"(pts_r7) : : "r5", "r6");
+ *
+ * The entry assignment/fence emits the same r4->r7 reload as the score-371 seed; it does
+ * not pin the formal. The point-scoped r5/r6 clobbers move from the entry tie to each
+ * phase's consumed pts fence, after the real setup_out/outp definitions and stack-home
+ * barrier. `i < bound` plus the equivalent negated in-range test completes the allocator
+ * nudge without changing behavior.
+ *
+ *   anchor                    JP ROM target              retained candidate
  *   ------------------------  -------------------------  -------------------------
  *   .text extent / frame      0x1F4 / sub sp,#0x3C      0x1F4 / sub sp,#0x3C
- *   stack arrays              lout@24                   lout@24
  *   forced homes              count@2C,t@30,out@34      count@2C,t@30,out@34
  *   `outp == &lout` home      [sp,#0x38]                [sp,#0x38]
  *   high-register roles       i=r9,ltimesp=r8,dtime=sl  i=r9,ltimesp=r8,dtime=sl
- *   remaining root residual   pts=r7                    pts=r5
+ *   entry / search pts        r7 at +0x0C               r4 at +0x0C; r7 at +0x1A
+ *   evaluator BL              +0x1D0                     +0x1D0
+ *   residual / hosted score   0                          369/500 (208/250); Sp10a 9281
  *
- * The unresolved `pts` r5->r7 choice cascades through the low-register coloring and setup
- * schedule. In particular, JP reloads `count-2` before materialising ltimesp/outp and emits
- * a direct `beq` to the open-spline arm; this seed materialises ltimesp/outp first and needs
- * the expanded `bne; b` form. Do NOT hard-pin `pts`: that form is already known to miscompile
- * this reconstruction. Only declaration/barrier ordering was varied.
+ * Search accounting (corrected deterministic run):
+ *   generated / normalized unique / source duplicates   36,864 / 36,864 / 0
+ *   compile failures                                    0
+ *   pruned: frame / homes / prologue                     384 / 0 / 0
+ *   pruned: extent / evaluator anchors                   31,968 / 1,008
+ *   normalized-assembly duplicates / compiled+scored     3,478 / 26
  *
- * Objective improvement over the trusted prior C (target comparison includes size delta):
- *   prior:  extent 0x1DC, frame 0x34, 441/500 positional byte mismatches,
- *           234/250 positional halfword mismatches.
- *   seed:   extent 0x1F4, frame 0x3C, 422/500 positional byte mismatches,
- *           221/250 positional halfword mismatches, plus every stack/high-reg anchor above.
+ * Two unique assemblies scored 369. Both were inspected and passed the semantic/full
+ * gates below. The retained one is the lower-risk tie-break: versus score 371 it changes
+ * only six object bytes, makes target offsets +0x47 and +0x49 exact, and changes no
+ * previously-correct byte to wrong. The alternative changed fourteen bytes for the same
+ * score. Neither form produces the target's direct r0->r7 at +0x0C; the objective was the
+ * numeric residual, and 369 is the safe strict improvement.
  *
- * Bounded follow-up variants (maximum four, none reached score 0):
- *   1. declare `ti` before i/j/slot                         -> identical (422 bytes)
- *   2. swap j/slot declaration order                       -> identical (422 bytes)
- *   3. split/reorder parameter-vs-outp `+m` barriers       -> worse (424 bytes)
- *   4. move the ltimesp `+r` fence before outp assignment  -> identical (422 bytes)
+ * Live family harvest before the search: Sp10a NONE, one family member, hosted
+ * base/best 9946. The retained source was synchronized to the owned scratch and recompiles
+ * there at 9281; the active registry row remains owned by this target.
  *
- * Semantic evidence for the retained seed:
- *   prove_nonmatching.py sub_800A594              -> PROVEN-BOUNDED(1)
- *   differential_test.py sub_800A594 --trials 60 -> EQUIV
- *      (signature kept on one line so the harness models all five args:
- *       ptr,val,val,ptr,val).
+ * Semantic and build evidence for the retained form:
+ *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py
+ *       sub_800A594                                -> PROVEN-BOUNDED(1)
+ *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py
+ *       sub_800A594 --trials 60                   -> EQUIV 60/60
+ *       ret4B args=['ptr','val','val','ptr','val'] (all five arguments modeled).
+ *   make check-nonmatching; make nonmatching; make check; make compare; make shiftcheck
+ *       -> all pass, fireemblem8.gba: OK, no stale compile errors, 0 HIGH.
+ * Project and Sp10a bodies are byte-identical (SHA-256
+ * a8a9ca26cb27eef44cdfec1674fdc7d8aa1cefb5556ab3eb28cf7ea4832c621b);
+ * the Sp10a registry row remains active.
  *
  * Historical attempts retained for provenance: plain -O2 was 0x1DC; -mjp-promote was
  * identical; volatile count was worse (0x208); the old 3471-iteration permuter run
@@ -95,107 +112,125 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, s
     register int dtime asm("sl");
     register u16 *ltimesp asm("r8");
     int *outp;
+    int *setup_out;
+    int *call_out;
     unsigned int ti;
+    int limit;
 
-    if (loop)
     {
-        t = sub_80D6384(pts[count - 1].time << 12, t);
-        ti = t >> 12;
-        i = 0;
-        ltimesp = ltimes;
-        outp = lout;
-        asm("" : "+r"(ltimesp));
-        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+        register struct SplineCtrlPoint *pts_r7 asm("r7");
 
-        if (count - 2 > 0 && (ti < pts[0].time || ti >= pts[1].time))
+        pts_r7 = pts;
+        asm volatile("" : "+r"(pts_r7));
+
+        if (loop)
         {
-            do
+            t = sub_80D6384(pts_r7[count - 1].time << 12, t);
+            ti = t >> 12;
+            i = 0;
+            limit = count - 2;
+            ltimesp = ltimes;
+            setup_out = lout;
+            outp = setup_out;
+            asm("" : "+r"(ltimesp));
+            asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+            asm volatile("" : "+r"(pts_r7) : : "r5", "r6");
+
+            if (i < limit && !(ti >= pts_r7[0].time && ti < pts_r7[1].time))
             {
-                i++;
-                if (i >= count - 2)
-                    break;
+                do
+                {
+                    i++;
+                    if (i >= limit)
+                        break;
+                    asm("" : "+r"(pts_r7));
+                }
+                while (!(ti >= pts_r7[i].time && ti < pts_r7[i + 1].time));
             }
-            while (ti < pts[i].time || ti >= pts[i + 1].time);
-        }
 
-        if (i == 0)
-        {
-            dtime = pts[count - 1].time - pts[count - 2].time;
-            lpts[0] = pts[count - 2].x;
-            lpts[1] = pts[count - 2].y;
-            ltimesp[0] = i;
-            j = 0;
-            for (slot = 1; slot <= 2; slot++)
+            if (i == 0)
             {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time + dtime;
-                if (j < count - 1)
+                dtime = pts[count - 1].time - pts[limit].time;
+                lpts[0] = pts[limit].x;
+                lpts[1] = pts[limit].y;
+                ltimesp[0] = i;
+                j = 0;
+                for (slot = 1; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time + dtime;
+                    if (j < count - 1)
+                        j++;
+                }
+                t += dtime << 12;
+            }
+            else
+            {
+                j = i - 1;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
                     j++;
-            }
-            t += dtime << 12;
-        }
-        else
-        {
-            j = i - 1;
-            for (slot = 0; slot <= 2; slot++)
-            {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                j++;
-            }
-        }
-    }
-    else
-    {
-        ti = t >> 12;
-        i = 0;
-        ltimesp = ltimes;
-        outp = lout;
-        asm("" : "+r"(ltimesp));
-        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
-        dtime = count - 1;
-
-        if (dtime > 0 && (ti < pts[0].time || ti >= pts[1].time))
-        {
-            do
-            {
-                i++;
-                if (i >= dtime)
-                    break;
-            }
-            while (ti < pts[i].time || ti >= pts[i + 1].time);
-        }
-
-        if (i == 0)
-        {
-            j = 0;
-            for (slot = 0; slot <= 2; slot++)
-            {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                if (slot < dtime)
-                    j++;
+                }
             }
         }
         else
         {
-            j = i - 1;
-            for (slot = 0; slot <= 2; slot++)
+            ti = t >> 12;
+            i = 0;
+            ltimesp = ltimes;
+            setup_out = lout;
+            outp = setup_out;
+            dtime = count - 1;
+            asm("" : "+r"(ltimesp));
+            asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+            asm volatile("" : "+r"(pts_r7) : : "r5", "r6");
+
+            if (i < dtime && !(ti >= pts_r7[0].time && ti < pts_r7[1].time))
             {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                if (j < dtime)
-                    j++;
+                do
+                {
+                    i++;
+                    if (i >= dtime)
+                        break;
+                    asm("" : "+r"(pts_r7));
+                }
+                while (!(ti >= pts_r7[i].time && ti < pts_r7[i + 1].time));
+            }
+
+            if (i == 0)
+            {
+                j = 0;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
+                    if (slot < dtime)
+                        j++;
+                }
+            }
+            else
+            {
+                j = i - 1;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
+                    if (j < dtime)
+                        j++;
+                }
             }
         }
     }
 
-    sub_800A34C(lpts, outp, ltimesp, t, 3);
-    out->x = outp[0];
-    out->y = outp[1];
+    call_out = outp;
+    sub_800A34C(lpts, call_out, ltimesp, t, 3);
+    out->x = call_out[0];
+    out->y = call_out[1];
     return i;
 }
