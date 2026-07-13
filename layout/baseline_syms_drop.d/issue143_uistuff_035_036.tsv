@@ -1,0 +1,15 @@
+# #143: gap35/gap36 of frontier_df4_uistuff are now real (relocatable) typed
+# definitions carved in-place in
+# src/data/frontier_df4_uistuff/frontier_df4_uistuff.c -- each blob's image +
+# palette + TSA symbols now live as their own INCBIN_U8/INCBIN_U16 definitions
+# in that file (Img_/Pal_/Tsa_ @ 0x085CDF84/0x085CEF98/0x085CEFB8 for
+# sub_8021AFC, and @ 0x085D14D4/0x085D188C/0x085D1A8C for Sub8022200). Drop the
+# opaque baseline .set aliases (from layout/baseline_syms.d/sub_8021AFC-130be8d8.tsv
+# and layout/baseline_syms.d/sub_8022200-46cc8c76.tsv) to avoid a multiple
+# definition of each symbol.
+Img_sub_8021AFC
+Pal_sub_8021AFC
+Tsa_sub_8021AFC
+Img_Sub8022200
+Pal_Sub8022200
+Tsa_Sub8022200

@@ -12205,8 +12205,34 @@ u32 data_085C6C14[] __attribute__((section(".data.frontier_df4_uistuff.gap33")))
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): the whole 72t 4bpp sheet is
  * now an editable PNG (png -> .4bpp -> .4bpp.lz), replacing the committed decompressed .bin. */
 u8 frontier_df4_uistuff_034_5C6E08[] __attribute__((section(".data.frontier_df4_uistuff.gap34"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.4bpp.lz");
-u8 frontier_df4_uistuff_035_5CDF84[] __attribute__((section(".data.frontier_df4_uistuff.gap35"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.4bpp.lz", "graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin", 0x1014, 0x2DC);
-u8 frontier_df4_uistuff_036_5D14D4[] __attribute__((section(".data.frontier_df4_uistuff.gap36"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.4bpp.lz", "graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin", 0x3B8, 0x33C);
+/* #143: gap35 fully symbolized -- real ABS consumers in src/sub_8021AFC.c
+ * (Img_sub_8021AFC 0x085CDF84 / Pal_sub_8021AFC 0x085CEF98 / Tsa_sub_8021AFC
+ * 0x085CEFB8). Image stays the PNG-built 4bpp LZ sheet (pinned -mindist 2,
+ * unchanged length 0x1014). The former "tail" bin slice is really two typed
+ * assets, split at their proven boundaries: a 32-byte/16-color palette (one
+ * bank, ApplyPalette) as committed JASC .pal -> .gbapal, then a 700-byte LZ77
+ * stream that decompresses to exactly 1536 bytes of headerless TSA/screen-entry
+ * data (Decompress + manual 0x360-halfword tile-index rebase) -- committed
+ * decompressed as Tsa_sub_8021AFC.tsa.bin, recompressed byte-exact at gbagfx's
+ * default flags (no pin needed; proven via extract/round-trip). */
+u8 Img_sub_8021AFC[] __attribute__((section(".data.frontier_df4_uistuff.gap35"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.4bpp.lz");
+u16 Pal_sub_8021AFC[] __attribute__((section(".data.frontier_df4_uistuff.gap35"))) = INCBIN_U16("graphics/frontier_df4_uistuff/Pal_sub_8021AFC.gbapal");
+u8 Tsa_sub_8021AFC[] __attribute__((section(".data.frontier_df4_uistuff.gap35"))) = INCBIN_U8("graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin.lz");
+/* #143: gap36 fully symbolized -- real ABS consumers in src/sub_8022200.c
+ * (Img_Sub8022200 0x085D14D4 / Pal_Sub8022200 0x085D188C / Tsa_Sub8022200
+ * 0x085D1A8C). Image stays the PNG-built 4bpp LZ sheet (pinned -mindist 2,
+ * unchanged length 0x3B8). The former "tail" bin slice is really two typed
+ * assets: a full 512-byte/256-color palette source (ApplyPalettes reads only
+ * bank 1 of 32 bytes at runtime, but all 512 bytes -- 240 trailing zero colors
+ * included -- occupy ROM and are preserved verbatim via committed JASC .pal
+ * -> .gbapal), then a 316-byte LZ77 stream that decompresses to exactly 1042
+ * bytes = 2-byte header 0x1319 + 26x20 standard TSA payload (Decompress +
+ * TmApplyTsa/CallARM_FillTileRect) -- committed decompressed as
+ * Tsa_Sub8022200.tsa.bin, recompressed byte-exact at gbagfx's default flags
+ * (no pin needed; proven via extract/round-trip). */
+u8 Img_Sub8022200[] __attribute__((section(".data.frontier_df4_uistuff.gap36"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.4bpp.lz");
+u8 Pal_Sub8022200[] __attribute__((section(".data.frontier_df4_uistuff.gap36"))) = INCBIN_U8("graphics/frontier_df4_uistuff/Pal_Sub8022200.gbapal");
+u8 Tsa_Sub8022200[] __attribute__((section(".data.frontier_df4_uistuff.gap36"))) = INCBIN_U8("graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin.lz");
 u32 frontier_df4_uistuff_038_5D32D8[] __attribute__((section(".data.frontier_df4_uistuff.gap38"))) = {
     0x00200020,
     0x00100010,
