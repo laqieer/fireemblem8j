@@ -926,11 +926,10 @@ catches a pinned path vanishing from the tracked inventory entirely, not
 just its bytes drifting -- plus this round's stale-count/mapping
 corrections) for the full per-item breakdown and verification method.
 Branch-local decision numbers continue this branch's own D378-onward
-sequence; the exact integration mapping onto `origin/main`'s D388 tip is a
-**seven-entry** table: **D378->D389, D379->D390, D380->D391, D381->D392,
-D382->D393, D383->D394, D384->D395** (the integrator should apply this
-renumbering, not this lane; D385 continues the same local sequence and maps
-to D396 at integration).
+sequence; the exact integration mapping onto `origin/main`'s D388 tip is an
+**eight-entry** table: **D378->D389, D379->D390, D380->D391, D381->D392,
+D382->D393, D383->D394, D384->D395, D385->D396** (the integrator should
+apply this renumbering, not this lane).
 
 `make clean && make compare` -> `fireemblem8.gba: OK`; `make shiftcheck` -> no
 high-confidence suspects. Reopened issue #143 remains open; this closes the

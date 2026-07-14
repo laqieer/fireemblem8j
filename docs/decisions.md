@@ -11977,9 +11977,12 @@ simulation onto the current `origin/main` D388 tip) recorded in this
 commit's push message. Issue #143 remains open; `main` was not merged; no
 force-push occurred. If a concurrently-integrated sibling branch has already
 claimed D384, the integrator should renumber this entry (and the D378-D383
-entries per the **seven-entry** mapping — D378->D389, D379->D390,
-D380->D391, D381->D392, D382->D393, D383->D394, D384->D395 — given in
-D382/D383/this entry), not the work it describes.
+entries) per the exact mapping given in D382/D383/this entry — as of D384
+that was seven entries (D378->D389 through D384->D395); D385 extends the
+same local sequence with an eighth entry (D385->D396), so the **current**
+integration mapping the integrator should apply is the full eight-entry
+table in D385/`docs/frontier.md`, not the seven-entry snapshot recorded
+here.
 
 ## D385 — fail-closed pinned-floor *presence* guard; branch/asset metadata corrections (issue #143 menu lane; maps to D396 at integration onto origin/main D388-tip) (2026-07-14)
 
@@ -12055,7 +12058,12 @@ built one. All counts below are re-derived fresh, in a built state
 - D384's own text claimed a "six-entry" integration mapping table; corrected
   to **seven** entries (D378->D389 through D384->D395), matching what
   D382/D383 already listed explicitly -- the six-entry wording undercounted
-  D384's own row.
+  D384's own row. **[Corrected again, current commit]** that seven-entry
+  snapshot was itself only accurate as of D384; now that this D385 entry
+  exists, the **current, live** integration mapping is an **eight-entry**
+  table -- **D378->D389, D379->D390, D380->D391, D381->D392, D382->D393,
+  D383->D394, D384->D395, D385->D396** -- given in full in
+  `docs/frontier.md`.
 - `docs/frontier.md` previously described the pinned-floor guard only as
   covering same-size tamper / wrong-size / missing-on-disk; updated to also
   describe the presence guard precisely now that it exists (was not
