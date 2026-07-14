@@ -1,4 +1,3 @@
 BG_Fill	080011D0	thumb	(sub_801FAA0 callee)
 Decompress	08013008	thumb	(sub_801FAA0 callee)
-gUnknown_08A7AE50	08A7AE50	data	(sub_801FAA0 compressed BG2 tilemap)
 gUnknown_02001F72	02001F72	data	(sub_801FAA0 decompress scratch)
