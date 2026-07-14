@@ -5,7 +5,7 @@
 #include "bmlib.h"
 
 extern void ArenaUi_StartPartialLock(ProcPtr proc);
-extern char frontier_df4_menu_038_ABCD24[];
+extern struct ProcCmd gProcScr_ArenaUiResultBgm[];
 extern void ArenaUi_Init(ProcPtr proc);
 extern void ArenaUi_ResultsDialogue(ProcPtr proc);
 extern void ArenaUi_ShowGoldBoxOnVictoryOrDraw(ProcPtr proc);
@@ -20,7 +20,7 @@ PROC_LABEL(1),
     PROC_CALL(BMapDispSuspend),
     PROC_SLEEP(0),
 
-    PROC_START_CHILD((struct ProcCmd*)frontier_df4_menu_038_ABCD24),
+    PROC_START_CHILD((struct ProcCmd*)gProcScr_ArenaUiResultBgm),
 
     PROC_CALL(ArenaUi_Init),
 
@@ -36,7 +36,7 @@ PROC_LABEL(1),
 PROC_LABEL(2),
     PROC_SLEEP(1),
 
-    PROC_END_EACH((struct ProcCmd*)frontier_df4_menu_038_ABCD24),
+    PROC_END_EACH((struct ProcCmd*)gProcScr_ArenaUiResultBgm),
     PROC_SLEEP(0),
 
     PROC_CALL_ARG(_FadeBgmOut, 2),

@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1421 | 98.4% |
+| **FLOOR** | 1425 | 98.4% |
 | **UNCERTAIN** | 23 | 1.6% |
-| **TOTAL** | 1444 | 100.0% |
+| **TOTAL** | 1448 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -49,7 +49,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1272 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1276 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1421) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1425) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1421 entries</summary>
+<details><summary>1425 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1089,6 +1089,10 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/Tsa_CommGameBgScreenInShop.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_menu/Tsa_DifficultyMenuObjs.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_menu/Tsa_MainMenuBgFog.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90_tsa.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
