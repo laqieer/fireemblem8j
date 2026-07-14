@@ -594,9 +594,9 @@ shiftcheck-glyphs: $(RELOCS_ELF) $(ROM) $(ELF)
 # Catches the same blind spot as shiftcheck-glyphs in a second consumer: a
 # `PROC_NAME((const void*)0x08..)` raw-literal cast compiles to a word with no
 # relocation, correct only in the byte-identical build.
-shiftcheck-procscr: $(RELOCS_ELF) $(ROM) $(ELF)
+shiftcheck-procscr: $(RELOCS_ELF) $(ROM) $(ELF) $(MAP)
 	$(PYTHON) $(SHIFTCHECK)/audit_procscr_relocs.py --elf $(ELF) --relocs-elf $(RELOCS_ELF) \
-	    --gba $(ROM) --prefix $(PREFIX)
+	    --gba $(ROM) --map $(MAP) --prefix $(PREFIX)
 
 # Focused unit tests for the relocation scanners. Keep these in the normal gate:
 # path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
