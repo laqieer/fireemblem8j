@@ -21,6 +21,35 @@ import audit_graphics_forms as a  # noqa: E402
 from PIL import Image  # noqa: E402
 
 
+def setUpModule():
+    """HERMETICITY (real incident, fixed here): this repo's own githooks/
+    pre-commit hook runs `make shiftcheck` (which runs THIS test module) as a
+    git pre-commit hook. Git sets GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE in the
+    hook's environment, and EVERY `git` subprocess call anywhere in this
+    process (and its children) inherits them -- overriding any `-C <path>`/
+    `cwd=` a test passes, no matter how carefully. Without this, a test
+    fixture's `git init`/`git commit` in an isolated tempfile.TemporaryDirectory()
+    silently operates on the REAL, wrapping FE8J repository instead (this
+    happened twice while developing this fix: once via RepoGraphFixture, once
+    via CleanGitEnvTest's own "outer" simulated-wrapper-repo setup -- both
+    recovered with `git reset --hard` before anything was pushed).
+    Module-level stripping (once, here) is the primary defense: it protects
+    EVERY git subprocess call in this file, present or future, rather than
+    relying on each call site to remember `env=a.clean_git_env()` individually
+    (which is exactly what was missed the second time)."""
+    global _ORIGINAL_ENVIRON
+    _ORIGINAL_ENVIRON = dict(os.environ)
+    for key in list(os.environ):
+        if key.startswith("GIT_"):
+            del os.environ[key]
+
+
+def tearDownModule():
+    os.environ.clear()
+    os.environ.update(_ORIGINAL_ENVIRON)
+
+
+
 def make_p_png(path, pixels, palette=None):
     """pixels: 2D list [y][x] of index values. palette: flat RGB list (len 768) or
     None (identity grayscale ramp, sufficient for pure index-value tests)."""
@@ -327,6 +356,78 @@ class JascPalTest(unittest.TestCase):
             with self.assertRaises(a.JascPalError):
                 a.parse_jasc_pal(path)
 
+    def test_lf_only_file_parses(self):
+        """gbagfx's ReadJascPaletteLine accepts a bare '\\n' terminator (not
+        just '\\r\\n') -- an LF-only file (e.g. saved/normalized by a Unix
+        tool) is completely valid and must not be rejected."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.pal")
+            with open(path, "wb") as f:
+                f.write(b"JASC-PAL\n0100\n2\n0 0 0\n255 255 255\n")
+            colors = a.parse_jasc_pal(path)
+            self.assertEqual(colors, [(0, 0, 0), (255, 255, 255)])
+
+    def test_crlf_only_file_parses(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._write(tmp, [b"JASC-PAL", b"0100", b"2", b"0 0 0", b"255 255 255"])
+            colors = a.parse_jasc_pal(path)
+            self.assertEqual(colors, [(0, 0, 0), (255, 255, 255)])
+
+    def test_mixed_lf_and_crlf_lines_parse(self):
+        """gbagfx's terminator check is PER-LINE, not a whole-file mode -- a
+        file mixing bare '\\n' and '\\r\\n' line-to-line is still valid."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.pal")
+            with open(path, "wb") as f:
+                f.write(b"JASC-PAL\r\n0100\n2\r\n0 0 0\n255 255 255\r\n")
+            colors = a.parse_jasc_pal(path)
+            self.assertEqual(colors, [(0, 0, 0), (255, 255, 255)])
+
+    def test_real_tree_style_lf_fixture(self):
+        """Mirrors the exact byte shape of a real tracked source
+        (graphics/reuse/bg_Castle_Night_palette.pal's grammar), but with bare
+        LF line endings throughout, to prove a real-file-style LF-only
+        palette is accepted end to end (header + N color lines + EOF)."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.pal")
+            lines = [b"JASC-PAL", b"0100", b"4", b"0 0 0", b"0 0 32",
+                     b"72 72 96", b"128 128 160"]
+            with open(path, "wb") as f:
+                f.write(b"\n".join(lines) + b"\n")
+            colors = a.parse_jasc_pal(path)
+            self.assertEqual(colors, [(0, 0, 0), (0, 0, 32), (72, 72, 96), (128, 128, 160)])
+
+    def test_lone_cr_not_followed_by_lf_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.pal")
+            with open(path, "wb") as f:
+                # '\r' followed by a digit, not '\n' -- gbagfx's "CR line
+                # endings aren't supported" fatal error.
+                f.write(b"JASC-PAL\r0100\r\n1\r\n0 0 0\r\n")
+            with self.assertRaises(a.JascPalError):
+                a.parse_jasc_pal(path)
+
+    def test_unterminated_final_line_fails(self):
+        """No trailing '\\n' or '\\r\\n' after the last color line -- gbagfx's
+        "Unexpected EOF. No LF or CRLF at end of file." fatal error."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.pal")
+            with open(path, "wb") as f:
+                f.write(b"JASC-PAL\r\n0100\r\n1\r\n0 0 0")  # no terminator at all
+            with self.assertRaises(a.JascPalError):
+                a.parse_jasc_pal(path)
+
+    def test_extra_trailing_blank_line_is_garbage(self):
+        """gbagfx's EOF check is a raw fgetc() after the last color line's
+        terminator is consumed -- even an otherwise-harmless extra blank line
+        counts as garbage."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.pal")
+            with open(path, "wb") as f:
+                f.write(b"JASC-PAL\r\n0100\r\n1\r\n0 0 0\r\n\r\n")
+            with self.assertRaises(a.JascPalError):
+                a.parse_jasc_pal(path)
+
 
 class GbapalRoundtripTest(unittest.TestCase):
     def test_correct_conversion_passes(self):
@@ -623,14 +724,26 @@ class FetsaTileBoundsTest(unittest.TestCase):
 class RepoGraphFixture:
     """Builds a minimal git-tracked fixture repo (Makefile + graphics/) so
     classify_pngs()/parse_explicit_fetsatool_pngs()/parse_num_tiles_overrides()
-    can be exercised end-to-end without touching the real, huge repo tree."""
+    can be exercised end-to-end without touching the real, huge repo tree.
+
+    IMPORTANT (hermeticity, defense in depth): every `git` call here passes
+    `env=a.clean_git_env()` EXPLICITLY. This module's setUpModule() also
+    strips GIT_* process-wide once at test-suite start, but that alone is
+    NOT sufficient -- a real incident while developing this fix showed that a
+    LATER test can legitimately re-introduce GIT_DIR into os.environ mid-run
+    (CleanGitEnvTest's hermeticity regression test does exactly this, to
+    simulate a wrapping git hook), and any RepoGraphFixture call made during
+    that window would inherit it if it didn't clean explicitly. Both layers
+    together (module-level baseline + per-call explicit) are needed."""
 
     def __init__(self, tmp):
         self.root = tmp
         os.makedirs(os.path.join(tmp, "graphics", "sub"), exist_ok=True)
-        subprocess.run(["git", "init", "-q"], cwd=tmp, check=True)
-        subprocess.run(["git", "config", "user.email", "t@example.com"], cwd=tmp, check=True)
-        subprocess.run(["git", "config", "user.name", "t"], cwd=tmp, check=True)
+        subprocess.run(["git", "init", "-q"], cwd=tmp, check=True, env=a.clean_git_env())
+        subprocess.run(["git", "config", "user.email", "t@example.com"],
+                        cwd=tmp, check=True, env=a.clean_git_env())
+        subprocess.run(["git", "config", "user.name", "t"],
+                        cwd=tmp, check=True, env=a.clean_git_env())
 
     def add(self, rel_path, content=b""):
         path = os.path.join(self.root, rel_path)
@@ -639,16 +752,17 @@ class RepoGraphFixture:
             content = content.encode()
         with open(path, "wb") as f:
             f.write(content)
-        subprocess.run(["git", "add", rel_path], cwd=self.root, check=True)
+        subprocess.run(["git", "add", rel_path], cwd=self.root, check=True, env=a.clean_git_env())
 
     def add_png(self, rel_path, pixels):
         path = os.path.join(self.root, rel_path)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         make_p_png(path, pixels)
-        subprocess.run(["git", "add", rel_path], cwd=self.root, check=True)
+        subprocess.run(["git", "add", rel_path], cwd=self.root, check=True, env=a.clean_git_env())
 
     def commit(self):
-        subprocess.run(["git", "commit", "-q", "-m", "fixture"], cwd=self.root, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "fixture"],
+                        cwd=self.root, check=True, env=a.clean_git_env())
 
 
 class ClassifyPngsIntegrationTest(unittest.TestCase):
@@ -825,6 +939,220 @@ class PayloadRelocOverlapTest(unittest.TestCase):
         violations = a.check_payload_reloc_overlap(
             reloc_offsets, name_to_ranges, {"payload_a"})
         self.assertEqual(violations, [])
+
+
+class FindIncbinGraphicsNamesTest(unittest.TestCase):
+    """The relocation-CONTAINMENT denominator (find_incbin_graphics_names):
+    EVERY `graphics/`-prefixed INCBIN declaration regardless of extension --
+    unlike _is_payload_path()'s format-semantic allowlist, a generic `.bin`/
+    `.bin.lz` blob (e.g. the real graphics/map/TileConfiguration7.bin.lz) is
+    just as real a "shouldn't contain a relocation slot" candidate as a
+    `.tsa.bin`."""
+
+    def test_generic_bin_under_graphics_is_included(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add(
+                "src/data/x/x.c",
+                'u8 TileConfiguration7[] = INCBIN_U8("graphics/map/TileConfiguration7.bin.lz");\n',
+            )
+            fx.commit()
+            names = a.find_incbin_graphics_names(tmp)
+            self.assertEqual(names, {"TileConfiguration7"})
+
+    def test_non_graphics_bin_is_excluded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add(
+                "src/data/x/x.c",
+                'u8 gSound[] = INCBIN_U8("sound/x/gSound.bin");\n',
+            )
+            fx.commit()
+            self.assertEqual(a.find_incbin_graphics_names(tmp), set())
+
+    def test_superset_of_the_narrow_format_classifier(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add(
+                "src/data/x/x.c",
+                'u8 gFoo_tiles[] = INCBIN_U8("graphics/x/gFoo.4bpp.lz");\n'
+                'u8 gFoo_residue[] = INCBIN_U8("graphics/x/gFoo_residue.bin.lz");\n',
+            )
+            fx.commit()
+            narrow = a.find_incbin_payload_names(tmp)
+            broad = a.find_incbin_graphics_names(tmp)
+            self.assertEqual(narrow, {"gFoo_tiles"})
+            self.assertEqual(broad, {"gFoo_tiles", "gFoo_residue"})
+            self.assertTrue(narrow <= broad)
+
+    def test_multiline_comment_with_bracket_annotations_does_not_leak(self):
+        """Regression: a source comment documenting byte ranges in
+        `[0xNNN,0xMMM)`-style notation (the REAL style used by e.g.
+        src/data/frontier_df3_ending/frontier_df3_ending.c) must not be
+        misparsed as an array declarator -- an earlier version of
+        _INCBIN_DECL_RE's `[^\\]]*` bracket-content class matched across
+        newlines (character classes aren't limited by re.DOTALL, which only
+        affects `.`), letting the regex run away through an unrelated
+        comment block and mis-pair a comment word with a much-later,
+        unrelated INCBIN_U8() call."""
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add(
+                "src/data/x/x.c",
+                "/* some comment describing sub-ranges:\n"
+                " *   Tsa_SomeName_0  [0x000,0x4B4)  1204 B  hdr 0x131D\n"
+                " *   Tsa_SomeName_1  [0x4B4,0x8F0)  1084 B  hdr 0x111D\n"
+                " */\n"
+                'u8 real_symbol_name[] __attribute__((section(".data.gap1"))) = INCBIN_U8(\n'
+                '    "graphics/x/Tsa_SomeName_0.bin",\n'
+                '    "graphics/x/Tsa_SomeName_1.bin");\n',
+            )
+            fx.commit()
+            names = a.find_incbin_graphics_names(tmp)
+            # Only the REAL declared variable is found; the comment's bracketed
+            # byte-range annotations must not leak in as bogus symbol names.
+            self.assertEqual(names, {"real_symbol_name"})
+
+
+class NmAddrNameAndDerivationTest(unittest.TestCase):
+    """parse_nm_addr_name() + derive_missing_symbol_sizes(): recovering a byte
+    range for a hand-assembled label nm -S gives no explicit size for, from
+    the next DISTINCT address in the full symbol table."""
+
+    def test_parse_nm_addr_name_sorts_by_address(self):
+        text = (
+            "08000010 T zzz_last_in_text_but_lower_addr\n"
+            "08000000 T aaa_first\n"
+        )
+        entries = a.parse_nm_addr_name(text)
+        self.assertEqual(entries, [(0x08000000, "aaa_first"),
+                                    (0x08000010, "zzz_last_in_text_but_lower_addr")])
+
+    def test_derives_size_from_next_distinct_address(self):
+        all_sorted = [
+            (0x1000, "AnimSprite_A"),  # sizeless -- needs derivation
+            (0x1020, "AnimSprite_B"),  # next distinct address -> A's size = 0x20
+            (0x1040, "AnimSprite_C"),
+        ]
+        derived, undeliverable = a.derive_missing_symbol_sizes(
+            all_sorted, {"AnimSprite_A"}, explicit_sizes={})
+        self.assertEqual(derived["AnimSprite_A"], [(0x1000, 0x20)])
+        self.assertEqual(undeliverable, set())
+
+    def test_skips_same_address_alias_to_find_the_real_next_address(self):
+        all_sorted = [
+            (0x1000, "AnimSprite_A"),
+            (0x1000, "AnimSprite_A_alias"),  # same address -- must be skipped
+            (0x1030, "AnimSprite_B"),
+        ]
+        derived, undeliverable = a.derive_missing_symbol_sizes(
+            all_sorted, {"AnimSprite_A"}, explicit_sizes={})
+        self.assertEqual(derived["AnimSprite_A"], [(0x1000, 0x30)])
+
+    def test_last_symbol_in_table_is_undeliverable(self):
+        all_sorted = [
+            (0x1000, "AnimSprite_A"),
+            (0x1020, "AnimSprite_LAST"),  # nothing follows -- can't derive a size
+        ]
+        derived, undeliverable = a.derive_missing_symbol_sizes(
+            all_sorted, {"AnimSprite_LAST"}, explicit_sizes={})
+        self.assertEqual(derived, {})
+        self.assertEqual(undeliverable, {"AnimSprite_LAST"})
+
+    def test_already_explicit_names_are_not_rederived(self):
+        all_sorted = [(0x1000, "AnimSprite_A"), (0x1020, "AnimSprite_B")]
+        derived, undeliverable = a.derive_missing_symbol_sizes(
+            all_sorted, {"AnimSprite_A"}, explicit_sizes={"AnimSprite_A": [(0x1000, 5)]})
+        self.assertEqual(derived, {})  # already has an explicit size -- skipped
+        self.assertEqual(undeliverable, set())
+
+
+class CleanGitEnvTest(unittest.TestCase):
+    """clean_git_env() -- part of the fix for a real incident where this test
+    suite, run from inside this repo's own `make shiftcheck` pre-commit hook,
+    committed synthetic fixture files into the ACTUAL FE8J repository because
+    git hooks set GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE in the environment, and
+    those override any -C/cwd-based repo discovery for every `git` subprocess
+    call, no matter the path passed. The PRIMARY fix is setUpModule() at the
+    top of this file (stripping GIT_* from the process environment once, for
+    every test); clean_git_env() is the reusable helper it (and
+    audit_graphics_forms.git_ls_files()) are built on."""
+
+    def test_strips_all_git_prefixed_vars_but_keeps_others(self):
+        old = dict(os.environ)
+        try:
+            os.environ["GIT_DIR"] = "/some/wrapping/repo/.git"
+            os.environ["GIT_WORK_TREE"] = "/some/wrapping/repo"
+            os.environ["GIT_INDEX_FILE"] = "/some/wrapping/repo/.git/index"
+            os.environ["PATH"] = old.get("PATH", "")
+            env = a.clean_git_env()
+            self.assertNotIn("GIT_DIR", env)
+            self.assertNotIn("GIT_WORK_TREE", env)
+            self.assertNotIn("GIT_INDEX_FILE", env)
+            self.assertIn("PATH", env)  # non-GIT_ vars are preserved
+        finally:
+            os.environ.clear()
+            os.environ.update(old)
+
+    def test_fixture_commit_is_hermetic_against_inherited_git_dir(self):
+        """Regression test for the exact incident: simulate a wrapping git hook
+        by setting GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE to point at a SEPARATE
+        'outer' repo (built with clean_git_env() itself, so this test is not
+        ALSO vulnerable to whatever environment the test runner happens to
+        have -- this is the second thing that bit the real incident: the
+        'outer' repo's own setup calls need to be hermetic too, independent of
+        setUpModule(), since a test verifying hermeticity must not silently
+        depend on a DIFFERENT hermeticity mechanism to set up its own fixture),
+        then build+commit a RepoGraphFixture in its own tmp dir (as every
+        other test in this file does) and confirm the commit landed in the
+        fixture's OWN repo, not the simulated outer one."""
+        with tempfile.TemporaryDirectory() as outer, tempfile.TemporaryDirectory() as inner:
+            subprocess.run(["git", "init", "-q"], cwd=outer, check=True, env=a.clean_git_env())
+            subprocess.run(["git", "config", "user.email", "outer@example.com"],
+                            cwd=outer, check=True, env=a.clean_git_env())
+            subprocess.run(["git", "config", "user.name", "outer"],
+                            cwd=outer, check=True, env=a.clean_git_env())
+            with open(os.path.join(outer, "outer.txt"), "w") as f:
+                f.write("outer")
+            subprocess.run(["git", "add", "outer.txt"], cwd=outer, check=True, env=a.clean_git_env())
+            subprocess.run(["git", "commit", "-q", "-m", "outer initial"],
+                            cwd=outer, check=True, env=a.clean_git_env())
+            outer_log_before = subprocess.run(
+                ["git", "log", "--oneline"], cwd=outer, capture_output=True, text=True,
+                check=True, env=a.clean_git_env()).stdout
+
+            old_env = dict(os.environ)
+            try:
+                # Simulate a git hook's environment: GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE
+                # pointing at the OUTER repo, as githooks/pre-commit's invocation of
+                # `make shiftcheck` (which runs this whole test file) would set.
+                os.environ["GIT_DIR"] = os.path.join(outer, ".git")
+                os.environ["GIT_WORK_TREE"] = outer
+                os.environ["GIT_INDEX_FILE"] = os.path.join(outer, ".git", "index")
+
+                fx = RepoGraphFixture(inner)
+                fx.add("Makefile", "")
+                fx.add_png("graphics/sub/hermetic.png", [[0] * 8 for _ in range(8)])
+                fx.commit()
+            finally:
+                os.environ.clear()
+                os.environ.update(old_env)
+
+            outer_log_after = subprocess.run(
+                ["git", "log", "--oneline"], cwd=outer, capture_output=True, text=True,
+                check=True, env=a.clean_git_env()).stdout
+            # The outer repo must be COMPLETELY untouched (still 1 commit, unchanged).
+            self.assertEqual(outer_log_before, outer_log_after)
+            self.assertEqual(len(outer_log_after.strip().splitlines()), 1)
+            # The inner fixture repo must have received the real commit.
+            inner_log = subprocess.run(
+                ["git", "-C", inner, "log", "--oneline"], capture_output=True, text=True,
+                check=True, env=a.clean_git_env()).stdout
+            self.assertIn("fixture", inner_log)
+            self.assertTrue(
+                os.path.exists(os.path.join(inner, "graphics", "sub", "hermetic.png")))
+            # And the outer repo must NOT have gained the fixture's files.
+            self.assertFalse(os.path.exists(os.path.join(outer, "graphics")))
 
 
 if __name__ == "__main__":
