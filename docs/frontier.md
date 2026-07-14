@@ -118,7 +118,8 @@ This snapshot supports a **candidate documentation handoff only**:
 - all current public gates above pass;
 - 1,452 FLOOR entries and the zero-size-symbol/`AnimSprite_*` extent blind spot
   are explicitly retained;
-- no D400/final closure verdict has been issued.
+- D400 records only the immutable-trailer metadata waiver; no final closure
+  verdict has yet been issued.
 
 An independent verifier and the sole integrator decide whether the evidence is
 sufficient to close issue #143. Do not label the issue final-MATCH from this
