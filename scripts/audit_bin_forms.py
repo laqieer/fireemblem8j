@@ -1064,13 +1064,13 @@ def emit(results, fe8u_bin_count, fe8j_bin_count):
 # --------------------------------------------------------------------------- #
 SELF_TEST_NOTES = [
     "`frontier_chap_title_*` **images** are classified **MISS** (chapter-title gfx → fe8u `.png`), not FLOOR; the chapter-title **string TSA** companion (`gChapterTitleStrTsa_jp` @ `0x08A92410`, `frontier_chap_title_115b_A92410.bin`) is a genuine **FLOOR** — a sparse BG-overlay tile-arrangement (fed to `CallARM_FillTileRect`), not pixel gfx, and fe8u keeps such TSA tilemaps binary (the pixel-gfx name-class MISS rule stays intact for real images).",
-    "`frontier_df4_misc_lo_*` is classified **MISS** (string pools → fe8u C literals), not FLOOR.",
+    "Raw `frontier_df4_misc_lo_*` string pools are classified **MISS** (→ fe8u C literals), not FLOOR; already-decoded pools such as `_004` must remain absent.",
     "`*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).",
     "`Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).",
     "`graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).",
-    "`graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2), EXCEPT the two RE'd-and-extracted TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` (issue #143), which are correctly **FLOOR** by the `.tsa.bin`-suffix rule (proven real ABS consumers in `src/sub_8021AFC.c` / `src/sub_8022200.c`).",
+    "Remaining raw `graphics/frontier_df4_uistuff/*` providers are classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2); the `SjisGlyphs_0859140C` run is typed and its raw provider must remain absent. The two RE'd TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` are correctly **FLOOR** by the `.tsa.bin`-suffix rule.",
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
-    "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
+    "The raw `gMPlayTable.bin` provider must remain absent because `sound/music_player_table.s` is the symbolic provider; its name-class rule remains **MISS** as a classifier regression guard.",
     "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",
     "Non-screen-length frontier BG-overlay **TSA tilemaps** (a u16 tile-attr array that is NOT a multiple of 32 B, dominated by the blank tile 0, ≤ 2 palettes — e.g. `gChapterTitleStrTsa_jp` / `frontier_chap_title_115b_A92410.bin`) are classified **FLOOR** by content (rule 0c), the companion to the 30×20 screen-tilemap rule (0b). Dense 4bpp pixel sheets (multiple of 32 B) can never match.",
     "**D337-correction (Rule 3b):** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable), not FLOOR. The historical mis-floored LZ class (`gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}`) has since been EXTRACTED to `graphics/**/*.tsa.bin` (issue #140) and is now fe8u-form-parity **FLOOR**; the rule remains as a fail-closed regression guard (helper-unit-tested below).",
@@ -1274,17 +1274,32 @@ def run_self_tests(by_path):
     def expect(substr, want_cat):
         matches = [p for p in by_path if substr in p]
         if not matches:
-            return  # not present in this checkout — skip silently
+            failures.append("expected at least one tracked .bin matching %r "
+                            "for category %s, but none was present"
+                            % (substr, want_cat))
+            return
         bad = [p for p in matches if by_path[p][1] != want_cat]
         if bad:
             failures.append("expected %s for %r, got %s (e.g. %s)"
                             % (want_cat, substr, by_path[bad[0]][1], bad[0]))
 
+    def expect_absent(path, reason):
+        if path in by_path:
+            failures.append("%s was reintroduced as a raw .bin -- %s"
+                            % (path, reason))
+
     # frontier_df4_misc_lo genuine SJIS string pools -> MISS (fe8u C literals).
     # But _015/_016 are LZ77-compressed TSA derivatives (`.lz` sibling, binary
     # tile-attr map, not text): a former false-MISS now correctly FLOOR via
     # rule 0d (`_is_lz_derivative_bin`). The raw string pools have no `.lz`.
-    expect("frontier_df4_misc_lo_004", "MISS")
+    expect_absent(
+        "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_004_0DEE88.bin",
+        "the SJIS string pool was decoded to .asciz/.byte source")
+    if not any(cat == "MISS" and "string literals" in proof
+               and rx.search("graphics/frontier_df4_misc_lo/x.bin")
+               for rx, cat, proof in NAME_CLASS_RULES):
+        failures.append("frontier_df4_misc_lo string-pool MISS name-class "
+                        "rule regressed")
     expect("frontier_df4_misc_lo_015", "FLOOR")
     expect("frontier_df4_misc_lo_016", "FLOOR")
     # frontier_chap_title PIXEL sheets are MISS (-> fe8u .png) and are all already
@@ -1306,8 +1321,11 @@ def run_self_tests(by_path):
     # issue #143: the two sub_8021AFC/Sub8022200 TSA companions were RE'd and
     # extracted to named `.tsa.bin` (real ABS consumers proven) -> correctly
     # FLOOR now (see the `.tsa.bin` FLOOR expect() above). Narrow bug #2's
-    # blanket UNCERTAIN assertion to the genuinely-still-unRE'd remainder.
-    expect("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", "UNCERTAIN")  # bug #2
+    # blanket UNCERTAIN assertion to the genuinely-still-unRE'd remainder. The
+    # 59140C provider is now typed Glyph[152], so its raw blob must stay absent.
+    expect_absent(
+        "graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin",
+        "SjisGlyphs_0859140C is the typed provider")
     expect("graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin", "FLOOR")  # #143
     expect("graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin", "FLOOR")  # #143
     # issue #143 menu coverage pass: the three genuine RE-complete residuals
@@ -1325,7 +1343,13 @@ def run_self_tests(by_path):
     expect("frontier_df4_menu_021_A95B4E.bin", "FLOOR")
     expect("frontier_df4_menu_027_A9D462.bin", "FLOOR")
     expect("graphics/banim/efx", "FLOOR")
-    expect("data/sound/gMPlayTable.bin", "MISS")
+    expect_absent(
+        "data/sound/gMPlayTable.bin",
+        "sound/music_player_table.s is the symbolic provider")
+    if not any(cat == "MISS" and "music_player_table.s" in proof
+               and rx.search("data/sound/gMPlayTable.bin")
+               for rx, cat, proof in NAME_CLASS_RULES):
+        failures.append("gMPlayTable MISS name-class rule regressed")
     # D326: verified 30x20 u16 banim screen tilemaps -> FLOOR (fe8u keeps binary)
     expect("frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin", "FLOOR")
     # D337-correction (Rule 3b compressed-vs-decompressed fix) — POST-EXTRACTION.

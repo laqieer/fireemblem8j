@@ -34,8 +34,8 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
 | **FLOOR** | 1448 | 99.5% |
-| **UNCERTAIN** | 8 | 0.5% |
-| **TOTAL** | 1456 | 100.0% |
+| **UNCERTAIN** | 7 | 0.5% |
+| **TOTAL** | 1455 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -53,7 +53,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 8 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 7 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -79,13 +79,13 @@ genuine FLOOR — all asserted by the self-test guards below).
 **Self-test guards** (the script exits non-zero if any fail):
 
 - `frontier_chap_title_*` **images** are classified **MISS** (chapter-title gfx → fe8u `.png`), not FLOOR; the chapter-title **string TSA** companion (`gChapterTitleStrTsa_jp` @ `0x08A92410`, `frontier_chap_title_115b_A92410.bin`) is a genuine **FLOOR** — a sparse BG-overlay tile-arrangement (fed to `CallARM_FillTileRect`), not pixel gfx, and fe8u keeps such TSA tilemaps binary (the pixel-gfx name-class MISS rule stays intact for real images).
-- `frontier_df4_misc_lo_*` is classified **MISS** (string pools → fe8u C literals), not FLOOR.
+- Raw `frontier_df4_misc_lo_*` string pools are classified **MISS** (→ fe8u C literals), not FLOOR; already-decoded pools such as `_004` must remain absent.
 - `*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).
 - `Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).
 - `graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).
-- `graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2), EXCEPT the two RE'd-and-extracted TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` (issue #143), which are correctly **FLOOR** by the `.tsa.bin`-suffix rule (proven real ABS consumers in `src/sub_8021AFC.c` / `src/sub_8022200.c`).
+- Remaining raw `graphics/frontier_df4_uistuff/*` providers are classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2); the `SjisGlyphs_0859140C` run is typed and its raw provider must remain absent. The two RE'd TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` are correctly **FLOOR** by the `.tsa.bin`-suffix rule.
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
-- `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
+- The raw `gMPlayTable.bin` provider must remain absent because `sound/music_player_table.s` is the symbolic provider; its name-class rule remains **MISS** as a classifier regression guard.
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 - Non-screen-length frontier BG-overlay **TSA tilemaps** (a u16 tile-attr array that is NOT a multiple of 32 B, dominated by the blank tile 0, ≤ 2 palettes — e.g. `gChapterTitleStrTsa_jp` / `frontier_chap_title_115b_A92410.bin`) are classified **FLOOR** by content (rule 0c), the companion to the 30×20 screen-tilemap rule (0b). Dense 4bpp pixel sheets (multiple of 32 B) can never match.
 - **D337-correction (Rule 3b):** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable), not FLOOR. The historical mis-floored LZ class (`gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}`) has since been EXTRACTED to `graphics/**/*.tsa.bin` (issue #140) and is now fe8u-form-parity **FLOOR**; the rule remains as a fail-closed regression guard (helper-unit-tested below).
@@ -1557,9 +1557,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (8) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (7) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>8 entries</summary>
+<details><summary>7 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1568,7 +1568,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_tail_B3AFF4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 
