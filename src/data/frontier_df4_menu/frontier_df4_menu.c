@@ -8990,4 +8990,4 @@ u8 frontier_df4_menu_039_AC00A8_10[] __attribute__((section(".data.frontier_df4_
 u32 frontier_df4_menu_039_AC00A8_11[] __attribute__((section(".data.frontier_df4_menu.gap39"))) = {
     (u32)&frontier_df4_menu_038_ABCD24_1,
 };
-u8 frontier_df4_menu_039_AC00A8_12[] __attribute__((section(".data.frontier_df4_menu.gap39"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin", 0x1D0, 0x11C);
+u8 frontier_df4_menu_039_AC00A8_12[] __attribute__((section(".data.frontier_df4_menu.gap39"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin", 0x1D0, 0xC4);

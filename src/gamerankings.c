@@ -5,6 +5,36 @@
 #include "bmunit.h"
 #include "bmsave.h"
 
+/* Overall/sub-rank weight+threshold lookup tables (issue #143 menu pass), ROM
+ * 0x08AC033C..0x08AC0394, ported byte-identical from fe8u's own
+ * src/gamerankings.c (region-same values; D34 previously noted the inter-table
+ * SPACING differs JP<->US, so these were bound individually as ABS baseline
+ * symbols -- layout/baseline_syms.d/data_gamerankings_tables.tsv, now fully
+ * superseded and deleted). Pinned to their own section (own object, own
+ * manifest row in layout/carved_rom.d/data_frontier4_df4_menu.tsv) carved out
+ * of frontier_df4_menu_039_AC00A8_12's raw tail; natural compiler alignment
+ * inserts the JP's 1-B zero pad between each u8[N][5] and the following u16[]
+ * (verified byte-exact via make compare). */
+u8 gOverallRankWeightLookup[5][5] __attribute__((section(".data.frontier_df4_menu.gap39_ranks"))) = {
+    { 40, 80, 120, 160, 200 },
+    { 15, 35, 55, 75, 100 },
+    { 0, 20, 40, 60, 80 },
+    { 0, 20, 40, 60, 80 },
+    { 10, 30, 50, 70, 90 },
+};
+u16 gOverallRankLookup[6] __attribute__((section(".data.frontier_df4_menu.gap39_ranks"))) = { 100, 200, 300, 450, 550, 550 };
+u8 gGamerankings_0[3][5] __attribute__((section(".data.frontier_df4_menu.gap39_ranks"))) = {
+    { 40, 80, 120, 160, 200 },
+    { 15, 35, 55, 75, 100 },
+    { 10, 30, 50, 70, 90 },
+};
+u16 gGamerankings_1[6] __attribute__((section(".data.frontier_df4_menu.gap39_ranks"))) = { 65, 125, 225, 305, 390, 390 };
+u8 gGamerankings_2[2][5] __attribute__((section(".data.frontier_df4_menu.gap39_ranks"))) = {
+    { 10, 20, 30, 40, 50 },
+    { 10, 30, 60, 90, 150 },
+};
+u16 gGamerankings_3[6] __attribute__((section(".data.frontier_df4_menu.gap39_ranks"))) = { 60, 80, 120, 150, 200, 200 };
+
 u16 GetGameDeathCount(void);
 u16 GetGameWinPerc(void);
 u16 GetChapterDeathCount(void);
