@@ -1,9 +1,10 @@
 # fe8u→fe8j asset-form alignment gap (#145 step-1 itemized checklist)
 
-> Single source of truth for the #145 form-alignment frontier. Split into
-> **B1 (shiftability-critical, pointer-bearing)** and **B2 (editability-only)**.
-> Regenerate the numbers from the live ELF + fe8u pointer oracle (see method).
-> Keep `make compare` OK + `make shiftcheck` 0 HIGH on every carve.
+> **HISTORICAL #145 SNAPSHOT (2026-07-04), NOT CURRENT WORK AUTHORITY.**
+> This checklist preserves the step-1 evidence and grouping used at that time.
+> [`docs/frontier.md`](frontier.md) is the sole current work frontier, and
+> [`docs/bin_audit.md`](bin_audit.md) is the current binary-form inventory.
+> The historical counts below must not be used for dispatch.
 
 ## Method / why `make shiftcheck` under-reports (the D345/D346 false floor)
 `audit_pointers.py --true-debt --gate` = 1 (0 real) is a **false floor**: raw-hex
@@ -14,8 +15,10 @@ un-relocated-word scan cross-checked against the fe8u relocation oracle
 (`scripts/fe8u_ptr_offsets.py:fe8u_ptr_at_jp`): a word is a **real** pointer iff
 fe8u relocates the corresponding JP address (vs a coincidental data/pixel constant).
 
-Audit baseline (2026-07-04): `audit_bin_forms.py` → MISS=3 / FLOOR=1401 /
-UNCERTAIN=222; `calcprogress.py` axis 3/6 → 99.31% extracted, 96,516 B opaque.
+Historical audit baseline (2026-07-04): `audit_bin_forms.py` → MISS=3 /
+FLOOR=1401 / UNCERTAIN=222; `calcprogress.py` axis 3/6 → 99.31% extracted,
+96,516 B opaque. The current repository-wide binary-form audit is maintained
+in `docs/bin_audit.md`; this dated baseline is retained only as evidence.
 Per-symbol fe8u-oracle scan → 207 symbols with signal, 874 real pointer words.
 
 ## Summary

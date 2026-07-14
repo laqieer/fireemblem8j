@@ -13502,3 +13502,27 @@ actionable binary-form closure residuals, not zero opaque/FLOOR debt. Full
 cold compare, shiftcheck, graphics, dependency/layout/self-contained,
 bin-form/asm-in-C, and exact range/relocation checks are the serial
 integration gate. Issue #143 remains open.
+
+## D400 — preserve fast-forward history and waive two malformed trailer parses (#143, 2026-07-14)
+
+The final independent closure audit found that documentation commits
+`88161bbcd0163db8d4cc934b0630c2510002634f` (D397) and
+`a8a30bf363f6c2eededaea538f2119303593bf69` (D398) contain the intended
+`Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>` text,
+but a blank line separates it from the final trailer block, so
+`git interpret-trailers --parse` recognizes only their `Copilot-Session`
+trailers.
+
+Rewriting those already-pushed commits would require replacing the
+fast-forward `main` history, contrary to branch protection and the established
+no-amend/no-force-push workflow. The repository therefore preserves both
+commits byte-for-byte and records this explicit metadata waiver instead. This
+does not waive trailers prospectively: D399 replayed malformed worker commits
+with contiguous, correctly parsed trailer blocks, and every closure/status
+follow-up through this decision also parses both required trailers.
+
+The defect is metadata-only: the two commits' content, authorship text,
+independent MATCH evidence, cold build/shiftcheck results, and exact-SHA CI
+remain unchanged. This waiver is specific to the two immutable historical
+commits and is not precedent for omitting or malformed trailers in future
+work.
