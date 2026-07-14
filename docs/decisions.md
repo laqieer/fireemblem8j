@@ -11463,7 +11463,7 @@ end-to-end by parsing the (N-1,M-1) header-pair formula from offset 0 to EOF:
 the sole consumer (`soundroom.c:89`) reads only the leading 30B (14x1)
 record; the remaining 370B parses cleanly as 25 more concatenated one-row TSA
 records (1x1/17x1/18x1/15x1, then 15 records of 5x1/6x1 spanning
-`0x08C..0x156`, then 6 records of 3x1 spanning `0x15C..0x18C`) plus a final
+`0x08C..0x15C`, then 6 records of 3x1 spanning `0x15C..0x18C`) plus a final
 4B `03 00 00 00` that is a truncated 4x1 header with no room for its data
 (file just ends) -- confirmed programmatically, matching the recipe's
 evidence exactly. Cross-checked against the fe8u oracle (local read-only
