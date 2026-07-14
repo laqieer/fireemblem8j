@@ -13163,3 +13163,51 @@ gate run). `make shiftcheck` -> PASS, 0 HIGH suspects, across all sub-gates
 cross-resource offsets, shiftable-region suspects). `check_incbin_deps.py` /
 `check_layout.py` -> OK. `git diff --check` clean. Issue #143 remains open;
 `main` was not merged; no force-push occurred.
+
+## D394 — fix blob017 headerless-map source contract at the naming boundary (issue #143 menu lane) (2026-07-14)
+
+**Scope.** Direct fix for the one real finding from the D393 throwaway
+simulation: main's `graphicscheck` gate (`scripts/audit_graphics_forms.py`,
+not owned by this lane) flagged
+`graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90_tsa.tsa.bin` as
+matching neither its "exact" nor "+2-trailing-zero" standard-TSA forms. Per
+the verifier's correction, this was a genuine **source naming** defect, not
+a checker gap to route around: the file's `.tsa.bin` suffix implies a
+headered standard-TSA payload (width/height bytes + `w*h` entries), but the
+actual decompressed content is a **headerless** raw BG screen tilemap (432
+`u16` tile-attr entries, 864 B, no dimension header at all --
+`sub_801FAA0` hardcodes the 24x18 grid itself). The repository already has a
+generic, structurally-discovered `*_map.bin`/`*.map.bin` family for exactly
+this shape (`scripts/audit_graphics_forms.py`'s `check_map_bin`, used by
+e.g. `graphics/gfx_data_bg/bg_Cell_map.bin`), so the fix is to rename to
+that convention rather than add a named exception to the graphics gate
+(which the verifier explicitly ruled out, and which this lane does not own
+anyway).
+
+**Fix.** `git mv
+graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90_tsa.tsa.bin
+graphics/frontier_df4_menu/Tsa_ChapterIntroCrestJp_map.bin` (matching the
+already-established `Tsa_ChapterIntroCrestJp` C array name this source
+feeds). Regenerated the LZ-compressed build output
+(`Tsa_ChapterIntroCrestJp_map.bin.lz`, gitignored/generated, gbagfx default
+flags -- the old `.lz` was never tracked either) and confirmed via
+`make compare` that it reproduces the exact 0x360 B decompressed / 552 B
+compressed bytes that were already proven byte-exact in earlier Phase A
+work. Updated the sole `INCBIN_U8` reference in
+`src/data/frontier_df4_menu/frontier_df4_menu.c` and its descriptive
+comment to explain the headerless-map rationale and point at the
+`*_map.bin` convention explicitly (so a future reader does not repeat the
+`.tsa.bin` naming mistake). Regenerated `layout/data_incbin_deps.mk` and
+`docs/bin_audit.md` (auto-generated; the old filename's stray references
+there were mechanical, not manual edits).
+
+**Verification.** `make clean && make compare` -> `fireemblem8.gba: OK` (sha1
+`7da0456035366aa18414faa79d8fe7649f03c1ed`) via a genuine from-scratch
+rebuild after the rename. `scripts/gen_layout.py` -> 0 baseline gaps,
+100.0000% decompiled (zero gaps/overlaps/duplicates across the full owned
+ROM range, reconfirmed for all 14 blobs). `make shiftcheck` -> PASS, 0 HIGH
+suspects. `scripts/check_incbin_deps.py` / `scripts/check_layout.py` /
+`scripts/check_selfcontained.py` -> OK. `git diff --check` clean. No other
+tracked or generated file referenced the old filename outside the two
+auto-regenerated ones. Issue #143 remains open; `main` was not merged; no
+force-push occurred.
