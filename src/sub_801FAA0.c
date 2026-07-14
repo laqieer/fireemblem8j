@@ -2,7 +2,7 @@
 #include "hardware.h"
 #include "bmlib.h"
 
-extern const u8 gUnknown_08A7AE50[];
+extern const u8 Tsa_ChapterIntroCrestJp[];
 extern u16 gUnknown_02001F72[];
 
 void sub_801FAA0(void)
@@ -19,7 +19,7 @@ void sub_801FAA0(void)
 
     i = 0;
     BG_Fill(gBG2TilemapBuffer, 0);
-    Decompress(gUnknown_08A7AE50, gUnknown_02001F72);
+    Decompress(Tsa_ChapterIntroCrestJp, gUnknown_02001F72);
 
     row = 0;
     dstBase = gBG2TilemapBuffer;

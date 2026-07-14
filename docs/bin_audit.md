@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1416 | 97.9% |
-| **UNCERTAIN** | 30 | 2.1% |
-| **TOTAL** | 1446 | 100.0% |
+| **FLOOR** | 1416 | 98.0% |
+| **UNCERTAIN** | 29 | 2.0% |
+| **TOTAL** | 1445 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -53,7 +53,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 30 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 29 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1525,9 +1525,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (30) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (29) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>30 entries</summary>
+<details><summary>29 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1544,7 +1544,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | ApConf/opaque | RE-complete (395 B floor, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers; JP-divergent, no fe8u twin, DEFERRED (D362) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
