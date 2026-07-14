@@ -1,5 +1,16 @@
 @ Descriptive assembly extracted from inline __asm__ + gap5 INCBIN global in frontier_df4_menu.c (#152).
 @ Interleaved .incbin + non-4-aligned .4byte function pointers; byte-exact via make compare.
+@
+@ gap5 (frontier_df4_menu_005_A5FFAD, ROM 0x08A5FFAD..0x08A60138, 0x18B=395 B) is the true
+@ floor: layout/carved_rom.d/data_frontier4_df4_menu.tsv's own gap5 row proves the ROM gap
+@ ends at 0x08A60138, where already-carved ProcScr_menu148_ref (ProcScr_EventHorizontalQuakefx
+@ etc.) picks up. The tracked frontier_df4_menu_005_A5FFAD.bin used to be over-extracted to
+@ 587 B (trailing 192 B duplicating that already-carved quakefx tail); trimmed to the true
+@ 395 B (issue #143 menu re-audit). RE-complete: a GameOver-sequence proc-script-like leaf,
+@ interleaved raw counts/fields + 8 already-relocated ARM function pointers, heavily
+@ cross-referenced base+offset from ~80 chapter Events_ref/MapChanges_ref tables (the
+@ earlier "MapChanges" label itself was refuted). No further typed structure is discernible
+@ without inventing semantics for the un-pointered raw fields; kept as an honest floor.
 
 	.section .data.frontier_df4_menu.gap5, "aw", %progbits
 	.global frontier_df4_menu_005_A5FFAD
