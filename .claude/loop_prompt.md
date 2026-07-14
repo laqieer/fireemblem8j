@@ -9,31 +9,17 @@ data; every pointer is a relocated symbol reference). Signal completion ONLY whe
 all six axes (`scripts/calcprogress.py`) are met, by outputting the promise
 phrase `FE8J_FINAL_GOAL_DONE`.
 
-## CURRENT PRIORITY FRONTIER — fe8u-STYLE TYPED ASSET EXTRACTION (axes #5+#6 together, D306)
+## Current priority frontier
 
-**Axis #5 is NOT complete (D305 "gate=0" RETRACTED by D306).** The inline-asm
-`__asm__ { .4byte sym }` de-pointering (relocated 7,639 → 14,383) was a byte-exact
-*interim patch*, not the real goal, and it left blind spots: (a) **364 real pointers
-stuck in `.4byte 0x08xxxxxx` literals** in __asm__ blocks (`audit_pointers.py
---true-debt --gate` now counts them), and (b) **pointers inside COMPRESSED data**
-(Huffman text, LZ77 banim/gfx) that no `0x08`-word scan can see and no `.4byte` can fix.
+Read [`docs/frontier.md`](../docs/frontier.md) at the start of every iteration and
+select work exclusively from that file. Board queues, generated classification
+caches, and dated plans are supporting evidence only unless the frontier links
+them explicitly.
 
-**The correct approach (user-directed): extract each region to its proper fe8u asset
-type, NOT inline-asm.** Pointers then become symbolic by construction (shiftable) AND
-the data is editable AND compressed assets work (re-compressed from source). Most assets
-are SHARED with fe8u → reuse/re-point; the main JP-specific delta is **text** (text-id
-offset + UI localization). Per type:
-- **Text**: fe8u message-text system (JP Huffman `CompressedText_MSG` + `gMsgHuffmanTable`).
-- **Graphics**: `.4bpp`/`.gbagfx` (LZ77 at build), reuse fe8u.
-- **Battle-anim scripts**: fe8u `banim/` (`animscr_*.s`, `banim_*_modes.bin`, `*_motion`).
-  JP has 224 raw `AnimScr_*`/`AnimSpr_*` blobs to extract this way.
-- **Maps / music / SFX**: fe8u map data / m4a song data.
-
-Method: for each region, identify its TYPE + fe8u counterpart (check `../fireemblem8u`),
-extract/re-point to the fe8u asset (decompress compressed ones), keep `make compare` OK.
-The two HARD RULES still hold (D299: edit LINKED source, verify via the LINKER; D297:
-fe8u is the correctness gate). Also retire the 364 stuck-literal real pointers as their
-tables get properly typed. See `docs/frontier.md` + the `data-extractor` agent.
+The D306 axes #5/#6 typed-asset campaign and its pointer/blob counts were a
+historical execution phase. Its durable methodology remains valid—prefer typed,
+editable source and symbolic relocations over opaque inline assembly—but its
+counts and queues must not be used for current dispatch.
 
 ## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
 
@@ -57,12 +43,10 @@ agents are low-yield, and which carve levers are EXHAUSTED. Then:
 
 ## Each iteration: ONE small verifiable increment
 
-1. **Pick the next task.** Read the board (`gh project view 3 --owner laqieer`,
-   issues #14 grind TUs in ROM order, #15 extend layout coverage) and
-   `docs/porting.md`. Normally: the next translation unit in US ldscript ROM
-   order (`../fireemblem8u/ldscript.txt`). If TUs are blocked on unmapped
-   symbols, instead extend coverage with `scripts/match_us_jp.py` /
-   `scripts/data_addr_map.py`.
+1. **Pick the next task.** Read `docs/frontier.md` and take the next task only
+   from its current target list. Consult the project board, `docs/porting.md`,
+   generated caches, and the US ldscript only as supporting material for that
+   selected frontier task; none is an independent queue.
 
 2. **Do the work** using **per-function-run porting** (decision D1 in
    `docs/decisions.md`) — NOT whole-file. Whole-file porting is done for the easy

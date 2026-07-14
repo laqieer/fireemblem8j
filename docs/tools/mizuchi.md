@@ -167,8 +167,9 @@ coordinator to run on a full checkout with the toolchain + API key present.
 ### Where it overlaps (and why ours is currently stronger)
 - **Claude-drives-decomp** is exactly what our headless loop already does — but
   ours is grounded by **IDA Hex-Rays + Ghidra pseudo-C of the actual JP ROM**
-  (`docs/reverse-engineering.md`), which is decisive for the ~16 genuinely
-  **region-different** functions that are all that's left of the *code*. Mizuchi's
+  (`docs/reverse-engineering.md`), which was decisive for the historical
+  ~16-function region-different snapshot used in this evaluation. Current code
+  scope belongs exclusively to [`docs/frontier.md`](../frontier.md). Mizuchi's
   Claude Runner gets only the asm + a context header and a `compile_and_view_assembly`
   tool — no decompiler pseudo-C, no JP-vs-US diff. For region-different work that's
   a weaker starting point than what we already have.

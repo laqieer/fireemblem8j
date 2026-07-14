@@ -137,11 +137,13 @@ just relink US source), use m2c to bootstrap the JP version:
 > Note: `fireemblem8.elf` is a build artifact (gitignored). Build it first
 > (`make`) so the objdump step has an ELF to read.
 
-## First-pass pipeline (P0.4): asm → readable NON_MATCHING C, automated
+## Historical first-pass pipeline (P0.4): asm → readable NON_MATCHING C
 
-The manual workflow above is now wrapped as the **default first pass** over the
-gbadisasm-carved region-different front (D24) — turning each carved `asm/<fn>.s`
-into a readable C first-draft that lands in the D26 staging tier
+The manual workflow above was wrapped as the **default first pass** over the
+historical gbadisasm-carved region-different front (D24). The resulting command
+inventory is a staging cache, not the current work queue; invoke it only for a
+target selected from [`docs/frontier.md`](../frontier.md). It turns a selected
+carved `asm/<fn>.s` into a readable C first-draft that lands in the D26 staging tier
 `src/nonmatching/<fn>.c` (NON-oracle; compiled only by `make nonmatching`),
 named/typed from the funclib US correspondence (D25).
 
@@ -157,7 +159,7 @@ scripts/m2c_firstpass.py --batch N --dry-run   # report the yield without writin
 1. **Pick the name.** Reads the carved asm's `@ JP 0x…` banner, looks the JP
    address up in `reference/maps/funclib_us_jp.tsv`, and takes
    `us_name_current`. Candidates are `asm/<fn>.s` that also have a funclib name;
-   `new-hint` rows (the region-different queue) come first, then
+   `new-hint` rows (the historical region-different inventory) come first, then
    `funcmap-agree`; `funcmap-disagree` (the quarantined ~0.6%) is skipped.
 2. **Clean the asm for m2c.** Drops the de-symbolization `.set SYM, 0xADDR`
    lines and the `_08xxxxxx: .4byte …` literal-pool definitions. m2c's
@@ -234,10 +236,12 @@ A landed seed **compiles and is readable**, but is **not** finished C:
 The seed's purpose is to **bootstrap** the readable body and feed the permuter,
 not to be final source — see the graduation path in `docs/nonmatching.md`.
 
-### Scaling next steps
+### Historical scaling notes
 
-- The pipeline is verify-or-skip per function, so `--batch N` runs unattended
-  over the 353-candidate backlog (and grows as more `asm/<fn>.s` are carved).
+- At the P0.4 pilot snapshot, the pipeline was verify-or-skip per function and
+  `--batch N` could run unattended over a 353-entry candidate cache. That count
+  is historical; current candidates must come exclusively from
+  [`docs/frontier.md`](../frontier.md).
 - The dominant skip cause (literal-pool typing) is the same **D24** gap the
   permuter/funclib-port step closes; pairing the seed with the named US source
   (D25) is the strongest hand-clean accelerant.

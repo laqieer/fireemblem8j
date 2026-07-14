@@ -118,8 +118,9 @@ unsolved patterns above (provisional — mark UNSOLVED, not DEADEND) and genuine
 region-different behavior (different US source).
 
 ## 7. agbcc reg-alloc FLAG MATRIX does NOT crack the spill-decision NEAR class (D284, tested)
-The remaining ~42 Thumb NEARs (Event18_ColorFade 800E1FC, AdjustNewUnitPosition 807C8DC, 80CAEF4, 806A41C,
-800A34C/594, 80A2E64/3528, etc.) are byte-CLOSE reconstructs whose only residual is agbcc choosing a different
+At the historical D284 test snapshot, ~42 Thumb NEARs (Event18_ColorFade 800E1FC,
+AdjustNewUnitPosition 807C8DC, 80CAEF4, 806A41C, 800A34C/594, 80A2E64/3528, etc.)
+were byte-CLOSE reconstructs whose only residual was agbcc choosing a different
 register-allocation / SPILL decision than the JP ROM's original build (e.g. JP anchors proc to ip + spills 2
 color locals to stack; agbcc-here pins proc to a callee-saved r7 + spills 1). HYPOTHESIS tested: a per-TU agbcc
 optimization flag controls this. RESULT (Event18_ColorFade, 204B, base residual 95 differing bytes): NONE of the
