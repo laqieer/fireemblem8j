@@ -13395,3 +13395,37 @@ exactly once, both OK), `scripts/check_incbin_deps.py` /
 TOTAL1456**; simulation worktree/branch removed afterward, nothing pushed
 from it. Issue #143 remains open; `main` was not merged; no amend/rebase/
 force-push occurred.
+
+**Integrator's real (non-simulated) confirmation.** The actual integration
+onto `origin/main`'s D388 tip reproduced every prediction above exactly:
+`docs/bin_audit.md` regenerated to **MISS=0 FLOOR=1448 UNCERTAIN=8
+TOTAL=1456**, zero menu-path UNCERTAIN entries; `make clean && make compare`
+-> `fireemblem8.gba: OK` (`graphicscheck: OK, zero defects`); `make
+shiftcheck` exit 0 with **96 graphics + 106 shiftcheck tests**, each running
+exactly once. Three cross-lane counts legitimately rose from this lane's own
+new/typed content (all explained, none weakening a gate):
+- D380's ptraudit ROM ABS32 total rose **59,516 -> 59,523** (+7, from the
+  new EventScr world-map/lookup/shop/gamerankings relocations this lane
+  types); FUNC targets (5,678), function-interior (0), and header-domain (0)
+  false relocations are all unchanged.
+- D388's ProcCmd audit `unique_non_null_pointer_slots`/`unique_relocated`
+  rose **4,701 -> 4,706** (+5, prefixes 994->995, records 7,772->7,779);
+  `gProcScr_ShopFadeIn` (the menu-037-shop fix) moves from the honest
+  zero-size-unrecovered inventory into `zero_size_recovered` (unrecovered
+  count 9->8) -- 0 missing/malformed either before or after.
+- D382's graphics `reloc_payload_incbin_names_declared`/`_linked` fell
+  **5,508 -> 5,478** (-30, still 0 unlinked/0 overlap violations): this
+  lane converted many `graphics/frontier_df4_menu/*` raw INCBIN payload
+  names into typed C arrays (SpriteEx tables, EventScr, lookup tables,
+  shop/gamerankings data) that no longer count as generic payload INCBIN
+  names, exactly the intended effect of typing raw assets. `map_bin_total`
+  rose **1,061 -> 1,062** (+1, the new `Tsa_ChapterIntroCrestJp_map.bin`).
+  `reloc_animsprite_names_total` (2,346) and `reloc_payload_overlap_violations`
+  (0) are unaffected. D383's glyph gate (system 1488/1488/1488/0, talk
+  2085/2085/2085/0) and D378's opaque self-ref gate (8 resolved/267 hit
+  words/0 unresolved, gate 0; 1,075 zero-size skipped, 865 `AnimSprite_*`)
+  are both unaffected by this lane.
+`scripts/check_incbin_deps.py`, `scripts/check_layout.py` (8,220
+layout-referenced objects, all git-tracked), `scripts/check_selfcontained.py`
+(100.00%, 0 baserom incbins) all pass; `git diff --check` and final
+`git status` are clean.
