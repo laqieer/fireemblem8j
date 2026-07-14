@@ -33,8 +33,8 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1434 | 98.5% |
-| **UNCERTAIN** | 22 | 1.5% |
+| **FLOOR** | 1448 | 99.5% |
+| **UNCERTAIN** | 8 | 0.5% |
 | **TOTAL** | 1456 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
@@ -42,18 +42,18 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
 | battle-anim | MISS | 0 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 1 | fe8u graphics/**/*.png |
+| pixel-gfx | MISS | 4 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 0 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 0 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 0 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1284 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1295 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 22 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 8 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1434) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1448) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1434 entries</summary>
+<details><summary>1448 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1090,6 +1090,20 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/frontier_df4_ending_007_s1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_ending/gTsa_DfEnding008.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_ending/gUnk_08AC718C.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/Tsa_ChapterIntroCrestJp_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/Tsa_ChapterStatusUi.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/Tsa_CommGameBgScreenInShop.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/Tsa_DifficultyMenuObjs.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/Tsa_MainMenuBgFog.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/UnusedMusicSelectTsa3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head_tsa.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B combined file): two disjoint live spans (gap21 head + gap21c interior) concatenated, every non-pointer byte a proven ProcCmd/SpriteEx field, all 9 interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (342 B, trimmed from a 1012 B combined file): two disjoint live spans (gap27 head + gap27c interior) concatenated, every non-pointer byte a proven ProcCmd field, all interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
 | `graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
@@ -1543,9 +1557,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (22) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (8) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>22 entries</summary>
+<details><summary>8 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1554,20 +1568,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | ApConf/opaque | RE-complete: proc-script leaf (the earlier 'MapChanges' label was refuted); JP-divergent, no fe8u twin, DEFERRED (D362) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_030_AA71D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_tail_B3AFF4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
