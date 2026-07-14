@@ -16,10 +16,18 @@ re-derived directly from tools/gbagfx + scripts/gfxtools/tsa_generator.py.
 
 Never touches baserom.gba. Wired as `graphicscheck` in the Makefile, which
 `compare` depends on (see Makefile) so it always runs against a fresh,
-fully-built tree -- never racing the asset-generation rules.
+fully-built tree -- never racing the asset-generation rules. An OPTIONAL,
+heavier companion check (--relocs-check, Makefile `graphicscheck-relocs`,
+folded into `make shiftcheck` rather than `compare` -- see the big comment
+above graphicscheck-relocs there) additionally verifies that no R_ARM_ABS32
+relocation SLOT lands inside a pure graphics/palette/TSA/map/FETSA payload or
+AnimSprite_* animation-command array, using the shiftability harness's
+already-built --emit-relocs ELF (also baserom-independent).
 
 Usage:
     python3 scripts/audit_graphics_forms.py [--root ROOT]
+    python3 scripts/audit_graphics_forms.py --relocs-check \
+        --elf fireemblem8.elf --relocs-elf fireemblem8_relocs.elf
 
 Exits 0 and prints exhaustive coverage counts with zero defects, or exits 1
 and prints every offender (including anything that falls into an "unknown"
@@ -27,6 +35,7 @@ classification bucket -- an unclassifiable asset is a HARD FAILURE, not a
 silent skip).
 """
 import argparse
+import bisect
 import os
 import re
 import struct
@@ -38,11 +47,17 @@ from PIL import Image
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_ROOT = os.path.dirname(SCRIPT_DIR)
 
-# Named, reasoned exceptions to the two `.tsa.bin` size formulas (docs/decomp_agent_playbook.md
-# lever: "3 native CallARM_FillTileRect .tsa.bin exceptions"). These use a still-unreverse-engineered
-# convention distinct from both the dimensioned-header and dimensioned-header+trailing-zero-word
-# forms. This set must stay EXACTLY these 3 paths until separate RE resolves them -- both a missing
-# and an extra path are audit failures (drift guard).
+# Named, reasoned exceptions to the two `.tsa.bin` size formulas. These are NOT a
+# third "native TSA format" -- TmApplyTsa (the consumer) is the standard TSA
+# reader; these 3 files are TEMPORARY MULTI-RESOURCE CONTAINER DEBT: each packs
+# more than one resource after the header (a dedicated segmentation RE effort is
+# tracked separately to split them into their constituent single-resource TSAs).
+# Until that split lands, they cannot satisfy either size formula and must stay
+# explicit, reasoned exceptions -- both a missing and an extra path are audit
+# failures (drift guard). This exception list is deliberately isolated (its own
+# frozenset, checked first, no other logic branches on it) so a future asset
+# branch can delete entries here the moment each file is split/re-classified,
+# without touching the two real size-formula checks.
 TSA_NAMED_EXCEPTIONS = frozenset({
     "graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin",
     "graphics/misc/gMenuSoundroom_4.tsa.bin",
@@ -319,13 +334,64 @@ def check_png_basic(path):
 # ConvertToTiles4Bpp + the invertColors semantics for non-palette (L-mode) images)
 # --------------------------------------------------------------------------
 
+def read_png_ihdr(path):
+    """Return (width, height, bit_depth, color_type) parsed directly from the
+    PNG's IHDR chunk (independent of Pillow, which RESCALES low-bit-depth
+    grayscale samples to the full 0-255 range for display -- see
+    read_grayscale_index() below for why that matters)."""
+    with open(path, "rb") as f:
+        header = f.read(33)
+    if header[:8] != b"\x89PNG\r\n\x1a\n" or header[12:16] != b"IHDR":
+        raise ValueError("not a PNG or missing leading IHDR chunk")
+    w, h = struct.unpack(">II", header[16:24])
+    bit_depth = header[24]
+    color_type = header[25]
+    return w, h, bit_depth, color_type
+
+
+def read_grayscale_index(pillow_value, bit_depth):
+    """Recover the RAW on-disk grayscale sample gbagfx's libpng-based reader
+    would see, from Pillow's already-decoded 'L'-mode pixel value.
+
+    Pillow decodes low-bit-depth (color_type 0) grayscale PNGs by RESCALING
+    each N-bit sample to the full 0-255 range (multiplying by 255 // (2**N - 1))
+    for display purposes -- e.g. a 4-bit sample of 7 is exposed as pixel value
+    7 * 17 = 119, NOT 7. gbagfx's ReadPng, by contrast, does NO such rescale: it
+    only converts bit depth via ConvertBitDepth() when the PNG's own on-disk
+    bit_depth differs from the TARGET asset's bit depth (4 for our generic
+    4bpp chain); when they already match (bit_depth == 4), the raw 0-15 sample
+    is used completely as-is.
+
+    Confirmed against the real tracked tree (2026-07-13 audit closure): of the
+    1,393 tracked L-mode PNGs, 1,389 are on-disk bit_depth 4 (need the /17
+    un-rescale below) and 4 are on-disk bit_depth 8 (gbagfx's ConvertBitDepth
+    degenerates to a same-size `srcByte % 16` mask there, which is exactly
+    `pillow_value & 0xF` since Pillow does not rescale 8-bit samples at all).
+    """
+    if bit_depth == 4:
+        if pillow_value % 17 != 0:
+            raise ValueError(
+                f"grayscale pixel value {pillow_value} is not an exact multiple of "
+                f"17 -- not a clean 4-bit sample Pillow's rescale-by-17 can be "
+                f"un-done for (malformed/lossy L-mode source?)")
+        return pillow_value // 17
+    if bit_depth == 8:
+        return pillow_value & 0xF
+    raise ValueError(
+        f"unhandled grayscale PNG bit depth {bit_depth} for the 4bpp tile audit "
+        f"(only 4 and 8 are currently used by any tracked asset -- extend "
+        f"read_grayscale_index() before trusting this asset)")
+
+
 def png_to_tiles_4bpp(path, num_tiles=None):
     """Compute the exact bytes gbagfx's `%.4bpp: %.png` rule would produce:
     tile order is row-major over 8x8 tiles (top-to-bottom, left-to-right);
     within a tile, 8 rows top-to-bottom, each row packed 2 pixels/byte (low
     nibble = even x, high nibble = odd x). L-mode (non-palette) images have
     their index INVERTED (value' = 15 - value) -- gbagfx's `invertColors =
-    !hasPalette`. If num_tiles is given, only that many tiles (in the same
+    !hasPalette` -- applied AFTER recovering the raw grayscale index (see
+    read_grayscale_index(); P-mode uses the PLTE index directly, with no
+    rescale to undo). If num_tiles is given, only that many tiles (in the same
     order) are produced (gbagfx's default `-num_tiles` NUM_TILES_IGNORE mode
     truncates unconditionally, regardless of what the discarded tail contains).
     """
@@ -333,6 +399,9 @@ def png_to_tiles_4bpp(path, num_tiles=None):
     if im.mode not in ("P", "L"):
         raise ValueError(f"unsupported mode {im.mode!r}")
     invert = im.mode == "L"
+    bit_depth = None
+    if invert:
+        _iw, _ih, bit_depth, _ct = read_png_ihdr(path)
     w, h = im.size
     if w % 8 != 0 or h % 8 != 0:
         raise ValueError(f"dimensions {w}x{h} not multiples of 8")
@@ -350,11 +419,12 @@ def png_to_tiles_4bpp(path, num_tiles=None):
                 for col in range(4):
                     x0 = tx * 8 + col * 2
                     x1 = x0 + 1
-                    v0 = px[x0, y] & 0xF
-                    v1 = px[x1, y] & 0xF
                     if invert:
-                        v0 = 15 - v0
-                        v1 = 15 - v1
+                        v0 = 15 - read_grayscale_index(px[x0, y], bit_depth)
+                        v1 = 15 - read_grayscale_index(px[x1, y], bit_depth)
+                    else:
+                        v0 = px[x0, y] & 0xF
+                        v1 = px[x1, y] & 0xF
                     out.append((v1 << 4) | v0)
             count += 1
     return bytes(out)
@@ -651,6 +721,205 @@ def check_btl_bg_pair(root, n, report):
 
 
 # --------------------------------------------------------------------------
+# OPTIONAL companion check: payload/AnimSprite relocation-slot audit.
+#
+# Not part of the default `graphicscheck` gate (it needs the shiftability
+# harness's --emit-relocs relink, scripts/shiftcheck/emit_relocs_link.sh ->
+# $(RELOCS_ELF), which is an EXTRA relink beyond the normal self-contained
+# $(ROM) build -- running it on every `make compare` would slow down the
+# byte-oracle gate for a check that is about pointer/relocation hygiene, not
+# source format). Wired instead as `graphicscheck-relocs` (Makefile), which
+# `make shiftcheck` already runs (shiftcheck already builds $(RELOCS_ELF) and
+# is the existing home for "does a relocation land somewhere it shouldn't"
+# checks -- see scripts/shiftcheck/scan_relocs.py, whose R_ARM_ABS32/ROM-range
+# extraction this reuses).
+#
+# What it guards: a raw ROM word that COINCIDENTALLY looks like a pointer
+# inside a pure-payload byte array (graphics/palette/TSA/map/FETSA INCBIN data,
+# or an AnimSprite_* animation-command array) is harmless UNLESS the linker
+# actually placed a relocation AT that word's address -- that would mean an
+# actual pointer-typed field was carved to overlap live pixel/tilemap/command
+# bytes, which would corrupt the payload the moment the ROM's layout ever
+# shifts. Zero such overlaps currently exist (verified against the full
+# 59,503-entry ROM-range R_ARM_ABS32 set): 5,308 INCBIN payload names (this
+# audit's own regex-based classification of every tracked graphics/palette/
+# TSA/map/FETSA INCBIN_U8/16/32 declaration -- see find_incbin_payload_names())
+# and all 1,461 unique AnimSprite_* symbol names.
+#
+# This intentionally does NOT flag a relocation that legitimately TARGETS a
+# payload symbol from elsewhere (a real pointer whose VALUE happens to point
+# at e.g. a tile array is completely normal and expected -- 4,388 such
+# relocations exist); it only checks whether the relocation SLOT's own
+# address lies inside a payload symbol's byte range.
+# --------------------------------------------------------------------------
+
+_ABS32_LINE_RE = re.compile(r"^\s*([0-9a-fA-F]{8})\s+[0-9a-fA-F]{8}\s+R_ARM_ABS32\b")
+ROM_BASE = 0x08000000
+ROM_HI = 0x09000000
+
+
+def parse_readelf_abs32_rom_offsets(readelf_r_output):
+    """Parse `readelf -r <elf>` text, returning the sorted list of R_ARM_ABS32
+    relocation slot addresses that fall in the ROM address window
+    [ROM_BASE, ROM_HI). Mirrors scripts/shiftcheck/scan_relocs.py's
+    abs32_offsets() (same filter -- debug-section relocations have small,
+    non-ROM offsets and are naturally excluded)."""
+    offsets = []
+    for line in readelf_r_output.splitlines():
+        m = _ABS32_LINE_RE.match(line)
+        if not m:
+            continue
+        addr = int(m.group(1), 16)
+        if ROM_BASE <= addr < ROM_HI:
+            offsets.append(addr)
+    offsets.sort()
+    return offsets
+
+
+_NM_SIZED_LINE_RE = re.compile(r"^([0-9a-fA-F]+)\s+([0-9a-fA-F]+)\s+\S\s+(\S+)")
+
+
+def parse_nm_sized_symbols(nm_s_n_output):
+    """Parse `nm -S -n <elf>` text, returning {name: [(addr, size), ...]} for
+    every symbol with a nonzero size (nm -S emits a size column only for
+    symbols the assembler/linker recorded a size for -- data arrays do; bare
+    labels don't)."""
+    by_name = {}
+    for line in nm_s_n_output.splitlines():
+        m = _NM_SIZED_LINE_RE.match(line)
+        if not m:
+            continue
+        addr, size, name = int(m.group(1), 16), int(m.group(2), 16), m.group(3)
+        if size:
+            by_name.setdefault(name, []).append((addr, size))
+    return by_name
+
+
+# Recognized "pure graphics/palette/TSA/map/FETSA payload" INCBIN path suffixes
+# (after stripping a trailing .lz). `.fk` ("fake compression", a 4-byte header
+# + raw bytes -- see the Makefile's `%.fk` rule) is matched via a second strip
+# since it wraps another one of these extensions (e.g. `foo.4bpp.fk`).
+_PAYLOAD_PLAIN_EXTS = (".4bpp", ".8bpp", ".1bpp", ".gbapal", ".agbpal", ".tsa.bin", ".map.bin")
+_PAYLOAD_FETSA_RE = re.compile(r"\.(?:fetsa|feimg)\d\.bin$")
+_INCBIN_DECL_RE = re.compile(
+    r"(\w+)\s*(?:\[[^\]]*\])+\s*"
+    r"(?:__attribute__\s*\(\([^;]*?\)\)\s*)?"
+    r"(?:SECTION\([^)]*\)\s*)?"
+    r"=\s*INCBIN_U(?:8|16|32)\(\s*\"([^\"]+)\"",
+    re.DOTALL,
+)
+
+
+def _is_payload_path(incbin_path):
+    p = incbin_path
+    if p.endswith(".lz"):
+        p = p[:-3]
+    if p.endswith(".fk"):
+        p = p[:-3]
+        if p.endswith(".lz"):
+            p = p[:-3]
+    if not p.startswith("graphics/"):
+        return False
+    return p.endswith(_PAYLOAD_PLAIN_EXTS) or bool(_PAYLOAD_FETSA_RE.search(p))
+
+
+def find_incbin_payload_names(root, extra_target_paths=()):
+    """Scan every tracked src/**/*.c for `TYPE name[...] = INCBIN_U8/16/32("path")`
+    declarations and return the set of C symbol names whose incbin'd path is a
+    recognized pure graphics/palette/TSA/map/FETSA payload extension (see
+    _is_payload_path()). `extra_target_paths` additionally matches declarations
+    whose path is one of the given LITERAL paths -- used for the 10 explicit,
+    renamed FETSATOOL Tsa_*.bin/IntelligentSystems targets (parse_explicit_
+    fetsatool_pngs()'s target strings), whose generic `graphics/.../Tsa_X.bin`
+    path doesn't end in a recognized suffix pattern by extension alone but IS
+    exactly one of the FETSATOOL tilemap outputs already classified by the PNG
+    audit above.
+
+    NOTE (honest limitation): this is a regex-based best-effort C declaration
+    parser, not a real C parser. It recognizes the declaration shapes actually
+    used in this tree (checked against every non-comment INCBIN_U8/16/32 call
+    site at authoring time) but is not guaranteed exhaustive against a novel
+    declaration shape a future carve might introduce.
+    """
+    extra_norm = {os.path.normpath(p) for p in extra_target_paths}
+    names = set()
+    for dirpath, _dirs, files in os.walk(os.path.join(root, "src")):
+        for fn in files:
+            if not fn.endswith(".c"):
+                continue
+            text = read_text(os.path.join(dirpath, fn))
+            for name, path in _INCBIN_DECL_RE.findall(text):
+                stripped = path[:-3] if path.endswith(".lz") else path
+                if _is_payload_path(path) or os.path.normpath(stripped) in extra_norm:
+                    names.add(name)
+    return names
+
+
+def check_payload_reloc_overlap(reloc_offsets, name_to_ranges, names):
+    """Return a list of (name, addr, size, first_overlapping_reloc) for every
+    named symbol range that a relocation slot address falls inside."""
+    violations = []
+    for name in names:
+        for addr, size in name_to_ranges.get(name, []):
+            lo = bisect.bisect_left(reloc_offsets, addr)
+            hi = bisect.bisect_left(reloc_offsets, addr + size)
+            if hi > lo:
+                violations.append((name, addr, size, reloc_offsets[lo]))
+    return violations
+
+
+def audit_payload_relocations(root, elf_path, relocs_elf_path, report,
+                               readelf_bin="readelf", nm_bin="nm"):
+    """The companion check described above. Requires the shiftability harness's
+    relocs-retained relink ($(RELOCS_ELF)) and the normal production ELF (for
+    symbol addresses/sizes) -- NOT baserom.gba."""
+    readelf_out = subprocess.run(
+        [readelf_bin, "-r", relocs_elf_path], capture_output=True, text=True, check=True,
+    ).stdout
+    reloc_offsets = parse_readelf_abs32_rom_offsets(readelf_out)
+
+    nm_out = subprocess.run(
+        [nm_bin, "-S", "-n", elf_path], capture_output=True, text=True, check=True,
+    ).stdout
+    name_to_ranges = parse_nm_sized_symbols(nm_out)
+
+    explicit_targets = set()
+    # Re-derive the explicit-renamed FETSATOOL rule TARGET paths (e.g.
+    # `graphics/misc_gfx/Tsa_OpAnimEphraim.bin`) directly from the same rule
+    # text parse_explicit_fetsatool_pngs() uses (that function returns
+    # png -> method, not the target path, so it's simplest to re-scan here).
+    for path in find_makefile_sources(root):
+        for line in _resolve_vars(read_text(path)):
+            m = _RULE_LINE_RE.match(line)
+            if not m:
+                continue
+            targets_str, _amp, prereqs_str = m.groups()
+            if "%" in targets_str or not any(t.endswith(".png") for t in prereqs_str.split()):
+                continue
+            explicit_targets.update(targets_str.split())
+
+    payload_names = find_incbin_payload_names(root, extra_target_paths=explicit_targets)
+    animsprite_names = {name for name in name_to_ranges if name.startswith("AnimSprite_")}
+
+    report.count("reloc_rom_abs32_total", len(reloc_offsets))
+    report.count("reloc_payload_incbin_names", len(payload_names))
+    report.count("reloc_animsprite_names", len(animsprite_names))
+
+    violations = check_payload_reloc_overlap(reloc_offsets, name_to_ranges,
+                                              payload_names | animsprite_names)
+    if violations:
+        for name, addr, size, reloc_addr in violations:
+            report.fail(
+                f"payload/AnimSprite symbol {name} (0x{addr:08X}+0x{size:X}) has a "
+                f"relocation slot at 0x{reloc_addr:08X} inside its own bytes -- a "
+                f"real pointer field appears to overlap graphics/animation payload "
+                f"data")
+    else:
+        report.count("reloc_payload_overlap_violations", 0)
+
+
+
+# --------------------------------------------------------------------------
 # main
 # --------------------------------------------------------------------------
 
@@ -780,10 +1049,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default=DEFAULT_ROOT,
                          help="repo root (default: parent of scripts/)")
+    parser.add_argument("--relocs-check", action="store_true",
+                         help="also run the payload/AnimSprite relocation-slot "
+                              "overlap audit (needs --elf and --relocs-elf; NOT "
+                              "part of the default graphicscheck gate -- see "
+                              "`make graphicscheck-relocs` / `make shiftcheck`)")
+    parser.add_argument("--elf", default="fireemblem8.elf",
+                         help="production ELF, for symbol addresses/sizes (--relocs-check only)")
+    parser.add_argument("--relocs-elf", default="fireemblem8_relocs.elf",
+                         help="the shiftability harness's --emit-relocs relink "
+                              "(--relocs-check only)")
     args = parser.parse_args()
 
+    root = os.path.abspath(args.root)
     report = Report()
-    audit(os.path.abspath(args.root), report)
+    audit(root, report)
+
+    if args.relocs_check:
+        audit_payload_relocations(root, args.elf, args.relocs_elf, report)
 
     print("=== graphics/source-format invariant audit ===")
     for key in sorted(report.counts):

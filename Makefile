@@ -545,6 +545,16 @@ shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 shiftcheck-ptraudit: $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) --fail-on-suspects
 
+# Layer 1e: reject a relocation SLOT (not just its target) landing inside a pure
+# graphics/palette/TSA/map/FETSA INCBIN payload or an AnimSprite_* animation-
+# command array (scripts/audit_graphics_forms.py --relocs-check; issue #143
+# closure evidence). Reuses the SAME $(RELOCS_ELF) this harness already builds
+# (no extra relink) -- a real pointer field carved to overlap live pixel/
+# tilemap/command bytes would corrupt that payload the instant the ROM's
+# layout ever shifts, even though the bytes match today.
+graphicscheck-relocs: $(RELOCS_ELF) $(ELF)
+	$(PYTHON) scripts/audit_graphics_forms.py --relocs-check --elf $(ELF) --relocs-elf $(RELOCS_ELF)
+
 # Focused unit tests for the relocation scanners. Keep these in the normal gate:
 # path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
 shiftcheck-tests:
@@ -559,10 +569,11 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 	    --outdir $(SHIFTDIR) --allowlist $(SHIFTCHECK)/allowlist.txt
 
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
-# + packed talk-table false-relocation scan + pointer-classification audit.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests
+# + packed talk-table false-relocation scan + pointer-classification audit +
+# graphics-payload relocation-slot audit.
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit graphicscheck-relocs shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff graphicscheck-relocs
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a
