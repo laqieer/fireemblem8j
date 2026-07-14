@@ -202,10 +202,13 @@ NAME_CLASS_RULES = [
      "UNCERTAIN", "RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap; a clean 4-way TSA split is available, DEFERRED (JP-only, no fe8u names) (D362)"),
     (re.compile(r"(^|/)graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4\.bin$"),
      "UNCERTAIN", "RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap + a non-palette data block (its 'palette' is 39% bit15-set, not a clean palette); DEFERRED (JP-only) (D362)"),
-    # frontier_df4_ending_008 (JP-exclusive): D362 — pointer-free OAM data (so it is
-    # shift-safe); no fe8u editable twin -> UNCERTAIN, but resolved, not "needs RE".
-    (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444\.bin$"),
-     "UNCERTAIN", "RE-complete: pointer-free OAM data (shift-safe); JP-divergent, no fe8u twin, DEFERRED (D362)"),
+    # frontier_df4_ending_007_residual (JP-exclusive): issue #143 RE — the LZ77
+    # image/TSA pair was extracted editable; the remaining 519 B tail is entirely
+    # zero except its first 8 bytes (00 00 00 1f 07 00 00 00). No pointer
+    # structure and no consumer semantics were found; positive evidence, not
+    # absence of investigation -> FLOOR (not UNCERTAIN).
+    (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_007_residual_B381\.bin$"),
+     "FLOOR", "evidence-backed FLOOR: 519 B near-zero residual (only first 8 B non-zero), no pointer structure, no known consumer -- narrowly scoped raw floor (#143, D377)"),
     # frontier_df4_menu_005 (JP-exclusive): D362 — a proc-script leaf; the earlier
     # "MapChanges" label was REFUTED. JP-divergent -> UNCERTAIN, not "needs RE".
     (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD\.bin$"),

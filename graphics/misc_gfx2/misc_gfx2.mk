@@ -59,6 +59,16 @@ graphics/misc_gfx2/Img_GmapCastleNodes.4bpp.lz: LZ_FLAGS := -mindist 2
 # reproduce byte-identical output vs the JP ROM.
 graphics/misc_gfx2/gTsa_WorldmapMinimap_1.bin.lz: LZ_FLAGS := -mindist 2
 
+# issue #143 (ending-assets): dat_worldmap_minimap_p0 expanded backward to
+# 0x08B1D954; both new LZ sheets need mindist=2 to reproduce the JP bytes.
+graphics/misc_gfx2/gUnk_08B1D954.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/misc_gfx2/gWorldmapMinimap_0.4bpp.lz: LZ_FLAGS := -mindist 2
+
+# issue #143 (ending-assets): dat_worldmap_skirmish expanded forward through
+# 0x08B2759C; both new LZ sheets need mindist=2 to reproduce the JP bytes.
+graphics/misc_gfx2/Img_WorldmapMinimap.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/misc_gfx2/gImg_WorldmapSkirmish.4bpp.lz: LZ_FLAGS := -mindist 2
+
 # soil-pilot: typed C object replaced the former worldmap-gmap assembly provider.
 # It depends on 4 PNG-derived 4bpp files + 2 PNG-derived 4bpp.lz files.
 src/data/worldmap/worldmap_gmap.o: \

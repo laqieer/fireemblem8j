@@ -11718,3 +11718,92 @@ Also note total linked ROM ABS32 grows from this decision's own 59,485 to
 **59,500** once stacked with D377's 15 additional literal-pool symbolizations
 (raw code literals that D377 turned into real relocations); the FUNC/interior/
 header counts above are unaffected by that stacking.
+## D381 — migrate six ending-frontier raw blobs; expand worldmap_minimap_p0 / worldmap_skirmish (2026-07-13)
+
+(Originally drafted as D377; renumbered at integration to D381 because
+`main` already owned D376/D377/D378/D379/D380 by the time this branch
+landed, per this entry's own "renumber if a concurrent sibling claimed D377"
+note.)
+
+**Scope.** Six remaining actionable `frontier_df4_ending` blobs (003, 007, 008,
+009, 010, 014) migrated to editable/typed source, following the exact
+per-blob segmentation researched for issue #143. `dat_worldmap_minimap_p0`
+expanded backward `0x08B1E49C -> 0x08B1D954`; `dat_worldmap_skirmish` expanded
+forward `0x08B26A6C -> 0x08B2759C` (no trailing gap — the next object already
+starts exactly there).
+
+**Findings that corrected the incoming research (evidence overrides prior
+assumption, per playbook).**
+- Blob 007's absolute JP address in the incoming research (`0x08AD0F0D`) did
+  not match the ground truth (`0x08AD0CFC`, confirmed via
+  `layout/carved_rom.tsv` and the adjacent `dat_ending_staffreel_p4` object);
+  the internal byte offsets/sizes were otherwise all correct.
+- Blob 008's first 252 bytes are **NOT** raw `struct AnimSpriteData` records —
+  independent verification against `layout/us_jp_funcmap.tsv` found an EXACT
+  region-same byte match with fe8u's `SpriteAnim_BrownTextBox`
+  (`include/ap.inc` AP object/sprite-animation format, `0x08a4d0ec`, 252 B).
+  It is committed as real `.s` source
+  (`dat_frontier_df4_ending_008_sub0.s`) rather than typed as a coincidental
+  12-byte-record terminator (the apparent `header==1` "terminator" at the true
+  record-20 boundary was an artifact of the wrong structural assumption).
+  The remaining 204+20 records genuinely have no fe8u twin (D362) and are kept
+  as raw `struct AnimSpriteData` literals via the `.affine` union view (all 4
+  words explicit) for unambiguous byte-exactness, without asserting semantics
+  for the non-clean "terminator" at record 224 (its trailing bytes are
+  non-zero, unlike a hand-authored `ANIM_SPRITE_END`).
+- Blob 009/010: the incoming research's byte offsets for the sub-parts
+  disagreed with the ground truth by tens to hundreds of bytes in places;
+  ground truth (baserom bytes + `layout/baseline_syms.d/cfbind_worldmap_status_ui.tsv`
+  + the real consumer `src/WorldmapStatus_InitGfx.c`) was used instead. The
+  consumer proves `gWorldmapMinimap_0..7`'s exact roles (2 LZ sheets, 5 TSAs,
+  1 three-bank palette). `gWorldmapMinimap_8` onward
+  (`DrawGMapPIPanelContents` / `worldmap_player_interface`) is a **different**
+  consumer/scope and is intentionally left as an honest raw remainder
+  (`frontier_df4_ending_010_remainder_B1E6BC.bin`, 472 B, still UNCERTAIN) —
+  not claimed done.
+- Blob 014's byte offsets in the incoming research were all independently
+  confirmed exact; only its two decompressed-tile-count claims were corrected
+  (64 tiles/2048 B and 128 tiles/4096 B, not the stated 111/382).
+
+**Per-blob disposition (see the .c/.s files + `layout/carved_rom.d/data_frontier4_df4_ending.tsv`
++ `layout/carved_rom.tsv` for exact addresses):**
+1. `gUnk_08AC718C` (604 B standard TSA, hdr 0x0e13=>15x20) + baseline
+   `Pal_StaffReelEnt_EndingFin` (32 B/16-color palette) — both real defs now,
+   replacing their `baseline_syms.tsv` ABS aliases.
+2. Two independent LZ77 TSA streams (2050 B/32x32 decompressed each) +
+   a 519 B evidence-backed FLOOR residual (near-zero, no pointer structure, no
+   consumer — narrow audit rule added to `scripts/audit_bin_forms.py`).
+3. `SpriteAnim_BrownTextBox` region-same AP object (252 B, exact fe8u twin) +
+   two raw `struct AnimSpriteData` tables (204 + 20 records) + an 8-byte pad +
+   a 1204 B standard TSA (hdr 0x1d13=>30x20).
+4/5. `dat_worldmap_minimap_p0` backward expansion: an unnamed 96-tile LZ sheet
+   (already had a pre-#143 PNG, moved in place), a 16-color palette, two TSAs,
+   `gWorldmapMinimap_0` (107-tile LZ sheet, PNG width=1 since 107 is prime),
+   `gWorldmapMinimap_1/2` (pre-existing, untouched), and
+   `gWorldmapMinimap_3..7` (4 TSAs + a 3-bank/48-color palette).
+6. `dat_worldmap_skirmish` forward expansion: `Img_WorldmapMinimap` (64-tile LZ
+   sheet), `Pal_WorldmapMinimap` (16-color palette), `gWorldmapSkirmish_1`
+   (8x8 TSA + pad), `gWorldmapSkirmish_2/3` (two time-domain BGR555 LUTs,
+   deliberately typed as literal `u16[16]` C arrays — NOT `.bin`/INCBIN — per
+   `src/WmMinimap_BlinkPalette.c`'s indexed-by-frame usage, so no
+   graphics/audit tool misclassifies them as palettes), and
+   `gImg_WorldmapSkirmish` (128-tile LZ sheet).
+
+**Verification.** Every PNG/TSA/palette/LZ source round-trips byte-exact
+(png->4bpp, 4bpp->4bpp.lz at the proven `-mindist`, pal->gbapal) against the
+original JP bytes; the two-stream LZ truncation for blob 007's second stream
+(gbagfx emits 3 harmless trailing zero bytes past the proven 529 B) is pinned
+by a deterministic `truncate -s 529` Makefile rule and independently verified
+by re-decompressing the truncated stream. `make layout` reports 100.0000%
+coverage; `python3 scripts/check_incbin_deps.py` and
+`python3 scripts/check_layout.py` both pass; `python3
+scripts/audit_bin_forms.py` moves `MISS 0->0`, `FLOOR 1426->1427`,
+`UNCERTAIN 26->25` (only the honest `010_remainder` stays UNCERTAIN). A clean
+`make compare` reports `fireemblem8.gba: OK` and `make shiftcheck` reports no
+high-confidence shiftability suspects.
+
+**Scope discipline.** `frontier_df4_ending_003_AC718C.bin`'s sibling
+`frontier_df3_ending`/`dat_DfEnding002_PalGfx` (a separate false-relocation
+lane) was NOT touched. `dat_worldmap_minimap_p2`/`p3` (already 0KB-delta,
+fully carved) were NOT touched. `gWorldmapMinimap_8..13`
+(`worldmap_player_interface`) was NOT claimed.

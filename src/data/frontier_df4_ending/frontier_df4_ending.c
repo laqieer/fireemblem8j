@@ -633,16 +633,55 @@ u32 frontier_df4_ending_gap2_r2[] __attribute__((section(".data.frontier_df4_end
     0x00000003, (u32)&MapRoute_TransitionLoop, 0x00000016, (u32)&MapRoute_TransitionEnd, 0x0000000C, 0x00000000,
     0x0002000B, 0x00000000, 0x00000000, 0x00000000,
 };
-u8 frontier_df4_ending_003_AC718C[] __attribute__((section(".data.frontier_df4_ending.gap3"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin");
+/* frontier_df4_ending_003_AC718C, JP 0x08AC718C-0x08AC7408 (636 B):
+ * [+0x000,+0x25C) 602 B standard TSA (hdr 0x0e,0x13 => 15x20) + its own 2-byte
+ * zero pad (baseline alias gUnk_08AC718C, consumed raw by sub_80BCA74.c via
+ * j_TmApplyTsa) -> gUnk_08AC718C.tsa.bin.
+ * [+0x25C,+0x27C) 32 B/16-color palette, baseline alias Pal_StaffReelEnt_EndingFin
+ * (extern in variables.h, consumed by ending_credits.c ApplyPalette) ->
+ * Pal_StaffReelEnt_EndingFin.pal (JASC, verified round-trip). Both baseline
+ * ABS aliases replaced by real definitions here; see
+ * layout/baseline_syms_drop.d/issue-143-ending-assets.tsv.
+ */
+u8 gUnk_08AC718C[] __attribute__((section(".data.frontier_df4_ending.gap3"))) = INCBIN_U8("graphics/frontier_df4_ending/gUnk_08AC718C.tsa.bin");
+u16 Pal_StaffReelEnt_EndingFin[] __attribute__((section(".data.frontier_df4_ending.gap3"))) = INCBIN_U16("graphics/frontier_df4_ending/Pal_StaffReelEnt_EndingFin.gbapal");
 u8 frontier_df4_ending_004_ACC378[] __attribute__((section(".data.frontier_df4_ending.gap4"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_004_ACC378.4bpp.lz");
 u8 frontier_df4_ending_005_ACEB54[] __attribute__((section(".data.frontier_df4_ending.gap5"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54_0.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54_1.4bpp.lz");
 u8 frontier_df4_ending_006_AD02D4[] __attribute__((section(".data.frontier_df4_ending.gap6"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz", "graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz");
-u8 frontier_df4_ending_007_AD0CFC[] __attribute__((section(".data.frontier_df4_ending.gap7"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin");
-u8 frontier_df4_ending_008_AD1444[] __attribute__((section(".data.frontier_df4_ending.gap8"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin");
+/* frontier_df4_ending_007, JP 0x08AD0CFC-0x08AD1284 (1416 B; layout/carved_rom.d
+ * gap7). Two independent GBA-BIOS-LZ77 streams each decompressing to a 2050 B
+ * standard TSA (hdr 0x1f,0x1f => 32x32, no trailing pad this time), followed by
+ * a 519 B near-zero residual:
+ *   [+0x000,+0x170) 368 B LZ77 -> 2050 B TSA -> frontier_df4_ending_007_s0.tsa.bin
+ *   [+0x170,+0x381) 529 B LZ77 -> 2050 B TSA -> frontier_df4_ending_007_s1.tsa.bin
+ *     (gbagfx -mindist 2 recompresses to 532 B whose first 529 B are byte-exact;
+ *     the trailing 3 B are zero padding not needed to decompress -- verified by
+ *     re-decompressing the truncated 529 B stream and comparing to the
+ *     original TSA bytes. Built via the .mk truncate rule below.)
+ *   [+0x381,+0x588) 519 B: FLOOR (not UNCERTAIN) -- entirely zero except the
+ *     first 8 bytes (00 00 00 1f 07 00 00 00). No pointer structure (data
+ *     never lands mid-word on a plausible ROM address), no known consumer
+ *     semantics; positive evidence it is NOT reducible to any typed/graphics
+ *     form -> kept narrowly as frontier_df4_ending_007_residual_B381.bin.
+ */
+u8 frontier_df4_ending_007_AD0CFC[] __attribute__((section(".data.frontier_df4_ending.gap7"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_007_s0.tsa.bin.lz", "graphics/frontier_df4_ending/frontier_df4_ending_007_s1.tsa.bin.lz", "graphics/frontier_df4_ending/frontier_df4_ending_007_residual_B381.bin");
+/* frontier_df4_ending_008_AD1444 (0x08AD1444-0x08AD247C, 4152 B) migrated to
+ * dat_frontier_df4_ending_008.c + dat_frontier_df4_ending_008_sub0.s (real
+ * SpriteAnim_BrownTextBox region-same match + typed AnimSpriteData tables +
+ * TSA); see layout/carved_rom.d/issue-143-ending-assets.tsv for the 5 sub-rows.
+ */
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x490] 96t 4bpp sheet ->
  * editable PNG (png -> .4bpp -> .4bpp.lz); [0x490:0xB48] trailing raw kept verbatim. */
-u8 frontier_df4_ending_009_B1D954[] __attribute__((section(".data.frontier_df4_ending.gap9"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin", 0x490, 0x6B8);
-u8 frontier_df4_ending_010_B1E5FC[] __attribute__((section(".data.frontier_df4_ending.gap10"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin");
+/* frontier_df4_ending_009_B1D954 (0x08B1D954-0x08B1E49C, 2888 B) fully migrated
+ * into the expanded dat_worldmap_minimap_p0 (issue #143); see
+ * src/data/worldmap_minimap/dat_worldmap_minimap_p0.c.
+ * frontier_df4_ending_010_B1E5FC's HEAD (0x08B1E5FC-0x08B1E6BC, 192 B,
+ * gWorldmapMinimap_3..7) also migrated there. The TAIL
+ * (0x08B1E6BC-0x08B1E894, 472 B, gWorldmapMinimap_8..13 / DrawGMapPIPanelContents
+ * / worldmap_player_interface) is a DIFFERENT consumer/scope, intentionally left
+ * as an honest raw remainder gap -- NOT claimed done by this carve.
+ */
+u8 frontier_df4_ending_010_remainder_B1E6BC[] __attribute__((section(".data.frontier_df4_ending.gap10"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_010_remainder_B1E6BC.bin");
 u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_ending.gap11"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.4bpp.lz");
 /* Worldmap-highlight reel blobs, split per the frontier_df4_voice_001_1F67BC
  * semantic table (Img, Tsa/Ap, dims). Base symbols kept so the table's
@@ -653,9 +692,11 @@ u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_e
 u8 frontier_df4_ending_012_B25A78[] __attribute__((section(".data.frontier_df4_ending.gap12"))) = INCBIN_U8("graphics/frontier_df4_ending/Tsa_WmHightLightMap5.bin", "graphics/frontier_df4_ending/Img_WmHightLightMap6.4bpp.lz");
 /*   013: Tsa_WmHightLightMap7 [0x00:0x38] + Img_WmHightLightMap8 [0x38:0x55c] + Tsa_WmHightLightMap8 [0x55c:end] */
 u8 frontier_df4_ending_013_B26374[] __attribute__((section(".data.frontier_df4_ending.gap13"))) = INCBIN_U8("graphics/frontier_df4_ending/Tsa_WmHightLightMap7.bin", "graphics/frontier_df4_ending/Img_WmHightLightMap8.4bpp.lz", "graphics/frontier_df4_ending/Tsa_WmHightLightMap8.bin");
-/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x6F0] 64t 4bpp sheet ->
- * editable PNG (png -> .4bpp -> .4bpp.lz); [0x6F0:0xB30] trailing raw kept verbatim. */
-u8 frontier_df4_ending_014_B26A6C[] __attribute__((section(".data.frontier_df4_ending.gap14"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin", 0x6F0, 0x440);
+/* frontier_df4_ending_014_B26A6C (0x08B26A6C-0x08B2759C, 2864 B) fully migrated
+ * into the expanded dat_worldmap_skirmish (issue #143); see
+ * src/data/worldmap_skirmish/dat_worldmap_skirmish.c. This gap row is REMOVED
+ * (no remainder) since the object boundary matches exactly.
+ */
 struct ProcCmd frontier_df4_ending_015_B3B3D4[] SECTION(".data.frontier_df4_ending.gap15") = {
     PROC_SLEEP(0),
     PROC_CALL(CreditsBlendCG_Init),
