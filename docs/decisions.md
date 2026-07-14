@@ -11359,3 +11359,137 @@ function ranges are otherwise byte-identical.
 **Scope.** This closes and guards only the **code-side raw numeric C literal**
 lane of reopened issue #143. It does not claim that every other pointer class or
 the issue as a whole is closed.
+
+## D378 — issue143 oversized-TSA/multi-resource outlier migrations (2026-07-14)
+
+(D-number from the free sequence; renumber at integration if a concurrent
+sibling claimed D378 -- several other issue #143 lanes are active in parallel
+worktrees off the same base.)
+
+**Scope.** Three independently-scoped, fully-researched data providers from
+issue #143's reopened `.incbin` review, carved in one isolated worktree/branch
+(`feat/issue-143-tsa-outlier-assets`, based on `origin/main` at `ab44df71e`):
+Recipe A (`gTsa_UnkData_0.tsa.bin`), Recipe B (`gMenuSoundroom_4.tsa.bin`,
+evidence-only), Recipe C (`gUnkData_26.tsa.bin`).
+
+**Recipe A.** `gTsa_UnkData_0.tsa.bin` (JP `0x08A7DCB8`) was 276B: a 244B
+standard TSA (header `0x1d,0x03` = 30x4 records = 242B + 2B alignment pad the
+TSA owns) followed by 32B that decodes as a standalone 16-color BGR555
+palette (values descending from a bright entry to `0x0000` -- a fire-like
+gradient, hence `Pal_ChapterTitleFire`), not TSA data. `chapter_title.c`'s
+`CallARM_FillTileRect(tm, gTsa_UnkData_0, TILEREF(...))` only ever reads the
+TSA's own N*M record bytes (never past them), so the trailing 32B has zero
+consumers -- genuinely dead. Kept `gTsa_UnkData_0` at 244B unchanged; added
+`Pal_ChapterTitleFire` as an editable JASC `graphics/misc_gfx2/
+Pal_ChapterTitleFire.pal` -> `.gbapal`, same section/order right after
+`gTsa_UnkData_0`. No baseline alias/drop existed for either name (verified:
+neither symbol appears in `layout/baseline_syms.tsv` or any
+`baseline_syms.d/*.tsv` fragment before this change -- both were always real
+typed C, never opaque baseline). Round-trip proof: pal->gbapal->pal->gbapal
+byte-cmp identical.
+
+**Recipe C.** `graphics/misc/gUnkData_26.tsa.bin` (21764B, JP
+`0x085DB10C..0x085E0610`) was one opaque multi-resource blob backing two live
+consumers (`src/sub_80487D8.c`'s MultiBoot-send UI setup and
+`src/sub_8048FC0.c`'s Link Arena sprite-text draw) plus a dead tail. Every
+byte range in the recipe was independently re-derived and verified against
+the monolith before committing anything:
+- Offsets partition the file exactly (`0x000..0x5504` == 21764B, no
+  gaps/overlaps).
+- All 5 LZ streams (`Img_MultiBootSendBg` 15260B->20480B/640 tiles,
+  `Tilemap_MultiBootSendBg` 1380B->1280B/640 u16 entries,
+  `Img_MultiBootSendListBar` 304B->1024B/32 tiles, `Img_MultiBootSendFont`
+  1052B->4096B/128 tiles, `Img_LinkArenaSpriteText` 2652B->6144B/192 tiles)
+  decompress and RECOMPRESS byte-exact with gbagfx's DEFAULT -mindist 2 -- no
+  LZ_FLAGS override needed (verified decompress->recompress->cmp against the
+  original monolith bytes for each stream independently).
+- The 4 images (256x160, 64x32, 128x64, 128x96) round-trip
+  png(indexed,4bpp)->4bpp->lz byte-exact against the original LZ streams;
+  index values (not embedded RGB) are what gbagfx's forward conversion
+  reproduces, so any 16-entry palette choice for PNG preview is safe -- bank 0
+  of each asset's real extracted palette was used for readability.
+- The 4 palettes (`Pal_MultiBootSendBg` 256B=8x16, `Pal_MultiBootSendListBar`
+  32B=16, `Pal_MultiBootSendFont` 32B=16, `Pal_LinkArenaSpriteText` 192B=6x16)
+  round-trip pal->gbapal->pal->gbapal byte-exact (gbagfx's .gbapal->.pal
+  reader auto-pads any >16-color palette read to 256 entries for PNG use --
+  irrelevant to the forward .pal->.gbapal build direction, which honors the
+  JASC header's own color count).
+- The 3 raw TSA records (`Tsa_LinkArenaTitleBanner` 15x4=122B+2pad=124B,
+  `Tsa_MultiBootSendListBarNarrow` 19x4=154B+2pad=156B,
+  `Tsa_MultiBootSendListBarWide` 30x3=182B+2pad=184B) match the same
+  (N-1,M-1) header-pair formula as Recipe A/B, verified by direct hex
+  inspection (trailing 2B zero pad present in all three).
+- `gUnk_LinkArenaSpriteTextTail` (140B) decodes to the exact u16[70] sequence
+  given in the recipe (cmp-verified byte-for-byte); no consumer found by
+  exhaustive grep -- kept as a typed literal (not INCBIN; too small to
+  warrant a separate committed asset file), documented as an honest dead
+  FLOOR rather than fabricated.
+
+**Renames.** `sub_80487D8.c`'s 9 `gUnk_085DB188`/`gUnk_085DED24`/
+`gUnk_085DF288`/`gUnk_085DF388`/`gUnk_085DF4B8`/`gUnk_085DF554`/
+`gUnk_085DF60C`/`gUnk_085DF62C`/`gUnk_085DFA48` externs were verified 1:1
+against the new asset names by subtracting the monolith's base address
+(`0x085DB10C`) from each old ABS address and matching the result to the
+recipe's byte-offset table -- EVERY one landed exactly on an asset boundary
+(e.g. `0x085DB188 - 0x085DB10C = 0x07C` == `Img_MultiBootSendBg`'s start),
+confirming both the semantic names and that the renaming is safe. Renamed in
+place; function body unchanged otherwise. `include/sio.h`'s
+`extern CONST_DATA u8 gUnkData_26[]` -> `Tsa_LinkArenaTitleBanner` (verified
+this header's only `#include`r that references the symbol is
+`sio_uiutils_0804D148.c`, whose `LATitleBanner_Init` is the asset's sole
+consumer). `Img_LinkArenaSpriteText`/`Pal_LinkArenaSpriteText` needed no
+rename -- their addresses (`0x085DFA68`/`0x085E04C4`) already matched the new
+offsets exactly, so the pre-existing baseline-alias names were already
+correct.
+
+**Baseline-alias drop.** The 9 renamed + 2 already-correct symbols were
+previously opaque `layout/baseline_syms.tsv` (monolith, 2 entries) /
+`layout/baseline_syms.d/zfix_80487D8.tsv` (fragment, 9 entries, shared with
+other still-opaque `sub_80487D8` externs not in this task's scope) ABS
+aliases. Now that real typed definitions exist in
+`src/data/5AA96C/dat_data_5AA96C.c`, the old aliases are dropped (not deleted
+in place, which would touch the shared monolith / a fragment owned by another
+task) via a NEW additive fragment,
+`layout/baseline_syms_drop.d/issue143-tsa-outlier-assets.tsv` (11 names, one
+per line) -- `scripts/gen_layout.py`'s existing drop-fragment mechanism
+excludes them from the generated `asm/jp_syms.s` regardless of which
+monolith/fragment originally declared them. Verified post-`make layout`: none
+of the 11 names appear in the generated `asm/jp_syms.s`.
+
+**Recipe B (evidence, no bytes changed).** `gMenuSoundroom_4.tsa.bin` (400B,
+`src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1637.c`) stays exactly
+byte-identical, single symbol. Re-derived its FULL internal record structure
+end-to-end by parsing the (N-1,M-1) header-pair formula from offset 0 to EOF:
+the sole consumer (`soundroom.c:89`) reads only the leading 30B (14x1)
+record; the remaining 370B parses cleanly as 25 more concatenated one-row TSA
+records (1x1/17x1/18x1/15x1, then 15 records of 5x1/6x1 spanning
+`0x08C..0x156`, then 6 records of 3x1 spanning `0x15C..0x18C`) plus a final
+4B `03 00 00 00` that is a truncated 4x1 header with no room for its data
+(file just ends) -- confirmed programmatically, matching the recipe's
+evidence exactly. Cross-checked against the fe8u oracle (local read-only
+checkout): `graphics/misc/gMenuSoundroom_4.tsa.bin` is byte-identical there
+too, with the SAME sole consumer at the analogous US call site --
+fe8u-form-parity FLOOR confirmed independently, not merely asserted. No asm
+refs, no interior baseline binds. Documented via a source comment at the
+INCBIN site; did not touch the active graphics-gate branch.
+
+**Result.** `make layout && make compare` -> `fireemblem8.gba: OK`;
+`make shiftcheck` -> 0 HIGH (both gates re-verified after every commit).
+`scripts/audit_bin_forms.py`: `.bin` 1445 -> 1448 (net +3: -1 deleted
+monolith, +4 new raw-TSA/tilemap FLOOR sources -- `Tsa_LinkArenaTitleBanner.bin`,
+`Tsa_MultiBootSendListBarNarrow.bin`, `Tsa_MultiBootSendListBarWide.bin`,
+`Tilemap_MultiBootSendBg_map.bin`), `MISS` stays **0** (the classifier's
+generic `graphics/misc/` pixel-gfx name-class rule initially false-MISS'd the
+tilemap source under its original name `Tilemap_MultiBootSendBg.bin` -- no
+fe8u basename twin exists to prove FLOOR by match, and the file doesn't end
+in `.tsa.bin`/`.map.bin`; renamed to `Tilemap_MultiBootSendBg_map.bin` to
+match this repo's existing `_map.bin` BG-tilemap-FLOOR naming convention
+(rule 0: `base.endswith("_map.bin")`, same as `graphics/gfx_data_bg/*_map.bin`)
+rather than editing the shared classifier script), `UNCERTAIN` unchanged at
+30. Strict editable-source gain: Recipe C = 32396 decoded bytes (31744 image
++ 512 palette + 140 typed tail) newly editable; Recipe A = 32 palette bytes.
+The raw decompressed TSA/tilemap/palette source bytes for both recipes
+remain a documented fe8u-form-parity FLOOR, not claimed as further reducible.
+Recipe B stays a documented evidence floor (400B unchanged). This closes only
+these three specific providers from issue #143's reopened review; the issue
+stays open pending the wider `.incbin` audit.

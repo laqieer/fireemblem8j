@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1415 | 97.9% |
+| **FLOOR** | 1418 | 97.9% |
 | **UNCERTAIN** | 30 | 2.1% |
-| **TOTAL** | 1445 | 100.0% |
+| **TOTAL** | 1448 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -49,7 +49,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1266 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1269 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1415) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1418) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1415 entries</summary>
+<details><summary>1418 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1254,6 +1254,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/mapanim/gMapanimEventcall_291.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/gMapanimEventcall_292.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/gTsa_ArenaBuildingFront.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc/Tilemap_MultiBootSendBg_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc/Tsa10_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa1_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa2_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
@@ -1264,6 +1265,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/misc/Tsa7_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa8_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa9_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/Tsa_LinkArenaTitleBanner.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc/Tsa_MultiBootSendListBarNarrow.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc/Tsa_MultiBootSendListBarWide.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc/gMenuSoundroom_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gMenuSoundroom_1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gMenuSoundroom_2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
@@ -1271,7 +1275,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/misc/gUnkData_13.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_14.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_15.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc/gUnkData_26.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_42.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_50.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_51.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |

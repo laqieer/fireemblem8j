@@ -40,4 +40,20 @@ SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_2[] = INCBIN_U8
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 Img_SoundRoomVolumeGraph[] = INCBIN_U8("graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u16 Pal_SoundRoomVolumeGraph[] = INCBIN_U16("graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_3[] = INCBIN_U8("graphics/reuse/gMenuSoundroom_3.4bpp.lz");
+/* issue143 Recipe B (evidence, no byte change -- kept single-symbol/400B):
+ * gMenuSoundroom_4.tsa.bin is a concatenated one-row TSA library. The sole
+ * consumer, soundroom.c:89's `CallARM_FillTileRect(TILEMAP_LOCATED(
+ * gBG1TilemapBuffer, 2, 19), gMenuSoundroom_4, 0x1200)`, reads only the
+ * leading 30B standard 14x1 record (header 0x0d,0x00 => N=14,M=1 => 14*1*2+2).
+ * The remaining 370B is a dead concatenated library of one-row TSA records
+ * (verified by re-parsing the (N-1,M-1) header-pair formula end-to-end):
+ *   1x1  @0x01E size4     17x1 @0x022 size36    18x1 @0x046 size38
+ *   15x1 @0x06C size32    then 15 records @0x08C..0x156 of 5x1/6x1 (14x6x1
+ *   + 1x5x1), then 6 records @0x15C..0x18C of 3x1, then a final 4B
+ *   `03 00 00 00` truncated 4x1 header remnant (no room for its data --
+ *   the file simply ends). No asm refs, no interior baseline binds, no
+ *   offset consumers found. fe8u's twin graphics/misc/gMenuSoundroom_4.tsa.bin
+ *   is byte-identical (same 400B, same sole soundroom.c consumer at the
+ *   analogous US call site) -- fe8u-form-parity FLOOR, not a MISS. Do not
+ *   fabricate per-record symbols: fe8u keeps this as one opaque blob too. */
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_4[] = INCBIN_U8("graphics/misc/gMenuSoundroom_4.tsa.bin");

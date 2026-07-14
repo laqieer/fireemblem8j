@@ -983,3 +983,42 @@ heuristics over a 40-file diverse sample spanning every subsystem group (`data/r
   exhausted; the remaining 226 are JP-unique opaque residues (legit incbin) + the 14 optional per-file LZ deep-RE
   probes. The `.bin` axis-1/2/6 objective is effectively met; strict MISS=0 remains gated only on the 3 tilemap-floor
   audit artifacts + any future JP-LZ deep-RE, not on any tractable carve.
+
+## issue143 TSA-outlier / multi-resource migration (2026-07-14)
+Three independent oversized-TSA/multi-resource providers scoped from issue #143's
+reopened `.incbin` review, carved in one isolated branch (`feat/issue-143-tsa-outlier-assets`):
+- **Recipe A** — `gTsa_UnkData_0.tsa.bin` (JP `0x08A7DCB8`, 276B) split: the real
+  244B TSA (30x4 record + 2B pad) is unchanged; the trailing 32B is a standalone
+  dead/orphaned 16-color palette, extracted as `Pal_ChapterTitleFire` (JASC `.pal`
+  round-trips byte-exact). No consumer wired (documented, not fabricated).
+- **Recipe C** — `graphics/misc/gUnkData_26.tsa.bin` (JP `0x085DB10C`, 21764B
+  monolith backing `sub_80487D8`'s MultiBoot-send UI + `sub_8048FC0`'s Link Arena
+  sprite text) decomposed into 13 semantic assets: 4 PNG images (256x160/64x32/
+  128x64/128x96, all png->4bpp->lz byte-exact with gbagfx DEFAULT `-mindist 2`), 4
+  JASC palettes (16/16/16/128/6x16-color banks, all round-trip byte-exact), 3 raw
+  TSA records (kept with their 2B alignment pad), 1 raw BG tilemap source, and a
+  140B typed `u16[70]` dead tail with no consumer. Old `gUnk_085D*` externs in
+  `sub_80487D8.c` renamed to the new semantic names (address-to-offset verified
+  1:1 for all 9); `include/sio.h`'s `gUnkData_26` -> `Tsa_LinkArenaTitleBanner`
+  (its only live consumer, `sio_uiutils_0804D148.c`'s `LATitleBanner_Init`). 11
+  now-redundant baseline ABS aliases dropped via
+  `layout/baseline_syms_drop.d/issue143-tsa-outlier-assets.tsv` (parallel-safe;
+  the shared `layout/baseline_syms.tsv` monolith is untouched). Old monolith
+  deleted. Strict editable-source gain: 31744 (image) + 512 (palette) + 140
+  (typed tail) = **32396 decoded bytes** newly editable; the raw decompressed
+  TSA/tilemap/palette bytes stay documented FLOOR (fe8u-form parity), not
+  claimed as further reducible.
+- **Recipe B** — `gMenuSoundroom_4.tsa.bin` (400B) kept byte-identical, single
+  symbol. Documented (not extracted): the sole consumer (`soundroom.c:89`)
+  reads only the leading 30B standard 14x1 record; the remaining 370B is a dead
+  concatenated one-row TSA library (1x1/17x1/18x1/15x1 + 15 records of 5x1/6x1 +
+  6 records of 3x1 + a truncated 4B 4x1 header remnant), re-derived end-to-end
+  from the `(N-1,M-1)` header-pair formula. fe8u's twin
+  `graphics/misc/gMenuSoundroom_4.tsa.bin` is byte-identical with the same sole
+  consumer -- confirmed fe8u-form-parity FLOOR, not a candidate for 26
+  fabricated per-record symbols.
+
+`make compare` -> `fireemblem8.gba: OK`; `make shiftcheck` -> 0 HIGH.
+`scripts/audit_bin_forms.py` regenerated: `.bin` 1445 -> 1448 (net +3: -1 old
+monolith, +4 new raw-TSA/tilemap FLOOR sources), `MISS` stays **0**, `UNCERTAIN`
+unchanged at 30 (issue #143 stays open pending the wider `.incbin` review).
