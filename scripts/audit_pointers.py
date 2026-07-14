@@ -594,8 +594,33 @@ def _object_runtime_relocations_to_symbol(object_path, symbol):
     return hits
 
 
-def _validate_orphan_selfref(record, entry, rom):
+def _validate_optional_fe8u_analogue(record, entry, evidence_notes):
+    """Treat the sibling fe8u source as corroboration, never as a CI prerequisite."""
     errors = []
+    fe8u_path = os.path.normpath(os.path.join(ROOT, entry["fe8u_provider"]))
+    try:
+        with open(fe8u_path, errors="replace") as f:
+            fe8u = _strip_source_comments(f.read())
+    except OSError:
+        evidence_notes.append(
+            f"optional fe8u corroboration unavailable: {entry['fe8u_provider']}; "
+            "local definition/relocation/base-reference/hash proof remains authoritative")
+        return errors
+
+    fe8u_size = _int(entry["fe8u_size"])
+    fe8u_pat = (r"\bCONST_DATA\s+u8\s+" + re.escape(record["symbol"])
+                + r"\s*\[\s*" + re.escape(f"0x{fe8u_size:X}") + r"\s*\]\s*=\s*\{")
+    if not re.search(fe8u_pat, fe8u, re.S):
+        errors.append(
+            f"present fe8u analogue contradicts evidence: expected flat inline "
+            f"u8[0x{fe8u_size:X}]")
+    return errors
+
+
+def _validate_orphan_selfref(record, entry, rom, evidence_notes=None):
+    errors = []
+    if evidence_notes is None:
+        evidence_notes = []
     provider = os.path.join(ROOT, entry["provider"])
     try:
         with open(provider, errors="replace") as f:
@@ -641,18 +666,8 @@ def _validate_orphan_selfref(record, entry, rom):
             "raw aligned ROM words now target orphan base at "
             + ", ".join(f"0x{x:08X}" for x in raw_base_slots))
 
-    fe8u_path = os.path.normpath(os.path.join(ROOT, entry["fe8u_provider"]))
-    try:
-        with open(fe8u_path, errors="replace") as f:
-            fe8u = _strip_source_comments(f.read())
-    except OSError as e:
-        errors.append(f"fe8u analogue unreadable: {entry['fe8u_provider']}: {e}")
-    else:
-        fe8u_size = _int(entry["fe8u_size"])
-        fe8u_pat = (r"\bCONST_DATA\s+u8\s+" + re.escape(record["symbol"])
-                    + r"\s*\[\s*" + re.escape(f"0x{fe8u_size:X}") + r"\s*\]\s*=\s*\{")
-        if not re.search(fe8u_pat, fe8u, re.S):
-            errors.append("fe8u analogue is no longer a flat inline u8[]")
+    errors.extend(_validate_optional_fe8u_analogue(
+        record, entry, evidence_notes))
     return errors
 
 
@@ -777,19 +792,23 @@ def classify_opaque_selfrefs(records, skipped, candidates, evidence, rom):
             unresolved.append(item)
             continue
         errors = _validate_common_selfref_facts(record, entry)
+        evidence_notes = []
         category = entry.get("category")
         if category == "gba-lz77":
             errors.extend(_validate_lz_selfref(record, entry))
         elif category == "direct-sound-pcm":
             errors.extend(_validate_pcm_selfref(record, entry))
         elif category == "unreferenced-opaque-orphan":
-            errors.extend(_validate_orphan_selfref(record, entry, rom))
+            errors.extend(_validate_orphan_selfref(
+                record, entry, rom, evidence_notes=evidence_notes))
         else:
             errors.append(f"unknown evidence category: {category!r}")
         item = dict(record)
         item["category"] = category
         item["provider"] = entry.get("provider")
         item["asset"] = entry.get("asset")
+        if evidence_notes:
+            item["evidence_notes"] = evidence_notes
         if errors:
             item["errors"] = errors
             unresolved.append(item)
@@ -1198,6 +1217,13 @@ def emit_true_debt():
             "errors": ["cannot scan opaque self-references without fireemblem8.gba/baserom.gba"]}]
     resolved_selfref_words = sum(len(item["hits"]) for item in selfref_resolved)
     unresolved_selfref_words = sum(len(item["hits"]) for item in selfref_unresolved)
+    selfref_evidence_notes = [
+        (item["symbol"], note)
+        for item in selfref_resolved + selfref_unresolved
+        for note in item.get("evidence_notes", [])
+    ]
+    skipped_anim_sprites = sum(
+        1 for symbol, _ in selfref_skipped if symbol.startswith("AnimSprite_"))
     selfref_gate = selfref_gate_count(selfref_unresolved)
     # completion gate: confirmed-real + unclassified DATA-pointer debt (code-axis excluded)
     gate = (real + blind_data + blind_exact + blind_unres + len(stuck_real)
@@ -1219,11 +1245,16 @@ def emit_true_debt():
           f"{len(selfref_resolved)} symbols / {resolved_selfref_words} hit words")
     print(f"  opaque SELF-REF unresolved review candidates, GATED  : "
           f"{len(selfref_unresolved)} symbols / {unresolved_selfref_words} hit words")
-    print(f"  zero-size opaque symbols skipped (no exact extent)   : {len(selfref_skipped)}")
+    print(f"  zero-size opaque symbols skipped (no exact extent)   : "
+          f"{len(selfref_skipped)} ({skipped_anim_sprites} AnimSprite_*)")
+    for symbol, note in selfref_evidence_notes:
+        print(f"  EVIDENCE NOTE [{symbol}]: {note}")
     print(f"  => COMPLETION GATE (confirmed-real + unclassified)    : {gate}")
     print(f"  NOTE: aligned words inside consumed LZ/PCM input are payload bytes, not")
     print(f"  pointer slots. The evidence manifest validates format, provenance, byte hash,")
     print(f"  exact size and hit set; any drift becomes unresolved and fails this gate.")
+    print(f"  SCOPE: the self-ref gate covers exact nonzero ELF extents plus independently")
+    print(f"  proven exact extents; zero-size symbols above remain an explicit blind spot.")
     if "--gate" in sys.argv:
         print("  -- residual real/unclassified DATA-pointer words (.bin) --")
         for (n, O, v, sym, off) in real_data:
