@@ -1,5 +1,11 @@
 # `.bin` reducibility verification (wave 8) — the honest split of the 642 heuristic-MISS
 
+> **HISTORICAL/SUPERSEDED WAVE SNAPSHOT (2026-06-30).** This entire document,
+> including the approximate 190-item list and its wave assignments, is retained
+> only as verification history and must not be used for dispatch. Current
+> binary-form status is generated in [`docs/bin_audit.md`](bin_audit.md);
+> [`docs/frontier.md`](frontier.md) is the sole source of current work.
+
 **2026-06-30.** Goal: *"no `.bin` kept if it is not `.bin` in fe8u."* After wave 7 (1981
 tracked `.bin`), `scripts/audit_bin_forms.py` (a **name-class heuristic**) reported MISS 642 /
 FLOOR 978 / UNCERTAIN 361. **642 is an UPPER BOUND, not a work-list** — it flags any blob that
@@ -21,7 +27,7 @@ cross-lane double-counting) and genuine floor.
 | map-tilemaps | 29 | 0 | — | 29 (28 already-reduced `_ref.c`, 1 `ObjectType9` JP-LZ) | symbol-name collision; de-pointering inputs counted as debt |
 | sound (vg+m4a) | 5 | 1 (`rom_header` slice) | — | 4 voicegroup | `rom_header_080000C0` misclassed m4a; voicegroup true ceiling = 2 |
 
-## Reducible work-list (~190, by form) — the real remaining work toward the goal
+## Historical reducible list (~190, by form) — superseded wave-8 evidence
 
 - **typed-C INCBIN→struct/array swaps (48, byte-neutral, no cascade):** `PopupScr_*`(6, JP popup
   enum per `ParsePopupInstAndGetLen.c`), `MuSoundScr_*`(7, fe8u `mu.c`), `gBattleparse_0..9`(10,

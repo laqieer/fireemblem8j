@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""US-source inventory / portable-source ceiling (task #26 tracker).
+"""Reference-US source-kind inventory (task #26 tracker).
 
 This inventory classifies the reference US decomp's function symbols by source
-kind. Its US-C-portable ceiling is useful for port planning, but it is NOT the
+kind. Its US-C-portable population is a scoped planning inventory, but it is NOT
+the JP matching-C denominator, an authoritative current-work inventory, or the
 same universe as scripts/calcprogress.py axis 2. The latter is the current linked
 JP build census: project C plus linked library functions, against those functions
 plus the remaining descriptive-assembly functions.
 
-This script makes that ceiling honest. For every JP function in
+For every JP function in
 `layout/us_jp_funcmap.tsv` it classifies the function's **US source kind** by its
 `us_addr` -- the authoritative cut -- using the US linker map
 `../fireemblem8u/fireemblem8.map`:
@@ -35,12 +36,12 @@ We then cross with THIS repo's matched set -- text symbols defined in the
 calcprogress.py axis 2) -- to mark each function graduated vs ungraduated.
 
 Output (committed to docs/us_source_inventory.md):
-  * totals per kind (the HONEST denominator: US-C-portable is the real matching-C
-    ceiling; US-ASM-stays + LIBC/LIBGCC are the legitimately-non-C remainder),
-  * port progress against the US-C-portable reference ceiling,
+  * reference-US totals per source kind and JP matched-name overlap,
   * the separately sourced current calcprogress.py axis-2 census,
-  * a ranked worklist: fully-unported US-C TUs by ungraduated-function count
-    (whole-TU-port candidates), then partially-ported TUs.
+  * reference tables grouped by zero or partial JP matched-name overlap.
+
+This output is descriptive evidence only. Never dispatch from it;
+docs/frontier.md is the sole authoritative current work source.
 
 Read-only: parses maps + runs `arm-none-eabi-nm` on already-built objects. Never
 edits the build, never `git add`. Caller stages script + generated md.
@@ -213,13 +214,12 @@ def jp_matched_funcs():
 
 
 # --------------------------------------------------------------------------- #
-# 2b. FULL US-C ceiling from the US map symbol table (independent of funcmap).
+# 2b. FULL reference-US C population from the map (independent of funcmap).
 #     The funcmap is only a SUBSET of US functions (the ones with an established
-#     per-function JP<->US address correspondence). The *true* matching-C ceiling
-#     is every US text symbol that lives in a src/*.o range -- regardless of
-#     whether the funcmap tracks it -- because a whole-TU port graduates funcmap
-#     and non-funcmap functions alike. We count those from the map's own symbol
-#     lines so the honest denominator is complete, not funcmap-bounded.
+#     per-function JP<->US address correspondence). This inventory includes every
+#     US text symbol that lives in a src/*.o range, regardless of whether the
+#     funcmap tracks it. That population is complete for this reference-US scope;
+#     it is not calcprogress's JP denominator.
 # --------------------------------------------------------------------------- #
 SYM_RE = re.compile(r"^\s+0x(0[0-9a-fA-F]+)\s+([A-Za-z_]\w*)\s*$")
 
@@ -255,7 +255,7 @@ def main():
     matched = jp_matched_funcs()
     axis2 = calcprogress_axis2()
 
-    # Full US text-symbol ceiling (independent of the funcmap subset).
+    # Full reference-US text-symbol population (independent of the funcmap subset).
     us_syms = us_text_symbols(starts, ranges)
     full = defaultdict(int)       # kind -> US function count
     full_grad = defaultdict(int)  # kind -> graduated-in-JP count
@@ -287,7 +287,7 @@ def main():
 
     kind_total = defaultdict(int)
     kind_grad = defaultdict(int)
-    # funcmap-tier hint per ungraduated function name (for the worklist)
+    # funcmap-tier hint per unmatched reference-US function name
     fm_tier_of = {}
 
     for jp, us, size, tier, name in rows:
@@ -297,12 +297,12 @@ def main():
             kind_grad[kind] += 1
         fm_tier_of[name] = tier
 
-    # funcmap US-C-portable subset (a hint about per-function confidence; the TRUE
-    # ceiling/worklist below uses the FULL US text-symbol table, not the funcmap).
+    # funcmap US-C-portable subset (a per-function correspondence hint; the
+    # reference tables below use the FULL US text-symbol table).
     fm_portable_total = kind_total["US-C-portable"]
     fm_portable_grad = kind_grad["US-C-portable"]
 
-    # ---- worklist from the FULL US-C symbol table (complete, not funcmap-bounded) ----
+    # ---- reference tables from the FULL US-C symbol population ----
     # per-TU: total US-C funcs, graduated-in-JP, ungraduated names (+ funcmap-tier
     # hint counts of the ungraduated set: how many carry an exact/masked funcmap row).
     tu_ungrad = defaultdict(list)
@@ -337,26 +337,31 @@ def main():
     total_us_funcs = sum(full.values())
 
     L = []
-    L.append("# US source inventory -- portable-source ceiling")
+    L.append("# Reference-US source-kind inventory")
     L.append("")
     L.append("_Generated by `scripts/us_source_tracker.py`. Do not edit by hand._")
+    L.append("")
+    L.append("> **REFERENCE INVENTORY, NOT A CURRENT WORK QUEUE.** Do not dispatch")
+    L.append("> from these tables. They describe reference-US source kinds and JP")
+    L.append("> matched-name overlap, not the authoritative JP work frontier.")
+    L.append("> [`docs/frontier.md`](frontier.md) is the sole current work source.")
     L.append("")
     L.append("Every US function symbol in `../fireemblem8u/fireemblem8.map` is")
     L.append("classified by the **US source kind** of its address (the authoritative")
     L.append("cut) from the object section ranges (` .text 0x08ADDR 0xSIZE <obj>`),")
     L.append("then crossed with THIS repo's byte-matched set (text symbols in the")
-    L.append("linked `src/*.o`). This establishes the reference decomp's")
-    L.append("**US-C-portable** planning ceiling --")
+    L.append("linked `src/*.o`). This establishes a scoped reference-US")
+    L.append("**US-C-portable** planning population --")
     L.append("the US decomp keeps `asm/arm.o`/`asm/arm_call.o` as descriptive `.s`")
     L.append("(already its gold standard) and links libc/libgcc from `tools/agbcc`,")
     L.append("none of which can ever become matching C.")
     L.append("")
-    L.append("## US portable-source ceiling (full reference text-symbol table)")
+    L.append("## Reference-US source-kind census (full text-symbol table)")
     L.append("")
     L.append("| kind | US functions | graduated (JP) | note |")
     L.append("|------|-------------:|---------------:|------|")
     L.append(f"| US-C-portable | {us_c_ceiling} | {us_c_grad} | "
-             f"real C TUs -- **portable-source planning ceiling** |")
+             f"real C TUs -- **reference planning population** |")
     L.append(f"| US-ASM-stays | {asm_stays} | {full_grad['US-ASM-stays']} | "
              f"arm.o/arm_call.o ARM-mode; stays .s (US standard); NEVER matching-C |")
     L.append(f"| LIBC/LIBGCC | {libc} | {full_grad['LIBC/LIBGCC']} | "
@@ -368,11 +373,12 @@ def main():
              f"**{us_c_grad + full_grad['US-ASM-stays'] + full_grad['LIBC/LIBGCC']}** "
              f"| US text symbols |")
     L.append("")
-    L.append(f"- **The US portable-source ceiling is {us_c_ceiling} functions.**")
+    L.append(f"- **The reference-US portable-source population is "
+             f"{us_c_ceiling} functions.**")
     L.append(f"  {nonc_full} US functions ({asm_stays} ASM-stays + {libc} libc/libgcc)")
     L.append(f"  legitimately stay non-C -- the US decomp itself keeps them that way.")
     L.append(f"- **Graduated: {us_c_grad} / {us_c_ceiling} = "
-             f"{pct(us_c_grad, us_c_ceiling):.2f}%** of the portable-source ceiling.")
+             f"{pct(us_c_grad, us_c_ceiling):.2f}%** matched by name in the JP build.")
     L.append("")
     L.append("## Current calcprogress axis 2 (distinct JP linked-build census)")
     L.append("")
@@ -389,7 +395,7 @@ def main():
     L.append("")
     L.append("`layout/us_jp_funcmap.tsv` tracks only the functions with an established")
     L.append("per-function JP<->US address correspondence (exact/masked tiers). It is")
-    L.append("a SUBSET of US functions; the worklist below uses the full table above.")
+    L.append("a SUBSET of US functions; the reference tables below use the full census.")
     L.append("")
     L.append("| funcmap kind | rows | graduated | note |")
     L.append("|------|-----:|----------:|------|")
@@ -414,23 +420,21 @@ def main():
              f"graduated. The {kind_total['DATA-obj']:,} DATA-obj rows are data "
              f"globals, not functions.")
     L.append("")
-    L.append("## Whole-TU-port worklist (fully-unported US-C TUs)")
+    L.append("## Reference-US TUs with zero JP matched-name overlap")
     L.append("")
-    L.append("Ranked by ungraduated US-C function count (full symbol table). A TU")
-    L.append("with 0 graduated functions is a clean whole-TU port candidate (no")
-    L.append("multiple-definition risk from a sibling partial carve). `tiers` shows")
-    L.append("the funcmap confidence of the ungraduated set (`no-funcmap` = no")
-    L.append("per-function correspondence tracked, usually region-different/larger).")
+    L.append("Listed by descending unmatched-name count for reference analysis only.")
+    L.append("A zero here describes name overlap, not current JP work or suitability")
+    L.append("for a whole-TU port. `tiers` records funcmap correspondence metadata.")
     L.append("")
     L.append("| US TU | US-C funcs | ungraduated | tiers |")
     L.append("|-------|-----------:|------------:|-------|")
     for tu, tot, ung, td in fully_unported:
         L.append(f"| {tu} | {tot} | {ung} | {tierstr(td)} |")
     L.append("")
-    L.append("## Partially-ported US-C TUs (per-function remainder)")
+    L.append("## Reference-US TUs with partial JP matched-name overlap")
     L.append("")
-    L.append("These already have some graduated functions; the remainder is")
-    L.append("per-function work (extract_func_only + bind statics).")
+    L.append("Descriptive matched/unmatched name counts only; this table is not")
+    L.append("a per-function task list.")
     L.append("")
     L.append("| US TU | US-C funcs | graduated | ungraduated | tiers |")
     L.append("|-------|-----------:|----------:|------------:|-------|")
@@ -442,27 +446,27 @@ def main():
     # ----------------------------------------------------------------------- #
     # Console summary.
     # ----------------------------------------------------------------------- #
-    print("== US SOURCE INVENTORY (portable-source ceiling) ==")
+    print("== REFERENCE-US SOURCE-KIND INVENTORY ==")
     print("  -- full US text-symbol table --")
-    print(f"  US-C-portable (CEILING) : {us_c_ceiling:5d}  "
+    print(f"  US-C-portable population: {us_c_ceiling:5d}  "
           f"graduated {us_c_grad} ({pct(us_c_grad, us_c_ceiling):.2f}%)")
     print(f"  US-ASM-stays            : {asm_stays:5d}  (never matching-C)")
     print(f"  LIBC/LIBGCC             : {libc:5d}  (never matching-C)")
     print(f"  total US functions      : {total_us_funcs:5d}")
     print()
-    print(f"  US portable-source ceiling     = {us_c_ceiling}")
-    print(f"  graduated of ceiling          = {us_c_grad} "
+    print(f"  reference portable population = {us_c_ceiling}")
+    print(f"  JP matched-name overlap       = {us_c_grad} "
           f"({pct(us_c_grad, us_c_ceiling):.2f}%)")
     print(f"  calcprogress axis 2 (JP build) = "
           f"{axis2['func_done']}/{axis2['func_total']} "
           f"({axis2['funcs']} project C + {axis2['func_lib']} linked library; "
           f"{axis2['func_asm']} asm remainder)")
     print()
-    print(f"  fully-unported US-C TUs (top 25 by ungraduated count):")
+    print(f"  reference TUs with zero JP matched-name overlap (first 25):")
     for tu, tot, ung, td in fully_unported[:25]:
         print(f"    {tu:24s} {ung:3d} ungraduated / {tot:3d}   [{tierstr(td)}]")
     print()
-    print(f"  partially-ported US-C TUs with most remainder (top 15):")
+    print(f"  reference TUs with partial JP matched-name overlap (first 15):")
     for tu, tot, g, ung, td in partially[:15]:
         print(f"    {tu:24s} {ung:3d} ungrad / {tot:3d} ({g} done)   [{tierstr(td)}]")
     print()

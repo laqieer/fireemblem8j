@@ -1,10 +1,15 @@
 # Axis #2 (matching-C) — final 4 still-asm status (matching stopped)
 
-> **[FINAL CURRENT STATUS 2026-07-13.]** This session byte-matched **11
+> **HISTORICAL/SUPERSEDED MATCHING-C CAMPAIGN RECORD.** All queues, ordering,
+> scores, and target suggestions in this document are retained only as dated
+> evidence and must not be used for dispatch. [`docs/frontier.md`](frontier.md)
+> is the sole current work list.
+>
+> **[HISTORICAL FINAL STATUS 2026-07-13.]** This session byte-matched **11
 > functions**, then integrated two proven nonmatching seed improvements. Because
 > neither seed replaced its asm byte provider, the aggregate remains **99.95%
-> (8688/8692), 4 still-asm**. This file is now a status/evidence record, not an
-> instruction to launch more matching work.
+> (8688/8692), 4 still-asm**. This file is a historical status/evidence record,
+> not an instruction to launch more matching work.
 >
 > 1. `sub_800A34C` — score **60**, real five-argument solver ABI,
 >    `PROVEN-BOUNDED(3)`, active
@@ -117,7 +122,9 @@
 
 ## Historical D307/W3 triage
 
-Retained for provenance; the five-entry queue above is the current work list.
+Retained only for historical provenance. The five-entry queue and all target
+ordering in this document are superseded and must not be used for dispatch;
+[`docs/frontier.md`](frontier.md) is the sole current work list.
 
 ## HIGH-CONFIDENCE RECONSTRUCTS (clear asm body, do first)
 - **#3 sub_80D17C8** (124B, classchg-sel): JP reads precomputed `gClassReelNameTable @0x089CF318`
