@@ -49,5 +49,6 @@ AAF9EC	AB031C	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_
 AB0830	AB0A44	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap35)	df4_menu region-diff data (532 B, long-tail gap)
 AB0D18	AB0FDC	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap36)	df4_menu region-diff data (708 B, long-tail gap)
 AB7144	ABCAD0	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap37)	df4_menu region-diff data (22924 B, long-tail gap)
-ABCD24	ABFFE4	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap38)	df4_menu region-diff data (12992 B, long-tail gap)
+ABCD24	ABCD44	src/uiarena.o(.data.frontier_df4_menu.gap38)	df4_menu region-diff data (gProcScr_ArenaUiResultBgm, 32 B, typed for #143)
+ABCD44	ABFFE4	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap38b)	df4_menu region-diff data (descriptor table tail, 12960 B, long-tail gap)
 AC00A8	AC0394	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap39)	df4_menu region-diff data (748 B, long-tail gap)

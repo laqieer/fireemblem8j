@@ -24,7 +24,6 @@
 
 extern struct ProcCmd gProcScr_ArenaUiMain[];
 extern struct ProcCmd gProcScr_ArenaUiResults[];
-extern struct ProcCmd gProcScr_ArenaUiResultBgm[];
 
 void StartArenaDialogue(int, ProcPtr);
 void DrawArenaOpponentDetailsText(ProcPtr);
@@ -117,3 +116,17 @@ void Arena_PlayArenaSong(void) {
     StartBgmExt(SONG_COLOSSEUM_ENTRANCE, 0, 0);
     return;
 }
+
+/* gProcScr_ArenaUiResultBgm (issue #143 menu pass): the ROM 0x08ABCD24..0x08ABCD44
+ * head of what was frontier_df4_menu_038_ABCD24 -- a real ProcCmd[4]. Carved into
+ * its own object so it needs its own manifest row (layout/carved_rom.d/
+ * data_frontier4_df4_menu.tsv); the remaining descriptor table stays in
+ * frontier_df4_menu.c (moved to a new gap38b section so both halves stay
+ * contiguous around this carve-out). Repointed both PROC_START_CHILD/
+ * PROC_END_EACH casts in dat_gProcScr_ArenaUiResults_ref.c. */
+struct ProcCmd gProcScr_ArenaUiResultBgm[] __attribute__((section(".data.frontier_df4_menu.gap38"))) = {
+    PROC_CALL(Arena_PlayResultSong),
+    PROC_SLEEP(210),
+    PROC_CALL(Arena_PlayArenaSong),
+    PROC_END,
+};
