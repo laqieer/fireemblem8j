@@ -4,10 +4,9 @@
 > described here are timeless and remain valid. However, the "FE8J's TRUE current
 > state" figures throughout (25.6% matching-C, ~0.12% data, ~17% build
 > self-containment, ~59% named) are **historical snapshots from early in the
-> project**. Current ground-truth figures (from `scripts/calcprogress.py`):
-> matching-C **99.86% (8680 / 8692)**, build self-containment **100%**, strict
-> C/PNG extracted data **79.91%**, source-form data **100.00%**, named symbols
-> **100.00%**. For what remains, see `docs/frontier.md`.
+> project**. Do not use any numeric claim below as current state. Recompute
+> current ground truth with `scripts/calcprogress.py`; the canonical scorecard
+> and live work list are maintained in `docs/frontier.md`.
 
 
 A prior effort drove the catch-all `asm/baserom.s` to **zero** `.incbin "baserom.gba"`

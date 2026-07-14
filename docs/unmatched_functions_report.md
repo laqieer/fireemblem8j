@@ -1,7 +1,10 @@
 # The 4 remaining unmatched functions — understanding report
 
-> **FINAL CURRENT SNAPSHOT 2026-07-13 (`origin/main`
+> **HISTORICAL CAMPAIGN SNAPSHOT 2026-07-13 (`origin/main`
 > `5b35c7635a847b70cca70f4bff77418801a209b6`).**
+> Current metrics and the live four-function list are maintained only in
+> [`frontier.md`](frontier.md); the SHA and research metrics below are retained
+> as campaign evidence.
 > The final two campaign changes are **proven nonmatching seed improvements, not
 > matching-C promotions**: `sub_800A594` landed at
 > `42a562774ce82b52ee20bcf19235c0543f4ef2e8`, then `sub_80C05C8` landed at

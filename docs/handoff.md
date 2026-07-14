@@ -1,10 +1,13 @@
 # FE8J handoff — next-session entry point
 
-**Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
-[`docs/maintenance.md`](maintenance.md).** Final campaign refresh: 2026-07-13.
+**Read [`docs/frontier.md`](frontier.md) first: it is the sole current-state
+source.** This file is a historical matching-campaign handoff; its dated SHAs,
+denominators, and per-promotion metrics are retained as evidence, not live
+progress. See also [`docs/maintenance.md`](maintenance.md).
 
-> **[FINAL REFRESH 2026-07-13 — matching campaign stopped.]**
-> Current `origin/main` is `5b35c7635a847b70cca70f4bff77418801a209b6`.
+> **[HISTORICAL FINAL REFRESH 2026-07-13 — matching campaign stopped.]**
+> The campaign snapshot's `origin/main` was
+> `5b35c7635a847b70cca70f4bff77418801a209b6`.
 > This session byte-matched **11 functions**; the final A594 and C05C8 changes
 > are proven nonmatching seed improvements, not promotions. Ground truth remains
 > matching-C **99.95% (8688/8692, 4 still-asm)**, source-form code

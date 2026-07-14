@@ -11805,7 +11805,7 @@ shiftability suspects.
 lane) was NOT touched. `dat_worldmap_minimap_p2`/`p3` (already 0KB-delta,
 fully carved) were NOT touched.
 
-## D381 follow-up — complete the gWorldmapMinimap_8..13 remainder; correct comment/audit-delta errors (2026-07-14)
+### Follow-up to D381 — complete the gWorldmapMinimap_8..13 remainder; correct comment/audit-delta errors (2026-07-14)
 
 An independent verifier confirmed the byte-level work above was correct but
 flagged the branch as near-complete, not complete: the honest
@@ -12209,7 +12209,6 @@ records the D383 closure; no additional edit needed there since the coarse
 gate count stays at 0 and no `calcprogress.py` axis changes.
 
 Tracked on the same issue #143 thread as D383.
-Tracked on the same issue #143 thread as D383.
 
 ## D385 — D384 was INCOMPLETE: source-declaration enumeration missed 3 more disguised `u32[]` ProcCmd scripts; broadened the gate to a byte-level strict decode of every ROM object symbol (2026-07-13)
 
@@ -12320,7 +12319,6 @@ the source-declaration level), not a new numeric scorecard axis. No
 the D383/D384 closures and its gate-count-stays-0 framing is unchanged by this
 broadening.
 
-Tracked on the same issue #143 thread as D383/D384.
 Tracked on the same issue #143 thread as D383/D384.
 
 ## D386 — D385's broadened ProcCmd gate had a real object-extent defect: bound every candidate to its OWN size, treat true terminal opcodes correctly, and verify NOLOAD/split-continuation edge cases empirically instead of guessing (2026-07-14)
@@ -12439,19 +12437,6 @@ truncated objects, genuine vs. unverifiable split continuations, NOLOAD
 candidates both trusted (clean decode) and excluded (failed decode), zero/
 negative-size handling, and non-terminating/runaway-decode bounding.
 
-**Numbering note for the integrator.** This branch was developed serially
-and locally numbers its new decisions D383 (glyph gate)/D384 (ProcCmd
-literals + scan_offsets.py fix)/D385 (broadened byte-decode rescan)/D386
-(this entry). The reviewer separately reports `main` currently maps D383 to
-an unrelated map-related decision and D384 to a different code-literals
-entry — i.e. these numbers WILL collide with `main` by the time this branch
-is integrated. The integrator must renumber all four headings (D383-D386)
-here and every cross-reference to them (including the two `docs/frontier.md`
-axis-5 mentions) against `main`'s actual next-available number at merge time;
-do not renumber preemptively in this branch without knowing that exact
-number.
-
-Tracked on the same issue #143 thread as D383/D384/D385.
 Tracked on the same issue #143 thread as D383/D384/D385.
 
 ## D387 — D386's ELF-symbol scanner silently dropped 262,885 zero-size `nm -S` lines before they ever reached the "zero-size" bucket; parse both line shapes explicitly and add a deterministic zero-size backstop that recovers 364 previously-invisible ProcCmd scripts (2026-07-14)
@@ -12560,10 +12545,7 @@ match; all 4,730 ProcCmd pointer-bearing fields (across all 995 prefixes,
 including the 364 newly-recovered zero-size scripts) track `+shift` (or stay
 NULL), 0 mismatches. `make clean && make compare` → `fireemblem8.gba: OK`.
 
-Tracked on the same issue #143 thread as D383/D384/D385/D386. Same
-numbering-collision note applies: D387 (this entry) is ALSO a locally-scoped
-number and must be renumbered by the integrator alongside D383-D386 against
-`main`'s actual next-available sequence at merge time.
+Tracked on the same issue #143 thread as D383/D384/D385/D386.
 
 ## D388 — D387's zero-size backstop reintroduced the exact cross-object annexation bug through a different path; add a hard nonzero-size boundary invariant + a general multi-object-crossing audit, and make the relocation-completeness/shifted-A/B denominators physical-address-truthful (2026-07-14)
 
@@ -12678,11 +12660,8 @@ ProcCmd `unique_non_null_pointer_slots_checked=4,701` mismatches=0,
 `null_pointer_bearing_fields_checked=13` mismatches=0. `make compare` and
 `make clean && make compare` both `fireemblem8.gba: OK`.
 
-Tracked on the same issue #143 thread as D383/D384/D385/D386/D387. Same
-numbering-collision note applies: D388 (this entry) is ALSO a locally-scoped
-number and must be renumbered by the integrator alongside D383-D387 against
-`main`'s actual next-available sequence at merge time.
-## D389 — frontier_df4_menu 14-file UNCERTAIN class: full Phase A+B + partial Phase C (issue #143 menu lane, integration-renumerable) (2026-07-14)
+Tracked on the same issue #143 thread as D383/D384/D385/D386/D387.
+## D389 — frontier_df4_menu 14-file UNCERTAIN class: full Phase A+B + partial Phase C (issue #143 menu lane) (2026-07-14)
 
 **Scope.** Isolated worktree/branch `feat/issue-143-menu-assets` (from
 `origin/main` `ab44df71e`), single owner of `src/data/frontier_df4_menu/**`,
@@ -12774,11 +12753,9 @@ remaining raw regions keep the class above zero). `make clean && make compare`
 -> `fireemblem8.gba: OK`; `make shiftcheck` -> no high-confidence suspects;
 `scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK;
 `git diff --check` clean. Issue #143 remains open; `main` was not merged; no
-force-push occurred. If a concurrently-integrated sibling branch has already
-claimed D389, the integrator should renumber this entry, not the work it
-describes.
+force-push occurred.
 
-## D390 — frontier_df4_menu 14-file UNCERTAIN class: Phase C completion (issue #143 menu lane, integration-renumerable) (2026-07-14)
+## D390 — frontier_df4_menu 14-file UNCERTAIN class: Phase C completion (issue #143 menu lane) (2026-07-14)
 
 **Scope.** Direct follow-up to D389 on the same isolated worktree/branch
 `feat/issue-143-menu-assets`. The prior pass explicitly deferred three items as
@@ -12904,11 +12881,9 @@ cannot distinguish a still-legitimate partial raw source from a genuine
 unresolved blob, so these are not new residual mysteries.
 
 **Result:** all three items explicitly deferred by D389 are now complete.
-Issue #143 remains open; `main` was not merged; no force-push occurred. If a
-concurrently-integrated sibling branch has already claimed D390, the
-integrator should renumber this entry, not the work it describes.
+Issue #143 remains open; `main` was not merged; no force-push occurred.
 
-## D391 — src/events_wm.c re-segmented to the audited 136-array boundary table (issue #143 menu lane, integration-renumerable) (2026-07-14)
+## D391 — src/events_wm.c re-segmented to the audited 136-array boundary table (issue #143 menu lane) (2026-07-14)
 
 **Scope.** Direct correction to the D390 `src/events_wm.c` migration, following an
 externally-supplied "menu-descriptor-re" boundary audit delivered in two parts.
@@ -12983,11 +12958,9 @@ suspects. `scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK.
 `git diff --check` clean. `scripts/audit_bin_forms.py` unchanged (21
 UNCERTAIN; this was a naming/boundary correction, not a new file
 conversion). Issue #143 remains open; `main` was not merged; no force-push
-occurred. If a concurrently-integrated sibling branch has already claimed
-D391, the integrator should renumber this entry, not the work it describes.
-D391, the integrator should renumber this entry, not the work it describes.
+occurred.
 
-## D392 — Events_WM_Beginning/ChapterIntro: canonical variables.h declaration + dead-extern cleanup (issue #143 menu lane, integration-renumerable) (2026-07-14)
+## D392 — Events_WM_Beginning/ChapterIntro: canonical variables.h declaration + dead-extern cleanup (issue #143 menu lane) (2026-07-14)
 
 **Scope.** Style/organization follow-up to D391, per a further "menu-descriptor-re"
 recipe message. Independently verified every substantive numeric/structural
@@ -13028,9 +13001,7 @@ rebuild after the fix. `make shiftcheck` -> PASS, 0 HIGH suspects.
 `scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK. `git diff
 --check` clean. No manifest change (pure declaration/type cleanup, same
 ROM bytes throughout). Issue #143 remains open; `main` was not merged; no
-force-push occurred. If a concurrently-integrated sibling branch has
-already claimed D392, the integrator should renumber this entry, not the
-work it describes.
+force-push occurred.
 
 ## D393 — menu source-coverage completion: duplicate-original elimination, FLOOR reclassification, exact lookup typing (issue #143 menu lane) (2026-07-14)
 

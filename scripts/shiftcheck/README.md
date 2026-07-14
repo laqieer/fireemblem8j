@@ -15,22 +15,18 @@ separate ELF / a generated ldscript, never `ldscript.txt`, `$(ROM)`, or `compare
 This harness was ported from fe8u (PR #745). fe8j's build differs structurally, so
 two things changed (see `docs/decisions.md` D313):
 
-1. **The CI gate is the STATIC layers only: `make shiftcheck = shiftcheck-build +
-   shiftcheck-static + shiftcheck-offsets + shiftcheck-talk +
-1. **The CI gate is the STATIC layers only: `make shiftcheck = shiftcheck-build +
-   shiftcheck-static + shiftcheck-offsets + shiftcheck-talk +
-   shiftcheck-ptraudit + shiftcheck-codeliterals + shiftcheck-selfrefs +
-   shiftcheck-glyphs + shiftcheck-procscr + shiftcheck-tests`.** These read the
-   linked ROM + the `--emit-relocs` ELF + the `.map`, audit packed talk metadata
-   and source pointer classifications (including STT_FUNC-targeting ABS32
-   relocations and proven packed-scalar false relocations), lexically reject raw
-   numeric C literal-pool pointers that have no relocation, decode opaque
-   self-referential embedded-data words against a narrow evidence manifest,
-   structurally walk the glyph-table linked lists and `struct ProcCmd` script
-   arrays for unrelocated pointer fields, and run focused scanner tests.
+1. **CI blocks on the static Layers 0/1/1b suite.** The authoritative wiring is
+   the `shiftcheck:` prerequisite list in the root `Makefile`: build-address,
+   retained-relocation, cross-resource-offset, packed-talk, pointer
+   classification, code-literal, opaque-self-reference, graphics
+   relocation/static-format, glyph, ProcCmd, and focused-test gates. Use
+   `make shiftcheck`; do not copy the prerequisite list or its changing counts
+   into other current-state docs. These gates read the built ROM, linked ELF and
+   `--emit-relocs` ELF, and map; they include the current real-relocation
+   pointer/glyph/ProcCmd/graphics checks.
 
-2. **Layer 2 (`shiftcheck-diff`) and Layer 3 (`shiftcheck-run`) are NON-gating and,
-   for Layer 2, NOT APPLICABLE to fe8j as-is.** fe8u's differential shift injects
+2. **Layer 2 (`shiftcheck-diff`) is non-gating and N/A on fe8j under D313;
+   Layer 3 (`shiftcheck-run`) is not ported.** fe8u's differential shift injects
    `. += S;` after `src/crt0.o(.text);` to slide the tail into the slack that exists
    before the first absolute pin `. = 0x08C00000;`. fe8j's generated `ldscript.txt`
    has **no crt0** (first object is `src/rom_header.o(.text)` @ `0x08000000`), is
@@ -60,8 +56,9 @@ result is recorded in the V1 PR.
 | `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish, plus (from `fireemblem8_relocs.elf`) false ROM ABS32 decodes: non-entry `STT_FUNC` targets, named zero-size semantic resources with addends ≥`0x10000`, proven packed scalars, and every unaudited relocation resolving inside the cartridge header. Header-domain targets fail closed unless they are exact typed FUNC/OBJECT pointers or explicitly audited pinned slots; known TileAnimations3, LZ, and nested DACS-image source domains always fail. |
 | `make shiftcheck-codeliterals` | 1e | Lexically tokenizes every linked code C source (excluding `src/data/**`) for standalone hex integer literals, then rejects numeric values in `[0x08000000, 0x0A000000)`. This catches 7/8/extra-leading-zero and suffixed spellings of agbcc literal-pool words emitted **without** `R_ARM_ABS32`; only the three declaration/call-scoped packed-value contexts documented by D377 are accepted. |
 | `make shiftcheck-selfrefs` | 1f | Decodes every structureless-opaque symbol's built-ROM bytes for self-referential words and checks each hit against a narrow evidence manifest (`scripts/shiftcheck/opaque_selfref_evidence.json`); unresolved candidates or evidence drift fail `scripts/audit_pointers.py --true-debt --gate`. Zero-size symbols are never extended to the next global. |
-| `make shiftcheck-glyphs` | 1g | Structural glyph-table audit (issue #143): walks the ACTUAL `TextGlyphs_System`/`TextGlyphs_Talk` linked lists in the built ROM (schema-known 0xC0 heads + `struct Glyph.sjisNext` chains, cycle-detected, ROM-range-checked) and requires a real relocation at every non-null pointer word. Catches a blind spot Layers 1 and 1d both miss: a raw literal in a single-glyph residue object never looks "MIXED" to the Layer-1 classifier, and a plain C `u32[]` numeric initializer (agbcc never relocates it) is invisible to Layer 1d's `.4byte`-token text scan. `--shifted-gba` adds an optional A/B proof against a `+shift` ROM (`build_shifted_rom.sh`): every reachable glyph's links track `+shift` and its payload bytes stay identical. |
-| `make shiftcheck-procscr` | 1h | Structural `struct ProcCmd` script audit (issue #143 follow-up, broadened per D385, object-extent/terminal-opcode/NOLOAD-corrected per D386, `nm -S` zero-size parsing fixed + zero-size backstop per D387, hard nonzero-size boundary invariant + physical-address-truthful denominators per D388): strict-decodes a ProcCmd prefix from EVERY ROM object symbol's address (including 3-field zero-size `nm -S` lines, now parsed instead of silently dropped, with a deterministic backstop recovering 363 previously-invisible scripts, hard-bounded so it never enters any part of a neighboring nonzero-size object's own bytes), bounded to that symbol's OWN `nm` size (not just symbols the C source types as `struct ProcCmd`, and never crossing into a neighboring object), and requires a real relocation at every non-null pointer-bearing `dataPtr` field, deduplicated by physical ROM source address across overlapping/nested prefixes for a truthful denominator (the opcode set mirrors `include/proc.h`'s `PROC_*` macro table; four opcodes -- `PROC_REPEAT`/`GOTO`/`JUMP`/`BLOCK` -- are runtime-verified terminal, so a script may end without a trailing `PROC_END`). Same blind spot as Layer 1g in a second consumer: `PROC_NAME((const void*)0x08..)` compiles to an unrelocated word. `--shifted-gba` adds the same optional A/B proof, also physical-address-deduplicated. |
+| `make graphicscheck-relocs` / `graphicscheck-tests` | 1g | Rejects relocation slots inside graphics payloads or `AnimSprite_*` command arrays and runs the source-format fixture suite. The plain `make graphicscheck` format audit also blocks `make compare`. |
+| `make shiftcheck-glyphs` | 1h | Structural glyph-table audit (issue #143): walks the ACTUAL `TextGlyphs_System`/`TextGlyphs_Talk` linked lists in the built ROM (schema-known 0xC0 heads + `struct Glyph.sjisNext` chains, cycle-detected, ROM-range-checked) and requires a real relocation at every non-null pointer word. Catches a blind spot Layers 1 and 1d both miss: a raw literal in a single-glyph residue object never looks "MIXED" to the Layer-1 classifier, and a plain C `u32[]` numeric initializer (agbcc never relocates it) is invisible to Layer 1d's `.4byte`-token text scan. `--shifted-gba` adds an optional A/B proof against a `+shift` ROM (`build_shifted_rom.sh`): every reachable glyph's links track `+shift` and its payload bytes stay identical. |
+| `make shiftcheck-procscr` | 1i | Structural `struct ProcCmd` script audit (issue #143 follow-up, broadened per D385, object-extent/terminal-opcode/NOLOAD-corrected per D386, `nm -S` zero-size parsing fixed + bounded zero-size backstop per D387-D388): strict-decodes ProcCmd prefixes from ROM object symbols, never crosses an independently-sized neighbor, requires a real relocation at every non-null pointer-bearing `dataPtr`, and deduplicates by physical ROM source address for the truthful denominator. The opcode set mirrors `include/proc.h`; `--shifted-gba` supplies an optional physical-address-deduplicated A/B proof. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
 | `make shiftcheck` | static + tests | The complete non-emulator gate above. |
@@ -88,7 +85,7 @@ shared classifier (`_classify.py`) buckets findings so the signal isn't drowned:
   data, e.g. a banim palette), not a typed pointer table.
 
 Coincidental values in the cartridge header range (`< 0x08000100`) and `.text`
-literal pools are filtered out by the relocation-ranking layer. D376 closes
+literal pools are filtered out by the relocation-ranking layer. D377 closes
 that deliberate `.text` blind spot at the source level:
 `shiftcheck-codeliterals` distinguishes the three proven packed contexts from
 raw numeric C pointers before agbcc can lower them to unrelocated pool words.
@@ -123,16 +120,17 @@ RESULT: no high-confidence shiftable-region suspects.
 A separate probe also confirmed there are no hardcoded *jump* tables (runs of
 unrelocated pointers at distinct symbol starts) elsewhere in the shiftable region —
 `gOpinfo_1` was the only real hardcoded-pointer table in the typed data. The
-remaining `[B]`/`[C]`/`[D]` words are coincidental incbin data, not pointers; the
-definitive check on those is Layer 3 (runtime).
+remaining `[B]`/`[C]`/`[D]` words are coincidental incbin data, not pointers.
+The runtime discussion below is fe8u history, not an fe8j gate.
 
-## Layer 3 runtime results
+## Layer 3 runtime results (fe8u history; not an fe8j gate)
 
 Backend: `mgba_oracle.c`, a small program linking `libmgba` (apt: `libmgba-dev`);
 `run_dynamic.py` compiles it on demand. (The mGBA Python bindings aren't on PyPI for
 this environment.) It is validated and non-vacuous:
 
-- **Positive** — fixed ROM vs a shifted ROM (`+0x40000` and `+0x80000`): framebuffers
+- **Historical fe8u positive** — fixed ROM vs a shifted ROM (`+0x40000` and
+  `+0x80000`): framebuffers
   are **identical at every checkpoint** through boot → title → intro → menus
   (frames 120–3000). The per-frame hashes vary (real changing screens), so the
   oracle is reading actual output, not a constant.
