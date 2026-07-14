@@ -3,11 +3,17 @@
 # byte-identical at the pinned -mindist); raw palette -> JASC .pal; everything else ->
 # verbatim .bin incbin'd directly. baserom.gba is out of the build graph. Oracle: make compare.
 
-# PNG-extracted LZ sheet (proven byte-exact at -mindist 2). blob 001 is a 3-way split:
-# [0:0x1218] 640t primary + preamble verbatim, [0x1218:0x15C8] 96t sheet -> editable PNG
-# (png -> .4bpp -> .4bpp.lz), [0x15C8:end] raw blocks verbatim (INCBIN slices of the
-# original .bin). gbagfx -mindist 2 reproduces the FE8 compressor's stream byte-for-byte.
+# PNG-extracted LZ sheet (proven byte-exact at -mindist 2). blob 001 is fully typed,
+# no verbatim residual remains: [0:0xCE4] 640t head sheet -> editable PNG (_head.png ->
+# .4bpp -> .4bpp.lz), [0xCE4:0x1198] standard TSA header 0x1D13=30x20 -> editable
+# .tsa.bin (_head_tsa.tsa.bin, raw/uncompressed, no LZ), [0x1198:0x1218] 4 16-color
+# palettes (_0 kept typed C u16[16] literal since 7 of 16 entries have bit15 set and a
+# JASC round-trip would clear it; _1/_2/_3 exact JASC .pal), [0x1218:0x15C8] 96t sheet
+# -> editable PNG (png -> .4bpp -> .4bpp.lz), [0x15C8:end] raw blocks verbatim (INCBIN
+# slices of the tail TSA + palette). gbagfx -mindist 2 reproduces the FE8 compressor's
+# stream byte-for-byte for both LZ sheets.
 graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head.4bpp.lz: LZ_FLAGS := -mindist 2
 
 # wave-reopened: 017/024/032/033 were mis-classified as non-reproducible LZ floors
 # (an off-by-4-padding measurement error). Each starts with a GBA-BIOS-LZ77 4bpp sheet
@@ -33,7 +39,10 @@ graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_2.4bpp.lz: LZ_FLAGS := -
 
 # blob 037 (AB7144) graphics prefix [0,0x5650] is a DECORATIVE FONT container, fully
 # split into 93 editable PNGs: _00 = 320t Latin alphabet sheet, _01.._92 = 92 self-
-# delimiting 16t class-name glyph sheets (Lord/Mercenary/Hero/Myrmidon... kanji), with
-# the 4 palettes + 0x2C pre-ProcScr raw kept as verbatim .bin slices and the shop/menu
-# ProcScr tail [0x5650,end] typed in the .c. All 93 sub-streams reproduce byte-exact at
-# gbagfx's default -mindist 2, so (like blobs 022/031) they need no explicit LZ_FLAGS pin.
+# delimiting 16t class-name glyph sheets (Lord/Mercenary/Hero/Myrmidon... kanji), plus
+# 4 16-color font palettes now editable JASC (Pal_MenuFontGlyphs0..3.pal, issue #143 --
+# no verbatim .bin slice remains for them) and the shop/menu ProcScr tail [0x5650,end]
+# typed in the .c (gDefaultShopInventory/gShopDialogueOffsetLut/gShopPortraitLut/
+# gProcScr_ShopFadeIn/Out, own object src/bmshop_080B8CF0.c). All 93 sub-streams
+# reproduce byte-exact at gbagfx's default -mindist 2, so (like blobs 022/031) they
+# need no explicit LZ_FLAGS pin.

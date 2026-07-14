@@ -68,6 +68,7 @@ REQUIREMENTS
     Idempotent: regenerates docs/bin_audit.md deterministically. Changes no ROM bytes.
 """
 
+import hashlib
 import os
 import re
 import struct
@@ -209,66 +210,33 @@ NAME_CLASS_RULES = [
     # absence of investigation -> FLOOR (not UNCERTAIN).
     (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_007_residual_B381\.bin$"),
      "FLOOR", "evidence-backed FLOOR: 519 B near-zero residual (only first 8 B non-zero), no pointer structure, no known consumer -- narrowly scoped raw floor (#143, D377)"),
-    # frontier_df4_menu_005 (JP-exclusive): D362 — a proc-script leaf; the earlier
-    # "MapChanges" label was REFUTED. JP-divergent, no fe8u twin.
-    # Re-audited (issue #143 menu pass): the tracked .bin was over-extracted at
-    # 587 B; layout/carved_rom.d/data_frontier4_df4_menu.tsv's own gap5 row
-    # (A5FFAD..A60138) proves the REAL gap is only 0x18B=395 B -- the trailing
-    # 192 B were already-superseded ProcScr_menu148_ref (quakefx) bytes. Trimmed
-    # the .bin to the true 395-B floor (byte-identical prefix, make compare
-    # unaffected: no INCBIN offset in frontier_df4_menu_asm.s exceeds 0x18B).
-    # Content: interleaved raw counts/fields + 8 already-relocated ARM function
-    # pointers (GameOver_FadeOutCurrentBgm, StartSlowFadeToBlack, EndAllMus,
-    # SkilGameOverForToturialExtraMap, sub_8021210, PostGameOverHandler,
-    # AsnycKeyStatus_ButtonB, UnsetKeyIgnoreMask) -- a GameOver-sequence
-    # proc-script-like leaf, heavily cross-referenced base+offset from ~80
-    # chapter Events_ref/MapChanges_ref tables. No further typed structure is
-    # discernible without inventing semantics for the un-pointered raw fields.
-    # RE-COMPLETE evidence-backed FLOOR (issue #143 coverage pass): unlike the
-    # generic "fe8u form unknown, needs RE" catch-all below (genuinely open
-    # questions), this asset's every byte's role IS proven (counts/fields vs. the
-    # 8 relocated pointers above); there is simply no fe8u twin to compare
-    # against and no further reducible structure. Distinct floor rationale from
-    # the TSA/.map.bin fe8u-parity FLOORs elsewhere in this script, but the same
-    # "legitimate, do not fake-extract further" conclusion -> FLOOR, not
-    # UNCERTAIN (which implies more RE work remains).
-    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD\.bin$"),
-     "FLOOR", "RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143)"),
-    # frontier_df4_menu_001/021/027 (JP-exclusive, issue #143 coverage pass):
-    # RE-COMPLETE evidence-backed FLOORs, same rationale as blob005 above. Each
-    # was reduced to the MINIMAL live byte range still read by any INCBIN/incbin
-    # consumer (src/data/frontier_df4_menu/frontier_df4_menu.c and/or
-    # frontier_df4_menu_asm.s), deleting ~2000-2200 B of duplicated content per
-    # file that used to sit alongside the already-extracted PNG/TSA/palette/typed-C
-    # companions covering the rest of each original blob. Every remaining byte's
-    # role is proven:
-    #  - 001 [0,0x1218) 4632 B: confirmed genuine LZ77 (0x10 header, decompressed
-    #    size 0x5000=20480 B=640 4bpp tiles); PNG round-trip reproduces the exact
-    #    20480 decompressed bytes, but no available gbagfx compressor preset
-    #    reproduces this exact compressed stream (original JP encoder used
-    #    different match-selection heuristics) -- kept as the minimal compressed
-    #    floor, not a generic opaque blob.
-    #  - 021 174 B (two disjoint spans concatenated): [0,0x22) is the gap21 head
-    #    (interleaved with 2 relocated pointers, DrawSupportBannerSprites_Init/
-    #    _Loop) and [0x22,0xAE) is the gap21c interior (interleaved with 7
-    #    relocated pointers to sub_80A74D4/StartMidFadeFromBlack/WaitForFade/
-    #    nullsub_82/StartMidFadeToBlack/WaitForFade/sub_80A7620) -- every
-    #    non-pointer byte is a proven ProcCmd/SpriteEx field, not unknown.
-    #  - 027 342 B (two disjoint spans concatenated): [0,0x11A) is the gap27 head
-    #    (struct ProcCmd literal stream, interleaved with many
-    #    Sprite_Savedraw_7+offset pointers not read from the file) and
-    #    [0x11A,0x156) is the gap27c interior (interleaved with 2 relocated
-    #    pointers, SaveDrawCursorYOffsetLut+0x1B/SqMask_Loop).
-    # No relocation slot or pointer-bearing schema is hidden in any of these
-    # residuals -- every interior ROM pointer word is already a named .4byte
-    # Sym(+addend) relocation in the surrounding C/asm, verified against
-    # `make shiftcheck`'s reloc-coverage gate. FLOOR, not UNCERTAIN.
-    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0\.bin$"),
-     "FLOOR", "RE-COMPLETE evidence-backed floor (4632 B, trimmed from a 6812 B combined file): confirmed genuine LZ77 640-tile stream (0x10 header, PNG round-trip exact for the decompressed 20480 B), but no gbagfx compressor preset reproduces the exact compressed bytes; JP-exclusive, no fe8u twin (issue #143)"),
-    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E\.bin$"),
-     "FLOOR", "RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B combined file): two disjoint live spans (gap21 head + gap21c interior) concatenated, every non-pointer byte a proven ProcCmd/SpriteEx field, all 9 interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143)"),
-    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462\.bin$"),
-     "FLOOR", "RE-COMPLETE evidence-backed floor (342 B, trimmed from a 1012 B combined file): two disjoint live spans (gap27 head + gap27c interior) concatenated, every non-pointer byte a proven ProcCmd field, all interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143)"),
+    # frontier_df4_ending_008 (JP-exclusive): D362 — pointer-free OAM data (so it is
+    # shift-safe); no fe8u editable twin -> UNCERTAIN, but resolved, not "needs RE".
+    (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444\.bin$"),
+     "UNCERTAIN", "RE-complete: pointer-free OAM data (shift-safe); JP-divergent, no fe8u twin, DEFERRED (D362)"),
+    # frontier_df4_menu_005/021/027 (JP-exclusive, issue #143 coverage pass):
+    # RE-COMPLETE evidence-backed floors. A path name is not evidence, so these
+    # are NOT a pathname-only regex rule -- see PINNED_RESIDUAL_FLOORS /
+    # _pinned_residual_floor_classify() near the top of this file (checked
+    # BEFORE this NAME_CLASS_RULES table, in `classify()`), which requires an
+    # EXACT (size, sha256) match before returning FLOOR; any drift (wrong size,
+    # changed bytes, or a missing file) is a hard UNCERTAIN failure naming the
+    # exact mismatch, never a silent pass-through. 005 is a proc-script leaf
+    # (395 B, trimmed from a stale 587 B over-extraction; the earlier
+    # "MapChanges" label was REFUTED; 8 already-relocated ARM function
+    # pointers, heavily cross-referenced base+offset from ~80 chapter
+    # Events_ref/MapChanges_ref tables). 021/027 (174 B / 342 B) are each two
+    # disjoint live INCBIN spans concatenated into one minimal file (found by
+    # checking BOTH src/data/frontier_df4_menu/frontier_df4_menu.c and the
+    # tracked frontier_df4_menu_asm.s, which reads a different range than the
+    # .c file for each). No relocation slot or pointer-bearing schema is
+    # hidden in any of these three -- every interior ROM pointer word is
+    # already a named .4byte Sym(+addend) relocation, verified against `make
+    # shiftcheck`'s reloc-coverage gate. blob001's former 4632 B "residual" was
+    # a FALSE floor (D394/D395): an over-large decompression window hid a true
+    # 3300 B LZ77 image boundary followed by a real TSA and 4 real palettes,
+    # all now fully typed/editable with zero raw bytes remaining -- it carries
+    # NO entry here or in PINNED_RESIDUAL_FLOORS.
     # frontier JP-divergent UI / font-group / ending / CG tables (UNCERTAIN): they
     # reached the name-class step precisely because NO fe8u editable twin exists
     # (JP-only multiplayer/menu/font/CG assets). The prior loose catch-all
@@ -515,6 +483,97 @@ def _is_sparse_overlay_tilemap(path):
     return _is_overlay_tsa_bytes(d)
 
 
+# --------------------------------------------------------------------------- #
+# Pinned residual-floor guards (issue #143 menu lane): drift-safe, fail-closed #
+# content verification for the three genuine RE-complete floors (blob005/021/ #
+# 027). A path name alone is NOT evidence of irreducibility -- a bare regex on #
+# the filename would classify FLOOR even if the file were replaced with junk  #
+# of the same name, or silently miss a deleted file. These three instead      #
+# require an EXACT (size, sha256) match; the pinned hash was computed once    #
+# from the tracked, already fully-audited residual and is intentionally not   #
+# regenerable by this script (a drifted file must be re-audited by a human,   #
+# not silently re-blessed). blob001's former 4632 B "residual" is NOT pinned  #
+# here: it was a FALSE floor (D394/D395) -- fully sourceable, no longer a raw #
+# file at all.                                                                #
+# --------------------------------------------------------------------------- #
+PINNED_RESIDUAL_FLOORS = {
+    "graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin": (
+        395,
+        "46e75502c72f4e066d6d8abe93c4cef6121027349af5ffe048ec0caa995da563",
+        "RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B "
+        "over-extraction): proc-script leaf with 8 relocated function "
+        "pointers, every byte's role proven; JP-exclusive, no fe8u twin to "
+        "compare (D362, issue #143)"),
+    "graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin": (
+        174,
+        "6ffae18b8345b2ffff8caef700464de40deb75aa0b5d2b32b992ec9eb754ac82",
+        "RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B "
+        "combined file): two disjoint live spans (gap21 head + gap21c "
+        "interior) concatenated, every non-pointer byte a proven "
+        "ProcCmd/SpriteEx field, all 9 interior pointers already relocated "
+        ".4byte Sym; JP-exclusive, no fe8u twin (issue #143)"),
+    "graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin": (
+        342,
+        "85748e2ed3c1e27ec5da07769f9cd0ed825c565e5ba86b15b2499dab26b6a7b3",
+        "RE-COMPLETE evidence-backed floor (342 B, trimmed from a 1012 B "
+        "combined file): two disjoint live spans (gap27 head + gap27c "
+        "interior) concatenated, every non-pointer byte a proven ProcCmd "
+        "field, all interior pointers already relocated .4byte Sym; "
+        "JP-exclusive, no fe8u twin (issue #143)"),
+}
+
+
+def check_pinned_residual_floor(path, expect_size, expect_sha256):
+    """Return None if `path` matches the pinned (size, sha256) exactly, else an
+    error string. Fails closed: a missing file, a wrong size, and changed
+    bytes (same size, different content) are all explicit failures -- never a
+    silent FLOOR pass-through."""
+    if not os.path.exists(path):
+        return "MISSING tracked residual file"
+    try:
+        data = open(path, "rb").read()
+    except OSError as e:
+        return f"unreadable ({e})"
+    if len(data) != expect_size:
+        return f"size {len(data)} != pinned {expect_size}"
+    got = hashlib.sha256(data).hexdigest()
+    if got != expect_sha256:
+        return f"sha256 {got} != pinned {expect_sha256}"
+    return None
+
+
+def _pinned_residual_floor_key(path):
+    """Return the PINNED_RESIDUAL_FLOORS key matching `path`, or None. Matches
+    both a bare repo-relative path and one with an extra directory prefix
+    (mirroring the `(^|/)...$` anchoring style used by the regex rules
+    elsewhere in this file), so callers can pass either form."""
+    norm = path.replace("\\", "/")
+    for key in PINNED_RESIDUAL_FLOORS:
+        if norm == key or norm.endswith("/" + key):
+            return key
+    return None
+
+
+def pinned_residual_floor_classify(path):
+    """If `path` is one of the three pinned genuine residual floors, return
+    its (category, proof, label) tuple -- FLOOR only on an exact (size,
+    sha256) match; any drift is a hard UNCERTAIN failure naming the exact
+    mismatch, distinguishable from the generic "needs RE" UNCERTAIN catch-all.
+    Returns None for any other path (not one of the three pinned floors)."""
+    key = _pinned_residual_floor_key(path)
+    if key is None:
+        return None
+    expect_size, expect_sha256, proof = PINNED_RESIDUAL_FLOORS[key]
+    err = check_pinned_residual_floor(path, expect_size, expect_sha256)
+    if err:
+        return ("UNCERTAIN",
+                f"PINNED FLOOR VERIFICATION FAILED ({err}) -- content drifted "
+                f"from the audited residual; re-audit required, not a silent "
+                f"FLOOR (issue #143)",
+                "pixel-gfx")
+    return ("FLOOR", proof, "pixel-gfx")
+
+
 def _is_lz_derivative_bin(path):
     """True if a frontier `.bin` is the DECOMPRESSED source of a committed
     build-time LZ77 stream -- it has a `<stem>.lz` or `<path>.lz` sibling on disk
@@ -637,6 +696,14 @@ def _is_compressed_derivative(jp_abspath, fe8u_bin_relpath):
 def classify(path, fe8u_idx):
     """Return (category, proof, category_label)."""
     base = os.path.basename(path)
+    # -1. Pinned residual-floor guard (issue #143 menu lane), checked BEFORE
+    #     any name-based rule: the three genuine RE-complete residuals
+    #     (blob005/021/027) require an exact (size, sha256) match, not just a
+    #     matching path, before returning FLOOR. See PINNED_RESIDUAL_FLOORS /
+    #     pinned_residual_floor_classify() above.
+    pinned = pinned_residual_floor_classify(path)
+    if pinned is not None:
+        return pinned
     # 0. TSA / tilemap by NAME -> FLOOR. fe8u keeps every TSA/tilemap binary as
     #    `*.tsa.bin` / `*.map.bin`. The fe8j extractor named these with a
     #    `Tsa_`/`gTsa_` PREFIX or a `_map` suffix and DROPPED the `.tsa.bin`
@@ -1085,8 +1152,72 @@ def _self_test_overlay_tsa_helpers():
     return fails
 
 
+def run_pinned_residual_floor_self_tests():
+    """Direct, synthetic-fixture self-tests for the pinned-residual-floor
+    mechanism (issue #143 menu lane): valid, wrong-size, wrong-content, and
+    missing-file cases, independent of the real tracked files (so a real
+    accidental edit to the tracked residual can't hide a broken checker, and
+    vice versa). Returns a list of failure strings (empty = all passed)."""
+    import tempfile
+    failures = []
+    with tempfile.TemporaryDirectory() as td:
+        valid_path = os.path.join(td, "valid.bin")
+        payload = b"\x42" * 174
+        with open(valid_path, "wb") as f:
+            f.write(payload)
+        good_sha = hashlib.sha256(payload).hexdigest()
+
+        # valid: exact size + exact hash -> None (no error)
+        err = check_pinned_residual_floor(valid_path, 174, good_sha)
+        if err is not None:
+            failures.append(f"pinned-floor valid case: expected None, got {err!r}")
+
+        # wrong-size: same content family, different declared expected size
+        err = check_pinned_residual_floor(valid_path, 175, good_sha)
+        if err is None or "size" not in err:
+            failures.append(f"pinned-floor wrong-size case: expected a size "
+                            f"mismatch error, got {err!r}")
+
+        # wrong-content: same size, different bytes (same-size tamper) -> must FAIL
+        tampered_path = os.path.join(td, "tampered.bin")
+        with open(tampered_path, "wb") as f:
+            f.write(b"\x43" * 174)  # same length, different content
+        err = check_pinned_residual_floor(tampered_path, 174, good_sha)
+        if err is None or "sha256" not in err:
+            failures.append(f"pinned-floor wrong-content case (same-size "
+                            f"tamper): expected a sha256 mismatch error, "
+                            f"got {err!r}")
+
+        # missing: file absent entirely -> must FAIL
+        missing_path = os.path.join(td, "does_not_exist.bin")
+        err = check_pinned_residual_floor(missing_path, 174, good_sha)
+        if err is None or "MISSING" not in err:
+            failures.append(f"pinned-floor missing-file case: expected a "
+                            f"MISSING error, got {err!r}")
+
+        # classify()-level wiring: a drifted file at one of the three REAL
+        # pinned paths must come back UNCERTAIN with an explicit
+        # "VERIFICATION FAILED" proof, never a silent FLOOR.
+        drift_key = "graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin"
+        drift_path = os.path.join(td, os.path.basename(drift_key))
+        with open(drift_path, "wb") as f:
+            f.write(b"\x00" * 21)  # arbitrary same-directory-name-like content
+        # exercise the classify path directly via the key lookup, bypassing the
+        # real tracked file entirely, by faking the "path ends with key" match:
+        fake_path = "/some/checkout/" + drift_key
+        # (fake_path does not exist on disk, so this also covers "absent file"
+        #  through the real classify()-facing entry point.)
+        cat, proof, _ = pinned_residual_floor_classify(fake_path)
+        if cat != "UNCERTAIN" or "VERIFICATION FAILED" not in proof:
+            failures.append(f"pinned-floor classify() missing-file wiring: "
+                            f"expected UNCERTAIN/VERIFICATION FAILED, got "
+                            f"{cat!r}/{proof!r}")
+    return failures
+
+
 def run_self_tests(by_path):
     failures = []
+    failures.extend(run_pinned_residual_floor_self_tests())
 
     def expect(substr, want_cat):
         matches = [p for p in by_path if substr in p]
@@ -1127,11 +1258,17 @@ def run_self_tests(by_path):
     expect("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", "UNCERTAIN")  # bug #2
     expect("graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin", "FLOOR")  # #143
     expect("graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin", "FLOOR")  # #143
-    # issue #143 menu coverage pass: the four minimal RE-complete residuals
-    # (001/021/027 trimmed to their minimal live INCBIN spans, plus the
-    # already-trimmed 005 floor) are evidence-backed FLOORs, not UNCERTAIN --
+    # issue #143 menu coverage pass: the three genuine RE-complete residuals
+    # (005/021/027, each pinned by exact size+sha256 -- see
+    # PINNED_RESIDUAL_FLOORS) are evidence-backed FLOORs, not UNCERTAIN --
     # every byte's role is proven even though there is no fe8u twin to compare.
-    expect("frontier_df4_menu_001_A588C0.bin", "FLOOR")
+    # blob001's former 4632 B "residual" is intentionally NOT expected FLOOR
+    # here: it was a false floor (D394/D395), now fully typed/editable with no
+    # raw file at all, so it must not appear in `by_path` as a `.bin` any more.
+    if any("frontier_df4_menu_001_A588C0.bin" in p for p in by_path):
+        failures.append("frontier_df4_menu_001_A588C0.bin still tracked as a "
+                        "raw .bin -- the false floor should be fully typed/"
+                        "editable with zero raw bytes remaining (D394/D395)")
     expect("frontier_df4_menu_005_A5FFAD.bin", "FLOOR")
     expect("frontier_df4_menu_021_A95B4E.bin", "FLOOR")
     expect("frontier_df4_menu_027_A9D462.bin", "FLOOR")

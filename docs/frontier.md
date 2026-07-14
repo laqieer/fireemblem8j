@@ -855,7 +855,7 @@ and value by exactly `+0x40000` while all seven normalized function ranges stay
 otherwise byte-identical. This lane is complete and regression-guarded; it does
 **not** close reopened issue #143 as a whole.
 
-### frontier_df4_menu 14-file UNCERTAIN class — full coverage, MISS=0/UNCERTAIN=0 for the menu lane (issue #143 menu lane, D389-D393, 2026-07-14)
+### frontier_df4_menu 14-file UNCERTAIN class — full coverage, MISS=0/UNCERTAIN=0 for the menu lane (issue #143 menu lane, D389-D395, 2026-07-14)
 
 The menu provider's 14-file UNCERTAIN class (001/005/017/021/023/024/027/
 029/030/032/033/037/038/039) is now **fully resolved**: every actionable byte
@@ -866,8 +866,8 @@ visually inspected. Phase A (all 9 smaller blobs: 001/005/017/021/023/024/
 027/030/033) and Phase B (both large containers: 029/032) were done first;
 Phase C (037/038/039 EventScr/shop/ranking migration plus the world-map
 lookup/prologue-udef extension) followed, including a boundary correction
-(see below) and a final source-coverage pass that eliminated four
-duplicated full opaque originals.
+(see below) and a final source-coverage pass that eliminated the duplicated
+full opaque originals.
 
 Phase C highlights: blob 037's true shop-data recut
 (`gDefaultShopInventory`/`gShopDialogueOffsetLut`/`gShopPortraitLut`/
@@ -882,47 +882,76 @@ TEXTSHOW words — an externally-supplied boundary audit caught and corrected
 a real naming/boundary bug in an earlier 139-piece segmentation (byte-exact
 in aggregate but internally mis-split; see D391). The world-map lookup
 tables (`Events_WM_BeginningTail[58]`, `Events_WM_ChapterIntro[59]`,
-typed `const EventScr * const [59]`, zero-addend, exactly 116 relocations)
-were appended to `src/data/data_chapter_asset_table.c` with a shiftable
-linker alias in `ldscript.template.txt`, and the prologue
+typed `const EventScr * const [58]`/`[59]`, zero-addend, exactly 116
+relocations) were appended to `src/data/data_chapter_asset_table.c` with a
+shiftable linker alias in `ldscript.template.txt`, and the prologue
 reinforcement/UnitDefinition data at `[0x0890814C,0x089081D8)` is now
 `src/data/data_prologue_event_udefs.c` (`REDAs_PrologueAlly1/2`,
 `REDAs_PrologueEnemy1/2/3`, `UnitDef_Event_PrologueAlly[3]`). Blobs 038 and
 039 are fully deleted.
 
-Final source-coverage pass (D393): four blobs (001/021/027/037) still
-carried their full original opaque `.bin`, duplicating bytes already covered
-by separately-extracted companions. Each was reduced to its minimal
-still-live byte range (or, for 037, its four residual palettes converted to
-JASC — no raw bytes left at all):
-- **001** (`frontier_df4_menu_001_A588C0.bin`, 6812 B -> 4632 B): the only
-  live range left is `[0,0x1218)`, confirmed genuine LZ77 (640 4bpp tiles);
-  PNG round-trip reproduces the exact decompressed bytes, but no available
-  gbagfx compressor preset reproduces the exact compressed stream — kept as
-  an evidence-backed minimal floor, not a duplicated full file.
-- **021** (`frontier_df4_menu_021_A95B4E.bin`, 2318 B -> 174 B): two disjoint
-  live spans (found only by also checking the tracked
-  `frontier_df4_menu_asm.s`, which reads a *different* range than
-  `frontier_df4_menu.c`) concatenated into one file.
-- **027** (`frontier_df4_menu_027_A9D462.bin`, 1012 B -> 342 B): same pattern,
-  two disjoint live spans (asm + c) concatenated into one file.
+Final source-coverage pass (D393/D394/D395): all four remaining blobs with a
+full original opaque `.bin` (001/021/027/037) had their duplicated bytes
+removed. This took two attempts — the first (D393) correctly eliminated
+021/027/037 but produced a FALSE floor for blob001:
+- **021** (`frontier_df4_menu_021_A95B4E.bin`, 2318 B -> 174 B) and **027**
+  (`frontier_df4_menu_027_A9D462.bin`, 1012 B -> 342 B): each has TWO
+  disjoint live spans -- found only by checking the tracked
+  `frontier_df4_menu_asm.s` *in addition to* `frontier_df4_menu.c`, which
+  reads a different range than the `.c` file for each -- concatenated into
+  one minimal file per blob.
 - **037** (`frontier_df4_menu_037_AB7144.bin`, 22924 B -> **deleted**): its
   only two live ranges were four 16-color font palettes (32 B + 96 B), all
   four JASC round-trip exact; converted to `Pal_MenuFontGlyphs0..3.pal`, so
-  the combined file has zero remaining readers and was removed outright.
+  the combined file has zero remaining readers.
+- **001** (`frontier_df4_menu_001_A588C0.bin`, originally 6812 B): D393 first
+  trimmed this to a 4632 B "floor", concluding no gbagfx compressor preset
+  reproduced its LZ77 stream. **This was wrong (D395's correction).** The
+  4632 B window had been fed to gbagfx's decompressor as one piece; gbagfx
+  silently stopped once it had the declared 20480 decompressed bytes and
+  never checked how many *input* bytes it actually consumed, hiding the true
+  boundary. Re-derived precisely: `[0,0xCE4)` 3300 B is the real LZ77 image
+  (640 tiles, a NEW dedicated 256x160 PNG distinct from the existing 64x96
+  sheet, round-trips exact at `-mindist 2`); `[0xCE4,0x1198)` 1204 B is an
+  ordinary standard TSA (header `0x1D13` = 30x20, stored as an ordinary
+  `.tsa.bin`); `[0x1198,0x1218)` 128 B is four 16-color palettes (palette 0
+  kept as an exact typed `u16[16]` literal since 7/16 entries have bit15 set
+  and JASC would clear it; palettes 1-3 exact JASC). blob001 now has **zero**
+  raw bytes remaining -- the file is fully deleted, not merely re-floored.
 
-All five prior audit-UNCERTAIN menu paths (001/005/021/027 as evidence-backed
-RE-complete floors, plus 037 now fully deleted) are reclassified: **menu-path
-UNCERTAIN is 0**. `scripts/audit_bin_forms.py`: MISS=0, FLOOR=1429,
-UNCERTAIN=16, TOTAL=1445 (repo-wide; the 16 remaining UNCERTAIN entries are
-outside the frontier_df4_menu lane, e.g. `frontier_df4_uistuff`, owned by
-sibling agents). See decisions.md **D389** (Phase A/B + shop/arena/rankings),
-**D390** (full Phase C completion, including a documented
-`.rodata`-vs-`.data` section-placement lesson learned from a caught-and-fixed
-regression), **D391** (136-array boundary correction), **D392** (lookup
-type-safety follow-up/dead-extern cleanup), and **D393** (final
-source-coverage pass: duplicate-original elimination, FLOOR reclassification,
-exact lookup typing) for the full per-item breakdown and verification method.
+All prior audit-UNCERTAIN menu paths are reclassified: **menu-path
+UNCERTAIN is 0**, and only three genuine RE-complete floors remain
+(005/021/027), each now guarded by a drift-safe, fail-closed pinned
+(size, sha256) check in `scripts/audit_bin_forms.py`
+(`PINNED_RESIDUAL_FLOORS`) rather than a bare pathname regex -- a
+same-size content tamper, a wrong-size file, or a missing file all fail
+closed to `UNCERTAIN` with an explicit "VERIFICATION FAILED" proof, proven
+by dedicated self-tests plus a live tamper-and-restore test against the real
+tracked file. `scripts/audit_bin_forms.py`: MISS=0, FLOOR=1428, UNCERTAIN=16,
+TOTAL=1444 (repo-wide, branch-local checkout; the 16 remaining UNCERTAIN
+entries are outside the frontier_df4_menu lane, e.g. `frontier_df4_uistuff`,
+owned by sibling agents). Integrated onto `origin/main`'s D388 tip in a
+throwaway simulation, the totals are **MISS=0, FLOOR=1448, UNCERTAIN=8,
+TOTAL=1456** once all `.lz`/PNG build artifacts exist (some FLOOR rules
+depend on a built `.lz` sibling to distinguish a compressed-TSA-derivative
+`.bin` from a genuine string pool).
+
+See decisions.md **D389** (Phase A/B + shop/arena/rankings), **D390** (full
+Phase C completion, including a documented `.rodata`-vs-`.data`
+section-placement lesson learned from a caught-and-fixed regression),
+**D391** (136-array boundary correction), **D392** (lookup type-safety
+follow-up/dead-extern cleanup), **D393** (source-coverage pass: 021/027/037
+duplicate-original elimination + FLOOR reclassification + exact lookup
+typing -- 001's part of this entry was later found to be a false floor),
+**D394** (blob017 `.tsa.bin` -> `*_map.bin` rename to satisfy the
+structurally-discovered headerless-map convention), and **D395** (blob001's
+false floor fully eliminated; pinned drift-safe FLOOR guards for
+005/021/027) for the full per-item breakdown and verification method.
+Branch-local decision numbers continued this branch's own D378-onward
+sequence during development; at integration onto `origin/main`'s D388 tip
+they were renumbered **D378->D389, D379->D390, D380->D391, D381->D392,
+D382->D393, D383->D394, D384->D395**, as reflected in the decision numbers
+cited above.
 
 `make clean && make compare` -> `fireemblem8.gba: OK`; `make shiftcheck` -> no
 high-confidence suspects. Reopened issue #143 remains open; this closes the
