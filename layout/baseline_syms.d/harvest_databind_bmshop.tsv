@@ -20,8 +20,6 @@ IsShopPageScrolling	080BA250	thumb	bmshop_080B95DC
 gPlaySt	0202BCEC	data	bmshop_080B95DC
 Proc_StartBlocking	08002C30	thumb	bmshop_080B95DC
 gBmSt	0202BCAC	data	bmshop_080B95DC
-gProcScr_ShopFadeIn	08ABC790	data	bmshop_080B95DC
-gProcScr_ShopFadeOut	08ABC7C8	data	bmshop_080B95DC
 InitShopScreenConfig	080B9E50	thumb	bmshop_080B95DC
 InitTalk	08006710	thumb	bmshop_080B95DC
 UnpackUiVArrowGfx	080B9F40	thumb	bmshop_080B95DC
@@ -43,4 +41,3 @@ ShopInitTexts_OnSell	080B9BE4	thumb	bmshop_080B8E70
 Proc_StartBlocking	08002C30	thumb	bmshop_080B8DC8
 gProcScr_Shop	08ABC808	data	bmshop_080B8DC8
 UpdateShopItemCounts	080B8E3C	thumb	bmshop_080B8DC8
-gDefaultShopInventory	08ABC768	data	bmshop_080B8DC8

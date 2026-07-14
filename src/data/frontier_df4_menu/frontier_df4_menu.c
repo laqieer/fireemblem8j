@@ -8525,15 +8525,18 @@ u32 frontier_df4_menu_036_AB0D18[] __attribute__((section(".data.frontier_df4_me
     (u32)&frontier_df4_menu_036_AB0D18 + 0x11c,
     0x00000801,
 };
-/* multi-slice atomic relocation carve of frontier_df4_menu_037_AB7144 (embedded ProcScr @ 0x5650):
-   the graphics prefix [0,0x5650) is a DECORATIVE FONT container -- fully split into editable PNGs:
+/* multi-slice atomic relocation carve of frontier_df4_menu_037_AB7144: the graphics
+   prefix [0,0x5624) is a DECORATIVE FONT container -- fully split into editable PNGs:
    [0,0x20) 1 palette verbatim, then a 320t Latin-alphabet sheet (_00), [0xF00,0xF60) 3 palettes
    verbatim, then 92 self-delimiting 16t class-name glyph sheets (_01.._92, e.g. Lord/Mercenary/
-   Hero/Myrmidon kanji), [0x5624,0x5650) 0x2C pre-ProcScr raw verbatim. Each LZ sub-stream is
-   png->4bpp->.4bpp.lz at -mindist 2 (reproduces the ROM block byte-for-byte incl. %4 padding).
-   The shop/menu ProcScr tail [0x5650,end) keeps its 50 func pointers + 2 self-ref child-ProcScr
-   pointers (blob+0x5984) as .4byte Sym(+addend); the 11 coincidental ROM-range words there are NOT
-   pointers (mid-func / mid-data offsets) and stay raw. byte-exact; make compare is the oracle. */
+   Hero/Myrmidon kanji). Each LZ sub-stream is png->4bpp->.4bpp.lz at -mindist 2 (reproduces the
+   ROM block byte-for-byte incl. %4 padding). [0x5624,0x5650) (the true shop-data range
+   gDefaultShopInventory/gShopDialogueOffsetLut/gShopPortraitLut + gProcScr_ShopFadeIn's first
+   word) moved to src/bmshop_080B8CF0.c (issue #143 menu pass; own object, own manifest row --
+   layout/carved_rom.d/data_frontier4_df4_menu.tsv). The shop/menu ProcScr tail beyond that keeps
+   its remaining func pointers + 2 self-ref child-ProcScr pointers (blob+0x5984) as
+   .4byte Sym(+addend); the 11 coincidental ROM-range words there are NOT pointers (mid-func /
+   mid-data offsets) and stay raw. byte-exact; make compare is the oracle. */
 u8 frontier_df4_menu_037_AB7144[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = INCBIN_U8(
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0x0, 0x20,
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_00.4bpp.lz",
@@ -8629,40 +8632,8 @@ u8 frontier_df4_menu_037_AB7144[] __attribute__((section(".data.frontier_df4_men
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_89.4bpp.lz",
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_90.4bpp.lz",
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_91.4bpp.lz",
-    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_92.4bpp.lz",
-    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0x5624, 0x2C);
-u32 frontier_df4_menu_037_AB7144_1[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
-    (u32)&LockGame + 0x1,
-    0x0001000E,
-    0x00000000,
-    0xFFFF0018,
-    (u32)&_FadeBgmOut + 0x1,
-    0x00000002,
-    (u32)&StartMidFadeToBlack + 0x1,
-    0x00000003,
-    (u32)&WaitForFade + 0x1,
-    0x00000002,
-    (u32)&BMapDispSuspend + 0x1,
-    0x00000000,
-    0x00000000,
-    0x00000002,
-    (u32)&ResetDialogueScreen + 0x1,
-    0x00000002,
-    (u32)&BMapDispResume + 0x1,
-    0x00000002,
-    (u32)&RefreshBMapGraphics + 0x1,
-    0x00000002,
-    (u32)&StartMapSongBgm + 0x1,
-    0x00000002,
-    (u32)&StartMidFadeFromBlack + 0x1,
-    0x00000003,
-    (u32)&WaitForFade + 0x1,
-    0x00000002,
-    (u32)&UnlockGame + 0x1,
-    0x00000000,
-    0x00000000,
-};
-struct ProcCmd gProcScr_Shop[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_92.4bpp.lz");
+struct ProcCmd gProcScr_Shop[] __attribute__((section(".data.frontier_df4_menu.gap37b"))) = {
     PROC_CALL((void*)((u8*)StartShopFadeIn + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)Shop_Init + 0x1)),
     PROC_CALL((void*)((u8*)Shop_InitBuyState + 0x1)), PROC_START_CHILD((void*)((u8*)frontier_df4_menu_gap37_4741)), PROC_CALL((void*)((u8*)FadeInBlackSpeed20 + 0x1)), PROC_SLEEP(0x1),
     PROC_CALL((void*)((u8*)Shop_EntryDialogue + 0x1)), PROC_LABEL(0x0), PROC_SLEEP(0x1), PROC_REPEAT((void*)((u8*)Shop_HandleEntryDialoguePrompt + 0x1)),
@@ -8684,7 +8655,7 @@ struct ProcCmd gProcScr_Shop[] __attribute__((section(".data.frontier_df4_menu.g
     PROC_END_EACH((void*)((u8*)frontier_df4_menu_gap37_4741)), PROC_CALL((void*)((u8*)StartShopFadeOut + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)UnlockGame + 0x1)),
     PROC_END,
 };
-u32 frontier_df4_menu_gap37_4732[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
+u32 frontier_df4_menu_gap37_4732[] __attribute__((section(".data.frontier_df4_menu.gap37b"))) = {
     0x00000003,
     (u32)&InitShopBuyStatus + 0x1,
     0x00000000,
@@ -8704,10 +8675,10 @@ u32 frontier_df4_menu_gap37_4732[] __attribute__((section(".data.frontier_df4_me
     0x40204010,
     0x0000040E,
 };
-struct ProcCmd gProcScr_GoldBox[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
+struct ProcCmd gProcScr_GoldBox[] __attribute__((section(".data.frontier_df4_menu.gap37b"))) = {
     PROC_REPEAT((void*)((u8*)GoldBox_OnLoop + 0x1)), PROC_END,
 };
-u32 frontier_df4_menu_gap37_4741[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
+u32 frontier_df4_menu_gap37_4741[] __attribute__((section(".data.frontier_df4_menu.gap37b"))) = {
     0x00000003,
     (u32)&_DisplayShopUiArrows + 0x1,
 };
