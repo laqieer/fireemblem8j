@@ -11310,7 +11310,7 @@ shiftability suspects. This resolves only these three fully proven map
 migrations from issue #143; it does not claim the wider `.incbin` review is
 closed.
 
-## D377 — reject function-interior ABS32 targets as false pointer decodes (2026-07-13)
+## D377 — reject proven false ABS32 decodes: function interiors and packed scalars (2026-07-13)
 
 **Finding.** A full linked-ELF sweep of ROM-backed `R_ARM_ABS32` relocations found
 59,503 records. Of the 5,679 whose exact relocation symbol-table entry was
@@ -11328,6 +11328,31 @@ Replace `(u32)&MenuStdHelpBox + 0x34` with the intentional non-relocating raw
 word `0x08050201`; preserve the neighboring `0x00010205`. The matching ROM
 remains byte-identical.
 
+**Packed-scalar extension.** Ten more retained relocations were fully disproven.
+`TileAnimations3` had eight `RomHeaderNintendoLogo + 7` expressions whose linked
+word was `0x0800000B`; FE8U's generated
+`src/data/map/obj_anim/TileAnimations3.inc` and JSON type every record as
+`.hword 11, 2048` followed by a frame pointer. Emit those scalar pairs directly.
+The live JP ELF places them at `0x085C5BD8`, `0x085C5BE0`, `0x085C5BE8`,
+`0x085C5BF0`, `0x085C5BF8`, `0x085C5C00`, `0x085C5C08`, and `0x085C5C10`.
+The supplied `0x08A074EC..0x08A075B0` addresses contain unrelated graphics words
+in this JP build and have no such relocations, so the audit derives slots from
+the ELF rather than hardcoding a regional address list.
+
+Two `sBanimEkrPopupProcNames + 0x1298D` expressions at `0x08A5BDA8` and
+`0x08A5D0BC` linked to `0x08100009`. The provider is only
+`[0x080ED67C,0x080ED7F4)`, and the event `AREA(...,9,0,16,8)` representation
+proves the word is packed coordinates/command metadata. Emit raw `0x08100009`.
+
+**Compressed-stream extension.** Independent review promoted the apparent
+`pad_BC3A00` exception from REVIEW to proven false decode. All three relocations
+to that pure-`0xFF` placement anchor occur inside LZ-compressed graphics:
+`0x085E2C4C=0x08BCCBCC` and `0x085E2DD4=0x08BCBD35` are inside
+`gLegacyUiFrameDImage`, while `0x0875096C=0x08BF6674` is inside the DarkBreath
+graphics stream beginning at `0x0874FE4C`. Simulating the documented
+`+0x40000` relocation changes 4 decompressed bytes in the former 4 KiB image
+and 2,950 bytes in the latter 8 KiB image. Emit all three words raw.
+
 **Class-wide gate.** Extend Layer 1d
 (`scripts/shiftcheck/audit_pointer_classification.py`) with
 `--relocs-elf fireemblem8_relocs.elf`. A small dependency-free ELF32 reader uses
@@ -11341,14 +11366,40 @@ this function-specific rule. Focused tests cover Thumb entry, even entry,
 function interior, OBJECT interior, debug/non-ROM filtering, and rejection of an
 ELF with zero ROM ABS32 records (which would otherwise silently disable the gate).
 
+The same pass now rejects named, non-section, zero-size semantic symbols whose
+final linked value is in ROM and whose addend is at least `0x10000`. A rigorous
+branch recheck found three raw predicate hits, not two: the two proven
+`sBanimEkrPopupProcNames` failures plus `pad_BC3A00 + 0x32C74`.
+The two AREA words also have an exact semantic rule keyed by symbol and packed
+value, so correcting the provider's ELF size cannot silently disable their
+regression gate. A complete `pad_BC3A00` inventory then found two more live
+relocations below the `0x10000` threshold; consumer/decompression proof promotes
+all three exact-anchor records to HIGH independently of addend. Other unproven
+`pad_`/`gap_` labels remain visible REVIEW records rather than being silently
+discarded. Do not infer validity from a blanket next-symbol boundary.
+
+For the header class, inventory every exact `RomHeaderNintendoLogo` relocation
+and reject linked value `0x0800000B` as the proven TileAnimations3 scalar. The
+live branch contained eight such relocations and no additional exact-symbol
+cases; after the fix the inventory is zero. This targeted semantic assertion
+will still catch a reintroduction without prejudging aliases handled by the
+separate verifier.
+
 **Proof and scope.** Before the data fix the new rule reports exactly one
 function-interior relocation. After it, the relocation-bearing ELF reports
 59,502 ROM ABS32 records, 5,678 FUNC targets, 5,672 Thumb entries, 6 even
-entries, and zero interiors. `make compare` is OK and `make shiftcheck` passes.
+entries, and zero interiors. After removing the ten requested packed-scalar
+relocations plus the three newly proven compressed-stream records, the final
+count is **59,489**; FUNC counts are unchanged. The scalar gate reports zero
+large-addend failures, zero compressed-anchor failures, zero AREA-scalar
+failures, zero header-scalar failures, zero exact `RomHeaderNintendoLogo`
+inventory, and zero placement-anchor reviews. All sixteen focused tests pass.
+`make compare` is OK and `make shiftcheck` passes.
 A dedicated post-header `+0x40000` shifted ROM keeps
 `gWorldmapRadar_1=0x08050201` and `gWorldmapRadar_2=0x00010205`; the old symbolic
 expression would evaluate to `0x080901CD + 0x34 = 0x08090201`.
 All 5,678 legitimate function-entry relocations track their target placement
 (5,656 shift by `+0x40000`; 22 target the deliberately unshifted 0xC0-byte ROM
-header and remain unchanged). This decision fixes and gates one reopened
-issue-#143 false-positive class only; it does not declare the issue fully closed.
+header and remain unchanged). This decision fixes and gates these four proven
+reopened issue-#143 false-positive classes only; it does not declare the issue
+fully closed.

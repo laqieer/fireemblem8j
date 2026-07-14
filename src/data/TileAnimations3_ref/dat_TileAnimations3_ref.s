@@ -1,25 +1,25 @@
 /* De-pointered from data/residual/TileAnimations3.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+ * Real frame pointers are relocatable symbol references; each leading word is
+ * instead the packed scalar pair duration=11,size=2048 from FE8U's generated
+ * TileAnimations3 source. Byte-identical to baserom (gated by `make compare`). */
 	.section .rodata.dat_TileAnimations3_ref, "a", %progbits
 	.global TileAnimations3
 TileAnimations3:
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_0
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_1
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_2
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_3
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_4
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_5
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_6
-	.4byte RomHeaderNintendoLogo + 0x7
+	.hword 11, 2048
 	.4byte TileAnimations3_frame_7
 	.4byte 0x00000000
 	.4byte 0x00000000

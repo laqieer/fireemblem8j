@@ -1,7 +1,6 @@
 /* De-pointered from data/residual/Ch16MapChanges.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+ * Real pointers remain relocatable symbol references; packed AREA command words
+ * such as 0x08100009 remain raw scalars. Byte-identical to baserom. */
 	.section .rodata.dat_Ch16MapChanges_ref, "a", %progbits
 	.global Ch16MapChanges
 Ch16MapChanges:
@@ -96,7 +95,7 @@ Ch16MapChanges:
 	.4byte 0x09160011
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7E8
-	.4byte sBanimEkrPopupProcNames + 0x1298D
+	.4byte 0x08100009
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7E8
 	.4byte 0x10130A0F

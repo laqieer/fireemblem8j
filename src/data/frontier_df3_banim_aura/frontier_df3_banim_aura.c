@@ -113,7 +113,6 @@ extern const u8 data_085D30F8[];
 extern const u8 Tsa_DarkBreathBg_10[];
 extern const u8 Tsa_DarkBreathBg_11[];
 extern const u8 gGfx_0878F150[];
-extern const u8 pad_BC3A00[];
 extern const u8 portrait_Villager_Girl_Young_mouth[];
 extern const u8 voicegroup029[];
 
@@ -345,8 +344,9 @@ u32 frontier_df3_banim_aura_001_74F150[] __attribute__((section(".data.frontier_
     (u32)&AnimSpr_NaglfarOBJ_14 + 0x2, (u32)&AnimSpr_NaglfarOBJ_15 + 0x2, (u32)&AnimSpr_NaglfarOBJ_16 + 0x2, (u32)&AnimSpr_NaglfarOBJ_17 + 0x2, (u32)&AnimSpr_NaglfarOBJ_18 + 0x2, (u32)&AnimSpr_NaglfarOBJ_19 + 0x2,
     (u32)&AnimSpr_NaglfarOBJ_20 + 0x2, (u32)&AnimSpr_NaglfarOBJ_21 + 0x2, (u32)&AnimSpr_NaglfarOBJ_22 + 0x2, (u32)&frontier_df3_banim_aura_001_74F150 + 0x2, (u32)&frontier_df3_banim_aura_001_74F150 + 0x1A, 0x80000000,
 };
-/* frontier_df3_banim_aura_002_74FD8C: atomic relocation carve (was INCBIN); every embedded ROM
-   pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+/* frontier_df3_banim_aura_002_74FD8C: atomic relocation carve (was INCBIN);
+   real embedded pointers relocate, while pointer-looking LZ bytes remain raw.
+   Byte-exact; make compare is the oracle. */
 u32 frontier_df3_banim_aura_002_74FD8C[] __attribute__((section(".data.frontier_df3_banim_aura.gap2"))) = {
     0x90000000, 0x005C0019, 0x0000FFF4, 0x00000001, 0x00000000, 0x00000000,
     0x90008000, 0x006F001D, 0x0000FFF2, 0x50008000, 0x0067001F, 0x0000FFF2,
@@ -474,7 +474,7 @@ u32 frontier_df3_banim_aura_002_74FD8C[] __attribute__((section(".data.frontier_
     0x000023FC, 0x02340057, 0x10D6D368, 0xEF24441B, 0x00546312, 0x1312D592,
     0x044434B5, 0xAF563230, 0x1321B672, 0x3564218F, 0x0170D829, 0x22FF0E10,
     0x1A3910B4, 0x1008000F, 0x3AD11207, 0xB701D016, 0x10465F20, 0x6447A01D,
-    0x3C003500, (u32)&TerrainTable_MovCost_BerserkerSnow + 0x3B, 0x4266463F, 0x215E0A46, (u32)&pad_BC3A00 + 0x32C74, 0x0D25462F,
+    0x3C003500, (u32)&TerrainTable_MovCost_BerserkerSnow + 0x3B, 0x4266463F, 0x215E0A46, 0x08BF6674, 0x0D25462F,
     0xA7011145, 0x84016958, 0x01BFDF32, 0xE52796A1, 0x8B0B9221, 0x26030C10,
     0x00FF0A06, 0x2818430D, 0x350740BF, 0x0E391027, 0xFF341330, 0x2129F802,
     0x0F102003, 0x70039310, 0x4D16E70A, 0x024070E6, 0xBB0E092D, 0x30FB50BB,

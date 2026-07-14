@@ -19,6 +19,16 @@ R_ARM_ABS32 relocation whose final ELF symbol type is STT_FUNC must resolve to
 the exact function entry, either even or with the Thumb bit set. A linked value
 inside the function is a high-confidence false pointer decode.
 
+Additional packed-scalar classes are checked from the same final ELF:
+  * a named zero-size resource symbol plus an addend >= 0x10000 that resolves
+    back into ROM (excluding explicit pad_/gap_ placement anchors);
+  * the proven sBanimEkrPopupProcNames/0x08100009 packed AREA command,
+    independently of whether that resource later gains a nonzero ELF size;
+  * RomHeaderNintendoLogo relocations whose linked word is the proven packed
+    TileAnimations3 scalar 0x0800000B (.hword 11, 2048).
+  * relocations to pad_BC3A00, all three of which occur inside LZ-compressed
+    graphics streams and corrupt decompressed output when shifted.
+
 Confirm each SUSPECT with method (1) source/struct and method (3) fe8u before changing
 anything. This script only REPORTS; it never edits. Byte-identical fixes are manual/gated.
 
@@ -51,7 +61,15 @@ SHF_ALLOC = 0x2
 EM_ARM = 40
 STT_OBJECT = 1
 STT_FUNC = 2
+STT_SECTION = 3
 R_ARM_ABS32 = 2
+LARGE_ZERO_SIZE_ADDEND_MIN = 0x10000
+PLACEMENT_ANCHOR_PREFIXES = ("pad_", "gap_")
+ROM_HEADER_LOGO_SYMBOL = "RomHeaderNintendoLogo"
+TILE_ANIMATIONS3_PACKED_SCALAR = 0x0800000B
+AREA_PACKED_SYMBOL = "sBanimEkrPopupProcNames"
+AREA_PACKED_SCALAR = 0x08100009
+PROVEN_COMPRESSED_SCALAR_ANCHORS = frozenset({"pad_BC3A00"})
 
 # Message-id range typically packed into the high half of talk/quote metadata words.
 MSG_HI_LO, MSG_HI_HI = 0x0800, 0x0FFF   # high16 in this range => could be a packed msg id
@@ -100,6 +118,16 @@ class FunctionRelocationAudit:
     even_entries: int
     thumb_entries: int
     suspects: list
+
+
+@dataclass
+class ScalarRelocationAudit:
+    large_zero_size_addends: list
+    placement_anchor_reviews: list
+    compressed_anchor_suspects: list
+    area_scalar_suspects: list
+    header_inventory: list
+    header_scalar_suspects: list
 
 
 def _cstring(blob, offset):
@@ -350,6 +378,67 @@ def classify_function_relocations(relocations):
     )
 
 
+def classify_scalar_relocations(relocations):
+    large_zero_size_addends = []
+    placement_anchor_reviews = []
+    compressed_anchor_suspects = []
+    area_scalar_suspects = []
+    header_inventory = []
+    header_scalar_suspects = []
+
+    for reloc in relocations:
+        symbol = reloc.symbol
+        if symbol.name in PROVEN_COMPRESSED_SCALAR_ANCHORS:
+            compressed_anchor_suspects.append(reloc)
+            # Consumer proof promotes this exact pure-padding anchor above the
+            # generic pad_/gap_ REVIEW bucket: each live relocation is bytes
+            # inside an LZ stream, not a semantic pointer.
+            continue
+
+        if (
+            symbol.name == AREA_PACKED_SYMBOL
+            and reloc.linked_value == AREA_PACKED_SCALAR
+        ):
+            area_scalar_suspects.append(reloc)
+            # This exact semantic rule is stronger than the generic zero-size
+            # heuristic and remains active if the provider is later sized.
+            continue
+
+        if symbol.name == ROM_HEADER_LOGO_SYMBOL:
+            header_inventory.append(reloc)
+            if reloc.linked_value == TILE_ANIMATIONS3_PACKED_SCALAR:
+                header_scalar_suspects.append(reloc)
+
+        addend = reloc.linked_value - symbol.value
+        large_zero_size = (
+            bool(symbol.name)
+            and symbol.st_type != STT_SECTION
+            and symbol.size == 0
+            and ROM_LO <= reloc.linked_value < ROM_HI
+            and addend >= LARGE_ZERO_SIZE_ADDEND_MIN
+        )
+        if not large_zero_size:
+            continue
+
+        record = (reloc, addend)
+        if symbol.name.startswith(PLACEMENT_ANCHOR_PREFIXES):
+            # pad_/gap_ labels are explicit build-layout anchors, not semantic
+            # resources. Keep them visible for review, but do not apply the
+            # high-confidence zero-size-resource rule without consumer proof.
+            placement_anchor_reviews.append(record)
+        else:
+            large_zero_size_addends.append(record)
+
+    return ScalarRelocationAudit(
+        large_zero_size_addends=large_zero_size_addends,
+        placement_anchor_reviews=placement_anchor_reviews,
+        compressed_anchor_suspects=compressed_anchor_suspects,
+        area_scalar_suspects=area_scalar_suspects,
+        header_inventory=header_inventory,
+        header_scalar_suspects=header_scalar_suspects,
+    )
+
+
 def require_relocation_bearing_elf(audit, path):
     if audit.rom_abs32 == 0:
         raise ElfFormatError(
@@ -378,6 +467,47 @@ def report_function_relocations(audit, relocs_elf, limit):
         f"even-entry={audit.even_entries:,}, "
         f"Thumb-entry={audit.thumb_entries:,}, "
         f"function-interior false relocations={len(audit.suspects):,}"
+    )
+
+
+def report_scalar_relocations(audit, limit):
+    print("\n" + "=" * 78)
+    print("PACKED-SCALAR ABS32 audit")
+    print("=" * 78)
+    for reloc, addend in audit.large_zero_size_addends[:limit]:
+        print(
+            f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
+            f"symbol={reloc.symbol.name} size=0 addend=0x{addend:X}"
+        )
+    for reloc in audit.compressed_anchor_suspects[:limit]:
+        addend = reloc.linked_value - reloc.symbol.value
+        print(
+            f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
+            f"symbol={reloc.symbol.name} addend=0x{addend:X} packed=LZ-stream"
+        )
+    for reloc in audit.area_scalar_suspects[:limit]:
+        print(
+            f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
+            f"symbol={reloc.symbol.name} packed=AREA(..., 9, 0, 16, 8)"
+        )
+    for reloc in audit.header_scalar_suspects[:limit]:
+        print(
+            f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
+            f"symbol={reloc.symbol.name} packed=.hword 11, 2048"
+        )
+    for reloc, addend in audit.placement_anchor_reviews[:limit]:
+        print(
+            f"  [REVIEW] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
+            f"placement-anchor={reloc.symbol.name} addend=0x{addend:X}"
+        )
+    print(
+        "SCALAR SUMMARY: "
+        f"zero-size large-addend false relocations={len(audit.large_zero_size_addends):,}, "
+        f"compressed-anchor false relocations={len(audit.compressed_anchor_suspects):,}, "
+        f"AREA packed-scalar false relocations={len(audit.area_scalar_suspects):,}, "
+        f"{ROM_HEADER_LOGO_SYMBOL} inventory={len(audit.header_inventory):,}, "
+        f"packed-scalar false relocations={len(audit.header_scalar_suspects):,}, "
+        f"placement-anchor reviews={len(audit.placement_anchor_reviews):,}"
     )
 
 
@@ -555,9 +685,9 @@ def main():
         return 2
 
     try:
-        function_relocs = classify_function_relocations(
-            iter_rom_abs32_relocations(args.relocs_elf)
-        )
+        rom_relocations = list(iter_rom_abs32_relocations(args.relocs_elf))
+        function_relocs = classify_function_relocations(rom_relocations)
+        scalar_relocs = classify_scalar_relocations(rom_relocations)
         require_relocation_bearing_elf(function_relocs, args.relocs_elf)
     except (OSError, ElfFormatError) as exc:
         print(f"cannot audit {args.relocs_elf}: {exc}", file=sys.stderr)
@@ -688,8 +818,13 @@ def main():
           f"false-positive(mis-id)={len(fp_suspects)}")
     print("Confirm each with (1) source/struct, (2) target meaningfulness, (3) fe8u before editing.")
     report_function_relocations(function_relocs, args.relocs_elf, args.limit)
+    report_scalar_relocations(scalar_relocs, args.limit)
     if args.fail_on_suspects and (
         inconsistent or fn_suspects or fp_suspects or function_relocs.suspects
+        or scalar_relocs.large_zero_size_addends
+        or scalar_relocs.compressed_anchor_suspects
+        or scalar_relocs.area_scalar_suspects
+        or scalar_relocs.header_scalar_suspects
     ):
         return 1
     return 0
