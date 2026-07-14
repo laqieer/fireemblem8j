@@ -13278,13 +13278,120 @@ and `make compare` passes.
 
 **Verification.** `make compare` -> `fireemblem8.gba: OK` after each
 sub-step (split, deletion, pinned-guard rewrite, tamper-and-restore).
-`scripts/audit_bin_forms.py` (branch-local): MISS=0, FLOOR=1428,
-UNCERTAIN=16, TOTAL=1444 (down one FLOOR/TOTAL from D393's 1429/1445, since
-blob001 is no longer a `.bin` at all -- not reclassified, removed). Menu-path
-UNCERTAIN confirmed 0. Full verification (clean rebuild, shiftcheck, layout
-reconstruction, fresh throwaway simulation onto the current `origin/main`
-D388 tip) recorded in this commit's push message. Issue #143 remains open;
-`main` was not merged; no force-push occurred. If a concurrently-integrated
-sibling branch has already claimed D395, the integrator should renumber this
-entry (and the D389-D394 entries per the six-entry mapping in D393/D394/this
-entry), not the work it describes.
+`scripts/audit_bin_forms.py` (branch-local, built state -- `.lz` build
+artifacts present): MISS=0, FLOOR=1429, UNCERTAIN=16, TOTAL=1445 --
+**unchanged** from D393's 1429/1445, not "down one" as first reported here:
+blob001's raw 4632 B pinned-pathname floor was not simply removed, it was
+replaced 1-for-1 by the ordinary 1204 B standard-TSA payload split out of
+it, which the pre-existing name/form-based TSA rule already classifies
+FLOOR on its own merits (a real, reproducible-form floor, not a pinned
+opaque one). Net FLOOR count is identical; only the *kind* of floor for that
+byte range changed. (An earlier report of FLOOR=1428/TOTAL=1444 for this
+entry was itself stale -- it was taken before `.lz` build artifacts existed
+on disk for every referenced source, and some FLOOR rules key off a built
+`.lz` sibling existing; see D396 for the fail-closed pinned-presence guard
+and this correction.) Menu-path UNCERTAIN confirmed 0. Full verification
+(clean rebuild, shiftcheck, layout reconstruction, fresh throwaway
+simulation onto the current `origin/main` D388 tip) recorded in this
+commit's push message. Issue #143 remains open; `main` was not merged; no
+force-push occurred. At integration, this entry (drafted locally as
+branch-local D384, part of the branch's own D378-D385 eight-entry
+sequence) was renumbered to **D395**, alongside D378->D389, D379->D390,
+D380->D391, D381->D392, D382->D393, D383->D394, and D385->D396.
+
+## D396 — fail-closed pinned-floor *presence* guard; branch/asset metadata corrections (issue #143 menu lane) (2026-07-14)
+
+**Scope.** Verifier follow-up on `d37de3915` (NEAR): all ROM bytes/relocs/
+assets confirmed MATCH, but two remaining audit-truth gaps.
+
+**1) Pinned-floor presence gap.** `run_self_tests()`'s `expect()` helper
+silently `return`s (no failure) when a substring has **zero** matches in
+`by_path` -- so if a `PINNED_RESIDUAL_FLOORS` key were ever entirely absent
+from the classified inventory (e.g. `git rm`/untracked, so `git ls-files`
+never returns it, as opposed to merely deleted-on-disk-but-still-tracked),
+the self-test suite would say nothing at all. Note this is a **different**
+failure mode from a tracked-but-disk-missing file: `git ls-files` lists
+tracked paths regardless of on-disk presence, so a `mv`-away-without-`git
+rm` is *already* caught by the existing `classify()`/`pinned_residual_
+floor_classify()` "MISSING tracked residual file" -> `UNCERTAIN` path (that
+one never needed the new guard). The genuinely uncovered case is the path
+disappearing from `by_path`'s keys entirely. Added
+`check_pinned_residual_floor_presence(by_path)`: iterates every
+`PINNED_RESIDUAL_FLOORS` key and fails, per-key, with an explicit "PINNED
+RESIDUAL FLOOR MISSING FROM INVENTORY" message if the key is not present in
+`by_path` (exact match or path-suffix match). Wired directly into
+`run_self_tests(by_path)` alongside the existing
+`run_pinned_residual_floor_self_tests()` call, so it runs against the REAL
+classified inventory on every audit run, not only synthetic fixtures.
+Added a synthetic regression inside `run_pinned_residual_floor_self_tests()`
+(all-keys-but-one `by_path`, and all-keys `by_path`) asserting the guard
+fires exactly for the omitted key and stays silent when nothing is missing.
+
+**Verification (both failure modes tested against the real tracked file,
+not just synthetic fixtures).**
+- *Disk-missing-but-tracked* (`mv` away, no `git rm`): audit still exits 1,
+  caught by the pre-existing `expect()` path (`by_path` still has the key,
+  classification is `UNCERTAIN`/"MISSING tracked residual file"). Restored;
+  sha256 reconfirmed against the pin
+  (`6ffae18b8345b2ffff8caef700464de40deb75aa0b5d2b32b992ec9eb754ac82` for
+  `frontier_df4_menu_021_A95B4E.bin`).
+- *Genuinely untracked* (`git rm --cached`, so the path drops out of
+  `git ls-files`/`by_path` entirely): **without this fix**, `expect()` would
+  see zero matches and silently pass; **with this fix**,
+  `check_pinned_residual_floor_presence` fires
+  "PINNED RESIDUAL FLOOR MISSING FROM INVENTORY:
+  'graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin' ... does not
+  appear anywhere in the classified `.bin` inventory ... hard failure, not a
+  silent skip", audit exits 1. `git add` restored tracking; content
+  byte-identical to the pre-test copy (`cmp` clean); sha256 still matches
+  the pin; a subsequent audit run returns exit 0 with zero self-test
+  failures.
+
+**2) Stale metadata corrections.** Root cause of the branch-local
+FLOOR/TOTAL discrepancy across recent entries: some `classify()` rules
+(`_is_lz_derivative_bin`-style checks) key off a built `.lz` sibling file
+existing **on disk**, a build artifact -- so the audit script reports
+different (lower) FLOOR/TOTAL counts run against a pre-build tree than a
+built one. All counts below are re-derived fresh, in a built state
+(`.lz`/PNG artifacts present from a completed `make compare`):
+- Branch-local `scripts/audit_bin_forms.py`: **MISS=0, FLOOR=1429,
+  UNCERTAIN=16, TOTAL=1445** (D395's own prior report of 1428/1444 for this
+  same built state was stale/wrong; see D395's corrected verification
+  paragraph). Branch delta from the D376 baseline: **MISS0/FLOOR1415/
+  UNCERTAIN30/TOTAL1445 -> MISS0/FLOOR1429/UNCERTAIN16/TOTAL1445**.
+- D388-integrated throwaway-simulation totals remain **MISS0/FLOOR1448/
+  UNCERTAIN8/TOTAL1456** (unchanged, already correct in D394/D395).
+- Menu-lane tracked-asset footprint, derived directly from
+  `layout/data_incbin_deps.mk`'s two menu object dependency lines: the
+  union of `frontier_df4_menu.o`'s 181 entries and
+  `frontier_df4_menu_asm.o`'s 3 (021/027 shared between both, 005 only in
+  the `.s` consumer) is exactly **182** distinct referenced paths = **179**
+  reconstructing sources (PNG/JASC/typed-C-generated/plain-TSA) + **3**
+  pinned residual floors (005/021/027); **127** of the 182 are `.lz`
+  compressed streams. (`docs/frontier.md` previously described this
+  informally; the exact arithmetic is now pinned here.)
+- D395's own text claimed a "six-entry" integration mapping table; corrected
+  to **seven** entries (D378->D389 through D384->D395), matching what
+  D393/D394 already listed explicitly -- the six-entry wording undercounted
+  D395's own row. (This entry, D396, brings the branch's full local sequence
+  to eight decisions total: D378->D389 through D385->D396.)
+- `docs/frontier.md` previously described the pinned-floor guard only as
+  covering same-size tamper / wrong-size / missing-on-disk; updated to also
+  describe the presence guard precisely now that it exists (was not
+  overclaimed before this fix landed, since the guard did not yet exist).
+
+**Verification.** `python3 scripts/audit_bin_forms.py` (built state): exit
+0, `MISS=0 FLOOR=1429 UNCERTAIN=16 TOTAL=1445`, zero self-test failures,
+`docs/bin_audit.md` regenerated. `make compare` -> `fireemblem8.gba: OK`
+(audit-script-only change; no ROM-byte-affecting source touched).
+`make shiftcheck` clean. Fresh throwaway simulation onto `origin/main`'s
+D388 tip (`4b7d16d8dcec8ee92e05099dd5db7718d081be2f`, re-fetched and
+reconfirmed unchanged): `make layout`, canonical deps/audit regeneration,
+`make clean && make compare` (`graphicscheck` 0 defects, `fireemblem8.gba:
+OK`), `make shiftcheck` (96 graphics + 106 shiftcheck tests, both run
+exactly once, both OK), `scripts/check_incbin_deps.py` /
+`scripts/check_layout.py` / `scripts/check_selfcontained.py` OK, `git diff
+--check` clean, integrated audit reconfirmed **MISS0/FLOOR1448/UNCERTAIN8/
+TOTAL1456**; simulation worktree/branch removed afterward, nothing pushed
+from it. Issue #143 remains open; `main` was not merged; no amend/rebase/
+force-push occurred.
