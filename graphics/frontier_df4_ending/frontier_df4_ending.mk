@@ -10,15 +10,6 @@
 # graphics/misc_gfx2/misc_gfx2.mk for their mindist overrides.)
 
 
-# wave49: frontier_df4_ending_006's two LZ sheets build from decompressed .bin
-# sources; truncate gbagfx output to the exact JP lengths (508B; 548B incl. 3B pad).
-graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz: graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin
-	$(GBAGFX) $< $@
-	truncate -s 508 $@
-graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz: graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin
-	$(GBAGFX) $< $@
-	truncate -s 548 $@
-
 # issue #143 (ending-assets): frontier_df4_ending_007's two independent LZ77
 # streams (each decompressing to a 2050 B standard TSA, hdr 0x1f1f => 32x32).
 # s0 round-trips exactly at -mindist 2. s1 round-trips its first 529 B exactly
@@ -29,4 +20,3 @@ graphics/frontier_df4_ending/frontier_df4_ending_007_s0.tsa.bin.lz: LZ_FLAGS := 
 graphics/frontier_df4_ending/frontier_df4_ending_007_s1.tsa.bin.lz: graphics/frontier_df4_ending/frontier_df4_ending_007_s1.tsa.bin
 	$(GBAGFX) $< $@ -mindist 2
 	truncate -s 529 $@
-

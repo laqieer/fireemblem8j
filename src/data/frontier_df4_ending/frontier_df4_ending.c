@@ -647,7 +647,6 @@ u8 gUnk_08AC718C[] __attribute__((section(".data.frontier_df4_ending.gap3"))) = 
 u16 Pal_StaffReelEnt_EndingFin[] __attribute__((section(".data.frontier_df4_ending.gap3"))) = INCBIN_U16("graphics/frontier_df4_ending/Pal_StaffReelEnt_EndingFin.gbapal");
 u8 frontier_df4_ending_004_ACC378[] __attribute__((section(".data.frontier_df4_ending.gap4"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_004_ACC378.4bpp.lz");
 u8 frontier_df4_ending_005_ACEB54[] __attribute__((section(".data.frontier_df4_ending.gap5"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54_0.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54_1.4bpp.lz");
-u8 frontier_df4_ending_006_AD02D4[] __attribute__((section(".data.frontier_df4_ending.gap6"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz", "graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz");
 /* frontier_df4_ending_007, JP 0x08AD0CFC-0x08AD1284 (1416 B; layout/carved_rom.d
  * gap7). Two independent GBA-BIOS-LZ77 streams each decompressing to a 2050 B
  * standard TSA (hdr 0x1f,0x1f => 32x32, no trailing pad this time), followed by
