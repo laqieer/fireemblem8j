@@ -11567,3 +11567,133 @@ the D376/D377 closures and its gate-count-stays-0 framing is unchanged by this
 broadening.
 
 Tracked on the same issue #143 thread as D376/D377.
+
+## D379 — D378's broadened ProcCmd gate had a real object-extent defect: bound every candidate to its OWN size, treat true terminal opcodes correctly, and verify NOLOAD/split-continuation edge cases empirically instead of guessing (2026-07-14)
+
+**The defect.** D378's byte-level rescan decoded a `struct ProcCmd` prefix
+starting at every ROM object symbol but did not bound the decode to that
+candidate's OWN `nm -S` size — it just kept reading forward until ANY
+byte pattern looked like a valid terminator. A script that legitimately ends
+in a terminal control-transfer opcode with NO following `PROC_END` was
+therefore walked straight through into the NEXT, unrelated, independently
+linked object. Demonstrated real overreads: `ProcScr_MapAnimPoisonDmg` and 8
+sibling `PROC_JUMP`-terminated arrays in `frontier_df4_banim_b.c` (each ends
+`..., PROC_JUMP(ProcScr_MapAnimEnd)` with nothing after it, laid out
+back-to-back with zero gap) were merged into one bogus 138-record/1104-byte
+"prefix" that also swallowed `ProcScr_MapBattleInfoBox`'s trailing real
+`PROC_END` — 68 overlapping pointer-slot double-counts across 22 distinct
+nested starts ROM-wide, including the `ProcScr_PalFade` family and
+`frontier_df4_menu_021c_A95DDC_4/6/8/10/12/14`.
+
+**Fix 1 — bound every decode to `[addr, addr+size)`.** `decode_prefix()` now
+takes the candidate's own declared size and NEVER reads a byte outside it,
+regardless of content.
+
+**Fix 2 — a correct terminal-opcode rule, derived from runtime semantics, not
+assumed from the one example given.** Inspecting `include/proc.h`'s handler
+table (`sProcessCmdTable`, source + disassembly for every entry) found FOUR
+opcodes that never fall through under normal script advancement, not one:
+- `PROC_JUMP` (`0x0D`, `src/proc_080031B8.c`): `Proc_GotoScript(...)`, no
+  `proc_scrCur++` — unconditionally repoints to a DIFFERENT script.
+- `PROC_GOTO` (`0x0C`, `ProcCmd_GOTO`): also no `proc_scrCur++`; `Proc_Goto()`
+  only searches within the CURRENT script, but still never falls through
+  (finds the label and jumps there, or loops on itself). Demonstrated real
+  case: `ProcScr_MapAnimBattle`, `gProcScr_FortuneSubMenu`,
+  `ProcScr_SioMenu_Init_5D3D50_0` all legitimately end here.
+- `PROC_BLOCK` (`0x10`): disassembly at its handler (`gap_00003240`, not yet
+  split into a named file) is exactly `movs r0, #0; bx lr` — an
+  unconditional permanent halt that never even reads `dataImm`/`dataPtr` or
+  touches `proc_scrCur`. Demonstrated real cases: `ProcScr_FadeToBlack`/
+  `FadeFromBlack`/`FadeToWhite`, `gProcScr_SubtitleHelp`,
+  `ProcScr_ManimLevelUpStatGainLabel`.
+- `PROC_REPEAT` (`0x03`, `ProcCmd_LOOP_ROUTINE`): DOES advance `proc_scrCur`,
+  but also sets `proc_idleCb`, and `RunProcessScript()` never dispatches
+  another opcode while `proc_idleCb != NULL` — so once installed, the script
+  never resumes on its own. Demonstrated real cases (all individually carved,
+  `layout/carved_rom.d/*.tsv`-annotated `(N ProcCmd)`): `ProcScr_SpacialSeTest`,
+  `ProcScr_ChapterIntro_RevealDecalSprite`, `ProcScr_DrawLinkArenaFogPlaceholders`,
+  `ProcScr_Mu`.
+`PROC_LABEL` (`0x0B`) and `PROC_CALL` (`0x02`) were checked and confirmed
+NON-terminal by direct disassembly (`PROC_LABEL`'s handler is the plain
+`ProcCmd_NOP`; `PROC_CALL`'s advances then calls) — they still require a
+following `PROC_END`. Critically, a `TERMINAL_OPCODES` record only ends
+decoding when it is ALSO the object's own last fitting record: the
+overwhelmingly common in-tree pattern `PROC_REPEAT(...), PROC_END,` must
+still consume its trailing real terminator when more of the SAME object's
+declared bytes remain (an earlier draft of this fix stopped at every
+`PROC_REPEAT` unconditionally and silently undercounted thousands of records
+in otherwise-normal scripts — caught by re-running against the real ROM
+before landing).
+
+**Fix 3 — NOLOAD "phantom placement" symbols are not blindly excluded.**
+This project's `ldscript.txt` declares 249 `.bss_<N>` output sections, ALL
+`(NOLOAD)` (verified 249/249) and many commented `region-diff (incbin)`: a
+NOLOAD address's bytes at `gba_file[addr - ROM_BASE]` are not proven to be
+that symbol's real content. An earlier draft of this fix excluded every
+NOLOAD-range candidate outright and REGRESSED: `ProcScr_efxThunderBG` (one of
+the three originally-fixed `PROC_NAME` literals) sits in a NOLOAD range
+(`.bss_42`, also `region-diff (incbin)`) yet decodes its true, correct content
+there — excluding it silently dropped the missing-relocation finding. The
+corrected rule only excludes a NOLOAD candidate when its decode does NOT
+cleanly terminate (untrustworthy either way, so neither reported malformed
+nor promoted); a clean termination is always trusted, matching the
+opcode-validity-odds reasoning already established for the ungated case.
+
+**Fix 4 — verified (not assumed) same-section split continuations.** Two
+truncated candidates turned out to be genuine source-level carving splits,
+each independently confirmed by reading the actual continuation object's
+bytes/relocations rather than guessed: `gProcScr_GameControl` (976 B, ends in
+a non-terminal `PROC_LABEL` per its own compiled assembly
+`gamecontrol_08009E68.s`) and `gProcScr_CharacterEndings` (176 B, ends in
+non-terminal `PROC_CALL`, matching the pre-existing `region-diff` comment in
+`src/data/frontier_df4_ending/frontier_df4_ending.c` that already documents
+"the label at +144 is 2... and PROC_GOTO(100) at +80 is dangling") are each
+immediately followed, in the SAME output section with zero gap, by a
+separately-named object (`frontier_df4_ending_gap1_r0`, etc.) whose leading
+bytes are the script's true `PROC_END`-terminated tail. `find_script_prefixes`
+now retries a truncated candidate's decode extended up to the end of up to 4
+contiguous following candidates; if THAT decode terminates validly, the
+finding is promoted into `prefixes` (fully relocation-audited, using the
+extended events) and reported separately as a `split_continuations` entry —
+never silently guessed, and never accepted if the extension itself fails to
+terminate (a dedicated regression fixture proves an unverifiable truncation
+stays malformed).
+
+**Verified result.** Re-running the corrected gate against a scratch rebuild
+of the pre-D377/D378 source (`git show f8f5c551d:...`) reproduces EXACTLY the
+6 known missing slots and 0 malformed / 0 unexpected: `ProcScr_efxThunderBG`,
+`ProcScr_efxThunderBGCOL`, `ProcScr_efxFireOBJ`, `data_08601748`,
+`data_086019E0`, `data_086019F8` (with `gProcScr_GameControl` and
+`gProcScr_CharacterEndings` both correctly resolved as verified split
+continuations even in the pre-fix tree, since that fact is independent of
+these fixes). The fixed tree: **631 script prefixes, 5,458 records, 3,330
+pointer-bearing slots, 3,330 relocated, 0 missing, 0 malformed, 2 verified
+split-continuations** — materially closer to the externally-reported 615
+prefixes than D378's uncorrected 622 (the residual delta is most plausibly
+population/edge-case-policy differences in exactly the two verified-split
+cases and/or NOLOAD-adjacent candidates, not "minor decode differences";
+both audits fully agree on the ONLY property that matters, the same 6 real
+misses and a clean floor after the fix). Shifted A/B re-verified: all
+3,330+ pointer-bearing fields across all 631 prefixes track `+0x40000` (or
+stay NULL) against a freshly built shifted ROM — 0 mismatches. 37 focused
+unit tests (`test_audit_procscr_relocs.py`, fully rewritten) now cover
+object-extent bounding, each terminal opcode ending a script correctly,
+terminal-opcode-mid-object continuing to a real `PROC_END`, the
+`ProcScr_MapAnimPoisonDmg`-shape adjacent-array family, nonterminal
+truncated objects, genuine vs. unverifiable split continuations, NOLOAD
+candidates both trusted (clean decode) and excluded (failed decode), zero/
+negative-size handling, and non-terminating/runaway-decode bounding.
+
+**Numbering note for the integrator.** This branch was developed serially
+and locally numbers its new decisions D376 (glyph gate)/D377 (ProcCmd
+literals + scan_offsets.py fix)/D378 (broadened byte-decode rescan)/D379
+(this entry). The reviewer separately reports `main` currently maps D376 to
+an unrelated map-related decision and D377 to a different code-literals
+entry — i.e. these numbers WILL collide with `main` by the time this branch
+is integrated. The integrator must renumber all four headings (D376-D379)
+here and every cross-reference to them (including the two `docs/frontier.md`
+axis-5 mentions) against `main`'s actual next-available number at merge time;
+do not renumber preemptively in this branch without knowing that exact
+number.
+
+Tracked on the same issue #143 thread as D376/D377/D378.
