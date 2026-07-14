@@ -6801,8 +6801,33 @@ u32 data_08A95AD8[] __attribute__((section(".data.frontier_df4_menu.gap20"))) = 
  * src/data/ProcScr_uisupport_ref/dat_ProcScr_uisupport_ref.c (own 4-aligned .rodata
  * sections); the surrounding data stays here as three INCBIN slices. Byte-exact:
  * 0x22 + 0xE0 + 0x44 + 0x148 + 0x680 = 0x90E. */
-/* [0x22,0x102) -> gProcScr_SupportScreen (ref file) */
-u8 frontier_df4_menu_021b_A95C50[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x102, 0x44);
+/* [0x102,0x146) -> 4 SpriteEx u16 tables, region-same with fe8u src/uisupport.c
+ * (sSprite_NameAffinLv/Uisupport_0/Uisupport_1/BackButton), consumed by
+ * DrawSupportSubScreenSprites (src/DrawSupportSubScreenSprites.c). Were baseline
+ * ABS aliases (layout/baseline_syms.d/cfbind_uisupport.tsv), now real typed data.
+ * 0x14+0xE+0x14+0xE = 0x44 (exact). */
+u16 sSprite_NameAffinLv[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = {
+    3,
+    0x4000, 0x4000, 0x082C,
+    0x4000, 0x4020, 0x0830,
+    0x4000, 0x4040, 0x0834,
+};
+u16 sSprite_Uisupport_0[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = {
+    2,
+    0x4000, 0x8000, 0x0800,
+    0x0000, 0x4020, 0x0804,
+};
+u16 sSprite_Uisupport_1[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = {
+    3,
+    0x4000, 0x8000, 0x0806,
+    0x4000, 0x8020, 0x080A,
+    0x0000, 0x4040, 0x080E,
+};
+u16 sSprite_BackButton[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = {
+    2,
+    0x4000, 0x8000, 0x0018,
+    0x8000, 0x0020, 0x001C,
+};
 /* [0x146,0x28E) -> gProcScr_SupportUnitSubScreen (ref file) */
 /* #143 shiftability: gap21c embeds gUnknown_08A95E20 (ProcScr for sub_80A7650)
  * whose 7 interior ProcCmd pointer words were raw un-relocatable addresses. Split
@@ -6837,7 +6862,27 @@ u8 frontier_df4_menu_021c_A95DDC_12[] __attribute__((section(".data.frontier_df4
 u32 frontier_df4_menu_021c_A95DDC_13[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&sub_80A7620,
 };
-u8 frontier_df4_menu_021c_A95DDC_14[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x31A, 0x5F4);
+/* Tail [0x31A,0x90E) / ROM 0x08A95E68..0x08A9645C (issue #143 menu pass):
+ * [0,0x18) 12 exact u16 values, no pointer/consumer/fe8u match -> typed literal
+ * table, honest "unknown purpose" floor. [0x18,0x320) Img_PrepHelpButtonSprites:
+ * LZ77 (776 B compressed) -> 2048 B/64 4bpp tiles, 256x16 PNG; consumers
+ * PrepHelpPrompt_Init/MenuButtonDisp_Init (was baseline ABS alias
+ * layout/baseline_syms.tsv:Img_PrepHelpButtonSprites, dropped via
+ * layout/baseline_syms_drop.d/Img_PrepHelpButtonSprites.tsv). [0x320,0x5D4)
+ * Gfx_SoundTest_8035650: JP-only BB sound-test caption, LZ77 (689 B + 3-B natural
+ * pad = 692 B compressed) -> 2048 B/64 4bpp tiles, 256x16 PNG; consumer
+ * sub_8035650 decompresses to 0x06015000 (was baseline ABS alias
+ * layout/baseline_syms.d/zfix_8035650.tsv). Both LZ streams reproduce byte-exact
+ * at gbagfx's default (mindist 2). [0x5D4,0x5F4) Pal_SoundTest_8035650: matching
+ * 16-color palette, applied to OBJ palette bank 5 (0xA8<<2) before
+ * gProcScr_SubtitleHelpDarkener; clean JASC round-trip. */
+u16 frontier_df4_menu_021c_A95E68[12] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
+    0x000B, 0x0063, 0x0000, 0x0000, 0x0010, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+};
+u8 Img_PrepHelpButtonSprites[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/Img_PrepHelpButtonSprites.4bpp.lz");
+u8 Gfx_SoundTest_8035650[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/Gfx_SoundTest_8035650.4bpp.lz");
+u16 Pal_SoundTest_8035650[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_SoundTest_8035650.gbapal");
 u8 frontier_df4_menu_022_A96D18[] __attribute__((section(".data.frontier_df4_menu.gap22"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_1.4bpp.lz");
 /* multi-stream container split (A99FA8, 1660 B): [0x0,0x40) = 2 verbatim palettes,
    then 3 self-delimiting LZ77 4bpp sub-streams -> editable PNG (png->4bpp->.4bpp.lz,
