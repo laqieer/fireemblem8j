@@ -208,8 +208,22 @@ NAME_CLASS_RULES = [
      "UNCERTAIN", "RE-complete: pointer-free OAM data (shift-safe); JP-divergent, no fe8u twin, DEFERRED (D362)"),
     # frontier_df4_menu_005 (JP-exclusive): D362 — a proc-script leaf; the earlier
     # "MapChanges" label was REFUTED. JP-divergent -> UNCERTAIN, not "needs RE".
+    # Re-audited (issue #143 menu pass): the tracked .bin was over-extracted at
+    # 587 B; layout/carved_rom.d/data_frontier4_df4_menu.tsv's own gap5 row
+    # (A5FFAD..A60138) proves the REAL gap is only 0x18B=395 B -- the trailing
+    # 192 B were already-superseded ProcScr_menu148_ref (quakefx) bytes. Trimmed
+    # the .bin to the true 395-B floor (byte-identical prefix, make compare
+    # unaffected: no INCBIN offset in frontier_df4_menu_asm.s exceeds 0x18B).
+    # Content: interleaved raw counts/fields + 8 already-relocated ARM function
+    # pointers (GameOver_FadeOutCurrentBgm, StartSlowFadeToBlack, EndAllMus,
+    # SkilGameOverForToturialExtraMap, sub_8021210, PostGameOverHandler,
+    # AsnycKeyStatus_ButtonB, UnsetKeyIgnoreMask) -- a GameOver-sequence
+    # proc-script-like leaf, heavily cross-referenced base+offset from ~80
+    # chapter Events_ref/MapChanges_ref tables. No further typed structure is
+    # discernible without inventing semantics for the un-pointered raw fields;
+    # kept as an honest evidence-backed floor.
     (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD\.bin$"),
-     "UNCERTAIN", "RE-complete: proc-script leaf (the earlier 'MapChanges' label was refuted); JP-divergent, no fe8u twin, DEFERRED (D362)"),
+     "UNCERTAIN", "RE-complete (395 B floor, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers; JP-divergent, no fe8u twin, DEFERRED (D362)"),
     # frontier JP-divergent UI / font-group / ending / CG tables (UNCERTAIN): they
     # reached the name-class step precisely because NO fe8u editable twin exists
     # (JP-only multiplayer/menu/font/CG assets). The prior loose catch-all
