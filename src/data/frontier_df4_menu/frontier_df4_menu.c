@@ -6916,7 +6916,12 @@ u16 Pal_PrepWindowC[16] __attribute__((section(".data.frontier_df4_menu.gap23"))
 u16 Pal_PrepWindowD[16] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_PrepWindowD.gbapal");
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x3DC] 61t 4bpp sheet ->
  * editable PNG; [0x3DC:0x3FC] trailing raw kept verbatim (symbol size 1020). */
-u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0x3DC, 0x20);
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x3DC] 61t 4bpp sheet ->
+ * editable PNG; [0x3DC:0x3FC] a generic reused 16-color UI-gradient palette,
+ * byte-identical to fe8u's gPal_SupportMenu (src/data/data_A195B0.c) -- no static
+ * consumer found for this JP copy, so kept a conservative local name/comment
+ * rather than claiming that identity, but emitted as an editable JASC source. */
+u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28_pal.gbapal");
 u32 frontier_df4_menu_026_A9CF7C[] __attribute__((section(".data.frontier_df4_menu.gap26"))) = {
     0x60000000,
     0x00000000,
