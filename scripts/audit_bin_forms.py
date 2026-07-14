@@ -210,7 +210,7 @@ NAME_CLASS_RULES = [
     (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_007_residual_B381\.bin$"),
      "FLOOR", "evidence-backed FLOOR: 519 B near-zero residual (only first 8 B non-zero), no pointer structure, no known consumer -- narrowly scoped raw floor (#143, D377)"),
     # frontier_df4_menu_005 (JP-exclusive): D362 — a proc-script leaf; the earlier
-    # "MapChanges" label was REFUTED. JP-divergent -> UNCERTAIN, not "needs RE".
+    # "MapChanges" label was REFUTED. JP-divergent, no fe8u twin.
     # Re-audited (issue #143 menu pass): the tracked .bin was over-extracted at
     # 587 B; layout/carved_rom.d/data_frontier4_df4_menu.tsv's own gap5 row
     # (A5FFAD..A60138) proves the REAL gap is only 0x18B=395 B -- the trailing
@@ -223,10 +223,52 @@ NAME_CLASS_RULES = [
     # AsnycKeyStatus_ButtonB, UnsetKeyIgnoreMask) -- a GameOver-sequence
     # proc-script-like leaf, heavily cross-referenced base+offset from ~80
     # chapter Events_ref/MapChanges_ref tables. No further typed structure is
-    # discernible without inventing semantics for the un-pointered raw fields;
-    # kept as an honest evidence-backed floor.
+    # discernible without inventing semantics for the un-pointered raw fields.
+    # RE-COMPLETE evidence-backed FLOOR (issue #143 coverage pass): unlike the
+    # generic "fe8u form unknown, needs RE" catch-all below (genuinely open
+    # questions), this asset's every byte's role IS proven (counts/fields vs. the
+    # 8 relocated pointers above); there is simply no fe8u twin to compare
+    # against and no further reducible structure. Distinct floor rationale from
+    # the TSA/.map.bin fe8u-parity FLOORs elsewhere in this script, but the same
+    # "legitimate, do not fake-extract further" conclusion -> FLOOR, not
+    # UNCERTAIN (which implies more RE work remains).
     (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD\.bin$"),
-     "UNCERTAIN", "RE-complete (395 B floor, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers; JP-divergent, no fe8u twin, DEFERRED (D362)"),
+     "FLOOR", "RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143)"),
+    # frontier_df4_menu_001/021/027 (JP-exclusive, issue #143 coverage pass):
+    # RE-COMPLETE evidence-backed FLOORs, same rationale as blob005 above. Each
+    # was reduced to the MINIMAL live byte range still read by any INCBIN/incbin
+    # consumer (src/data/frontier_df4_menu/frontier_df4_menu.c and/or
+    # frontier_df4_menu_asm.s), deleting ~2000-2200 B of duplicated content per
+    # file that used to sit alongside the already-extracted PNG/TSA/palette/typed-C
+    # companions covering the rest of each original blob. Every remaining byte's
+    # role is proven:
+    #  - 001 [0,0x1218) 4632 B: confirmed genuine LZ77 (0x10 header, decompressed
+    #    size 0x5000=20480 B=640 4bpp tiles); PNG round-trip reproduces the exact
+    #    20480 decompressed bytes, but no available gbagfx compressor preset
+    #    reproduces this exact compressed stream (original JP encoder used
+    #    different match-selection heuristics) -- kept as the minimal compressed
+    #    floor, not a generic opaque blob.
+    #  - 021 174 B (two disjoint spans concatenated): [0,0x22) is the gap21 head
+    #    (interleaved with 2 relocated pointers, DrawSupportBannerSprites_Init/
+    #    _Loop) and [0x22,0xAE) is the gap21c interior (interleaved with 7
+    #    relocated pointers to sub_80A74D4/StartMidFadeFromBlack/WaitForFade/
+    #    nullsub_82/StartMidFadeToBlack/WaitForFade/sub_80A7620) -- every
+    #    non-pointer byte is a proven ProcCmd/SpriteEx field, not unknown.
+    #  - 027 342 B (two disjoint spans concatenated): [0,0x11A) is the gap27 head
+    #    (struct ProcCmd literal stream, interleaved with many
+    #    Sprite_Savedraw_7+offset pointers not read from the file) and
+    #    [0x11A,0x156) is the gap27c interior (interleaved with 2 relocated
+    #    pointers, SaveDrawCursorYOffsetLut+0x1B/SqMask_Loop).
+    # No relocation slot or pointer-bearing schema is hidden in any of these
+    # residuals -- every interior ROM pointer word is already a named .4byte
+    # Sym(+addend) relocation in the surrounding C/asm, verified against
+    # `make shiftcheck`'s reloc-coverage gate. FLOOR, not UNCERTAIN.
+    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0\.bin$"),
+     "FLOOR", "RE-COMPLETE evidence-backed floor (4632 B, trimmed from a 6812 B combined file): confirmed genuine LZ77 640-tile stream (0x10 header, PNG round-trip exact for the decompressed 20480 B), but no gbagfx compressor preset reproduces the exact compressed bytes; JP-exclusive, no fe8u twin (issue #143)"),
+    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E\.bin$"),
+     "FLOOR", "RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B combined file): two disjoint live spans (gap21 head + gap21c interior) concatenated, every non-pointer byte a proven ProcCmd/SpriteEx field, all 9 interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143)"),
+    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462\.bin$"),
+     "FLOOR", "RE-COMPLETE evidence-backed floor (342 B, trimmed from a 1012 B combined file): two disjoint live spans (gap27 head + gap27c interior) concatenated, every non-pointer byte a proven ProcCmd field, all interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143)"),
     # frontier JP-divergent UI / font-group / ending / CG tables (UNCERTAIN): they
     # reached the name-class step precisely because NO fe8u editable twin exists
     # (JP-only multiplayer/menu/font/CG assets). The prior loose catch-all
@@ -1085,6 +1127,14 @@ def run_self_tests(by_path):
     expect("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", "UNCERTAIN")  # bug #2
     expect("graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin", "FLOOR")  # #143
     expect("graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin", "FLOOR")  # #143
+    # issue #143 menu coverage pass: the four minimal RE-complete residuals
+    # (001/021/027 trimmed to their minimal live INCBIN spans, plus the
+    # already-trimmed 005 floor) are evidence-backed FLOORs, not UNCERTAIN --
+    # every byte's role is proven even though there is no fe8u twin to compare.
+    expect("frontier_df4_menu_001_A588C0.bin", "FLOOR")
+    expect("frontier_df4_menu_005_A5FFAD.bin", "FLOOR")
+    expect("frontier_df4_menu_021_A95B4E.bin", "FLOOR")
+    expect("frontier_df4_menu_027_A9D462.bin", "FLOOR")
     expect("graphics/banim/efx", "FLOOR")
     expect("data/sound/gMPlayTable.bin", "MISS")
     # D326: verified 30x20 u16 banim screen tilemaps -> FLOOR (fe8u keeps binary)
