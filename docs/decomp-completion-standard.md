@@ -1,23 +1,27 @@
 # What "Decompilation Complete" Actually Means (and Where FE8J Really Stands)
 
-> **NOTE — Snapshot document.** The definitions, methodology, and standards
-> described here are timeless and remain valid. However, the "FE8J's TRUE current
-> state" figures throughout (25.6% matching-C, ~0.12% data, ~17% build
-> self-containment, ~59% named) are **historical snapshots from early in the
-> project**. Do not use any numeric claim below as current state. Recompute
-> current ground truth with `scripts/calcprogress.py`; the canonical scorecard
-> and live work list are maintained in `docs/frontier.md`.
+> **HISTORICAL SNAPSHOT RECORD — NOT CURRENT STATE.** The standards and
+> methodology remain useful, but the body preserves the initial completion
+> audit from **2026-06-10** (with its code-byte subsection refreshed on
+> **2026-06-23**) and a later mixed checkpoint table assembled across
+> **2026-06-22 through 2026-07-11**. D296 and D304-D306 supply the historical
+> shiftability/editability context. Thus the 83%-failure, 25.6% matching-C,
+> 0.12% data, 59% named, 8,680/8,692, 14,383/364, and 746 KB figures below are
+> explicitly historical. Do not use any numeric claim in this document as
+> current state. Recompute with `scripts/calcprogress.py`; the canonical
+> current scorecard and work list are maintained only in `docs/frontier.md`.
 
 
-A prior effort drove the catch-all `asm/baserom.s` to **zero** `.incbin "baserom.gba"`
-directives and declared the FE8J decompilation **complete**. That conclusion was
-wrong. Nothing was decompiled or extracted to achieve it — the 12,462 incbins were
+At the initial 2026-06-10 audit, a prior effort had driven the catch-all
+`asm/baserom.s` to **zero** `.incbin "baserom.gba"` directives and declared
+the FE8J decompilation **complete**. That conclusion was wrong at that
+checkpoint. Nothing was decompiled or extracted to achieve it — the 12,462 incbins were
 simply **relocated** out of `asm/baserom.s` into 2,319 other committed
 `asm/*.s` files (e.g. `data_banim.s` = 1,475 incbins, `dat_data_portrait.s` = 482,
 `direct_sound_data.s` = 439), each still literally pulling raw bytes with
-`.incbin "baserom.gba", off, size`. The "goal met" was a **byte-shuffle**, not a
-decompilation. The build still cannot produce a single one of those 13.3 MB of bytes
-without the original ROM physically present.
+`.incbin "baserom.gba", off, size`. The then-claimed "goal met" was a
+**byte-shuffle**, not a decompilation. At that historical checkpoint, the build
+could not produce those 13.3 MB without the original ROM physically present.
 
 This document states the **real** definition of "decomp complete" as proven by the
 gold-standard references — `fireemblem8u` (the near-complete US counterpart) and
@@ -31,29 +35,29 @@ asset toolchain (gbagfx, preproc, jsonproc, textencode, mid2agb, aif2pcm). The
 original ROM, `baserom.gba`, is **only** the verification target of `make compare`
 (a post-build `sha1sum -c`) — it is **never a build input**. Delete `baserom.gba`
 and `make` must still emit the byte-identical ROM. FE8U and pokeemerald pass this.
-**FE8J fails it on 83% of the ROM.**
+**Historical 2026-06-10 result: FE8J failed it on 83% of the ROM. This is not
+the current result.**
 
 ---
 
-## Current data metric split — strict extraction vs source-form bytes
+## Data-metric scope — strict extraction vs source-form bytes
 
 `python3 scripts/calcprogress.py` intentionally keeps the decomp.dev-compatible
 **EXTRACTED DATA** numerator strict: `src/*.o` C/PNG/charmap/typed data plus
-libc/libgcc data only. That number is currently **79.91%** and should not be
-renamed or inflated.
+libc/libgcc data only. Its current value belongs in `docs/frontier.md`, not
+here.
 
-The companion **SOURCE-FORM DATA** line answers the honest completion question for
-non-`src/` asset roots without pretending opaque raw blobs are editable source.
-It credits only object roots whose Makefile recipes are
-committed editable source with no `baserom.gba` fallback: `banim/data_banim.o`
+The companion **SOURCE-FORM DATA** line is an allow-listed object-root metric
+for non-`src/` asset roots. It credits approved roots whose Makefile recipes
+have no `baserom.gba` fallback, including `banim/data_banim.o`
 from `arm_compressing_linker.py` over `banim/*_motion.s` and `graphics/banim`
 PNG/AGBPAL assets; `sound/songs/midi/*.o` from `mid2agb` over committed `.mid`;
 `sound/voicegroups/*.o` from editable voice macro `.s`; `asm/fe6sio.o` from the
 mgfembp FE6 payload source; and the small descriptive m4a tables. It subtracts
-the remaining opaque raw-incbin/`.bin` frontier from the source-form numerator.
-`scripts/check_selfcontained.py` is the proof gate: it currently reports 0
-`.incbin "baserom.gba"` directives in build-input source trees, so those credited
-bytes are source-built, not hidden ROM incbins.
+disallowed opaque roots but accepts legitimate FLOOR binary inputs. Therefore
+source-form 100% does not mean zero `.bin` files, zero FLOOR inventory, or
+strict typed/structured source for every byte. `scripts/check_selfcontained.py`
+is the separate proof gate; see `docs/frontier.md` for its current result.
 
 ## The real completion criterion — "remove `baserom.gba`, `make` still builds byte-perfect"
 
@@ -91,14 +95,16 @@ variant. The strictest "foreign blob" case is still reproduced byte-perfectly **
 source**. This is the model for any region that resists C: reconstruct from source
 or commit a descriptively-named extracted asset — never incbin the original ROM.
 
-**FE8J's true state.** The Makefile **hard-depends** on `baserom.gba`:
-`asm/baserom.o: baserom.gba` (Makefile L134), `baserom.gba` is in
-`GEN_LAYOUT_INPUTS`, and the header comment states "Requires a local copy of the
-original ROM at `./baserom.gba`." There are **12,462** `.incbin "baserom.gba"`
+**Historical initial-audit state (2026-06-10; not current).** The Makefile
+then **hard-depended** on `baserom.gba`:
+`asm/baserom.o: baserom.gba` (Makefile L134), `baserom.gba` was in
+`GEN_LAYOUT_INPUTS`, and the header comment stated "Requires a local copy of the
+original ROM at `./baserom.gba`." There were **12,462** `.incbin "baserom.gba"`
 directives across **2,319** `asm/*.s` files (0 in `src/`), summing to **13,932,295
-bytes = 13.29 MB = 83.0%** of the 16 MiB (16,777,216-byte) ROM. Every one resolves
-**only** against `baserom.gba`; 0 resolve against any generated/extracted source.
-**Delete `baserom.gba` and 83% of the ROM cannot be produced — the build fails.**
+bytes = 13.29 MB = 83.0%** of the 16 MiB (16,777,216-byte) ROM. Every one resolved
+**only** against `baserom.gba`; 0 resolved against any generated/extracted source.
+**At that checkpoint, deleting `baserom.gba` left 83% of the ROM
+unproducible and the build failed.**
 
 > **Definition of done (the acceptance test FE8J must add to CI):**
 > `mv baserom.gba /tmp && make` → builds `fireemblem8.gba`; then restore baserom and
@@ -185,11 +191,12 @@ intermediates:
   reproduce the original compressor's output; without the right value the bytes
   differ and `make compare` fails.
 
-**FE8J's TRUE current state.** **0.12% extracted.** Of carved data,
-**13,899,434 bytes (99.88%)** are named `.incbin` from `baserom.gba`; only
-**17,369 bytes (0.12%)** live in C arrays — and those are lookup tables inside ported
-`.c` (e.g. `sOamTileSizeLut`), **not** extracted assets. The whole repo has **1 PNG**,
-**0** generated `.4bpp/.gbapal/.lz`, **0 `.mid`**. There is **no asset toolchain at
+**Historical initial-audit snapshot (2026-06-10; not current).**
+**0.12% was extracted.** Of carved data,
+**13,899,434 bytes (99.88%)** were named `.incbin` from `baserom.gba`; only
+**17,369 bytes (0.12%)** lived in C arrays — and those were lookup tables inside ported
+`.c` (e.g. `sOamTileSizeLut`), **not** extracted assets. The whole repo had **1 PNG**,
+**0** generated `.4bpp/.gbapal/.lz`, **0 `.mid`**. There was **no asset toolchain at
 all** — `tools/` holds only RE/build tooling (agbcc, ida, gbadisasm, m2c, permuter,
 objdiff); no gbagfx, preproc, bin2c, jsonproc, textencode, mid2agb, or aif2pcm. The
 "data 18.6% carved" figure is **named-incbin-of-baserom**, which is **not extraction**.
@@ -197,7 +204,7 @@ Worse, `scripts/calcprogress.py` (L149–150) sets `jp_data_total = data_bytes` 
 hardcodes `data_remaining = 0`, so "Data 100%" is **tautological** (denominator ==
 numerator).
 
-**Work to close it.** Port `tools/preproc` + `tools/bin2c` + `tools/gbagfx` (gfx +
+**Historical plan at that checkpoint.** Port `tools/preproc` + `tools/bin2c` + `tools/gbagfx` (gfx +
 LZ/RL); write ROM→asset extractors (gbagfx `Nbpp→png`, palette→`.pal`,
 LZ-decompress), commit the PNGs/`.pal`/`.bin`, add the generic Makefile rules, and
 replace each gfx incbin with `INCBIN_U8` of the rebuilt asset — **tuning `-mindist`
@@ -223,18 +230,19 @@ end** of the spectrum:
 `descriptive asm (oracle, byte-source .s)` → `NONMATCHING C (readable, byte-source
 still .s)` → `matching C (goal, oracle, byte-source .c)`.
 
-**FE8J's TRUE current state.** Code is the most-advanced axis but still **<26% real
-C**. Of 8,528 US-target functions, only **2,187 (25.6%)** are matching C compiled from
-`src/*.c`; **6,282 (73.7%)** are **gbadisasm descriptive asm** — real Thumb/ARM
+**Historical initial-audit snapshot (2026-06-10, with code-byte figures
+refreshed 2026-06-23; not current).** Code was the most-advanced axis but still
+**<26% real C**. Of 8,528 US-target functions, only **2,187 (25.6%)** were matching C compiled from
+`src/*.c`; **6,282 (73.7%)** were **gbadisasm descriptive asm** — real Thumb/ARM
 opcodes that *do* assemble without the ROM, but are **disassembly, not
 decompilation** (+12 NONMATCHING staging C). By code byte: of 900,892 carved code
-bytes, **156,736 (17.4%)** is real C and **744,156 (82.6%)** is descriptive asm. Even
+bytes, **156,736 (17.4%)** was real C and **744,156 (82.6%)** was descriptive asm. Even
 named files like `asm/sub_8024390.s` (`push`/`ldr`/`bl`) and `AddTarget.s` are
 gbadisasm output, not C. **disasm ≠ decomp**: the 6,282 descriptive-asm functions each
-have a byte-source of `.s`, the `INCLUDE_ASM`-equivalent — exactly what FE8U has
+had a byte-source of `.s`, the `INCLUDE_ASM`-equivalent — exactly what FE8U has
 **zero** of.
 
-**Work to close it.** Convert each of the 6,282 asm function `.s` into byte-matching
+**Historical plan at that checkpoint.** Convert each of the 6,282 asm function `.s` into byte-matching
 C (m2c first pass → hand refinement → decomp-permuter), with the byte-identical build
 as the per-function gate. Only the genuinely-unmatchable tail stays C with a
 `NONMATCHING` `else` that still compiles to exact bytes — never raw asm. The
@@ -248,12 +256,13 @@ undocumented. FE8U's map has **0 `sub_`** and **0 `nullsub`** — **35,140** sym
 all documented (the 377 `gUnknown_*` are named placeholders with documented offsets,
 counted as partial). Naming is real C names plus `sym_iwram.txt` for IWRAM/BSS layout.
 
-**FE8J's TRUE current state.** Of **19,961** `.global` asm labels, roughly **8,180
-(~41%)** are auto-generated placeholders: **5,730 `sub_XXXX`** + **654 `data_`** +
+**Historical initial-audit snapshot (2026-06-10; not current).** Of
+**19,961** `.global` asm labels, roughly **8,180
+(~41%)** were auto-generated placeholders: **5,730 `sub_XXXX`** + **654 `data_`** +
 **109 `nullsub_`** + **~1,687** auto `banim_/snd_/gfx_` asset-sheet labels. The
-remaining ~11,680 are PascalCase/`gGlobal` names largely **inherited from the US map**.
+remaining ~11,680 were PascalCase/`gGlobal` names largely **inherited from the US map**.
 
-**Work to close it.** Name every `sub_/data_/nullsub_/auto-sheet` label with an
+**Historical plan at that checkpoint.** Name every `sub_/data_/nullsub_/auto-sheet` label with an
 RE-derived name. The workflow keys on the **US address** via
 `reference/maps/funclib_us_jp.tsv` (**8,377** rows — *hint, not truth*, ~0.6%
 non-random errors), resolves the current name from `fireemblem8u`, and **validates
@@ -268,7 +277,8 @@ data-byte %, named-symbol %, and (the ultimate gate) baserom-independence. FE8U'
 hitting 100% only when those blobs reach 0; `gen-report.py` feeds documented%,
 matched_code, and matched_functions to decomp.dev.
 
-**FE8J's TRUE current state — the metrics are not honest.** `calcprogress.py` reports
+**Historical initial-audit snapshot (2026-06-10; not current).** The then-current
+`calcprogress.py` reported
 **"code in src 99.94%"** (counts incbin-free descriptive **asm** as "src"), **"data
 in src 100%"** (denominator == numerator, L149), and **"94,277 symbols documented =
 225.28%"** — an overflow past 100% (against a 41,849 denominator), implying
@@ -278,27 +288,29 @@ with real decompiled C **and descriptively-named data**" — but descriptively-n
 data **is still incbin**. The badges conflate descriptive-asm with decompiled-C and
 self-reference the data denominator.
 
-**Work to close it.** Replace the badges with four honest axes — (1)
+**Historical plan at that checkpoint.** Replace the badges with four honest axes — (1)
 build-without-baserom %, (2) matching-C function %, (3) extracted-asset data %, (4)
 meaningfully-named symbol % — fix `jp_data_total` to a real `dataTotal` and the
 symbol denominator to stop overflowing, and add the **self-contained build** CI gate.
 
 ---
 
-## Honest scorecard — where FE8J REALLY is
+## Historical initial-audit scorecard (2026-06-10; not current)
 
-Blunt numbers from the audit (ROM = 16,777,216 bytes):
+These were the audit's point-in-time numbers (ROM = 16,777,216 bytes). For the
+current scorecard use `docs/frontier.md`.
 
 | Front | Honest figure | What the badges claimed |
 |---|---|---|
-| **Build without `baserom.gba`** | **~17%** (only ~2.85 MB of 16 MB is real source; **13.29 MB / 83.0%** is `.incbin "baserom.gba"` across **12,462** directives in 2,319 files) — **the self-contained build FAILS** | implied ~complete |
-| **Code as matching C** | **25.6% by function** (2,187 / 8,528); **17.4% by code-byte** (156,736 / 900,892). The other **73.7%** of functions are gbadisasm **descriptive asm**, not C | "code in src 99.94%" |
+| **Build without `baserom.gba`** | **~17%** (only ~2.85 MB of 16 MB was real source; **13.29 MB / 83.0%** was `.incbin "baserom.gba"` across **12,462** directives in 2,319 files) — **the self-contained build FAILED** | implied ~complete |
+| **Code as matching C** | **25.6% by function** (2,187 / 8,528); **17.4% by code-byte** (156,736 / 900,892). The other **73.7%** of functions were gbadisasm **descriptive asm**, not C | "code in src 99.94%" |
 | **Data extracted to assets** | **~0.12%** (13.27 MB named-incbin; only **17 KB** in C arrays; **1 PNG**, **0** `.4bpp/.gbapal/.lz`, **0 `.mid`** in the whole repo) | "data in src 100%" (tautological) |
-| **Symbols meaningfully named** | **~59%** (8,180 of 19,961 labels are `sub_/data_/nullsub_/auto-sheet` placeholders; the named rest is largely inherited from the US map) | "225.28% documented" (overflow) |
+| **Symbols meaningfully named** | **~59%** (8,180 of 19,961 labels were `sub_/data_/nullsub_/auto-sheet` placeholders; the named rest was largely inherited from the US map) | "225.28% documented" (overflow) |
 
-**Bottom line:** FE8J is **not close** to a real decompilation. The genuinely-advanced
-axis is code-**as-opcodes** (99.9% of the *code region* builds without the ROM — but
-disasm ≠ decomp). Everything else is early: 83% of the ROM still resolves only against
+**Historical conclusion at that checkpoint:** FE8J was **not close** to a real
+decompilation. The genuinely-advanced axis was code-**as-opcodes** (99.9% of
+the *code region* built without the ROM — but disasm ≠ decomp). Everything
+else was early: 83% of the ROM still resolved only against
 `baserom.gba`, data extraction is essentially **zero**, a quarter of functions are C,
 and two-fifths of symbols are placeholders. The "decomp complete / byte-coverage goal
 met" claim was a **mirage** produced by relocating incbins and by self-referential
@@ -306,17 +318,17 @@ metrics.
 
 ---
 
-## Phased re-plan to TRUE completion
+## Historical phased re-plan from the initial audit
 
-This is a **multi-sprint** effort: ~13.3 MB of data to extract, **6,282** functions
-to decompile to matching C, and **~8,000** placeholder symbols to name — every step
-gated by the byte-identical build. Ordered by dependency, with the existing assets
-feeding each phase.
+At the 2026-06-10 checkpoint this was estimated as a **multi-sprint** effort:
+~13.3 MB of data to extract, **6,282** functions to decompile to matching C,
+and **~8,000** placeholder symbols to name. These quantities are historical,
+not a current backlog; current work is defined only in `docs/frontier.md`.
 
 **Phase 0 — Stand up the oracle and the toolchain (do this FIRST).**
 1. Add the **self-contained build** target/CI gate: build with `baserom.gba` moved
-   away; it must succeed once data is extracted, and *today it should be allowed to
-   fail loudly* so the metric is honest from day one. Keep `baserom.gba` strictly
+   away; it must succeed once data is extracted, and *at that checkpoint it was
+   expected to fail loudly* so the metric was honest from day one. Keep `baserom.gba` strictly
    behind `make compare`.
 2. Port the asset toolchain from FE8U in dependency order:
    `tools/preproc` + `tools/bin2c` → `tools/gbagfx` (gfx + LZ/RL with `-mindist`) →
@@ -352,7 +364,7 @@ missing piece is the **asset toolchain** (Phase 0), without which Phase 1 cannot
 
 ---
 
-## Corrected metrics + the new oracle
+## Historical metric evolution and the new-oracle rationale
 
 **The new oracle (`make compare` WITHOUT baserom as a build input):**
 
@@ -362,25 +374,30 @@ mv baserom.gba /tmp/ && make            # MUST build fireemblem8.gba from source
 make compare                            # verifies via `sha1sum -c checksum.sha1` — still no baserom.gba needed
 ```
 
-Concretely, FE8J must reach the FE8U/pokeemerald build graph: remove
+The historical plan was for FE8J to reach the FE8U/pokeemerald build graph:
+remove
 `asm/baserom.o: baserom.gba` and the `baserom.gba` node from `GEN_LAYOUT_INPUTS`,
 gitignore `*.gba`/`*.4bpp`/`*.gbapal`/`*.lz`, and keep `baserom.gba` referenced **only**
 for the post-build `sha1sum -c` (or, like pokeemerald, behind `COMPARE=1`). When
 `grep baserom Makefile` finds only clean-time preservation (or nothing), the oracle is
 met.
 
-**Honest per-front metrics to publish (replacing the inflated badges):**
+**Historical mixed-checkpoint table — not a current scorecard.** These rows
+were updated independently between 2026-06-22 and 2026-07-11; D296 and
+D304-D306 are the shiftability/editability decision context. They are retained
+to show metric evolution, not to describe the present tree.
 
-| Axis | Definition (denominator) | FE8J today | Target |
+| Axis | Definition (denominator) | Historical checkpoint | Target |
 |---|---|---|---|
-| **Build self-containment** | bytes producible from source ÷ 16,777,216 | ~~**~17%**~~ → **100%** (current) | 100% (self-contained build passes) |
-| **Matching-C functions** | matching-C funcs ÷ 8,692 | ~~**25.6%** (2,187)~~ → **99.86% (8680 / 8692)** (current) | 100% (FE8U: 99.777%) |
-| **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
-| **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **100.00%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
-| **Shiftability** (D296/D304/**D306**) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + structural classification) | ~~43.79%~~ → ~~"complete/gate=0" (D305, RETRACTED)~~ → **14,383 relocated; honest gate = 364 + unmeasured compressed** (current) | **0 real un-relocated pointers, achieved via fe8u-style typed asset extraction (D306)** — NOT inline-asm `.4byte`. The D305 "gate=0/complete" was retracted (D306): the auditor was blind to (a) 364 real pointers stuck in `__asm__` `.4byte` literals, and (b) pointers inside COMPRESSED data (Huffman text, LZ77 banim/gfx) that no `0x08`-word scan can see. True completion = extract every region to its proper fe8u asset type (text/gfx/anim-script/map/music), where pointers are symbolic by construction. |
-| **Asset editability** (D296) | structured/logic data in typed source ÷ structured data bytes | opaque structured raw-incbin = **746 KB** | 100% — **0 opaque structured blobs** (graphics `.bin` exempt) |
+| **Build self-containment** | bytes producible from source ÷ 16,777,216 | 2026-06-22: ~~**~17%**~~ → **100%** | 100% (self-contained build passes) |
+| **Matching-C functions** | matching-C funcs ÷ 8,692 | 2026-07-11: ~~**25.6%** (2,187)~~ → **99.86% (8680 / 8692)** | 100% (FE8U: 99.777%) |
+| **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | 2026-06-22: ~~**~0.12%**~~ → **100% of the then-measured set** | 100% |
+| **Named symbols** | named ÷ total labels (no overflow) | 2026-07-10: ~~**~59%**~~ → **100.00% under that checkpoint's census** | 100% (FE8U: 0 `sub_`/`nullsub`) |
+| **Shiftability** (D296/D304/**D306**) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + structural classification) | 2026-06-27 D306 snapshot: ~~43.79%~~ → ~~"complete/gate=0" (D305, RETRACTED)~~ → **14,383 relocated; then-honest gate = 364 + unmeasured compressed** | **0 real un-relocated pointers, achieved via fe8u-style typed asset extraction (D306)** — NOT inline-asm `.4byte`. At that checkpoint D305's "gate=0/complete" had been retracted by D306 because the auditor was blind to 364 real pointers in `__asm__` `.4byte` literals and pointers inside compressed data. |
+| **Asset editability** (D296) | structured/logic data in typed source ÷ structured data bytes | 2026-06-26 D296 snapshot: opaque structured raw-incbin = **746 KB** | 100% — **0 opaque structured blobs** (graphics `.bin` exempt) |
 
-_(Row values updated to ground truth from `scripts/calcprogress.py` / `scripts/audit_pointers.py --metrics`. Struck-through values are the historical snapshots from when this doc was written. See `docs/frontier.md` for what remains.)_
+_Every value in this table is historical. See `docs/frontier.md` for current
+generator output and what remains._
 
 **A byte-perfect ROM is necessary but NOT sufficient.** Axes #5–#6 (D296) are part
 of the final goal: a real decomp must be **shiftable** (no hardcoded absolute
@@ -390,11 +407,13 @@ C, not opaque `u8[] = INCBIN` blobs). The completion oracle is therefore: all si
 axes at target **AND** `make compare` → `OK` **AND** the shiftability **real-pointer
 gate** (`scripts/audit_pointers.py --true-debt --gate`) reports **0**.
 
-> **D305 (2026-06-27) — RETRACTED by D306.** D305 ratified "gate = 0 = axis #5
+> **Historical D305/D306 record (2026-06-27; not current status).** D305
+> ratified "gate = 0 = axis #5
 > complete", but that gate was measured by an auditor with two blind spots: it never
-> scanned the 364 real pointers stuck in `__asm__` `.4byte` literals, and it
+> scanned the then-observed 364 real pointers stuck in `__asm__` `.4byte` literals, and it
 > fundamentally cannot see pointers inside COMPRESSED data (Huffman text, LZ77
-> banim/gfx). Honest gate = 364 + unmeasured compressed. **Axis #5 is NOT complete.**
+> banim/gfx). The checkpoint's honest gate was 364 + unmeasured compressed,
+> so D306 recorded axis #5 as incomplete at that time.
 >
 > **D306 (2026-06-27, user-directed):** the still-true part of D305 stands — a literal
 > `0x08`-word count of 0 is the wrong invariant (coincidental constants permanently
@@ -405,7 +424,7 @@ gate** (`scripts/audit_pointers.py --true-debt --gate`) reports **0**.
 > symbolic, relocatable reference, and the data is editable. Axes #5 and #6 are the
 > same job; track completion as axis #6.
 
-Until all six reach target **and** the self-contained build passes with `make compare`
-→ `OK`, FE8J is an **in-progress** decompilation. The single number that matters most
-for true completion is matching-C at 100%, because it is the only one that cannot be
-gamed by relabeling: **every function must compile to exact bytes.**
+The durable criterion remains that all applicable axes reach target and the
+self-contained `make compare` passes. This document does not state whether the
+current tree has reached those targets; use `docs/frontier.md` and canonical
+commands for current status.

@@ -67,11 +67,22 @@ assets.
 
 The supplemental strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336); valid banim and sound source forms are outside that
-narrow subset. Current binary-form audit: **MISS=0, FLOOR=1452, UNCERTAIN=0,
-TOTAL=1452**. Here `UNCERTAIN=0` means no actionable tracked binary-form
-residuals; **1,452 evidence-backed FLOOR entries remain**, along with the
-explicit zero-size-symbol/`AnimSprite_*` extent blind spot documented in
-[`docs/frontier.md`](docs/frontier.md).
+narrow subset. Source-form 100% is an **allow-listed object-root metric**: it
+accepts committed source-producing roots and their legitimate binary inputs,
+including the **1,452 evidence-backed FLOOR** files. It does not mean zero
+`.bin` files, zero FLOOR inventory, or that every byte is strict typed/
+structured source. Current binary-form audit: **MISS=0, FLOOR=1452,
+UNCERTAIN=0, TOTAL=1452**. Here `UNCERTAIN=0` means no actionable tracked
+binary-form residuals; the explicit zero-size-symbol/`AnimSprite_*` extent
+blind spot also remains, as documented in [`docs/frontier.md`](docs/frontier.md).
+
+Named 2,600/2,600 is the current literal `.global` assembly-label census used
+by `calcprogress.py`; it is not a census of every ELF/C symbol and is not
+directly comparable to historical 12,688-style denominators. Run
+`calcprogress.py` only after the project toolchain and libraries are installed
+and populated, especially `tools/agbcc/lib`. Without that library, its 127
+linked functions are omitted and the function result can misleadingly read
+8,561/8,565 instead of 8,688/8,692.
 
 Run `python3 scripts/calcprogress.py` for the scorecard,
 `python3 scripts/check_selfcontained.py` for self-containment, and

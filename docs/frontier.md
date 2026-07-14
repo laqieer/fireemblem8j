@@ -34,6 +34,20 @@ Supplemental data metric: the strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336). It intentionally excludes valid banim and sound
 source forms and is not the extracted-data gate.
 
+Source-form 100% is an **allow-listed object-root metric**, not a zero-binary
+claim. It credits approved source-producing roots while accepting their
+legitimate binary inputs, including the 1,452 evidence-backed FLOOR files.
+Therefore it means neither zero `.bin` files, zero FLOOR inventory, nor that
+every credited byte is strict typed/structured source.
+
+Named 2,600/2,600 is specifically the current literal `.global`
+assembly-label census performed by `calcprogress.py`. It is not all ELF/C
+symbols and cannot be compared directly with historical 12,688-style
+denominators. Run the script only after the project toolchain/library build is
+installed and populated, especially `tools/agbcc/lib`; otherwise its 127
+linked library functions disappear and the function line can misleadingly
+report 8,561/8,565 rather than 8,688/8,692.
+
 ### Current issue-143 and shiftability evidence
 
 - Binary-form audit: **MISS=0, FLOOR=1452, UNCERTAIN=0, TOTAL=1452**.

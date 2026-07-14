@@ -7,8 +7,11 @@ absolute address (`(u8*)0x08A39148`) holds the correct value only because everyt
 sits at its original offset. It carries no relocation, so it breaks the moment the
 layout moves. These tools find such hardcoded pointers.
 
-Nothing here touches the matching build — every target is `.PHONY` and uses a
-separate ELF / a generated ldscript, never `ldscript.txt`, `$(ROM)`, or `compare`.
+The targets are `.PHONY`, but they do use matching-build artifacts as audit
+inputs. They read the generated `ldscript.txt`, matching ROM (`$(ROM)`), linked
+ELF, separate `--emit-relocs` ELF, and map; prerequisites may ensure those
+inputs exist. The audit phases do not modify the matching ROM. Differential
+shift outputs, where supported, use separate files and never replace `$(ROM)`.
 
 ## fe8j (JP) adaptation — read this first
 

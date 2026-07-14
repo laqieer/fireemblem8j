@@ -67,9 +67,10 @@ incbin vs. bytes produced by real source*.
 5. **JP data extraction** — text/script (largest), fonts, graphics, tables.
 6. **Completion** — 100 % of the incbin replaced; documentation; reproducible CI.
 
-## Current state
+## Historical bootstrap snapshot and current-state pointer
 
-_(Historical snapshot — for current numbers see `docs/frontier.md`.)_
+_(Historical bootstrap evidence follows. For every current number and remaining
+target, use `docs/frontier.md`.)_
 
 Early bootstrap (now historical):
 
@@ -80,15 +81,10 @@ Early bootstrap (now historical):
 * **Carve automation**: manifests in `layout/` + `scripts/gen_layout.py`
   (`make layout`) generate the incbin splits, ldscript, and baseline symbols.
 
-**Current progress (ground truth from `scripts/calcprogress.py`):**
-
-* **Matching-C functions**: 99.86% (8680 / 8692)
-* **Build self-containment**: 100%
-* **Extracted data**: 100% of the measured set
-* **Named symbols**: 100.00%
-
-For what remains to be done, see `docs/frontier.md` (single source of truth for
-the remaining work). The per-TU porting recipe is in `docs/porting.md`.
+Current progress is intentionally not duplicated here. Recompute it with
+`scripts/calcprogress.py` and read `docs/frontier.md`, the single source of
+truth for both the scorecard and remaining work. The per-TU porting recipe is
+in `docs/porting.md`.
 
 ## Tooling reused from `../fireemblem8u`
 
