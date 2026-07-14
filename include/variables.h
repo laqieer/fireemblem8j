@@ -1072,6 +1072,12 @@ extern u8 Tsa_FinScreen[];
 extern u16 Pal_FinScreen_1[]; // pal
 extern u8 Tsa_EndingFin[]; // tsa
 extern u16 Pal_StaffReelEnt_EndingFin[];
+extern u16 Pal_PlayerRankSpritesJp_Obj8_9[32];
+extern u8 Img_PlayerRankSpritesJp[];
+extern u16 Pal_PlayerRankSpritesJp_Obj10_14[16];
+extern u16 Pal_PlayerRankSpritesJp_Obj6[16];
+extern u16 Pal_PlayerRankSpritesJp_Obj7Anim[32];
+extern u16 Pal_PlayerRankSpritesJp_Obj15[32];
 extern u8 Img_StaffReelEnt_0[];
 extern u8 Img_StaffReelEnt_1[];
 extern u8 Img_StaffReelEnt_2[];
