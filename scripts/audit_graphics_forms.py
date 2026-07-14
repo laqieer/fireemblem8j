@@ -49,20 +49,169 @@ DEFAULT_ROOT = os.path.dirname(SCRIPT_DIR)
 
 # Named, reasoned exceptions to the two `.tsa.bin` size formulas. These are NOT a
 # third "native TSA format" -- TmApplyTsa (the consumer) is the standard TSA
-# reader; these 3 files are TEMPORARY MULTI-RESOURCE CONTAINER DEBT: each packs
-# more than one resource after the header (a dedicated segmentation RE effort is
-# tracked separately to split them into their constituent single-resource TSAs).
-# Until that split lands, they cannot satisfy either size formula and must stay
-# explicit, reasoned exceptions -- both a missing and an extra path are audit
-# failures (drift guard). This exception list is deliberately isolated (its own
-# frozenset, checked first, no other logic branches on it) so a future asset
-# branch can delete entries here the moment each file is split/re-classified,
-# without touching the two real size-formula checks.
+# reader; this file is TEMPORARY MULTI-RESOURCE CONTAINER DEBT (a dedicated
+# segmentation RE effort is tracked separately): it is being deleted/split into
+# three standard-formula TSAs -- Tsa_MultiBootSendListBarNarrow.bin (156B =
+# 154B standard 19x4 + 2 zero bytes), Tsa_MultiBootSendListBarWide.bin (184B =
+# 182B standard 30x3 + 2 zero bytes), Tsa_LinkArenaTitleBanner.bin (124B =
+# 122B standard 15x4 + 2 zero bytes) -- plus a headerless 1280B raw BG tilemap,
+# Tilemap_MultiBootSendBg.bin, which is DELIBERATELY NOT a `.tsa.bin` and must
+# NOT be TSA-header-parsed (see MULTIBOOT_SPLIT_TARGETS / check_multiboot_split_
+# targets() below, which validate each successor path the moment it appears,
+# so the split can land with zero further gate changes). Until that split
+# lands, gUnkData_26.tsa.bin cannot satisfy either size formula and must stay
+# an explicit, reasoned exception -- both it disappearing (without updating
+# this set) and an unexpected new oversized file are audit failures (drift
+# guard). This exception list is deliberately isolated (its own frozenset,
+# checked first, no other logic branches on it) so a future asset branch can
+# delete the entry here the moment the file is split, without touching the
+# two real size-formula checks.
 TSA_NAMED_EXCEPTIONS = frozenset({
-    "graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin",
-    "graphics/misc/gMenuSoundroom_4.tsa.bin",
     "graphics/misc/gUnkData_26.tsa.bin",
 })
+
+# --- graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin: TRANSITIONAL container shape ---
+# A separate worker is migrating this file from 276B down to 244B (standard
+# header 0x1d,0x03 = 30x4 -> 240B payload -> 242B total -> +2 zero bytes =
+# 244B, which the plain "plus2" formula already accepts with ZERO extra code)
+# by splitting its trailing 32 bytes out into a new JASC palette source,
+# Pal_ChapterTitleFire.pal. Until that split lands, the CURRENT 276B file is
+# a real, narrowly-scoped, STRUCTURALLY VALIDATED transitional shape (not a
+# blanket size/path allowlist): standard-formula 242B TSA + 2 zero bytes +
+# exactly 16 trailing u16 GBA-palette-shaped color words (bit 15 clear on
+# every one, GBA's BGR555 format never sets it). Scoped to this one literal
+# path (a 276B file elsewhere is NOT given a pass) and to the exact structural
+# shape, both empirically confirmed against the current tracked bytes. Once
+# the migration lands (file shrinks to 244B), this branch simply stops
+# matching (244 != 276) and the plain "plus2" formula above takes over --
+# delete this whole block then; it will no longer be reachable.
+GTSA_UNKDATA_0_TRANSITIONAL_PATH = "graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin"
+GTSA_UNKDATA_0_TRANSITIONAL_SIZE = 276
+GTSA_UNKDATA_0_TRANSITIONAL_TAIL_COLORS = 16
+
+
+def _check_gtsa_unkdata_0_transitional(data):
+    """Return None if `data` matches the exact transitional shape described
+    above, else a reason string."""
+    if len(data) < 2:
+        return "too short for a TSA header"
+    w, h = data[0], data[1]
+    payload = (w + 1) * (h + 1) * 2
+    std_total = 2 + payload
+    tail_start = std_total + 2
+    expected_total = tail_start + GTSA_UNKDATA_0_TRANSITIONAL_TAIL_COLORS * 2
+    if len(data) != expected_total:
+        return (f"size {len(data)} != expected transitional size {expected_total} "
+                f"(header w={w + 1} h={h + 1} -> {std_total}B standard TSA + 2 zero "
+                f"bytes + {GTSA_UNKDATA_0_TRANSITIONAL_TAIL_COLORS * 2}B palette tail)")
+    if data[std_total:tail_start] != b"\x00\x00":
+        return "missing the 2 zero alignment bytes before the palette tail"
+    tail = data[tail_start:]
+    for i in range(0, len(tail), 2):
+        word = tail[i] | (tail[i + 1] << 8)
+        if word & 0x8000:
+            return (f"trailing palette word at tail offset {i} (0x{word:04X}) has "
+                     f"bit 15 set -- not a valid GBA BGR555 color, so this isn't the "
+                     f"documented trailing-palette transitional shape")
+    return None
+
+
+# --- graphics/misc/gMenuSoundroom_4.tsa.bin: evidence manifest (permanent) -----
+# NOT a malformed single TSA: a concatenated one-row TSA template library. The
+# sole LIVE consumer reads only record 0 (offset 0x000, 14x1, 30B); every other
+# record is DEAD but MECHANICALLY VALID (no interior refs, no baseline binds, no
+# asm consumer -- confirmed against the JP/US ROMs, which are byte-identical
+# here), except the final 4 bytes, a PROVEN truncated remnant (claims a 4x1
+# record needing 8 payload bytes, but only 2 are actually present -- 6 short).
+# This manifest is the exact, evidence-backed record stream (offset, width,
+# height) derived directly from decoding the tracked bytes -- not a generic
+# "oversized TSA is fine" bypass. validate_menu_soundroom_4() parses every
+# record with the SAME standard header+payload formula used everywhere else in
+# this file and requires the derived stream to equal this list exactly (a
+# single byte anywhere changing any record's declared width/height, or the
+# terminal remnant's exact 4 bytes, is a hard failure -- drift guard).
+MENU_SOUNDROOM_4_PATH = "graphics/misc/gMenuSoundroom_4.tsa.bin"
+MENU_SOUNDROOM_4_RECORDS = (
+    # (byte offset, width, height) for every WELL-FORMED record.
+    (0, 14, 1), (30, 1, 1), (34, 17, 1), (70, 18, 1), (108, 15, 1),
+    (140, 6, 1), (154, 6, 1), (168, 6, 1), (182, 6, 1), (196, 6, 1),
+    (210, 6, 1), (224, 6, 1), (238, 6, 1), (252, 6, 1), (266, 6, 1),
+    (280, 6, 1), (294, 5, 1), (306, 6, 1), (320, 6, 1), (334, 6, 1),
+    (348, 3, 1), (356, 3, 1), (364, 3, 1), (372, 3, 1), (380, 3, 1), (388, 3, 1),
+)
+MENU_SOUNDROOM_4_REMNANT_OFFSET = 396
+MENU_SOUNDROOM_4_REMNANT_BYTES = b"\x03\x00\x00\x00"  # claims 4x1 (needs 8B payload), 6B short
+MENU_SOUNDROOM_4_TOTAL_SIZE = 400
+
+
+def validate_menu_soundroom_4(data):
+    """Return None if `data` matches the exact evidence manifest above, else a
+    reason string identifying the first mismatch."""
+    if len(data) != MENU_SOUNDROOM_4_TOTAL_SIZE:
+        return f"total size {len(data)} != expected {MENU_SOUNDROOM_4_TOTAL_SIZE}"
+    for offset, w, h in MENU_SOUNDROOM_4_RECORDS:
+        if offset + 2 > len(data):
+            return f"expected record at offset {offset} ({w}x{h}) but file ends first"
+        actual_w, actual_h = data[offset] + 1, data[offset + 1] + 1
+        if (actual_w, actual_h) != (w, h):
+            return (f"record at offset {offset}: expected {w}x{h}, header decodes "
+                     f"to {actual_w}x{actual_h}")
+        size = 2 + w * h * 2
+        if offset + size > MENU_SOUNDROOM_4_REMNANT_OFFSET and offset + size != len(data):
+            return f"record at offset {offset} ({w}x{h}, {size}B) overruns the manifest"
+    remnant = data[MENU_SOUNDROOM_4_REMNANT_OFFSET:]
+    if remnant != MENU_SOUNDROOM_4_REMNANT_BYTES:
+        return (f"terminal remnant at offset {MENU_SOUNDROOM_4_REMNANT_OFFSET} is "
+                 f"{remnant.hex()}, expected the proven truncated remnant "
+                 f"{MENU_SOUNDROOM_4_REMNANT_BYTES.hex()}")
+    return None
+
+
+# --- gUnkData_26.tsa.bin split successors: dormant until each path exists -----
+# The migration worker may land these AFTER this branch. Each entry is checked
+# ONLY if the path is already tracked (a fresh worktree without the split yet
+# sees none of these and is unaffected); the moment any of them is committed,
+# it is immediately validated against the exact documented size/formula --
+# no further gate changes needed. `is_tsa=True` entries use the same standard-
+# formula-plus-optional-2-zero-bytes check as every other `.tsa.bin`; the raw
+# tilemap is explicitly NOT TSA-header-parsed (checked only for its documented
+# flat size, mirroring the .map.bin family's "no invented dimension check").
+MULTIBOOT_SPLIT_TARGETS = (
+    ("graphics/misc/Tsa_MultiBootSendListBarNarrow.bin", 156, True),
+    ("graphics/misc/Tsa_MultiBootSendListBarWide.bin", 184, True),
+    ("graphics/misc/Tsa_LinkArenaTitleBanner.bin", 124, True),
+    ("graphics/misc/Tilemap_MultiBootSendBg.bin", 1280, False),
+)
+
+
+def check_multiboot_split_targets(root, report):
+    for rel_path, expected_size, is_tsa in MULTIBOOT_SPLIT_TARGETS:
+        abspath = os.path.join(root, rel_path)
+        if not os.path.exists(abspath):
+            continue  # pre-split state: not landed yet, nothing to check
+        with open(abspath, "rb") as f:
+            data = f.read()
+        if len(data) != expected_size:
+            report.fail(f"{rel_path}: size {len(data)} != documented {expected_size}")
+            continue
+        if is_tsa:
+            kind, reason = classify_tsa_bin(abspath, rel_path)
+            if kind == "unknown":
+                report.fail(f"{rel_path}: {reason}")
+                continue
+            report.count("multiboot_split_target_ok")
+        else:
+            if len(data) % 2 != 0:
+                report.fail(f"{rel_path}: odd length {len(data)} (headerless raw tilemap)")
+                continue
+            err = check_map_bin(abspath)
+            if err:
+                report.fail(f"{rel_path}: {err}")
+                continue
+            report.count("multiboot_split_target_ok")
+
+
+
 
 # The six live btl_bg FETSA3/FEIMG3 pairs whose editable source is a plain linear 4bpp tile-strip
 # PNG (NOT a TSA screen-image) -- see graphics/btl_bg/btl_bg.mk "wave-2 (axis #6)". btl_bg_59 is
@@ -656,12 +805,18 @@ def check_gbapal_roundtrip(colors, gbapal_path):
 # --------------------------------------------------------------------------
 
 def classify_tsa_bin(path, rel_path):
-    """Returns one of 'exact', 'plus2', 'named_exception', or ('unknown', reason)."""
-    if rel_path in TSA_NAMED_EXCEPTIONS:
-        return ("named_exception", None)
+    """Returns one of 'exact', 'plus2', 'transitional_palette_tail',
+    'menu_soundroom_4_manifest', 'named_exception', or ('unknown', reason)."""
     with open(path, "rb") as f:
         data = f.read()
+    if rel_path == MENU_SOUNDROOM_4_PATH:
+        reason = validate_menu_soundroom_4(data)
+        if reason:
+            return ("unknown", reason)
+        return ("menu_soundroom_4_manifest", None)
     if len(data) < 2:
+        if rel_path in TSA_NAMED_EXCEPTIONS:
+            return ("named_exception", None)
         return ("unknown", f"file too short ({len(data)} bytes, need >= 2 for header)")
     w, h = data[0], data[1]
     expected = 2 + (w + 1) * (h + 1) * 2
@@ -669,6 +824,20 @@ def classify_tsa_bin(path, rel_path):
         return ("exact", None)
     if len(data) == expected + 2 and data[-2:] == b"\x00\x00":
         return ("plus2", None)
+    if rel_path == GTSA_UNKDATA_0_TRANSITIONAL_PATH:
+        reason = _check_gtsa_unkdata_0_transitional(data)
+        if reason is None:
+            return ("transitional_palette_tail", None)
+        # If the size at least matches the documented transitional total, the
+        # structural mismatch (bad padding / bad palette word) IS the specific
+        # defect -- report that, not the generic exact/plus2 message. If the
+        # size doesn't even match, fall through to the generic message (still
+        # covers "the migration landed but produced neither the old
+        # transitional shape nor the new plain plus2 form").
+        if len(data) == GTSA_UNKDATA_0_TRANSITIONAL_SIZE:
+            return ("unknown", reason)
+    if rel_path in TSA_NAMED_EXCEPTIONS:
+        return ("named_exception", None)
     return ("unknown", f"size {len(data)} matches neither exact ({expected}) "
                         f"nor +2-trailing-zero ({expected + 2}) form for header w={w} h={h}")
 
@@ -1028,6 +1197,9 @@ def audit(root, report):
     missing_exceptions = TSA_NAMED_EXCEPTIONS - seen_exceptions
     if missing_exceptions:
         report.fail(f".tsa.bin named exceptions missing/no-longer-tracked: {sorted(missing_exceptions)}")
+
+    # --- item 4: gUnkData_26.tsa.bin split successors (dormant until landed) ---
+    check_multiboot_split_targets(root, report)
 
     # --- item 4: .map.bin ---
     map_files = git_ls_files(root, "*.map.bin")
