@@ -1,5 +1,6 @@
 #include "global.h"
 #include "proc.h"
+#include "event.h"
 
 extern u32 ProcScr_MuCritFlash[];
 /* ProcScr_MuDeathFade defined below as struct ProcCmd[] (declared in mu.h) */
@@ -1733,7 +1734,117 @@ extern const u8 frontier_df4_banim_a_005_5EA510[];
 extern const u8 frontier_df4_banim_a_006_5EBF04[];
 extern const u8 frontier_df4_menu_014_A72BF0[];
 extern struct ProcCmd gProcScr_ArenaUiResultBgm[];
-extern const u8 frontier_df4_menu_039_AC00A8[];
+extern EventScr EventScrWM_CastleFrelia_Beginning[];
+extern EventScr EventScrWM_Ch10a_Beginning[];
+extern EventScr EventScrWM_Ch10b_Beginning[];
+extern EventScr EventScrWM_Ch11a_Beginning[];
+extern EventScr EventScrWM_Ch11b_Beginning[];
+extern EventScr EventScrWM_Ch12a_Beginning[];
+extern EventScr EventScrWM_Ch12b_Beginning[];
+extern EventScr EventScrWM_Ch13a_Beginning[];
+extern EventScr EventScrWM_Ch13b_Beginning[];
+extern EventScr EventScrWM_Ch14a_Beginning[];
+extern EventScr EventScrWM_Ch14b_Beginning[];
+extern EventScr EventScrWM_Ch15a_Beginning[];
+extern EventScr EventScrWM_Ch15b_Beginning[];
+extern EventScr EventScrWM_Ch16a_Beginning[];
+extern EventScr EventScrWM_Ch16b_Beginning[];
+extern EventScr EventScrWM_Ch17a_Beginning[];
+extern EventScr EventScrWM_Ch17b_Beginning[];
+extern EventScr EventScrWM_Ch18a_Beginning[];
+extern EventScr EventScrWM_Ch18b_Beginning[];
+extern EventScr EventScrWM_Ch19a_Beginning[];
+extern EventScr EventScrWM_Ch19b_Beginning[];
+extern EventScr EventScrWM_Ch1_Beginning[];
+extern EventScr EventScrWM_Ch1_ChapterIntro[];
+extern EventScr EventScrWM_Ch20a_Beginning[];
+extern EventScr EventScrWM_Ch20b_Beginning[];
+extern EventScr EventScrWM_Ch21ax_Beginning[];
+extern EventScr EventScrWM_Ch21bx_Beginning[];
+extern EventScr EventScrWM_Ch2_Beginning[];
+extern EventScr EventScrWM_Ch2_ChapterIntro[];
+extern EventScr EventScrWM_Ch3_Beginning[];
+extern EventScr EventScrWM_Ch3_ChapterIntro[];
+extern EventScr EventScrWM_Ch4_Beginning[];
+extern EventScr EventScrWM_Ch4_ChapterIntro[];
+extern EventScr EventScrWM_Ch5_Beginning[];
+extern EventScr EventScrWM_Ch5_ChapterIntro[];
+extern EventScr EventScrWM_Ch5x_Beginning[];
+extern EventScr EventScrWM_Ch6_Beginning[];
+extern EventScr EventScrWM_Ch6_ChapterIntro[];
+extern EventScr EventScrWM_Ch7_Beginning[];
+extern EventScr EventScrWM_Ch7_ChapterIntro[];
+extern EventScr EventScrWM_Ch8_Beginning[];
+extern EventScr EventScrWM_Ch8_ChapterIntro[];
+extern EventScr EventScrWM_Ch9a_Beginning[];
+extern EventScr EventScrWM_Ch9a_ChapterIntro[];
+extern EventScr EventScrWM_Ch9b_Beginning[];
+extern EventScr EventScrWM_JPOnly_3[];
+extern EventScr EventScrWM_JPOnly_4[];
+extern EventScr EventScrWM_JPOnly_5[];
+extern EventScr EventScrWM_JPOnly_6[];
+extern EventScr EventScrWM_LagdouRuins10_Beginning[];
+extern EventScr EventScrWM_LagdouRuins3_Beginning[];
+extern EventScr EventScrWM_LagdouRuins4_Beginning[];
+extern EventScr EventScrWM_LagdouRuins5_Beginning[];
+extern EventScr EventScrWM_LagdouRuins6_Beginning[];
+extern EventScr EventScrWM_LagdouRuins7_Beginning[];
+extern EventScr EventScrWM_LagdouRuins8_Beginning[];
+extern EventScr EventScrWM_LagdouRuins9_Beginning[];
+extern EventScr EventScrWM_MelkaenCoast_Beginning[];
+extern EventScr EventScrWM_MessedEventscr_1[];
+extern EventScr EventScrWM_MessedEventscr_10[];
+extern EventScr EventScrWM_MessedEventscr_11[];
+extern EventScr EventScrWM_MessedEventscr_13[];
+extern EventScr EventScrWM_MessedEventscr_14[];
+extern EventScr EventScrWM_MessedEventscr_15[];
+extern EventScr EventScrWM_MessedEventscr_16[];
+extern EventScr EventScrWM_MessedEventscr_17[];
+extern EventScr EventScrWM_MessedEventscr_18[];
+extern EventScr EventScrWM_MessedEventscr_19[];
+extern EventScr EventScrWM_MessedEventscr_2[];
+extern EventScr EventScrWM_MessedEventscr_20[];
+extern EventScr EventScrWM_MessedEventscr_23[];
+extern EventScr EventScrWM_MessedEventscr_25[];
+extern EventScr EventScrWM_MessedEventscr_26[];
+extern EventScr EventScrWM_MessedEventscr_27[];
+extern EventScr EventScrWM_MessedEventscr_28[];
+extern EventScr EventScrWM_MessedEventscr_29[];
+extern EventScr EventScrWM_MessedEventscr_3[];
+extern EventScr EventScrWM_MessedEventscr_30[];
+extern EventScr EventScrWM_MessedEventscr_31[];
+extern EventScr EventScrWM_MessedEventscr_32[];
+extern EventScr EventScrWM_MessedEventscr_33[];
+extern EventScr EventScrWM_MessedEventscr_34[];
+extern EventScr EventScrWM_MessedEventscr_38[];
+extern EventScr EventScrWM_MessedEventscr_39[];
+extern EventScr EventScrWM_MessedEventscr_4[];
+extern EventScr EventScrWM_MessedEventscr_40[];
+extern EventScr EventScrWM_MessedEventscr_41[];
+extern EventScr EventScrWM_MessedEventscr_42[];
+extern EventScr EventScrWM_MessedEventscr_44[];
+extern EventScr EventScrWM_MessedEventscr_45[];
+extern EventScr EventScrWM_MessedEventscr_46[];
+extern EventScr EventScrWM_MessedEventscr_47[];
+extern EventScr EventScrWM_MessedEventscr_48[];
+extern EventScr EventScrWM_MessedEventscr_49[];
+extern EventScr EventScrWM_MessedEventscr_5[];
+extern EventScr EventScrWM_MessedEventscr_55[];
+extern EventScr EventScrWM_MessedEventscr_56[];
+extern EventScr EventScrWM_MessedEventscr_57[];
+extern EventScr EventScrWM_MessedEventscr_58[];
+extern EventScr EventScrWM_MessedEventscr_6[];
+extern EventScr EventScrWM_MessedEventscr_7[];
+extern EventScr EventScrWM_MessedEventscr_8[];
+extern EventScr EventScrWM_MessedEventscr_9[];
+extern EventScr EventScrWM_Prologue_Beginning[];
+extern EventScr EventScrWM_Prologue_ChapterIntro[];
+extern EventScr EventScrWM_ValniTower3_Beginning[];
+extern EventScr EventScrWM_ValniTower4_Beginning[];
+extern EventScr EventScrWM_ValniTower5_Beginning[];
+extern EventScr EventScrWM_ValniTower6_Beginning[];
+extern EventScr EventScrWM_ValniTower7_Beginning[];
+extern EventScr EventScrWM_ValniTower8_Beginning[];
 extern const u8 frontier_df4_misc_lo_010_0E3CD7[];
 extern const u8 frontier_df4_misc_lo_010b_0E3D78[];
 extern const u8 frontier_df4_misc_lo_017_1B1878[];
@@ -7171,26 +7282,26 @@ u32 frontier_df4_banim_b_072_903A50[] __attribute__((section(".data.frontier_df4
 };
 /* frontier_df4_banim_b_073_907F78: atomic relocation carve (was INCBIN); every embedded ROM pointer in coherent pointer tables expressed as .4byte Sym(+addend), byte-exact. */
 u32 frontier_df4_banim_b_073_907F78[] __attribute__((section(".data.frontier_df4_banim_b.gap73"))) = {
-    (u32)&gProcScr_ArenaUiResultBgm + 0xC8, (u32)&gProcScr_ArenaUiResultBgm + 0x66C, (u32)&gProcScr_ArenaUiResultBgm + 0x6A4, (u32)&gProcScr_ArenaUiResultBgm + 0x880, (u32)&gProcScr_ArenaUiResultBgm + 0xA1C, (u32)&frontier_df4_menu_039_AC00A8 + 0x30,
-    (u32)&gProcScr_ArenaUiResultBgm + 0xB4C, (u32)&gProcScr_ArenaUiResultBgm + 0xE38, (u32)&gProcScr_ArenaUiResultBgm + 0xF24, (u32)&gProcScr_ArenaUiResultBgm + 0x1010, (u32)&gProcScr_ArenaUiResultBgm + 0x1090, (u32)&gProcScr_ArenaUiResultBgm + 0x12F0,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x14B0, (u32)&gProcScr_ArenaUiResultBgm + 0x14CC, (u32)&gProcScr_ArenaUiResultBgm + 0x1610, (u32)&gProcScr_ArenaUiResultBgm + 0x1EB4, (u32)&gProcScr_ArenaUiResultBgm + 0x1F20, (u32)&gProcScr_ArenaUiResultBgm + 0x20C4,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x2274, (u32)&gProcScr_ArenaUiResultBgm + 0x23F0, (u32)&gProcScr_ArenaUiResultBgm + 0x2500, (u32)&gProcScr_ArenaUiResultBgm + 0x26E4, (u32)&frontier_df4_menu_039_AC00A8 + 0x38, (u32)&gProcScr_ArenaUiResultBgm + 0x17DC,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1A10, (u32)&gProcScr_ArenaUiResultBgm + 0x1B5C, (u32)&gProcScr_ArenaUiResultBgm + 0x1B78, (u32)&gProcScr_ArenaUiResultBgm + 0x1C60, (u32)&gProcScr_ArenaUiResultBgm + 0x27CC, (u32)&gProcScr_ArenaUiResultBgm + 0x2980,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x2B0C, (u32)&gProcScr_ArenaUiResultBgm + 0x2CB8, (u32)&gProcScr_ArenaUiResultBgm + 0x2E34, (u32)&gProcScr_ArenaUiResultBgm + 0x2F44, (u32)&gProcScr_ArenaUiResultBgm + 0x3128, (u32)&frontier_df4_menu_039_AC00A8 + 0x40,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1DF0, (u32)&gProcScr_ArenaUiResultBgm + 0x1E04, (u32)&gProcScr_ArenaUiResultBgm + 0x1E0C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E14, (u32)&gProcScr_ArenaUiResultBgm + 0x1E1C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E24,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1E2C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E34, (u32)&gProcScr_ArenaUiResultBgm + 0x1E4C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E5C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E64, (u32)&gProcScr_ArenaUiResultBgm + 0x1E6C,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1E74, (u32)&gProcScr_ArenaUiResultBgm + 0x1E7C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E84, (u32)&gProcScr_ArenaUiResultBgm + 0x1E8C, (u32)&gProcScr_ArenaUiResultBgm + 0x1E94, (u32)&gProcScr_ArenaUiResultBgm + 0x1E9C,
-    (u32)&frontier_df4_menu_039_AC00A8, (u32)&gProcScr_ArenaUiResultBgm + 0x1DE0, (u32)&frontier_df4_menu_039_AC00A8 + 0x48, (u32)&frontier_df4_menu_039_AC00A8 + 0x168, 0x00000000, (u32)&gProcScr_ArenaUiResultBgm + 0x660,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x678, (u32)&gProcScr_ArenaUiResultBgm + 0x714, (u32)&gProcScr_ArenaUiResultBgm + 0x8F0, (u32)&gProcScr_ArenaUiResultBgm + 0xA78, (u32)&frontier_df4_menu_039_AC00A8 + 0x34, (u32)&gProcScr_ArenaUiResultBgm + 0xC38,
-    (u32)&gProcScr_ArenaUiResultBgm + 0xE94, (u32)&gProcScr_ArenaUiResultBgm + 0xF80, (u32)&gProcScr_ArenaUiResultBgm + 0x1060, (u32)&gProcScr_ArenaUiResultBgm + 0x114C, (u32)&gProcScr_ArenaUiResultBgm + 0x134C, (u32)&gProcScr_ArenaUiResultBgm + 0x14C8,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1528, (u32)&gProcScr_ArenaUiResultBgm + 0x16A0, (u32)&gProcScr_ArenaUiResultBgm + 0x1F18, (u32)&gProcScr_ArenaUiResultBgm + 0x2004, (u32)&gProcScr_ArenaUiResultBgm + 0x2194, (u32)&gProcScr_ArenaUiResultBgm + 0x22D0,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x244C, (u32)&gProcScr_ArenaUiResultBgm + 0x2618, (u32)&gProcScr_ArenaUiResultBgm + 0x2740, (u32)&frontier_df4_menu_039_AC00A8 + 0x3C, (u32)&gProcScr_ArenaUiResultBgm + 0x18B4, (u32)&gProcScr_ArenaUiResultBgm + 0x1A90,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1B74, (u32)&gProcScr_ArenaUiResultBgm + 0x1BD4, (u32)&gProcScr_ArenaUiResultBgm + 0x1CBC, (u32)&gProcScr_ArenaUiResultBgm + 0x286C, (u32)&gProcScr_ArenaUiResultBgm + 0x2A4C, (u32)&gProcScr_ArenaUiResultBgm + 0x2BDC,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x2D14, (u32)&gProcScr_ArenaUiResultBgm + 0x2E90, (u32)&gProcScr_ArenaUiResultBgm + 0x305C, (u32)&gProcScr_ArenaUiResultBgm + 0x3184, (u32)&frontier_df4_menu_039_AC00A8 + 0x44, (u32)&gProcScr_ArenaUiResultBgm + 0x1DF8,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1E08, (u32)&gProcScr_ArenaUiResultBgm + 0x1E10, (u32)&gProcScr_ArenaUiResultBgm + 0x1E18, (u32)&gProcScr_ArenaUiResultBgm + 0x1E20, (u32)&gProcScr_ArenaUiResultBgm + 0x1E28, (u32)&gProcScr_ArenaUiResultBgm + 0x1E30,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1E38, (u32)&gProcScr_ArenaUiResultBgm + 0x1E50, (u32)&gProcScr_ArenaUiResultBgm + 0x1E60, (u32)&gProcScr_ArenaUiResultBgm + 0x1E68, (u32)&gProcScr_ArenaUiResultBgm + 0x1E70, (u32)&gProcScr_ArenaUiResultBgm + 0x1E78,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1E80, (u32)&gProcScr_ArenaUiResultBgm + 0x1E88, (u32)&gProcScr_ArenaUiResultBgm + 0x1E90, (u32)&gProcScr_ArenaUiResultBgm + 0x1E98, (u32)&gProcScr_ArenaUiResultBgm + 0x1EA0, (u32)&frontier_df4_menu_039_AC00A8 + 0x28,
-    (u32)&gProcScr_ArenaUiResultBgm + 0x1DE4, (u32)&frontier_df4_menu_039_AC00A8 + 0xA4, (u32)&frontier_df4_menu_039_AC00A8 + 0x1C4, 0x0001820D, 0x0000FFFF, 0x0001820A,
+    (u32)&EventScrWM_Prologue_Beginning, (u32)&EventScrWM_Ch1_Beginning, (u32)&EventScrWM_Ch2_Beginning, (u32)&EventScrWM_Ch3_Beginning, (u32)&EventScrWM_Ch4_Beginning, (u32)&EventScrWM_Ch21ax_Beginning,
+    (u32)&EventScrWM_Ch5_Beginning, (u32)&EventScrWM_Ch6_Beginning, (u32)&EventScrWM_Ch7_Beginning, (u32)&EventScrWM_Ch8_Beginning, (u32)&EventScrWM_Ch9a_Beginning, (u32)&EventScrWM_Ch10a_Beginning,
+    (u32)&EventScrWM_Ch12a_Beginning, (u32)&EventScrWM_Ch13a_Beginning, (u32)&EventScrWM_Ch14a_Beginning, (u32)&EventScrWM_Ch15a_Beginning + 0x8, (u32)&EventScrWM_Ch16a_Beginning + 0x8, (u32)&EventScrWM_Ch17a_Beginning + 0x8,
+    (u32)&EventScrWM_Ch18a_Beginning + 0x8, (u32)&EventScrWM_Ch19a_Beginning + 0x8, (u32)&EventScrWM_Ch20a_Beginning + 0x8, (u32)&EventScrWM_JPOnly_3 + 0x8, (u32)&EventScrWM_Ch21bx_Beginning, (u32)&EventScrWM_Ch9b_Beginning,
+    (u32)&EventScrWM_Ch10b_Beginning, (u32)&EventScrWM_Ch12b_Beginning, (u32)&EventScrWM_Ch13b_Beginning, (u32)&EventScrWM_Ch14b_Beginning, (u32)&EventScrWM_Ch15b_Beginning + 0x8, (u32)&EventScrWM_Ch16b_Beginning + 0x8,
+    (u32)&EventScrWM_Ch17b_Beginning + 0x8, (u32)&EventScrWM_Ch18b_Beginning + 0x8, (u32)&EventScrWM_Ch19b_Beginning + 0x8, (u32)&EventScrWM_Ch20b_Beginning + 0x8, (u32)&EventScrWM_JPOnly_5 + 0x8, (u32)&EventScrWM_Ch11a_Beginning,
+    (u32)&EventScrWM_MessedEventscr_11, (u32)&EventScrWM_ValniTower3_Beginning, (u32)&EventScrWM_ValniTower4_Beginning, (u32)&EventScrWM_ValniTower5_Beginning, (u32)&EventScrWM_ValniTower6_Beginning, (u32)&EventScrWM_ValniTower7_Beginning,
+    (u32)&EventScrWM_ValniTower8_Beginning, (u32)&EventScrWM_MessedEventscr_19, (u32)&EventScrWM_MessedEventscr_23 + 0x4, (u32)&EventScrWM_LagdouRuins3_Beginning, (u32)&EventScrWM_LagdouRuins4_Beginning, (u32)&EventScrWM_LagdouRuins5_Beginning,
+    (u32)&EventScrWM_LagdouRuins6_Beginning, (u32)&EventScrWM_LagdouRuins7_Beginning, (u32)&EventScrWM_LagdouRuins8_Beginning, (u32)&EventScrWM_LagdouRuins9_Beginning, (u32)&EventScrWM_LagdouRuins10_Beginning, (u32)&EventScrWM_MessedEventscr_33,
+    (u32)&EventScrWM_CastleFrelia_Beginning + 0x8, (u32)&EventScrWM_MelkaenCoast_Beginning, (u32)&EventScrWM_Ch11a_Beginning + 0x8, (u32)&EventScrWM_Ch11b_Beginning + 0x8, 0x00000000, (u32)&EventScrWM_Prologue_ChapterIntro,
+    (u32)&EventScrWM_Ch1_ChapterIntro, (u32)&EventScrWM_Ch2_ChapterIntro, (u32)&EventScrWM_Ch3_ChapterIntro, (u32)&EventScrWM_Ch4_ChapterIntro, (u32)&EventScrWM_MessedEventscr_55, (u32)&EventScrWM_Ch5_ChapterIntro,
+    (u32)&EventScrWM_Ch6_ChapterIntro, (u32)&EventScrWM_Ch7_ChapterIntro, (u32)&EventScrWM_Ch8_ChapterIntro, (u32)&EventScrWM_Ch9a_ChapterIntro, (u32)&EventScrWM_MessedEventscr_1, (u32)&EventScrWM_MessedEventscr_2,
+    (u32)&EventScrWM_MessedEventscr_3, (u32)&EventScrWM_MessedEventscr_4, (u32)&EventScrWM_Ch16a_Beginning, (u32)&EventScrWM_MessedEventscr_38 + 0x8, (u32)&EventScrWM_MessedEventscr_39 + 0x8, (u32)&EventScrWM_MessedEventscr_40 + 0x8,
+    (u32)&EventScrWM_MessedEventscr_41 + 0x8, (u32)&EventScrWM_MessedEventscr_42 + 0x8, (u32)&EventScrWM_JPOnly_4 + 0x8, (u32)&EventScrWM_MessedEventscr_56, (u32)&EventScrWM_MessedEventscr_5, (u32)&EventScrWM_MessedEventscr_6,
+    (u32)&EventScrWM_MessedEventscr_7, (u32)&EventScrWM_MessedEventscr_8, (u32)&EventScrWM_MessedEventscr_9, (u32)&EventScrWM_MessedEventscr_44 + 0x8, (u32)&EventScrWM_MessedEventscr_45 + 0x8, (u32)&EventScrWM_MessedEventscr_46 + 0x8,
+    (u32)&EventScrWM_MessedEventscr_47 + 0x8, (u32)&EventScrWM_MessedEventscr_48 + 0x8, (u32)&EventScrWM_MessedEventscr_49 + 0x8, (u32)&EventScrWM_JPOnly_6 + 0x8, (u32)&EventScrWM_Ch11a_Beginning + 0x4, (u32)&EventScrWM_MessedEventscr_11 + 0x8,
+    (u32)&EventScrWM_MessedEventscr_13, (u32)&EventScrWM_MessedEventscr_14, (u32)&EventScrWM_MessedEventscr_15, (u32)&EventScrWM_MessedEventscr_16, (u32)&EventScrWM_MessedEventscr_17, (u32)&EventScrWM_MessedEventscr_18,
+    (u32)&EventScrWM_MessedEventscr_20, (u32)&EventScrWM_MessedEventscr_23 + 0x8, (u32)&EventScrWM_MessedEventscr_25, (u32)&EventScrWM_MessedEventscr_26, (u32)&EventScrWM_MessedEventscr_27, (u32)&EventScrWM_MessedEventscr_28,
+    (u32)&EventScrWM_MessedEventscr_29, (u32)&EventScrWM_MessedEventscr_30, (u32)&EventScrWM_MessedEventscr_31, (u32)&EventScrWM_MessedEventscr_32, (u32)&EventScrWM_MessedEventscr_34, (u32)&EventScrWM_Ch5x_Beginning,
+    (u32)&EventScrWM_MessedEventscr_10, (u32)&EventScrWM_MessedEventscr_57 + 0x8, (u32)&EventScrWM_MessedEventscr_58 + 0x8, 0x0001820D, 0x0000FFFF, 0x0001820A,
     0x0000FFFF, 0x000181CA, 0x0000FFFF, 0x000181C9, 0x0000FFFF, 0x00018149,
     0x0000FFFF, 0x00018148, 0x0000FFFF, 0x02010149, 0x0000FFFF, 0x0000020A,
     0x0000FFFF, 0x00000188, 0x0000FFFF, 0x00000189, 0x0010FFFF, 0x08000702,

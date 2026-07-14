@@ -1275,7 +1275,6 @@ AB0C26	AB0D18	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1644.o(.rodata.d
 AB0FDC	AB7144	src/data/A2EEF0/dat_data_A2EEF0_p0.o(.rodata.dat_data_A2EEF0_p0)	dat_data_A2EEF0_p0 region-same per-sym shifted (24KB)
 ABCAD0	ABCAD4	src/bmshop.o(.data)	bmshop .data
 ABCC34	ABCD24	src/data/gProcScr_ArenaUiResults_ref/dat_gProcScr_ArenaUiResults_ref.o(.rodata.dat_gProcScr_ArenaUiResults_ref)	gProcScr_ArenaUiResults region-diff (funcmap code-ref, 0KB)
-ABFFE4	AC00A8	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1652.o(.rodata.dat_worldmap_gmapunit_p1652)	dat_worldmap_gmapunit_p1652 region-same per-sym shifted (0KB)
 AC0394	AC059C	src/cg.o(.data)	cg .data
 AC09E8	AC0AF8	src/data/gCharacterEndingTitleLut_ref/dat_gCharacterEndingTitleLut_ref.o(.rodata.dat_gCharacterEndingTitleLut_ref)	gCharacterEndingTitleLut region-diff (funcmap code-ref, 0KB)
 AC0AF8	AC0B90	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1655.o(.rodata.dat_worldmap_gmapunit_p1655)	dat_worldmap_gmapunit_p1655 region-same per-sym shifted (0KB)

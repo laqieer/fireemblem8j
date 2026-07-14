@@ -13,11 +13,16 @@ expressions (including ``#define`` bodies) remain visible.  Standalone C hex
 integer tokens are parsed numerically, so omitted/extra leading zeroes,
 uppercase spellings, and integer suffixes cannot bypass the ROM-range check.
 
-Only three proven packed-value contexts are accepted:
+Only four proven packed-value contexts are accepted:
 
 * ROM-looking words inside the ``gMsgHuffmanTable`` initializer;
 * the exact ``0x08001000`` coefficient in ``gWorldmapMapmu_1``;
-* the exact ``0x08A708A7`` OpSubtitle palette-fill word.
+* the exact ``0x08A708A7`` OpSubtitle palette-fill word;
+* the four proven-coincidental TEXTSHOW command words inside
+  ``src/events_wm.c`` (0x08801B20/0x08821B20/0x088E1B20/0x08A61B20 at JP ROM
+  0x08ABD3B4/0x08ABD58C/0x08ABDD9C/0x08ABE4E8 -- confirmed by an independent
+  pointer-target scan of the whole EventScr_WM region to be the *only* four
+  ROM-range words with no matching array/function target).
 """
 
 import argparse
@@ -52,7 +57,10 @@ HEX_INTEGER_FULL_RE = re.compile(
 ALLOW_HUFFMAN = "gMsgHuffmanTable packed values"
 ALLOW_WORLDMAP = "gWorldmapMapmu_1 spline coefficient"
 ALLOW_OPSUBTITLE = "OpSubtitle palette fill word"
-ALLOW_ORDER = (ALLOW_HUFFMAN, ALLOW_WORLDMAP, ALLOW_OPSUBTITLE)
+ALLOW_TEXTSHOW = "events_wm.c TEXTSHOW command words"
+ALLOW_ORDER = (ALLOW_HUFFMAN, ALLOW_WORLDMAP, ALLOW_OPSUBTITLE, ALLOW_TEXTSHOW)
+
+TEXTSHOW_VALUES = frozenset({0x08801B20, 0x08821B20, 0x088E1B20, 0x08A61B20})
 
 
 @dataclass(frozen=True)
@@ -247,6 +255,8 @@ def scan_source(path, text):
             and match.start() in palette_offsets
         ):
             label = ALLOW_OPSUBTITLE
+        elif path == "src/events_wm.c" and value in TEXTSHOW_VALUES:
+            label = ALLOW_TEXTSHOW
 
         if label is not None:
             allowed[label] += 1

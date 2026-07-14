@@ -59,6 +59,23 @@ int other = 0x08A708A7;
             [(3, "0x08A708A7")],
         )
 
+    def test_only_exact_events_wm_textshow_words_are_allowed(self):
+        text = """
+EventScr x[] = {
+    (EventScr)0x08801B20,
+    (EventScr)0x08821B20,
+    (EventScr)0x088E1B20,
+    (EventScr)0x08A61B20,
+    (EventScr)0x08ABCD44,
+};
+"""
+        findings, allowed = scanner.scan_source("src/events_wm.c", text)
+        self.assertEqual(allowed[scanner.ALLOW_TEXTSHOW], 4)
+        self.assertEqual(
+            [(finding.line, finding.token) for finding in findings],
+            [(7, "0x08ABCD44")],
+        )
+
     def test_alternate_spellings_are_reported_without_substring_matches(self):
         text = """
 void * short_form = (void *)0x8001234;
