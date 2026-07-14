@@ -47,28 +47,18 @@ from PIL import Image
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_ROOT = os.path.dirname(SCRIPT_DIR)
 
-# Named, reasoned exceptions to the two `.tsa.bin` size formulas. These are NOT a
-# third "native TSA format" -- TmApplyTsa (the consumer) is the standard TSA
-# reader; this file is TEMPORARY MULTI-RESOURCE CONTAINER DEBT (a dedicated
-# segmentation RE effort is tracked separately): it is being deleted/split into
-# three standard-formula TSAs -- Tsa_MultiBootSendListBarNarrow.bin (156B =
-# 154B standard 19x4 + 2 zero bytes), Tsa_MultiBootSendListBarWide.bin (184B =
-# 182B standard 30x3 + 2 zero bytes), Tsa_LinkArenaTitleBanner.bin (124B =
-# 122B standard 15x4 + 2 zero bytes) -- plus a headerless 1280B raw BG tilemap,
-# Tilemap_MultiBootSendBg.bin, which is DELIBERATELY NOT a `.tsa.bin` and must
-# NOT be TSA-header-parsed (see MULTIBOOT_SPLIT_TARGETS / check_multiboot_split_
-# targets() below, which validate each successor path the moment it appears,
-# so the split can land with zero further gate changes). Until that split
-# lands, gUnkData_26.tsa.bin cannot satisfy either size formula and must stay
-# an explicit, reasoned exception -- both it disappearing (without updating
-# this set) and an unexpected new oversized file are audit failures (drift
-# guard). This exception list is deliberately isolated (its own frozenset,
-# checked first, no other logic branches on it) so a future asset branch can
-# delete the entry here the moment the file is split, without touching the
-# two real size-formula checks.
-TSA_NAMED_EXCEPTIONS = frozenset({
-    "graphics/misc/gUnkData_26.tsa.bin",
-})
+# Named, reasoned exceptions to the two `.tsa.bin` size formulas. These are NOT
+# a third "native TSA format" -- TmApplyTsa (the consumer) is the standard TSA
+# reader. This set is now EMPTY: the sole remaining case, gUnkData_26.tsa.bin,
+# was a size/path-only exception; it is now instead modeled as a real
+# evidence-backed PRE/POST migration STATE TRANSITION (see
+# GUNKDATA_26_PATH / check_gunkdata_26_transition() below), not a stale
+# allowlist entry. Kept as an (empty) frozenset -- rather than deleted outright
+# -- so the drift-guard mechanism (missing_exceptions check below) and its
+# calling convention stay in place for any FUTURE genuinely-unresolved oversized
+# TSA that needs the same "explicit, reasoned, narrowly-scoped" treatment.
+TSA_NAMED_EXCEPTIONS = frozenset()
+
 
 # --- graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin: TRANSITIONAL container shape ---
 # A separate worker is migrating this file from 276B down to 244B (standard
@@ -167,48 +157,142 @@ def validate_menu_soundroom_4(data):
     return None
 
 
-# --- gUnkData_26.tsa.bin split successors: dormant until each path exists -----
-# The migration worker may land these AFTER this branch. Each entry is checked
-# ONLY if the path is already tracked (a fresh worktree without the split yet
-# sees none of these and is unaffected); the moment any of them is committed,
-# it is immediately validated against the exact documented size/formula --
-# no further gate changes needed. `is_tsa=True` entries use the same standard-
-# formula-plus-optional-2-zero-bytes check as every other `.tsa.bin`; the raw
-# tilemap is explicitly NOT TSA-header-parsed (checked only for its documented
-# flat size, mirroring the .map.bin family's "no invented dimension check").
-MULTIBOOT_SPLIT_TARGETS = (
-    ("graphics/misc/Tsa_MultiBootSendListBarNarrow.bin", 156, True),
-    ("graphics/misc/Tsa_MultiBootSendListBarWide.bin", 184, True),
-    ("graphics/misc/Tsa_LinkArenaTitleBanner.bin", 124, True),
-    ("graphics/misc/Tilemap_MultiBootSendBg.bin", 1280, False),
+# --- graphics/misc/gUnkData_26.tsa.bin: evidence-backed PRE/POST migration ----
+# state transition (NOT a stale path exception). Per the landed split's own
+# commit evidence (src/data/5AA96C/dat_data_5AA96C.c, "issue143 Recipe C"),
+# this 21764B monolith (JP 0x085DB10C..0x085E0610) packed 13 semantic
+# sub-assets (TSAs, 4bpp images, palettes, one inline-C tail) -- NOT a single
+# malformed TSA. Three of those sub-assets are standard-formula TSAs; a
+# fourth is a headerless raw BG screen tilemap. This models BOTH sides of the
+# migration with real, evidence-derived structure -- never a bare size/path
+# allowlist, never a silently-optional successor count:
+#
+#   PRE-SPLIT (GUNKDATA_26_PATH is still tracked): validate_gunkdata_26_monolith()
+#   requires the EXACT documented monolith size, AND that each of the 3 KNOWN
+#   byte ranges GUNKDATA_26_KNOWN_SEGMENTS independently parses as a valid
+#   standard-formula TSA. Those 3 ranges were located by finding each landed
+#   successor's own bytes VERBATIM inside this monolith (not guessed) --
+#   confirmed structural evidence, not a size coincidence. (Honest scope limit:
+#   the remaining ~10 sub-assets, including the tilemap's equivalent bytes,
+#   are not individually byte-attributed here -- full 13-way segmentation is a
+#   separate, larger RE effort. What's checked is real and specific, not "the
+#   size looks right".)
+#
+#   POST-SPLIT (the monolith is gone): ALL FOUR successors in
+#   GUNKDATA_26_POST_SPLIT_SUCCESSORS are now MANDATORY -- a partial split
+#   (any one successor missing) is a hard failure, not a silently-skipped
+#   dormant check.
+GUNKDATA_26_PATH = "graphics/misc/gUnkData_26.tsa.bin"
+GUNKDATA_26_MONOLITH_SIZE = 21764
+GUNKDATA_26_KNOWN_SEGMENTS = (
+    # (label, start offset, end offset) within the monolith -- each range's
+    # bytes were found VERBATIM in the pre-split monolith by searching for the
+    # now-landed successor file's own content.
+    ("Tsa_LinkArenaTitleBanner-equivalent", 0, 124),
+    ("Tsa_MultiBootSendListBarNarrow-equivalent", 17324, 17480),
+    ("Tsa_MultiBootSendListBarWide-equivalent", 17480, 17664),
+)
+GUNKDATA_26_POST_SPLIT_SUCCESSORS = (
+    ("graphics/misc/Tsa_LinkArenaTitleBanner.bin", 124, "tsa"),
+    ("graphics/misc/Tsa_MultiBootSendListBarNarrow.bin", 156, "tsa"),
+    ("graphics/misc/Tsa_MultiBootSendListBarWide.bin", 184, "tsa"),
+    # The real landed path -- a headerless raw BG tilemap (32x20 = 640 u16
+    # entries), NOT a `.tsa.bin` and NOT TSA-header-parsed. See the generic
+    # "*_map.bin"/"*.map.bin" headerless-map family below for the shared
+    # semantic (even length + valid tile-id domain) validator.
+    ("graphics/misc/Tilemap_MultiBootSendBg_map.bin", 1280, "map640"),
 )
 
 
-def check_multiboot_split_targets(root, report):
-    for rel_path, expected_size, is_tsa in MULTIBOOT_SPLIT_TARGETS:
-        abspath = os.path.join(root, rel_path)
-        if not os.path.exists(abspath):
-            continue  # pre-split state: not landed yet, nothing to check
-        with open(abspath, "rb") as f:
+def validate_gunkdata_26_monolith(data):
+    """Return None if `data` matches the pre-split monolith's evidence-backed
+    shape (see the module comment above), else a reason string."""
+    if len(data) != GUNKDATA_26_MONOLITH_SIZE:
+        return f"size {len(data)} != documented monolith size {GUNKDATA_26_MONOLITH_SIZE}"
+    for label, start, end in GUNKDATA_26_KNOWN_SEGMENTS:
+        kind, reason = classify_tsa_bytes(data[start:end])
+        if kind == "unknown":
+            return f"known segment {label} at [{start},{end}): {reason}"
+    return None
+
+
+def check_gunkdata_26_transition(root, report):
+    """Validate whichever side of the gUnkData_26 migration the current tree
+    is on. Exactly one branch applies; neither is optional/silent. The
+    pre-split monolith's OWN structural validation happens via the generic
+    `.tsa.bin` audit loop (classify_tsa_bin() routes GUNKDATA_26_PATH to
+    validate_gunkdata_26_monolith() there); this function additionally
+    enforces the state-transition invariant the generic loop cannot: which
+    ever side is IN EFFECT must be complete."""
+    abspath = os.path.join(root, GUNKDATA_26_PATH)
+    if os.path.exists(abspath):
+        report.count("gunkdata_26_state_pre_split_monolith_present", 1)
+        return
+    missing = []
+    for rel_path, expected_size, kind in GUNKDATA_26_POST_SPLIT_SUCCESSORS:
+        successor_abspath = os.path.join(root, rel_path)
+        if not os.path.exists(successor_abspath):
+            missing.append(rel_path)
+            continue
+        with open(successor_abspath, "rb") as f:
             data = f.read()
         if len(data) != expected_size:
             report.fail(f"{rel_path}: size {len(data)} != documented {expected_size}")
             continue
-        if is_tsa:
-            kind, reason = classify_tsa_bin(abspath, rel_path)
-            if kind == "unknown":
-                report.fail(f"{rel_path}: {reason}")
+        if kind == "tsa":
+            tsa_kind, tsa_reason = classify_tsa_bin(successor_abspath, rel_path)
+            if tsa_kind == "unknown":
+                report.fail(f"{rel_path}: {tsa_reason}")
                 continue
-            report.count("multiboot_split_target_ok")
-        else:
-            if len(data) % 2 != 0:
-                report.fail(f"{rel_path}: odd length {len(data)} (headerless raw tilemap)")
-                continue
-            err = check_map_bin(abspath)
+        elif kind == "map640":
+            err = check_map_bin(successor_abspath, expected_entries=640)
             if err:
                 report.fail(f"{rel_path}: {err}")
                 continue
-            report.count("multiboot_split_target_ok")
+        report.count("gunkdata_26_post_split_successor_ok")
+    if missing:
+        report.fail(
+            f"gUnkData_26 post-split state incomplete: missing {len(missing)} of "
+            f"{len(GUNKDATA_26_POST_SPLIT_SUCCESSORS)} required successors (the "
+            f"split is all-or-nothing, never silently optional): {sorted(missing)}")
+    else:
+        report.count("gunkdata_26_post_split_complete", 1)
+
+
+# --- graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin: headerless screen
+# data, NOT a standard-header TSA (its sibling Tsa_Sub8022200.tsa.bin IS an
+# ordinary exact-form TSA and needs no special-casing). Per its real consumer,
+# src/sub_8021AFC.c: `Decompress(Tsa_sub_8021AFC, gUiTmScratchA)` copies the
+# raw bytes verbatim into a screen-entry scratch buffer, THEN
+# `gUiTmScratchA[i] += TILEREF(BGCHR_BMFX_IMG, BGPAL_DANCERING_IMG)` rebases
+# every entry's tile bank/id at RUNTIME -- so the file itself intentionally
+# has no width/height header (rebasing a header word would corrupt it) and
+# must never be interpreted as one. 1536B = 768 u16 entries = a 32x24 screen
+# (matching the file's own natural size; the consumer's rebase loop covers a
+# larger 0x360-entry scratch buffer, but that's a RUNTIME buffer detail, not
+# this SOURCE file's shape). Validated as raw BG screen-entry data (even
+# length, exact 768-entry count, valid GBA tile-id domain per entry) via the
+# SAME headerless-map check used for the generic "*_map.bin"/"*.map.bin"
+# family below -- not a byte hash, not a name-only bypass.
+TSA_SUB_8021AFC_PATH = "graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin"
+TSA_SUB_8021AFC_ENTRIES = 768  # 32x24
+
+
+def validate_sub_8021afc_headerless_map(data):
+    """Return None if `data` is valid headerless BG screen-entry data matching
+    TSA_SUB_8021AFC_ENTRIES, else a reason string. Deliberately does NOT read
+    data[0:2] as a (width-1, height-1) TSA header -- that would misinterpret
+    real screen-entry tile data as bogus dimensions."""
+    if len(data) % 2 != 0:
+        return f"odd length {len(data)} (headerless raw screen data)"
+    entries = list(decode_tile_ids_le16(data))
+    if len(entries) != TSA_SUB_8021AFC_ENTRIES:
+        return (f"decoded {len(entries)} u16 entries, expected exactly "
+                f"{TSA_SUB_8021AFC_ENTRIES} (32x24)")
+    for tile_id, _word in entries:
+        if tile_id > 1023:
+            return f"decoded tile_id {tile_id} > 1023"
+    return None
 
 
 
@@ -861,13 +945,34 @@ def check_gbapal_roundtrip(colors, gbapal_path):
 # .tsa.bin invariants (item 4): scripts/tmap2tsa.py / scripts/gfxtools/tsa2.py
 # TSA.to_bytes(with_dimensions=True) format: 2-byte header (width-1, height-1),
 # payload (w+1)*(h+1)*2 bytes. A second observed form appends one extra zero
-# u16 word (48 files); 3 named files use a different, not-yet-reverse-engineered
-# convention and are explicit, asserted exceptions (see TSA_NAMED_EXCEPTIONS).
+# u16 word (48 files); a handful of named files need special-cased structural
+# routing (see TSA_SUB_8021AFC_PATH, MENU_SOUNDROOM_4_PATH,
+# GTSA_UNKDATA_0_TRANSITIONAL_PATH above) -- none of them are bare path/size
+# allowlists; each is validated by real, evidence-derived structure.
 # --------------------------------------------------------------------------
+
+def classify_tsa_bytes(data):
+    """The two CORE .tsa.bin size formulas, on raw bytes (no path/name
+    special-casing -- used both for whole-file classification (classify_tsa_bin)
+    and for validating a sub-range of a larger blob, e.g. a monolith's known
+    segment (validate_gunkdata_26_monolith)). Returns ('exact' | 'plus2', None)
+    or ('unknown', reason)."""
+    if len(data) < 2:
+        return ("unknown", f"too short ({len(data)} bytes, need >= 2 for header)")
+    w, h = data[0], data[1]
+    expected = 2 + (w + 1) * (h + 1) * 2
+    if len(data) == expected:
+        return ("exact", None)
+    if len(data) == expected + 2 and data[-2:] == b"\x00\x00":
+        return ("plus2", None)
+    return ("unknown", f"size {len(data)} matches neither exact ({expected}) "
+                        f"nor +2-trailing-zero ({expected + 2}) form for header w={w} h={h}")
+
 
 def classify_tsa_bin(path, rel_path):
     """Returns one of 'exact', 'plus2', 'transitional_palette_tail',
-    'menu_soundroom_4_manifest', 'named_exception', or ('unknown', reason)."""
+    'menu_soundroom_4_manifest', 'sub_8021afc_headerless_map',
+    'gunkdata_26_pre_split_monolith', or ('unknown', reason)."""
     with open(path, "rb") as f:
         data = f.read()
     if rel_path == MENU_SOUNDROOM_4_PATH:
@@ -875,19 +980,22 @@ def classify_tsa_bin(path, rel_path):
         if reason:
             return ("unknown", reason)
         return ("menu_soundroom_4_manifest", None)
-    if len(data) < 2:
-        if rel_path in TSA_NAMED_EXCEPTIONS:
-            return ("named_exception", None)
-        return ("unknown", f"file too short ({len(data)} bytes, need >= 2 for header)")
-    w, h = data[0], data[1]
-    expected = 2 + (w + 1) * (h + 1) * 2
-    if len(data) == expected:
-        return ("exact", None)
-    if len(data) == expected + 2 and data[-2:] == b"\x00\x00":
-        return ("plus2", None)
+    if rel_path == TSA_SUB_8021AFC_PATH:
+        reason = validate_sub_8021afc_headerless_map(data)
+        if reason:
+            return ("unknown", reason)
+        return ("sub_8021afc_headerless_map", None)
+    if rel_path == GUNKDATA_26_PATH:
+        reason = validate_gunkdata_26_monolith(data)
+        if reason:
+            return ("unknown", reason)
+        return ("gunkdata_26_pre_split_monolith", None)
+    kind, reason = classify_tsa_bytes(data)
+    if kind != "unknown":
+        return (kind, reason)
     if rel_path == GTSA_UNKDATA_0_TRANSITIONAL_PATH:
-        reason = _check_gtsa_unkdata_0_transitional(data)
-        if reason is None:
+        transitional_reason = _check_gtsa_unkdata_0_transitional(data)
+        if transitional_reason is None:
             return ("transitional_palette_tail", None)
         # If the size at least matches the documented transitional total, the
         # structural mismatch (bad padding / bad palette word) IS the specific
@@ -896,11 +1004,8 @@ def classify_tsa_bin(path, rel_path):
         # covers "the migration landed but produced neither the old
         # transitional shape nor the new plain plus2 form").
         if len(data) == GTSA_UNKDATA_0_TRANSITIONAL_SIZE:
-            return ("unknown", reason)
-    if rel_path in TSA_NAMED_EXCEPTIONS:
-        return ("named_exception", None)
-    return ("unknown", f"size {len(data)} matches neither exact ({expected}) "
-                        f"nor +2-trailing-zero ({expected + 2}) form for header w={w} h={h}")
+            return ("unknown", transitional_reason)
+    return ("unknown", reason)
 
 
 # --------------------------------------------------------------------------
@@ -911,13 +1016,21 @@ def classify_tsa_bin(path, rel_path):
 # catch a future change that widens the tile-id field beyond 10 bits).
 # --------------------------------------------------------------------------
 
-def check_map_bin(path):
-    """Return None if OK, else an error string."""
+def check_map_bin(path, expected_entries=None):
+    """Return None if OK, else an error string. `expected_entries`, if given,
+    additionally requires the file to decode to EXACTLY that many u16 entries
+    (used for named successors with a documented fixed grid, e.g. the 640-entry
+    32x20 MultiBoot BG tilemap or the 768-entry 32x24 uistuff screen data) --
+    left None for the generic bulk family, whose dimensions are intentionally
+    not encoded/invented (see the module comment above)."""
     with open(path, "rb") as f:
         data = f.read()
     if len(data) % 2 != 0:
         return f"odd length {len(data)}"
-    for tile_id, _word in decode_tile_ids_le16(data):
+    entries = list(decode_tile_ids_le16(data))
+    if expected_entries is not None and len(entries) != expected_entries:
+        return f"decoded {len(entries)} u16 entries, expected exactly {expected_entries}"
+    for tile_id, _word in entries:
         if tile_id > 1023:
             return f"decoded tile_id {tile_id} > 1023"  # unreachable given the 10-bit mask; kept as a guard
     return None
@@ -1413,11 +1526,15 @@ def audit(root, report):
     if missing_exceptions:
         report.fail(f".tsa.bin named exceptions missing/no-longer-tracked: {sorted(missing_exceptions)}")
 
-    # --- item 4: gUnkData_26.tsa.bin split successors (dormant until landed) ---
-    check_multiboot_split_targets(root, report)
+    # --- item 4: gUnkData_26.tsa.bin migration (pre-split monolith segments OR
+    # complete post-split successor set -- see check_gunkdata_26_transition()) ---
+    check_gunkdata_26_transition(root, report)
 
-    # --- item 4: .map.bin ---
-    map_files = git_ls_files(root, "*.map.bin")
+    # --- item 4: .map.bin (both the "*.map.bin" and the repository's "*_map.bin"
+    # headerless-BG-tilemap spelling, e.g. graphics/gfx_data_bg/bg_Cell_map.bin
+    # and the gUnkData_26 split's Tilemap_MultiBootSendBg_map.bin -- same family,
+    # same generic invariant, just two naming conventions in the tracked tree) ---
+    map_files = sorted(set(git_ls_files(root, "*.map.bin")) | set(git_ls_files(root, "*_map.bin")))
     for mapf in map_files:
         err = check_map_bin(os.path.join(root, mapf))
         if err:

@@ -489,13 +489,19 @@ class TsaBinClassifyTest(unittest.TestCase):
             kind, reason = a.classify_tsa_bin(path, "graphics/x/t.tsa.bin")
             self.assertEqual(kind, "unknown")
 
-    def test_named_exception_bypasses_size_formula(self):
+    def test_named_exception_mechanism_is_now_empty(self):
+        """TSA_NAMED_EXCEPTIONS is intentionally an empty frozenset -- the
+        former sole entry (gUnkData_26.tsa.bin) is now modeled as a real
+        evidence-backed state transition (see GunkData26TransitionTest), not a
+        size/path-only exception. A garbage-sized file at an ARBITRARY path
+        (not a specially-routed one) is correctly rejected, not exempted."""
+        self.assertEqual(a.TSA_NAMED_EXCEPTIONS, frozenset())
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "t.tsa.bin")
             with open(path, "wb") as f:
                 f.write(b"\x01\x02\x03")  # garbage size, wouldn't match either formula
-            kind, reason = a.classify_tsa_bin(path, "graphics/misc/gUnkData_26.tsa.bin")
-            self.assertEqual(kind, "named_exception")
+            kind, reason = a.classify_tsa_bin(path, "graphics/misc/some_other_file.tsa.bin")
+            self.assertEqual(kind, "unknown")
 
     def test_garbage_size_is_unknown(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -623,65 +629,225 @@ class MenuSoundroom4ManifestTest(unittest.TestCase):
         self.assertIn("total size", err)
 
 
-class MultibootSplitTargetsTest(unittest.TestCase):
-    """gUnkData_26.tsa.bin's successors are DORMANT until each path is actually
-    committed by the migration worker -- a fresh tree without them must not
-    fail, and each must be validated the instant it appears."""
+class GunkData26TransitionTest(unittest.TestCase):
+    """gUnkData_26.tsa.bin's migration modeled as a real, evidence-backed
+    PRE/POST state transition (not a stale path/size exception): pre-split,
+    the monolith's 3 known TSA sub-ranges must independently validate; once
+    the monolith is gone, ALL FOUR successors (3 TSA + the raw BG tilemap)
+    become mandatory -- a partial split is a hard failure."""
 
-    def test_dormant_when_no_successor_paths_exist(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            os.makedirs(os.path.join(tmp, "graphics", "misc"))
-            report = a.Report()
-            a.check_multiboot_split_targets(tmp, report)
-            self.assertEqual(report.failures, [])
-            self.assertNotIn("multiboot_split_target_ok", report.counts)
+    def _build_monolith(self, corrupt_segment=None, total_size=None):
+        """Build a synthetic GUNKDATA_26_MONOLITH_SIZE-byte blob with valid
+        standard-formula TSAs at each of the 3 known segment offsets (filler
+        elsewhere, matching the "not fully segmented" honest scope limit)."""
+        size = total_size if total_size is not None else a.GUNKDATA_26_MONOLITH_SIZE
+        data = bytearray(b"\xAA" * size)  # filler for the untriaged remainder
 
-    def test_validates_narrow_bar_the_instant_it_appears(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            d = os.path.join(tmp, "graphics", "misc")
-            os.makedirs(d)
-            # 156B = 154B standard 19x4 (w=18,h=3 zero-based) + 2 zero bytes.
-            w, h = 18, 3
+        def make_tsa(w, h):
             payload = b"\x00" * ((w + 1) * (h + 1) * 2)
-            with open(os.path.join(d, "Tsa_MultiBootSendListBarNarrow.bin"), "wb") as f:
-                f.write(bytes([w, h]) + payload + b"\x00\x00")
+            return bytes([w, h]) + payload + b"\x00\x00"  # plus2 form
+
+        segments = {
+            "Tsa_LinkArenaTitleBanner-equivalent": make_tsa(14, 3),   # 15x4 -> 124B
+            "Tsa_MultiBootSendListBarNarrow-equivalent": make_tsa(18, 3),  # 19x4 -> 156B
+            "Tsa_MultiBootSendListBarWide-equivalent": make_tsa(29, 2),    # 30x3 -> 184B
+        }
+        for label, start, end in a.GUNKDATA_26_KNOWN_SEGMENTS:
+            seg = segments[label]
+            self.assertEqual(len(seg), end - start, label)
+            if end <= len(data):
+                if label == corrupt_segment:
+                    seg = bytes([0xFF, 0xFF]) + seg[2:]  # corrupt the header
+                data[start:end] = seg
+        return bytes(data)
+
+    def test_valid_pre_split_monolith_passes(self):
+        data = self._build_monolith()
+        self.assertIsNone(a.validate_gunkdata_26_monolith(data))
+
+    def test_pre_split_monolith_wrong_total_size_fails(self):
+        data = self._build_monolith(total_size=a.GUNKDATA_26_MONOLITH_SIZE - 1)
+        err = a.validate_gunkdata_26_monolith(data)
+        self.assertIsNotNone(err)
+        self.assertIn("monolith size", err)
+
+    def test_pre_split_monolith_corrupt_known_segment_fails(self):
+        data = self._build_monolith(corrupt_segment="Tsa_MultiBootSendListBarNarrow-equivalent")
+        err = a.validate_gunkdata_26_monolith(data)
+        self.assertIsNotNone(err)
+        self.assertIn("Tsa_MultiBootSendListBarNarrow-equivalent", err)
+
+    def test_classify_tsa_bin_routes_monolith_path(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.tsa.bin")
+            with open(path, "wb") as f:
+                f.write(self._build_monolith())
+            kind, reason = a.classify_tsa_bin(path, a.GUNKDATA_26_PATH)
+            self.assertEqual(kind, "gunkdata_26_pre_split_monolith")
+            self.assertIsNone(reason)
+
+    def test_pre_split_state_no_successors_required(self):
+        """While the monolith is present, none of the 4 post-split successor
+        paths are required -- the transition check is a no-op on that side."""
+        with tempfile.TemporaryDirectory() as tmp:
+            d = os.path.join(tmp, "graphics", "misc")
+            os.makedirs(d)
+            with open(os.path.join(d, "gUnkData_26.tsa.bin"), "wb") as f:
+                f.write(self._build_monolith())
             report = a.Report()
-            a.check_multiboot_split_targets(tmp, report)
+            a.check_gunkdata_26_transition(tmp, report)
             self.assertEqual(report.failures, [])
-            self.assertEqual(report.counts.get("multiboot_split_target_ok"), 1)
+            self.assertEqual(report.counts.get("gunkdata_26_state_pre_split_monolith_present"), 1)
 
-    def test_wrong_size_narrow_bar_fails(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            d = os.path.join(tmp, "graphics", "misc")
-            os.makedirs(d)
-            with open(os.path.join(d, "Tsa_MultiBootSendListBarNarrow.bin"), "wb") as f:
-                f.write(b"\x00" * 100)  # wrong size
-            report = a.Report()
-            a.check_multiboot_split_targets(tmp, report)
-            self.assertTrue(any("156" in msg for msg in report.failures))
+    def _write_post_split_successors(self, root, skip=None):
+        d = os.path.join(root, "graphics", "misc")
+        os.makedirs(d, exist_ok=True)
+        w, h = 14, 3  # 15x4 -> 124B
+        payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+        banner = bytes([w, h]) + payload + b"\x00\x00"
+        w, h = 18, 3  # 19x4 -> 156B
+        payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+        narrow = bytes([w, h]) + payload + b"\x00\x00"
+        w, h = 29, 2  # 30x3 -> 184B
+        payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+        wide = bytes([w, h]) + payload + b"\x00\x00"
+        tilemap = struct.pack("<640H", *([0] * 640))
+        files = {
+            "Tsa_LinkArenaTitleBanner.bin": banner,
+            "Tsa_MultiBootSendListBarNarrow.bin": narrow,
+            "Tsa_MultiBootSendListBarWide.bin": wide,
+            "Tilemap_MultiBootSendBg_map.bin": tilemap,
+        }
+        for name, content in files.items():
+            if name == skip:
+                continue
+            with open(os.path.join(d, name), "wb") as f:
+                f.write(content)
 
-    def test_raw_tilemap_is_not_tsa_header_parsed(self):
+    def test_post_split_complete_set_passes(self):
         with tempfile.TemporaryDirectory() as tmp:
-            d = os.path.join(tmp, "graphics", "misc")
-            os.makedirs(d)
-            # A plausible flat u16 tilemap: 1280 bytes, all tile ids in range.
-            data = struct.pack("<640H", *([0] * 640))
-            with open(os.path.join(d, "Tilemap_MultiBootSendBg.bin"), "wb") as f:
-                f.write(data)
+            self._write_post_split_successors(tmp)
             report = a.Report()
-            a.check_multiboot_split_targets(tmp, report)
+            a.check_gunkdata_26_transition(tmp, report)
             self.assertEqual(report.failures, [])
-            self.assertEqual(report.counts.get("multiboot_split_target_ok"), 1)
+            self.assertEqual(report.counts.get("gunkdata_26_post_split_successor_ok"), 4)
+            self.assertEqual(report.counts.get("gunkdata_26_post_split_complete"), 1)
 
-    def test_raw_tilemap_odd_length_fails(self):
+    def test_post_split_missing_one_successor_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
-            d = os.path.join(tmp, "graphics", "misc")
-            os.makedirs(d)
-            with open(os.path.join(d, "Tilemap_MultiBootSendBg.bin"), "wb") as f:
-                f.write(b"\x00" * 1279)  # odd length, wrong size too
+            self._write_post_split_successors(tmp, skip="Tilemap_MultiBootSendBg_map.bin")
             report = a.Report()
-            a.check_multiboot_split_targets(tmp, report)
+            a.check_gunkdata_26_transition(tmp, report)
             self.assertTrue(report.failures)
+            self.assertTrue(any("all-or-nothing" in msg for msg in report.failures))
+            self.assertNotIn("gunkdata_26_post_split_complete", report.counts)
+
+    def test_post_split_wrong_size_successor_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._write_post_split_successors(tmp)
+            with open(os.path.join(tmp, "graphics", "misc", "Tsa_LinkArenaTitleBanner.bin"), "wb") as f:
+                f.write(b"\x00" * 50)
+            report = a.Report()
+            a.check_gunkdata_26_transition(tmp, report)
+            self.assertTrue(any("124" in msg for msg in report.failures))
+
+    def test_real_tilemap_filename_exact_regression(self):
+        """The real landed successor is graphics/misc/Tilemap_MultiBootSendBg_map.bin
+        (an underscore-map suffix, NOT Tilemap_MultiBootSendBg.bin) -- regression-
+        guard the exact documented path."""
+        names = [rel for rel, _size, _kind in a.GUNKDATA_26_POST_SPLIT_SUCCESSORS]
+        self.assertIn("graphics/misc/Tilemap_MultiBootSendBg_map.bin", names)
+        self.assertNotIn("graphics/misc/Tilemap_MultiBootSendBg.bin", names)
+
+    def test_check_map_bin_expected_entries_enforced_directly(self):
+        """Semantic entry-count validation (check_map_bin's expected_entries
+        parameter), tested directly at the function that implements it: a
+        buffer whose length doesn't correspond to exactly 640 u16 entries is
+        rejected even though every individual tile id is in-range."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.bin")
+            with open(path, "wb") as f:
+                f.write(struct.pack("<639H", *([0] * 639)))  # one entry short of 640
+            err = a.check_map_bin(path, expected_entries=640)
+            self.assertIsNotNone(err)
+            self.assertIn("640", err)
+
+    def test_gunkdata_26_tilemap_wrong_size_caught_before_entry_check(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._write_post_split_successors(tmp)
+            path = os.path.join(tmp, "graphics", "misc", "Tilemap_MultiBootSendBg_map.bin")
+            with open(path, "wb") as f:
+                f.write(struct.pack("<639H", *([0] * 639)))  # wrong size (1278B, not 1280B)
+            report = a.Report()
+            a.check_gunkdata_26_transition(tmp, report)
+            self.assertTrue(any("1280" in msg for msg in report.failures))
+
+
+class Sub8021AFCHeaderlessMapTest(unittest.TestCase):
+    """graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin: intentionally
+    headerless 1536B screen-entry data (768 u16 = 32x24) consumed via
+    `Decompress()` + runtime tile-index rebasing (src/sub_8021AFC.c) -- NOT a
+    standard-header TSA. Its sibling Tsa_Sub8022200.tsa.bin remains an ordinary
+    exact-form TSA (needs no special-casing -- ordinary classify_tsa_bytes())."""
+
+    def _valid_data(self):
+        return struct.pack("<768H", *([0] * 768))
+
+    def test_valid_headerless_map_passes(self):
+        self.assertIsNone(a.validate_sub_8021afc_headerless_map(self._valid_data()))
+
+    def test_classify_tsa_bin_routes_away_from_header_parsing(self):
+        """Regression: the file's first 2 bytes can coincidentally form a
+        header that would look like a PERFECTLY VALID standard-formula TSA if
+        misinterpreted -- (w=12,h=58) -> a 13x59 grid whose exact-form total
+        (2 + 13*59*2 = 1536) equals this file's real size byte-for-byte. If
+        classify_tsa_bin ever fell through to the generic exact/plus2 formula
+        for this path, it would WRONGLY report 'exact' instead of routing to
+        the headerless validator. Confirms the path-based routing check runs
+        BEFORE the generic formula, not after."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.tsa.bin")
+            data = bytearray(self._valid_data())
+            data[0:2] = bytes([12, 58])  # misleadingly "valid" 13x59 TSA header
+            with open(path, "wb") as f:
+                f.write(bytes(data))
+            # Prove the misleading header really would fool the generic formula.
+            misleading_kind, _ = a.classify_tsa_bytes(bytes(data))
+            self.assertEqual(misleading_kind, "exact")
+            # But classify_tsa_bin, routed by path, uses the headerless
+            # validator instead and correctly accepts it as screen data (NOT
+            # as a coincidentally-matching TSA header).
+            kind, reason = a.classify_tsa_bin(path, a.TSA_SUB_8021AFC_PATH)
+            self.assertEqual(kind, "sub_8021afc_headerless_map")
+            self.assertIsNone(reason)
+
+    def test_wrong_length_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.tsa.bin")
+            with open(path, "wb") as f:
+                f.write(self._valid_data() + b"\x00")  # odd length
+            kind, reason = a.classify_tsa_bin(path, a.TSA_SUB_8021AFC_PATH)
+            self.assertEqual(kind, "unknown")
+            self.assertIn("odd length", reason)
+
+    def test_wrong_entry_count_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.tsa.bin")
+            with open(path, "wb") as f:
+                f.write(struct.pack("<767H", *([0] * 767)))  # one short
+            kind, reason = a.classify_tsa_bin(path, a.TSA_SUB_8021AFC_PATH)
+            self.assertEqual(kind, "unknown")
+            self.assertIn("768", reason)
+
+    def test_sibling_tsa_sub8022200_is_ordinary_exact_tsa(self):
+        """Tsa_Sub8022200.tsa.bin (the sibling) needs NO special routing --
+        plain classify_tsa_bytes() standard formula applies."""
+        w, h = 0, 0  # trivial 1x1 exact TSA
+        payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+        data = bytes([w, h]) + payload
+        kind, reason = a.classify_tsa_bytes(data)
+        self.assertEqual(kind, "exact")
+        self.assertIsNone(reason)
 
 
 class MapBinTest(unittest.TestCase):
@@ -700,6 +866,39 @@ class MapBinTest(unittest.TestCase):
             err = a.check_map_bin(path)
             self.assertIsNotNone(err)
             self.assertIn("odd length", err)
+
+    def test_expected_entries_none_skips_count_check(self):
+        """The generic bulk family (no documented per-file dimensions) passes
+        `expected_entries=None` and must not fail on entry count alone."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.map.bin")
+            with open(path, "wb") as f:
+                f.write(struct.pack("<H", 0))  # 1 entry -- any count is fine
+            self.assertIsNone(a.check_map_bin(path))
+
+
+class MapBinDiscoveryTest(unittest.TestCase):
+    """The repository uses BOTH `*.map.bin` (e.g. banim/opanim/FETSATOOL) and
+    `*_map.bin` (e.g. graphics/gfx_data_bg/bg_Cell_map.bin, and gUnkData_26's
+    split successor Tilemap_MultiBootSendBg_map.bin) headerless-map spellings
+    -- both must be discovered by the audit, not just the dotted form."""
+
+    def test_underscore_map_bin_is_discovered(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add("graphics/sub/bg_Example_map.bin",
+                    struct.pack("<H", 0) + struct.pack("<H", 1))
+            fx.add("graphics/sub/example.map.bin",
+                    struct.pack("<H", 0) + struct.pack("<H", 1))
+            fx.commit()
+            dotted = set(a.git_ls_files(tmp, "*.map.bin"))
+            underscored = set(a.git_ls_files(tmp, "*_map.bin"))
+            combined = dotted | underscored
+            self.assertIn("graphics/sub/bg_Example_map.bin", combined)
+            self.assertIn("graphics/sub/example.map.bin", combined)
+            # The two glob patterns never overlap for the same file (a name
+            # can't simultaneously end in both literal suffixes).
+            self.assertEqual(dotted & underscored, set())
 
 
 class FetsaTileBoundsTest(unittest.TestCase):
