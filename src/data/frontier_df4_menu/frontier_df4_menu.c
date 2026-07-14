@@ -7558,7 +7558,51 @@ struct ProcCmd data_08A9E510[] SECTION(".data.frontier_df4_menu.gap28") = {
     PROC_END,
 };
 
-u8 frontier_df4_menu_029_AA3860[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin");
+/* blob 029 (AA3860, 0x3834 B) fully split (issue #143 menu pass): zero
+ * uncovered bytes, no floor remains. All named symbols were already
+ * extern-declared with real consumers (include/variables.h); only the
+ * definitions were missing. gSaveScreen_0 [0x1A9C,0x1B20) is carved into its
+ * own object (src/data/menu/anim_save_screen.s, byte-identical to fe8u's own)
+ * so it needs its own manifest row -- see layout/carved_rom.d/
+ * data_frontier4_df4_menu.tsv. The remaining tail [0x1B20,0x3834) moves to a
+ * new section (gap29b) so its single .o(section) placement stays contiguous
+ * around the gSaveScreen_0 carve-out. */
+/* [0,0x17C) Tsa_MainMenuBgFog: LZ77 (377 B + 3-B natural pad = 380 B
+ * compressed) -> 2050 B, decoded bytes fe8u-exact (graphics/misc/
+ * Tsa_MainMenuBgFog.tsa.bin); default gbagfx (mindist 2) reproduces the
+ * compressed stream byte-exact. */
+u8 Tsa_MainMenuBgFog[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U8("graphics/frontier_df4_menu/Tsa_MainMenuBgFog.tsa.bin.lz");
+/* [0x17C,0x195C) Img_SaveScreenSprits: LZ77 (6111 B + 1-B natural pad = 6112 B
+ * compressed) -> 14336 B, 256x112 4bpp PNG (JP-specific pixels); default
+ * gbagfx (mindist 2) reproduces the compressed stream byte-exact. */
+u8 Img_SaveScreenSprits[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U8("graphics/frontier_df4_menu/Img_SaveScreenSprits.4bpp.lz");
+/* [0x195C,0x1A7C) Pal_SaveScreenSprits: 0x120=288 B = 9 palette banks (6
+ * populated + 3 blank -- the blank banks are still real asset data, kept
+ * verbatim); each bank round-trips exactly via JASC. */
+u16 Pal_SaveScreenSprits[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U16(
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_0.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_1.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_2.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_3.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_4.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_5.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_6.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_7.gbapal",
+    "graphics/frontier_df4_menu/Pal_SaveScreenSprits_8.gbapal");
+/* [0x1A7C,0x1A9C) Pal_MenuSaveMainBg_0: 32 B, byte-identical to fe8u's own
+ * (graphics/misc/Pal_08A28088.pal). */
+u16 Pal_MenuSaveMainBg_0[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_MenuSaveMainBg_0.gbapal");
+/* [0x1A9C,0x1B20) gSaveScreen_0: see src/data/menu/anim_save_screen.s. */
+/* [0x1B20,0x2140) Img_UnkSaveMenu_08AA5380: LZ77 (0x61E B + 2-B natural pad
+ * ->0x620) -> 0xC00 B, 256x24 4bpp PNG. No static consumer found (unlike its
+ * siblings); kept a conservative content name/comment but fully editable. */
+u8 Img_UnkSaveMenu_08AA5380[] __attribute__((section(".data.frontier_df4_menu.gap29b"))) = INCBIN_U8("graphics/frontier_df4_menu/Img_UnkSaveMenu_08AA5380.4bpp.lz");
+/* [0x2140,0x2D48) Img_GameMainMenuObjs: LZ77 (0xC05 B + 3-B natural pad
+ * ->0xC08) -> 0x1800 B, 256x48 4bpp PNG. */
+u8 Img_GameMainMenuObjs[] __attribute__((section(".data.frontier_df4_menu.gap29b"))) = INCBIN_U8("graphics/frontier_df4_menu/Img_GameMainMenuObjs.4bpp.lz");
+/* [0x2D48,0x3834) Img_DifficultyMenuObjs: LZ77 (0xAEB B + 1-B natural pad
+ * ->0xAEC) -> 0x1800 B, 256x48 4bpp PNG. */
+u8 Img_DifficultyMenuObjs[] __attribute__((section(".data.frontier_df4_menu.gap29b"))) = INCBIN_U8("graphics/frontier_df4_menu/Img_DifficultyMenuObjs.4bpp.lz");
 /* blob 030 (AA71D4, 0x610 B) fully split (issue #143 menu pass), no floor remains:
  * [0,0x13A) Tsa_DifficultyMenuObjs: byte-exact raw TSA (hdr 0x0B0C = 13x12, 156
  * u16 entries), consumer InitDifficultySelectScreen. [0x13A,0x13C) explicit 2-B

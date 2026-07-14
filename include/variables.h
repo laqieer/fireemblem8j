@@ -942,7 +942,7 @@ extern u16 Pal_SaveScreenSprits[]; // pal
 extern u16 Pal_MenuSaveMainBg_0[];
 extern u16 gSaveScreen_0[]; // ap
 extern u8 Img_GameMainMenuObjs[];
-// extern ??? Img_DifficultyMenuObjs
+extern u8 Img_DifficultyMenuObjs[];
 // extern ??? Pal_DifficultyMenuObjs
 // extern ??? gUnknown_08A2949A
 // extern ??? gUnknown_08A294BA
