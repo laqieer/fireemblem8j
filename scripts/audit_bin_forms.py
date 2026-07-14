@@ -980,9 +980,15 @@ def emit(results, fe8u_bin_count, fe8j_bin_count):
     A("| Category | Verdict | Count (this run) | fe8u editable form |")
     A("|---|---|---:|---|")
     emitted = set()
-    for label, (verdict, form) in PLAN_CATEGORIES.items():
-        n = sum(label_counts.get(label, {}).values())
-        A("| %s | %s | %d | %s |" % (md_escape(label), verdict, n, md_escape(form)))
+    for label, (nominal_verdict, form) in PLAN_CATEGORIES.items():
+        observed = label_counts.get(label, {})
+        if observed:
+            for verdict, n in sorted(observed.items()):
+                A("| %s | %s | %d | %s |"
+                  % (md_escape(label), verdict, n, md_escape(form)))
+        else:
+            A("| %s | %s | 0 | %s |"
+              % (md_escape(label), nominal_verdict, md_escape(form)))
         emitted.add(label)
     for label in sorted(label_counts):
         if label not in emitted:
@@ -1052,7 +1058,7 @@ SELF_TEST_NOTES = [
     "`*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).",
     "`Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).",
     "`graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).",
-    "Remaining raw `graphics/frontier_df4_uistuff/*` providers are classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2); the `SjisGlyphs_0859140C` run is typed and its raw provider must remain absent. The two RE'd TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` are correctly **FLOOR** by the `.tsa.bin`-suffix rule.",
+    "The `graphics/frontier_df4_uistuff/*` raw-provider rule remains a regression guard; the current inventory has zero **UNCERTAIN** entries. The `SjisGlyphs_0859140C` run is typed and its raw provider must remain absent. The two RE'd TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` are correctly **FLOOR** by the `.tsa.bin`-suffix rule.",
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "The raw `gMPlayTable.bin` provider must remain absent because `sound/music_player_table.s` is the symbolic provider; its name-class rule remains **MISS** as a classifier regression guard.",
     "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",

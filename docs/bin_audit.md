@@ -42,7 +42,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
 | battle-anim | MISS | 0 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 5 | fe8u graphics/**/*.png |
+| pixel-gfx | FLOOR | 5 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 0 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 0 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 0 | fe8u C literals (src/menu_def.c) |
@@ -83,7 +83,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 - `*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).
 - `Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).
 - `graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).
-- Remaining raw `graphics/frontier_df4_uistuff/*` providers are classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2); the `SjisGlyphs_0859140C` run is typed and its raw provider must remain absent. The two RE'd TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` are correctly **FLOOR** by the `.tsa.bin`-suffix rule.
+- The `graphics/frontier_df4_uistuff/*` raw-provider rule remains a regression guard; the current inventory has zero **UNCERTAIN** entries. The `SjisGlyphs_0859140C` run is typed and its raw provider must remain absent. The two RE'd TSA companions `Tsa_sub_8021AFC.tsa.bin` / `Tsa_Sub8022200.tsa.bin` are correctly **FLOOR** by the `.tsa.bin`-suffix rule.
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - The raw `gMPlayTable.bin` provider must remain absent because `sound/music_player_table.s` is the symbolic provider; its name-class rule remains **MISS** as a classifier regression guard.
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
