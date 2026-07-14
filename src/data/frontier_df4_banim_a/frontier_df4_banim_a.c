@@ -27,13 +27,10 @@ extern u32 data_08600DB8[];
 extern u32 data_08601000[];
 extern u32 data_08601108[];
 extern u32 data_08601700[];
-extern u32 data_08601748[];
 extern u32 data_086017A8[];
 extern u32 data_086017C0[];
 extern u32 data_08601978[];
 extern u32 data_086019C0[];
-extern u32 data_086019E0[];
-extern u32 data_086019F8[];
 extern u32 data_08601A40[];
 extern u32 data_08601B68[];
 extern u32 data_08601B98[];
@@ -2792,11 +2789,19 @@ u32 data_08601700[] __attribute__((section(".data.frontier_df4_banim_a.gap13")))
     (u32)&data_0875F138 + 0x20, (u32)&data_0875F138 + 0x114, (u32)&data_0875F138 + 0x208, (u32)&data_0875F138 + 0x2FC, (u32)&data_0875F138 + 0x474, (u32)&data_0875F138 + 0x5EC,
     (u32)&data_0875F138 + 0x764, (u32)&data_0875F138 + 0x940, (u32)&data_0875F138 + 0xB1C, (u32)&data_0875F138 + 0xCF8, (u32)&data_0875F138 + 0xE94, (u32)&data_0875F138 + 0x1030,
 };
-u32 data_08601748[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
-    0x00000001, 0x080E33A4, 0x00000004, (u32)&sub_80661D0, 0x00000003, (u32)&sub_80661EC,
-    0x00000000, 0x00000000, 0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xD7C, 0x00000004, (u32)&efxGespenstBG4_OnEnd,
-    0x00000003, (u32)&efxGespenstBG4_Loop, 0x00000000, 0x00000000, 0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xD8C,
-    0x000A000F, 0x00000000, 0x00000003, (u32)&efxGespenstBGCOL2_Loop, 0x00000000, 0x00000000,
+/* #143 shiftability: data_08601748 is 3 concatenated ProcCmd scripts (12
+ * records, 96 B). Carved in-place from a raw u32[] blob to a real relocatable
+ * typed struct ProcCmd[] -- byte-neutral (same bytes/relocs). Its first
+ * PROC_NAME held the raw literal 0x080E33A4 (an unnamed interior offset of
+ * frontier_df4_misc_lo_008_0E2638), which did NOT track a +0x40000 ROM shift;
+ * re-express it as frontier_df4_misc_lo_008_0E2638 + 0xD6C (== 0x080E33A4) so
+ * the word becomes an R_ARM_ABS32 relocation, matching the sibling proc-script
+ * carves in this file (ProcScr_efxLuna/efxExcalibur/efxLuceBGCOL). The other
+ * two PROC_NAMEs already used the symbolic form. */
+struct ProcCmd data_08601748[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_008_0E2638 + 0xD6C)), PROC_SET_END_CB(sub_80661D0), PROC_REPEAT(sub_80661EC), PROC_END,
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_008_0E2638 + 0xD7C)), PROC_SET_END_CB(efxGespenstBG4_OnEnd), PROC_REPEAT(efxGespenstBG4_Loop), PROC_END,
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_008_0E2638 + 0xD8C)), PROC_MARK(0xA), PROC_REPEAT(efxGespenstBGCOL2_Loop), PROC_END,
 };
 u32 data_086017A8[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xDF0, 0x00000003, (u32)&sub_8066410, 0x00000000, 0x00000000,
@@ -2837,11 +2842,25 @@ u32 data_086019C0[] __attribute__((section(".data.frontier_df4_banim_a.gap13")))
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xF8C, 0x00000004, (u32)&sub_8066E24, 0x00000003, (u32)&sub_8066E40,
     0x00000000, 0x00000000,
 };
-u32 data_086019E0[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
-    0x00000001, 0x080E35D0, 0x00000003, (u32)&efxReblowOBJ_Loop_B, 0x00000000, 0x00000000,
+/* #143 shiftability: data_086019E0 carved in-place from a raw u32[] blob to a
+ * real relocatable typed struct ProcCmd[] -- byte-neutral (same 24 bytes, same
+ * relocs). Its PROC_NAME held the raw literal 0x080E35D0 (an unnamed interior
+ * offset of frontier_df4_misc_lo_008_0E2638), which did NOT track a +0x40000
+ * ROM shift; re-express it as frontier_df4_misc_lo_008_0E2638 + 0xF98
+ * (== 0x080E35D0), matching the sibling proc-script carves in this file
+ * (ProcScr_efxLuna/efxExcalibur/efxLuceBGCOL). PROC_REPEAT already relocated. */
+struct ProcCmd data_086019E0[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_008_0E2638 + 0xF98)), PROC_REPEAT(efxReblowOBJ_Loop_B), PROC_END,
 };
-u32 data_086019F8[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
-    0x00000001, 0x080E35DC, 0x00000003, (u32)&efxIvaldiWOUT_Loop, 0x00000000, 0x00000000,
+/* #143 shiftability: data_086019F8 carved in-place from a raw u32[] blob to a
+ * real relocatable typed struct ProcCmd[] -- byte-neutral (same 24 bytes, same
+ * relocs). Its PROC_NAME held the raw literal 0x080E35DC (an unnamed interior
+ * offset of frontier_df4_misc_lo_008_0E2638), which did NOT track a +0x40000
+ * ROM shift; re-express it as frontier_df4_misc_lo_008_0E2638 + 0xFA4
+ * (== 0x080E35DC), matching the sibling proc-script carves in this file.
+ * PROC_REPEAT already relocated. */
+struct ProcCmd data_086019F8[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_008_0E2638 + 0xFA4)), PROC_REPEAT(efxIvaldiWOUT_Loop), PROC_END,
 };
 /* #143 shiftability: ProcScr_efxLuceBGCOL (JP 0x08601A10) carved in-place from the
  * fully-symbolized gap13 .4byte blob into a real relocatable typed struct ProcCmd[]

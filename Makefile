@@ -527,13 +527,18 @@ shiftcheck-glyphs: $(RELOCS_ELF) $(ROM) $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_glyph_relocs.py --elf $(ELF) --relocs-elf $(RELOCS_ELF) \
 	    --gba $(ROM) --prefix $(PREFIX)
 
-# Layer 1f: structural ProcCmd script-array relocation audit (#143 follow-up) --
-# for every GLOBAL source-declared `struct ProcCmd NAME[]` definition, requires a
-# real R_ARM_ABS32 relocation at every non-null pointer-bearing dataPtr field
-# (PROC_NAME/CALL/REPEAT/SET_END_CB/START_CHILD*/WHILE*/END_EACH/BREAK_EACH/JUMP/
-# CALL_2/CALL_ARG). Catches the same blind spot as shiftcheck-glyphs in a second
-# consumer: a `PROC_NAME((const void*)0x08..)` raw-literal cast compiles to a word
-# with no relocation, correct only in the byte-identical build.
+# Layer 1f: structural ProcCmd script relocation audit (#143 follow-up) --
+# strict-decodes a `struct ProcCmd` prefix (opcode <=0x19, non-pointer op ptr
+# must be zero, pointer op nonzero ptr must be ROM-range, terminated by a valid
+# zero PROC_END) from EVERY ROM object symbol's address, not just source
+# declared `struct ProcCmd NAME[]` arrays -- some genuine ProcCmd scripts are
+# declared as plain `u32[]` blobs and cast at the call site, invisible to a
+# source-type scan. Requires a real R_ARM_ABS32 relocation at every non-null
+# pointer-bearing dataPtr field of every decoded script (PROC_NAME/CALL/REPEAT/
+# SET_END_CB/START_CHILD*/WHILE*/END_EACH/BREAK_EACH/JUMP/CALL_2/CALL_ARG).
+# Catches the same blind spot as shiftcheck-glyphs in a second consumer: a
+# `PROC_NAME((const void*)0x08..)` raw-literal cast compiles to a word with no
+# relocation, correct only in the byte-identical build.
 shiftcheck-procscr: $(RELOCS_ELF) $(ROM) $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_procscr_relocs.py --elf $(ELF) --relocs-elf $(RELOCS_ELF) \
 	    --gba $(ROM) --prefix $(PREFIX)
