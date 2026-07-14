@@ -1,1 +1,4 @@
 AC5558	AC6C98	src/data/frontier_df3_ending/player_rank.o(.data.frontier_df3_ending.player_rank)	issue143 player-rank graphics migration
+B3AFF4	B3B014	src/data/frontier_ending_cg/frontier_ending_cg.o(.data.frontier_ending_cg.tail_pal)	issue143 ending-CG tail palette
+B3B014	B3B334	src/data/frontier_ending_cg/frontier_ending_cg.o(.data.frontier_ending_cg.tail_img)	issue143 ending-CG tail image
+B3B334	B3B3D4	src/data/frontier_ending_cg/anim_frontier_ending_cg_tail_B3B334.o(.data.frontier_ending_cg.tail_ap)	issue143 ending-CG tail AP definition
