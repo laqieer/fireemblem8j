@@ -14,7 +14,8 @@
  * authoring tool used -- this does NOT assert the record is genuinely an affine
  * transform; it is simply the byte-exact raw encoding.
  *
- * Record 224 (index within this file, byte [+0xA88,+0xA94)) has header==1, the
+ * Record 224 (the 204th/last element of the 204-record table above, local
+ * index 203, relative blob offset [+0xA80,+0xA8C)) has header==1, the
  * same value as the ANIM_SPRITE_END sentinel, but its trailing 6 bytes are
  * NOT zero (0x0025,0x1a3a,0x04b3) -- inconsistent with a hand-authored
  * terminator written via that macro. We therefore do NOT use ANIM_SPRITE_END

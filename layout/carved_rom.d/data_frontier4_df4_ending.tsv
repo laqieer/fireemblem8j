@@ -12,7 +12,6 @@ AD1540	AD1ED0	src/data/frontier_df4_ending/dat_frontier_df4_ending_008.o(.data.f
 AD1ED0	AD1FC0	src/data/frontier_df4_ending/dat_frontier_df4_ending_008.o(.data.frontier_df4_ending.gap8_sub2)	sAnimSpriteData_DfEnding008_tail[20] unterminated OAM-shaped tail, honestly not consumed as terminated (240 B; #143)
 AD1FC0	AD1FC8	src/data/frontier_df4_ending/dat_frontier_df4_ending_008.o(.data.frontier_df4_ending.gap8_sub3)	8-byte zero pad (#143)
 AD1FC8	AD247C	src/data/frontier_df4_ending/dat_frontier_df4_ending_008.o(.data.frontier_df4_ending.gap8_sub4)	gTsa_DfEnding008 standard TSA (1204 B incl. 2-byte pad, hdr 0x1d13=>30x20; #143)
-B1E6BC	B1E894	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap10)	df4_ending region-diff data remainder (472 B; gWorldmapMinimap_8..13 / DrawGMapPIPanelContents / worldmap_player_interface -- different consumer/scope, NOT migrated by #143, honest remainder)
 B24D0C	B2523C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap11)	df4_ending region-diff data (1328 B, long-tail gap)
 B25A78	B25F9C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap12)	df4_ending region-diff data (1316 B, long-tail gap)
 B26374	B26938	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap13)	df4_ending region-diff data (1476 B, long-tail gap)
