@@ -8,12 +8,18 @@ the numbers it produced, how those cross-check against what we already know
 (`layout/us_jp_funcmap.tsv` and the gbadisasm region-different backlog), and the
 recommendation on a CI re-confirmation gate.
 
+> **HISTORICAL SURVEY/CACHE (2026-06-09), NOT CURRENT WORK AUTHORITY.**
+> The 5,934-function population below was the gbadisasm survey input at that
+> time; entries may since be carved or otherwise superseded. Preserve these
+> numbers as methodology evidence only. Current decomp scope and targets are
+> defined exclusively by [`docs/frontier.md`](../frontier.md).
+
 **Bottom line up front.** coddog *works* and confirms the JP carved set is
 overwhelmingly region-same vs US (11 054 / 12 050 read functions byte- or
 opcode-identical). But its **marginal value over the existing funcmap + funclib
-(D25) is low today**: it structurally **cannot see the un-carved region-different
-backlog** (the work that actually remains), and on the carved set it mostly
-re-confirms what we already know. Its one durable use is a **CI / pre-carve
+(D25) was low in this survey**: it structurally could not see the survey's
+un-carved region-different population, and on the carved set it mostly
+re-confirmed what was already known. Its one durable use is a **CI / pre-carve
 re-confirmation gate** on already-carved code — recommended as *opt-in*, not a
 required gate.
 
@@ -74,7 +80,7 @@ thumb bit cleared so addresses line up with funcmap / backlog:
 | `region-same-reloc`  | **7 169** | 99.99 % — opcodes identical, pointer/literal delta only |
 | `near-match`         | **929**   | 99.0–99.98 % — small real instruction delta |
 | `weak-near`          | **67**    | <99 % matched (mostly mislabels / coincidence) |
-| `region-different`   | **5 934** | gbadisasm backlog; **coddog cannot read these** (see below) — label asserted, `similarity=NA` |
+| `region-different`   | **5 934** | historical gbadisasm survey population; **coddog could not read these** (see below) — label asserted, `similarity=NA` |
 
 So of the 12 050 JP functions coddog **can read**, **11 054 (91.7 %)** are
 region-same (exact or relocation-only) — the JP carved set is overwhelmingly a
@@ -113,23 +119,24 @@ coincidentally opcode-similar. coddog found **no genuinely-new shared
 static-lib/libgcc carve target** (e.g. `__divsi3`/memcpy) beyond what the carved
 set + funcmap already cover.
 
-## Cross-check 2 — vs the gbadisasm region-different backlog
+## Cross-check 2 — vs the historical gbadisasm survey population
 
-`scripts/carve_gbadisasm_asm.py --list` → **5 934 uncarved region-different code
-functions**. Cross-checking against coddog:
+At survey time, `scripts/carve_gbadisasm_asm.py --list` produced **5 934
+un-carved region-different code functions**. Cross-checking that dated input
+against coddog:
 
-- **0** of the 5 934 are readable by coddog. They live in the `asm/baserom.s`
+- **0** of the 5 934 were readable by coddog. They lived in the `asm/baserom.s`
   incbin gap as ABS `.set` symbols (176) or carry **no ELF symbol at all** (5 684);
   objdiff classifies none as `SymbolKind::Function`, so coddog **skips every one**.
-- Consequently coddog produces **no match** for all 5 934 — it never (wrongly)
+- Consequently coddog produced **no match** for all 5 934 — it never (wrongly)
   calls one region-same (0 conflicts), but this is **structural coverage, not
   independent confirmation**: coddog *agrees on the label* (region-different) only
   because it cannot see them, adding no evidence.
 
 The funclib (D25) region-different set could not be cross-checked directly: the
 D25 ingest target `reference/maps/funclib_us_jp.tsv` is **not yet materialized**
-(D25 is the decision; the ingester has not run). The gbadisasm backlog is the
-operative region-different work queue and is the cross-check used here.
+(D25 is the decision; the ingester had not run). The dated gbadisasm population
+was the survey cross-check input, not a current queue.
 
 ## Marginal value over funcmap + funclib (D25)
 
@@ -143,11 +150,11 @@ operative region-different work queue and is the cross-check used here.
 
 coddog's **unique** contribution is *content-based* re-confirmation on the carved
 set (catching a future regression where a carved function silently stops matching
-its US sibling, or a renamed/moved twin). It does **not** help with the actual
-remaining work — the 5 934 region-different functions — because that work is
-exactly the set coddog is blind to until it is carved (the documented coverage
-limitation in `coddog.md`). Its discovery value over funcmap+funclib **today is
-near zero**.
+its US sibling, or a renamed/moved twin). It did **not** help with the survey's
+5 934-function region-different input because that population was exactly what
+coddog could not see until carving (the documented coverage limitation in
+`coddog.md`). Its discovery value over funcmap+funclib was near zero for that
+survey. This does not describe the current frontier.
 
 ## Recommendation: a coddog CI re-confirmation gate?
 

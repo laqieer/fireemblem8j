@@ -5,12 +5,12 @@ Ghidra and says "search and install MCP on GitHub to use them." This is the
 result: the autonomous loop (and you, interactively in Claude Code) can drive
 **IDA Pro's Hex-Rays decompiler headlessly** over the Model Context Protocol.
 
-This is the lever for the remaining work. The automatable porting has converged
-(see [`docs/decisions.md`](decisions.md)); what's left is the ~16
-**region-different** functions (text rendering, font/glyph, menu geometry, save
-versioning) that must be **hand-decompiled against the JP ROM's actual
-behaviour**. A decompiler that produces pseudo-C for any JP address is exactly
-what that needs.
+This was introduced as a lever for the then-remaining work after automatable
+porting converged (see [`docs/decisions.md`](decisions.md)). The historical
+"~16 region-different functions" scope and its subsystem examples are
+superseded; this page documents tooling, not the current queue. Use
+[`docs/frontier.md`](frontier.md) exclusively for current targets. A decompiler
+that produces pseudo-C for any JP address remains useful methodology.
 
 ## What got set up (all local, outside the repo)
 

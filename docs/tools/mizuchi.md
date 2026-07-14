@@ -182,10 +182,11 @@ coordinator to run on a full checkout with the toolchain + API key present.
   must still pass `make compare` before anything is committed.
 
 ### Risks / caveats
-- **Bigger picture mismatch.** FE8J is ~94% *data* (by ROM volume); see
-  `docs/frontier.md` for the current code-matching frontier (~389 unmatched functions
-  at 95.44% matching-C). Mizuchi targets function matching, which is now a smaller
-  but still real slice of remaining work.
+- **Bigger picture mismatch.** The "~389 unmatched / 95.44%" scope used during
+  this tool evaluation is a historical snapshot, not a current claim. See
+  [`docs/frontier.md`](../frontier.md) exclusively for current code-matching
+  scope. Mizuchi targets function matching rather than the project's broader
+  code-and-data concerns.
 - **Cost/throughput.** The `run` loop spends API tokens per function with up to 25
   retries; without IDA/Ghidra grounding it will burn more for less on the hard
   functions than our existing loop.

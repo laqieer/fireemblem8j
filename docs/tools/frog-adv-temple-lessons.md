@@ -1,5 +1,10 @@
 # Lessons from the Frogger's Adventures: Temple of the Frog decomp
 
+> **HISTORICAL TOOL-RESEARCH SNAPSHOT.** FE8J percentages, frontier descriptions,
+> and prioritization proposals below are retained for methodology only and are
+> not a dispatch queue. Use [`docs/frontier.md`](../frontier.md) exclusively for
+> current FE8J scope and targets.
+
 Research notes from a deep read of
 [JRickey/frog-adv-temple-decomp](https://github.com/JRickey/frog-adv-temple-decomp),
 a complete, byte-matching,

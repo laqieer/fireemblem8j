@@ -1,5 +1,10 @@
 # fe8u Discord Mining — Reusable Knowledge Deltas (for FE8J)
 
+> **HISTORICAL RESEARCH SNAPSHOT.** Priority and actionable-gap labels below
+> describe the mining session, not the current FE8J queue. Preserve them as
+> methodology evidence; use [`docs/frontier.md`](frontier.md) exclusively for
+> current scope and targets.
+
 Mined from FE Universe `#decomp` (416236460002377730, 19,232 msgs, 2018-02→2026-06)
 and pret `fireemblem8` (442465614104231937, 7,413 msgs, 2018-08→2026-06) — BOTH new
 vs the existing matching-focused `docs/discord_findings.md`. Distilled/paraphrased;

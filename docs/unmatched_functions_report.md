@@ -662,7 +662,9 @@ then stop repeated variants of the same idea and hand off to community/permuter 
 4. Avoid broad “permanent ceiling” language. State the tested variants and exact residual;
    reserve “handwritten/wrong compiler” for positive instruction-level evidence.
 
-**Bottom line:** the remaining prize is **7 functions / 2,976 bytes / ~0.08% axis-2**.
+**Bottom line:** the current remainder is **4 functions / 2,020 bytes / ~0.05%
+of the axis-2 function count** (584 + 500 + 392 + 544 bytes, matching the table
+above and [`frontier.md`](frontier.md)).
 The new wins improve the expected value of *targeted, structurally different* attempts,
 not endless re-runs of an unchanged permuter search space.
 ---

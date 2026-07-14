@@ -1,5 +1,10 @@
 # Batch plan — FE8J asset editability (fe8u-parity, "fix all .bin misses") + shiftability validation
 
+> **HISTORICAL/SUPERSEDED BATCH PLAN.** Its counts, work units, and sequencing
+> are retained as implementation history, not as a current queue. Current
+> binary-form status comes from [`docs/bin_audit.md`](bin_audit.md), and all
+> current work scope comes exclusively from [`docs/frontier.md`](frontier.md).
+
 ## Context
 
 User asked (via `/batch`, ultracode), then expanded twice, for comprehensive

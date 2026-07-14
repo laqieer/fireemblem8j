@@ -1,5 +1,9 @@
 # FE8J Data-Axis Target Map (CTO scout — 2026-06-13, loop iter2)
 
+> **HISTORICAL/SUPERSEDED SCOUT SNAPSHOT.** The metrics, tiers, and target
+> ordering below describe the 2026-06-13 survey and are not current work
+> authority. Use [`docs/frontier.md`](frontier.md) exclusively for current scope.
+
 > **Note on data metrics.** `calcprogress.py` reports "Extracted data = 100%" but this is
 > tautological (denominator == numerator). The 3.51% figure below uses a more honest
 > denominator (raw data region bytes). Neither figure should be taken as "done" — the

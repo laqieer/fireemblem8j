@@ -7,6 +7,11 @@ reads a [`decomp_settings`](https://github.com/ethteck/decomp_settings)
 `decomp.yaml`, parses each binary's ELF with `objdiff`, and disassembles GBA
 code as Thumb (ARM7TDMI, `unarm` V4T) — exactly our target.
 
+> **Scope note.** The setup and methodology remain useful, but backlog counts
+> and queue language below describe the historical 2026-06-09 survey, not
+> current remaining work. Use [`docs/frontier.md`](../frontier.md) exclusively
+> for current decomp scope and targets.
+
 ## Why we use it
 
 Our core need is **triage**: for every FE8J function, decide whether it is
@@ -29,15 +34,15 @@ It complements, not replaces, the existing flow:
   coddog adds *content* similarity, catching renamed/moved functions and
   confirming a region is byte-identical before you spend effort carving.
 
-> **Coverage — what coddog can and cannot see today.** coddog's `read_elf` keeps
+> **Coverage observed in the 2026-06-09 survey.** coddog's `read_elf` keeps
 > only ELF symbols with `size > 0`, a real section, and `SymbolKind::Function`.
-> On the JP side the functions we have **not** decompiled yet are *not* real ELF
+> On the JP side, functions not yet decompiled in that survey were *not* real ELF
 > function symbols — they live inside the `asm/baserom.s` incbin gaps (no
 > per-function symbol) or as sizeless ABS `.set name, 0x..+1` entries in
 > `asm/jp_syms.s` — so coddog **skips them**. As configured, the `jp` version
-> therefore exposes only the JP functions we've **already carved/symbolized**
+> therefore exposed only the JP functions already carved/symbolized
 > with a real size; it does **not** yet enumerate the full remaining-function
-> backlog. coddog still earns its keep on that carved set (confirm a JP function
+> survey population. coddog still earns its keep on a carved set (confirm a JP function
 > matches its US sibling, find renamed/moved twins, `match`/`submatch` on known
 > JP symbols, `cluster` the JP ELF). To extend triage to the *pending* functions
 > you must first feed coddog a JP ELF/map whose pending functions carry real
@@ -222,23 +227,27 @@ run; see **[`coddog-classification.md`](coddog-classification.md)** for the
 numbers, the cross-check vs `layout/us_jp_funcmap.tsv` and the gbadisasm backlog,
 the marginal-value analysis vs funcmap+funclib (D25), and the CI-gate
 recommendation. Artifacts: `reference/maps/coddog_classification.tsv` and the
-re-runnable `scripts/tools/coddog/classify.py`. Headline: of 12 050 JP functions
+re-runnable `scripts/tools/coddog/classify.py`. Historical headline: of 12 050 JP functions
 coddog can read, 11 054 are region-same; it agrees with the byte-match funcmap
 91.7 % (100 % at a region-same-or-near bar) but **cannot see the 5 934-function
-region-different backlog** (the actual remaining work), so its discovery value
-over funcmap+funclib is low — its use is opt-in re-confirmation, not a CI gate.
+region-different survey input**. That population was not a durable statement of
+remaining work; current scope belongs only in `docs/frontier.md`. Its discovery
+value over funcmap+funclib was low — its use is opt-in re-confirmation, not a CI
+gate.
 
 ## Status / caveats
 
 - Built and smoke-tested via `setup.sh`; see the PR for `coddog --help` output.
 - A real cross-version `compare2` needs both ELFs present (gitignored, absent in
   worktrees) — run it from the main tree after a build.
-- **JP-side coverage is limited to carved/sized functions** (see "Coverage"
-  above): coddog skips sizeless `.set`/incbin-gap symbols, so the `jp` version
-  does not yet list the full remaining-function backlog. Extending it needs a JP
+- **JP-side survey coverage was limited to carved/sized functions** (see
+  "Coverage" above): coddog skipped sizeless `.set`/incbin-gap symbols, so the
+  `jp` version did not list the survey's full region-different population.
+  Extending this methodology needs a JP
   ELF whose pending functions carry real `.size`s.
-- coddog matches **functions**, not data. FE8's ROM is ~94% data; the data
-  frontier still uses `scripts/carve_data.py` (`docs/strategy.md`).
+- coddog matches **functions**, not data. The survey-era data workflow used
+  `scripts/carve_data.py`; current data scope is defined only in
+  `docs/frontier.md`, while `docs/strategy.md` documents methodology.
 - Similarity is on instruction streams, so an exact name match in the US map is
   still the fastest path; coddog earns its keep on renamed/moved/region-shuffled
   functions and on *proving* a region is identical before carving.
