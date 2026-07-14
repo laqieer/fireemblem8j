@@ -757,6 +757,18 @@ The .bin count held (these carve real code/pointers out of source-form data, not
   table's 72 mostly-coincidental words correctly SKIPPED for a future typed data-extraction task).
 
 ## CURRENT STATE (authoritative, 2026-07-13, main 5b35c7635a847b70cca70f4bff77418801a209b6 — exact-SHA CI/Pages + secret scan GREEN)
+- **[2026-07-13, D377, issue #143 — ending-frontier six-blob wave.]** Migrated the six
+  remaining actionable `frontier_df4_ending` blobs (003/007/008/009/010/014) to
+  editable/typed source; expanded `dat_worldmap_minimap_p0` backward
+  (`0x08B1E49C -> 0x08B1D954`) and `dat_worldmap_skirmish` forward
+  (`0x08B26A6C -> 0x08B2759C`). `docs/bin_audit.md`: MISS 0->0, FLOOR 1426->1427,
+  UNCERTAIN 26->25 (only `frontier_df4_ending_010_remainder_B1E6BC.bin`, 472 B,
+  `gWorldmapMinimap_8..13`/`worldmap_player_interface` — a different consumer/scope,
+  intentionally NOT claimed — remains). `make compare` OK, `make shiftcheck` clean.
+  See D377 in `docs/decisions.md` for full per-blob evidence, including two
+  corrections to the incoming research (blob 007's stated address was off by
+  0x211 from ground truth; blob 008's first 252 B is a region-same fe8u
+  `SpriteAnim_BrownTextBox` AP object, not raw `AnimSpriteData`).
 - **`.bin` frontier: MISS=3 / FLOOR=1401 / UNCERTAIN=226** (`FE8U=../fireemblem8u python3 scripts/audit_bin_forms.py`).
   The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
   **[refreshed 2026-07-10, D360: live `docs/bin_audit.md` now reads MISS=0 / FLOOR=1407 / UNCERTAIN=34. The 3
