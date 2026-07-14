@@ -18,6 +18,14 @@ __iwram_start = ORIGIN(iwram);
 
 ENTRY(Init)
 
+/* Events_WM_Beginning[0] is the shared final NULL word of gChapterDataAssetTable
+   (src/data/data_chapter_asset_table.c); Events_WM_BeginningTail[58] holds the
+   rest of the array immediately afterward in the same object. This alias makes
+   the two overlay into a single 59-entry Events_WM_Beginning[] view for
+   worldmap_main_080BF178.c without duplicating the NULL word. Shiftable: it
+   tracks gChapterDataAssetTable wherever the carved_rom manifest places it. */
+Events_WM_Beginning = gChapterDataAssetTable + 0x3AC;
+
 @EXTERN_BODY@
 SECTIONS
 {

@@ -73,7 +73,6 @@
 903A50	904B84	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap72)	df4_banim_b region-diff data head (4404 B, long-tail gap; gAffinityBonuses split out)
 904B84	904BC4	src/data/bmreliance_data.o(.data)	gAffinityBonuses typed C (affinity support-bonus table; region-same gameplay data, agbcc pads struct to 8-byte stride -> 0x40 block)
 904BC4	904E1C	src/data/frontier_df4_banim_b/frontier_df4_banim_b_asm.o(.data.frontier_df4_banim_b.gap72b)	df4_banim_b region-diff data tail (600 B, long-tail gap)
-907F78	9081D8	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap73)	df4_banim_b region-diff data (608 B, long-tail gap)
 909DE8	909FEC	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap74)	df4_banim_b region-diff data (516 B, long-tail gap)
 90A050	90A2D0	src/data/frontier_df4_banim_b/frontier_df4_banim_b_asm.o(.data.frontier_df4_banim_b.gap75)	df4_banim_b region-diff data (640 B, long-tail gap)
 90B4DC	90B888	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap76)	df4_banim_b region-diff data (940 B, long-tail gap)

@@ -15,7 +15,7 @@ extern const u8 EventScr_Prologue_EirikaAttacked[];
 extern const u8 EventScr_Prologue_ExecTut[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 BmGuideTextSetAllGreen[];
-extern const u8 frontier_df4_banim_b_073_907F78[];
+extern const u8 UnitDef_Event_PrologueAlly[];
 extern const u8 Event_TextWithBG[];
 extern const u8 EventScr_Prologue_GiveRapier[];
 extern const u8 EventScr_Prologue_ONeillSpawn[];
@@ -29,7 +29,7 @@ SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventSc
     ASMC(BmGuideTextSetAllGreen + 0x1)
     LABEL(0)
     ENUT(8)
-    LOAD1(1, frontier_df4_banim_b_073_907F78 + 0x224)
+    LOAD1(1, UnitDef_Event_PrologueAlly)
     ENUN
     SVAL(EVT_SLOT_1, 0xD)
     SET_HP(2)
