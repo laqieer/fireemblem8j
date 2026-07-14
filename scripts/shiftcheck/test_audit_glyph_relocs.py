@@ -265,5 +265,90 @@ class VerifyShiftTest(unittest.TestCase):
         self.assertIn("payload", kinds)
 
 
+class NamedRunContractTest(unittest.TestCase):
+    def _fixture(self):
+        rom = FakeRom()
+        system = BASE + 0x1000
+        talk = BASE + 0x1400
+        run = BASE + 0x3000
+        count = 3
+        size = count * g.GLYPH_SIZE
+        internal = {0: 1}
+
+        make_table(rom, system, {0: run, 1: run + 2 * g.GLYPH_SIZE})
+        make_table(rom, talk, {})
+        make_glyph(rom, run, run + g.GLYPH_SIZE, 0x82, 8)
+        make_glyph(rom, run + g.GLYPH_SIZE, 0, 0x83, 8)
+        make_glyph(rom, run + 2 * g.GLYPH_SIZE, 0, 0x84, 8)
+
+        relocs = {system, system + 4, run}
+        tables = {"TextGlyphs_System": system, "TextGlyphs_Talk": talk}
+        return rom, run, size, count, internal, tables, relocs
+
+    def _audit(self, rom, run, size, count, internal, tables, relocs,
+               symbol_addr=None, symbol_size=None):
+        return g.audit_named_glyph_run(
+            rom.bytes(), run, size, count, internal, tables, relocs,
+            run if symbol_addr is None else symbol_addr,
+            size if symbol_size is None else symbol_size,
+        )
+
+    def test_clean_named_run_contract(self):
+        args = self._fixture()
+        result = self._audit(*args)
+        self.assertEqual(result["errors"], [])
+        self.assertEqual(result["system"], 3)
+        self.assertEqual(result["talk"], 0)
+        self.assertEqual(result["incoming"], 3)
+        self.assertEqual(result["external"], 2)
+        self.assertEqual(result["internal"], 1)
+        self.assertEqual(result["relocated"], 3)
+        self.assertEqual(result["run_relocs"], 1)
+
+    def test_missing_inbound_record_is_rejected(self):
+        rom, run, size, count, internal, tables, relocs = self._fixture()
+        make_table(rom, tables["TextGlyphs_System"], {0: run})
+        relocs.remove(tables["TextGlyphs_System"] + 4)
+
+        result = self._audit(rom, run, size, count, internal, tables, relocs)
+        self.assertTrue(any("record 2 incoming=0" in error for error in result["errors"]))
+        self.assertTrue(any("reaches 2/3" in error for error in result["errors"]))
+
+    def test_duplicate_incoming_is_rejected(self):
+        rom, run, size, count, internal, tables, relocs = self._fixture()
+        system = tables["TextGlyphs_System"]
+        make_table(rom, system, {0: run, 1: run + 2 * g.GLYPH_SIZE,
+                                 2: run + 2 * g.GLYPH_SIZE})
+        relocs.add(system + 8)
+
+        result = self._audit(rom, run, size, count, internal, tables, relocs)
+        self.assertTrue(any("record 2 incoming=2" in error for error in result["errors"]))
+
+    def test_wrong_internal_target_is_rejected(self):
+        rom, run, size, count, internal, tables, relocs = self._fixture()
+        rom.poke_u32(run, run + 2 * g.GLYPH_SIZE)
+
+        result = self._audit(rom, run, size, count, internal, tables, relocs)
+        self.assertTrue(any("record 0 sjisNext" in error for error in result["errors"]))
+
+    def test_relocation_in_bitmap_payload_is_rejected(self):
+        rom, run, size, count, internal, tables, relocs = self._fixture()
+        relocs.add(run + 8)
+
+        result = self._audit(rom, run, size, count, internal, tables, relocs)
+        self.assertTrue(any("relocation sources inside run" in error
+                            for error in result["errors"]))
+        self.assertTrue(any(f"0x{run + 8:08X}" in error for error in result["errors"]))
+
+    def test_wrong_symbol_extent_is_rejected(self):
+        rom, run, size, count, internal, tables, relocs = self._fixture()
+
+        result = self._audit(
+            rom, run, size, count, internal, tables, relocs,
+            symbol_addr=run, symbol_size=size - 4,
+        )
+        self.assertTrue(any("symbol extent" in error for error in result["errors"]))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -7,7 +7,7 @@
 57CF7C	57D324	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap4)	df4_uistuff region-diff data (936 B, long-tail gap)
 57DFCC	57E2E4	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap5)	df4_uistuff region-diff data (792 B, long-tail gap)
 57E4DC	57E83C	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap6)	df4_uistuff region-diff data (864 B, long-tail gap)
-59140C	593ECC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap7)	df4_uistuff region-diff data (10944 B, long-tail gap)
+59140C	593ECC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap7)	typed struct Glyph[152] System-SJIS continuation run
 5946F4	594934	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap8)	df4_uistuff region-diff data (576 B, long-tail gap)
 594B2C	594DFC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap9)	df4_uistuff region-diff data (720 B, long-tail gap)
 595B34	595D74	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap10)	df4_uistuff region-diff data (576 B, long-tail gap)

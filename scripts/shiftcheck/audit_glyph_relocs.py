@@ -57,6 +57,20 @@ GLYPH_SIZE = 0x48          # sizeof(struct Glyph): sjisNext(4) + sjisByte1/width
 TABLE_HEADS = 0xC0         # one head per Shift-JIS trail byte (trail = slot_index + 0x40)
 TABLES = ("TextGlyphs_System", "TextGlyphs_Talk")
 
+NAMED_RUN_SYMBOL = "SjisGlyphs_0859140C"
+NAMED_RUN_ADDR = 0x0859140C
+NAMED_RUN_SIZE = 0x2AC0
+NAMED_RUN_RECORDS = 152
+NAMED_RUN_INTERNAL_EDGES = {
+    0: 94, 1: 38, 3: 147, 6: 22, 7: 92, 9: 104, 11: 118,
+    14: 51, 15: 29, 16: 20, 17: 69, 20: 54, 22: 55, 24: 57,
+    25: 110, 26: 61, 28: 121, 30: 141, 32: 45, 34: 68,
+    37: 113, 38: 53, 40: 130, 41: 149, 43: 85, 51: 117,
+    55: 59, 57: 105, 60: 72, 61: 63, 63: 111, 64: 98,
+    68: 145, 77: 148, 78: 90, 79: 81, 89: 125, 91: 140,
+    100: 123, 103: 137, 113: 133, 133: 150, 135: 151,
+}
+
 RELOC_SECTION_RE = re.compile(r"^RELOCATION RECORDS FOR \[(.+)\]:$")
 ABS32_RELOC_RE = re.compile(r"\s*([0-9A-Fa-f]{8})\s+R_ARM_ABS32\s+(.+)$")
 ROM_OUTPUT_SECTION = ".rom"
@@ -177,6 +191,132 @@ def format_char(buf, rom_lo, trail, target_addr):
     return f"{lead_s} {trail:02X}"
 
 
+def audit_named_glyph_run(buf, run_addr, run_size, record_count, internal_edges,
+                          table_addrs, relocs, symbol_addr, symbol_size,
+                          rom_lo=ROM_BASE, rom_hi=ROM_HI, glyph_size=GLYPH_SIZE,
+                          heads=TABLE_HEADS):
+    """Audit one named contiguous Glyph run and its complete incoming edge set.
+
+    Reuses the schema traversal above for reachability/incoming edges, then adds
+    the named provider's fixed extent and per-record sjisNext contract.
+    """
+    errors = []
+    expected_size = record_count * glyph_size
+    run_hi = run_addr + run_size
+    expected_records = {run_addr + i * glyph_size for i in range(record_count)}
+    expected_internal_sources = {
+        run_addr + source * glyph_size for source in internal_edges
+    }
+
+    if run_size != expected_size:
+        errors.append(
+            f"contract extent size=0x{run_size:X}, expected record_count*stride=0x{expected_size:X}"
+        )
+    if symbol_addr != run_addr or symbol_size != run_size:
+        got_addr = "missing" if symbol_addr is None else f"0x{symbol_addr:08X}"
+        got_size = "missing" if symbol_size is None else f"0x{symbol_size:X}"
+        errors.append(
+            f"symbol extent addr={got_addr} size={got_size}, "
+            f"expected addr=0x{run_addr:08X} size=0x{run_size:X}"
+        )
+
+    for index in range(record_count):
+        source = run_addr + index * glyph_size
+        actual = read_u32(buf, rom_lo, source)
+        expected_index = internal_edges.get(index)
+        expected = 0 if expected_index is None else run_addr + expected_index * glyph_size
+        if actual is None:
+            errors.append(f"record {index} sjisNext unreadable at 0x{source:08X}")
+        elif actual != expected:
+            errors.append(
+                f"record {index} sjisNext=0x{actual:08X}, expected=0x{expected:08X}"
+            )
+
+    reachable = {}
+    incoming_by_source = {}
+    for name, table_addr in table_addrs.items():
+        glyphs = set()
+        for ev in iter_table_links(buf, table_addr, rom_lo, rom_hi, heads):
+            if ev["kind"] == "malformed":
+                errors.append(
+                    f"{name} malformed addr=0x{ev['addr']:08X} "
+                    f"reason={ev['reason']} trail=0x{ev['trail']:02X}"
+                )
+            elif ev["kind"] == "glyph":
+                glyphs.add(ev["addr"])
+            elif run_addr <= ev["target"] < run_hi:
+                source = ev["source"]
+                target = ev["target"]
+                previous = incoming_by_source.setdefault(source, target)
+                if previous != target:
+                    errors.append(
+                        f"incoming source 0x{source:08X} has conflicting targets "
+                        f"0x{previous:08X}/0x{target:08X}"
+                    )
+        reachable[name] = glyphs
+
+    system_reachable = reachable.get("TextGlyphs_System", set()) & expected_records
+    talk_reachable = reachable.get("TextGlyphs_Talk", set()) & expected_records
+    if system_reachable != expected_records:
+        missing = len(expected_records - system_reachable)
+        extra = len(system_reachable - expected_records)
+        errors.append(
+            f"TextGlyphs_System reaches {len(system_reachable)}/{record_count} "
+            f"named records (missing={missing} extra={extra})"
+        )
+    if talk_reachable:
+        errors.append(f"TextGlyphs_Talk reaches {len(talk_reachable)} named records, expected 0")
+
+    incoming_by_target = {addr: [] for addr in expected_records}
+    for source, target in incoming_by_source.items():
+        if target in incoming_by_target:
+            incoming_by_target[target].append(source)
+    for target in sorted(incoming_by_target):
+        sources = incoming_by_target[target]
+        if len(sources) != 1:
+            index = (target - run_addr) // glyph_size
+            errors.append(f"record {index} incoming={len(sources)}, expected exactly 1")
+
+    internal_sources = {
+        source for source in incoming_by_source if run_addr <= source < run_hi
+    }
+    external_sources = set(incoming_by_source) - internal_sources
+    expected_external = record_count - len(internal_edges)
+    if len(internal_sources) != len(internal_edges) or len(external_sources) != expected_external:
+        errors.append(
+            f"incoming partition external={len(external_sources)} internal={len(internal_sources)}, "
+            f"expected external={expected_external} internal={len(internal_edges)}"
+        )
+
+    missing_relocs = sorted(set(incoming_by_source) - relocs)
+    if missing_relocs:
+        errors.append(
+            f"incoming relocated={len(incoming_by_source) - len(missing_relocs)}/"
+            f"{len(incoming_by_source)}; missing={','.join(f'0x{x:08X}' for x in missing_relocs[:8])}"
+        )
+
+    reloc_sources_in_run = {source for source in relocs if run_addr <= source < run_hi}
+    if reloc_sources_in_run != expected_internal_sources:
+        missing = sorted(expected_internal_sources - reloc_sources_in_run)
+        extra = sorted(reloc_sources_in_run - expected_internal_sources)
+        errors.append(
+            "relocation sources inside run differ from sjisNext contract: "
+            f"missing={','.join(f'0x{x:08X}' for x in missing[:8]) or '-'} "
+            f"extra={','.join(f'0x{x:08X}' for x in extra[:8]) or '-'}"
+        )
+
+    return {
+        "errors": errors,
+        "system": len(system_reachable),
+        "talk": len(talk_reachable),
+        "incoming": len(incoming_by_source),
+        "external": len(external_sources),
+        "internal": len(internal_sources),
+        "relocated": len(set(incoming_by_source) & relocs),
+        "run_relocs": len(reloc_sources_in_run),
+    }
+
+
 # --------------------------------------------------------------------------
 # Shifted A/B verification (reuses iter_table_links, so it can never disagree
 # with audit_table about which words/glyphs are in scope).
@@ -247,6 +387,15 @@ def load_symbol(elf, name, prefix="arm-none-eabi-"):
         if len(parts) == 3 and parts[2] == name:
             return int(parts[0], 16)
     return None
+
+
+def load_symbol_extent(elf, name, prefix="arm-none-eabi-"):
+    out = subprocess.check_output([prefix + "nm", "-S", elf], text=True, errors="replace")
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) >= 4 and parts[-1] == name:
+            return int(parts[0], 16), int(parts[1], 16)
+    return None, None
 
 
 def load_rom_abs32_relocs(elf, prefix="arm-none-eabi-"):
@@ -329,6 +478,30 @@ def main():
             print(f"  MALFORMED addr=0x{m['addr']:08X} reason={m['reason']} trail=0x{m['trail']:02X}")
         if n_missing or n_malformed:
             overall_bad = True
+
+    symbol_addr, symbol_size = load_symbol_extent(args.elf, NAMED_RUN_SYMBOL, args.prefix)
+    named = audit_named_glyph_run(
+        rom,
+        NAMED_RUN_ADDR,
+        NAMED_RUN_SIZE,
+        NAMED_RUN_RECORDS,
+        NAMED_RUN_INTERNAL_EDGES,
+        table_addrs,
+        relocs,
+        symbol_addr,
+        symbol_size,
+    )
+    print(f"\n{NAMED_RUN_SYMBOL} @ 0x{NAMED_RUN_ADDR:08X}: "
+          f"records={NAMED_RUN_RECORDS} system={named['system']} talk={named['talk']} "
+          f"incoming={named['incoming']} external={named['external']} internal={named['internal']} "
+          f"relocated={named['relocated']} run_relocs={named['run_relocs']} "
+          f"errors={len(named['errors'])}")
+    for error in named["errors"][:args.limit]:
+        print(f"  CONTRACT {error}")
+    if len(named["errors"]) > args.limit:
+        print(f"  ... +{len(named['errors']) - args.limit} more")
+    if named["errors"]:
+        overall_bad = True
 
     if args.shifted_gba:
         with open(args.shifted_gba, "rb") as f:
