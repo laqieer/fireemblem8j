@@ -50,7 +50,7 @@ result is recorded in the V1 PR.
 | `make shiftcheck-static` | 1 | Relinks with `ld --emit-relocs`, then flags every ROM-pointer-looking word that carries **no relocation**. Ranked by signal (see below). |
 | `make shiftcheck-offsets` | 1b | Of the words that *do* relocate, flags any relocated against the **wrong base symbol** — `ResourceA + hardcoded offset` that lands at the start of a different resource B (`scan_offsets.py`). |
 | `make shiftcheck-talk` | 1c | Rejects ABS32 relocations in packed battle/defeat-talk fields other than the real event-pointer member. It parses only relocations **sourced from `.rom`**; `.debug_*` offsets that merely overlap the GBA numeric range are excluded. |
-| `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes and, from `fireemblem8_relocs.elf`, false ROM ABS32 decodes: non-entry `STT_FUNC` targets, named zero-size semantic resources with addends ≥`0x10000`, and the proven packed AREA/TileAnimations3/LZ-stream scalars. The AREA assertion remains active if its provider later gains an ELF size; all `pad_BC3A00` targets fail because consumer proof shows they are compressed bytes. Other unproven `pad_`/`gap_` anchors remain REVIEW-only. |
+| `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes and, from `fireemblem8_relocs.elf`, false ROM ABS32 decodes: non-entry `STT_FUNC` targets, named zero-size semantic resources with addends ≥`0x10000`, proven packed scalars, and every unaudited relocation resolving inside the cartridge header. Header-domain targets fail closed unless they are exact typed FUNC/OBJECT pointers or explicitly audited pinned slots; known TileAnimations3, LZ, and nested DACS-image source domains always fail. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
 | `make shiftcheck` | static + tests | The complete non-emulator gate above. |
@@ -230,15 +230,20 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
   each ROM-backed `R_ARM_ABS32` against the exact relocation symbol-table entry;
   `STT_FUNC` targets must link to `S_even` or `S_even|1`; large-addend zero-size
   semantic resources and the proven AREA/TileAnimations3/LZ-stream packed
-  scalars are separate high-confidence classes. Non-ALLOC/debug relocation
-  sections and OBJECT interiors are outside the function-specific rule.
+  scalars are separate high-confidence classes. Every target in
+  `[0x08000000,0x080000C0)` is additionally schema-classified; compressed
+  resources and nested firmware/debug-monitor images cannot borrow the parent
+  ROM relocation domain. Non-ALLOC/debug relocation sections and OBJECT
+  interiors are outside the function-specific rule.
 - `test_scan_talk_table_relocs.py` — focused tests for `.debug_*` offset collisions,
   genuine packed-field failures, and absolute `.rom` offsets.
 - `test_audit_pointer_classification.py` — exact even/Thumb function entries,
   function interiors, OBJECT interiors, debug/non-ROM section filtering, and
   rejection of a non-relocation-bearing ELF, plus zero-size large-addend,
   unproven placement-anchor review, proven compressed-anchor rejection,
-  sized-provider AREA scalar, and header-scalar inventory cases.
+  sized-provider AREA scalar, all twelve proven header-domain failures,
+  TileAnimations3 frame-pointer controls, typed header pointers, pinned cases,
+  and intentional raw-domain handling.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"

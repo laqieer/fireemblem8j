@@ -1,5 +1,5 @@
-/* Migrated from asm/data_08B5B560.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Tsa_OpAnimEphraimClose2: region-same LZ77 tilemap (decoded size 0x500).
+ * Pointer-looking payload words remain raw compressed bytes, not relocations.
  */
 	.section .data.residue.08B5B560, "aw", %progbits
 	.global data_08B5B560
@@ -49,7 +49,7 @@ data_08B5B560:
 	.4byte 0xA01CED80
 	.4byte 0x19F0A0EE
 	.4byte 0x01F001F0
-	.4byte Init
+	.4byte 0x08000000
 	.4byte 0x0A710971
 	.4byte 0x38A10B91
 	.4byte 0x1BF0A10C
@@ -65,4 +65,4 @@ data_08B5B560:
 	.4byte 0xF041704A
 	.4byte 0xB001F01F
 	.4byte 0x00000001
-/* de-pointered slice data_08B5B560: ptr=1 data=60 skip=0 */
+/* audited slice data_08B5B560: ptr=0 data=61 skip=0 */

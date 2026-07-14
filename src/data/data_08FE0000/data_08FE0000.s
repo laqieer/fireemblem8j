@@ -1,5 +1,6 @@
-/* Migrated from asm/data_08FE0000.s (secondary ARM/Thumb executable image (multiboot/download-play child) -- NOT graphics; de-pointered with real relocations (.4byte Init, rom_header_080000C0)).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* DACS/IS-AGB debug-monitor image with its own embedded address domain.
+ * This is not a multiboot child. The legacy public symbol is retained, while
+ * child-domain 0x08000000 metadata words remain raw rather than parent relocs.
  */
 	.section .data.residue.08FE0000, "aw", %progbits
 	.global MultiBootImage_08FE0000
@@ -145,7 +146,7 @@ MultiBootImage_08FE0000:
 	.4byte 0xAAAAAAAA
 	.4byte 0xAAAAAAAA
 	.4byte 0x0000000F
-	.4byte Init
+	.4byte 0x08000000
 	.4byte 0xEA00002E
 	.4byte 0x09FE2258
 	.4byte 0x09FE3A01
@@ -1338,7 +1339,7 @@ MultiBootImage_08FE0000:
 	.4byte 0xE59FE010
 	.4byte 0xE59F1010
 	.4byte 0xE12FFF11
-	.4byte Init
+	.4byte 0x08000000
 	.4byte 0x04000000
 	.4byte 0x0000020C
 	.4byte 0x09FE2011
@@ -2055,7 +2056,7 @@ MultiBootImage_08FE0000:
 	.4byte 0x09FE3038
 	.4byte 0x09FE30E4
 	.4byte 0x09FE3100
-	.4byte Init
+	.4byte 0x08000000
 	.4byte 0x09FE3000
 	.4byte 0xE59F2008
 	.4byte 0xE3811022
@@ -4100,4 +4101,4 @@ MultiBootImage_08FE0000:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice MultiBootImage_08FE0000: ptr=4 data=4085 skip=7 */
+/* audited slice MultiBootImage_08FE0000: ptr=1 data=4088 skip=7 */

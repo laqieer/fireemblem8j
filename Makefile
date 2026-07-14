@@ -513,7 +513,8 @@ shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 # Layer 1d: reject source-level pointer-classification mistakes plus false ROM
 # ABS32 decodes identified from the relocation-bearing final ELF: STT_FUNC
 # interiors, zero-size semantic resources with huge addends, and proven packed
-# AREA/header/compressed-stream scalar words.
+# AREA/header/compressed-stream scalar words. Header-domain targets fail closed
+# unless their ELF type proves an exact pointer/code use or the slot is audited.
 shiftcheck-ptraudit: $(RELOCS_ELF) $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) \
 	    --relocs-elf $(RELOCS_ELF) --fail-on-suspects
