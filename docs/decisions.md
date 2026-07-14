@@ -13429,3 +13429,29 @@ new/typed content (all explained, none weakening a gate):
 layout-referenced objects, all git-tracked), `scripts/check_selfcontained.py`
 (100.00%, 0 baserom incbins) all pass; `git diff --check` and final
 `git status` are clean.
+
+## D397 — bank independently verified ending000/ending016 typed providers (#143, 2026-07-14)
+
+Serial integration accepted worker commit
+`83eda3506b2fff37141a18f4906abaee2b217689` (selective source commit
+`fc215da63c480a332c835c26bf6d4bf4190a88be`) with the independent verifier
+verdict **MATCH**. It removes the raw providers
+`frontier_df4_ending_000_AC059C.bin` (`0x08AC059C..0x08AC09E8`) and
+`frontier_df4_ending_016_B3EC33.bin` (`0x08B3EC33..0x08B3EE00`).
+
+ending000 is now exact typed JP ending data: a `0x44C`-byte object, 134 JP
+numeric text IDs, and exactly three `R_ARM_ABS32` relocations; its linked
+range SHA256 is
+`7e9b966828fb2e8a58535b780a3a24d416e7370ff6d5ea3c37020f907e722eab`.
+ending016 is now one-byte pad + generated 176-byte TSA + six typed CTC lists
++ two-byte pad + the preserved typed ProcCmd tail with the expected voice
+and callback relocations; its complete linked-range SHA256 is
+`1e7bd479e63d83efa6a9cc850733a338c3f565229f503d268d312457c00891f2`.
+
+The regenerated built-state audit moves exactly from
+`MISS=0 FLOOR=1448 UNCERTAIN=8 TOTAL=1456` to
+`MISS=0 FLOOR=1449 UNCERTAIN=6 TOTAL=1455`: two raw `UNCERTAIN` assets are
+deleted and the new TSA source adds one legitimate binary floor. Full cold
+`make compare`, shiftcheck/graphics tests, dependency/layout/self-contained
+gates, and exact byte/relocation checks are the integration oracle. Issue
+#143 remains open; the separate uistuff glyph branch is not part of D397.

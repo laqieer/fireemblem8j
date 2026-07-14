@@ -1,4 +1,4 @@
 AC059C	AC09E8	src/ending_details_080BB4AC.o(.data)	gpDefeatedEndingLocString + gCharacterEndings_Eirika[68] + gCharacterEndings_Ephraim[68] + gCharacterEndingsByRoute[2] typed JP data (#143, D397)
-B3EC33	B3EC34	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_06_pad)	1-byte alignment pad before gTsa_OpSubtitle_06 (#143, D398)
-B3EC34	B3ECE4	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_06_ref)	gTsa_OpSubtitle_06 generated 176-byte JP LZ TSA (#143, D398)
-B3ECE4	B3EDD0	src/DrawTitleSprites_Loop.o(.data)	six typed title-screen PutSpriteExt CTC lists plus 2-byte pad (#143, D398)
+B3EC33	B3EC34	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_06_pad)	1-byte alignment pad before gTsa_OpSubtitle_06 (#143, D397)
+B3EC34	B3ECE4	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_06_ref)	gTsa_OpSubtitle_06 generated 176-byte JP LZ TSA (#143, D397)
+B3ECE4	B3EDD0	src/DrawTitleSprites_Loop.o(.data)	six typed title-screen PutSpriteExt CTC lists plus 2-byte pad (#143, D397)
