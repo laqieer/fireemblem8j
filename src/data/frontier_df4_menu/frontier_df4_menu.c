@@ -6890,11 +6890,30 @@ u8 frontier_df4_menu_022_A96D18[] __attribute__((section(".data.frontier_df4_men
    text, _1 14t UI bar, _2 64t icon sheet; [0x53C,end) = 0x140 trailing raw verbatim.
    Reassembled at the exact ROM offsets; make compare is the oracle. */
 u8 frontier_df4_menu_023_A99FA8[] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U8(
-    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin", 0x0, 0x40,
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_pal0.gbapal",
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_pal1.gbapal",
     "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_0.4bpp.lz",
     "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_1.4bpp.lz",
-    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_2.4bpp.lz",
-    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin", 0x53C, 0x140);
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_2.4bpp.lz");
+/* [0x53C,0x5FC): gPal_A9A4E4[6][16], six augury/rank-sprite palette frames
+ * (consumers sub_80A2DF8, sub_80A3074, sub_80A3458); was baseline ABS alias
+ * (layout/baseline_syms.d/zfix_80A3074.tsv). Emitted as 6 concatenated 16-color
+ * JASC sources (a single 96-color .pal round-trips to a padded 256-color
+ * .gbapal, so it is split per fe8-palette-bank convention). */
+u16 gPal_A9A4E4[96] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U16(
+    "graphics/frontier_df4_menu/gPal_A9A4E4_0.gbapal",
+    "graphics/frontier_df4_menu/gPal_A9A4E4_1.gbapal",
+    "graphics/frontier_df4_menu/gPal_A9A4E4_2.gbapal",
+    "graphics/frontier_df4_menu/gPal_A9A4E4_3.gbapal",
+    "graphics/frontier_df4_menu/gPal_A9A4E4_4.gbapal",
+    "graphics/frontier_df4_menu/gPal_A9A4E4_5.gbapal");
+/* [0x5FC,0x67C): Pal_PrepWindowA/B/C/D[16], byte-identical to fe8u's own
+ * Pal_08A1D850/08A1D870/08A1D890/08A1D8B0.gbapal (src/data/data_A195B0.c);
+ * were baseline ABS aliases (layout/baseline_syms.d/handdecomp_Prep_LoadWindowGfx.tsv). */
+u16 Pal_PrepWindowA[16] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_PrepWindowA.gbapal");
+u16 Pal_PrepWindowB[16] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_PrepWindowB.gbapal");
+u16 Pal_PrepWindowC[16] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_PrepWindowC.gbapal");
+u16 Pal_PrepWindowD[16] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_PrepWindowD.gbapal");
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x3DC] 61t 4bpp sheet ->
  * editable PNG; [0x3DC:0x3FC] trailing raw kept verbatim (symbol size 1020). */
 u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0x3DC, 0x20);
