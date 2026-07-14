@@ -11758,9 +11758,9 @@ assumption, per playbook).**
   consumer proves `gWorldmapMinimap_0..7`'s exact roles (2 LZ sheets, 5 TSAs,
   1 three-bank palette). `gWorldmapMinimap_8` onward
   (`DrawGMapPIPanelContents` / `worldmap_player_interface`) is a **different**
-  consumer/scope and is intentionally left as an honest raw remainder
-  (`frontier_df4_ending_010_remainder_B1E6BC.bin`, 472 B, still UNCERTAIN) —
-  not claimed done.
+  consumer/TU and was initially left as an honest raw remainder
+  (`frontier_df4_ending_010_remainder_B1E6BC.bin`, 472 B, UNCERTAIN) in the
+  first commit; the 2026-07-14 follow-up below completes it.
 - Blob 014's byte offsets in the incoming research were all independently
   confirmed exact; only its two decompressed-tile-count claims were corrected
   (64 tiles/2048 B and 128 tiles/4096 B, not the stated 111/382).
@@ -11796,14 +11796,95 @@ original JP bytes; the two-stream LZ truncation for blob 007's second stream
 by a deterministic `truncate -s 529` Makefile rule and independently verified
 by re-decompressing the truncated stream. `make layout` reports 100.0000%
 coverage; `python3 scripts/check_incbin_deps.py` and
-`python3 scripts/check_layout.py` both pass; `python3
-scripts/audit_bin_forms.py` moves `MISS 0->0`, `FLOOR 1426->1427`,
-`UNCERTAIN 26->25` (only the honest `010_remainder` stays UNCERTAIN). A clean
-`make compare` reports `fireemblem8.gba: OK` and `make shiftcheck` reports no
-high-confidence shiftability suspects.
+`python3 scripts/check_layout.py` both pass. A clean `make compare` reports
+`fireemblem8.gba: OK` and `make shiftcheck` reports no high-confidence
+shiftability suspects.
 
 **Scope discipline.** `frontier_df4_ending_003_AC718C.bin`'s sibling
 `frontier_df3_ending`/`dat_DfEnding002_PalGfx` (a separate false-relocation
 lane) was NOT touched. `dat_worldmap_minimap_p2`/`p3` (already 0KB-delta,
-fully carved) were NOT touched. `gWorldmapMinimap_8..13`
-(`worldmap_player_interface`) was NOT claimed.
+fully carved) were NOT touched.
+
+## D381 follow-up — complete the gWorldmapMinimap_8..13 remainder; correct comment/audit-delta errors (2026-07-14)
+
+An independent verifier confirmed the byte-level work above was correct but
+flagged the branch as near-complete, not complete: the honest
+`frontier_df4_ending_010_remainder_B1E6BC.bin` (472 B,
+`0x08B1E6BC..0x08B1E894`) still had every byte named/consumed by real code
+and should not have been left raw.
+
+**Completion.** Created `src/data/worldmap_minimap/dat_worldmap_minimap_p1.c`,
+a NEW object filling the address/naming gap between `dat_worldmap_minimap_p0`
+(ends `0x08B1E6BC`) and `dat_worldmap_minimap_p2` (starts `0x08B1E894`)
+exactly. Ground truth from the real consumers:
+- `src/worldmap_player_interface.c:ApplyGMapPIMinimapUnitPalette()` — `src =
+  gWorldmapMinimap_8/9/10/11` per `FACTION_BLUE/RED/GREEN`/other, then
+  `ApplyPalette(src, palId)`. Each is a 16-color palette (32 B):
+  `gWorldmapMinimap_8` @`0x08B1E6BC`, `_9` @`0x08B1E6DC`, `_10` @`0x08B1E6FC`,
+  `_11` @`0x08B1E71C`.
+- `src/DrawGMapPIPanelContents.c` — `CallARM_FillTileRect(gUnk_25,
+  gWorldmapMinimap_12/13, 0x8000)` per `proc->interfaceKind` (0 / 1), each a
+  `u8[]` standard TSA + 2-byte zero pad: `gWorldmapMinimap_12` @`0x08B1E73C`
+  (hdr `0x0b,0x04` => 12x5, 122 B + 2-byte pad = 124 B), `gWorldmapMinimap_13`
+  @`0x08B1E7B8` (hdr `0x0b,0x08` => 12x9, 218 B + 2-byte pad = 220 B).
+
+All 6 sizes/boundaries were independently confirmed against `baserom.gba` and
+sum to exactly 472 B ending at `0x08B1E894` (the confirmed start of `p2`,
+matching `layout/us_jp_funcmap.tsv`'s `gGfx_GMapPI_LevelNums` exact-match row).
+The 4 palettes are committed as JASC `.pal` (all round-trip byte-exact via
+`gbagfx`); the 2 TSAs are committed as `.tsa.bin` (raw, both round-trip
+trivially since they are verbatim source). All six baseline_syms ABS aliases
+dropped. `frontier_df4_ending_010_remainder_B1E6BC.bin`, its
+`data_frontier4_df4_ending.tsv` row, and the narrow 472-byte remainder note
+are deleted entirely — no bytes remain unclassified.
+
+**Comment correction.** `dat_frontier_df4_ending_008.c`'s description of the
+false-terminator record referred to "Record 224 ... byte [+0xA88,+0xA94)"; the
+correct relative blob offset is **[+0xA80,+0xA8C)** (`224 * 12 = 0xA80`), i.e.
+the 204th/last element (local index 203) of the `sAnimSpriteData_DfEnding008_1[204]`
+table. The underlying bytes/logic (header==1 with non-zero trailing words,
+therefore not using `ANIM_SPRITE_END`) are unchanged — only the stated offset
+was wrong.
+
+**Corrected audit delta (verifier caught a stale/wrong claim in the first
+commit).** The committed `docs/bin_audit.md` after the first commit read
+`FLOOR 1426->1427 / UNCERTAIN 26->25`, computed by diffing two ad hoc runs
+that were not on a like-for-like base. Recomputing properly — running
+`scripts/audit_bin_forms.py` fresh against `origin/main` (`13c5b678f`, with
+its gitignored `.lz` build artifacts present so the script's self-test
+guards pass) versus this branch's final tree, both against the same current
+`../fireemblem8u` oracle:
+- **Base (`13c5b678f`):** MISS=0, FLOOR=1415, UNCERTAIN=30, TOTAL=1445
+  (matches the originally committed `docs/bin_audit.md` at that commit).
+- **Branch (final, this follow-up):** MISS=0, FLOOR=1429, UNCERTAIN=24,
+  TOTAL=1453.
+- **True delta: FLOOR +14, UNCERTAIN -6, TOTAL +8, MISS +0.**
+
+The +14 FLOOR are all `.tsa.bin` sources (14 files: 1 from blob 003's
+`gUnk_08AC718C` (renamed/reclassified from an opaque baseline alias to a real
+`.tsa.bin` source), 3 from blob 007 (2 LZ77 TSA streams plus the
+evidence-backed `_residual_B381.bin` floored by the new audit rule), 1
+from blob 008, 2 from blob 009, 4 from blob 010's `gWorldmapMinimap_3..6`, 1
+from blob 014's `gWorldmapSkirmish_1`, and 2 new from this follow-up's
+`gWorldmapMinimap_12/13` — 1+3+1+2+4+1+2 = 14); the palettes (`.pal`/JASC) and
+images (`.png`) are
+not `.bin` and do not appear in this count. The -6 UNCERTAIN are exactly the
+six original raw blobs (003/007/008/009/010/014); the transient
+`010_remainder_B1E6BC.bin` created by the first commit and deleted by this
+follow-up nets to zero and does not appear in either audit run's committed
+output. `docs/frontier.md`'s session note and this file's earlier `D381` text
+are corrected to match (the previously-stated `1426->1427/26->25` numbers
+were computed against a stale/mismatched comparison point, not this base).
+
+**Verification (this follow-up).** All 6 new sources (4 palettes + 2 TSAs)
+round-trip byte-exact (`gbagfx` pal<->gbapal); the full 472 B concatenation
+matches `frontier_df4_ending_010_remainder_B1E6BC.bin`'s original bytes
+exactly (`cmp`); `make layout` reports 100.0000% coverage;
+`scripts/check_incbin_deps.py` and `scripts/check_layout.py` pass; a clean
+`make compare` reports `fireemblem8.gba: OK`; `make shiftcheck` reports no
+high-confidence shiftability suspects.
+
+**Renumbering note.** This decision was originally filed locally as `D377`
+(follow-up appended in place, no new number); renumbered at integration to
+`D381` because `main` already owned `D376`-`D380` by the time this branch
+landed.

@@ -1295,6 +1295,7 @@ B085F8	B1CCD4	src/data/worldmap/worldmap_gmap.o(.data)	worldmap_gmap typed C INC
 B1CCF4	B1CD80	src/data/worldmap_gmap/dat_worldmap_gmap_p1.o(.rodata.dat_worldmap_gmap_p1)	dat_worldmap_gmap_p1 region-same per-sym shifted (0KB)
 B1CD80	B1D954	src/data/anim_worldmap_sprite/dat_anim_worldmap_sprite.o(.rodata.dat_anim_worldmap_sprite)	dat_anim_worldmap_sprite region-same shifted (2KB)
 B1D954	B1E6BC	src/data/worldmap_minimap/dat_worldmap_minimap_p0.o(.rodata.dat_worldmap_minimap_p0)	dat_worldmap_minimap_p0 region-same per-sym shifted (0KB); expanded backward for #143 (absorbs former frontier_df4_ending gap9 + gap10 head)
+B1E6BC	B1E894	src/data/worldmap_minimap/dat_worldmap_minimap_p1.o(.rodata.dat_worldmap_minimap_p1)	dat_worldmap_minimap_p1 region-same per-sym (0KB); NEW #143 follow-up, fills the p0/p2 address+naming gap exactly (former frontier_df4_ending gap10 tail, 472 B: gWorldmapMinimap_8..13)
 B1E894	B1E998	src/data/worldmap_minimap/dat_worldmap_minimap_p2.o(.rodata.dat_worldmap_minimap_p2)	dat_worldmap_minimap_p2 region-same per-sym shifted (0KB)
 B1E9B8	B23F00	src/data/worldmap_minimap/dat_worldmap_minimap_p3.o(.rodata.dat_worldmap_minimap_p3)	dat_worldmap_minimap_p3 region-same per-sym shifted (21KB)
 B23F00	B24D0C	src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.o(.rodata.dat_anim_worldmap_highlight)	dat_anim_worldmap_highlight region-same shifted (3KB)

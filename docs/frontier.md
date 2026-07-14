@@ -761,14 +761,21 @@ The .bin count held (these carve real code/pointers out of source-form data, not
   remaining actionable `frontier_df4_ending` blobs (003/007/008/009/010/014) to
   editable/typed source; expanded `dat_worldmap_minimap_p0` backward
   (`0x08B1E49C -> 0x08B1D954`) and `dat_worldmap_skirmish` forward
-  (`0x08B26A6C -> 0x08B2759C`). `docs/bin_audit.md`: MISS 0->0, FLOOR 1426->1427,
-  UNCERTAIN 26->25 (only `frontier_df4_ending_010_remainder_B1E6BC.bin`, 472 B,
-  `gWorldmapMinimap_8..13`/`worldmap_player_interface` — a different consumer/scope,
-  intentionally NOT claimed — remains). `make compare` OK, `make shiftcheck` clean.
+  (`0x08B26A6C -> 0x08B2759C`). `make compare` OK, `make shiftcheck` clean.
   See D381 in `docs/decisions.md` for full per-blob evidence, including two
   corrections to the incoming research (blob 007's stated address was off by
   0x211 from ground truth; blob 008's first 252 B is a region-same fe8u
   `SpriteAnim_BrownTextBox` AP object, not raw `AnimSpriteData`).
+  **[2026-07-14 follow-up]** Completed the remaining 472 B
+  (`gWorldmapMinimap_8..13`, real consumers `worldmap_player_interface.c` +
+  `DrawGMapPIPanelContents.c`) into a NEW `dat_worldmap_minimap_p1` object that
+  fills the `p0`/`p2` address+naming gap exactly; corrected a comment
+  offset error (blob 008's false-terminator is at relative `+0xA80`, not
+  `+0xA88`); and corrected the audit-delta claim. Properly diffed against
+  `origin/main` (`13c5b678f`, MISS=0/FLOOR=1415/UNCERTAIN=30/TOTAL=1445) vs.
+  this branch's final tree: **true delta FLOOR +14 / UNCERTAIN -6 / TOTAL +8 /
+  MISS +0** (the previously-stated `FLOOR 1426->1427 / UNCERTAIN 26->25` was
+  computed from a mismatched comparison and is superseded).
 - **`.bin` frontier: MISS=3 / FLOOR=1401 / UNCERTAIN=226** (`FE8U=../fireemblem8u python3 scripts/audit_bin_forms.py`).
   The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
   **[refreshed 2026-07-10, D360: live `docs/bin_audit.md` now reads MISS=0 / FLOOR=1407 / UNCERTAIN=34. The 3

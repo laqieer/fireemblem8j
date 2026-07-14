@@ -672,16 +672,18 @@ u8 frontier_df4_ending_007_AD0CFC[] __attribute__((section(".data.frontier_df4_e
  */
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x490] 96t 4bpp sheet ->
  * editable PNG (png -> .4bpp -> .4bpp.lz); [0x490:0xB48] trailing raw kept verbatim. */
-/* frontier_df4_ending_009_B1D954 (0x08B1D954-0x08B1E49C, 2888 B) fully migrated
- * into the expanded dat_worldmap_minimap_p0 (issue #143); see
- * src/data/worldmap_minimap/dat_worldmap_minimap_p0.c.
- * frontier_df4_ending_010_B1E5FC's HEAD (0x08B1E5FC-0x08B1E6BC, 192 B,
- * gWorldmapMinimap_3..7) also migrated there. The TAIL
- * (0x08B1E6BC-0x08B1E894, 472 B, gWorldmapMinimap_8..13 / DrawGMapPIPanelContents
- * / worldmap_player_interface) is a DIFFERENT consumer/scope, intentionally left
- * as an honest raw remainder gap -- NOT claimed done by this carve.
+/* frontier_df4_ending_009_B1D954 (0x08B1D954-0x08B1E49C, 2888 B) and all of
+ * frontier_df4_ending_010_B1E5FC (0x08B1E5FC-0x08B1E894, 664 B) fully migrated
+ * (issue #143 + follow-up): the head (gWorldmapMinimap_3..7, 192 B) into the
+ * expanded dat_worldmap_minimap_p0, and the former TAIL
+ * (gWorldmapMinimap_8..13, 472 B, DrawGMapPIPanelContents /
+ * worldmap_player_interface -- a different consumer/TU) into the NEW
+ * dat_worldmap_minimap_p1, which fills the address/naming gap between p0
+ * (ends 0x08B1E6BC) and p2 (starts 0x08B1E894) exactly. See
+ * src/data/worldmap_minimap/dat_worldmap_minimap_p0.c and
+ * src/data/worldmap_minimap/dat_worldmap_minimap_p1.c. This gap row is
+ * REMOVED entirely (no remainder).
  */
-u8 frontier_df4_ending_010_remainder_B1E6BC[] __attribute__((section(".data.frontier_df4_ending.gap10"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_010_remainder_B1E6BC.bin");
 u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_ending.gap11"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.4bpp.lz");
 /* Worldmap-highlight reel blobs, split per the frontier_df4_voice_001_1F67BC
  * semantic table (Img, Tsa/Ap, dims). Base symbols kept so the table's
