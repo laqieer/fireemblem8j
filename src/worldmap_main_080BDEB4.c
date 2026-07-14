@@ -31,8 +31,6 @@ s8 GmScrollManageExist(void);
 // TODO: Implicit declaration?
 void GetWMCenteredCameraPosition(int, int, s16 *, s16 *);
 
-extern u16 * Events_WM_Beginning[];
-extern u16 * Events_WM_ChapterIntro[];
 
 struct Proc8A3DD30
 {

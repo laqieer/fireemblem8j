@@ -610,7 +610,7 @@ extern EventScr EventScrWM_ValniTower8_Beginning[];
    Every entry below is an exact array-start pointer -- the corrected
    136-array src/events_wm.c boundary table eliminates the +offset
    hacks an earlier segmentation needed here. */
-const EventScr * const Events_WM_BeginningTail[58] __attribute__((section(".data"))) =
+const void * Events_WM_BeginningTail[58] __attribute__((section(".data"))) =
 {
     EventScrWM_Prologue_Beginning, /* Events_WM_Beginning[1] */
     EventScrWM_Ch1_Beginning, /* Events_WM_Beginning[2] */
@@ -675,7 +675,7 @@ const EventScr * const Events_WM_BeginningTail[58] __attribute__((section(".data
 /* 0x08908060..0x0890814C: per-chapter "return to map" intro scripts run
    after Events_WM_Beginning; entry 0 is unused (no chapter uses gmapEventId
    0 for this table) and stays NULL like the JP ROM word at that address. */
-const EventScr * const Events_WM_ChapterIntro[59] __attribute__((section(".data"))) =
+const void * Events_WM_ChapterIntro[59] __attribute__((section(".data"))) =
 {
     0, /* Events_WM_ChapterIntro[0]: unused */
     EventScrWM_Prologue_ChapterIntro, /* Events_WM_ChapterIntro[1] */

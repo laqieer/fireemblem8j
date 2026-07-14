@@ -663,6 +663,8 @@ extern CONST_DATA u8 Unk_Itemuse_8[];
 // extern ??? gUnknown_088AF880
 // extern ??? gUnknown_088AFB5A
 // extern ??? gSpellAssocData
+extern const void *Events_WM_Beginning[59];
+extern const void *Events_WM_ChapterIntro[59];
 // extern ??? gUnknown_088D2058
 extern struct gfx_set CONST_DATA gConvoBackgroundData[];
 extern u8 CONST_DATA gPromoJidLut[][2];
