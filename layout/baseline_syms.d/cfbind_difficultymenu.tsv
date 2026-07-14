@@ -1,5 +1,4 @@
 gTextIds_DifficultyDescription	08A9D970	data	DrawDifficultyModeText
-Pal_MenuSaveMainBg_0	08AA52DC	data	DifficultyMenu_UpdateModePalettes
 gMenuMainObjs_0	08AA7114	data	DifficultyMenu_UpdateModePalettes
 gPlayStChapterBits	02000940	data	SaveDrawSetDifficultSlotPalette
 gUnkData_43	08A79BA2	data	SaveDrawSetDifficultSlotPalette

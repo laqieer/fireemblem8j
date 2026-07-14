@@ -986,3 +986,4 @@ sound/songs/midi/*.s
 !src/data/frontier_df4_banim_b/frontier_df4_banim_b_asm.s
 !src/data/frontier_df4_menu/frontier_df4_menu_asm.s
 !src/data/frontier_df4_ending/frontier_df4_ending_asm.s
+!src/data/menu/anim_save_screen.s
