@@ -10,3 +10,5 @@ SECTION(".rodata.dat_ending_staffreel_p2") u8 Tsa_StaffReelEnt_2[] = INCBIN_U8("
 SECTION(".rodata.dat_ending_staffreel_p2") u8 Tsa_StaffReelEnt_3[] = INCBIN_U8("graphics/misc_gfx2/Tsa_StaffReelEnt_3.bin.lz");
 SECTION(".rodata.dat_ending_staffreel_p2") u8 Tsa_StaffReelEnt_4[] = INCBIN_U8("graphics/misc_gfx2/Tsa_StaffReelEnt_4.bin.lz");
 SECTION(".rodata.dat_ending_staffreel_p2") u8 Tsa_StaffReelEnt_5[] = INCBIN_U8("graphics/misc_gfx2/Tsa_StaffReelEnt_5.bin.lz");
+SECTION(".rodata.dat_ending_staffreel_p2") u8 Tsa_StaffReelEnt_6[] = INCBIN_U8("graphics/misc_gfx2/Tsa_StaffReelEnt_6.bin.lz");
+SECTION(".rodata.dat_ending_staffreel_p2") u8 Tsa_StaffReelEnt_7[] = INCBIN_U8("graphics/misc_gfx2/Tsa_StaffReelEnt_7.bin.lz");

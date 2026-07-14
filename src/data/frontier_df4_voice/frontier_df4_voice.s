@@ -97,7 +97,7 @@ frontier_df4_voice_001_1F67BC:
 	.4byte 0x03020303, 0x70616D47, 0x64615220, 0x00007265, 0x70616D47, 0x73614220
 	.4byte 0x654D2065, 0x0000756E, Img_StaffReelEnt_0, Tsa_StaffReelEnt_0, Img_StaffReelEnt_1, Tsa_StaffReelEnt_1
 	.4byte Img_StaffReelEnt_2, Tsa_StaffReelEnt_2, Img_StaffReelEnt_3, Tsa_StaffReelEnt_3, Img_StaffReelEnt_4, Tsa_StaffReelEnt_4
-	.4byte Img_StaffReelEnt_5, Tsa_StaffReelEnt_5, Img_StaffReelEnt_6, frontier_df4_ending_006_AD02D4, frontier_df4_ending_004_ACC378, frontier_df4_ending_006_AD02D4 + 0x1fc
+	.4byte Img_StaffReelEnt_5, Tsa_StaffReelEnt_5, Img_StaffReelEnt_6, Tsa_StaffReelEnt_6, frontier_df4_ending_004_ACC378, Tsa_StaffReelEnt_7
 	.4byte Img_StaffReelEnt_8, Tsa_StaffReelEnt_8, Img_StaffReelEnt_9, Tsa_StaffReelEnt_9, frontier_df4_ending_005_ACEB54, frontier_df4_ending_007_AD0CFC
 	.4byte frontier_df4_ending_005_ACEB54 + 0x42c, frontier_df4_ending_007_AD0CFC + 0x170, cg_0_part_0_tiles, cg_0_part_1_tiles, cg_0_part_2_tiles, cg_0_part_3_tiles
 	.4byte cg_0_part_4_tiles, cg_0_part_5_tiles, cg_0_part_6_tiles, cg_0_part_7_tiles, cg_0_part_8_tiles, cg_0_part_9_tiles

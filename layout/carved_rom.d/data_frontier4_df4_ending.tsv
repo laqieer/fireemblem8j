@@ -4,7 +4,6 @@ AC16C8	AC1A0C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_
 AC718C	AC7408	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap3)	gUnk_08AC718C region-same-named TSA (604 B) + Pal_StaffReelEnt_EndingFin palette (32 B) region-diff typed data (#143; both baseline ABS aliases replaced by real defs)
 ACC378	ACCD98	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap4)	df4_ending region-diff data (2592 B, long-tail gap)
 ACEB54	ACF418	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap5)	df4_ending region-diff data (2244 B, long-tail gap)
-AD02D4	AD06F4	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap6)	df4_ending region-diff data (1056 B, long-tail gap)
 AD0CFC	AD1284	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap7)	df4_ending 2x LZ77 TSA streams (2050 B decompressed each, hdr 0x1f1f=>32x32) + 519 B evidence-backed FLOOR residual (#143, D377)
 AD1444	AD1540	src/data/frontier_df4_ending/dat_frontier_df4_ending_008_sub0.o(.data.frontier_df4_ending.gap8_sub0)	SpriteAnim_BrownTextBox region-same exact twin of fe8u (AP format, 252 B; #143)
 AD1540	AD1ED0	src/data/frontier_df4_ending/dat_frontier_df4_ending_008.o(.data.frontier_df4_ending.gap8_sub1)	sAnimSpriteData_DfEnding008_1[204] region-diff typed struct AnimSpriteData table (2448 B; #143, D362 no fe8u twin)
