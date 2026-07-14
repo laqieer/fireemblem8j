@@ -27,7 +27,7 @@ SECTION(".rodata.dat_data_5AA96C") u8 gUnkData_25[] = INCBIN_U8("graphics/reuse/
  */
 SECTION(".rodata.dat_data_5AA96C") u8 Tsa_LinkArenaTitleBanner[] = INCBIN_U8("graphics/misc/Tsa_LinkArenaTitleBanner.bin");
 SECTION(".rodata.dat_data_5AA96C") u8 Img_MultiBootSendBg[] = INCBIN_U8("graphics/misc/Img_MultiBootSendBg.4bpp.lz");
-SECTION(".rodata.dat_data_5AA96C") u16 Tilemap_MultiBootSendBg[] = INCBIN_U16("graphics/misc/Tilemap_MultiBootSendBg.bin.lz");
+SECTION(".rodata.dat_data_5AA96C") u16 Tilemap_MultiBootSendBg[] = INCBIN_U16("graphics/misc/Tilemap_MultiBootSendBg_map.bin.lz");
 SECTION(".rodata.dat_data_5AA96C") u16 Pal_MultiBootSendBg[] = INCBIN_U16("graphics/misc/Pal_MultiBootSendBg.gbapal");
 SECTION(".rodata.dat_data_5AA96C") u8 Img_MultiBootSendListBar[] = INCBIN_U8("graphics/misc/Img_MultiBootSendListBar.4bpp.lz");
 /* tile0x78/pal4 base (0x4078 passed to j_TmApplyTsa by sub_80487D8): narrow

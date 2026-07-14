@@ -70,8 +70,11 @@ graphics/misc/gUnkData_92.tsa.bin.lz: LZ_FLAGS := -mindist 2
 # into 13 semantic MultiBoot-send / Link Arena assets (src/data/5AA96C/dat_data_5AA96C.c).
 # All 5 LZ streams (Img_MultiBootSendBg, Tilemap_MultiBootSendBg, Img_MultiBootSendListBar,
 # Img_MultiBootSendFont, Img_LinkArenaSpriteText) reproduce byte-exact with gbagfx's
-# DEFAULT -mindist 2 -- no LZ_FLAGS overrides needed. The 3 raw TSA records
-# (Tsa_LinkArenaTitleBanner, Tsa_MultiBootSendListBarNarrow, Tsa_MultiBootSendListBarWide)
-# are committed including their trailing 2B alignment pad. The old monolith is deleted;
-# object -> asset deps are tracked automatically via layout/data_incbin_deps.mk
-# (scripts/gen_data_incbin_deps.py).
+# DEFAULT -mindist 2 -- no LZ_FLAGS overrides needed. Tilemap_MultiBootSendBg's raw
+# decompressed source is committed as Tilemap_MultiBootSendBg_map.bin (the `_map.bin`
+# suffix matches this repo's BG-tilemap FLOOR naming convention, e.g.
+# graphics/gfx_data_bg/*_map.bin, scripts/audit_bin_forms.py rule 0). The 3 raw TSA
+# records (Tsa_LinkArenaTitleBanner, Tsa_MultiBootSendListBarNarrow,
+# Tsa_MultiBootSendListBarWide) are committed including their trailing 2B alignment
+# pad. The old monolith is deleted; object -> asset deps are tracked automatically
+# via layout/data_incbin_deps.mk (scripts/gen_data_incbin_deps.py).
