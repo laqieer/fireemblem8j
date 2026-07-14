@@ -12682,3 +12682,98 @@ Tracked on the same issue #143 thread as D383/D384/D385/D386/D387. Same
 numbering-collision note applies: D388 (this entry) is ALSO a locally-scoped
 number and must be renumbered by the integrator alongside D383-D387 against
 `main`'s actual next-available sequence at merge time.
+## D389 — frontier_df4_menu 14-file UNCERTAIN class: full Phase A+B + partial Phase C (issue #143 menu lane, integration-renumerable) (2026-07-14)
+
+**Scope.** Isolated worktree/branch `feat/issue-143-menu-assets` (from
+`origin/main` `ab44df71e`), single owner of `src/data/frontier_df4_menu/**`,
+`graphics/frontier_df4_menu/**`, and the exact semantic destinations
+(`bmshop`, `uiarena`, `data_chapter_asset_table`, `gamerankings`) named in the
+issue-143 menu task. Sibling agents own other issue-143 lanes concurrently
+(glyph-relocs, code-literals, ending-assets, false-func-reloc-gate,
+graphics-gate, map-assets, pointer-audit, tsa-outlier-assets, uistuff-assets) —
+this decision covers only the menu blobs.
+
+**Phase A (all 8 items done):** 001 (tail TSA+palette, byte-identical to
+`Pal_GameOverText2`), 005 (trimmed a 587 B over-extraction to its true 395 B
+floor per the manifest's own gap5 row), 017 (`Img_ChapterIntroCrestJp` +
+`Tsa_ChapterIntroCrestJp` + `Pal_ChapterIntroCrestJp`, dropping the
+`gUnknown_08A7AE50` baseline alias), 021 (4 `sSprite_*` SpriteEx tables +
+`Img_PrepHelpButtonSprites`/`Gfx_SoundTest_8035650`/`Pal_SoundTest_8035650`),
+023 (full split: 2 head palettes, `gPal_A9A4E4[6][16]`,
+`Pal_PrepWindowA/B/C/D`), 024 (tail palette, family match to fe8u's
+`gPal_SupportMenu`), 027 (17 `gSprite_SavemenuData_N` OAM tables decoded via
+`OAM0_SHAPE_x`/`OAM1_SIZE_x` macros + `SpriteArray_SavemenuData_0/_1`, proven
+against fe8u's `src/savemenu_data.c`), 030 (`Tsa_DifficultyMenuObjs` +
+`Pal_MenuMainObjs_0` + `Tsa_CommGameBgScreenInShop`), 033
+(`Pal_StatusScreenLabelSprites` + `Tsa_ChapterStatusUi`). menu UNCERTAIN
+30 -> 25.
+
+**Phase B (both items done):** 029 (zero uncovered bytes: `Tsa_MainMenuBgFog`,
+`Img_SaveScreenSprits`+`Pal_SaveScreenSprits` (9 palette banks),
+`Pal_MenuSaveMainBg_0`, `gSaveScreen_0` ported byte-identical from fe8u's
+`src/data/menu/anim_save_screen.s` as its own object/manifest row,
+`Img_UnkSaveMenu_08AA5380` (no consumer, conservative name),
+`Img_GameMainMenuObjs`, `Img_DifficultyMenuObjs`); 032 (zero uncovered bytes:
+live `Pal_SoundRoomUiElements` repointed into `SoundRoomUi_Init`, plus a fully
+sourceable but genuinely UNUSED Music Select UI screen kept under
+`UnusedMusicSelect*` names — 2 LZ sheets, 4 raw TSA frames, 12 chapter-label
+LZ streams, 4 palettes). menu UNCERTAIN 25 -> 23.
+
+**Phase C (partial — 2 of many items):** carved `gProcScr_ArenaUiResultBgm`
+(blob 038's true `[0,0x20)` head) into `src/uiarena.c` as a real
+`PROC_CALL`/`PROC_SLEEP`/`PROC_END` script, repointing
+`dat_gProcScr_ArenaUiResults_ref.c`'s two casts and 104 base+offset
+expressions in `frontier_df4_menu.c`/`frontier_df4_banim_b.c` (same ROM
+address, ordinary cross-TU extern, no alias). Carved the gamerankings
+rank-weight/threshold tables (`gOverallRankWeightLookup`, `gOverallRankLookup`,
+`gGamerankings_0..3`) into `src/gamerankings.c`, byte-identical to fe8u's own
+values, out of blob 039's raw tail. Both needed their own manifest row (own
+object file) split out of the surrounding gapN section so the carve-out stays
+contiguous — the established pattern from D-prior anim-carve work
+(`layout/carved_rom.d/data_frontier4_df4_menu.tsv`).
+
+**Verification method for every item above:** exact byte-slice extraction +
+independent Python re-derivation of the claimed structure (TSA header/dims,
+LZ77 decompressed size from the embedded 3-byte length, palette bit15/JASC
+round-trip, OAM macro decomposition with an assert on every residual bit),
+cross-checked against `../fireemblem8u` where a named counterpart existed,
+then `make compare` (incremental) after each edit and a full `make clean &&
+make compare` + `make shiftcheck` before this decision was recorded. Every
+checkpoint was pushed as its own commit to `feat/issue-143-menu-assets`
+immediately after its own green build, per the parallel-carving playbook.
+
+**NOT done in this pass (explicitly deferred, not silently dropped):**
+- 037's true shop-data recut (`[0x08ABC768,0x08ABC808)`: `gDefaultShopInventory`,
+  `gShopDialogueOffsetLut`, `gShopPortraitLut`, `gProcScr_ShopFadeIn/Out`) —
+  investigation found `gShopDialogueOffsetLut`/`gShopPortraitLut` are **already
+  compiled** (region-same placement, not baseline aliases) but their *literal
+  values* (`FID_SHOP_ARMORY`/`VENDOR`/`SECRET` = 0x65/0x66/0x68) do not match
+  the raw JP ROM bytes at that address (0x66/0x67/0x69, confirmed by direct
+  ROM-file inspection) — yet `make compare` currently passes, meaning these
+  symbols are NOT presently linked at that exact address despite `nm` showing
+  matching addresses, which needs a careful independent read of the "masked"-
+  file placement mechanism (`layout/us_jp_funcmap.tsv`'s `masked` designation)
+  before touching it. Flagging this as a genuine correctness question for the
+  next pass rather than guessing.
+- 038/039's EventScr migration (136 JP EventScr arrays across new
+  `src/events_wm.c` + `src/events/*-wm.h` headers, the 74/30/2/10 relocation
+  contract, the 7 previously-missed pointer relocations, the 4 non-relocated
+  TEXTSHOW words) — far larger in scope than any single item completed above
+  and requires its own dedicated, carefully-sequenced pass.
+- World-map lookup extension (`Events_WM_BeginningTail`/`Events_WM_ChapterIntro`,
+  the `ldscript.template.txt` shiftable alias) and
+  `src/data/data_prologue_event_udefs.c`.
+- blob 037's remaining raw palette slices (4 font palettes + the 93-PNG
+  container's own internals, already region-different but working) were not
+  re-examined beyond the shop-data question above.
+
+**Result:** menu UNCERTAIN class 30 -> 23 (of the original 14-file set,
+001/005/017/021*/023/024/027/029/030/032/033 are now resolved or reduced to
+their proven floor; 021's untouched middle residual and 037/038/039's
+remaining raw regions keep the class above zero). `make clean && make compare`
+-> `fireemblem8.gba: OK`; `make shiftcheck` -> no high-confidence suspects;
+`scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK;
+`git diff --check` clean. Issue #143 remains open; `main` was not merged; no
+force-push occurred. If a concurrently-integrated sibling branch has already
+claimed D389, the integrator should renumber this entry, not the work it
+describes.
