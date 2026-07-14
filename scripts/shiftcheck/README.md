@@ -52,7 +52,7 @@ result is recorded in the V1 PR.
 | `make shiftcheck-talk` | 1c | Rejects ABS32 relocations in packed battle/defeat-talk fields other than the real event-pointer member. It parses only relocations **sourced from `.rom`**; `.debug_*` offsets that merely overlap the GBA numeric range are excluded. |
 | `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish. |
 | `make shiftcheck-glyphs` | 1e | Structural glyph-table audit (issue #143): walks the ACTUAL `TextGlyphs_System`/`TextGlyphs_Talk` linked lists in the built ROM (schema-known 0xC0 heads + `struct Glyph.sjisNext` chains, cycle-detected, ROM-range-checked) and requires a real relocation at every non-null pointer word. Catches a blind spot Layers 1 and 1d both miss: a raw literal in a single-glyph residue object never looks "MIXED" to the Layer-1 classifier, and a plain C `u32[]` numeric initializer (agbcc never relocates it) is invisible to Layer 1d's `.4byte`-token text scan. `--shifted-gba` adds an optional A/B proof against a `+shift` ROM (`build_shifted_rom.sh`): every reachable glyph's links track `+shift` and its payload bytes stay identical. |
-| `make shiftcheck-procscr` | 1f | Structural `struct ProcCmd` script audit (issue #143 follow-up, broadened per D378, object-extent/terminal-opcode/NOLOAD-corrected per D379, `nm -S` zero-size parsing fixed + zero-size backstop per D380): strict-decodes a ProcCmd prefix from EVERY ROM object symbol's address (including 3-field zero-size `nm -S` lines, now parsed instead of silently dropped, with a deterministic backstop recovering 364 previously-invisible scripts), bounded to that symbol's OWN `nm` size (not just symbols the C source types as `struct ProcCmd`, and never crossing into a neighboring object), and requires a real relocation at every non-null pointer-bearing `dataPtr` field (the opcode set mirrors `include/proc.h`'s `PROC_*` macro table; four opcodes -- `PROC_REPEAT`/`GOTO`/`JUMP`/`BLOCK` -- are runtime-verified terminal, so a script may end without a trailing `PROC_END`). Same blind spot as Layer 1e in a second consumer: `PROC_NAME((const void*)0x08..)` compiles to an unrelocated word. `--shifted-gba` adds the same optional A/B proof. |
+| `make shiftcheck-procscr` | 1f | Structural `struct ProcCmd` script audit (issue #143 follow-up, broadened per D378, object-extent/terminal-opcode/NOLOAD-corrected per D379, `nm -S` zero-size parsing fixed + zero-size backstop per D380, hard nonzero-size boundary invariant + physical-address-truthful denominators per D381): strict-decodes a ProcCmd prefix from EVERY ROM object symbol's address (including 3-field zero-size `nm -S` lines, now parsed instead of silently dropped, with a deterministic backstop recovering 363 previously-invisible scripts, hard-bounded so it never enters any part of a neighboring nonzero-size object's own bytes), bounded to that symbol's OWN `nm` size (not just symbols the C source types as `struct ProcCmd`, and never crossing into a neighboring object), and requires a real relocation at every non-null pointer-bearing `dataPtr` field, deduplicated by physical ROM source address across overlapping/nested prefixes for a truthful denominator (the opcode set mirrors `include/proc.h`'s `PROC_*` macro table; four opcodes -- `PROC_REPEAT`/`GOTO`/`JUMP`/`BLOCK` -- are runtime-verified terminal, so a script may end without a trailing `PROC_END`). Same blind spot as Layer 1e in a second consumer: `PROC_NAME((const void*)0x08..)` compiles to an unrelocated word. `--shifted-gba` adds the same optional A/B proof, also physical-address-deduplicated. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
 | `make shiftcheck` | static + tests | The complete non-emulator gate above. |
@@ -249,36 +249,53 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
 - `audit_procscr_relocs.py` — Layer 1f: structural `struct ProcCmd` script
   relocation audit (issue #143 follow-up, broadened per D378, object-extent/
   terminal-opcode/NOLOAD-corrected per D379, `nm -S` zero-size-line parsing
-  fixed + deterministic zero-size backstop per D380) + optional
-  `--shifted-gba` A/B proof. Strict-decodes a `struct ProcCmd` prefix (opcode
-  <=0x19; non-pointer op ptr must be zero; pointer op nonzero ptr must be
-  ROM-range), bounded STRICTLY to each candidate's own `nm` size (never
-  crosses into a neighboring object), from EVERY ROM object symbol's address
-  (deduplicated by address), not just symbols the C source declares as
-  `struct ProcCmd` -- some genuine scripts are declared as plain `u32[]` and
-  only cast at the `Proc_Start()` call site, invisible to a source-type scan.
-  A script may terminate in a valid zero `PROC_END` OR in one of four
+  fixed + deterministic zero-size backstop per D380, hard nonzero-size
+  boundary invariant + physical-address-truthful denominators per D381) +
+  optional `--shifted-gba` A/B proof. Strict-decodes a `struct ProcCmd`
+  prefix (opcode <=0x19; non-pointer op ptr must be zero; pointer op nonzero
+  ptr must be ROM-range), bounded STRICTLY to each candidate's own `nm` size
+  (never crosses into a neighboring object), from EVERY ROM object symbol's
+  address (deduplicated by address), not just symbols the C source declares
+  as `struct ProcCmd` -- some genuine scripts are declared as plain `u32[]`
+  and only cast at the `Proc_Start()` call site, invisible to a source-type
+  scan. A script may terminate in a valid zero `PROC_END` OR in one of four
   runtime-verified TERMINAL_OPCODES (`PROC_REPEAT`/`GOTO`/`JUMP`/`BLOCK`)
   when that record is truly the object's last one; a NOLOAD "phantom
   placement" candidate (see `load_noload_ranges`) is trusted when it decodes
   cleanly and only excluded (not reported malformed) when it does not; a
-  genuinely truncated candidate is retried against its immediately-following
-  same-section object(s) and, if THAT verifiably terminates, promoted as a
-  `split_continuations` entry rather than guessed. `nm -S` emits both a
-  4-field sized line and a 3-field ZERO-size line (no size column at all,
-  not "0"); `load_rom_symbols`/`parse_nm_s_output` parse both shapes
-  explicitly (an earlier `len(parts) < 4` guard silently dropped every
-  3-field line, making `zero-size (skipped): 0` a false report). A
-  zero-size candidate is additionally retried, bounded up to the end of up
-  to 4 following candidate addresses (the same `extended_bound` mechanism as
-  split-continuation verification); if that reaches a full valid
-  termination it is promoted and reported as `zero_size_recovered` (364
+  genuinely truncated NONZERO-size candidate is retried extended into the
+  SINGLE immediately following candidate that carries its own nonzero
+  declared size (`extended_bound`/`first_nonzero_neighbor`; zero-size labels
+  in between are skipped, never a boundary themselves) and, if that
+  verifiably terminates AND its consumed range does not cross into a SECOND
+  independently-sized object (`crossed_nonzero_objects` -- more than one
+  crossed object means REJECTED into `boundary_rejected`, never promoted),
+  promoted as a `split_continuations` entry. `nm -S` emits both a 4-field
+  sized line and a 3-field ZERO-size line (no size column at all, not "0");
+  `load_rom_symbols`/`parse_nm_s_output` parse both shapes explicitly (an
+  earlier `len(parts) < 4` guard silently dropped every 3-field line, making
+  `zero-size (skipped): 0` a false report). A zero-size candidate (owns NO
+  bytes of its own) is additionally retried bounded up to the START of the
+  first following candidate with its OWN nonzero size (`zero_size_boundary`
+  -- that neighbor's bytes are NEVER entered, not even partially, unlike the
+  single-hop split-continuation case above); if that reaches a full valid
+  termination it is promoted and reported as `zero_size_recovered` (363
   legitimate scripts recovered fixed-tree, 0 missing/malformed among them);
   otherwise it stays an honestly-reported `zero_size` entry, and any
   remaining Proc-suggestively-named zero-size candidate is printed by name
   every run (`ZERO-SIZE-UNRECOVERED`) as a reproducible evidence inventory,
-  never silently omitted. Walks only the schema-known pointer-bearing
-  opcodes from `include/proc.h`'s `PROC_*` table.
+  never silently omitted. An earlier draft reused the split-continuation
+  bound for the zero-size backstop too and reintroduced the exact
+  cross-object annexation bug through this path (demonstrated:
+  `gProcScr_PhaseIntroUnk`/`gProcScr_ShopFadeIn`); the hard nonzero-size
+  boundary fixes both. Relocation-completeness totals are deduplicated by
+  PHYSICAL ROM source address across all (possibly overlapping/nested)
+  prefixes via `unique_pointer_slots` -- the non-unique per-prefix totals are
+  kept but clearly labeled, and the deduplicated `unique_non_null_pointer_slots`/
+  `unique_missing` figures are the actual gate denominator; NULL
+  pointer-bearing fields are reported in their own separate, deduplicated
+  count. Walks only the schema-known pointer-bearing opcodes from
+  `include/proc.h`'s `PROC_*` table.
 - `test_audit_procscr_relocs.py` — focused tests (synthetic ROM fixtures, no
   toolchain needed) for object-extent bounding, each terminal opcode ending a
   script correctly (including mid-object continuing to a real `PROC_END`),
@@ -288,9 +305,13 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
   ptr/pointer-out-of-range rejection, non-terminating/runaway decode,
   unexpected-relocation-on-non-pointer-field, alias/dedup-by-address, clean-
   prefix behavior, the `nm -S` 3-field/4-field parser (`ParseNmSOutputTest`,
-  fed realistic `nm -S` text directly, not pre-built tuples), and the
-  zero-size backstop's recovery/non-recovery/disabled/no-following-candidate
-  cases (`ZeroSizeBackstopTest`).
+  fed realistic `nm -S` text directly, not pre-built tuples), the zero-size
+  backstop's recovery/non-recovery/disabled/no-following-candidate cases
+  (`ZeroSizeBackstopTest`), the `PhaseIntroUnk`/`ShopFadeIn`/consecutive-
+  zero-size-label boundary regressions (`ZeroSizeBackstopBoundaryRegressionTest`),
+  a synthetic two-object annexation rejection (`BoundaryCrossingAuditTest`),
+  and physical-address deduplication + null/non-null separation
+  (`UniquePointerSlotsTest`).
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"
