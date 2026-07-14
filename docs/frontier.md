@@ -919,6 +919,37 @@ Final counts are **59,485 ROM ABS32, 5,678 FUNC targets, 0 function interiors,
 0 compressed-anchor failures, and 0 AREA-scalar failures**. This completes only these proven
 reopened-checklist classes; it does **not** claim issue #143 is fully closed.
 
+### Deterministic graphics/source-format invariant audit (`graphicscheck`) — added and gated (#143-adjacent, D382, 2026-07-14)
+
+New BLOCKING `make graphicscheck` (`scripts/audit_graphics_forms.py`) validates
+the *editable source* behind every graphics asset (PNG mode/dims/tile order,
+JASC `.pal` header/count exactly like `gbagfx`'s LF/CRLF parsing, `.tsa.bin`/
+`.map.bin`/`*_map.bin` structure, FETSATOOL per-tile bank/mask invariants) as a
+companion to `make compare`'s byte-identity oracle — format/shape is gated
+here, byte identity remains `compare`'s exclusive job. A companion
+`graphicscheck-relocs` rejects a relocation SLOT landing inside a graphics
+payload or `AnimSprite_*` command array (targets *into* an asset are allowed;
+only slots *inside* payload bytes are hard failures); `graphicscheck-tests`
+wires 96 focused fixture-only unit tests into `make shiftcheck`/CI exactly
+once, racing nothing.
+
+Integrated-tree counts (measured fresh on this D381 main): `map_bin_total:
+1061` (not the branch's own stale-base `1060` — the D379 split already
+replaced `gUnkData_26.tsa.bin` with 13 successors including the
+`Tilemap_MultiBootSendBg_map.bin` `*_map.bin` file, +1 real member), all 4
+`gUnkData_26` post-split successors mandatory and present,
+`tsa_sub_8021afc_headerless_map: 1` (32x24 headerless map, routed ahead of
+generic TSA-header parsing), 0 named TSA exceptions, 2,346 `AnimSprite_*`/
+`AnimScr_*` labels (1,461 explicit + 885 derived), 5,508 linked
+`graphics/`-prefixed INCBIN names (0 unlinked — a fresh count on this tree,
+not the verifier's older `D380`-snapshot `5,490`), 0 payload-relocation
+overlap violations, exactly 1 pre-existing orphan `.pal` and 1
+documentation-preview PNG (both explicitly enumerated/regression-guarded, not
+silently skipped). `graphicscheck: OK (zero defects)` on both the plain and
+`--relocs-check` passes. D380's **59,500 ROM ABS32 / 5,678 FUNC / 0
+interiors / 0 header** and D378's **1,075 skipped / 865 `AnimSprite_*` /
+gate 0** are unaffected by this lane. See decisions.md **D382**.
+
 ### Six-axis scorecard refresh (axis-2 refreshed 2026-07-13; axis-3/6 refreshed 2026-07-09; verbatim source = `python3 scripts/calcprogress.py`)
 | # | Axis | Value | Detail |
 |---|---|---|---|

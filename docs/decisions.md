@@ -11888,3 +11888,149 @@ high-confidence shiftability suspects.
 (follow-up appended in place, no new number); renumbered at integration to
 `D381` because `main` already owned `D376`-`D380` by the time this branch
 landed.
+
+## D382 — deterministic graphics/source-format invariant audit (`graphicscheck`) (2026-07-14)
+
+**Scope.** Integrates `feat/issue-143-graphics-gate` (5 commits): a new BLOCKING
+`make graphicscheck` gate (`scripts/audit_graphics_forms.py`) that validates the
+*editable source* behind every graphics asset is well-formed -- PNG mode/dims,
+per-tile pixel indices a 4bpp/FETSATOOL pack would silently truncate, JASC
+`.pal` header/count, `.tsa.bin`/`.map.bin`/`*_map.bin` structure -- as a
+companion to `make compare`'s byte-identity oracle, which proves the ROM's
+BYTES are right but says nothing about whether the SOURCE that produced them
+is well-formed. `make compare` now depends on `graphicscheck` (both BLOCKING);
+a companion `graphicscheck-relocs` (reuses `$(RELOCS_ELF)`) rejects a
+relocation SLOT landing inside a graphics/palette/TSA/map/FETSA INCBIN payload
+or an `AnimSprite_*` command array (a real pointer overlapping live asset
+bytes would corrupt that payload the instant the ROM ever shifts, even though
+today's bytes match); `graphicscheck-tests` wires the audit's own 96 focused
+unit tests (fixture-only, no toolchain/ROM) into `make shiftcheck`/CI exactly
+once, racing nothing (pure Python, no `$(RELOCS_ELF)`/`$(ELF)` dependency).
+
+**Makefile/CI merge.** The branch forked before `shiftcheck-codeliterals`
+(D377), `shiftcheck-selfrefs` (D378), and this repo's since-updated
+`shiftcheck-ptraudit` (D380, now `--relocs-elf`-aware) existed, and its own
+`shiftcheck:`/`.PHONY` prerequisite lines conflicted with all three at
+cherry-pick time. Resolved by semantic union, preserving every existing layer
+in its established order and appending the new graphics layers immediately
+after `shiftcheck-selfrefs` and before the pre-existing `shiftcheck-tests`:
+`shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk
+shiftcheck-ptraudit shiftcheck-codeliterals shiftcheck-selfrefs
+graphicscheck-relocs graphicscheck-tests shiftcheck-tests`. `compare: $(ROM)
+graphicscheck` was a clean addition (no other lane touches `compare`).
+`.github/workflows/ci.yml`'s single existing `make shiftcheck` step already
+exercises both new graphics layers -- no CI file changes needed beyond a
+comment update carried from the branch.
+
+**Integrated-tree counts (measured fresh on this D381 main, not the branch's
+own stale pre-integration base or the verifier's older D380 simulation).**
+`python3 scripts/audit_graphics_forms.py` (`graphicscheck`):
+```
+btl_bg_pair_ok: 6 / btl_bg_pairs_total: 6
+fetsatool_png_ok: 111
+generic_4bpp_roundtrip_ok: 3181
+gunkdata_26_post_split_complete: 1 (gunkdata_26_post_split_successor_ok: 4/4)
+jasc_pal_header_ok: 611
+map_bin_ok: 1061 / map_bin_total: 1061
+num_tiles_overrides_seen: 14
+orphan_pal_no_gbapal: 1
+pal_gbapal_roundtrip_ok: 610 / pal_total: 611
+palette_only_roundtrip_ok: 42
+png_basic_ok: 3335 / png_total: 3335
+  (png_fetsatool 111, png_generic_4bpp 3181, png_generic_1bpp/8bpp 0,
+   png_palette_only 42, png_documentation_preview 1)
+tsa_total: 203 (tsa_exact 142, tsa_plus2 59,
+  tsa_menu_soundroom_4_manifest 1, tsa_sub_8021afc_headerless_map 1)
+graphicscheck: OK (zero defects)
+```
+`python3 scripts/audit_graphics_forms.py --relocs-check --elf fireemblem8.elf
+--relocs-elf fireemblem8_relocs.elf` adds:
+```
+reloc_animsprite_names_total: 2346 (1461 explicit + 885 derived)
+reloc_payload_incbin_names_declared: 5508 / linked: 5508 / unlinked: 0
+reloc_payload_overlap_violations: 0
+reloc_rom_abs32_total: 59500
+graphicscheck: OK (zero defects)
+```
+
+**`map_bin_total` 1060 vs 1061 (the verifier's only non-blocking correction).**
+The branch's own final commit was verified on its stale pre-integration base,
+where `graphics/misc/gUnkData_26.tsa.bin` was still the intact 21764B
+monolith (pre-D379-split state) and reported `map_bin_total: 1060`. On this
+integrated D381 tree the D379 (tsa-outlier) split has already landed:
+`gUnkData_26.tsa.bin` no longer exists, replaced by 13 semantic successors,
+one of which is the raw BG tilemap `Tilemap_MultiBootSendBg_map.bin`
+(`*_map.bin` spelling) -- so the generic headerless-map family gains exactly
+one more real, passing member versus the branch-local count. **Integrated
+`map_bin_total = 1061`, not 1060** (`map_bin_ok` matches exactly, 0 defects).
+This is not a discrepancy to resolve; it is the correct, expected effect of
+the two lanes stacking, exactly as `D379`'s own evidence documents the
+`Tilemap_MultiBootSendBg_map.bin` rename that supplies this file.
+
+**Linked-INCBIN denominator (5,508, not the verifier's 5,490).** The
+verifier's independent build was against an older `D380` main snapshot; every
+subsequent lane integrated onto `main` before this one (D381 ending-assets,
+plus this branch's own new asset-adjacent checks) legitimately changes the
+set of `graphics/`-prefixed INCBIN declarations the audit discovers and
+their ELF-linked-name overlap. Rerunning fresh on the actual current
+integration target (this D381 main) is authoritative: **5,508 declared / 5,508
+linked / 0 unlinked**, independent of file extension, matching every
+graphics-prefixed `INCBIN_U8/U16/U32` call site in the currently-linked
+object set.
+
+**Behavioral scope, stated precisely.** `graphicscheck`/`graphicscheck-relocs`
+validate FORMAT and SHAPE (dimensions, tile counts, header fields, palette
+counts, relocation-slot placement) of the editable source and its build
+outputs -- they do **not** independently prove the built ROM's bytes are the
+original JP bytes; that remains `make compare`'s exclusive job (SHA-1 vs
+`checksum.sha1`). The two gates are complementary and both BLOCKING, not
+redundant: a source-format defect fails `graphicscheck` even when `compare`'s
+bytes still happen to be correct this build (e.g. an equivalent-output PNG
+with the wrong declared bit depth); a byte regression still fails `compare`
+regardless of format-audit results.
+
+**Explicitly drift-guarded exceptions (not silently ignored).** Two long
+pre-existing assets have narrow, evidence-scoped exceptions rather than a
+blanket pass: (1) exactly one orphan `.pal` JASC source with no `.gbapal`
+build product (`orphan_pal_no_gbapal: 1`) is enumerated and asserted, not
+skipped by omission; (2) exactly one documentation-preview PNG
+(`png_documentation_preview: 1`, not consumed by any build rule) is likewise
+named and counted. Both are regression-tested: if either count drifts (a new
+untracked orphan appears, or the named file starts/stops matching), the gate
+fails rather than silently absorbing the change.
+
+**No named TSA exceptions remain.** `TSA_NAMED_EXCEPTIONS` is an intentional
+empty `frozenset` (mechanism kept for a genuinely future-unresolved case, zero
+current entries). `graphics/misc/gUnkData_26.tsa.bin`'s former exception was
+replaced by a real pre/post migration-state validator
+(`validate_gunkdata_26_monolith` / `check_gunkdata_26_transition`): POST-SPLIT
+(this tree's actual state) requires all four successors present, none
+optional. `graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin` is routed to
+a dedicated structural validator (`validate_sub_8021afc_headerless_map`)
+proving it as an intentionally headerless 1536B/768-u16-entry (32x24) screen-
+entry table per its real runtime-rebase consumer (`src/sub_8021AFC.c`) --
+proven ahead of the generic TSA-header formula by a regression test whose
+bytes would otherwise coincidentally parse as a plausible 13x59 standard TSA.
+Its sibling `Tsa_Sub8022200.tsa.bin` needs no special-casing (ordinary exact
+form). Both `*.map.bin` and the repository's `*_map.bin` spelling are
+discovered by the same generic family (43 previously-unaudited `*_map.bin`
+files gained coverage, all passing).
+
+**Verification.** 96/96 focused `graphicscheck` unit tests pass (fixture-only,
+covers PNG tile order incl. L-mode 4bpp index inversion, JASC LF/CRLF
+parsing exactly like `gbagfx`, TSA exact/+2/named-exception/monolith-
+transition/headerless-map classification, FETSATOOL per-tile bank/mask
+invariants, hermetic git-environment isolation, and FAILURE fixtures for
+each class); `make clean && make compare` -> `graphicscheck: OK (zero
+defects)` -> `fireemblem8.gba: OK`; full `make shiftcheck` passes all layers
+(133 total unit tests across `graphicscheck-tests` + `shiftcheck-tests`, each
+suite running exactly once); D380's function-relocation/scalar/header
+classes remain **59,500 ROM ABS32 / 5,678 FUNC targets / 0 interiors / 0
+header-domain relocations**; D378's self-ref gate remains **8 resolved / 267
+hit words / 0 unresolved / gate 0**, with **1,075 zero-size opaque symbols
+skipped (865 `AnimSprite_*`)** unaffected by this lane.
+`scripts/check_incbin_deps.py`, `scripts/check_layout.py`, and
+`scripts/check_selfcontained.py` (100.00%, 0 baserom incbins) all pass.
+
+This decision documents a #143-adjacent build-system/CI hardening lane; it
+does not declare issue #143 fully closed.
