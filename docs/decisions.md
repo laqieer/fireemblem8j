@@ -11663,3 +11663,48 @@ UNCERTAIN; this was a naming/boundary correction, not a new file
 conversion). Issue #143 remains open; `main` was not merged; no force-push
 occurred. If a concurrently-integrated sibling branch has already claimed
 D380, the integrator should renumber this entry, not the work it describes.
+
+## D381 — Events_WM_Beginning/ChapterIntro: canonical variables.h declaration + dead-extern cleanup (issue #143 menu lane, integration-renumerable) (2026-07-14)
+
+**Scope.** Style/organization follow-up to D380, per a further "menu-descriptor-re"
+recipe message. Independently verified every substantive numeric/structural
+claim in that message against the already-committed D379/D380 state before
+making any change: the Beginning[1..58]/ChapterIntro[1..58] name sequences,
+the 907BC8-90814C carved_rom.tsv row, the `Events_WM_Beginning =
+gChapterDataAssetTable + 0x3AC` linker alias, the 116 lookup relocations
+(confirmed via `arm-none-eabi-objdump -r` on `data_chapter_asset_table.o`'s
+real `.data` section: 350 total - 234 pre-existing `gChapterDataAssetTable`
+relocations = 116), and the full prologue-udefs recipe (offsets, names,
+relocation counts) all matched **exactly** what was already committed --
+this message changed nothing structural, only two presentational points:
+
+1. Declare `Events_WM_Beginning`/`Events_WM_ChapterIntro` in the shared
+   `include/variables.h` (as `const void *Events_WM_Beginning[59];` /
+   `Events_WM_ChapterIntro[59];`) instead of as a local extern in the one
+   real consumer (`src/worldmap_main_080BF178.c`), matching
+   `gChapterDataAssetTable`'s own `const void*` element type (the two arrays
+   alias into the same storage, so sharing its type is more consistent than
+   the `const EventScr * const` used since D379).
+2. Removed the local extern from `worldmap_main_080BF178.c`.
+
+**Regression caught and fixed before commit.** Moving the declaration into
+`variables.h` (included by every translation unit via `global.h`) collided
+with ~27 pre-existing dead `extern u16 * Events_WM_Beginning[];`/
+`ChapterIntro[];` declarations left over in `masked_*.c`/`worldmap_main_*.c`/
+`exact_080be6a0.c` (harvested-but-unused decomp boilerplate, orphaned since
+the D379 commit deleted their only real user, the old
+`frontier_df4_banim_b_073_907F78` array). A conflicting-extern-type compile
+error (`src/exact_080be6a0.c`) surfaced this on the first `make compare`
+after the change. Confirmed each of the 28 affected files had *exactly* two
+occurrences of the two names (both dead externs, zero real uses) before
+deleting those two lines from each file.
+
+**Verification.** `make clean && make compare` -> `fireemblem8.gba: OK` (sha1
+`7da0456035366aa18414faa79d8fe7649f03c1ed`) via a genuine from-scratch
+rebuild after the fix. `make shiftcheck` -> PASS, 0 HIGH suspects.
+`scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK. `git diff
+--check` clean. No manifest change (pure declaration/type cleanup, same
+ROM bytes throughout). Issue #143 remains open; `main` was not merged; no
+force-push occurred. If a concurrently-integrated sibling branch has
+already claimed D381, the integrator should renumber this entry, not the
+work it describes.
