@@ -1,7 +1,6 @@
-/* De-pointered from data/residual/EventListScr_Ch16b_Location.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* De-pointered from data/residual/EventListScr_Ch16b_Location.bin.
+ * Real pointers remain relocatable symbol references; packed AREA command words
+ * such as 0x08100009 remain raw scalars. Byte-identical to baserom. */
 	.section .rodata.dat_EventListScr_Ch16b_Location_ref, "a", %progbits
 	.global EventListScr_Ch16b_Location
 EventListScr_Ch16b_Location:
@@ -20,7 +19,7 @@ EventListScr_Ch16b_Location:
 	.4byte 0x09160011
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xA8
-	.4byte sBanimEkrPopupProcNames + 0x1298D
+	.4byte 0x08100009
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xA8
 	.4byte 0x10130A0F

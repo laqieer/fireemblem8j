@@ -510,9 +510,10 @@ shiftcheck-offsets: $(RELOCS_ELF) $(ROM) $(MAP)
 shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/scan_talk_table_relocs.py --elf $(RELOCS_ELF) --ref-elf $(ELF)
 
-# Layer 1d: reject source-level pointer-classification mistakes plus any ROM ABS32
-# relocation to an STT_FUNC symbol that resolves anywhere except the exact even/Thumb
-# entry. The latter must use the relocation-bearing final ELF, not source-text guesses.
+# Layer 1d: reject source-level pointer-classification mistakes plus false ROM
+# ABS32 decodes identified from the relocation-bearing final ELF: STT_FUNC
+# interiors, zero-size semantic resources with huge addends, and proven packed
+# AREA/header/compressed-stream scalar words.
 shiftcheck-ptraudit: $(RELOCS_ELF) $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) \
 	    --relocs-elf $(RELOCS_ELF) --fail-on-suspects

@@ -20,10 +20,10 @@ two things changed (see `docs/decisions.md` D313):
    shiftcheck-ptraudit + shiftcheck-codeliterals + shiftcheck-selfrefs +
    shiftcheck-tests`.** These read the linked ROM + the `--emit-relocs` ELF + the
    `.map`, audit packed talk metadata and source pointer classifications
-   (including STT_FUNC-targeting ABS32 relocations), lexically reject raw
-   numeric C literal-pool pointers that have no relocation, decode opaque
-   self-referential embedded-data words against a narrow evidence manifest, and
-   run focused scanner tests.
+   (including STT_FUNC-targeting ABS32 relocations and proven packed-scalar
+   false relocations), lexically reject raw numeric C literal-pool pointers
+   that have no relocation, decode opaque self-referential embedded-data words
+   against a narrow evidence manifest, and run focused scanner tests.
 
 2. **Layer 2 (`shiftcheck-diff`) and Layer 3 (`shiftcheck-run`) are NON-gating and,
    for Layer 2, NOT APPLICABLE to fe8j as-is.** fe8u's differential shift injects
@@ -53,7 +53,7 @@ result is recorded in the V1 PR.
 | `make shiftcheck-static` | 1 | Relinks with `ld --emit-relocs`, then flags every ROM-pointer-looking word that carries **no relocation**. Ranked by signal (see below). |
 | `make shiftcheck-offsets` | 1b | Of the words that *do* relocate, flags any relocated against the **wrong base symbol** — `ResourceA + hardcoded offset` that lands at the start of a different resource B (`scan_offsets.py`). |
 | `make shiftcheck-talk` | 1c | Rejects ABS32 relocations in packed battle/defeat-talk fields other than the real event-pointer member. It parses only relocations **sourced from `.rom`**; `.debug_*` offsets that merely overlap the GBA numeric range are excluded. |
-| `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish, plus (from `fireemblem8_relocs.elf`) false ROM ABS32 decodes: any relocation to an `STT_FUNC` symbol whose linked word is not the exact even or Thumb entry (function-interior/addend targets), proven packed AREA/TileAnimations3/compressed-stream scalar words, and unaudited ROM-header-domain targets. |
+| `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish, plus (from `fireemblem8_relocs.elf`) false ROM ABS32 decodes: non-entry `STT_FUNC` targets (function-interior/addend targets), named zero-size semantic resources with addends ≥`0x10000`, and the proven packed AREA/TileAnimations3/LZ-stream scalars. The AREA assertion remains active if its provider later gains an ELF size; all `pad_BC3A00` targets fail because consumer proof shows they are compressed bytes. Other unproven `pad_`/`gap_` anchors remain REVIEW-only. |
 | `make shiftcheck-codeliterals` | 1e | Lexically tokenizes every linked code C source (excluding `src/data/**`) for standalone hex integer literals, then rejects numeric values in `[0x08000000, 0x0A000000)`. This catches 7/8/extra-leading-zero and suffixed spellings of agbcc literal-pool words emitted **without** `R_ARM_ABS32`; only the three declaration/call-scoped packed-value contexts documented by D377 are accepted. |
 | `make shiftcheck-selfrefs` | 1f | Decodes every structureless-opaque symbol's built-ROM bytes for self-referential words and checks each hit against a narrow evidence manifest (`scripts/shiftcheck/opaque_selfref_evidence.json`); unresolved candidates or evidence drift fail `scripts/audit_pointers.py --true-debt --gate`. Zero-size symbols are never extended to the next global. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
@@ -237,13 +237,17 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
 - `audit_pointer_classification.py` — Layer 1d source heuristics plus a
   dependency-free ELF32 pass over the relocation-bearing final ELF. It resolves
   each ROM-backed `R_ARM_ABS32` against the exact relocation symbol-table entry;
-  `STT_FUNC` targets must link to `S_even` or `S_even|1`. Non-ALLOC/debug
-  relocation sections and OBJECT interiors are outside this specific rule.
+  `STT_FUNC` targets must link to `S_even` or `S_even|1`; large-addend zero-size
+  semantic resources and the proven AREA/TileAnimations3/LZ-stream packed
+  scalars are separate high-confidence classes. Non-ALLOC/debug relocation
+  sections and OBJECT interiors are outside the function-specific rule.
 - `test_scan_talk_table_relocs.py` — focused tests for `.debug_*` offset collisions,
   genuine packed-field failures, and absolute `.rom` offsets.
 - `test_audit_pointer_classification.py` — exact even/Thumb function entries,
   function interiors, OBJECT interiors, debug/non-ROM section filtering, and
-  rejection of a non-relocation-bearing ELF.
+  rejection of a non-relocation-bearing ELF, plus zero-size large-addend,
+  unproven placement-anchor review, proven compressed-anchor rejection,
+  sized-provider AREA scalar, and header-scalar inventory cases.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"
