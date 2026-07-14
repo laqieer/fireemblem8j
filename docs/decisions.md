@@ -12564,3 +12564,121 @@ Tracked on the same issue #143 thread as D383/D384/D385/D386. Same
 numbering-collision note applies: D387 (this entry) is ALSO a locally-scoped
 number and must be renumbered by the integrator alongside D383-D386 against
 `main`'s actual next-available sequence at merge time.
+
+## D388 — D387's zero-size backstop reintroduced the exact cross-object annexation bug through a different path; add a hard nonzero-size boundary invariant + a general multi-object-crossing audit, and make the relocation-completeness/shifted-A/B denominators physical-address-truthful (2026-07-14)
+
+**The defect.** D387's zero-size backstop reused `extended_bound()` -- the
+SAME multi-hop, full-neighbor-size bound already used (and narrowly
+verified) for split-continuations -- for zero-size candidates too. But a
+zero-size candidate owns NO bytes of its own at all, unlike a genuinely
+truncated nonzero-size candidate with a real, verified single-neighbor
+precedent; reusing the permissive bound let the walk read straight through
+an entire independently-sized neighboring object whenever ITS bytes also
+happened to decode validly (the exact cross-object bug D386 already fixed
+once, reintroduced through this different code path). Two demonstrated real
+regressions: `gProcScr_PhaseIntroUnk` (truly 16 B / 2 records, per
+`data_085C3348.s`) swallowed the ENTIRETY of the immediately following,
+separately nonzero-sized `gProcScr_PhaseIntroText` (72 B) into one bogus
+88 B / 11-record blob; `gProcScr_ShopFadeIn` (a zero-size, absolute-typed
+sub-label sitting inside the tail of its enclosing `frontier_df4_menu_037_AB7144`
+object) walked through the ENTIRE following sibling
+`frontier_df4_menu_037_AB7144_1` object, annexing 56 B that was never its
+own -- explicitly "a known carve split (first command word before the
+provider boundary)", not license for a generic global-next-symbol walk.
+
+**Fix 1 — a hard, non-crossable boundary for the zero-size backstop.**
+Replaced the zero-size backstop's bound with `zero_size_boundary()`
+(built on a new `first_nonzero_neighbor()` helper): the ceiling is the
+START address of the first subsequent candidate that carries its OWN
+nonzero declared `nm` size -- that candidate's bytes are NEVER entered, not
+even partially. Purely zero-size labels in between are skipped over (they
+own no bytes and are not boundaries themselves), but the walk always stops
+the instant a nonzero-size candidate is found. Re-run on the real ROM:
+`gProcScr_PhaseIntroUnk` now decodes exactly 16 B / 2 records (matching its
+true content exactly); `gProcScr_ShopFadeIn` now has only a 4 B window --
+below one whole 8 B record -- so it correctly stays unrecovered rather than
+annexing its neighbor (moved from `zero_size_recovered` back into the
+honest `zero_size` bucket, and into the printed Proc-like-unrecovered
+evidence inventory, now 9 names instead of 8).
+
+**Fix 2 — split-continuation kept its ability to read into ONE verified
+neighbor, but now only ONE, and audited.** `extended_bound()` (used only for
+genuinely truncated NONZERO-size candidates, e.g. `gProcScr_GameControl`/
+`gProcScr_CharacterEndings`) still extends into the single immediately
+following nonzero-size candidate's full declared size (skipping over
+zero-size labels first, exactly as before for `GameControl`, which needs no
+neighbor's bytes at all) -- but never walks past that first nonzero-size
+candidate to a second, third, or fourth one the way the old multi-hop loop
+could. A NEW general safety net, `crossed_nonzero_objects(addr,
+consumed_end)`, is applied to EVERY promotion attempt (both mechanisms):
+every OTHER candidate address strictly inside the consumed byte range that
+carries its own nonzero declared size is a genuinely distinct,
+independently-sized sibling object; more than one such crossed object means
+the decode is annexing multiple unrelated objects, not continuing one
+script, and the promotion is REJECTED -- reported in a new
+`boundary_rejected` bucket (distinct from `truncated`, never silently
+folded in without a reason, never promoted into `prefixes`). Re-run against
+the real ROM: both `gProcScr_GameControl` and `gProcScr_CharacterEndings`
+remain correctly promoted as split continuations (0 boundary rejections
+found for either), confirming the general audit does not regress the two
+already-verified legitimate cases.
+
+**Fix 3 — physical-address-truthful relocation-completeness and shifted A/B
+denominators.** A verified split-continuation's target range can ALSO
+independently form its own standalone prefix from its own start address (a
+genuinely legitimate double-decode of the same shared physical bytes, e.g.
+`frontier_df4_ending_gap1_r0` decodes both as `gProcScr_CharacterEndings`'s
+tail AND on its own); the old per-prefix-instance totals counted that
+shared physical slot address once per prefix that touched it, inflating the
+apparent denominator (the source of the previously-unexplained 4,743-vs-
+4,730 discrepancy between the main audit and the shifted-A/B section). New
+`unique_pointer_slots(prefixes, want_null=False)` deduplicates every
+pointer-bearing slot event by its PHYSICAL ROM source address across ALL
+prefixes before counting; the non-unique per-prefix `records`/`pointer_slots`/
+`relocated` totals are kept (clearly labeled "non-unique, per-prefix-instance
+total") alongside the new deduplicated `unique_non_null_pointer_slots`/
+`unique_relocated`/`unique_missing` figures, which are now the TRUTHFUL gate
+denominator (`overall_bad` is computed from `unique_missing`, not the raw
+non-deduplicated count). NULL pointer-bearing fields are deduplicated and
+reported in a SEPARATE `null_pointer_bearing_fields` count, never folded
+into the non-null denominator. The shifted-A/B section was rewritten to
+check each unique physical slot exactly once against the SAME deduplicated
+sets, eliminating the discrepancy at its root rather than merely footnoting
+it.
+
+**Re-verified fixed-tree result (this round).** `candidate symbol
+addresses: 34,214; NOLOAD (skipped): 0; zero-size (skipped, honest):
+11,110 (+1 vs D387 -- `ShopFadeIn` moved back); zero-size (recovered): 363
+(-1 vs D387's 364); script prefixes: 994 (-1); records: 7,772 (non-unique);
+pointer_slots: 4,719 (non-unique) / relocated: 4,719 (non-unique);
+**unique_non_null_pointer_slots: 4,701, unique_relocated: 4,701,
+unique_missing: 0**; null_pointer_bearing_fields (deduplicated): 13;
+missing: 0; malformed: 0; verified split-continuations: 2 (unchanged,
+`gProcScr_GameControl`/`gProcScr_CharacterEndings`); boundary-rejected
+(multi-object annexation): 0.** The Proc-like-named zero-size-unrecovered
+evidence inventory grows from 8 to 9 (adds `gProcScr_ShopFadeIn`, now
+honestly reported rather than falsely recovered).
+
+Pre-fix re-verification (via `git show f8f5c551d~1:.../frontier_df4_banim_a.c`
+swapped in, rebuilt, gate re-run, then restored): reproduces EXACTLY the
+same 6 unique missing physical slots as every prior round
+(`unique_missing=6`: `ProcScr_efxThunderBG`, `ProcScr_efxThunderBGCOL`,
+`ProcScr_efxFireOBJ`, `data_08601748`, `data_086019E0`, `data_086019F8`),
+`RESULT: FAIL`; fixed tree `unique_missing=0`, `RESULT: OK`. 6 new focused
+regression tests added (`ZeroSizeBackstopBoundaryRegressionTest` x3
+reproducing the `PhaseIntroUnk`/`ShopFadeIn`/consecutive-zero-size-labels
+shapes, `BoundaryCrossingAuditTest` x1 proving a synthetic two-object
+annexation is rejected, `UniquePointerSlotsTest` x2 proving physical
+deduplication and null/non-null separation) -- 71 total focused unit tests
+(`make shiftcheck-tests`), up from 65. Glyph gate unchanged: system
+1488/1488/1488/0, talk 2085/2085/2085/0. Shifted A/B re-verified against a
+freshly built `+0x40000` ROM: glyph 0 mismatches (CP932 `97 CE` 緑 confirmed
+reachable baseline `0x0857AD74` / shifted `0x085BAD74`, payload identical);
+ProcCmd `unique_non_null_pointer_slots_checked=4,701` mismatches=0,
+`null_pointer_bearing_fields_checked=13` mismatches=0. `make compare` and
+`make clean && make compare` both `fireemblem8.gba: OK`.
+
+Tracked on the same issue #143 thread as D383/D384/D385/D386/D387. Same
+numbering-collision note applies: D388 (this entry) is ALSO a locally-scoped
+number and must be renumbered by the integrator alongside D383-D387 against
+`main`'s actual next-available sequence at merge time.

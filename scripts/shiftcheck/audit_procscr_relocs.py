@@ -342,6 +342,38 @@ def audit_prefix(events, relocs):
             "missing": missing, "malformed": malformed}
 
 
+def unique_pointer_slots(prefixes, want_null=False):
+    """Deduplicate pointer-bearing `ptr-field` events by their PHYSICAL
+    ROM source address across ALL (possibly overlapping/nested) prefixes.
+
+    A verified split-continuation's target range can also independently
+    form its own standalone prefix from ITS OWN start address (both are
+    legitimately promoted -- the continuation because the ORIGINAL script's
+    tail lives there, the standalone one because those same bytes ALSO
+    happen to decode as a valid script on their own); the physical ROM
+    words in that overlap are the exact same addresses in both, and must be
+    counted exactly ONCE in any relocation-completeness denominator, never
+    once per prefix that happens to touch them.
+
+    `want_null=False` (default): only non-null pointer-bearing slots
+    (`target != 0`) -- the real "must-be-relocated" denominator.
+    `want_null=True`: only NULL pointer-bearing slots (`target == 0`) -- a
+    separate, trivially-verified-stays-NULL bucket, reported apart so it
+    can never be folded into (and inflate) the non-null denominator.
+
+    Returns {source_addr: event}."""
+    out = {}
+    for addr in prefixes:
+        for ev in prefixes[addr]:
+            if ev["kind"] != "ptr-field" or not ev["pointer_bearing"]:
+                continue
+            is_null = ev["target"] == 0
+            if is_null != want_null:
+                continue
+            out[ev["source"]] = ev
+    return out
+
+
 def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
                           record_size=RECORD_SIZE, max_records=MAX_RECORDS,
                           min_records=2, noload_ranges=(), verify_split_continuations=True,
@@ -381,17 +413,23 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
 
     `verify_split_continuations` (default True): when a NONZERO-size
     candidate is genuinely truncated (see decode_prefix), retry the SAME
-    decode with its size extended up to (never past) the END of up to 4
-    contiguous following candidate addresses in `addr_sizes` -- i.e. the
-    next physically-contiguous, independently linked/named object(s) in ROM
-    order. If THAT extended decode terminates validly, the "truncation" is a
-    source-level carving artifact (the true script was split across two
-    adjacent C symbols in the SAME section, verified via THIS project's own
-    reference ELF/ROM -- not assumed), not a real defect; it is promoted
-    into `prefixes` using the extended events (so its pointer fields ARE
-    still relocation-audited) and reported separately in
-    `split_continuations` for transparency. It stays in `truncated` only if
-    extending does not reach a valid terminator. Demonstrated real case:
+    decode extended up to (never past) the END of the SINGLE immediately
+    following candidate address in `addr_sizes` that carries its OWN
+    nonzero declared size (skipping over any purely zero-size labels in
+    between, which own no bytes and so cannot themselves BE the
+    continuation target). If THAT extended decode terminates validly AND
+    its consumed byte range does not cross into any SECOND independently
+    -sized object (see `crossed_nonzero_objects` below -- this is the
+    boundary invariant a prior draft of this mechanism lacked, see D388),
+    the "truncation" is a source-level carving artifact (the true script
+    was split across two adjacent C symbols in the SAME section, verified
+    via THIS project's own reference ELF/ROM -- not assumed), not a real
+    defect; it is promoted into `prefixes` using the extended events (so its
+    pointer fields ARE still relocation-audited) and reported separately in
+    `split_continuations` for transparency. It stays in `truncated` (or is
+    reported in `boundary_rejected`, see below) if extending does not reach
+    a valid terminator, or does reach one only by annexing more than the
+    single sanctioned neighbor. Demonstrated real case:
     `gProcScr_CharacterEndings` (176 B, ends in a non-terminal `PROC_CALL`)
     is immediately followed, in the same `.data.frontier_df4_ending.gap1`
     section, by `frontier_df4_ending_gap1_r0` -- a plain `u32[]` whose first
@@ -399,26 +437,61 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
     `PROC_CALL(Fin_End)`/`PROC_END` tail (matching the region-diff comment
     already in `src/data/frontier_df4_ending/frontier_df4_ending.c`); its one
     pointer (`Fin_End`) is already a real symbol reference, not a raw
-    literal, so this extension finds zero missing relocations.
+    literal, so this extension finds zero missing relocations. Only ONE
+    nonzero-size neighbor is ever consulted (never a multi-hop chain) --
+    see `gProcScr_GameControl`'s case, which needs no neighbor's bytes at
+    all (its own huge zero-size-label-only "gap" already contains its true
+    terminator well before reaching any independently-sized object).
 
-    `verify_zero_size_backstop` (default True): the SAME deterministic
-    extension mechanism, generalized to a ZERO-size candidate (no declared
-    extent at all -- e.g. a bare assembly label inside a still-untyped raw
-    `.s` blob that is nonetheless a genuine `Proc_Start()` target). The
-    candidate's decode is retried bounded up to the end of up to 4 following
-    candidate addresses (never an unrelated inferred guess -- the SAME
-    bounded-walk helper used for split continuations); only a FULLY validly
-    terminated decode is promoted (into `prefixes`, reported separately in
-    `zero_size_recovered`). A zero-size candidate whose extended decode does
-    NOT terminate validly stays honestly reported in `zero_size` (a genuine,
-    currently-unrecoverable blind spot -- never silently claimed as safe).
-    This is NOT a guess: this project's ROM is one fully packed, contiguous
-    16 MB image (`docs/parallel-carving.md`/shiftcheck README: no slack, no
-    gaps), so "up to the next independently-addressed candidate" is a real,
-    load-bearing upper bound on any object's true extent, not an assumption.
+    `verify_zero_size_backstop` (default True): a ZERO-size candidate (no
+    declared extent at all -- e.g. a bare assembly label inside a
+    still-untyped raw `.s` blob that is nonetheless a genuine
+    `Proc_Start()` target) OWNS NO BYTES OF ITS OWN, so unlike a genuinely
+    truncated nonzero-size candidate there is no "its own declared end plus
+    one verified neighbor" precedent -- the ONLY safe bound is the START
+    address of the very next candidate that carries its OWN nonzero
+    declared size (see `first_nonzero_neighbor`/`zero_size_boundary`
+    below); that neighbor's bytes are NEVER entered, not even partially.
+    Purely zero-size labels in between are skipped over (they aren't
+    boundaries either) but the walk always stops the instant a nonzero-size
+    candidate is found, using its START, never any part of its span. Only a
+    FULLY validly terminated decode within that hard ceiling is promoted
+    (into `prefixes`, reported separately in `zero_size_recovered`); a
+    zero-size candidate whose decode does not terminate before that ceiling
+    (or has no such ceiling at all) stays honestly reported in `zero_size`
+    (a genuine, currently-unrecoverable blind spot -- never silently claimed
+    as safe). This distinction is load-bearing: an earlier draft of this
+    backstop reused the SAME multi-hop, full-neighbor-size bound as split
+    continuations and reintroduced the exact cross-object annexation bug
+    through this different path -- demonstrated real regressions:
+    `gProcScr_PhaseIntroUnk` (truly 16 B / 2 records) swallowed the entirety
+    of the following, independently-sized `gProcScr_PhaseIntroText` (72 B)
+    into one bogus 88 B / 11-record blob; `gProcScr_ShopFadeIn` (a
+    zero-size, absolute-typed sub-label sitting inside the tail of the
+    enclosing `frontier_df4_menu_037_AB7144` object) walked through the
+    ENTIRE following sibling `frontier_df4_menu_037_AB7144_1` object,
+    annexing 56 B that was never its own. Bounding a zero-size candidate's
+    ceiling strictly at the next nonzero-size candidate's START (never its
+    end) fixes both: `PhaseIntroUnk` now has an exact 16 B window (matching
+    its true 2-record content) and `ShopFadeIn` has only a 4 B window --
+    below one whole record's 8 B, so it correctly stays unrecovered rather
+    than annexing its neighbor.
+
+    `crossed_nonzero_objects(addr, consumed_end)`: the general boundary
+    invariant/audit applied to EVERY promotion attempt (split-continuation
+    AND zero-size backstop) before it is accepted -- every OTHER candidate
+    address strictly INSIDE `(addr, consumed_end)` that carries its own
+    nonzero declared size is a genuinely distinct, independently-sized
+    sibling object; more than one such crossed object means the consumed
+    range is annexing multiple unrelated objects and the promotion is
+    rejected (reported in `boundary_rejected`, never silently accepted).
+    Exactly one is the sanctioned single-hop split-continuation case (see
+    above); zero is the normal/backstop case (by construction, since the
+    zero-size backstop's own ceiling never lets `consumed_end` reach any
+    nonzero-size candidate's start at all).
 
     Returns (prefixes, truncated, zero_size, noload_skipped, split_continuations,
-             zero_size_recovered):
+             zero_size_recovered, boundary_rejected):
       prefixes: {addr: events} for every address whose decode TERMINATED
         validly with >= min_records (including verified split continuations,
         verified zero-size recoveries, AND any NOLOAD-range address that
@@ -431,16 +504,25 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
         into an unverified neighboring symbol.
       zero_size: sorted list of every candidate address whose declared size
         was <= 0 AND whose extended-decode backstop (if attempted) did not
-        reach a valid terminator either -- an honestly-reported, currently
-        unrecoverable blind spot, never silently decoded unbounded.
+        reach a valid terminator (or had no safe nonzero-size ceiling at
+        all) -- an honestly-reported, currently unrecoverable blind spot,
+        never silently decoded unbounded.
       noload_skipped: sorted list of every candidate address inside a NOLOAD
         range whose decode did NOT cleanly terminate (and was not a verified
         split continuation) -- excluded because its bytes are not proven
         reliable there, not because it is malformed.
       split_continuations: sorted list of every NONZERO-size address promoted
-        from `truncated` into `prefixes` via the extended-decode verification.
+        from `truncated` into `prefixes` via the single-hop extended-decode
+        verification (boundary-checked, see above).
       zero_size_recovered: sorted list of every ZERO-size address promoted
-        into `prefixes` via the same extended-decode verification.
+        into `prefixes` via the hard-ceiling-bounded backstop decode.
+      boundary_rejected: sorted list of every address whose extended decode
+        DID terminate validly with >= min_records but was REJECTED because
+        its consumed range crossed into more than one independently-sized
+        object (an unsafe annexation, not a verified single-hop
+        continuation) -- reported for transparency, never silently folded
+        into `truncated`/`zero_size` without a distinct reason, and never
+        promoted into `prefixes`.
     """
     size_by_addr = dict(addr_sizes)
     sorted_addrs = sorted(size_by_addr)
@@ -450,35 +532,83 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
     noload_skipped = []
     split_continuations = []
     zero_size_recovered = []
+    boundary_rejected = []
 
-    def extended_bound(addr, size, max_hops=4):
-        """Walk forward through immediately-adjacent candidates (no gap
-        required -- the demonstrated case is perfectly contiguous, zero gap)
-        to find a safe upper bound for a retry decode: the end of the
-        Nth-next candidate object, capped at `max_hops` so this can never
-        silently absorb an unbounded run of unrelated objects."""
-        end = addr + size
+    def first_nonzero_neighbor(addr):
+        """Address of the first candidate strictly after `addr` (sorted
+        candidate order) that carries its OWN nonzero declared `nm` size, or
+        None if no such candidate exists. Purely zero-size labels in
+        between are skipped over -- they own no bytes and are never
+        boundaries themselves -- but the first nonzero-size candidate found
+        is always the hard stopping point for this walk (callers differ
+        only in whether they include that candidate's bytes or stop AT its
+        start; see `extended_bound` vs `zero_size_boundary`)."""
         i = bisect.bisect_right(sorted_addrs, addr)
-        bound = end
-        for _ in range(max_hops):
-            if i >= len(sorted_addrs):
-                break
+        while i < len(sorted_addrs):
             nxt = sorted_addrs[i]
-            if nxt < bound:
-                i += 1
-                continue
-            bound = max(bound, nxt + size_by_addr[nxt])
+            if size_by_addr[nxt] > 0:
+                return nxt
             i += 1
+        return None
+
+    def zero_size_boundary(addr):
+        """Hard, non-crossable upper bound for a ZERO-size candidate's
+        backstop decode: the START address of the first subsequent
+        nonzero-size candidate (see `first_nonzero_neighbor`) -- that
+        candidate's bytes are NEVER entered, not even partially, since a
+        zero-size label owns no bytes of its own and has no "single verified
+        neighbor" precedent the way a genuinely truncated nonzero-size
+        object does. Returns None if no such candidate exists (nothing to
+        safely bound against, so the backstop cannot attempt recovery)."""
+        return first_nonzero_neighbor(addr)
+
+    def extended_bound(addr, size):
+        """Safe upper bound for a genuinely TRUNCATED NONZERO-size
+        candidate's single-hop split-continuation retry: its own declared
+        end, extended by the FULL declared size of the SINGLE immediately
+        following nonzero-size candidate (see `first_nonzero_neighbor`;
+        purely zero-size labels in between are skipped over, since they own
+        no bytes and cannot themselves be a continuation target). Crossing
+        into a SECOND independently-sized object is never attempted by this
+        bound itself -- `crossed_nonzero_objects` is the corresponding
+        post-hoc audit applied to whatever this bound's decode actually
+        consumes, so even a coincidentally-terminating multi-object read is
+        still caught and rejected."""
+        end = addr + size
+        nxt = first_nonzero_neighbor(addr)
+        if nxt is None:
+            return None
+        bound = max(end, nxt + size_by_addr[nxt])
         return bound if bound > end else None
+
+    def crossed_nonzero_objects(addr, consumed_end):
+        """Every OTHER candidate address strictly INSIDE `(addr,
+        consumed_end)` that carries its own nonzero declared size -- i.e. a
+        genuinely distinct, independently-sized sibling object whose bytes
+        this decode would be annexing rather than legitimately continuing
+        into. Used as the general boundary invariant: more than one such
+        crossed object means the promotion must be rejected (see
+        `boundary_rejected`)."""
+        i = bisect.bisect_right(sorted_addrs, addr)
+        out = []
+        while i < len(sorted_addrs) and sorted_addrs[i] < consumed_end:
+            cand = sorted_addrs[i]
+            if size_by_addr[cand] > 0:
+                out.append(cand)
+            i += 1
+        return out
 
     for addr, size in addr_sizes:
         if size <= 0:
             if verify_zero_size_backstop:
-                bound = extended_bound(addr, 0)
-                if bound is not None:
+                bound = zero_size_boundary(addr)
+                if bound is not None and bound > addr:
                     recovered = decode_prefix(buf, addr, bound - addr, rom_lo, rom_hi,
                                                record_size, max_records)
-                    if recovered["terminated"] and len(recovered["events"]) >= min_records * 2:
+                    n_events = len(recovered["events"])
+                    consumed_end = addr + (n_events // 2) * record_size
+                    if (recovered["terminated"] and n_events >= min_records * 2
+                            and not crossed_nonzero_objects(addr, consumed_end)):
                         prefixes[addr] = recovered["events"]
                         zero_size_recovered.append(addr)
                         continue
@@ -512,10 +642,23 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
             if bound is not None:
                 extended = decode_prefix(buf, addr, bound - addr, rom_lo, rom_hi,
                                           record_size, max_records)
-                if extended["terminated"] and len(extended["events"]) >= min_records * 2:
-                    prefixes[addr] = extended["events"]
-                    split_continuations.append(addr)
-                    continue
+                n_events = len(extended["events"])
+                consumed_end = addr + (n_events // 2) * record_size
+                crossed = crossed_nonzero_objects(addr, consumed_end)
+                if extended["terminated"] and n_events >= min_records * 2:
+                    if len(crossed) <= 1:
+                        prefixes[addr] = extended["events"]
+                        split_continuations.append(addr)
+                        continue
+                    else:
+                        # Terminated, but only by annexing MORE than the
+                        # single sanctioned neighbor -- an unsafe,
+                        # multi-object annexation, not a verified split
+                        # continuation. Reject; report distinctly rather
+                        # than silently falling into `truncated` (which
+                        # would mislabel it as an ordinary malformed
+                        # truncation) or being promoted.
+                        boundary_rejected.append(addr)
 
         if in_noload_range(addr, noload_ranges):
             # A decode that does NOT cleanly terminate, on a candidate whose
@@ -537,8 +680,9 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
     noload_skipped.sort()
     split_continuations.sort()
     zero_size_recovered.sort()
+    boundary_rejected.sort()
     return (prefixes, truncated, zero_size, noload_skipped, split_continuations,
-            zero_size_recovered)
+            zero_size_recovered, boundary_rejected)
 
 
 # --------------------------------------------------------------------------
@@ -758,7 +902,8 @@ def main():
     noload_ranges = load_noload_ranges(args.map)
     addr_sizes = [(addr, size) for addr, (_, size) in symbols.items()]
     (prefixes, truncated, zero_size, noload_skipped, split_continuations,
-     zero_size_recovered) = find_script_prefixes(rom, addr_sizes, noload_ranges=noload_ranges)
+     zero_size_recovered, boundary_rejected) = find_script_prefixes(
+        rom, addr_sizes, noload_ranges=noload_ranges)
 
     print("=" * 78)
     print("Structural ProcCmd relocation audit (strict-decoded script prefixes, all ROM symbols)")
@@ -768,11 +913,18 @@ def main():
           f"zero-size (skipped): {len(zero_size)}  zero-size (recovered): {len(zero_size_recovered)}  "
           f"script prefixes found: {len(prefixes)}  (symbol name reports: {n_reports})  "
           f"truncated (malformed): {len(truncated)}  "
-          f"verified split-continuations: {len(split_continuations)}")
+          f"verified split-continuations: {len(split_continuations)}  "
+          f"boundary-rejected (multi-object annexation): {len(boundary_rejected)}")
     for addr in split_continuations:
         print(f"  SPLIT-CONTINUATION addr=0x{addr:08X} names={symbols[addr][0]} "
               f"(genuine script split across adjacent same-section symbols; "
               f"verified terminated + relocation-audited as one)")
+    for addr in boundary_rejected:
+        print(f"  BOUNDARY-REJECTED addr=0x{addr:08X} names={symbols[addr][0]} "
+              f"(extended decode DID terminate, but only by crossing into "
+              f"MORE THAN ONE independently-sized object -- an unsafe "
+              f"multi-object annexation, not a verified single-hop "
+              f"continuation; rejected, reported as truncated instead)")
     for addr in zero_size_recovered[:args.limit]:
         print(f"  ZERO-SIZE-RECOVERED addr=0x{addr:08X} names={symbols[addr][0]} "
               f"(no declared nm size; extent recovered from the next known "
@@ -820,8 +972,27 @@ def main():
         all_malformed.append({"addr": addr, "names": names, "reason": "truncated-at-object-end",
                                "records_decoded": len(truncated[addr]) // 2})
 
-    print(f"\nprefixes={len(prefixes)} records={total_records} pointer_slots={total_slots} "
-          f"relocated={total_relocated} missing={len(all_missing)} malformed={len(all_malformed)}")
+    # `total_slots`/`total_relocated` above are NON-UNIQUE, per-prefix-
+    # instance totals: a physical ROM byte range shared by an
+    # overlapping/nested prefix pair (e.g. a verified split-continuation
+    # target that ALSO independently forms its own standalone prefix from
+    # its own start address) is counted once per prefix that touches it,
+    # inflating the apparent denominator. The TRUTHFUL relocation-
+    # completeness denominator deduplicates by physical ROM source address
+    # across every prefix before counting -- see `unique_pointer_slots`.
+    unique_slots = unique_pointer_slots(prefixes)
+    unique_null_slots = unique_pointer_slots(prefixes, want_null=True)
+    unique_missing_addrs = {addr for addr in unique_slots if addr not in relocs}
+    unique_relocated = len(unique_slots) - len(unique_missing_addrs)
+
+    print(f"\nprefixes={len(prefixes)} records={total_records} (non-unique, per-prefix-instance total) "
+          f"pointer_slots={total_slots} relocated={total_relocated} (non-unique -- see below for the "
+          f"deduplicated denominator) missing={len(all_missing)} malformed={len(all_malformed)}")
+    print(f"unique_non_null_pointer_slots (deduplicated by physical ROM source address -- the "
+          f"TRUTHFUL relocation-completeness denominator)={len(unique_slots)} "
+          f"unique_relocated={unique_relocated} unique_missing={len(unique_missing_addrs)}  "
+          f"null_pointer_bearing_fields (deduplicated, must stay NULL, never counted toward the "
+          f"non-null denominator)={len(unique_null_slots)}")
 
     for m in all_missing[:args.limit]:
         print(f"  MISSING addr=0x{m['addr']:08X} names={m['names']} "
@@ -834,7 +1005,7 @@ def main():
     if len(all_malformed) > args.limit:
         print(f"  ... +{len(all_malformed) - args.limit} more")
 
-    overall_bad = bool(all_missing or all_malformed)
+    overall_bad = bool(unique_missing_addrs or all_malformed)
 
     if args.shifted_gba:
         with open(args.shifted_gba, "rb") as f:
@@ -842,18 +1013,49 @@ def main():
         print("\n" + "=" * 78)
         print(f"Shifted A/B proof (+0x{shift:X}) against {args.shifted_gba}")
         print("=" * 78)
-        total_checked = 0
+
+        def shifted_u32(addr):
+            off = (addr - ROM_BASE) + shift
+            if off < 0 or off + 4 > len(shifted):
+                return None
+            return int.from_bytes(shifted[off:off + 4], "little")
+
+        # Checked against the SAME physical-address-deduplicated sets used
+        # for the relocation-completeness denominator above, so a byte range
+        # shared by an overlapping/nested prefix pair is verified exactly
+        # ONCE, not once per prefix that happens to touch it (the source of
+        # the earlier 4,743-vs-4,730 discrepancy between this section and
+        # the main audit's own totals).
         all_mismatches = []
-        for addr in sorted(prefixes):
-            checked, mismatches = verify_shift(prefixes[addr], rom, shifted, shift)
-            total_checked += checked
-            all_mismatches.extend({"addr": addr, "names": symbols[addr][0], **m} for m in mismatches)
-        print(f"\npointer_fields_checked={total_checked} mismatches={len(all_mismatches)}")
+        for source, ev in sorted(unique_slots.items()):
+            expected = ev["target"] + shift
+            got = shifted_u32(source)
+            if got != expected:
+                all_mismatches.append({"source": source, "opcode": ev["opcode"],
+                                        "base_target": ev["target"], "expected": expected,
+                                        "shifted": got})
+
+        null_mismatches = []
+        for source, ev in sorted(unique_null_slots.items()):
+            got = shifted_u32(source)
+            if got != 0:
+                null_mismatches.append({"source": source, "opcode": ev["opcode"],
+                                         "base_target": 0, "expected": 0, "shifted": got})
+
+        print(f"\nunique_non_null_pointer_slots_checked={len(unique_slots)} "
+              f"mismatches={len(all_mismatches)}")
+        print(f"null_pointer_bearing_fields_checked (deduplicated, must stay NULL, "
+              f"reported separately -- never folded into the non-null count "
+              f"above)={len(unique_null_slots)} mismatches={len(null_mismatches)}")
         for m in all_mismatches[:args.limit]:
             print(f"  MISMATCH {m}")
         if len(all_mismatches) > args.limit:
             print(f"  ... +{len(all_mismatches) - args.limit} more")
-        if all_mismatches:
+        for m in null_mismatches[:args.limit]:
+            print(f"  NULL-MISMATCH {m}")
+        if len(null_mismatches) > args.limit:
+            print(f"  ... +{len(null_mismatches) - args.limit} more")
+        if all_mismatches or null_mismatches:
             overall_bad = True
 
     print("\n" + "=" * 78)
