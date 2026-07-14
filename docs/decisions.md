@@ -12907,3 +12907,81 @@ unresolved blob, so these are not new residual mysteries.
 Issue #143 remains open; `main` was not merged; no force-push occurred. If a
 concurrently-integrated sibling branch has already claimed D390, the
 integrator should renumber this entry, not the work it describes.
+
+## D380 — src/events_wm.c re-segmented to the audited 136-array boundary table (issue #143 menu lane, integration-renumerable) (2026-07-14)
+
+**Scope.** Direct correction to the D379 `src/events_wm.c` migration, following an
+externally-supplied "menu-descriptor-re" boundary audit delivered in two parts.
+As with all such input in this lane, the table was independently re-verified
+against raw JP ROM bytes before being applied -- not accepted at face value.
+
+**What was wrong.** My prior 139-piece segmentation (D379/12d2b6315) was
+byte-exact in aggregate (`make compare` passed) but had incorrect internal
+boundaries in the Valni Tower / Lagdou Ruins degenerate-stub cluster
+(`0x08ABEB08`-`0x08ABEBD8`): several 4/8/12-byte "MessedEventscr_N" /
+"ValniTowerN_Beginning" stub arrays were mis-split by a consistent few-byte
+drift, and one 140 B region (`sEventScrWM_MelkaenCoastDialogue_Jp` +
+`sEventScrWM_MelkaenCoastIntroBody_Jp`) was lumped into one generic
+`EventScrWM_JPOnly_1` blob. Because the content is a stream of raw event
+command words with no dividers, any self-consistent (contiguous,
+non-overlapping) boundary choice reproduces the same aggregate bytes -- so the
+bug was invisible to `make compare` but showed up as the `Events_WM_Beginning`/
+`Events_WM_ChapterIntro` lookup tables needing several `(EventScr*)((u8*)Name +
+0x8)` "offset into the wrong neighboring array" hacks instead of exact
+`&Name` pointers.
+
+**Verification of the corrected table before applying it.**
+- Parsed the combined 136-entry table programmatically: confirmed contiguous,
+  no gaps/overlaps, exactly 13816 B (`0x08ABCD44`-`0x08AC033C`), all entries a
+  multiple of 4 bytes.
+- Cross-checked `08ABEB0C` (inside the disputed cluster) holds the literal
+  value `0x08ABCDCC` -- a real internal pointer to the claimed
+  `sEventScrWM_MelkaenCoastIntroBody_Jp` boundary -- confirming that split
+  point directly from ROM bytes, not from the table's say-so.
+- Regenerated the array contents from raw ROM bytes against the new
+  boundaries and re-derived the relocation classification (internal-range
+  pointer resolution, the `data_085B9BBC + 0x168` RemoveBGIfNeeded idiom,
+  `EventScr_CallOnTutorialMode`, and the 4 TEXTSHOW addresses) completely
+  independently of the table's own claimed counts: got **exactly** 32 + 30 + 2
+  + 10 = 74, matching the contract exactly by construction, not by trusting
+  the summary numbers.
+- Re-ran the 117-entry `Events_WM_Beginning`/`Events_WM_ChapterIntro` lookup
+  extraction (from D379) against the corrected boundaries: **all 117 entries
+  now resolve to an exact array start with zero `+offset` hacks**, versus
+  several offset expressions needed against the old (buggy) boundaries --
+  strong independent confirmation the corrected table is right.
+- `arm-none-eabi-objdump -r src/events_wm.o`, restricted to the real
+  `.data.frontier_df4_menu.events_wm` section (excluding `.debug_info`/
+  `.debug_pubnames` duplicate relocations from `-g`, which are stripped from
+  the shipped ROM and not part of the gate): **exactly 74** `R_ARM_ABS32`,
+  broken down 32/30/2/10 as claimed.
+
+**Changes.** Regenerated `src/events_wm.c` from raw ROM bytes against the
+corrected 136-array table (133 FE8U-named + 3 inferred JP-only, matching the
+external audit's own count -- down from my prior 139-piece segmentation's 6
+JP-only gaps, since several of those gaps are now correctly attributed to
+named JP-only arrays like `sEventScrWM_MelkaenCoastDialogue_Jp` and
+`sEventScrWM_MessedEventscr_0_Ephraim_Jp`). Recomputed
+`Events_WM_BeginningTail`/`Events_WM_ChapterIntro` in
+`src/data/data_chapter_asset_table.c` against the corrected boundaries (now
+all exact-pointer, no offset hacks). Removed ~112 now-fully-dead extern
+declarations for old `EventScrWM_*` names left over in
+`src/data/frontier_df4_banim_b/frontier_df4_banim_b.c` and one in
+`src/data/frontier_df4_menu/frontier_df4_menu.c` (both orphaned once the
+D379 commit deleted the `frontier_df4_banim_b_073_907F78` array that had been
+their only user). The `layout/carved_rom.d/data_frontier4_df4_menu.tsv` row
+for `ABCD44-AC033C` already named `src/events_wm.o(.data.frontier_df4_menu.
+events_wm)` and needed no manifest change. Did not attempt a full
+FE8U-style macro-expanded/header-split rewrite (`src/events/*-wm.h` per
+chapter) in this pass -- the priority was correcting the proven boundary
+bug first; the typed-raw-word representation established in D379 remains,
+which is byte-exact and does not block a future macro-decoding pass.
+
+**Verification.** `make clean && make compare` -> `fireemblem8.gba: OK` (sha1
+`7da0456035366aa18414faa79d8fe7649f03c1ed`). `make shiftcheck` -> PASS, 0 HIGH
+suspects. `scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK.
+`git diff --check` clean. `scripts/audit_bin_forms.py` unchanged (21
+UNCERTAIN; this was a naming/boundary correction, not a new file
+conversion). Issue #143 remains open; `main` was not merged; no force-push
+occurred. If a concurrently-integrated sibling branch has already claimed
+D380, the integrator should renumber this entry, not the work it describes.

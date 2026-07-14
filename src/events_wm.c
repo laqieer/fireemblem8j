@@ -1,26 +1,25 @@
 /* GENERATED (issue #143 menu pass, Phase C EventScr migration): word-exact port of
- * the JP world-map EventScr family, ROM 0x08ABCD44..0x08AC033C, independently
- * re-derived by aligning fe8u's src/events_wm.c array boundaries against the raw
- * JP ROM bytes (each array's start verified by exact byte-pattern search, sizes
- * confirmed contiguous end-to-end, 13816 B total). 74 ABS32 relocations proven by
- * this same derivation: 32 EventScr_RemoveBGIfNeeded (expressed as the existing
- * codebase idiom data_085B9BBC + 0x168, matching 52 other pre-existing references
- * to that same address elsewhere -- introducing a distinct EventScr_RemoveBGIfNeeded
- * symbol there collides with those, per scan_offsets.py), 30 EventScr_WM_FadeCommon,
- * 2 EventScr_CallOnTutorialMode, 10 internal script pointers -- plus 4
- * non-relocated TEXTSHOW command words (proven coincidental 0x08xxxxxx values at
- * 0x08ABD3B4/0x08ABD58C/0x08ABDD9C/0x08ABE4E8) deliberately left as raw literals.
- * Word values that could not be attributed to a known fe8u macro this pass (all
- * content in the JP-only gap regions, and any per-array literal whose exact
- * game-logic meaning was not independently re-derived) are kept as typed raw
- * EventScr words rather than invented symbolic macros -- byte-exact is the only
- * claim made for those; make compare is the oracle. */
+ * the JP world-map EventScr family, ROM 0x08ABCD44..0x08AC033C, using the audited
+ * 136-array boundary table (133 FE8U-named + 3 inferred JP-only) cross-checked
+ * against raw JP ROM bytes: every array start verified as either an internal
+ * pointer target from elsewhere in this same stream, or a boundary independently
+ * confirmed byte-for-byte (13816 B total, contiguous, no gaps/overlaps). 74 ABS32
+ * relocations proven by this same derivation: 32 EventScr_RemoveBGIfNeeded
+ * (expressed as the existing codebase idiom data_085B9BBC + 0x168, matching 52
+ * other pre-existing references to that same address elsewhere -- introducing a
+ * distinct EventScr_RemoveBGIfNeeded symbol there collides with those, per
+ * scan_offsets.py), 30 EventScr_WM_FadeCommon, 2 EventScr_CallOnTutorialMode, 10
+ * internal script pointers -- plus 4 non-relocated TEXTSHOW command words (proven
+ * coincidental 0x08xxxxxx values at 0x08ABD3B4/0x08ABD58C/0x08ABDD9C/0x08ABE4E8)
+ * deliberately left as raw literals. Word values that could not be attributed to
+ * a known fe8u macro this pass are kept as typed raw EventScr words rather than
+ * invented symbolic macros -- byte-exact is the only claim made for those; make
+ * compare is the oracle. */
 #include "global.h"
 #include "event.h"
 #include "eventcall.h"
 
 extern u8 data_085B9BBC[];
-
 
 EventScr EventScr_WM_FadeCommon[7] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x0000AD40,
@@ -32,7 +31,7 @@ EventScr EventScr_WM_FadeCommon[7] __attribute__((section(".data.frontier_df4_me
     (EventScr)0x00000120,
 };
 
-EventScr EventScrWM_JPOnly_1[35] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
+EventScr sEventScrWM_MelkaenCoastDialogue_Jp[27] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x0000C720,
     (EventScr)0x0000C640,
     (EventScr)0x0000087C,
@@ -60,11 +59,14 @@ EventScr EventScrWM_JPOnly_1[35] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00000120,
+};
+
+EventScr sEventScrWM_MelkaenCoastIntroBody_Jp[8] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00060E20,
     (EventScr)0x00000A40,
     (EventScr)&EventScr_WM_FadeCommon,
     (EventScr)0x00000A40,
-    (EventScr)&EventScrWM_JPOnly_1,
+    (EventScr)&sEventScrWM_MelkaenCoastDialogue_Jp,
     (EventScr)0x00140E20,
     (EventScr)0x00101721,
     (EventScr)0x00000120,
@@ -75,18 +77,18 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x0000C220,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x7FFF1322,
     (EventScr)0x00200E20,
     (EventScr)0x00041220,
     (EventScr)0x0000B460,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00000010,
     (EventScr)0x00020E20,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x003C0E20,
@@ -98,7 +100,7 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x0000087B,
     (EventScr)0x00001D20,
     (EventScr)0x0000B680,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00180000,
     (EventScr)0x0000003C,
     (EventScr)0x003C0E20,
@@ -130,14 +132,14 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x00060E20,
     (EventScr)0x001A0E20,
     (EventScr)0x0000B840,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00001C20,
     (EventScr)0x00001D20,
     (EventScr)0x001E0E20,
     (EventScr)0x0000B940,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000BA40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000C540,
     (EventScr)0x00000100,
     (EventScr)0x00200E20,
@@ -212,7 +214,7 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x001E0E20,
     (EventScr)0x0000B680,
     (EventScr)0x00300000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000003C,
     (EventScr)0x003C0E20,
     (EventScr)0x0000C460,
@@ -242,7 +244,7 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x00001D20,
     (EventScr)0x001E0E20,
     (EventScr)0x0000B680,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00300000,
     (EventScr)0x0000003C,
     (EventScr)0x003C0E20,
@@ -291,7 +293,7 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x00000034,
     (EventScr)0x003E0E20,
     (EventScr)0x0000BC60,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00010014,
     (EventScr)0x0000BC60,
     (EventScr)0x00010000,
@@ -379,19 +381,19 @@ EventScr EventScrWM_Prologue_Beginning[358] __attribute__((section(".data.fronti
     (EventScr)0x00840084,
     (EventScr)0x005C006C,
     (EventScr)0x000100D2,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A8C0,
     (EventScr)0x00000003,
     (EventScr)0x00920073,
     (EventScr)0x0056005B,
     (EventScr)0x000100D2,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A8C0,
     (EventScr)0x00000004,
     (EventScr)0x00920095,
     (EventScr)0x0056007D,
     (EventScr)0x000100D2,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00001C20,
     (EventScr)0x00001D20,
     (EventScr)0x0000AC40,
@@ -466,9 +468,9 @@ EventScr EventScrWM_Ch2_Beginning[28] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000001,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -484,10 +486,10 @@ EventScr EventScrWM_Ch2_Beginning[28] __attribute__((section(".data.frontier_df4
     (EventScr)0x00000A40,
     (EventScr)&EventScr_CallOnTutorialMode,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -548,7 +550,7 @@ EventScr EventScrWM_Ch2_ChapterIntro[82] __attribute__((section(".data.frontier_
     (EventScr)0x00000046,
     (EventScr)0x00550E20,
     (EventScr)0x0000BC60,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00010008,
     (EventScr)0x00001C20,
     (EventScr)0x00001D20,
@@ -594,9 +596,9 @@ EventScr EventScrWM_Ch3_Beginning[28] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000002,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -612,10 +614,10 @@ EventScr EventScrWM_Ch3_Beginning[28] __attribute__((section(".data.frontier_df4
     (EventScr)0x00000A40,
     (EventScr)&EventScr_CallOnTutorialMode,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -635,7 +637,7 @@ EventScr EventScrWM_Ch3_ChapterIntro[75] __attribute__((section(".data.frontier_
     (EventScr)0x0000A140,
     (EventScr)0x00000003,
     (EventScr)0x0000A240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009E60,
     (EventScr)0x000D0002,
     (EventScr)0x00020002,
@@ -656,7 +658,7 @@ EventScr EventScrWM_Ch3_ChapterIntro[75] __attribute__((section(".data.frontier_
     (EventScr)0x00000883,
     (EventScr)0x00001D20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A040,
     (EventScr)0x00000003,
     (EventScr)0x0000C540,
@@ -680,7 +682,7 @@ EventScr EventScrWM_Ch3_ChapterIntro[75] __attribute__((section(".data.frontier_
     (EventScr)0x0000A440,
     (EventScr)0x003C0002,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00030002,
     (EventScr)0x0000FFFC,
     (EventScr)0x0000AC40,
@@ -703,9 +705,9 @@ EventScr EventScrWM_Ch4_Beginning[23] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000003,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -716,10 +718,10 @@ EventScr EventScrWM_Ch4_Beginning[23] __attribute__((section(".data.frontier_df4
     (EventScr)0x00000003,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -742,7 +744,7 @@ EventScr EventScrWM_Ch4_ChapterIntro[53] __attribute__((section(".data.frontier_
     (EventScr)0x00000885,
     (EventScr)0x00001D20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00040003,
     (EventScr)0x0000FFF8,
     (EventScr)0x00001C20,
@@ -792,9 +794,9 @@ EventScr EventScrWM_Ch5_Beginning[31] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000004,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -805,10 +807,10 @@ EventScr EventScrWM_Ch5_Beginning[31] __attribute__((section(".data.frontier_df4
     (EventScr)0x00000004,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00020820,
     (EventScr)0x00000120,
 };
@@ -821,7 +823,7 @@ EventScr EventScrWM_Ch5_0[28] __attribute__((section(".data.frontier_df4_menu.ev
     (EventScr)0x00008440,
     (EventScr)0x00000006,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x0000A980,
@@ -829,13 +831,13 @@ EventScr EventScrWM_Ch5_0[28] __attribute__((section(".data.frontier_df4_menu.ev
     (EventScr)0x00060008,
     (EventScr)0x0000FFFE,
     (EventScr)0x0000AC40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A980,
     (EventScr)0x00040000,
     (EventScr)0x00050006,
     (EventScr)0x0000FFFE,
     (EventScr)0x0000AC40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A640,
     (EventScr)0x00050000,
     (EventScr)0x00009B40,
@@ -863,7 +865,7 @@ EventScr EventScrWM_Ch5_ChapterIntro[126] __attribute__((section(".data.frontier
     (EventScr)0x003C0E20,
     (EventScr)0x0000C720,
     (EventScr)0x0000B460,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00000003,
     (EventScr)0x00780E20,
     (EventScr)0x00009E60,
@@ -984,9 +986,9 @@ EventScr EventScrWM_Ch6_Beginning[23] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000005,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -997,10 +999,10 @@ EventScr EventScrWM_Ch6_Beginning[23] __attribute__((section(".data.frontier_df4
     (EventScr)0x00000005,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1049,9 +1051,9 @@ EventScr EventScrWM_Ch7_Beginning[23] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000006,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -1062,10 +1064,10 @@ EventScr EventScrWM_Ch7_Beginning[23] __attribute__((section(".data.frontier_df4
     (EventScr)0x00000006,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1114,7 +1116,7 @@ EventScr EventScrWM_Ch8_Beginning[20] __attribute__((section(".data.frontier_df4
     (EventScr)0x00010000,
     (EventScr)0x00000008,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009440,
     (EventScr)0x00000007,
     (EventScr)0x00009240,
@@ -1155,9 +1157,9 @@ EventScr EventScrWM_Ch9a_Beginning[47] __attribute__((section(".data.frontier_df
     (EventScr)0x00010000,
     (EventScr)0x00000001,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -1185,17 +1187,17 @@ EventScr EventScrWM_Ch9a_Beginning[47] __attribute__((section(".data.frontier_df
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x002E0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x003C0E20,
     (EventScr)0x00008920,
     (EventScr)0x00051220,
     (EventScr)0x00000A40,
     (EventScr)&EventScrWM_MessedEventscr_0,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1235,7 +1237,7 @@ EventScr EventScrWM_Ch9a_ChapterIntro[105] __attribute__((section(".data.frontie
     (EventScr)0x0000AC40,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x0000A240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B460,
     (EventScr)0xFFF80000,
     (EventScr)0x00000003,
@@ -1313,9 +1315,9 @@ EventScr EventScrWM_Ch10a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00010000,
     (EventScr)0x00000009,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -1326,10 +1328,10 @@ EventScr EventScrWM_Ch10a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x0000000A,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1410,7 +1412,7 @@ EventScr EventScrWM_MessedEventscr_1[89] __attribute__((section(".data.frontier_
     (EventScr)0x0000A040,
     (EventScr)0x00000004,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x000A0009,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -1427,10 +1429,10 @@ EventScr EventScrWM_MessedEventscr_1[89] __attribute__((section(".data.frontier_
 
 EventScr EventScrWM_Ch12a_Beginning[6] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1444,9 +1446,9 @@ EventScr EventScrWM_Ch13a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00010000,
     (EventScr)0x0000000B,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -1457,10 +1459,10 @@ EventScr EventScrWM_Ch13a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x0000000C,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1507,7 +1509,7 @@ EventScr EventScrWM_MessedEventscr_3[58] __attribute__((section(".data.frontier_
     (EventScr)0x00060E20,
     (EventScr)0x002E0E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x000C000B,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -1531,9 +1533,9 @@ EventScr EventScrWM_Ch14a_Beginning[36] __attribute__((section(".data.frontier_d
     (EventScr)0x00010000,
     (EventScr)0x0000000C,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001E0E20,
@@ -1553,14 +1555,14 @@ EventScr EventScrWM_Ch14a_Beginning[36] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1604,7 +1606,7 @@ EventScr EventScrWM_MessedEventscr_4[70] __attribute__((section(".data.frontier_
     (EventScr)0x0000A440,
     (EventScr)0x003C0002,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x000D000C,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -1637,7 +1639,7 @@ EventScr EventScrWM_MessedEventscr_4[70] __attribute__((section(".data.frontier_
     (EventScr)0x00000120,
 };
 
-EventScr EventScrWM_JPOnly_2[9] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
+EventScr sEventScrWM_MessedEventscr_0_Ephraim_Jp[9] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00001A25,
     (EventScr)0x000B0540,
     (EventScr)0x00540018,
@@ -1655,11 +1657,11 @@ EventScr EventScrWM_Ch9b_Beginning[54] __attribute__((section(".data.frontier_df
     (EventScr)0x000F0000,
     (EventScr)0x00000001,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -1692,17 +1694,17 @@ EventScr EventScrWM_Ch9b_Beginning[54] __attribute__((section(".data.frontier_df
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x002E0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x003C0E20,
     (EventScr)0x00008920,
     (EventScr)0x00061220,
     (EventScr)0x00000A40,
-    (EventScr)&EventScrWM_JPOnly_2,
+    (EventScr)&sEventScrWM_MessedEventscr_0_Ephraim_Jp,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1722,7 +1724,7 @@ EventScr EventScrWM_MessedEventscr_5[87] __attribute__((section(".data.frontier_
     (EventScr)0x000002BC,
     (EventScr)0x00060E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x000E0001,
     (EventScr)0x0000FFFC,
     (EventScr)0x001E0E20,
@@ -1733,7 +1735,7 @@ EventScr EventScrWM_MessedEventscr_5[87] __attribute__((section(".data.frontier_
     (EventScr)0x00008920,
     (EventScr)0x001E0E20,
     (EventScr)0x0000AA40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000C640,
     (EventScr)0x000008A7,
     (EventScr)0x00001D20,
@@ -1780,7 +1782,7 @@ EventScr EventScrWM_MessedEventscr_5[87] __attribute__((section(".data.frontier_
     (EventScr)0x0000A440,
     (EventScr)0x003C0002,
     (EventScr)0x0000AB40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00001C20,
     (EventScr)0x00001D20,
     (EventScr)0x0000AC40,
@@ -1802,11 +1804,11 @@ EventScr EventScrWM_Ch10b_Beginning[32] __attribute__((section(".data.frontier_d
     (EventScr)0x000F0000,
     (EventScr)0x0000000E,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008340,
     (EventScr)0x00700000,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -1820,14 +1822,14 @@ EventScr EventScrWM_Ch10b_Beginning[32] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1887,10 +1889,10 @@ EventScr EventScrWM_MessedEventscr_6[51] __attribute__((section(".data.frontier_
 
 EventScr EventScrWM_Ch12b_Beginning[6] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1904,9 +1906,9 @@ EventScr EventScrWM_Ch13b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x000F0000,
     (EventScr)0x00000010,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -1917,10 +1919,10 @@ EventScr EventScrWM_Ch13b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00000011,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -1968,9 +1970,9 @@ EventScr EventScrWM_Ch14b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x000F0000,
     (EventScr)0x00000011,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -1981,10 +1983,10 @@ EventScr EventScrWM_Ch14b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00000012,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
     (EventScr)0x00000120,
 };
 
@@ -2028,12 +2030,12 @@ EventScr EventScrWM_MessedEventscr_9[73] __attribute__((section(".data.frontier_
     (EventScr)0x00001D20,
     (EventScr)0x002E0E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00120011,
     (EventScr)0x0000FFFC,
     (EventScr)0x00640E20,
     (EventScr)0x0000AA40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00001C20,
     (EventScr)0x00001D20,
     (EventScr)0x00009E60,
@@ -2049,7 +2051,7 @@ EventScr EventScrWM_MessedEventscr_9[73] __attribute__((section(".data.frontier_
     (EventScr)0x0000A440,
     (EventScr)0x003C0002,
     (EventScr)0x0000AB40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x002E0E20,
     (EventScr)0x0000A520,
     (EventScr)0x0000AC40,
@@ -2068,23 +2070,25 @@ EventScr EventScrWM_MelkaenCoast_Beginning[1] __attribute__((section(".data.fron
     (EventScr)0x00000120,
 };
 
-EventScr EventScrWM_MessedEventscr_10[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
+EventScr EventScrWM_MessedEventscr_10[3] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00000A40,
+    (EventScr)&sEventScrWM_MelkaenCoastIntroBody_Jp,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_ValniTower1_Beginning[2] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)&EventScrWM_JPOnly_1 + 0x6C),
+    (EventScr)0x00401720,
     (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_11[3] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00401720,
-    (EventScr)0x00000120,
     (EventScr)0x7FFF1322,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_ValniTower2_Beginning[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_12[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
@@ -2160,13 +2164,13 @@ EventScr EventScrWM_LagdouRuins1_Beginning[1] __attribute__((section(".data.fron
 };
 
 EventScr EventScrWM_MessedEventscr_23[3] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000120,
-    (EventScr)0x00000120,
     (EventScr)0x7FFF1322,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_LagdouRuins2_Beginning[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_24[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
@@ -2254,14 +2258,12 @@ EventScr EventScrWM_MessedEventscr_36[1] __attribute__((section(".data.frontier_
 };
 
 EventScr EventScrWM_Ch15a_Beginning[25] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000120,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000013,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009440,
     (EventScr)0x0000000D,
     (EventScr)0x00009240,
@@ -2276,25 +2278,25 @@ EventScr EventScrWM_Ch15a_Beginning[25] __attribute__((section(".data.frontier_d
     (EventScr)0x00130000,
     (EventScr)0x0000C120,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_37[2] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
+    (EventScr)0x00011020,
     (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch16a_Beginning[57] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00011020,
-    (EventScr)0x00000120,
-    (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000013,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009340,
     (EventScr)0x0000000E,
     (EventScr)0x00009340,
@@ -2320,7 +2322,7 @@ EventScr EventScrWM_Ch16a_Beginning[57] __attribute__((section(".data.frontier_d
     (EventScr)0x00009140,
     (EventScr)0x00000014,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00008680,
@@ -2338,17 +2340,17 @@ EventScr EventScrWM_Ch16a_Beginning[57] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001E0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x003C0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_38[48] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -2380,7 +2382,7 @@ EventScr EventScrWM_MessedEventscr_38[48] __attribute__((section(".data.frontier
     (EventScr)0x0000A440,
     (EventScr)0x003C0002,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00140013,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -2395,19 +2397,19 @@ EventScr EventScrWM_MessedEventscr_38[48] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch17a_Beginning[52] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000014,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -2429,7 +2431,7 @@ EventScr EventScrWM_Ch17a_Beginning[52] __attribute__((section(".data.frontier_d
     (EventScr)0x00008780,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x00280013,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x00140E20,
@@ -2443,18 +2445,18 @@ EventScr EventScrWM_Ch17a_Beginning[52] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_39[56] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -2509,19 +2511,19 @@ EventScr EventScrWM_MessedEventscr_39[56] __attribute__((section(".data.frontier
     (EventScr)0x003C0E20,
     (EventScr)0x00101721,
     (EventScr)0x0000A040,
+    (EventScr)0x00000002,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch18a_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000002,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000015,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -2532,14 +2534,14 @@ EventScr EventScrWM_Ch18a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00000019,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_40[72] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -2558,7 +2560,7 @@ EventScr EventScrWM_MessedEventscr_40[72] __attribute__((section(".data.frontier
     (EventScr)0x00000534,
     (EventScr)0x00060E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00160015,
     (EventScr)0x0000FFFC,
     (EventScr)0x00008680,
@@ -2610,19 +2612,19 @@ EventScr EventScrWM_MessedEventscr_40[72] __attribute__((section(".data.frontier
     (EventScr)0x0000A040,
     (EventScr)0x00000003,
     (EventScr)0x0000A040,
+    (EventScr)0x00000004,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch19a_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000004,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000016,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -2633,14 +2635,14 @@ EventScr EventScrWM_Ch19a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x0000001A,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_41[45] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -2670,7 +2672,7 @@ EventScr EventScrWM_MessedEventscr_41[45] __attribute__((section(".data.frontier
     (EventScr)0x00001D20,
     (EventScr)0x002E0E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00170016,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -2684,19 +2686,19 @@ EventScr EventScrWM_MessedEventscr_41[45] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch20a_Beginning[70] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000017,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -2743,7 +2745,7 @@ EventScr EventScrWM_Ch20a_Beginning[70] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x00140E20,
@@ -2754,14 +2756,14 @@ EventScr EventScrWM_Ch20a_Beginning[70] __attribute__((section(".data.frontier_d
     (EventScr)0x0000001B,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_42[51] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -2785,7 +2787,7 @@ EventScr EventScrWM_MessedEventscr_42[51] __attribute__((section(".data.frontier
     (EventScr)0x0000C540,
     (EventScr)0x00000200,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00190017,
     (EventScr)0x0000FFF9,
     (EventScr)0x00140E20,
@@ -2811,19 +2813,19 @@ EventScr EventScrWM_MessedEventscr_42[51] __attribute__((section(".data.frontier
     (EventScr)0x00140E20,
     (EventScr)0x00101721,
     (EventScr)0x0000A040,
-};
-
-EventScr EventScrWM_JPOnly_3[17] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00000002,
     (EventScr)0x00000120,
+};
+
+EventScr EventScrWM_Ch21a_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000018,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -2831,23 +2833,17 @@ EventScr EventScrWM_JPOnly_3[17] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x00009920,
     (EventScr)0x00280E20,
     (EventScr)0x00009040,
-};
-
-EventScr EventScrWM_Ch21a_Beginning[5] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x0000001F,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
-};
-
-EventScr EventScrWM_MessedEventscr_43[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
-EventScr EventScrWM_JPOnly_4[35] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
+EventScr EventScrWM_MessedEventscr_43[35] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -2859,7 +2855,7 @@ EventScr EventScrWM_JPOnly_4[35] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x003C0E20,
     (EventScr)0x0000C720,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00190018,
     (EventScr)0x0000FFFC,
     (EventScr)0x0000C640,
@@ -2881,19 +2877,19 @@ EventScr EventScrWM_JPOnly_4[35] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch15b_Beginning[40] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000012,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -2917,18 +2913,18 @@ EventScr EventScrWM_Ch15b_Beginning[40] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_44[69] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00000A40,
     (EventScr)&EventScr_WM_FadeCommon,
@@ -2979,7 +2975,7 @@ EventScr EventScrWM_MessedEventscr_44[69] __attribute__((section(".data.frontier
     (EventScr)0x0000C540,
     (EventScr)0x00000200,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00130012,
     (EventScr)0x0000FFFC,
     (EventScr)0x00008680,
@@ -2996,17 +2992,17 @@ EventScr EventScrWM_MessedEventscr_44[69] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch16b_Beginning[51] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000013,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009340,
     (EventScr)0x00000009,
     (EventScr)0x00009340,
@@ -3026,7 +3022,7 @@ EventScr EventScrWM_Ch16b_Beginning[51] __attribute__((section(".data.frontier_d
     (EventScr)0x00009140,
     (EventScr)0x00000016,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00008680,
@@ -3044,17 +3040,17 @@ EventScr EventScrWM_Ch16b_Beginning[51] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001E0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x003C0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_45[48] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3086,7 +3082,7 @@ EventScr EventScrWM_MessedEventscr_45[48] __attribute__((section(".data.frontier
     (EventScr)0x0000A440,
     (EventScr)0x003C0002,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00140013,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -3101,19 +3097,19 @@ EventScr EventScrWM_MessedEventscr_45[48] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch17b_Beginning[52] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000014,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -3135,7 +3131,7 @@ EventScr EventScrWM_Ch17b_Beginning[52] __attribute__((section(".data.frontier_d
     (EventScr)0x00008780,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x00280013,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x00140E20,
@@ -3149,18 +3145,18 @@ EventScr EventScrWM_Ch17b_Beginning[52] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_46[55] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3214,19 +3210,19 @@ EventScr EventScrWM_MessedEventscr_46[55] __attribute__((section(".data.frontier
     (EventScr)0x003C0E20,
     (EventScr)0x00101721,
     (EventScr)0x0000A040,
+    (EventScr)0x00000002,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch18b_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000002,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000015,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -3237,14 +3233,14 @@ EventScr EventScrWM_Ch18b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00000019,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_47[72] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3263,7 +3259,7 @@ EventScr EventScrWM_MessedEventscr_47[72] __attribute__((section(".data.frontier
     (EventScr)0x00000534,
     (EventScr)0x00060E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00160015,
     (EventScr)0x0000FFFC,
     (EventScr)0x00008680,
@@ -3315,19 +3311,19 @@ EventScr EventScrWM_MessedEventscr_47[72] __attribute__((section(".data.frontier
     (EventScr)0x0000A040,
     (EventScr)0x00000003,
     (EventScr)0x0000A040,
+    (EventScr)0x00000004,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch19b_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000004,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000016,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -3338,14 +3334,14 @@ EventScr EventScrWM_Ch19b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x0000001A,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_48[45] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3375,7 +3371,7 @@ EventScr EventScrWM_MessedEventscr_48[45] __attribute__((section(".data.frontier
     (EventScr)0x00001D20,
     (EventScr)0x002E0E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00170016,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -3389,19 +3385,19 @@ EventScr EventScrWM_MessedEventscr_48[45] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch20b_Beginning[70] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000017,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x001A0E20,
@@ -3448,7 +3444,7 @@ EventScr EventScrWM_Ch20b_Beginning[70] __attribute__((section(".data.frontier_d
     (EventScr)0x00008880,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x001A0000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x001A0E20,
     (EventScr)0x00140E20,
@@ -3459,14 +3455,14 @@ EventScr EventScrWM_Ch20b_Beginning[70] __attribute__((section(".data.frontier_d
     (EventScr)0x0000001B,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_49[51] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3490,7 +3486,7 @@ EventScr EventScrWM_MessedEventscr_49[51] __attribute__((section(".data.frontier
     (EventScr)0x0000C540,
     (EventScr)0x00000200,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00190017,
     (EventScr)0x0000FFF9,
     (EventScr)0x00140E20,
@@ -3516,19 +3512,19 @@ EventScr EventScrWM_MessedEventscr_49[51] __attribute__((section(".data.frontier
     (EventScr)0x00140E20,
     (EventScr)0x00101721,
     (EventScr)0x0000A040,
-};
-
-EventScr EventScrWM_JPOnly_5[17] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00000002,
     (EventScr)0x00000120,
+};
+
+EventScr EventScrWM_Ch21b_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x00000018,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -3536,23 +3532,17 @@ EventScr EventScrWM_JPOnly_5[17] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x00009920,
     (EventScr)0x00280E20,
     (EventScr)0x00009040,
-};
-
-EventScr EventScrWM_Ch21b_Beginning[5] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x0000001F,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
-};
-
-EventScr EventScrWM_MessedEventscr_50[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
-EventScr EventScrWM_JPOnly_6[35] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
+EventScr EventScrWM_MessedEventscr_50[35] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3564,7 +3554,7 @@ EventScr EventScrWM_JPOnly_6[35] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x003C0E20,
     (EventScr)0x0000C720,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00190018,
     (EventScr)0x0000FFFC,
     (EventScr)0x0000C640,
@@ -3586,25 +3576,25 @@ EventScr EventScrWM_JPOnly_6[35] __attribute__((section(".data.frontier_df4_menu
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_51[44] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009340,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009D40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008340,
     (EventScr)0x000C0000,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -3612,7 +3602,7 @@ EventScr EventScrWM_MessedEventscr_51[44] __attribute__((section(".data.frontier
     (EventScr)0x00009920,
     (EventScr)0x00280E20,
     (EventScr)0x00009040,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00460E20,
     (EventScr)0x0000AF40,
     (EventScr)0x00010028,
@@ -3623,7 +3613,7 @@ EventScr EventScrWM_MessedEventscr_51[44] __attribute__((section(".data.frontier
     (EventScr)0x00001D20,
     (EventScr)0x00140E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00010000,
     (EventScr)0x002800C8,
     (EventScr)0x00001C20,
@@ -3633,33 +3623,33 @@ EventScr EventScrWM_MessedEventscr_51[44] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x0000C120,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_52[49] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x0000C120,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x00000005,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00009D40,
     (EventScr)0x00000005,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x0000A640,
     (EventScr)0x00050000,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A980,
     (EventScr)0x00040000,
     (EventScr)0x00040005,
     (EventScr)0x0000FFFE,
     (EventScr)0x0000AC40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A980,
     (EventScr)0x00040000,
     (EventScr)0x00030004,
@@ -3667,49 +3657,51 @@ EventScr EventScrWM_MessedEventscr_52[49] __attribute__((section(".data.frontier
     (EventScr)0x00008780,
     (EventScr)0xFFFFFFFF,
     (EventScr)0x00780001,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000AC40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A980,
     (EventScr)0x00040000,
     (EventScr)0x00020003,
     (EventScr)0x0000FFFE,
     (EventScr)0x0000AC40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000A980,
     (EventScr)0x00040000,
     (EventScr)0x00010002,
     (EventScr)0x0000FFFE,
     (EventScr)0x0000AC40,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00008920,
     (EventScr)0x0000A640,
     (EventScr)0x00010000,
+    (EventScr)0x0000C120,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_CastleFrelia_Beginning[6] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x0000C120,
-    (EventScr)0x00000120,
     (EventScr)0x00880321,
     (EventScr)0x00010C41,
     (EventScr)0x0000000C,
     (EventScr)0x00000A40,
+    (EventScr)&EventScrWM_MessedEventscr_51,
+    (EventScr)0x00000121,
 };
 
 EventScr EventScrWM_MessedEventscr_53[4] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)&EventScrWM_MessedEventscr_51 + 0x8),
-    (EventScr)0x00000121,
     (EventScr)0x00010820,
     (EventScr)0x00000A40,
+    (EventScr)&EventScrWM_MessedEventscr_52,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_54[2] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)&EventScrWM_MessedEventscr_52 + 0x8),
+    (EventScr)0x00101721,
     (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch5x_Beginning[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch5x_ChapterIntro[1] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
@@ -3733,16 +3725,14 @@ EventScr EventScrWM_MessedEventscr_56[1] __attribute__((section(".data.frontier_
 };
 
 EventScr EventScrWM_Ch11a_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00000120,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x00010000,
     (EventScr)0x0000000A,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -3753,14 +3743,14 @@ EventScr EventScrWM_Ch11a_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x0000000B,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_MessedEventscr_57[49] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
     (EventScr)0x00060E20,
     (EventScr)0x00008680,
     (EventScr)0xFFFFFFFF,
@@ -3795,7 +3785,7 @@ EventScr EventScrWM_MessedEventscr_57[49] __attribute__((section(".data.frontier
     (EventScr)0x00001C20,
     (EventScr)0x00001D20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x000B000A,
     (EventScr)0x0000FFFC,
     (EventScr)0x00001C20,
@@ -3808,19 +3798,19 @@ EventScr EventScrWM_MessedEventscr_57[49] __attribute__((section(".data.frontier
     (EventScr)0x0000C920,
     (EventScr)0x00020E20,
     (EventScr)0x00140E20,
+    (EventScr)0x00101721,
+    (EventScr)0x00000120,
 };
 
 EventScr EventScrWM_Ch11b_Beginning[23] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)0x00101721,
-    (EventScr)0x00000120,
     (EventScr)0x00011020,
     (EventScr)0x0000C360,
     (EventScr)0x000F0000,
     (EventScr)0x0000000F,
     (EventScr)0x00008540,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B240,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0000B320,
     (EventScr)0x00001020,
     (EventScr)0x00140E20,
@@ -3831,14 +3821,14 @@ EventScr EventScrWM_Ch11b_Beginning[23] __attribute__((section(".data.frontier_d
     (EventScr)0x00000010,
     (EventScr)0x00460E20,
     (EventScr)0x0000A140,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x00011020,
     (EventScr)0x00000A40,
+    (EventScr)((u8*)data_085B9BBC + 0x168), /* EventScr_RemoveBGIfNeeded (existing idiom) */
+    (EventScr)0x00000120,
 };
 
-EventScr EventScrWM_MessedEventscr_58[54] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
-    (EventScr)((u8*)data_085B9BBC + 0x168),
-    (EventScr)0x00000120,
+EventScr EventScrWM_MessedEventscr_58[52] __attribute__((section(".data.frontier_df4_menu.events_wm"))) = {
     (EventScr)0x00060E20,
     (EventScr)0x00000A40,
     (EventScr)&EventScr_WM_FadeCommon,
@@ -3880,7 +3870,7 @@ EventScr EventScrWM_MessedEventscr_58[54] __attribute__((section(".data.frontier
     (EventScr)0x00000100,
     (EventScr)0x002E0E20,
     (EventScr)0x0000A980,
-    (EventScr)0x00000000,
+    0,
     (EventScr)0x0010000F,
     (EventScr)0x0000FFFC,
     (EventScr)0x006E0E20,
