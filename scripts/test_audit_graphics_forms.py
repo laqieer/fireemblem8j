@@ -40,6 +40,9 @@ def make_p_png(path, pixels, palette=None):
 
 
 def make_l_png(path, pixels):
+    """Pillow's PNG encoder always saves 'L' mode at on-disk bit_depth 8 (raw
+    byte values, no rescale) -- exercises audit_graphics_forms's bit_depth==8
+    grayscale branch (`pillow_value & 0xF`)."""
     h = len(pixels)
     w = len(pixels[0])
     im = Image.new("L", (w, h))
@@ -48,6 +51,47 @@ def make_l_png(path, pixels):
         for x in range(w):
             px[x, y] = pixels[y][x]
     im.save(path)
+
+
+def make_l4_png(path, pixels):
+    """Hand-write a genuine PNG color_type=0 (grayscale) bit_depth=4 file --
+    Pillow's encoder has no supported way to produce one (its `bits=` save
+    kwarg is silently ignored for 'L' mode), but this is exactly what 1,389 of
+    the 1,393 tracked L-mode assets actually are on disk. Samples are 4-bit
+    values 0-15, MSB-first packed 2/byte per the PNG spec. Exercises
+    audit_graphics_forms's bit_depth==4 branch (Pillow rescales each sample by
+    17 on read: e.g. raw 7 -> pixel value 119; read_grayscale_index() must
+    recover 7 via `// 17`)."""
+    h = len(pixels)
+    w = len(pixels[0])
+
+    def chunk(tag, data):
+        out = struct.pack(">I", len(data)) + tag + data
+        import zlib
+        crc = zlib.crc32(tag + data) & 0xFFFFFFFF
+        return out + struct.pack(">I", crc)
+
+    import zlib
+    sig = b"\x89PNG\r\n\x1a\n"
+    ihdr = struct.pack(">IIBBBBB", w, h, 4, 0, 0, 0, 0)
+    row_bytes = (w + 1) // 2
+    raw = bytearray()
+    for row in pixels:
+        raw.append(0)  # filter type 0 (none)
+        rb = bytearray(row_bytes)
+        for i, v in enumerate(row):
+            byte_i = i // 2
+            if i % 2 == 0:
+                rb[byte_i] |= (v & 0xF) << 4
+            else:
+                rb[byte_i] |= (v & 0xF)
+        raw += rb
+    idat = zlib.compress(bytes(raw), 9)
+    with open(path, "wb") as f:
+        f.write(sig)
+        f.write(chunk(b"IHDR", ihdr))
+        f.write(chunk(b"IDAT", idat))
+        f.write(chunk(b"IEND", b""))
 
 
 class TileOrderTest(unittest.TestCase):
@@ -90,13 +134,40 @@ class TileOrderTest(unittest.TestCase):
             # tile1 (x 8-15): bytes 0x98 0xba 0xdc 0xfe per row.
             self.assertEqual(out[32:36], bytes([0x98, 0xba, 0xdc, 0xfe]))
 
-    def test_l_mode_inverts_index(self):
+    def test_l_mode_inverts_index_bit_depth_8(self):
+        """make_l_png() saves at on-disk bit_depth 8 (Pillow's default for 'L'),
+        so raw byte values 0-7 are used as-is (`& 0xF`, no /17 un-rescale)."""
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "t.png")
             pixels = [[x for x in range(8)] for _ in range(8)]
             make_l_png(path, pixels)
+            _w, _h, bit_depth, _ct = a.read_png_ihdr(path)
+            self.assertEqual(bit_depth, 8)
             out = a.png_to_tiles_4bpp(path)
             # raw x=0,1 -> 0,1; inverted -> 15,14; byte = (14<<4)|15 = 0xEF.
+            self.assertEqual(out[0], 0xEF)
+
+    def test_l_mode_inverts_index_bit_depth_4(self):
+        """A genuine 4-bit-depth grayscale PNG (color_type 0): Pillow rescales
+        each 4-bit sample by *17 on decode (e.g. raw 3 -> pixel value 51), so
+        the audit must recover the ORIGINAL sample via `// 17` before
+        inverting -- naively using Pillow's rescaled value directly (or
+        masking it with `& 0xF`, which happens to coincide only because
+        sample*17 is always a repeated hex digit, e.g. 3*17=51=0x33) would
+        silently apply the wrong transform for any value that ISN'T a clean
+        multiple of 17."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.png")
+            pixels = [[x for x in range(8)] for _ in range(8)]
+            make_l4_png(path, pixels)
+            _w, _h, bit_depth, _ct = a.read_png_ihdr(path)
+            self.assertEqual(bit_depth, 4)
+            im = Image.open(path)
+            px = im.load()
+            self.assertEqual(px[3, 0], 51)  # Pillow's rescaled (3 * 17) value
+            out = a.png_to_tiles_4bpp(path)
+            # raw x=0,1 -> 0,1; inverted -> 15,14; byte = (14<<4)|15 = 0xEF (same
+            # end result as the bit_depth-8 case above, via the CORRECT formula).
             self.assertEqual(out[0], 0xEF)
 
     def test_num_tiles_truncates_regardless_of_tail_content(self):
@@ -114,6 +185,33 @@ class TileOrderTest(unittest.TestCase):
             self.assertEqual(len(out_full), 3 * 32)
             self.assertEqual(len(out_2), 2 * 32)
             self.assertEqual(out_2, out_full[:64])
+
+
+class ReadGrayscaleIndexTest(unittest.TestCase):
+    def test_bit_depth_4_recovers_exact_sample(self):
+        for sample in range(16):
+            pillow_value = sample * 17
+            self.assertEqual(a.read_grayscale_index(pillow_value, 4), sample)
+
+    def test_bit_depth_4_rejects_non_multiple_of_17(self):
+        with self.assertRaises(ValueError):
+            a.read_grayscale_index(100, 4)  # not a multiple of 17
+
+    def test_bit_depth_8_is_a_plain_mask(self):
+        self.assertEqual(a.read_grayscale_index(0x37, 8), 0x7)
+
+    def test_unhandled_bit_depth_raises(self):
+        with self.assertRaises(ValueError):
+            a.read_grayscale_index(3, 2)
+
+
+class ReadPngIhdrTest(unittest.TestCase):
+    def test_reads_dimensions_and_depth(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.png")
+            make_l4_png(path, [[0] * 8 for _ in range(8)])
+            w, h, bit_depth, color_type = a.read_png_ihdr(path)
+            self.assertEqual((w, h, bit_depth, color_type), (8, 8, 4, 0))
 
 
 class CheckGeneric4bppTest(unittest.TestCase):
@@ -438,6 +536,118 @@ class ClassifyPngsIntegrationTest(unittest.TestCase):
             fx.commit()
             overrides = a.parse_num_tiles_overrides(tmp)
             self.assertEqual(overrides.get("graphics/sub/a_sheet.4bpp"), 241)
+
+
+class PayloadRelocOverlapTest(unittest.TestCase):
+    """The optional --relocs-check companion (Makefile `graphicscheck-relocs` /
+    `make shiftcheck`): a real ROM word that coincidentally looks like a
+    pointer inside a pure-payload byte array is fine; an ACTUAL relocation
+    slot landing inside one is a real defect. These test the parsing +
+    overlap-detection logic against literal tool-output text (mirroring
+    scripts/shiftcheck/test_scan_talk_table_relocs.py's approach), so no
+    toolchain or real ELF is needed to exercise the logic."""
+
+    def test_parse_readelf_filters_to_rom_range(self):
+        text = (
+            "\nRelocation section '.rel.rom' at offset 0x10 contains 2 entries:\n"
+            " Offset     Info    Type            Sym.Value  Sym. Name\n"
+            "08a5ea5c  01020304 R_ARM_ABS32       08000100   some_symbol\n"
+            "00001234  01020304 R_ARM_ABS32       00000001   debug_sym\n"
+        )
+        offsets = a.parse_readelf_abs32_rom_offsets(text)
+        self.assertEqual(offsets, [0x08A5EA5C])
+
+    def test_parse_readelf_ignores_non_abs32(self):
+        text = "08a5ea5c  01020304 R_ARM_ABS16       08000100   some_symbol\n"
+        self.assertEqual(a.parse_readelf_abs32_rom_offsets(text), [])
+
+    def test_parse_nm_sized_symbols(self):
+        text = (
+            "087d10e4 00002850 T btl_bg_59_tiles\n"
+            "087d3934 00000050 T btl_bg_59_palette\n"
+            "087d3984 00000000 T zero_size_label\n"
+        )
+        syms = a.parse_nm_sized_symbols(text)
+        self.assertEqual(syms["btl_bg_59_tiles"], [(0x087D10E4, 0x2850)])
+        self.assertEqual(syms["btl_bg_59_palette"], [(0x087D3934, 0x50)])
+        self.assertNotIn("zero_size_label", syms)  # zero size -- nothing to overlap-check
+
+    def test_is_payload_path_recognizes_all_documented_extensions(self):
+        for path in [
+            "graphics/x/a.4bpp", "graphics/x/a.4bpp.lz",
+            "graphics/x/a.gbapal", "graphics/x/a.gbapal.lz",
+            "graphics/x/a.agbpal", "graphics/x/a.agbpal.lz",
+            "graphics/x/a.tsa.bin", "graphics/x/a.tsa.bin.lz",
+            "graphics/x/a.map.bin", "graphics/x/a.map.bin.lz",
+            "graphics/x/a.fetsa3.bin", "graphics/x/a.fetsa3.bin.lz",
+            "graphics/x/a.feimg2.bin", "graphics/x/a.feimg2.bin.lz",
+            "graphics/x/a.4bpp.fk",
+        ]:
+            self.assertTrue(a._is_payload_path(path), path)
+
+    def test_is_payload_path_rejects_non_graphics_and_generic_bin(self):
+        self.assertFalse(a._is_payload_path("sound/x/a.bin"))
+        self.assertFalse(a._is_payload_path("graphics/x/a.bin"))  # generic residual blob
+        self.assertFalse(a._is_payload_path("graphics/x/a.mid"))
+
+    def test_find_incbin_payload_names_end_to_end(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add(
+                "src/data/x/x.c",
+                'u8 gFoo_tiles[] = INCBIN_U8("graphics/x/gFoo.4bpp.lz");\n'
+                'u16 gFoo_palette[] = INCBIN_U16("graphics/x/gFoo.gbapal.lz");\n'
+                'u8 gFoo_sound[] = INCBIN_U8("sound/x/gFoo.bin");\n'
+                'u8 gFoo_residue[] __attribute__((section(".data.gap0"))) = '
+                'INCBIN_U8("graphics/x/gFoo_residue.bin.lz");\n',
+            )
+            fx.commit()
+            names = a.find_incbin_payload_names(tmp)
+            self.assertEqual(names, {"gFoo_tiles", "gFoo_palette"})
+
+    def test_find_incbin_payload_names_extra_target_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fx = RepoGraphFixture(tmp)
+            fx.add(
+                "src/data/x/x.c",
+                'u8 Tsa_Renamed[] = INCBIN_U8("graphics/x/Tsa_Renamed.bin.lz");\n',
+            )
+            fx.commit()
+            # "graphics/x/Tsa_Renamed.bin" doesn't match any recognized suffix on
+            # its own (plain .bin) -- only the explicit-rule target list finds it.
+            self.assertEqual(a.find_incbin_payload_names(tmp), set())
+            names = a.find_incbin_payload_names(
+                tmp, extra_target_paths=["graphics/x/Tsa_Renamed.bin"])
+            self.assertEqual(names, {"Tsa_Renamed"})
+
+    def test_overlap_detects_reloc_inside_symbol(self):
+        reloc_offsets = [0x1000, 0x1010, 0x2000]
+        name_to_ranges = {"payload_a": [(0x1000, 0x20)]}  # covers 0x1000-0x101F
+        violations = a.check_payload_reloc_overlap(
+            reloc_offsets, name_to_ranges, {"payload_a"})
+        # One violation entry per overlapping (name, addr, size) range (reporting
+        # the first offending reloc address); both 0x1000 and 0x1010 fall inside
+        # this range but are summarized as a single reported defect.
+        self.assertEqual(len(violations), 1)
+        self.assertEqual(violations[0][:3], ("payload_a", 0x1000, 0x20))
+
+    def test_no_overlap_when_relocs_are_elsewhere(self):
+        reloc_offsets = [0x2000, 0x3000]
+        name_to_ranges = {"payload_a": [(0x1000, 0x20)]}
+        violations = a.check_payload_reloc_overlap(
+            reloc_offsets, name_to_ranges, {"payload_a"})
+        self.assertEqual(violations, [])
+
+    def test_overlap_ignores_unrequested_names(self):
+        # A relocation inside a symbol NOT in the requested `names` set (e.g. a
+        # legitimately pointer-bearing object the caller deliberately excluded
+        # from the pure-payload classification) must not be flagged -- only
+        # symbols the caller actually classified as pure payload are checked.
+        reloc_offsets = [0x1000]
+        name_to_ranges = {"payload_a": [(0x2000, 0x20)], "other_sym": [(0x1000, 0x20)]}
+        violations = a.check_payload_reloc_overlap(
+            reloc_offsets, name_to_ranges, {"payload_a"})
+        self.assertEqual(violations, [])
 
 
 if __name__ == "__main__":
