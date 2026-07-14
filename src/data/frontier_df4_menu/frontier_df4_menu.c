@@ -7559,7 +7559,21 @@ struct ProcCmd data_08A9E510[] SECTION(".data.frontier_df4_menu.gap28") = {
 };
 
 u8 frontier_df4_menu_029_AA3860[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin");
-u8 frontier_df4_menu_030_AA71D4[] __attribute__((section(".data.frontier_df4_menu.gap30"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_030_AA71D4.bin");
+/* blob 030 (AA71D4, 0x610 B) fully split (issue #143 menu pass), no floor remains:
+ * [0,0x13A) Tsa_DifficultyMenuObjs: byte-exact raw TSA (hdr 0x0B0C = 13x12, 156
+ * u16 entries), consumer InitDifficultySelectScreen. [0x13A,0x13C) explicit 2-B
+ * zero pad. [0x13C,0x15C) Pal_MenuMainObjs_0: 16-color palette, byte-identical to
+ * fe8u's own Pal_08A295B4 (graphics/misc/Pal_08A295B4.pal); was baseline ABS alias
+ * (layout/baseline_syms.tsv), dropped via layout/baseline_syms_drop.d/
+ * Pal_MenuMainObjs_0.tsv. [0x15C,0x610) Tsa_CommGameBgScreenInShop: byte-exact raw
+ * TSA (hdr 0x131d = 30x20, 1204 B incl. 2-B pad), consumers bmshop_080B95DC/
+ * bonusclaim_080B56F8/ExtramenuUnk_LoadGfx. All three symbols were already
+ * extern-declared (include/variables.h) with real consumers; only the definitions
+ * were missing. */
+u8 Tsa_DifficultyMenuObjs[] __attribute__((section(".data.frontier_df4_menu.gap30"))) = INCBIN_U8("graphics/frontier_df4_menu/Tsa_DifficultyMenuObjs.tsa.bin");
+u16 frontier_df4_menu_030_pad[1] __attribute__((section(".data.frontier_df4_menu.gap30"))) = { 0x0000 };
+u16 Pal_MenuMainObjs_0[] __attribute__((section(".data.frontier_df4_menu.gap30"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_MenuMainObjs_0.gbapal");
+u8 Tsa_CommGameBgScreenInShop[] __attribute__((section(".data.frontier_df4_menu.gap30"))) = INCBIN_U8("graphics/frontier_df4_menu/Tsa_CommGameBgScreenInShop.tsa.bin");
 /* Wave47: LZ-hybrid decomposed — 1044B JP-LZ 4bpp sheet (128 tiles, byte-exact
  * via gbagfx default) + 32B raw 16-color palette tail. */
 u8 frontier_df4_menu_031_AA9F98[] __attribute__((section(".data.frontier_df4_menu.gap31"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98_pal.gbapal");

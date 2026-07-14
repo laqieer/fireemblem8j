@@ -33,7 +33,6 @@ Tsa_ShopWindows	08A1DFBC	data	bmshop_080B95DC
 gShopItemTexts	0203EF64	data	bmshop_080B95DC
 Pal_CommGameBgScreenInShop	08BB059C	data	bmshop_080B95DC
 Img_CommGameBgScreen	08BABE04	data	bmshop_080B95DC
-Tsa_CommGameBgScreenInShop	08AA7330	data	bmshop_080B95DC
 Img_ShopGoldBox	08A1E080	data	bmshop_080B95DC
 gUiFramePaletteA	085E0D94	data	bmshop_080B95DC
 PutSpecialChar	08004A14	thumb	bmshop_080B95DC
