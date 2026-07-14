@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import unittest
+from collections import Counter
 
 import audit_pointer_classification as audit
 
@@ -182,32 +183,161 @@ class AuditPointerClassificationTest(unittest.TestCase):
             [(candidate, 0x32C74)],
         )
 
-    def test_tile_animations_header_scalar_is_rejected_and_inventoried(self):
+    def test_all_twelve_proven_header_relocations_are_rejected(self):
+        candidates = [
+            relocation(
+                0,
+                0x08000004,
+                audit.TILE_ANIMATIONS3_PACKED_SCALAR,
+                name=audit.ROM_HEADER_LOGO_SYMBOL,
+                size=0,
+                slot=slot,
+            )
+            for slot in sorted(audit.TILE_ANIMATIONS3_SCALAR_SLOTS)
+        ]
+        candidates.append(
+            relocation(
+                0,
+                0x08000000,
+                0x08000000,
+                name="Init",
+                size=0,
+                slot=0x08B5B614,
+            )
+        )
+        candidates.extend(
+            relocation(
+                0,
+                0x08000000,
+                0x08000000,
+                name="Init",
+                size=0,
+                slot=slot,
+            )
+            for slot in (0x08FE0234, 0x08FE14D8, 0x08FE200C)
+        )
+
+        result = audit.classify_header_relocations(candidates)
+        schemas = Counter(schema for _, schema in result.suspects)
+
+        self.assertEqual(result.total, 12)
+        self.assertEqual(len(result.suspects), 12)
+        self.assertEqual(schemas[audit.HEADER_SCHEMA_TILE_SCALAR], 8)
+        self.assertEqual(schemas["Tsa_OpAnimEphraimClose2 LZ stream"], 1)
+        self.assertEqual(schemas["DACS/IS-AGB debug-monitor image"], 3)
+
+    def test_tile_animation_frame_pointers_are_positive_controls(self):
+        candidates = [
+            relocation(
+                audit.STT_OBJECT,
+                0x085D0000 + index * 0x100,
+                0x085D0000 + index * 0x100,
+                name=f"TileAnimations3_frame_{index}",
+                size=0x100,
+                slot=slot + 4,
+            )
+            for index, slot in enumerate(sorted(audit.TILE_ANIMATIONS3_SCALAR_SLOTS))
+        ]
+
+        result = audit.classify_header_relocations(candidates)
+
+        self.assertEqual(result.total, 0)
+        self.assertEqual(result.suspects, [])
+
+    def test_exact_typed_header_code_pointer_is_accepted(self):
+        candidate = relocation(
+            audit.STT_FUNC,
+            0x08000001,
+            0x08000001,
+            name="TypedHeaderEntry",
+            size=0x20,
+            slot=0x08100000,
+        )
+        result = audit.classify_header_relocations([candidate])
+
+        self.assertEqual(result.typed_code, [candidate])
+        self.assertEqual(result.suspects, [])
+
+    def test_exact_sized_header_object_pointer_is_accepted(self):
+        candidate = relocation(
+            audit.STT_OBJECT,
+            0x08000004,
+            0x08000004,
+            name="TypedNintendoLogo",
+            size=0x9C,
+            slot=0x08100004,
+        )
+        result = audit.classify_header_relocations([candidate])
+
+        self.assertEqual(result.typed_objects, [candidate])
+        self.assertEqual(result.suspects, [])
+
+    def test_untyped_header_target_fails_closed(self):
         candidate = relocation(
             0,
-            0x08000004,
-            0x0800000B,
-            name=audit.ROM_HEADER_LOGO_SYMBOL,
+            0x08000000,
+            0x08000000,
+            name="InitAlias",
             size=0,
-            slot=0x085C5BD8,
+            slot=0x08100008,
         )
-        result = audit.classify_scalar_relocations([candidate])
+        result = audit.classify_header_relocations([candidate])
 
-        self.assertEqual(result.header_inventory, [candidate])
-        self.assertEqual(result.header_scalar_suspects, [candidate])
+        self.assertEqual(
+            result.suspects,
+            [(candidate, audit.HEADER_SCHEMA_UNTYPED)],
+        )
 
-    def test_other_header_relocation_is_inventory_only(self):
+    def test_explicitly_audited_pinned_header_slot_is_accepted(self):
         candidate = relocation(
             0,
-            0x08000004,
-            0x08000007,
-            name=audit.ROM_HEADER_LOGO_SYMBOL,
+            0x08000080,
+            0x08000080,
+            name="PinnedHeaderField",
             size=0,
+            slot=0x0810000C,
         )
-        result = audit.classify_scalar_relocations([candidate])
+        result = audit.classify_header_relocations(
+            [candidate],
+            pinned_slots=frozenset({candidate.slot}),
+        )
 
-        self.assertEqual(result.header_inventory, [candidate])
-        self.assertEqual(result.header_scalar_suspects, [])
+        self.assertEqual(result.pinned, [candidate])
+        self.assertEqual(result.suspects, [])
+
+    def test_intentional_raw_header_domains_do_not_become_false_negatives(self):
+        for relpath in audit.INTENTIONAL_RAW_HEADER_DOMAIN_FILES:
+            with self.subTest(relpath=relpath):
+                self.assertTrue(
+                    audit.is_intentional_raw_header_domain(relpath, 0x08000000)
+                )
+
+        self.assertFalse(
+            audit.is_intentional_raw_header_domain(
+                "src/data/ordinary_pointer_table.s",
+                0x08000000,
+            )
+        )
+        self.assertFalse(
+            audit.is_intentional_raw_header_domain(
+                "src/data/data_08FE0000/data_08FE0000.s",
+                0x080000C0,
+            )
+        )
+
+    def test_intentional_raw_header_domain_does_not_collide_with_symbolic_use(self):
+        raw_targets = {}
+        tracked = audit.record_raw_target(
+            raw_targets,
+            "src/data/data_08FE0000/data_08FE0000.s",
+            148,
+            0x08000000,
+        )
+        symbolic_targets = {0x08000000: [("src/typed_table.c", 10, "Init", 0)]}
+
+        self.assertFalse(tracked)
+        self.assertEqual(raw_targets, {})
+        self.assertEqual(set(raw_targets) & set(symbolic_targets), set())
 
 
 if __name__ == "__main__":

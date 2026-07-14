@@ -153,11 +153,17 @@ class OpaqueSelfrefAuditTest(unittest.TestCase):
         self.assertEqual(sum(len(item["hits"]) for item in resolved), 267)
         self.assertEqual(unresolved, [])
         self.assertEqual(classified_skipped, skipped)
-        self.assertEqual(len(skipped), 1074)
+        # D380 (issue #143 false-func-reloc-gate lane) removed the one false
+        # `Init` relocation baked into data_08B5B560/Tsa_OpAnimEphraimClose2,
+        # making that object fully relocation-free. That legitimately promotes
+        # it into the structureless-opaque population scanned here (zero-size,
+        # so it lands in `skipped`), moving the "other" (non-AnimSprite_)
+        # zero-size count from 209 to 210 and the total from 1074 to 1075.
+        self.assertEqual(len(skipped), 1075)
         anim_sprite_skipped = [
             item for item in skipped if item[0].startswith("AnimSprite_")]
         self.assertEqual(len(anim_sprite_skipped), 865)
-        self.assertEqual(len(skipped) - len(anim_sprite_skipped), 209)
+        self.assertEqual(len(skipped) - len(anim_sprite_skipped), 210)
         self.assertEqual(skipped, sorted(skipped, key=lambda item: item[1]))
         self.assertIn(
             ("AnimSprite_EkrMainMini_L_Far",

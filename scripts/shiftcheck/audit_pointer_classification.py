@@ -29,6 +29,11 @@ Additional packed-scalar classes are checked from the same final ELF:
   * relocations to pad_BC3A00, all three of which occur inside LZ-compressed
     graphics streams and corrupt decompressed output when shifted.
 
+Every ROM-site ABS32 relocation resolving inside the 0xC0-byte cartridge header
+is also schema-audited. Proven compressed/scalar/nested-image source domains are
+always rejected. Elsewhere, only exact typed FUNC/OBJECT targets or explicitly
+audited pinned slots are accepted; untyped header-domain relocations fail closed.
+
 Confirm each SUSPECT with method (1) source/struct and method (3) fe8u before changing
 anything. This script only REPORTS; it never edits. Byte-identical fixes are manual/gated.
 
@@ -70,6 +75,25 @@ TILE_ANIMATIONS3_PACKED_SCALAR = 0x0800000B
 AREA_PACKED_SYMBOL = "sBanimEkrPopupProcNames"
 AREA_PACKED_SCALAR = 0x08100009
 PROVEN_COMPRESSED_SCALAR_ANCHORS = frozenset({"pad_BC3A00"})
+ROM_HEADER_HI = ROM_LO + 0xC0
+TILE_ANIMATIONS3_SCALAR_SLOTS = frozenset(
+    range(0x085C5BD8, 0x085C5C18, 8)
+)
+HEADER_COMPRESSED_SOURCE_RANGES = (
+    (0x08B5B560, 0x08B5B654, "Tsa_OpAnimEphraimClose2 LZ stream"),
+)
+HEADER_NESTED_IMAGE_SOURCE_RANGES = (
+    (0x08FE0000, 0x08FE4000, "DACS/IS-AGB debug-monitor image"),
+)
+AUDITED_PINNED_HEADER_RELOCATION_SLOTS = frozenset()
+HEADER_SCHEMA_TILE_SCALAR = "TileAnimations3 u16 time/size scalar"
+HEADER_SCHEMA_UNTYPED = "untyped or unaudited header-domain target"
+INTENTIONAL_RAW_HEADER_DOMAIN_FILES = frozenset(
+    {
+        "src/data/data_08B5B560/data_08B5B560.s",
+        "src/data/data_08FE0000/data_08FE0000.s",
+    }
+)
 
 # Message-id range typically packed into the high half of talk/quote metadata words.
 MSG_HI_LO, MSG_HI_HI = 0x0800, 0x0FFF   # high16 in this range => could be a packed msg id
@@ -126,8 +150,15 @@ class ScalarRelocationAudit:
     placement_anchor_reviews: list
     compressed_anchor_suspects: list
     area_scalar_suspects: list
-    header_inventory: list
-    header_scalar_suspects: list
+
+
+@dataclass
+class HeaderRelocationAudit:
+    total: int
+    typed_code: list
+    typed_objects: list
+    pinned: list
+    suspects: list
 
 
 def _cstring(blob, offset):
@@ -383,8 +414,6 @@ def classify_scalar_relocations(relocations):
     placement_anchor_reviews = []
     compressed_anchor_suspects = []
     area_scalar_suspects = []
-    header_inventory = []
-    header_scalar_suspects = []
 
     for reloc in relocations:
         symbol = reloc.symbol
@@ -403,11 +432,6 @@ def classify_scalar_relocations(relocations):
             # This exact semantic rule is stronger than the generic zero-size
             # heuristic and remains active if the provider is later sized.
             continue
-
-        if symbol.name == ROM_HEADER_LOGO_SYMBOL:
-            header_inventory.append(reloc)
-            if reloc.linked_value == TILE_ANIMATIONS3_PACKED_SCALAR:
-                header_scalar_suspects.append(reloc)
 
         addend = reloc.linked_value - symbol.value
         large_zero_size = (
@@ -434,9 +458,88 @@ def classify_scalar_relocations(relocations):
         placement_anchor_reviews=placement_anchor_reviews,
         compressed_anchor_suspects=compressed_anchor_suspects,
         area_scalar_suspects=area_scalar_suspects,
-        header_inventory=header_inventory,
-        header_scalar_suspects=header_scalar_suspects,
     )
+
+
+def _source_range_label(slot, ranges):
+    for start, end, label in ranges:
+        if start <= slot < end:
+            return label
+    return None
+
+
+def classify_header_relocations(
+    relocations,
+    pinned_slots=AUDITED_PINNED_HEADER_RELOCATION_SLOTS,
+):
+    total = 0
+    typed_code = []
+    typed_objects = []
+    pinned = []
+    suspects = []
+
+    for reloc in relocations:
+        if not (ROM_LO <= reloc.linked_value < ROM_HEADER_HI):
+            continue
+
+        total += 1
+
+        if reloc.slot in TILE_ANIMATIONS3_SCALAR_SLOTS:
+            suspects.append((reloc, HEADER_SCHEMA_TILE_SCALAR))
+            continue
+
+        label = _source_range_label(reloc.slot, HEADER_COMPRESSED_SOURCE_RANGES)
+        if label is not None:
+            suspects.append((reloc, label))
+            continue
+
+        label = _source_range_label(reloc.slot, HEADER_NESTED_IMAGE_SOURCE_RANGES)
+        if label is not None:
+            suspects.append((reloc, label))
+            continue
+
+        if reloc.slot in pinned_slots:
+            pinned.append(reloc)
+            continue
+
+        symbol = reloc.symbol
+        if symbol.st_type == STT_FUNC:
+            function_even = symbol.value & ~1
+            if reloc.linked_value in (function_even, function_even | 1):
+                typed_code.append(reloc)
+                continue
+
+        if (
+            symbol.st_type == STT_OBJECT
+            and symbol.size > 0
+            and reloc.linked_value == symbol.value
+        ):
+            typed_objects.append(reloc)
+            continue
+
+        suspects.append((reloc, HEADER_SCHEMA_UNTYPED))
+
+    return HeaderRelocationAudit(
+        total=total,
+        typed_code=typed_code,
+        typed_objects=typed_objects,
+        pinned=pinned,
+        suspects=suspects,
+    )
+
+
+def is_intentional_raw_header_domain(relpath, value):
+    return (
+        relpath in INTENTIONAL_RAW_HEADER_DOMAIN_FILES
+        and ROM_LO <= value < ROM_HEADER_HI
+    )
+
+
+def record_raw_target(raw_targets, relpath, line, value):
+    if is_intentional_raw_header_domain(relpath, value):
+        return False
+    raw_targets.setdefault(value, []).append((relpath, line))
+    return True
 
 
 def require_relocation_bearing_elf(audit, path):
@@ -490,11 +593,6 @@ def report_scalar_relocations(audit, limit):
             f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
             f"symbol={reloc.symbol.name} packed=AREA(..., 9, 0, 16, 8)"
         )
-    for reloc in audit.header_scalar_suspects[:limit]:
-        print(
-            f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
-            f"symbol={reloc.symbol.name} packed=.hword 11, 2048"
-        )
     for reloc, addend in audit.placement_anchor_reviews[:limit]:
         print(
             f"  [REVIEW] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
@@ -505,9 +603,28 @@ def report_scalar_relocations(audit, limit):
         f"zero-size large-addend false relocations={len(audit.large_zero_size_addends):,}, "
         f"compressed-anchor false relocations={len(audit.compressed_anchor_suspects):,}, "
         f"AREA packed-scalar false relocations={len(audit.area_scalar_suspects):,}, "
-        f"{ROM_HEADER_LOGO_SYMBOL} inventory={len(audit.header_inventory):,}, "
-        f"packed-scalar false relocations={len(audit.header_scalar_suspects):,}, "
         f"placement-anchor reviews={len(audit.placement_anchor_reviews):,}"
+    )
+
+
+def report_header_relocations(audit, limit):
+    print("\n" + "=" * 78)
+    print("ROM-HEADER ABS32 schema audit")
+    print("=" * 78)
+    for reloc, schema in audit.suspects[:limit]:
+        print(
+            f"  [HIGH] slot=0x{reloc.slot:08X} linked=0x{reloc.linked_value:08X} "
+            f"symbol={reloc.symbol.name} schema={schema}"
+        )
+    if len(audit.suspects) > limit:
+        print(f"  ... +{len(audit.suspects)-limit} more")
+    print(
+        "HEADER SUMMARY: "
+        f"resolving-inside-header={audit.total:,}, "
+        f"typed-code={len(audit.typed_code):,}, "
+        f"typed-object={len(audit.typed_objects):,}, "
+        f"audited-pinned={len(audit.pinned):,}, "
+        f"false relocations={len(audit.suspects):,}"
     )
 
 
@@ -688,6 +805,7 @@ def main():
         rom_relocations = list(iter_rom_abs32_relocations(args.relocs_elf))
         function_relocs = classify_function_relocations(rom_relocations)
         scalar_relocs = classify_scalar_relocations(rom_relocations)
+        header_relocs = classify_header_relocations(rom_relocations)
         require_relocation_bearing_elf(function_relocs, args.relocs_elf)
     except (OSError, ElfFormatError) as exc:
         print(f"cannot audit {args.relocs_elf}: {exc}", file=sys.stderr)
@@ -712,7 +830,7 @@ def main():
     sym_targets = {}     # addr -> [(rel,ln,sym,off)]
     for rel, ln, kind, txt, sym, off, is_raw in refs:
         if is_raw:
-            raw_targets.setdefault(off, []).append((rel, ln))
+            record_raw_target(raw_targets, rel, ln, off)
         else:
             base = name2addr.get(sym)
             if base is not None:
@@ -737,7 +855,7 @@ def main():
     for rel, ln, kind, txt, sym, off, is_raw in refs:
         if is_raw:
             a = off
-            if a in starts:
+            if a in starts and not is_intentional_raw_header_domain(rel, a):
                 own = owning(addrs, addr2name, a)
                 fn_suspects.append((rel, ln, f"0x{a:08X}", f"== START {own[1]}", "HIGH"))
         else:
@@ -819,12 +937,13 @@ def main():
     print("Confirm each with (1) source/struct, (2) target meaningfulness, (3) fe8u before editing.")
     report_function_relocations(function_relocs, args.relocs_elf, args.limit)
     report_scalar_relocations(scalar_relocs, args.limit)
+    report_header_relocations(header_relocs, args.limit)
     if args.fail_on_suspects and (
         inconsistent or fn_suspects or fp_suspects or function_relocs.suspects
         or scalar_relocs.large_zero_size_addends
         or scalar_relocs.compressed_anchor_suspects
         or scalar_relocs.area_scalar_suspects
-        or scalar_relocs.header_scalar_suspects
+        or header_relocs.suspects
     ):
         return 1
     return 0
