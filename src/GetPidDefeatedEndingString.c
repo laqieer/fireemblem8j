@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ending_details.h"
 
 struct UnitUsageStats
 {
@@ -13,9 +14,6 @@ struct ROMChapterData
     /* 00 */ u8 _pad00[0x70];
     /* 70 */ u16 unk70;
 };
-
-extern u8 frontier_df4_ending_000_AC059C[];
-#define gpDefeatedEndingLocString (*(char **)frontier_df4_ending_000_AC059C)
 
 extern int GetPidDefeatType(int pid);
 extern void CheckPermanentFlag(int flag);

@@ -42,6 +42,9 @@ src/data/op_subtitle/op_subtitle_gfx.o: \
 src/data/op_subtitle/op_subtitle_gfx.o: \
   graphics/misc_gfx2/gGfx_OpSubtitle_06.4bpp.lz
 
+src/data/op_subtitle/op_subtitle_gfx.o: \
+  graphics/misc_gfx2/gTsa_OpSubtitle_06.tsa.bin.lz
+
 
 
 
@@ -58,6 +61,10 @@ graphics/misc_gfx2/Img_GmapCastleNodes.4bpp.lz: LZ_FLAGS := -mindist 2
 # issue140: gTsa_WorldmapMinimap_1 (LZ-compressed TSA) requires mindist=2 to
 # reproduce byte-identical output vs the JP ROM.
 graphics/misc_gfx2/gTsa_WorldmapMinimap_1.bin.lz: LZ_FLAGS := -mindist 2
+
+# issue143-ending-providers: gTsa_OpSubtitle_06 must use mindist=2 to
+# reproduce the 176-byte JP LZ stream exactly.
+graphics/misc_gfx2/gTsa_OpSubtitle_06.tsa.bin.lz: LZ_FLAGS := -mindist 2
 
 # issue #143 (ending-assets): dat_worldmap_minimap_p0 expanded backward to
 # 0x08B1D954; both new LZ sheets need mindist=2 to reproduce the JP bytes.
