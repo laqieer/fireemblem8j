@@ -4,6 +4,7 @@ import copy
 import os
 import struct
 import sys
+import tempfile
 import unittest
 
 
@@ -76,6 +77,52 @@ class OpaqueSelfrefAuditTest(unittest.TestCase):
         errors.extend(audit._validate_orphan_selfref(record, entry, self.rom))
         self.assertEqual(errors, [])
 
+    def test_absent_fe8u_analogue_is_optional_corroboration(self):
+        symbol = "gUnkData_108"
+        record = self.record(symbol)
+        entry = copy.deepcopy(self.evidence["resolved"][symbol])
+        with tempfile.TemporaryDirectory() as tmpdir:
+            entry["fe8u_provider"] = os.path.join(tmpdir, "missing.c")
+            evidence = {
+                "version": 1,
+                "resolved": {symbol: entry},
+                "exact_extents": {},
+            }
+            resolved, unresolved, _ = audit.classify_opaque_selfrefs(
+                {symbol: record}, [], [record], evidence, self.rom)
+
+        self.assertEqual(unresolved, [])
+        self.assertEqual(len(resolved), 1)
+        self.assertEqual(resolved[0]["evidence_notes"], [
+            f"optional fe8u corroboration unavailable: {entry['fe8u_provider']}; "
+            "local definition/relocation/base-reference/hash proof remains authoritative",
+        ])
+
+    def test_present_mismatching_fe8u_analogue_fails_closed(self):
+        symbol = "gUnkData_108"
+        record = self.record(symbol)
+        entry = copy.deepcopy(self.evidence["resolved"][symbol])
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = os.path.join(tmpdir, "data_B1FE7C.c")
+            with open(path, "w", encoding="utf-8") as f:
+                f.write("CONST_DATA u16 gUnkData_108[0xA788] = { 0 };")
+            entry["fe8u_provider"] = path
+            evidence = {
+                "version": 1,
+                "resolved": {symbol: entry},
+                "exact_extents": {},
+            }
+            resolved, unresolved, _ = audit.classify_opaque_selfrefs(
+                {symbol: record}, [], [record], evidence, self.rom)
+
+        self.assertEqual(resolved, [])
+        self.assertEqual(len(unresolved), 1)
+        self.assertGreaterEqual(audit.selfref_gate_count(unresolved), 1)
+        self.assertEqual(unresolved[0]["errors"], [
+            "present fe8u analogue contradicts evidence: "
+            "expected flat inline u8[0xA788]",
+        ])
+
     def test_popup_zero_size_uses_exact_provider_extent_and_has_no_hits(self):
         symbol = "sBanimEkrPopupProcNames"
         entry = self.evidence["exact_extents"][symbol]
@@ -99,12 +146,24 @@ class OpaqueSelfrefAuditTest(unittest.TestCase):
         opaque = audit.structureless_opaque_syms()
         records, skipped, candidates = audit.scan_opaque_selfref_candidates(
             self.addrs, self.a2n, self.a2s, opaque, self.rom, self.evidence)
-        resolved, unresolved, _ = audit.classify_opaque_selfrefs(
+        resolved, unresolved, classified_skipped = audit.classify_opaque_selfrefs(
             records, skipped, candidates, self.evidence, self.rom)
 
         self.assertEqual(len(resolved), 8)
         self.assertEqual(sum(len(item["hits"]) for item in resolved), 267)
         self.assertEqual(unresolved, [])
+        self.assertEqual(classified_skipped, skipped)
+        self.assertEqual(len(skipped), 1074)
+        anim_sprite_skipped = [
+            item for item in skipped if item[0].startswith("AnimSprite_")]
+        self.assertEqual(len(anim_sprite_skipped), 865)
+        self.assertEqual(len(skipped) - len(anim_sprite_skipped), 209)
+        self.assertEqual(skipped, sorted(skipped, key=lambda item: item[1]))
+        self.assertIn(
+            ("AnimSprite_EkrMainMini_L_Far",
+             self.name2addr["AnimSprite_EkrMainMini_L_Far"]),
+            skipped,
+        )
         self.assertNotIn(
             "sBanimEkrPopupProcNames",
             {item["symbol"] for item in candidates},

@@ -11389,6 +11389,18 @@ least one unit to the real completion gate. Zero-size symbols are skipped unless
 an independent exact provider extent is validated; the popup provider's layout
 row, object section size, linked-byte hash, and zero-hit set are pinned.
 
+**Scope boundary.** Gate 0 means all candidates in the current **exact
+nonzero-extent** opaque-symbol population are resolved, plus the independently
+pinned `0x178` popup extent validates as zero-hit. It is not a claim about every
+opaque byte: **1,074 zero-size opaque symbols are skipped**, including **865
+`AnimSprite_*` OAM/AnimScr-family labels** and 209 others. No other
+repository-wide scanner currently backstops self-references inside this
+zero-size population. The former invalid next-global/stretched scan is useful
+only as empirical current-tree history: despite scanning that larger superset,
+it found no candidates beyond the same nine rows already accounted for here
+(the eight real-extent candidates plus the false popup row). That observation
+does not make the invented extents valid and is not a completeness proof.
+
 **Resolved evidence (8 symbols / 267 coincidental words).**
 
 - Four GBA `0x10` LZ streams: `TowerOfValniObjectType`, `ObjectType4`,
@@ -11410,14 +11422,21 @@ row, object section size, linked-byte hash, and zero-hit set are pinned.
   `.rel.debug_info` relocation has `r_offset` outside ROM and is ignored);
   no aligned raw word targets its base; and fe8u keeps its region-different
   analogue as a flat inline `u8[0xA788]`. This is a narrow unreferenced opaque
-  orphan classification, not a name-based exemption.
+  orphan classification, not a name-based exemption. The fe8u analogue is
+  optional corroboration because CI's sibling checkout is best-effort: when
+  absent or unreadable, the gate emits an evidence note and relies on the
+  pinned local proof above; when present but structurally contradictory, it
+  remains a fail-closed error.
 
 **Gate and regressions.** The real `make shiftcheck` invocation now runs the
 hardened `audit_pointers.py --true-debt --gate`. Regression tests cover:
 zero-size symbols never extending to the next symbol; real LZ/PCM/orphan
 resolution; the exact popup extent; provider or hit-set drift failing closed;
-and a synthetic unknown self-ref becoming unresolved and gating. Baseline is
-**8 resolved / 267 hit words / 0 unresolved / completion gate 0**.
+absent optional fe8u corroboration vs a contradictory present analogue; the
+deterministic **1,074 = 865 `AnimSprite_*` + 209 other** zero-size blind-spot
+baseline; and a synthetic unknown self-ref becoming unresolved and gating.
+Baseline is **8 resolved / 267 hit words / 0 unresolved / completion gate 0**
+within the exact-extent scope above.
 
 This completes the reopened opaque-self-reference audit checklist item only.
 It does **not** declare issue #143 fully closed; the issue remains the umbrella
