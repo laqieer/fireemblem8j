@@ -21,6 +21,8 @@ struct Glyph {
     u32 bitmap[16];          // image data of the glyph (16x16 pixels, 2 bits per pixel)
 };
 
+extern struct Glyph SjisGlyphs_0859140C[152];
+
 enum langaguge_index {
     LANG_JAPANESE,
     LANG_ENGLISH,

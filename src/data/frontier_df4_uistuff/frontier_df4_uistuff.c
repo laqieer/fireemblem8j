@@ -1,18 +1,8 @@
 #include "global.h"
+#include "fontgrp.h"
 #include "proc.h"
 #include "bmio.h"
 
-extern u32 frontier_df4_uistuff_007_59140C_22[];
-extern u32 frontier_df4_uistuff_007_59140C_24[];
-extern u32 frontier_df4_uistuff_007_59140C_42[];
-extern u32 frontier_df4_uistuff_007_59140C_50[];
-extern u32 frontier_df4_uistuff_007_59140C_52[];
-extern u32 frontier_df4_uistuff_007_59140C_54[];
-extern u32 frontier_df4_uistuff_007_59140C_58[];
-extern u32 frontier_df4_uistuff_007_59140C_60[];
-extern u32 frontier_df4_uistuff_007_59140C_64[];
-extern u32 frontier_df4_uistuff_007_59140C_80[];
-extern u32 frontier_df4_uistuff_007_59140C_82[];
 extern const u8 gMenuDefPoolMaptask[];
 
 extern const u8 AnyLinkArenaTeamExists[];
@@ -2164,189 +2154,1072 @@ u32 frontier_df4_uistuff_006_57E4DC[] __attribute__((section(".data.frontier_df4
     0x0003FFFF,
     0x00000000,
 };
-/* #143 shiftability: frontier_df4_uistuff_007_59140C is a struct Glyph[152] whose 43 interior
- * Glyph.sjisNext fields were raw absolute words that emitted no relocation, so
- * they did NOT shift under the +0x40000 shifted-ROM build (kanji glyph-chain
- * corruption). Carve every sjisNext to a relocatable .4byte self-ref; all other
- * bytes stay .incbin. Byte-exact: base 0x0859140C + each delta == the vanilla
- * word (verified by make compare).
- * KEPT AS INLINE ASM (#152): this interleaves 43 relocatable self-pointers with 43
- * sliced .incbin blobs. preproc INCBIN_U8 cannot take an (offset,len) slice, and
- * collapsing to a whole-file INCBIN would reintroduce hardcoded self-pointers and
- * fail shiftcheck. Typed C would require inlining ~10.7KB of blob bytes, dropping
- * the editable .bin asset. So the .incbin form is retained deliberately. */
-u32 frontier_df4_uistuff_007_59140C[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1A70,
+struct Glyph SjisGlyphs_0859140C[152] SECTION(".data.frontier_df4_uistuff.gap7") = {
+    { .sjisNext = &SjisGlyphs_0859140C[94], .sjisByte1 = 0x8F, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000C330, 0x0003BEEF,
+        0x0000E7AB, 0x0003A9FC, 0x0000EFEB, 0x0003AB3C,
+        0x0000EFEB, 0x0003A9FC, 0x0003EFAB, 0x0000EFBB,
+        0x0000EFBB, 0x0000EFAB, 0x000030FF, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[38], .sjisByte1 = 0x90, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0000FEFC, 0x0003AAAB,
+        0x0000FEFC, 0x0000EAAC, 0x0000FEFC, 0x0003AAAB,
+        0x0000EFEC, 0x0000EAAC, 0x0000EFEC, 0x0000EAAC,
+        0x0000EFEC, 0x0000EBEC, 0x00003C30, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x90, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000C30, 0x0003FBEC, 0x0003ABAB,
+        0x0003B6EC, 0x0003BBAB, 0x0000EFAB, 0x0003B9EC,
+        0x0000FFFC, 0x0003AAAB, 0x0000FEFC, 0x0000EAEC,
+        0x0000FEEC, 0x0003AAAB, 0x0003FFFF, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[147], .sjisByte1 = 0x93, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000030, 0x0003FFEC,
+        0x0003AAAC, 0x0003BFEC, 0x0003BF9B, 0x0003BABB,
+        0x0003BFBC, 0x0003BFB0, 0x0003BA70, 0x0003BFC0,
+        0x00039F00, 0x0000EAC0, 0x00003F00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x89, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000CC0, 0x0000FBBC, 0x0003AAAB,
+        0x0000FBBC, 0x0000EAAC, 0x0000EEEC, 0x0000EAAC,
+        0x0000EEEC, 0x0003AAAB, 0x0000FABC, 0x0000E66C,
+        0x0003BEFB, 0x0003CECF, 0x00000300, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x91, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0000ECEC,
+        0x0003ABAB, 0x0000EFEC, 0x0003A9AB, 0x0000EFEC,
+        0x0003BBBB, 0x0000EAAC, 0x0000EFEC, 0x0000EAAC,
+        0x0000EFEC, 0x0000EAAC, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[22], .sjisByte1 = 0x8E, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000300, 0x0003FEFF,
+        0x0003AAAB, 0x0003BFFB, 0x0003BABB, 0x0000FBFC,
+        0x0000F6FC, 0x0003AAAB, 0x0003FEFF, 0x00000EC0,
+        0x00000EC0, 0x00000DB0, 0x000003F0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[92], .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FCC0, 0x000EABBC,
+        0x0003EFBB, 0x000EAB9B, 0x000EFB9B, 0x000EAB9B,
+        0x000EFB9B, 0x000EAB9B, 0x000EFB9B, 0x000EABBB,
+        0x0003AFBB, 0x000EFBBC, 0x00030CC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8E, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0003FEFF, 0x0003AAEB,
+        0x0003BBBC, 0x0000E6EB, 0x0003AA9F, 0x0000EFEC,
+        0x0000EAAC, 0x0000EFEC, 0x0000EA6C, 0x0000EAAC,
+        0x00003BB0, 0x0000ECEC, 0x0000F03C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[104], .sjisByte1 = 0x94, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0003FEFF, 0x0003AAAB,
+        0x0000DEBB, 0x0003BAEB, 0x0000EDBB, 0x0003BF6B,
+        0x0000EAAB, 0x0000FBBB, 0x0003AAAB, 0x0000FBBB,
+        0x0003BB9B, 0x000367EB, 0x0000FC3F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x9A, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00003000, 0x0000EC30, 0x0003ACEC,
+        0x0003EFEC, 0x000EAAEC, 0x000EEEAB, 0x0003AAEC,
+        0x0003EEEC, 0x000EAEEC, 0x0003BEAC, 0x000E9ADB,
+        0x0003AE7C, 0x000EABB0, 0x000FFCF0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[118], .sjisByte1 = 0x92, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003C30, 0x0000ECEC,
+        0x0003EFAB, 0x000EAAEC, 0x0003EFEC, 0x0000ECEB,
+        0x0000EFAB, 0x0003ABEB, 0x0000ECE7, 0x0000ECEC,
+        0x0003EFEC, 0x000EAAEC, 0x0003FF30, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x93, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FFCF, 0x0003AABB,
+        0x0003BFAC, 0x0003AABC, 0x0003BFBB, 0x0003AAAC,
+        0x0003AEB0, 0x0003AEB0, 0x0003AAAC, 0x0003BFAC,
+        0x0003B3BB, 0x0003AFBB, 0x0003F0CF, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8C, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0003FEFF, 0x0003AAAB,
+        0x0003BBBB, 0x0000EBEC, 0x0003AAAB, 0x0003BFFB,
+        0x0003AAAB, 0x0000FEFB, 0x0000EEEB, 0x0000EAAB,
+        0x0003BEFB, 0x0003AAAB, 0x0003FFFF, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[51], .sjisByte1 = 0x8D, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0003FEFF, 0x0003AAAB,
+        0x0000EFEC, 0x0000EAAC, 0x0000FFFC, 0x0003AAAB,
+        0x0003BEFB, 0x0000E6BC, 0x00003AEB, 0x0000EBBC,
+        0x0003B9EB, 0x0003CEBC, 0x000003C0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[29], .sjisByte1 = 0x92, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000C30, 0x0000FBEC, 0x0003AA6C,
+        0x0000D5DB, 0x0000EEFB, 0x0000EAFB, 0x0003FFFB,
+        0x0003AABB, 0x0003BFBB, 0x0003EAFB, 0x00003B3B,
+        0x00003B3B, 0x00003AFB, 0x00003F0F, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[20], .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x000FFF30, 0x000EAAEC, 0x00036FAB,
+        0x0000DBEC, 0x0003E6EC, 0x000EAFAC, 0x000EE6EB,
+        0x000E6EEB, 0x0003AEEB, 0x000E66EC, 0x000EEFEC,
+        0x0003DBEC, 0x000EAAEC, 0x000FFF3C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[69], .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x0003FF30, 0x000EAAEC, 0x000EEEFB,
+        0x00039AEF, 0x000EEE9B, 0x000DAAEC, 0x0003E6FB,
+        0x0003AAAC, 0x0003EFBC, 0x000EAAAB, 0x0003EABC,
+        0x0000EFB0, 0x0000EAB0, 0x0000FFF0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x0A,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CF30, 0x0003BEEC,
+        0x00039AAC, 0x0003BEEB, 0x00039AAC, 0x000EBDEC,
+        0x003BBEEC, 0x000F9AAC, 0x0003BEEB, 0x00039AEC,
+        0x0003BDAC, 0x0003B3EC, 0x0000C030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000000C0, 0x000003B0,
+        0x000003B0, 0x0000FFBC, 0x0000EAAB, 0x0000EFBC,
+        0x0000EFBB, 0x0000EFAC, 0x0000EDB0, 0x0000EEEC,
+        0x000FEFEC, 0x000E9C3B, 0x0003F00F, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[54], .sjisByte1 = 0x8C, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0003FEFF, 0x0003AAAB,
+        0x0000FBFB, 0x0003AABB, 0x0000FBFB, 0x0003AABB,
+        0x0003BBBB, 0x0003AABB, 0x0000FBFB, 0x0003AABB,
+        0x0003FBFB, 0x00003B3B, 0x00000C0F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x95, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0000ECEC,
+        0x00003BB0, 0x0000F77C, 0x0003AAAB, 0x0000FBBC,
+        0x0003BBBB, 0x0003BBBB, 0x0000EBAC, 0x00003BB0,
+        0x0000FBBC, 0x0003AAAB, 0x0003FFFF, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[55], .sjisByte1 = 0x81, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000300, 0x00000EC0,
+        0x00000EC0, 0x00003AB0, 0x0003FABF, 0x0003AAAB,
+        0x0000EAAC, 0x00003AB0, 0x0000EAAC, 0x0000EBAC,
+        0x0003ACEB, 0x0003B03B, 0x0003C00F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8E, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000C030, 0x0003B3EF,
+        0x0003BEAB, 0x0003BBEC, 0x0003BAAB, 0x0003BAEB,
+        0x0003B6EB, 0x0003BFEC, 0x0003B36C, 0x0003B3AB,
+        0x0003BCEB, 0x0003ACEC, 0x0000F030, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[57], .sjisByte1 = 0x8B, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000300, 0x0003FEFF,
+        0x0003AAAB, 0x0003BF7B, 0x00039ABB, 0x0000FBAC,
+        0x00003670, 0x000039B0, 0x0000EFEC, 0x0003BABB,
+        0x0000FBBF, 0x00003AB0, 0x00003FF0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[110], .sjisByte1 = 0x81, .width = 0x07,
+      .bitmap = {
+        0x00000000, 0x00003FF0, 0x00003AB0, 0x00000EB0,
+        0x000003B0, 0x000003B0, 0x000003B0, 0x000003B0,
+        0x000003B0, 0x000003B0, 0x000003B0, 0x000003B0,
+        0x00000EB0, 0x00003AB0, 0x00003FF0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[61], .sjisByte1 = 0x81, .width = 0x07,
+      .bitmap = {
+        0x00000000, 0x00000FFC, 0x00000EAC, 0x00000EB0,
+        0x00000EC0, 0x00000EC0, 0x00000EC0, 0x00000EC0,
+        0x00000EC0, 0x00000EC0, 0x00000EC0, 0x00000EC0,
+        0x00000EB0, 0x00000EAC, 0x00000FFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x94, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FCFF, 0x000EABAB,
+        0x0003FBBB, 0x0003FBAB, 0x000EABBB, 0x000EDBBB,
+        0x000EEBAB, 0x000E6BBB, 0x0003BBBB, 0x0003BBAB,
+        0x000E6EEC, 0x000EEDBB, 0x000333CF, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[121], .sjisByte1 = 0x91, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FC30, 0x0003ABEC,
+        0x0003BBEC, 0x0003A9AB, 0x0003FFEC, 0x000E9AEC,
+        0x000EEEAC, 0x000EAA6C, 0x0003EFEB, 0x000EAAEC,
+        0x0003ABEC, 0x000EEEEC, 0x000F333C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x95, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00033030, 0x000EEFEC,
+        0x000EA9AB, 0x0003EFBC, 0x000EAAB0, 0x000EEEEC,
+        0x000EAAEC, 0x000EEEAB, 0x000EEE6B, 0x000EAAEC,
+        0x000EEEEC, 0x000EEEEC, 0x0003333C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[141], .sjisByte1 = 0x8D, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FFFC, 0x0003AAAC,
+        0x0003A9EC, 0x0003BEEF, 0x000EAAAB, 0x000EFFFB,
+        0x000EEABB, 0x0003EFBF, 0x0000EAB0, 0x0000EFB0,
+        0x0000EAB0, 0x0000EFB0, 0x0000F0F0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003C030, 0x0003BCEC,
+        0x00036BAB, 0x0000FBBC, 0x0003FBB0, 0x000EAB6C,
+        0x0003BBAC, 0x0003BB6B, 0x0003B9EB, 0x0003B6EC,
+        0x0003BFEC, 0x0003B0EC, 0x0003C03C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[45], .sjisByte1 = 0x87, .width = 0x06,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000003FC,
+        0x00000EAB, 0x000003AC, 0x000003AC, 0x000003AC,
+        0x000003AC, 0x000003AC, 0x000003AC, 0x000003AC,
+        0x000003AC, 0x00000EAB, 0x000003FC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x87, .width = 0x07,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00003FFC,
+        0x0000EAAB, 0x00003BAC, 0x00003BAC, 0x00003BAC,
+        0x00003BAC, 0x00003BAC, 0x00003BAC, 0x00003BAC,
+        0x00003BAC, 0x0000EAAB, 0x00003FFC, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[68], .sjisByte1 = 0x87, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x0000FFFC,
+        0x0003AAAB, 0x0000EEEC, 0x0000EEEC, 0x0000EEEC,
+        0x0000EEEC, 0x0000EEEC, 0x0000EEEC, 0x0000EEEC,
+        0x0000EEEC, 0x0003AAAB, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x87, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x0003FFFC,
+        0x000EAAAB, 0x000EFDAC, 0x000ECEAC, 0x000ECEAC,
+        0x0003BBAC, 0x0003BBAC, 0x0003BBAC, 0x0003EFAC,
+        0x0003EFAC, 0x000EAAAB, 0x0003FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x87, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x0003FFFC,
+        0x000EAAAB, 0x0003BFAC, 0x0003B3AC, 0x0003B3AC,
+        0x0000EEB0, 0x0000EEB0, 0x0000EEB0, 0x0000EEB0,
+        0x00003AC0, 0x00003AC0, 0x00000F00, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[113], .sjisByte1 = 0x8C, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000C0C0, 0x0003B3B0,
+        0x000EAEAC, 0x0003BEEC, 0x00036EAC, 0x000EEEEC,
+        0x00039AAB, 0x0003BEEC, 0x0003EEAC, 0x000EDAAC,
+        0x000EFAEC, 0x000DAEEC, 0x000FF33C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[53], .sjisByte1 = 0x94, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FF30, 0x0003AAEC,
+        0x0000FEEC, 0x0000FEAB, 0x0003AAEC, 0x0003BEEB,
+        0x0003B69B, 0x00039A9B, 0x0000EEEB, 0x000366EF,
+        0x00039AEC, 0x0003B6EC, 0x0003CF3C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0xE7, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000C30, 0x0003FBEC,
+        0x0003ABBB, 0x0003B9FC, 0x0003B66B, 0x0003BEEC,
+        0x0003ABAB, 0x0003BBEC, 0x0003ABAB, 0x0003BFEB,
+        0x0003B3AC, 0x00036CDB, 0x0000F03F, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[130], .sjisByte1 = 0x92, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003C000, 0x0003BF00,
+        0x0000EAFC, 0x0000EEAC, 0x0000EEEC, 0x0000EEEC,
+        0x0000EEEC, 0x00036EEC, 0x00039EEC, 0x0003BEEC,
+        0x0003BEDB, 0x000ECEFB, 0x000F030F, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[149], .sjisByte1 = 0x8A, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000FF00, 0x0003AAF0,
+        0x0000FFEC, 0x0003AAEC, 0x0003BEAB, 0x0003BEEC,
+        0x0003AAEC, 0x0003BEAC, 0x0003BEDB, 0x0003AAFC,
+        0x0000FFC0, 0x0003AAB0, 0x0003FFC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x0000333C, 0x0003EEDB, 0x000EEF6C,
+        0x0003EEAB, 0x000EAA7B, 0x0003EEEB, 0x0003EEAB,
+        0x000367FC, 0x00039AAB, 0x0003BBFC, 0x0003B9AB,
+        0x000E76FB, 0x000ECEAB, 0x000303FC, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[85], .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003CCC0, 0x0003BBBC,
+        0x0000EF6B, 0x0003BAEC, 0x0000E7EC, 0x000EAA6B,
+        0x0003DBEC, 0x0003EEEC, 0x000EAAAB, 0x000EEE6B,
+        0x000EEEEC, 0x0003EFEC, 0x00003030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x9B, .width = 0x0A,
+      .bitmap = {
+        0x00000000, 0x0003FC30, 0x0003ABEC, 0x0003EFEC,
+        0x000EAAAB, 0x00039BBB, 0x000EFEBB, 0x003BABBB,
+        0x000FBBBB, 0x000EAA9B, 0x000E666C, 0x000EBAEC,
+        0x000E669B, 0x000EFEFB, 0x0003030C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FF0F, 0x000EAAFB,
+        0x000EEEEC, 0x000EAAFC, 0x000EEEEB, 0x000EAAEC,
+        0x000EFEEC, 0x000E66EC, 0x000EBAEC, 0x000E66EC,
+        0x0003FF9B, 0x000EAA7B, 0x000FFFCF, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000C3FC, 0x0003BDAB,
+        0x0003BBEC, 0x0003BBEC, 0x0003BBEC, 0x0003B9AB,
+        0x0003BBEC, 0x0003BBEC, 0x0003BCEC, 0x0003B0EC,
+        0x0003B0EC, 0x0003ACEC, 0x0000F030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x9D, .width = 0x0A,
+      .bitmap = {
+        0x00000000, 0x000030C0, 0x000FEFBC, 0x000EA6AB,
+        0x000EEEEC, 0x000EEAAB, 0x000E6D9C, 0x003BDAAB,
+        0x000CFBBC, 0x0003AAAC, 0x0003FBFC, 0x000EAAAB,
+        0x0003FBFC, 0x000036C0, 0x00000F00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8E, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000030C0, 0x0003EFBC,
+        0x000EA6AB, 0x0003DBEC, 0x0003EFEC, 0x000EA6AC,
+        0x000EEAEC, 0x000EEEEC, 0x0003EEEC, 0x000EFEDB,
+        0x000EF67B, 0x000DA9BC, 0x0003FFC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x92, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0003EFEC,
+        0x000EAAEC, 0x0003BBAB, 0x000EAA6C, 0x000EEEBB,
+        0x000EAABB, 0x000EEEBB, 0x000E66EB, 0x000EBAEC,
+        0x000E66BB, 0x000EFEFB, 0x0003030C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x93, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000003C0, 0x00003EBC,
+        0x0000EF6B, 0x0000EEEC, 0x0000EFBC, 0x0000EEAB,
+        0x0000EE7C, 0x0000EFBC, 0x0000E6AB, 0x0000EFBC,
+        0x0003EFB0, 0x000E9F6C, 0x0003F0F0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[117], .sjisByte1 = 0x91, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0000FEFC, 0x0003AAAB,
+        0x0003B77B, 0x0000FBBC, 0x0000EBEC, 0x0000FDB0,
+        0x00003B6C, 0x0000E6AC, 0x0000FFF0, 0x0003BBBC,
+        0x000E7DBB, 0x0003EAFB, 0x00003F0F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000CFC, 0x0000FBAB,
+        0x0003A9BB, 0x0000FEAB, 0x0000036B, 0x0000FFBB,
+        0x0003ABAB, 0x0000FFFC, 0x0000EAAC, 0x0000EEEC,
+        0x0000EEEC, 0x0003AAAB, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x93, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FC30, 0x0003ABEC,
+        0x0003B7AC, 0x0003BBEC, 0x0000EEAB, 0x000367EC,
+        0x0003BB9B, 0x0000EAAC, 0x0000EFEC, 0x0000EAAC,
+        0x0000EFEC, 0x0000EAAC, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x95, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000CFC, 0x0000FBAB,
+        0x0003AAEC, 0x0003BEAB, 0x0003AAEC, 0x0003BE6F,
+        0x0000E9DB, 0x0003AAAC, 0x0000FDB0, 0x0000EAAC,
+        0x0000EF9B, 0x0000EABC, 0x00003FC0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[59], .sjisByte1 = 0x8D, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000030, 0x0003FFEC,
+        0x0003AAAC, 0x0003999B, 0x0003BBBC, 0x0003B6EC,
+        0x0000EFF0, 0x0000F7BC, 0x0003BBBB, 0x000EFFBB,
+        0x0003BDBB, 0x0000EACC, 0x00003F00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FCFF, 0x000EABAB,
+        0x000EEEBB, 0x000EAABB, 0x000EEEEB, 0x000EA9BB,
+        0x0003EFBB, 0x000EA9BB, 0x000EEE6B, 0x000EAEFB,
+        0x000EDAFB, 0x000EBEFB, 0x000FC30F, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[105], .sjisByte1 = 0xE2, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x0000F0F0, 0x0000EF9F, 0x0003AD6B,
+        0x0003EEEC, 0x000EAA6C, 0x0003EFAB, 0x000EAAEC,
+        0x0003EE6C, 0x000E6EAB, 0x00039AEB, 0x0003BEEC,
+        0x000E6E6C, 0x000EFBAC, 0x00030CFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x97, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x0003FCFF, 0x0003ABAB, 0x0003BBBB,
+        0x0003AFAC, 0x0003B9BB, 0x0000EEEC, 0x0000EAAC,
+        0x0000EEEC, 0x00036AA7, 0x0000FBBC, 0x0003AAAB,
+        0x0000EFEC, 0x0003B03B, 0x0003C00F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x0A,
+      .bitmap = {
+        0x00000000, 0x00003000, 0x0003EF00, 0x0003AEFF,
+        0x000FEEAB, 0x003AAABB, 0x000EDFBB, 0x000E9EBB,
+        0x000EE7BB, 0x000EABBB, 0x000EEDAB, 0x000EBAFF,
+        0x000E76C0, 0x000EAAC0, 0x000FFFC0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[72], .sjisByte1 = 0x91, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x00003EC0, 0x0000EAC0,
+        0x0000FEFC, 0x0003AAAB, 0x0003BFFB, 0x0003AAAB,
+        0x0003BFFB, 0x0003AAAB, 0x0000FEFC, 0x0003AAAB,
+        0x0000FEFC, 0x00000EC0, 0x00000300, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[63], .sjisByte1 = 0x89, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0003ECEC,
+        0x000EEFAB, 0x0003AAEC, 0x0003EEAB, 0x000EEEEC,
+        0x000E6EEC, 0x0003BEAC, 0x0003BEEB, 0x000EE6EB,
+        0x0003FD9B, 0x000EAAFB, 0x0003FF0F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8D, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000030C0, 0x0000EFB0,
+        0x0000EFB0, 0x0003AA6C, 0x0000FBEC, 0x000039EB,
+        0x0000F6EB, 0x0003AAEC, 0x0000EE6C, 0x0000EDAC,
+        0x0000EF6C, 0x0003AAEC, 0x0000FF30, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[111], .sjisByte1 = 0x96, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000300, 0x0000FEFC,
+        0x0003AAAB, 0x0000F9BC, 0x0000E76C, 0x0003BEFB,
+        0x0000DA9C, 0x00003EF0, 0x0000EFBC, 0x0003AAAB,
+        0x0000EFBC, 0x0000ECEC, 0x00003030, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[98], .sjisByte1 = 0x89, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000C30, 0x0000FBEC,
+        0x0003AAAB, 0x0000FBEC, 0x0000F7DC, 0x0003AAAB,
+        0x0000FBEC, 0x0000FBEC, 0x0003AAAB, 0x0000FBBC,
+        0x00003BEC, 0x00003AFB, 0x00000F0F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x0003FF00, 0x000EAACC, 0x000EEEFB,
+        0x000EAAEC, 0x000EEEF0, 0x000EAAFC, 0x0003EFEB,
+        0x000EAAEC, 0x000EEEEC, 0x000EAEEC, 0x000EDAEC,
+        0x000DFD6C, 0x000EAABB, 0x0003FFCF, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x88, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000C0C, 0x0003FB3B, 0x0003AAEC,
+        0x0003BBF0, 0x0003AA7C, 0x0000FFEB, 0x0003AAEC,
+        0x0003BEEC, 0x0003A9EC, 0x0000EEEC, 0x0003AAAC,
+        0x0000EF6C, 0x0003AABB, 0x0003FFCF, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x92, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0003EFEC,
+        0x000EAA6B, 0x0003BBFC, 0x0003BBAB, 0x000EAAFC,
+        0x000EEE6B, 0x0003EFFC, 0x000EAA6B, 0x000EEEBB,
+        0x000EEEBB, 0x0003EFAB, 0x000030FC, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[145], .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000303FC, 0x000EFEAB,
+        0x000EEDEC, 0x000EEEEC, 0x000EEEAB, 0x000EAAEB,
+        0x000EEEEB, 0x000EEE9B, 0x000EEEFB, 0x000EFEAB,
+        0x000ECEFB, 0x000ECEAB, 0x000303FC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CC0C, 0x0003BB3B,
+        0x000EAAEC, 0x0003BB3C, 0x000EAAFB, 0x000EEEEC,
+        0x000EAAF0, 0x00039B30, 0x0003EFEC, 0x000EAAEC,
+        0x0003673B, 0x000EBAFB, 0x0003CF0F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x92, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000300, 0x00000EC0,
+        0x0000FEFC, 0x0003AAAB, 0x0003BEFB, 0x0003BEFB,
+        0x0003AAAB, 0x0000FEFC, 0x0000EEC0, 0x0000EEC0,
+        0x00039AFC, 0x0003BDAB, 0x0003C3FC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x0000FF00, 0x0000E9FC, 0x000036AB,
+        0x00003EFC, 0x0000EAAC, 0x0000FDBC, 0x0003AAAB,
+        0x0003FF6C, 0x0000EA9B, 0x0000EFBB, 0x0000EABF,
+        0x0000EFB0, 0x0000EAB0, 0x00003FC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00003000, 0x0003EF30, 0x000EAAEC,
+        0x00039BEC, 0x000EFEAB, 0x0003BB6C, 0x000EA9BB,
+        0x0003BBBB, 0x000EA9BB, 0x00037B9B, 0x0003B6EC,
+        0x000E6EBB, 0x000EFAFB, 0x00030F0C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x92, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x000030C0, 0x0000EFB0, 0x0003AFB0,
+        0x0003EF6C, 0x000EAAEC, 0x000EFEEB, 0x000EAAEB,
+        0x000EFEEC, 0x000EAAEC, 0x000EFEEC, 0x000EAAEC,
+        0x0003BBEC, 0x000ECEEC, 0x00030330, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x96, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00003030, 0x0000EFEC, 0x0003AAAB,
+        0x0000EDEC, 0x0000FABC, 0x0003BBBB, 0x0000EAAC,
+        0x0003BBBB, 0x0000FABC, 0x0000FEFC, 0x0003AAAB,
+        0x0000E66C, 0x0003BEFB, 0x0003C30F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8C, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000FFFC, 0x0003AAAB,
+        0x0000FE7C, 0x00003DB0, 0x0000EAB0, 0x0000EFB0,
+        0x0000EF6C, 0x0000E7EC, 0x00003AAC, 0x000039F0,
+        0x0000F6FC, 0x0003AAAB, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x90, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0000EFEC,
+        0x0003AAAB, 0x0000EFEC, 0x0000EFEC, 0x00003EF0,
+        0x0000F9C0, 0x0003BBBC, 0x0003BFBB, 0x0000F3BB,
+        0x0003BDBB, 0x00036ACC, 0x0000FF00, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[148], .sjisByte1 = 0x8E, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003C0C0, 0x0003B3B0,
+        0x0003B3B0, 0x0003BEEC, 0x0003BEEC, 0x0003BAEB,
+        0x0003AEEB, 0x0003B6EC, 0x0003BAEC, 0x000E6EEC,
+        0x000EE7AC, 0x000EFBEC, 0x00030C30, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[90], .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000CFC, 0x0003FBAB,
+        0x000EA9BB, 0x000E76BB, 0x000EBBAB, 0x000EEDBB,
+        0x000EEEBB, 0x000EBAAB, 0x000EF6BB, 0x000EABBB,
+        0x000EFFBB, 0x000DB3BB, 0x0003C0CC, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[81], .sjisByte1 = 0x92, .width = 0x0A,
+      .bitmap = {
+        0x00000000, 0x00003000, 0x0003EF0C, 0x000EAAFB,
+        0x000EEEEC, 0x003AAABC, 0x000EFEFB, 0x000EAAEC,
+        0x000EFEF0, 0x000EAAF0, 0x000EFEEC, 0x000EAAEC,
+        0x0003BB3B, 0x000ECEFB, 0x0003030C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8C, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CCC0, 0x0003BBB0,
+        0x000EAAAC, 0x0003EFEC, 0x0003E6AC, 0x000EAEEC,
+        0x000EDAAC, 0x000EE6EC, 0x0003BEAC, 0x000D9AEC,
+        0x000E66AC, 0x000EEEDB, 0x000F333F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x96, .width = 0x0A,
+      .bitmap = {
+        0x00000000, 0x0000C330, 0x0003BEEC, 0x0003BAAC,
+        0x000EAFEC, 0x003BBEAB, 0x003AABEB, 0x000FBEAB,
+        0x00036FEB, 0x000EABEC, 0x000EEEAC, 0x000EAEEC,
+        0x000EEEEC, 0x000EAEAC, 0x0003F3FC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x96, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FF00, 0x000EABFC,
+        0x000EFBAB, 0x000EFBBB, 0x000EABAB, 0x0003BBBB,
+        0x0003BBAB, 0x000EABBB, 0x0003BBBB, 0x0003BBAB,
+        0x000E6BFC, 0x000EF6C0, 0x00030F00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FC30, 0x0003ABEC,
+        0x0003BBAB, 0x0003BBBC, 0x0003BBB0, 0x0003BB6C,
+        0x0003ABEC, 0x000367AB, 0x0003A7EB, 0x00039BEC,
+        0x0003BBEC, 0x000E7EEC, 0x0003C33C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0xE3, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000030F0, 0x0003ECEC,
+        0x000EEBFB, 0x000EE79B, 0x00036FEC, 0x0003ABBB,
+        0x0000EF6B, 0x0003EFEC, 0x000EAA6B, 0x0003EFAB,
+        0x0000ECEC, 0x0000ECEC, 0x0000F030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x90, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000F00, 0x00003AC0,
+        0x0000EFB0, 0x0003BEEC, 0x000EEA9B, 0x0003E9EC,
+        0x0000EFEC, 0x0003EAAC, 0x0003BFAC, 0x0000E66C,
+        0x0000D9EC, 0x0003AFAB, 0x0003F0FC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8D, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CC30, 0x0003BBEC,
+        0x0003BBAB, 0x000EAAEC, 0x0003BBAB, 0x0003BBEC,
+        0x0003BBAB, 0x000EAAEC, 0x0003BB6C, 0x0003BBAB,
+        0x0003BBEB, 0x0003B6EC, 0x0003CF3C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8D, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000300, 0x0003CEF0,
+        0x0003BAAC, 0x0000EEFC, 0x0003AAAB, 0x0000FE7C,
+        0x0000EDB0, 0x00003A6C, 0x00003FBB, 0x0000EA9C,
+        0x0000EF6C, 0x0000DAF0, 0x00003FC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003300, 0x00FCEEF0,
+        0x00ABEEAC, 0x00FC33F0, 0x00003FFC, 0x00C0EAAB,
+        0x00C03EFC, 0x00B00EC0, 0x00B00EC0, 0x00EC0E70,
+        0x003B03B0, 0x000EC0EC, 0x0003C030, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[125], .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00330000, 0x00EEF00F,
+        0x00EEEC3A, 0x003FEF3B, 0x003AAAFB, 0x00FBEF0E,
+        0x00BBEC0E, 0x00FBE703, 0x003B3B0D, 0x003B3B0E,
+        0x003BFEFB, 0x000EBEEC, 0x0003C330, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00033000, 0x000EEC00,
+        0x000EEFC0, 0x0003BAB0, 0x0003BFC0, 0x00C3B03F,
+        0x00B3B0EA, 0x00EFB03F, 0x00FBB000, 0x00CFB000,
+        0x00C3BFC0, 0x00C3AAB0, 0x0000FFC0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[140], .sjisByte1 = 0x84, .width = 0x0B,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x0000C030,
+        0x0003BCEC, 0x0003BBE7, 0x0003BB3B, 0x0033BB0E,
+        0x00EFBB0E, 0x00E7BB0E, 0x003BBB0E, 0x0039BB0E,
+        0x000EB6CE, 0x0003BECE, 0x0000C303, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00000FF0,
+        0x00003AAC, 0x00000FB0, 0x000003B0, 0x00FF3FBC,
+        0x00AAEAAB, 0x00FF3FBC, 0x000003B0, 0x000003B0,
+        0x00003FB0, 0x0000EAC0, 0x00003F00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00F030C0,
+        0x00ECEFB0, 0x00EFEFB0, 0x00EEAAAC, 0x00EFEFB3,
+        0x00ACEFBE, 0x00ECEFB3, 0x00ECECC0, 0x00ECE700,
+        0x00EC3B00, 0x00EC0EC0, 0x00300300, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000033, 0x000000EE,
+        0x000000EE, 0x00000033, 0x00000000, 0x00F03003,
+        0x00AFEF0E, 0x00FEAAFB, 0x000EFECC, 0x000ECEC0,
+        0x0003BF00, 0x0000EB00, 0x00003C00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0B,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00330000, 0x00EEF000,
+        0x00EEEC00, 0x003FEC00, 0x003AA700, 0x003BDB3F,
+        0x003B36EA, 0x0039CEFF, 0x000EC3C0, 0x000E7000,
+        0x0003BC00, 0x0000EB00, 0x00003C00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003300, 0x0000EEC0,
+        0x0000EEFC, 0x00003BAB, 0x00003BFC, 0x00FF3B00,
+        0x00AAFB00, 0x00FF3B00, 0x00003B00, 0x00003B00,
+        0x00003BFC, 0x00003AAB, 0x00000FFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CC00, 0x0003BB00,
+        0x003FBBF0, 0x00EBEEAC, 0x003CEFF0, 0x0000EC03,
+        0x0000EC0E, 0x00C0EC03, 0x00C0EC00, 0x0070EC00,
+        0x009CEFF0, 0x00EBEAAC, 0x003F3FF0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+        0x0003FF0C, 0x000EAAFB, 0x0003EF3B, 0x0030EC3B,
+        0x00ECEC3B, 0x00ECEC39, 0x00ECEC0E, 0x0030EC0E,
+        0x00CFEFC3, 0x00BAAAB0, 0x00CFFFC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0B,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00330000, 0x00EEF000,
+        0x00EEEC00, 0x003FEC00, 0x003AA700, 0x003BDB33,
+        0x003B36EE, 0x0039CEEE, 0x000EC3EE, 0x000E70EF,
+        0x0003BC3B, 0x0000EB0E, 0x00003C03, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[123], .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000CC0, 0x00FF3BBC,
+        0x00AAFBBB, 0x00FF0CFB, 0x00FFC03B, 0x00AAB0FB,
+        0x00FFC3AB, 0x00C00EFB, 0x00C0033B, 0x00C0003B,
+        0x00BF003B, 0x00EAC03B, 0x003F000C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CC00, 0x0003BB00,
+        0x003FBBF3, 0x00EBEEAC, 0x003CEFF3, 0x0000EC0E,
+        0x0000EC0E, 0x00C0EC0E, 0x00C0EC0E, 0x0070EC0E,
+        0x009CEFF3, 0x00EBEAAC, 0x003F3FF0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0C,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000CC000, 0x003BB000,
+        0x00FBB0CC, 0x00BFC3BB, 0x00CECEFB, 0x000ECEFB,
+        0x000EC33B, 0x0003B039, 0x0003B00E, 0x0000EC0E,
+        0x00C03B03, 0x00B00EC0, 0x00F003C0, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[137], .sjisByte1 = 0x81, .width = 0x0B,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00330000, 0x00EECC00,
+        0x00EEFBC3, 0x00333BBE, 0x000F3BB3, 0x003AFBB0,
+        0x000FABB0, 0x0000FB9C, 0x00003BEC, 0x00003BE7,
+        0x000FFB39, 0x003AAC0E, 0x000FF003, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00FF0CCC,
+        0x03AAFBBB, 0x0CFF3BBB, 0x03FFCCFB, 0x0EAAB0FB,
+        0x0EFFC3AB, 0x0EC00E7B, 0x0EC00FFB, 0x0EC0003B,
+        0x03BF003B, 0x0CEAC03B, 0x003F000C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000CC0, 0x0000FBB0,
+        0x0F03BBBF, 0x0ECECEEA, 0x0ECF0EFF, 0x0EC00EC0,
+        0x0E700EC0, 0x03B00EC0, 0x039C0EC0, 0x00EF0EC0,
+        0x0039CEFF, 0x000EBEAA, 0x0003F3FF, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x03FF0FFF,
+        0x0EAAFAAA, 0x0EFF3BFF, 0x0EC03B00, 0x03B039C0,
+        0x03B00EC0, 0x00EC0E7F, 0x036C03BB, 0x03BB00EC,
+        0x0ECEC3B0, 0x0B03BEC0, 0x0C00CF00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000000C0,
+        0x00003FB0, 0x0000EAB0, 0x0000EFB0, 0x03FCECEC,
+        0x0EABEFBB, 0x03FCEECF, 0x00003B00, 0x00003B00,
+        0x00000EF0, 0x000003AF, 0x000000F3, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+        0x00000FFC, 0x0C003AAB, 0x0C003BFC, 0x0CFFFB00,
+        0x0FAABB00, 0x0FBFFB00, 0x0FBB0EC0, 0x0CEB0EC0,
+        0x0B3B03BC, 0x0B0EC0EB, 0x0C03003C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x0C000030,
+        0x0CFFC0EF, 0x03AAB0EE, 0x03BFC0EE, 0x03B00CEE,
+        0x03B03BEE, 0x03B039EE, 0x03B00EEE, 0x03B00E6E,
+        0x03BFC3AD, 0x0FAAB0EF, 0x0CFFC030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00C00003,
+        0x03B00C0E, 0x03B03B3B, 0x0FBF3B3C, 0x0AAAFB00,
+        0x0FBF39C0, 0x03B00EC0, 0x03B00E70, 0x039C03BC,
+        0x00EC00E7, 0x003B003A, 0x000F000F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000C3000,
+        0x003BEC00, 0x003BE700, 0x003B3B03, 0x00FB0ECE,
+        0x03AB0EB3, 0x0EFB0EEC, 0x033B0EFB, 0x003B0ECF,
+        0x003B0EC0, 0x003B0EC0, 0x000C0300, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x81, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+        0x0C000FFC, 0x0C003AAB, 0x0C003BFC, 0x0C303B00,
+        0x0FEFFB00, 0x0EAABB00, 0x0FEBCEC0, 0x0CEECEC0,
+        0x0CEFB3BC, 0x0CECC0EB, 0x0030003C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[133], .sjisByte1 = 0x81, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x003FF003,
+        0x0CEAAC0E, 0x0CEFF00E, 0x0CEC000E, 0x0C3B000E,
+        0x0C3B030E, 0x0C0ECECE, 0x0C36CECE, 0x0C3BB3BE,
+        0x0CECECEE, 0x0FB03B3A, 0x03C00F0F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000C0003,
+        0x003B000E, 0x003B000E, 0x03FBF00E, 0x0EAAAC3E,
+        0x03FBF0EA, 0x003B03BE, 0x0C3B00CE, 0x0C39C00E,
+        0x000EC00E, 0x0003B00E, 0x0000F003, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000C0C00,
+        0x003B3B00, 0x003B39C0, 0x003B0EC0, 0x00FB03B0,
+        0x03AB03AC, 0x0EFB03BB, 0x033B03BE, 0x003B03B3,
+        0x003B03B0, 0x003B03B0, 0x000C00C0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x0C00FFFF,
+        0x0B00EAAB, 0x09C0EFFB, 0x0EC0EC3B, 0x03B0EC3B,
+        0x03ACEC3B, 0x03BBEC3B, 0x03BEEC0C, 0x03B3E700,
+        0x03B03BC0, 0x03B00EB0, 0x00C003C0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CC00, 0x0C03BB00,
+        0x0C03BB33, 0x0000CCEF, 0x00003BEC, 0x0FF0E7EC,
+        0x0AACECEC, 0x0FF0ECEC, 0x00039CEC, 0x0003B0DB,
+        0x0003B03B, 0x0C03B03B, 0x0C00C00C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00C00003,
+        0x03B00C0E, 0x03B03B3B, 0x0FBF3B3C, 0x0AAAFB00,
+        0x0FBF39C3, 0x03B00EC0, 0x03B00E70, 0x039C03BC,
+        0x00EC00E7, 0x003B003A, 0x000F000F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000C3000,
+        0x003BEC00, 0x003BE700, 0x003B3B03, 0x00FB0ECE,
+        0x03AB0EB3, 0x0EFB0EEC, 0x033B0EFB, 0x003B0ECF,
+        0x003B0EC0, 0x003B0EC0, 0x000C0300, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000F0C30,
+        0x003B3BEC, 0x0CECFBEC, 0x0CF3AAAB, 0x0C00FBEC,
+        0x07003BEC, 0x0B003BEC, 0x09C03B30, 0x0EF039C0,
+        0x039C0EC0, 0x00EB03B0, 0x003F00C0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00033000, 0x000EEC00,
+        0x000EEC03, 0x0003AB0E, 0x000EFB0E, 0x0FCECECE,
+        0x0ABEFBBE, 0x0FCEECC3, 0x0003B003, 0x0003B000,
+        0x0000EF00, 0x00003AC0, 0x00000F00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00303FF0,
+        0x00ECEAAC, 0x00ECEFF0, 0x00ECEC00, 0x03EC3B03,
+        0x0EAC3B0E, 0x0BEC0EC3, 0x0CEC36C0, 0x00EC3BB0,
+        0x00ECECEC, 0x00EFB03B, 0x0033C00F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x84, .width = 0x0E,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x000C0000,
+        0x003B0000, 0x003B0000, 0x003B0000, 0x0036CFF0,
+        0x00EEFAAC, 0x00EECFF3, 0x03BDB000, 0x03BFB000,
+        0x0E6BBC00, 0x0EF6AC00, 0x030FF000, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x95, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000CC0, 0x00003BB0, 0x0000E76C,
+        0x00039FDB, 0x0000DAAC, 0x00003BB0, 0x0000EAAC,
+        0x0000EFEC, 0x0000EAAC, 0x0000EFEC, 0x0000EAAC,
+        0x00003BB0, 0x0000ECEC, 0x0000F03C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x89, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x0000C000, 0x0003BCC0, 0x000EEBBC,
+        0x0003BB6B, 0x000EA9EC, 0x000EFFEC, 0x000EA7AB,
+        0x000EFFEC, 0x000DABAC, 0x00037FEB, 0x000EEEEB,
+        0x0003EEEC, 0x000EB3EC, 0x0003C0F0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x95, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0000FEFC, 0x0003AAAB,
+        0x0000EDEC, 0x00039ABB, 0x0000FEEC, 0x0000EAAC,
+        0x0000FEEC, 0x0003AAAB, 0x0003BEFB, 0x0003AAAB,
+        0x0003BEFB, 0x0003AAAB, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000C30, 0x0000FBEC, 0x0003A9AC,
+        0x0000EFBB, 0x00003FFC, 0x0000E9F0, 0x00003EAC,
+        0x0000FEFC, 0x0003AAAB, 0x0000FEFC, 0x000039B0,
+        0x0000DB9C, 0x0003AFEB, 0x0000F03C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x89, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000FFCC, 0x0003AABB,
+        0x0003BFAC, 0x0003AAB0, 0x0003BFBC, 0x0003AABB,
+        0x0003FFEC, 0x0003AAB0, 0x0003BBAC, 0x0003BBAC,
+        0x0003BBBB, 0x000EAA9B, 0x0003FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0xE1, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000C3FC, 0x0003BEAB,
+        0x0003BBEC, 0x000EA9AB, 0x0003BAEB, 0x0003B6AB,
+        0x000EAEEB, 0x0003BEAB, 0x0003BFEC, 0x000EAB6B,
+        0x0003FDAC, 0x000EAAFB, 0x0003FF0C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000F00, 0x00003AC0,
+        0x0003EFBC, 0x000EBAEB, 0x0003FFFC, 0x0003AAAC,
+        0x00039FF0, 0x0000E7F0, 0x0003AAAC, 0x0003BFEC,
+        0x0003BFEC, 0x0003AAAC, 0x0000FFF0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x89, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000030C0, 0x0003EFBC,
+        0x000EAAAB, 0x0003EFBC, 0x00003FC0, 0x00033BB0,
+        0x000EFBEC, 0x0003ABEB, 0x0000FBEC, 0x00003BEC,
+        0x0003FBEC, 0x000EACEC, 0x0003F030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8A, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0000ECEC,
+        0x0000EFEC, 0x0003AAAB, 0x0000EFEC, 0x0000ECEC,
+        0x0000EFEC, 0x0000EAAC, 0x0000EFEC, 0x0000ECEC,
+        0x0000EFEC, 0x0000EAAC, 0x0000FFFC, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[150], .sjisByte1 = 0x8A, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000C30, 0x00003BEC,
+        0x000FFAAC, 0x000EAB9B, 0x000EEAAB, 0x0003E6EC,
+        0x0000EEAB, 0x0000EFAC, 0x0000EEAC, 0x00039BAC,
+        0x0003BAAC, 0x000ECEFC, 0x00030300, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x97, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000FF0C, 0x0003AAFB,
+        0x00039FEC, 0x000EAAFC, 0x000EEEFB, 0x000EAAEC,
+        0x000EEEF0, 0x000EAAF0, 0x000FEFEC, 0x000EAAEC,
+        0x000EDBFB, 0x000EB6FB, 0x000FCF0C, 0x00000000,
+    } },
+    { .sjisNext = &SjisGlyphs_0859140C[151], .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FFFC, 0x000EAAAB,
+        0x0003A7FB, 0x0000DABB, 0x0000FFBB, 0x0003AABB,
+        0x0000EFBB, 0x0000EFBB, 0x0000EFBB, 0x0000EF6B,
+        0x0003DFFB, 0x000EAAAB, 0x0003FFFC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x000000C0, 0x00000FB0,
+        0x000FFAB0, 0x000EAFBC, 0x000EDAAB, 0x000EEFBC,
+        0x000EEEBC, 0x000E6EBB, 0x00039EBB, 0x0003BFBB,
+        0x000E6FBC, 0x000EFBB0, 0x00030FF0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8C, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000C330, 0x0003BEEC,
+        0x000EAAEC, 0x00039B9B, 0x000EAABB, 0x0003B6FB,
+        0x0003B9BB, 0x0003FBFB, 0x000EAABB, 0x0003DBFB,
+        0x00036AFB, 0x000EBBBB, 0x0003CCCC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8D, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003C000, 0x000EBC30,
+        0x00036BEC, 0x0003FBEC, 0x000EA9AB, 0x0003FBEC,
+        0x0003F9EC, 0x000EAAEC, 0x000EFAAC, 0x000EFADB,
+        0x000EFBBC, 0x000EABC0, 0x0003FC00, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x97, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x0003F3F0, 0x000EAEAC, 0x0003FFF0,
+        0x000EAEAC, 0x000E6E6C, 0x0003FBF0, 0x000EAAAC,
+        0x000EEEEC, 0x000EAAAC, 0x0003EFAC, 0x000DA6AC,
+        0x0003EFA7, 0x000EA6BB, 0x0003FFCC, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8D, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FC30, 0x000EABEC,
+        0x000FBBEC, 0x000EA9AB, 0x000FBBBB, 0x000E7BBB,
+        0x0003FFBB, 0x000EABBB, 0x000EFBBB, 0x000EAB6C,
+        0x000EFB9B, 0x000EABBC, 0x0003FCC0, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8C, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FCFC, 0x000EABA7,
+        0x0003EFBB, 0x0003BBAB, 0x000E67BB, 0x000EAAAB,
+        0x00036BAF, 0x000EEE6B, 0x0003FFFC, 0x000DBBBC,
+        0x000EFDBB, 0x0003AAFB, 0x0000FF0C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x95, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CC30, 0x0003BBEC,
+        0x000EAAEC, 0x0003BBAB, 0x0003BBEC, 0x000EAAEC,
+        0x000EEEAC, 0x000EEE6C, 0x000EAAEB, 0x000EEEEC,
+        0x000EEEEC, 0x000EAAEB, 0x0003FF3C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8F, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000C30, 0x0003FBEC,
+        0x000EABBB, 0x0003EEEF, 0x0003EDAB, 0x000EABBB,
+        0x000EEBAB, 0x000EEBBB, 0x000EEBAB, 0x000EEB7B,
+        0x000DABBB, 0x0003EF6B, 0x000030FF, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x91, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CCCC, 0x0003BBBB,
+        0x000EAAAC, 0x0003BBBC, 0x0003AABB, 0x0003FFEC,
+        0x000EAAB0, 0x000EFBB0, 0x000EAAAC, 0x0003BAEC,
+        0x0003BAFB, 0x0000FB3B, 0x00000C0C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0000CCC0, 0x0003BBB0,
+        0x000EAAB0, 0x0003676C, 0x0003ABEC, 0x000EAA6B,
+        0x000E69EB, 0x0003666C, 0x000EAAAC, 0x00039EEC,
+        0x0003BAAC, 0x000EEEEC, 0x00033330, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000330, 0x000FFEEC, 0x000EAAAB,
+        0x000EE6AF, 0x0003BEEB, 0x000EEDAC, 0x0003AA9C,
+        0x0000FBEC, 0x0003AAAC, 0x000FFBEC, 0x000EAAAC,
+        0x000E9B9B, 0x000EEEFB, 0x0003330C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8D, .width = 0x08,
+      .bitmap = {
+        0x00000000, 0x00000300, 0x0000FEFC, 0x0003AAAB,
+        0x0000FEFC, 0x0003AAAB, 0x0003BDBB, 0x0000FB6C,
+        0x0000F6BC, 0x00036F6C, 0x0003AAAB, 0x0000FEFC,
+        0x0000EEEC, 0x0003BEFB, 0x0000C30C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x8B, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x0003FCFF, 0x000EABAB,
+        0x0003FBBB, 0x0003FBBB, 0x000EABAB, 0x000EFBEC,
+        0x000EFBEC, 0x000EFBAC, 0x000EABEB, 0x0003FBEB,
+        0x0003FBAB, 0x000EABDB, 0x0003FC3F, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x90, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00003030, 0x0000ECEC,
+        0x000FEFEC, 0x000EAAAB, 0x000EEEBC, 0x000EAA6C,
+        0x000EEEAB, 0x000EEEEB, 0x000EAAEF, 0x000FEFEC,
+        0x0000ECEC, 0x0000ECEC, 0x00003030, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x89, .width = 0x09,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000030, 0x0003FFEC,
+        0x000EAAAC, 0x0003BFDB, 0x0003BABB, 0x0003BBBB,
+        0x0003BBBB, 0x0003BBBB, 0x0003BABB, 0x0003BFFB,
+        0x0003B03B, 0x0003AC3B, 0x0000F00C, 0x00000000,
+    } },
+    { .sjisNext = NULL, .sjisByte1 = 0x00, .width = 0x06,
+      .bitmap = {
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+        0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    } },
 };
-u8 frontier_df4_uistuff_007_59140C_1[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x4, 0x44);
-u32 frontier_df4_uistuff_007_59140C_2[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_42,
-};
-u8 frontier_df4_uistuff_007_59140C_3[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x4C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_4[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2958,
-};
-u8 frontier_df4_uistuff_007_59140C_5[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xDC, 0xD4);
-u32 frontier_df4_uistuff_007_59140C_6[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_24,
-};
-u8 frontier_df4_uistuff_007_59140C_7[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1B4, 0x44);
-u32 frontier_df4_uistuff_007_59140C_8[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x19E0,
-};
-u8 frontier_df4_uistuff_007_59140C_9[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1FC, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_10[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1D40,
-};
-u8 frontier_df4_uistuff_007_59140C_11[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x28C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_12[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2130,
-};
-u8 frontier_df4_uistuff_007_59140C_13[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x31C, 0xD4);
-u32 frontier_df4_uistuff_007_59140C_14[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_50,
-};
-u8 frontier_df4_uistuff_007_59140C_15[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x3F4, 0x44);
-u32 frontier_df4_uistuff_007_59140C_16[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x828,
-};
-u8 frontier_df4_uistuff_007_59140C_17[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x43C, 0x44);
-u32 frontier_df4_uistuff_007_59140C_18[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_22,
-};
-u8 frontier_df4_uistuff_007_59140C_19[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x484, 0x44);
-u32 frontier_df4_uistuff_007_59140C_20[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1368,
-};
-u8 frontier_df4_uistuff_007_59140C_21[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x4CC, 0xD4);
-u32 frontier_df4_uistuff_007_59140C_22[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0xF30,
-};
-u8 frontier_df4_uistuff_007_59140C_23[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x5A4, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_24[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_52,
-};
-u8 frontier_df4_uistuff_007_59140C_25[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x634, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_26[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_54,
-};
-u8 frontier_df4_uistuff_007_59140C_27[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x6C4, 0x44);
-u32 frontier_df4_uistuff_007_59140C_28[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1EF0,
-};
-u8 frontier_df4_uistuff_007_59140C_29[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x70C, 0x44);
-u32 frontier_df4_uistuff_007_59140C_30[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_58,
-};
-u8 frontier_df4_uistuff_007_59140C_31[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x754, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_32[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2208,
-};
-u8 frontier_df4_uistuff_007_59140C_33[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x7E4, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_34[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x27A8,
-};
-u8 frontier_df4_uistuff_007_59140C_35[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x874, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_36[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0xCA8,
-};
-u8 frontier_df4_uistuff_007_59140C_37[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x904, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_38[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_64,
-};
-u8 frontier_df4_uistuff_007_59140C_39[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x994, 0xD4);
-u32 frontier_df4_uistuff_007_59140C_40[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_80,
-};
-u8 frontier_df4_uistuff_007_59140C_41[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xA6C, 0x44);
-u32 frontier_df4_uistuff_007_59140C_42[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0xEE8,
-};
-u8 frontier_df4_uistuff_007_59140C_43[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xAB4, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_44[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2490,
-};
-u8 frontier_df4_uistuff_007_59140C_45[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xB44, 0x44);
-u32 frontier_df4_uistuff_007_59140C_46[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x29E8,
-};
-u8 frontier_df4_uistuff_007_59140C_47[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xB8C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_48[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x17E8,
-};
-u8 frontier_df4_uistuff_007_59140C_49[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xC1C, 0x23C);
-u32 frontier_df4_uistuff_007_59140C_50[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x20E8,
-};
-u8 frontier_df4_uistuff_007_59140C_51[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xE5C, 0x11C);
-u32 frontier_df4_uistuff_007_59140C_52[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1098,
-};
-u8 frontier_df4_uistuff_007_59140C_53[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xF7C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_54[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1D88,
-};
-u8 frontier_df4_uistuff_007_59140C_55[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x100C, 0xD4);
-u32 frontier_df4_uistuff_007_59140C_56[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1440,
-};
-u8 frontier_df4_uistuff_007_59140C_57[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x10E4, 0x44);
-u32 frontier_df4_uistuff_007_59140C_58[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_60,
-};
-u8 frontier_df4_uistuff_007_59140C_59[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x112C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_60[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1F38,
-};
-u8 frontier_df4_uistuff_007_59140C_61[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x11BC, 0x44);
-u32 frontier_df4_uistuff_007_59140C_62[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1B90,
-};
-u8 frontier_df4_uistuff_007_59140C_63[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1204, 0x11C);
-u32 frontier_df4_uistuff_007_59140C_64[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x28C8,
-};
-u8 frontier_df4_uistuff_007_59140C_65[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1324, 0x284);
-u32 frontier_df4_uistuff_007_59140C_66[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x29A0,
-};
-u8 frontier_df4_uistuff_007_59140C_67[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x15AC, 0x44);
-u32 frontier_df4_uistuff_007_59140C_68[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x1950,
-};
-u8 frontier_df4_uistuff_007_59140C_69[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x15F4, 0x44);
-u32 frontier_df4_uistuff_007_59140C_70[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x16C8,
-};
-u8 frontier_df4_uistuff_007_59140C_71[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x163C, 0x2CC);
-u32 frontier_df4_uistuff_007_59140C_72[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2328,
-};
-u8 frontier_df4_uistuff_007_59140C_73[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x190C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_74[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2760,
-};
-u8 frontier_df4_uistuff_007_59140C_75[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x199C, 0x284);
-u32 frontier_df4_uistuff_007_59140C_76[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2298,
-};
-u8 frontier_df4_uistuff_007_59140C_77[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1C24, 0xD4);
-u32 frontier_df4_uistuff_007_59140C_78[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2688,
-};
-u8 frontier_df4_uistuff_007_59140C_79[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1CFC, 0x2CC);
-u32 frontier_df4_uistuff_007_59140C_80[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C_82,
-};
-u8 frontier_df4_uistuff_007_59140C_81[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1FCC, 0x59C);
-u32 frontier_df4_uistuff_007_59140C_82[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2A30,
-};
-u8 frontier_df4_uistuff_007_59140C_83[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x256C, 0x8C);
-u32 frontier_df4_uistuff_007_59140C_84[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
-    (u32)&frontier_df4_uistuff_007_59140C + 0x2A78,
-};
-u8 frontier_df4_uistuff_007_59140C_85[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x25FC, 0x4C4);
 
 u32 frontier_df4_uistuff_008_5946F4[] __attribute__((section(".data.frontier_df4_uistuff.gap8"))) = {
     (u32)&frontier_df4_uistuff_017_59A574 + 0x9d8,
