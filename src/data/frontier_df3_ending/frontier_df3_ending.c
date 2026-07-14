@@ -383,16 +383,9 @@ u8 frontier_df3_ending_001_AC3AA8[] __attribute__((section(".data.frontier_df3_e
     "graphics/frontier_df3_ending/Tsa_DfEnding001_1.bin",
     "graphics/frontier_df3_ending/Tsa_DfEnding001_2.bin",
     "graphics/frontier_df3_ending/Tsa_DfEnding001_3.bin");
-/* frontier_df3_ending_002 (JP 0x08AC50A4..0x08AC6C98, 7156 B) is also NOT compressed
- * (0x131D TSA header). Split byte-exact into two named JP-only sub-assets, keeping the
- * base symbol at offset 0:
- *   Tsa_DfEnding002         [0x000,0x4B4)  1204 B  raw TSA tilemap (hdr 0x131D)
- *   dat_DfEnding002_PalGfx  [0x4B4,0x1BF4) 5952 B  an opaque data block that is NOT a
- *     clean BGR555 palette (39% of its u16 have bit15 set, so it must not be typed as
- *     a .gbapal/Pal_). It leads with a 32-colour BGR555 palette (64 B, two gradient
- *     banks) followed by 4bpp-format graphics data (5888 B, 184 tiles). Kept as one
- *     verbatim byte-exact blob (named, not further decoded).
+/* JP 0x08AC50A4..0x08AC5558: raw 30x20 TSA tilemap (hdr 0x131D).
+ * The following player-rank palettes and compressed sprite sheet are owned by
+ * src/data/frontier_df3_ending/player_rank.c.
  */
 u8 frontier_df3_ending_002_AC50A4[] __attribute__((section(".data.frontier_df3_ending.gap2"))) = INCBIN_U8(
-    "graphics/frontier_df3_ending/Tsa_DfEnding002.bin",
-    "graphics/frontier_df3_ending/dat_DfEnding002_PalGfx.bin");
+    "graphics/frontier_df3_ending/Tsa_DfEnding002.bin");

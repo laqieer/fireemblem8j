@@ -3,6 +3,7 @@
 #include "fontgrp.h"
 #include "soundwrapper.h"
 #include "proc.h"
+#include "variables.h"
 
 struct GameRankProc
 {
@@ -28,12 +29,6 @@ extern struct RankRamUnk gUnk_0202BCEC;
 extern u8 gUnk_020230E8[];
 
 extern u8 gUnk_08AC718C[];
-extern u8 gUnk_08AC5558[];
-extern u8 gUnk_08AC5598[];
-extern u8 gUnk_08AC6BD8[];
-extern u8 gUnk_08AC6C58[];
-extern u8 gUnk_08AC6BF8[];
-extern u8 gUnk_08AC6C18[];
 
 void LoadLegacyUiFrameGraphics(void);
 void j_TmApplyTsa(u16 * dst, const void * src, int size);
@@ -61,15 +56,15 @@ void sub_80BCA74(struct GameRankProc * proc)
 
     LoadLegacyUiFrameGraphics();
     j_TmApplyTsa((u16 *)0x020234A8, gUnk_08AC718C, 0x80 << 5);
-    CopyToPaletteBuffer(gUnk_08AC5558, (0xc0 << 2), 0x40);
-    Decompress(gUnk_08AC5598, (void *)0x06011000);
+    CopyToPaletteBuffer(Pal_PlayerRankSpritesJp_Obj8_9, (0xc0 << 2), 0x40);
+    Decompress(Img_PlayerRankSpritesJp, (void *)0x06011000);
 
     for (i = 0; i < 5; i++)
-        CopyToPaletteBuffer(gUnk_08AC6BD8, ((i + 0x1a) << 5), 0x20);
+        CopyToPaletteBuffer(Pal_PlayerRankSpritesJp_Obj10_14, ((i + 0x1a) << 5), 0x20);
 
-    CopyToPaletteBuffer(gUnk_08AC6C58, (0xf8 << 2), 0x20);
-    CopyToPaletteBuffer(gUnk_08AC6BF8, (0xb0 << 2), 0x20);
-    CopyToPaletteBuffer(gUnk_08AC6C18, (0xb8 << 2), 0x20);
+    CopyToPaletteBuffer(Pal_PlayerRankSpritesJp_Obj15, (0xf8 << 2), 0x20);
+    CopyToPaletteBuffer(Pal_PlayerRankSpritesJp_Obj6, (0xb0 << 2), 0x20);
+    CopyToPaletteBuffer(Pal_PlayerRankSpritesJp_Obj7Anim, (0xb8 << 2), 0x20);
     BG_EnableSyncByMask(0xf);
 
     if (gUnk_0202BCEC.flags14 & 0x80)
@@ -109,5 +104,5 @@ void sub_80BCA74(struct GameRankProc * proc)
     }
 
     StartParallelWorker(EndingDetails_PutSprites, proc);
-    StartMixPalette(gUnk_08AC6C18, gUnk_08AC6C18 + 0x20, 2, 0x17, 1, proc);
+    StartMixPalette(Pal_PlayerRankSpritesJp_Obj7Anim, Pal_PlayerRankSpritesJp_Obj7Anim + 16, 2, 0x17, 1, proc);
 }
