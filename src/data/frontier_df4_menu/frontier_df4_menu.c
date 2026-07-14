@@ -1197,7 +1197,12 @@ struct ProcCmd ProcScr_GlowCrossExit[] __attribute__((section(".data.frontier_df
     PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)GlowCrossExit_Init + 0x1)), PROC_REPEAT((void*)((u8*)GlowCrossExit_Loop + 0x1)), PROC_CALL((void*)((u8*)gap_0008359C + 0x1)),
     PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
 };
-u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", 0x0, 0x1218, "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", 0x15C8, 0x4D4);
+/* frontier_df4_menu_001_A588C0 tail [0x15C8,0x1A9C): standard TSA header 0x1d 0x13
+   (30x20), 600 u16 tile-attr entries (all 0x001F) + 2-byte zero pad (1204 B total,
+   matching the fe8u cg_N.tsa.bin convention), then a 32-B 16-color palette that is
+   byte-identical to fe8u/fe8j's own Pal_GameOverText2 (src/data/A01CC4/dat_data_A01CC4_2.c)
+   -- a separate ROM copy at a different address, so it needs its own definition here. */
+u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", 0x0, 0x1218, "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_pal.gbapal");
 /* frontier_df4_menu_002_A5D648: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 u32 frontier_df4_menu_002_A5D648[] __attribute__((section(".data.frontier_df4_menu.gap2"))) = {
