@@ -13,10 +13,10 @@
 08001EF0	08001FA0	12	reloc-ambiguous	DisablePaletteSync	hardware
 08001EF0	0804B92C	12	reloc-ambiguous	ClearLinkArenaUiBlendWindow	sio_804B920
 080048B4	08021518	36	reloc-ambiguous	StartGameOverScreen	gameoverbgfx
-08006DC8	080381F4	20	reloc-ambiguous	RecordDisplayAfterTowerCleared	bmdifficulty
 08006DC8	0800D1E4	20	reloc-ambiguous	BlockProcForEventEngine	event
-08006DC8	080AC3E0	20	reloc-ambiguous	NewNewGameDifficultySelect	difficultymenu
+08006DC8	080381F4	20	reloc-ambiguous	RecordDisplayAfterTowerCleared	bmdifficulty
 08006DC8	08085374	20	reloc-ambiguous	EventCallGameOverExt	eventcall
+08006DC8	080AC3E0	20	reloc-ambiguous	NewNewGameDifficultySelect	difficultymenu
 08006DDC	08012B24	24	reloc-ambiguous	CheckShinningStonefxExists	eventfx-shinningstone
 08006DDC	08021DF8	24	reloc-ambiguous	EventWarpAnimExists	eventwarpfx
 08006DDC	08079F84	24	reloc-ambiguous	MuCtrExists	muctrl

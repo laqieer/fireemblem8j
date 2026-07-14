@@ -126,8 +126,8 @@ Descriptive distribution of cached region-same no-funcmap candidates
 | hardware | 3 |
 | banim-efxmagic-excalibur | 3 |
 | time | 2 |
-| difficultymenu | 2 |
 | eventcall | 2 |
+| difficultymenu | 2 |
 | mapanim_scanline | 2 |
 | banim-efxmagic-gleipnir | 2 |
 | banim-efxmagic-luna | 2 |
@@ -135,8 +135,8 @@ Descriptive distribution of cached region-same no-funcmap candidates
 | mapanim_staffeffect | 2 |
 | popup | 1 |
 | gameoverbgfx | 1 |
-| bmdifficulty | 1 |
 | event | 1 |
+| bmdifficulty | 1 |
 | eventfx-shinningstone | 1 |
 | eventwarpfx | 1 |
 | muctrl | 1 |

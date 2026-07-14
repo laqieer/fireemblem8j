@@ -539,7 +539,12 @@ def main():
         if name not in rs_names:
             region_same_rows.append((jp, us, size, "exact", name, tu))
             rs_names.add(name)
-    region_same_rows.sort(key=lambda r: (r[0] if r[0] >= 0 else 1 << 40))
+    # `imap_unordered` deliberately returns worker results in completion order.
+    # Include every output field in the key so equal JP-address matches still
+    # render byte-deterministically across repeated generator runs.
+    region_same_rows.sort(
+        key=lambda r: ((r[0] if r[0] >= 0 else 1 << 40), r[1], r[2],
+                       r[3], r[4], r[5] or ""))
 
     n = len(results)
     rsu = label_count["region-same-unique"]
