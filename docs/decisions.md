@@ -11669,7 +11669,7 @@ continuations even in the pre-fix tree, since that fact is independent of
 these fixes). The fixed tree: **631 script prefixes, 5,458 records, 3,330
 pointer-bearing slots, 3,330 relocated, 0 missing, 0 malformed, 2 verified
 split-continuations** — materially closer to the externally-reported 615
-prefixes than D378's uncorrected 622 (the residual delta is most plausibly
+prefixes than D378's uncorrected 635 (the residual delta is most plausibly
 population/edge-case-policy differences in exactly the two verified-split
 cases and/or NOLOAD-adjacent candidates, not "minor decode differences";
 both audits fully agree on the ONLY property that matters, the same 6 real
@@ -11697,3 +11697,114 @@ do not renumber preemptively in this branch without knowing that exact
 number.
 
 Tracked on the same issue #143 thread as D376/D377/D378.
+
+## D380 — D379's ELF-symbol scanner silently dropped 262,885 zero-size `nm -S` lines before they ever reached the "zero-size" bucket; parse both line shapes explicitly and add a deterministic zero-size backstop that recovers 364 previously-invisible ProcCmd scripts (2026-07-14)
+
+**The defect.** `load_rom_symbols()` required `len(parts) >= 4` before parsing
+any `nm -S` line. `arm-none-eabi-nm -S` emits TWO structurally different line
+shapes, not one padded with a zero: a SIZED line is 4 fields
+(`ADDR SIZE TYPE NAME`), but a ZERO-SIZE line is only 3 fields
+(`ADDR TYPE NAME` — the size column is genuinely absent, not "0"). The old
+`len(parts) < 4: continue` guard silently discarded every 3-field line before
+it ever reached the explicit `zero_size` reporting bucket — verified via
+`arm-none-eabi-nm -S fireemblem8.elf | awk '{print NF}' | sort | uniq -c`:
+262,885 of 285,980 total lines are 3-field. The live gate printed
+`zero-size (skipped): 0`, which was a false report: 11,473 real ROM addresses
+existed ONLY as a 3-field line and were never even candidates, so they were
+neither audited nor honestly counted as a blind spot — a silent omission, not
+a reported one.
+
+**Fix 1 — parse both line shapes by their own field count.** `load_rom_symbols`
+now branches on `len(parts) == 4` (sized) vs. `len(parts) == 3` (zero-size,
+`size = 0`); any other shape (e.g. a 2-field undefined `U` entry) is skipped
+defensively, never guessed into a wrong field mapping. The parsing itself was
+factored into a pure `parse_nm_s_output(text)` function so it is directly
+unit-testable against realistic `nm -S` text strings (not just pre-built
+tuples) — 7 new tests in `ParseNmSOutputTest` cover the 4-field/3-field/mixed
+shapes, same-address alias merging with max-size-kept, malformed/unexpected
+shapes, ROM-range filtering, and name sorting. Re-running against the real
+ELF after this fix alone: candidate addresses 22,741 → 34,214 (+11,473
+zero-size, now honestly counted), while `prefixes=631 records=5,458
+slots=3,330 relocated=3,330 missing=0 malformed=0` (D379's result) is
+UNCHANGED — the fix is purely additive coverage, no regression.
+
+**Fix 2 — a deterministic zero-size backstop, not a 16-candidate spot-fix.**
+The reviewer's 16 named zero-size ProcCmd candidates (15 declared names plus
+disguised-cast `data_085C66D8`) were investigated by reusing the SAME
+`extended_bound()` mechanism already verified for split-continuations (D379
+Fix 4), generalized to size=0: bound a zero-size candidate's retry-decode up
+to the end of up to 4 contiguous following candidate addresses (never an
+inferred/guessed extent, never crossing into a truly unrelated symbol — the
+same safety property already established), and only promote it into
+`prefixes` (reported separately in `zero_size_recovered`) if that extended
+decode reaches a FULL valid termination with `>= min_records`. This is
+strictly MORE conservative than a name-based allowlist (it requires the same
+strict per-record opcode/pointer/PROC_END validation as every other
+candidate) yet recovers a MUCH larger population than the reviewer's named
+16: **364 legitimate ProcCmd scripts** among the 11,473 zero-size candidates,
+confirmed to include `data_085C66D8` (decodes 8 records / 4 pointer slots, 0
+missing) — most of the remainder are `ProcScr_efx*` battle-animation effect
+scripts still living as raw, still-undecompiled asm labels with no `.size`
+directive, the same category the original 6 fixed literals came from. All
+364 recovered scripts add to `prefixes`/`records`/`pointer_slots` and are
+fully relocation-audited exactly like any other candidate: **0 missing, 0
+malformed** among them. Live fixed-tree result after both fixes:
+**candidate symbol addresses: 34,214; zero-size (skipped, honest blind
+spot): 11,109; zero-size (recovered): 364; script prefixes: 995; records:
+7,788; pointer slots: 4,730; relocated: 4,730; missing: 0; malformed: 0;
+verified split-continuations: 2** (unchanged from D379).
+
+**Honest remaining blind spot, pinned by name/count (not silently omitted).**
+Of the 11,109 zero-size candidates that remain unrecovered, only **8** carry
+a Proc-suggestive name and none of them are genuine `struct ProcCmd` script
+data on inspection: `PrepScreenProc_AddPostgameUnits` (a post-game unit-prep
+routine, not a script), `gProcScr_SALLYCURSOR_pool`, `ProcName_efxLunaBG2` /
+`ProcName_efxDarkGradoOBJ01piece` / `ProcName_efxCrimsonEyeOBJFinish` (name
+LABEL tables, not `ProcCmd` record arrays), `sBanimEkrPopupProcNames`,
+`sCcramifyProcData`, and `data_08577688`/`sProcessCmdTable` itself (the
+opcode DISPATCH table of function pointers — never `ProcCmd` records at
+all). The audit script prints this exact 8-address/name inventory every run
+(`ZERO-SIZE-UNRECOVERED`, gated behind the same Proc-name heuristic used only
+for this transparency report, never for pointer classification) so the
+blind spot is reproducible evidence, not a claim: re-running
+`audit_procscr_relocs.py` against the current ELF reproduces the identical 8
+names/addresses every time. None of them are claimed as relocation-audited;
+this is the honest remainder, by name and count, per this round's
+requirement.
+
+**Correcting two prior claims in D379/`docs/frontier.md`.** (1) D379's
+prose said "closer to the externally-reported 615 than D378's uncorrected
+622" — 622 was never a real figure in this branch; D378's own reported
+result was **635** script prefixes (see D378's "Verified result" paragraph).
+Both mentions (here and the matching `docs/frontier.md` axis-5 sentence)
+are corrected to 635. (2) Re-reading D379's Fix 3/Fix 4 text: `NOLOAD`
+trusted-on-clean-decode is demonstrated by `ProcScr_efxThunderBG` and split
+continuation is demonstrated by `gProcScr_GameControl`/
+`gProcScr_CharacterEndings` — these were already correctly separated in the
+committed text, not conflated. For full transparency anyway: re-running the
+live gate against the current fixed-tree ELF reports **`NOLOAD (skipped):
+0`** — there is currently NO real ROM address that hits the
+NOLOAD-exclude-on-failed-decode branch; that branch is exercised only by the
+synthetic `NoloadTest.test_noload_candidate_that_fails_to_terminate_is_silently_excluded`
+regression fixture. It is retained as defensive, safety-net behavior (a
+NOLOAD address's bytes are not proven reliable, so a decode that fails to
+terminate there must not be reported as a false "malformed" finding) rather
+than as a demonstrated live-ROM case, and is documented as such going
+forward.
+
+**Re-verification (this round).** `make compare` → `fireemblem8.gba: OK`.
+65 focused unit tests (`make shiftcheck-tests`, up from 49 pre-round —
+7 `ParseNmSOutputTest` + 5 `ZeroSizeBackstopTest`, plus updates to every
+existing `find_script_prefixes` call site for the new 6-tuple return) all
+pass. `make shiftcheck` passes with the corrected gate included. Glyph gate
+unchanged: system 1488/1488/1488/0, talk 2085/2085/2085/0. Shifted A/B
+re-verified against a freshly built `+0x40000` ROM: every reachable
+system/talk glyph head and `sjisNext` pointer and every glyph payload byte
+match; all 4,730 ProcCmd pointer-bearing fields (across all 995 prefixes,
+including the 364 newly-recovered zero-size scripts) track `+shift` (or stay
+NULL), 0 mismatches. `make clean && make compare` → `fireemblem8.gba: OK`.
+
+Tracked on the same issue #143 thread as D376/D377/D378/D379. Same
+numbering-collision note applies: D380 (this entry) is ALSO a locally-scoped
+number and must be renumbered by the integrator alongside D376-D379 against
+`main`'s actual next-available sequence at merge time.

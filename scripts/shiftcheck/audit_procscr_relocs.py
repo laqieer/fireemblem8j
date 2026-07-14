@@ -344,7 +344,8 @@ def audit_prefix(events, relocs):
 
 def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
                           record_size=RECORD_SIZE, max_records=MAX_RECORDS,
-                          min_records=2, noload_ranges=(), verify_split_continuations=True):
+                          min_records=2, noload_ranges=(), verify_split_continuations=True,
+                          verify_zero_size_backstop=True):
     """Decode a strict, object-extent-bounded ProcCmd prefix at every
     `(addr, size)` in `addr_sizes` (size = that address's OWN `nm -S` size;
     every candidate is a distinct ELF symbol value, already deduplicated by
@@ -378,46 +379,68 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
     missing-relocation finding (such a trivial "script" has zero pointer
     slots to audit either way).
 
-    `verify_split_continuations` (default True): when a candidate is
-    genuinely truncated (see decode_prefix), retry the SAME decode with its
-    size extended up to (never past) the START OF THE NEXT candidate address
-    in `addr_sizes` -- i.e. the next physically-contiguous, independently
-    linked/named object in ROM order. If THAT extended decode terminates
-    validly, the "truncation" is a source-level carving artifact (the true
-    script was split across two adjacent C symbols in the SAME section,
-    verified via THIS project's own reference ELF/ROM -- not assumed), not a
-    real defect; it is promoted into `prefixes` using the extended events
-    (so its pointer fields ARE still relocation-audited) and reported
-    separately in `split_continuations` for transparency. It stays in
-    `truncated` only if extending does not reach a valid terminator.
-    Demonstrated real case: `gProcScr_CharacterEndings` (176 B, ends in a
-    non-terminal `PROC_CALL`) is immediately followed, in the same
-    `.data.frontier_df4_ending.gap1` section, by `frontier_df4_ending_gap1_r0`
-    -- a plain `u32[]` whose first 4 records are the script's genuine
-    `PROC_GOTO(100)`/`PROC_LABEL(100)`/`PROC_CALL(Fin_End)`/`PROC_END` tail
-    (matching the region-diff comment already in
-    `src/data/frontier_df4_ending/frontier_df4_ending.c`); its one pointer
-    (`Fin_End`) is already a real symbol reference, not a raw literal, so this
-    extension finds zero missing relocations.
+    `verify_split_continuations` (default True): when a NONZERO-size
+    candidate is genuinely truncated (see decode_prefix), retry the SAME
+    decode with its size extended up to (never past) the END of up to 4
+    contiguous following candidate addresses in `addr_sizes` -- i.e. the
+    next physically-contiguous, independently linked/named object(s) in ROM
+    order. If THAT extended decode terminates validly, the "truncation" is a
+    source-level carving artifact (the true script was split across two
+    adjacent C symbols in the SAME section, verified via THIS project's own
+    reference ELF/ROM -- not assumed), not a real defect; it is promoted
+    into `prefixes` using the extended events (so its pointer fields ARE
+    still relocation-audited) and reported separately in
+    `split_continuations` for transparency. It stays in `truncated` only if
+    extending does not reach a valid terminator. Demonstrated real case:
+    `gProcScr_CharacterEndings` (176 B, ends in a non-terminal `PROC_CALL`)
+    is immediately followed, in the same `.data.frontier_df4_ending.gap1`
+    section, by `frontier_df4_ending_gap1_r0` -- a plain `u32[]` whose first
+    4 records are the script's genuine `PROC_GOTO(100)`/`PROC_LABEL(100)`/
+    `PROC_CALL(Fin_End)`/`PROC_END` tail (matching the region-diff comment
+    already in `src/data/frontier_df4_ending/frontier_df4_ending.c`); its one
+    pointer (`Fin_End`) is already a real symbol reference, not a raw
+    literal, so this extension finds zero missing relocations.
 
-    Returns (prefixes, truncated, zero_size, noload_skipped, split_continuations):
+    `verify_zero_size_backstop` (default True): the SAME deterministic
+    extension mechanism, generalized to a ZERO-size candidate (no declared
+    extent at all -- e.g. a bare assembly label inside a still-untyped raw
+    `.s` blob that is nonetheless a genuine `Proc_Start()` target). The
+    candidate's decode is retried bounded up to the end of up to 4 following
+    candidate addresses (never an unrelated inferred guess -- the SAME
+    bounded-walk helper used for split continuations); only a FULLY validly
+    terminated decode is promoted (into `prefixes`, reported separately in
+    `zero_size_recovered`). A zero-size candidate whose extended decode does
+    NOT terminate validly stays honestly reported in `zero_size` (a genuine,
+    currently-unrecoverable blind spot -- never silently claimed as safe).
+    This is NOT a guess: this project's ROM is one fully packed, contiguous
+    16 MB image (`docs/parallel-carving.md`/shiftcheck README: no slack, no
+    gaps), so "up to the next independently-addressed candidate" is a real,
+    load-bearing upper bound on any object's true extent, not an assumption.
+
+    Returns (prefixes, truncated, zero_size, noload_skipped, split_continuations,
+             zero_size_recovered):
       prefixes: {addr: events} for every address whose decode TERMINATED
         validly with >= min_records (including verified split continuations,
-        AND any NOLOAD-range address that nonetheless decoded cleanly).
-      truncated: {addr: events} for every NON-NOLOAD address that ran out of
-        its own declared bytes after >= min_records non-terminal records AND
-        whose extended-decode verification (if attempted) did not reach a
-        valid terminator either -- a genuine malformed truncation, reported,
-        never silently dropped or extended into an unverified neighboring
-        symbol.
+        verified zero-size recoveries, AND any NOLOAD-range address that
+        nonetheless decoded cleanly).
+      truncated: {addr: events} for every NON-NOLOAD, NONZERO-size address
+        that ran out of its own declared bytes after >= min_records
+        non-terminal records AND whose extended-decode verification (if
+        attempted) did not reach a valid terminator either -- a genuine
+        malformed truncation, reported, never silently dropped or extended
+        into an unverified neighboring symbol.
       zero_size: sorted list of every candidate address whose declared size
-        was <= 0 (skipped explicitly, never decoded).
+        was <= 0 AND whose extended-decode backstop (if attempted) did not
+        reach a valid terminator either -- an honestly-reported, currently
+        unrecoverable blind spot, never silently decoded unbounded.
       noload_skipped: sorted list of every candidate address inside a NOLOAD
         range whose decode did NOT cleanly terminate (and was not a verified
         split continuation) -- excluded because its bytes are not proven
         reliable there, not because it is malformed.
-      split_continuations: sorted list of every address promoted from
-        `truncated` into `prefixes` via the extended-decode verification.
+      split_continuations: sorted list of every NONZERO-size address promoted
+        from `truncated` into `prefixes` via the extended-decode verification.
+      zero_size_recovered: sorted list of every ZERO-size address promoted
+        into `prefixes` via the same extended-decode verification.
     """
     size_by_addr = dict(addr_sizes)
     sorted_addrs = sorted(size_by_addr)
@@ -426,6 +449,7 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
     zero_size = []
     noload_skipped = []
     split_continuations = []
+    zero_size_recovered = []
 
     def extended_bound(addr, size, max_hops=4):
         """Walk forward through immediately-adjacent candidates (no gap
@@ -449,6 +473,15 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
 
     for addr, size in addr_sizes:
         if size <= 0:
+            if verify_zero_size_backstop:
+                bound = extended_bound(addr, 0)
+                if bound is not None:
+                    recovered = decode_prefix(buf, addr, bound - addr, rom_lo, rom_hi,
+                                               record_size, max_records)
+                    if recovered["terminated"] and len(recovered["events"]) >= min_records * 2:
+                        prefixes[addr] = recovered["events"]
+                        zero_size_recovered.append(addr)
+                        continue
             zero_size.append(addr)
             continue
 
@@ -503,7 +536,9 @@ def find_script_prefixes(buf, addr_sizes, rom_lo=ROM_BASE, rom_hi=ROM_HI,
     zero_size.sort()
     noload_skipped.sort()
     split_continuations.sort()
-    return prefixes, truncated, zero_size, noload_skipped, split_continuations
+    zero_size_recovered.sort()
+    return (prefixes, truncated, zero_size, noload_skipped, split_continuations,
+            zero_size_recovered)
 
 
 # --------------------------------------------------------------------------
@@ -548,15 +583,31 @@ def verify_shift(events, base_buf, shifted_buf, shift, rom_lo=ROM_BASE):
 def load_rom_symbols(elf, prefix="arm-none-eabi-"):
     """addr -> (sorted list of every symbol NAME at that address, size).
 
-    `size` is that address's own `nm -S` size (0 if nm ever reports no size).
-    If multiple nm lines share an address with different sizes (not expected
-    in practice -- true aliases report identical sizes, as verified for
-    `ProcScr_efxFireOBJ`/`frontier_df4_banim_a_010_5FF7C8`), the LARGEST
-    reported size is kept, since decode_prefix's own per-record validity
-    checks make a too-generous bound safe (it can only ever accept MORE
-    candidate records, still individually validated and still terminated by
-    the same PROC_END/TERMINAL_OPCODES rule) whereas a too-small bound could
-    wrongly report a real script as truncated.
+    `nm -S` emits TWO distinct line shapes, and both must be parsed:
+      - a SIZED line: `ADDR SIZE TYPE NAME` (4 fields);
+      - a ZERO-SIZE line: `ADDR TYPE NAME` (3 fields, no size column at all --
+        NOT "size omitted as 0", the column is simply absent). An earlier
+        version of this parser required `len(parts) >= 4`, silently DROPPING
+        every 3-field line before it ever reached the zero-size bucket --
+        262,885 of ~285,980 total `nm -S` lines in this ELF are 3-field, so
+        `zero-size (skipped): 0` was reporting a false negative (11,473 ROM
+        addresses exist ONLY as a 3-field line and were never even candidates
+        at all, live or explicit-skip). Both shapes are now parsed explicitly
+        by their OWN field count -- never inferred, never guessed -- and a
+        3-field line is size=0, correctly routed to the explicit `zero_size`
+        bucket in `find_script_prefixes` (never silently omitted, never given
+        an inferred/borrowed extent from an unrelated neighboring symbol).
+
+    If multiple nm lines share an address with different sizes (true
+    aliases report identical sizes, as verified for
+    `ProcScr_efxFireOBJ`/`frontier_df4_banim_a_010_5FF7C8`; a 3-field
+    zero-size line and a 4-field sized line can ALSO share an address, e.g. a
+    debug/local alias of an otherwise-sized global), the LARGEST reported
+    size is kept, since decode_prefix's own per-record validity checks make a
+    too-generous bound safe (it can only ever accept MORE candidate records,
+    still individually validated and still terminated by the same
+    PROC_END/TERMINAL_OPCODES rule) whereas a too-small bound could wrongly
+    report a real script as truncated.
 
     Deliberately UNFILTERED by nm type (global/local/absolute-alias): a
     static local, a global object, and an alias can all be legitimate
@@ -566,18 +617,34 @@ def load_rom_symbols(elf, prefix="arm-none-eabi-"):
     source-declaration scan.
     """
     out = subprocess.check_output([prefix + "nm", "-S", elf], text=True, errors="replace")
+    return parse_nm_s_output(out)
+
+
+def parse_nm_s_output(text, rom_lo=ROM_BASE, rom_hi=ROM_HI):
+    """Pure parser: `nm -S` text -> {addr: (sorted names, size)}, ROM-ranged.
+
+    Factored out of `load_rom_symbols` so the exact 3-field/4-field line-shape
+    logic (see that function's docstring for the bug this fixes) is directly
+    unit-testable against realistic `nm -S` text, not just already-parsed
+    tuples."""
     by_addr = {}
-    for line in out.splitlines():
+    for line in text.splitlines():
         parts = line.split()
-        if len(parts) < 4:
-            continue
+        if len(parts) == 4:
+            addr_s, size_s, _typ, name = parts
+        elif len(parts) == 3:
+            addr_s, _typ, name = parts
+            size_s = "0"
+        else:
+            continue  # unexpected shape (e.g. an undefined 2-field `U` entry
+                      # in a non-final-linked object) -- skip defensively,
+                      # never guess a field mapping.
         try:
-            addr = int(parts[0], 16)
-            size = int(parts[1], 16)
+            addr = int(addr_s, 16)
+            size = int(size_s, 16)
         except ValueError:
             continue
-        name = parts[3]
-        if ROM_BASE <= addr < ROM_HI:
+        if rom_lo <= addr < rom_hi:
             names, cur_size = by_addr.get(addr, ([], 0))
             names.append(name)
             by_addr[addr] = (names, max(cur_size, size))
@@ -690,15 +757,15 @@ def main():
     relocs = load_rom_abs32_relocs(args.relocs_elf, args.prefix)
     noload_ranges = load_noload_ranges(args.map)
     addr_sizes = [(addr, size) for addr, (_, size) in symbols.items()]
-    prefixes, truncated, zero_size, noload_skipped, split_continuations = find_script_prefixes(
-        rom, addr_sizes, noload_ranges=noload_ranges)
+    (prefixes, truncated, zero_size, noload_skipped, split_continuations,
+     zero_size_recovered) = find_script_prefixes(rom, addr_sizes, noload_ranges=noload_ranges)
 
     print("=" * 78)
     print("Structural ProcCmd relocation audit (strict-decoded script prefixes, all ROM symbols)")
     print("=" * 78)
     n_reports = sum(len(symbols[a][0]) for a in prefixes)
     print(f"candidate symbol addresses: {len(symbols)}  NOLOAD (skipped): {len(noload_skipped)}  "
-          f"zero-size (skipped): {len(zero_size)}  "
+          f"zero-size (skipped): {len(zero_size)}  zero-size (recovered): {len(zero_size_recovered)}  "
           f"script prefixes found: {len(prefixes)}  (symbol name reports: {n_reports})  "
           f"truncated (malformed): {len(truncated)}  "
           f"verified split-continuations: {len(split_continuations)}")
@@ -706,6 +773,29 @@ def main():
         print(f"  SPLIT-CONTINUATION addr=0x{addr:08X} names={symbols[addr][0]} "
               f"(genuine script split across adjacent same-section symbols; "
               f"verified terminated + relocation-audited as one)")
+    for addr in zero_size_recovered[:args.limit]:
+        print(f"  ZERO-SIZE-RECOVERED addr=0x{addr:08X} names={symbols[addr][0]} "
+              f"(no declared nm size; extent recovered from the next known "
+              f"candidate address(es) and fully relocation-audited)")
+    if len(zero_size_recovered) > args.limit:
+        print(f"  ... +{len(zero_size_recovered) - args.limit} more")
+
+    # Honest blind-spot inventory: zero-size candidates whose name suggests a
+    # ProcCmd/script table but which the zero-size backstop could NOT
+    # terminate validly (so they are correctly excluded, not silently
+    # dropped). This is a deterministic, reproducible list -- re-running this
+    # script reproduces the same names/addresses every time.
+    proc_like_unrecovered = sorted(
+        addr for addr in zero_size
+        if any("proc" in n.lower() for n in symbols[addr][0])
+    )
+    print(f"zero-size candidates with a Proc-like name that remain UNRECOVERED "
+          f"(honest blind spot, not audited as scripts): {len(proc_like_unrecovered)}")
+    for addr in proc_like_unrecovered:
+        print(f"  ZERO-SIZE-UNRECOVERED addr=0x{addr:08X} names={symbols[addr][0]} "
+              f"(no declared nm size; backstop decode did not terminate validly "
+              f"within the available candidate extent; NOT claimed as an "
+              f"audited ProcCmd script)")
 
     total_records = 0
     total_slots = 0

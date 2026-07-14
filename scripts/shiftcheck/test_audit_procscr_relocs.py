@@ -195,7 +195,7 @@ class DecodePrefixTerminalOpcodeTest(unittest.TestCase):
         # into one 5-record chain; find_script_prefixes must report them as
         # two INDEPENDENT prefixes when given their correct sizes.
         addr_sizes = [(first_addr, first_end - first_addr), (second_addr, second_end - second_addr)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), addr_sizes)
         self.assertEqual(set(prefixes.keys()), {first_addr, second_addr})
         self.assertEqual(len(prefixes[first_addr]), 4)
@@ -221,7 +221,7 @@ class DecodePrefixTerminalOpcodeTest(unittest.TestCase):
             (0x00, 0, 0),              # PROC_END
         ])
         addr_sizes = [(jump_addr, jump_end - jump_addr), (end_addr, end_script_end - end_addr)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), addr_sizes)
         self.assertEqual(len(prefixes[jump_addr]), 4)   # just its own 2 records
         self.assertEqual(len(prefixes[end_addr]), 6)    # just its own 3 records
@@ -261,7 +261,7 @@ class DecodePrefixTruncationTest(unittest.TestCase):
         make_script(rom, addr, [(0x01, 0, BASE + 0x2000), (0x02, 0, BASE + 0x3000)])
         make_record(rom, addr + 16, 0x00, 0, 0)  # must not be consumed
         # No other candidate follows, so no split-continuation is possible.
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), [(addr, 16)])
         self.assertEqual(prefixes, {})
         self.assertIn(addr, truncated)
@@ -275,7 +275,7 @@ class DecodePrefixTruncationTest(unittest.TestCase):
         rom = FakeRom()
         addr = BASE + 0x1000
         make_script(rom, addr, [(0x02, 0, BASE + 0x2000)])  # PROC_CALL, size=8, no room for more
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), [(addr, 8)])
         self.assertEqual(prefixes, {})
         self.assertEqual(truncated, {})
@@ -300,7 +300,7 @@ class SplitContinuationTest(unittest.TestCase):
             (0x00, 0, 0),              # the real terminator
         ])
         addr_sizes = [(first_addr, first_end - first_addr), (second_addr, second_end - second_addr)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), addr_sizes)
 
         self.assertEqual(truncated, {})
@@ -327,7 +327,7 @@ class SplitContinuationTest(unittest.TestCase):
             (0x00, 0, 0),
         ])
         addr_sizes = [(first_addr, first_end - first_addr), (second_addr, second_end - second_addr)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), addr_sizes)
         self.assertEqual(splits, [first_addr])
 
@@ -351,7 +351,7 @@ class SplitContinuationTest(unittest.TestCase):
         # into it must not manufacture a false success.
         second_end = make_script(rom, second_addr, [(0x7F, 0, 0)])
         addr_sizes = [(first_addr, first_end - first_addr), (second_addr, second_end - second_addr)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), addr_sizes)
         self.assertEqual(splits, [])
         self.assertIn(first_addr, truncated)
@@ -378,7 +378,7 @@ class NoloadTest(unittest.TestCase):
         target = BASE + 0x2000
         end = make_script(rom, addr, [(0x01, 0, target), (0x00, 0, 0)])
         noload_ranges = [(addr, end)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), [(addr, end - addr)], noload_ranges=noload_ranges)
         self.assertIn(addr, prefixes)
         self.assertEqual(truncated, {})
@@ -399,7 +399,7 @@ class NoloadTest(unittest.TestCase):
             (0x02, 0, BASE + 0x3000),  # non-terminal, nothing valid follows
         ])
         noload_ranges = [(addr, end)]
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, _zsr = p.find_script_prefixes(
             rom.bytes(), [(addr, end - addr)], noload_ranges=noload_ranges)
         self.assertEqual(prefixes, {})
         self.assertEqual(truncated, {})  # NOT reported as malformed
@@ -535,10 +535,11 @@ class FindScriptPrefixesDedupTest(unittest.TestCase):
         good_end = make_script(rom, good, [(0x04, 0, 0), (0x00, 0, 0)])
         rom.poke_u16(bad, 0x7F)  # unknown opcode -> invalid prefix
 
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
             rom.bytes(), [(good, good_end - good), (bad, 8)])
         self.assertEqual(set(prefixes.keys()), {good})
         self.assertEqual(truncated, {})
+        self.assertEqual(zsr, [])
 
     def test_nested_alias_addresses_decoded_once_each(self):
         # Mirrors ProcScr_efxFireOBJ / frontier_df4_banim_a_010_5FF7C8: two nm
@@ -549,7 +550,7 @@ class FindScriptPrefixesDedupTest(unittest.TestCase):
         rom = FakeRom()
         addr = BASE + 0x1000
         end = make_script(rom, addr, [(0x01, 0, BASE + 0x2000), (0x00, 0, 0)])
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
             rom.bytes(), [(addr, end - addr)])
         self.assertEqual(len(prefixes), 1)
 
@@ -558,10 +559,159 @@ class FindScriptPrefixesDedupTest(unittest.TestCase):
         real = BASE + 0x1000
         real_end = make_script(rom, real, [(0x04, 0, 0), (0x00, 0, 0)])
         zero = BASE + 0x2000
-        prefixes, truncated, zero_size, noload_skipped, splits = p.find_script_prefixes(
+        # zero has no following candidate at all, so even with the backstop
+        # enabled there is nothing to bound an extended decode against.
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
             rom.bytes(), [(real, real_end - real), (zero, 0)])
         self.assertEqual(set(prefixes.keys()), {real})
         self.assertEqual(zero_size, [zero])
+        self.assertEqual(zsr, [])
+
+
+class ZeroSizeBackstopTest(unittest.TestCase):
+    """Covers the zero-size backstop mechanism itself: a zero-size candidate
+    is promoted into `prefixes` (and reported in `zero_size_recovered`) ONLY
+    if extending its decode up to the next known candidate address(es)
+    reaches a valid terminator; otherwise it stays an honest `zero_size`
+    report, never silently guessed or unbounded."""
+
+    def test_zero_size_candidate_recovered_when_next_candidate_bounds_it(self):
+        rom = FakeRom()
+        zero = BASE + 0x1000
+        # No declared size, but a real 2-record PROC_END-terminated script
+        # sits right there, and there IS a following candidate to bound it.
+        script_end = make_script(rom, zero, [(0x04, 0, 0), (0x00, 0, 0)])
+        following = script_end  # next candidate begins exactly where this ends
+        make_script(rom, following, [(0x00, 0, 0)])
+
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
+            rom.bytes(), [(zero, 0), (following, 8)])
+        self.assertEqual(zsr, [zero])
+        self.assertIn(zero, prefixes)
+        self.assertEqual(zero_size, [])
+
+    def test_zero_size_candidate_not_recovered_without_valid_terminator(self):
+        rom = FakeRom()
+        zero = BASE + 0x1000
+        following = BASE + 0x1010
+        # Non-terminal opcodes run all the way through `zero` AND `following`
+        # without ever hitting PROC_END/a terminal opcode, so even the
+        # extended (bounded-to-`following`) decode still never terminates.
+        make_record(rom, zero, 0x04, 0, 0)
+        make_record(rom, zero + p.RECORD_SIZE, 0x04, 0, 0)
+        make_record(rom, following, 0x04, 0, 0)
+
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
+            rom.bytes(), [(zero, 0), (following, 8)])
+        self.assertEqual(zsr, [])
+        self.assertNotIn(zero, prefixes)
+        self.assertEqual(zero_size, [zero])
+
+    def test_zero_size_candidate_with_no_following_candidate_stays_unrecovered(self):
+        rom = FakeRom()
+        zero = BASE + 0x1000
+        make_script(rom, zero, [(0x04, 0, 0), (0x00, 0, 0)])
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
+            rom.bytes(), [(zero, 0)])
+        self.assertEqual(zsr, [])
+        self.assertEqual(zero_size, [zero])
+
+    def test_zero_size_backstop_can_be_disabled(self):
+        rom = FakeRom()
+        zero = BASE + 0x1000
+        script_end = make_script(rom, zero, [(0x04, 0, 0), (0x00, 0, 0)])
+        following = script_end
+        make_script(rom, following, [(0x00, 0, 0)])
+
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
+            rom.bytes(), [(zero, 0), (following, 8)], verify_zero_size_backstop=False)
+        self.assertEqual(zsr, [])
+        self.assertEqual(zero_size, [zero])
+        self.assertNotIn(zero, prefixes)
+
+    def test_recovered_zero_size_pointers_are_still_relocation_audited(self):
+        # The whole point of recovery is that the promoted events go through
+        # the SAME audit_prefix relocation check as any other prefix.
+        rom = FakeRom()
+        zero = BASE + 0x1000
+        target = BASE + 0x2000
+        script_end = make_script(rom, zero, [(0x01, 0, target), (0x00, 0, 0)])
+        following = script_end
+        make_script(rom, following, [(0x00, 0, 0)])
+
+        prefixes, truncated, zero_size, noload_skipped, splits, zsr = p.find_script_prefixes(
+            rom.bytes(), [(zero, 0), (following, 8)])
+        self.assertEqual(zsr, [zero])
+        result = p.audit_prefix(prefixes[zero], relocs=set())
+        self.assertEqual(len(result["missing"]), 1)
+        self.assertEqual(result["missing"][0]["source"], zero + 4)
+        self.assertEqual(result["missing"][0]["target"], target)
+
+
+class ParseNmSOutputTest(unittest.TestCase):
+    """Direct, text-level regression tests for the `nm -S` line-shape parser
+    (the actual bug: an earlier `len(parts) < 4: continue` silently dropped
+    every 3-field zero-size line before it ever reached the zero-size
+    bucket). These feed realistic `nm -S` text strings straight through
+    `parse_nm_s_output`, not pre-built tuples, so they would have caught the
+    real defect."""
+
+    def test_four_field_sized_line_is_parsed_with_its_size(self):
+        text = "08001000 00000010 T ProcScr_Example\n"
+        out = p.parse_nm_s_output(text)
+        self.assertEqual(out[0x08001000], (["ProcScr_Example"], 0x10))
+
+    def test_three_field_zero_size_line_is_parsed_as_size_zero(self):
+        text = "08001000 T ProcScr_NoSize\n"
+        out = p.parse_nm_s_output(text)
+        self.assertEqual(out[0x08001000], (["ProcScr_NoSize"], 0))
+
+    def test_mixed_three_and_four_field_lines_both_captured(self):
+        text = (
+            "08001000 00000008 T ProcScr_Sized\n"
+            "08002000 T ProcScr_ZeroSize\n"
+        )
+        out = p.parse_nm_s_output(text)
+        self.assertEqual(set(out.keys()), {0x08001000, 0x08002000})
+        self.assertEqual(out[0x08001000][1], 0x8)
+        self.assertEqual(out[0x08002000][1], 0)
+
+    def test_alias_same_address_names_merge_and_max_size_kept(self):
+        text = (
+            "08001000 00000008 T ProcScr_A\n"
+            "08001000 T ProcScr_B\n"          # zero-size alias, same address
+            "08001000 00000010 t ProcScr_C\n"  # larger sized alias
+        )
+        out = p.parse_nm_s_output(text)
+        names, size = out[0x08001000]
+        self.assertEqual(names, sorted(["ProcScr_A", "ProcScr_B", "ProcScr_C"]))
+        self.assertEqual(size, 0x10)
+
+    def test_malformed_or_unexpected_shape_lines_are_skipped(self):
+        text = (
+            "         U ProcScr_Undefined\n"  # 2-field undefined symbol
+            "08001000 00000008 T ProcScr_Good\n"
+            "not a valid nm line at all\n"
+            "\n"
+        )
+        out = p.parse_nm_s_output(text)
+        self.assertEqual(set(out.keys()), {0x08001000})
+
+    def test_addresses_outside_rom_range_are_dropped(self):
+        text = (
+            "02000000 00000008 T IwramThing\n"   # EWRAM, not ROM
+            "08001000 00000008 T ProcScr_InRom\n"
+        )
+        out = p.parse_nm_s_output(text)
+        self.assertEqual(set(out.keys()), {0x08001000})
+
+    def test_names_are_sorted_within_an_address(self):
+        text = (
+            "08001000 00000008 T ZzzName\n"
+            "08001000 00000008 t AaaName\n"
+        )
+        out = p.parse_nm_s_output(text)
+        self.assertEqual(out[0x08001000][0], ["AaaName", "ZzzName"])
 
 
 class VerifyShiftTest(unittest.TestCase):
