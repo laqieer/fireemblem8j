@@ -14,15 +14,19 @@ struct MultiBootSendProc
 
 extern const u8 gUnk_080DEEE8[0x18];
 
-extern const u8 gUnk_085DF388[];
-extern const u8 gUnk_085DF60C[];
-extern const u8 gUnk_085DF62C[];
-extern const u8 gUnk_085DFA48[];
-extern const u8 gUnk_085DF4B8[];
-extern const u8 gUnk_085DF554[];
-extern const u8 gUnk_085DB188[];
-extern const u8 gUnk_085DED24[];
-extern const u8 gUnk_085DF288[];
+/* issue143 Recipe C: these were opaque gUnk_* baseline ABS aliases into the
+ * gUnkData_26.tsa.bin monolith; now real typed symbols in
+ * src/data/5AA96C/dat_data_5AA96C.c (semantic names verified by matching each
+ * address to its carved asset's offset within the former monolith). */
+extern const u8 Img_MultiBootSendListBar[];
+extern const u8 Pal_MultiBootSendListBar[];
+extern const u8 Img_MultiBootSendFont[];
+extern const u8 Pal_MultiBootSendFont[];
+extern const u8 Tsa_MultiBootSendListBarNarrow[];
+extern const u8 Tsa_MultiBootSendListBarWide[];
+extern const u8 Img_MultiBootSendBg[];
+extern const u8 Tilemap_MultiBootSendBg[];
+extern const u8 Pal_MultiBootSendBg[];
 extern const u8 gUnk_085D3EA8[];
 
 extern u16 gUnk_020234A8[];
@@ -66,17 +70,17 @@ void sub_80487D8(struct MultiBootSendProc * proc)
 
     Nop_SioUiutils_0();
 
-    Decompress(gUnk_085DF388, (void *)(0x06000F00 + GetBackgroundTileDataOffset(1)));
-    CopyToPaletteBuffer(gUnk_085DF60C, 0x80, 0x20);
-    Decompress(gUnk_085DF62C, (void *)0x06014000);
-    CopyToPaletteBuffer(gUnk_085DFA48, 0x98 << 2, 0x20);
+    Decompress(Img_MultiBootSendListBar, (void *)(0x06000F00 + GetBackgroundTileDataOffset(1)));
+    CopyToPaletteBuffer(Pal_MultiBootSendListBar, 0x80, 0x20);
+    Decompress(Img_MultiBootSendFont, (void *)0x06014000);
+    CopyToPaletteBuffer(Pal_MultiBootSendFont, 0x98 << 2, 0x20);
 
-    j_TmApplyTsa(gUnk_020234A8, gUnk_085DF4B8, 0x4078);
-    j_TmApplyTsa(gUnk_020234A8 + (0x88 << 3) / 2, gUnk_085DF554, 0x4078);
+    j_TmApplyTsa(gUnk_020234A8, Tsa_MultiBootSendListBarNarrow, 0x4078);
+    j_TmApplyTsa(gUnk_020234A8 + (0x88 << 3) / 2, Tsa_MultiBootSendListBarWide, 0x4078);
 
-    Decompress(gUnk_085DB188, (void *)((0xC0 << 0x13) + GetBackgroundTileDataOffset(3)));
-    Decompress(gUnk_085DED24, gUnk_020244A8);
-    CopyToPaletteBuffer(gUnk_085DF288, 0xE0, 0x80 << 1);
+    Decompress(Img_MultiBootSendBg, (void *)((0xC0 << 0x13) + GetBackgroundTileDataOffset(3)));
+    Decompress(Tilemap_MultiBootSendBg, gUnk_020244A8);
+    CopyToPaletteBuffer(Pal_MultiBootSendBg, 0xE0, 0x80 << 1);
 
     tm = gUnk_020244A8;
     for (i = 0; i < (0xA0 << 2); i++)

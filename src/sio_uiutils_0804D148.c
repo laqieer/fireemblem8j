@@ -51,7 +51,10 @@ void LATitleBanner_Init(struct LinkArenaTitleBannerProc * proc)
 
     CopyLinkArenaTileRows(gGenericBuffer + (a + b), OBJ_CHR_ADDR(0x200), 10, 2);
 
-    CallARM_FillTileRect(gBG2TilemapBuffer, gUnkData_26, (((u16)(proc->chr >> 1) >> 4)) | 0x1000);
+    /* issue143 Recipe C: gUnkData_26 (the 21764B monolith) split into 13
+     * semantic assets; this is the only live consumer, and it only ever
+     * reads the leading Tsa_LinkArenaTitleBanner record. */
+    CallARM_FillTileRect(gBG2TilemapBuffer, Tsa_LinkArenaTitleBanner, (((u16)(proc->chr >> 1) >> 4)) | 0x1000);
     BG_EnableSyncByMask(BG2_SYNC_BIT);
 
     return;

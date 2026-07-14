@@ -1108,7 +1108,10 @@ extern u8 Img_LinkArenaPostBattleBg[]; // img
 extern u16 Pal_LinkArenaPostBattleBg[]; // pal
 extern u8 Tsa_LinkArenaPostBattleBg[]; // tsa
 extern u8 gUnkData_25[];
-extern CONST_DATA u8 gUnkData_26[];
+// issue143 Recipe C: gUnkData_26.tsa.bin (21764B monolith) split into 13
+// semantic assets in src/data/5AA96C/dat_data_5AA96C.c; this is the only
+// piece with a live consumer (sio_uiutils_0804D148.c's LATitleBanner_Init).
+extern CONST_DATA u8 Tsa_LinkArenaTitleBanner[];
 
 extern int gCurrentKeyInSeqIndex;
 extern int gTargetKeyInSeqIndex;
