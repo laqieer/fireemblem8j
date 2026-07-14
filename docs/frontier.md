@@ -816,7 +816,7 @@ and value by exactly `+0x40000` while all seven normalized function ranges stay
 otherwise byte-identical. This lane is complete and regression-guarded; it does
 **not** close reopened issue #143 as a whole.
 
-### frontier_df4_menu 14-file UNCERTAIN class — full coverage, MISS=0/UNCERTAIN=0 for the menu lane (issue #143 menu lane, D378-D384, 2026-07-14)
+### frontier_df4_menu 14-file UNCERTAIN class — full coverage, MISS=0/UNCERTAIN=0 for the menu lane (issue #143 menu lane, D378-D385, 2026-07-14)
 
 The menu provider's 14-file UNCERTAIN class (001/005/017/021/023/024/027/
 029/030/032/033/037/038/039) is now **fully resolved**: every actionable byte
@@ -888,14 +888,28 @@ UNCERTAIN is 0**, and only three genuine RE-complete floors remain
 same-size content tamper, a wrong-size file, or a missing file all fail
 closed to `UNCERTAIN` with an explicit "VERIFICATION FAILED" proof, proven
 by dedicated self-tests plus a live tamper-and-restore test against the real
-tracked file. `scripts/audit_bin_forms.py`: MISS=0, FLOOR=1428, UNCERTAIN=16,
-TOTAL=1444 (repo-wide, branch-local checkout; the 16 remaining UNCERTAIN
+tracked file, and (D385) a dedicated fail-closed presence guard that fails
+the moment any pinned path vanishes from the tracked `.bin` inventory
+entirely (e.g. via `git rm`/untracking), not merely when its on-disk bytes
+drift. `scripts/audit_bin_forms.py`, run in a built state (`.lz`/PNG
+artifacts present on disk, since some FLOOR rules key off a built `.lz`
+sibling existing): MISS=0, FLOOR=1429, UNCERTAIN=16, TOTAL=1445 (repo-wide,
+branch-local checkout; unchanged from D382's own 1429/1445, since D384
+replaced blob001's pinned opaque floor with an ordinary reproducible-form
+TSA floor rather than removing a floor outright; the 16 remaining UNCERTAIN
 entries are outside the frontier_df4_menu lane, e.g. `frontier_df4_uistuff`,
-owned by sibling agents). Integrated onto `origin/main`'s D388 tip in a
+owned by sibling agents). This branch's overall audit delta from its D376
+baseline is **MISS0/FLOOR1415/UNCERTAIN30/TOTAL1445 -> MISS0/FLOOR1429/
+UNCERTAIN16/TOTAL1445**. Integrated onto `origin/main`'s D388 tip in a
 throwaway simulation, the totals are **MISS=0, FLOOR=1448, UNCERTAIN=8,
 TOTAL=1456** once all `.lz`/PNG build artifacts exist (some FLOOR rules
 depend on a built `.lz` sibling to distinguish a compressed-TSA-derivative
-`.bin` from a genuine string pool).
+`.bin` from a genuine string pool). The menu lane's own tracked-asset
+footprint is **182 referenced paths (179 reconstructing sources + 3 pinned
+residual floors: 005/021/027), including 127 `.lz` compressed streams** --
+the union of `frontier_df4_menu.o`'s 181 dependency-line entries and
+`frontier_df4_menu_asm.o`'s 3 (021/027 counted once each, shared between
+both objects).
 
 See decisions.md **D378** (Phase A/B + shop/arena/rankings), **D379** (full
 Phase C completion, including a documented `.rodata`-vs-`.data`
@@ -905,13 +919,18 @@ follow-up/dead-extern cleanup), **D382** (source-coverage pass: 021/027/037
 duplicate-original elimination + FLOOR reclassification + exact lookup
 typing -- 001's part of this entry was later found to be a false floor),
 **D383** (blob017 `.tsa.bin` -> `*_map.bin` rename to satisfy the
-structurally-discovered headerless-map convention), and **D384** (blob001's
+structurally-discovered headerless-map convention), **D384** (blob001's
 false floor fully eliminated; pinned drift-safe FLOOR guards for
-005/021/027) for the full per-item breakdown and verification method.
+005/021/027), and **D385** (fail-closed pinned-floor *presence* guard --
+catches a pinned path vanishing from the tracked inventory entirely, not
+just its bytes drifting -- plus this round's stale-count/mapping
+corrections) for the full per-item breakdown and verification method.
 Branch-local decision numbers continue this branch's own D378-onward
-sequence; the exact integration mapping onto `origin/main`'s D388 tip is
-**D378->D389, D379->D390, D380->D391, D381->D392, D382->D393, D383->D394,
-D384->D395** (the integrator should apply this renumbering, not this lane).
+sequence; the exact integration mapping onto `origin/main`'s D388 tip is a
+**seven-entry** table: **D378->D389, D379->D390, D380->D391, D381->D392,
+D382->D393, D383->D394, D384->D395** (the integrator should apply this
+renumbering, not this lane; D385 continues the same local sequence and maps
+to D396 at integration).
 
 `make clean && make compare` -> `fireemblem8.gba: OK`; `make shiftcheck` -> no
 high-confidence suspects. Reopened issue #143 remains open; this closes the

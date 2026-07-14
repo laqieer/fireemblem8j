@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1428 | 98.9% |
+| **FLOOR** | 1429 | 98.9% |
 | **UNCERTAIN** | 16 | 1.1% |
-| **TOTAL** | 1444 | 100.0% |
+| **TOTAL** | 1445 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -49,7 +49,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1276 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1277 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1428) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1429) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1428 entries</summary>
+<details><summary>1429 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1094,6 +1094,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/UnusedMusicSelectTsa1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/UnusedMusicSelectTsa2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/UnusedMusicSelectTsa3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head_tsa.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B combined file): two disjoint live spans (gap21 head + gap21c interior) concatenated, every non-pointer byte a proven ProcCmd/SpriteEx field, all 9 interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143) |

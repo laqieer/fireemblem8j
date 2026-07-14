@@ -1145,12 +1145,35 @@ def _self_test_overlay_tsa_helpers():
     return fails
 
 
+def check_pinned_residual_floor_presence(by_path):
+    """Fail-closed presence guard for PINNED_RESIDUAL_FLOORS: iterate every
+    pinned key and require it to appear in `by_path` (the real classified
+    inventory from this run) BEFORE trusting its classification. Without this,
+    a pinned path that is silently deleted/untracked would simply have zero
+    matches in the `expect()` substring search below and be skipped ("not
+    present in this checkout"), never raising a failure -- exactly the
+    "audit must scream, not silently celebrate" gap this closes. Returns a
+    list of failure strings (empty = every pinned path is present)."""
+    failures = []
+    for key in PINNED_RESIDUAL_FLOORS:
+        if not any(p == key or p.endswith("/" + key) for p in by_path):
+            failures.append(
+                f"PINNED RESIDUAL FLOOR MISSING FROM INVENTORY: {key!r} is a "
+                f"pinned residual floor (PINNED_RESIDUAL_FLOORS) but does not "
+                f"appear anywhere in the classified `.bin` inventory for this "
+                f"run -- the tracked file was deleted/renamed/untracked "
+                f"without updating the pin registry; this is a hard failure, "
+                f"not a silent skip")
+    return failures
+
+
 def run_pinned_residual_floor_self_tests():
     """Direct, synthetic-fixture self-tests for the pinned-residual-floor
-    mechanism (issue #143 menu lane): valid, wrong-size, wrong-content, and
-    missing-file cases, independent of the real tracked files (so a real
-    accidental edit to the tracked residual can't hide a broken checker, and
-    vice versa). Returns a list of failure strings (empty = all passed)."""
+    mechanism (issue #143 menu lane): valid, wrong-size, wrong-content,
+    missing-file, and inventory-presence cases, independent of the real
+    tracked files (so a real accidental edit to the tracked residual can't
+    hide a broken checker, and vice versa). Returns a list of failure
+    strings (empty = all passed)."""
     import tempfile
     failures = []
     with tempfile.TemporaryDirectory() as td:
@@ -1205,12 +1228,41 @@ def run_pinned_residual_floor_self_tests():
             failures.append(f"pinned-floor classify() missing-file wiring: "
                             f"expected UNCERTAIN/VERIFICATION FAILED, got "
                             f"{cat!r}/{proof!r}")
+
+    # inventory-presence regression: synthesize a `by_path` inventory that
+    # contains every pinned floor EXCEPT one, and assert the presence guard
+    # (check_pinned_residual_floor_presence) explicitly catches the missing
+    # one -- proving a deleted/untracked pinned path cannot silently pass
+    # (the `expect()` substring search below would find zero matches and
+    # skip it without this guard).
+    all_keys = list(PINNED_RESIDUAL_FLOORS)
+    assert all_keys, "PINNED_RESIDUAL_FLOORS must not be empty for this test to be meaningful"
+    omitted = all_keys[0]
+    fake_by_path = {k: ("FLOOR", "fixture", "pixel-gfx") for k in all_keys if k != omitted}
+    presence_failures = check_pinned_residual_floor_presence(fake_by_path)
+    if not any(omitted in f for f in presence_failures):
+        failures.append(
+            f"pinned-floor inventory-presence regression: removing "
+            f"{omitted!r} from a synthetic by_path did not trigger a "
+            f"presence-guard failure naming it (got {presence_failures!r})")
+    # and the complementary case: a FULLY populated inventory must produce no
+    # presence failures at all.
+    full_by_path = {k: ("FLOOR", "fixture", "pixel-gfx") for k in all_keys}
+    if check_pinned_residual_floor_presence(full_by_path):
+        failures.append(
+            "pinned-floor inventory-presence regression: a fully-populated "
+            "synthetic by_path unexpectedly triggered a presence failure")
     return failures
 
 
 def run_self_tests(by_path):
     failures = []
     failures.extend(run_pinned_residual_floor_self_tests())
+    # Fail-closed presence guard against the REAL classified inventory for
+    # this run: every PINNED_RESIDUAL_FLOORS key must actually appear. A
+    # deleted/renamed/untracked pinned file is a hard failure here, not a
+    # silent skip (see check_pinned_residual_floor_presence docstring).
+    failures.extend(check_pinned_residual_floor_presence(by_path))
 
     def expect(substr, want_cat):
         matches = [p for p in by_path if substr in p]
