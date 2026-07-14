@@ -52,6 +52,5 @@ AB7144	ABC768	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_
 ABC768	ABC808	src/bmshop_080B8CF0.o(.data.frontier_df4_menu.gap37_shop)	df4_menu region-diff data (shop LUTs + gProcScr_ShopFadeIn/Out, 160 B, typed for #143)
 ABC808	ABCAD0	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap37b)	df4_menu region-diff data (gProcScr_Shop tail, 712 B, long-tail gap)
 ABCD24	ABCD44	src/uiarena.o(.data.frontier_df4_menu.gap38)	df4_menu region-diff data (gProcScr_ArenaUiResultBgm, 32 B, typed for #143)
-ABCD44	ABFFE4	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap38b)	df4_menu region-diff data (descriptor table tail, 12960 B, long-tail gap)
-AC00A8	AC033C	src/data/frontier_df4_menu/frontier_df4_menu.o(.data.frontier_df4_menu.gap39)	df4_menu region-diff data (660 B, long-tail gap)
+ABCD44	AC033C	src/events_wm.o(.data.frontier_df4_menu.events_wm)	df4_menu region-same/diff data (JP world-map EventScr family, 13816 B, migrated for #143 -- supersedes gap38b tail, dat_worldmap_gmapunit_p1652, and gap39)
 AC033C	AC0394	src/gamerankings.o(.data.frontier_df4_menu.gap39_ranks)	df4_menu region-same data (gamerankings rank-weight/threshold tables, 88 B, typed for #143)
