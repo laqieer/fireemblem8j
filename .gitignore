@@ -149,6 +149,7 @@ src/data/**/*.s
 !src/data/anim_mapanim_berserk_silence/dat_anim_mapanim_berserk_silence.s
 !src/data/anim_mapanim_torch/dat_anim_mapanim_torch.s
 !src/data/frontier_df4_ending/dat_frontier_df4_ending_008_sub0.s
+!src/data/frontier_ending_cg/anim_frontier_ending_cg_tail_B3B334.s
 !src/data/anim_mapanim_torchfx/dat_anim_mapanim_torchfx.s
 !src/data/anim_mapanim_objects/dat_anim_mapanim_objects.s
 # ...and the unit-icon move (AP) motion tables: editable fe8u .2byte-offset .s

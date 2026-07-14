@@ -183,26 +183,6 @@ NAME_CLASS_RULES = [
     # frontier event-script blobs (MISS) -> EVENT_* macros in C.
     (re.compile(r"(^|/)graphics/frontier_[^/]*eventscr"),
      "MISS", "fe8u src/events/*.c (EVENT_* macros; frontier event script)"),
-    # frontier_ending_cg_000 (uncompressed JP-exclusive worldmap-style CG, 0 xrefs,
-    # NO fe8u counterpart). D360 called it "no provable sub-boundaries -> verbatim
-    # .bin ceiling". D362 CORRECTS that: because it is UNCOMPRESSED, any tile-aligned
-    # cut is byte-exact, so the palette [0x00:0x80] (-> .gbapal) and the 1024 clean
-    # tiles [0x80:0x8080] (-> .png), ~40%, were split OUT editable; only the
-    # interspersed tiles+tilemap tail [0x8080:end] (47,588 B, no clean tile-aligned
-    # cut) stays a verbatim .bin (renamed frontier_ending_cg_tail_B2F9F0.bin). Still
-    # UNCERTAIN (JP-exclusive, no fe8u editable twin), resolved NOT deferred. Must
-    # precede the generic frontier catch-all below. (D360; corrected D362)
-    (re.compile(r"(^|/)graphics/frontier_ending_cg/frontier_ending_cg_tail_B2F9F0\.bin$"),
-     "UNCERTAIN", "RE-complete, PARTIALLY EXTRACTED: uncompressed CG — palette + 1024-tile PNG split out editable (~40%); this 47,588 B interspersed tiles+tilemap tail has no clean tile-aligned cut → genuine verbatim floor (D362)"),
-    # frontier_df3_ending_001/002 (JP-exclusive): D362 re-derivation — these are NOT
-    # compressed (both start with 0x131d = a TSA width/height header, not a 0x10 LZ
-    # header); they are raw TSA data. 001 has a clean 4-way TSA split available but
-    # DEFERRED (JP-only, no fe8u names). 002 is a raw TSA + a non-palette data block
-    # (its "palette" is 39% bit15-set, NOT a clean palette). Off "needs RE".
-    (re.compile(r"(^|/)graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8\.bin$"),
-     "UNCERTAIN", "RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap; a clean 4-way TSA split is available, DEFERRED (JP-only, no fe8u names) (D362)"),
-    (re.compile(r"(^|/)graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4\.bin$"),
-     "UNCERTAIN", "RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap + a non-palette data block (its 'palette' is 39% bit15-set, not a clean palette); DEFERRED (JP-only) (D362)"),
     # frontier_df4_ending_007_residual (JP-exclusive): issue #143 RE — the LZ77
     # image/TSA pair was extracted editable; the remaining 519 B tail is entirely
     # zero except its first 8 bytes (00 00 00 1f 07 00 00 00). No pointer
@@ -210,10 +190,6 @@ NAME_CLASS_RULES = [
     # absence of investigation -> FLOOR (not UNCERTAIN).
     (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_007_residual_B381\.bin$"),
      "FLOOR", "evidence-backed FLOOR: 519 B near-zero residual (only first 8 B non-zero), no pointer structure, no known consumer -- narrowly scoped raw floor (#143, D377)"),
-    # frontier_df4_ending_008 (JP-exclusive): D362 — pointer-free OAM data (so it is
-    # shift-safe); no fe8u editable twin -> UNCERTAIN, but resolved, not "needs RE".
-    (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444\.bin$"),
-     "UNCERTAIN", "RE-complete: pointer-free OAM data (shift-safe); JP-divergent, no fe8u twin, DEFERRED (D362)"),
     # frontier_df4_menu_005/021/027 (JP-exclusive, issue #143 coverage pass):
     # RE-COMPLETE evidence-backed floors. A path name is not evidence, so these
     # are NOT a pathname-only regex rule -- see PINNED_RESIDUAL_FLOORS /
@@ -484,11 +460,11 @@ def _is_sparse_overlay_tilemap(path):
 
 
 # --------------------------------------------------------------------------- #
-# Pinned residual-floor guards (issue #143 menu lane): drift-safe, fail-closed #
-# content verification for the three genuine RE-complete floors (blob005/021/ #
-# 027). A path name alone is NOT evidence of irreducibility -- a bare regex on #
+# Pinned residual-floor guards (issue #143): drift-safe, fail-closed content   #
+# verification for genuine RE-complete floors. A path name alone is NOT       #
+# evidence of irreducibility -- a bare regex on                               #
 # the filename would classify FLOOR even if the file were replaced with junk  #
-# of the same name, or silently miss a deleted file. These three instead      #
+# of the same name, or silently miss a deleted file. These entries instead    #
 # require an EXACT (size, sha256) match; the pinned hash was computed once    #
 # from the tracked, already fully-audited residual and is intentionally not   #
 # regenerable by this script (a drifted file must be re-audited by a human,   #
@@ -497,6 +473,13 @@ def _is_sparse_overlay_tilemap(path):
 # file at all.                                                                #
 # --------------------------------------------------------------------------- #
 PINNED_RESIDUAL_FLOORS = {
+    "graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin": (
+        24,
+        "ea5540a7a4c6d18612397d714e9ce29ef77928d28ac240eaefda6f6a8567e0e9",
+        "RE-COMPLETE evidence-backed floor: exact 24-byte partial 4bpp "
+        "fragment between 647 complete tiles and a 30x20 TSA map; no "
+        "symbol, relocation, xref, or fe8u semantic twin, and neither a "
+        "semantic u16 table nor CreditsCG-indexed data (issue #143)"),
     "graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin": (
         395,
         "46e75502c72f4e066d6d8abe93c4cef6121027349af5ffe048ec0caa995da563",
@@ -555,11 +538,11 @@ def _pinned_residual_floor_key(path):
 
 
 def pinned_residual_floor_classify(path):
-    """If `path` is one of the three pinned genuine residual floors, return
+    """If `path` is one of the pinned genuine residual floors, return
     its (category, proof, label) tuple -- FLOOR only on an exact (size,
     sha256) match; any drift is a hard UNCERTAIN failure naming the exact
     mismatch, distinguishable from the generic "needs RE" UNCERTAIN catch-all.
-    Returns None for any other path (not one of the three pinned floors)."""
+    Returns None for any other path (not one of the pinned floors)."""
     key = _pinned_residual_floor_key(path)
     if key is None:
         return None
@@ -696,9 +679,10 @@ def _is_compressed_derivative(jp_abspath, fe8u_bin_relpath):
 def classify(path, fe8u_idx):
     """Return (category, proof, category_label)."""
     base = os.path.basename(path)
-    # -1. Pinned residual-floor guard (issue #143 menu lane), checked BEFORE
-    #     any name-based rule: the three genuine RE-complete residuals
-    #     (blob005/021/027) require an exact (size, sha256) match, not just a
+    # -1. Pinned residual-floor guard (issue #143), checked BEFORE any
+    #     name-based rule: genuine RE-complete residuals
+    #     (ending-CG pad and menu blob005/021/027) require an exact
+    #     (size, sha256) match, not just a
     #     matching path, before returning FLOOR. See PINNED_RESIDUAL_FLOORS /
     #     pinned_residual_floor_classify() above.
     pinned = pinned_residual_floor_classify(path)
@@ -1176,13 +1160,30 @@ def check_pinned_residual_floor_presence(by_path):
 
 def run_pinned_residual_floor_self_tests():
     """Direct, synthetic-fixture self-tests for the pinned-residual-floor
-    mechanism (issue #143 menu lane): valid, wrong-size, wrong-content,
+    mechanism (issue #143): valid, wrong-size, wrong-content,
     missing-file, and inventory-presence cases, independent of the real
     tracked files (so a real accidental edit to the tracked residual can't
     hide a broken checker, and vice versa). Returns a list of failure
     strings (empty = all passed)."""
     import tempfile
     failures = []
+    pad_key = "graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin"
+    pad_pin = PINNED_RESIDUAL_FLOORS.get(pad_key)
+    if pad_pin is None:
+        failures.append("ending-CG pad pin missing from PINNED_RESIDUAL_FLOORS")
+    else:
+        if pad_pin[:2] != (
+                24,
+                "ea5540a7a4c6d18612397d714e9ce29ef77928d28ac240eaefda6f6a8567e0e9"):
+            failures.append(
+                "ending-CG pad pin size/hash drifted from the audited 24-byte "
+                f"residual: got {pad_pin[:2]!r}")
+        if ("partial 4bpp fragment" not in pad_pin[2]
+                or "CreditsCG-indexed" not in pad_pin[2]):
+            failures.append(
+                "ending-CG pad pin lost its evidence-backed classification "
+                f"reason: {pad_pin[2]!r}")
+
     with tempfile.TemporaryDirectory() as td:
         valid_path = os.path.join(td, "valid.bin")
         payload = b"\x42" * 174
@@ -1270,6 +1271,16 @@ def run_self_tests(by_path):
     # deleted/renamed/untracked pinned file is a hard failure here, not a
     # silent skip (see check_pinned_residual_floor_presence docstring).
     failures.extend(check_pinned_residual_floor_presence(by_path))
+    pad_key = "graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin"
+    pad_rec = by_path.get(pad_key)
+    if pad_rec is None:
+        failures.append(
+            "ending-CG pad real-file self-test is non-vacuous: the tracked "
+            f"{pad_key!r} must be present in the classified inventory")
+    elif pad_rec[1] != "FLOOR":
+        failures.append(
+            "ending-CG pad real-file self-test expected FLOOR after exact "
+            f"hash/size verification, got {pad_rec[1]!r}: {pad_rec[2]}")
 
     def expect(substr, want_cat):
         matches = [p for p in by_path if substr in p]
@@ -1328,7 +1339,7 @@ def run_self_tests(by_path):
         "SjisGlyphs_0859140C is the typed provider")
     expect("graphics/frontier_df4_uistuff/Tsa_sub_8021AFC.tsa.bin", "FLOOR")  # #143
     expect("graphics/frontier_df4_uistuff/Tsa_Sub8022200.tsa.bin", "FLOOR")  # #143
-    # issue #143 menu coverage pass: the three genuine RE-complete residuals
+    # issue #143 menu coverage pass: the three genuine menu residuals
     # (005/021/027, each pinned by exact size+sha256 -- see
     # PINNED_RESIDUAL_FLOORS) are evidence-backed FLOORs, not UNCERTAIN --
     # every byte's role is proven even though there is no fe8u twin to compare.

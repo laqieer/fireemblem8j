@@ -135,15 +135,13 @@ SUBSYS = {
         "region_start": 0x0877BBB8,
         "region_end": 0x087961E8,
     },
-    # Ending-credits CG blob (ending_credits.c; code ported, gEndingCredits_0[] data
-    # still in baseline). The region [0x08B27970, 0x08B3B3D4) holds the compressed CG
-    # images + TSA + palettes that EndingCredits_LoadCG Decompress()es; they are
-    # indexed by CreditsCG structs that live OUTSIDE the region (in the gEndingCredits_0
-    # table), so no pointer array sits in the window for per-asset tiling. It is bounded
-    # exactly by two named/carved objects: dat_anim_worldmap_skirmish ends at the start
-    # and ProcScr_EndingCredits_BlendCGMaybe (0x08B3B3D4) begins at the end. 1.1% 0xFF
-    # (max FF-run 6 = no padding) — a single byte-perfect blob under one descriptive
-    # symbol. `blob` mode: one incbin for the whole uncarved window.
+    # JP-only ending-CG asset window. It is bounded exactly by two named/carved
+    # objects: dat_anim_worldmap_skirmish ends at the start and
+    # ProcScr_EndingCredits_BlendCGMaybe (0x08B3B3D4) begins at the end. The
+    # window contains palettes, raw/LZ 4bpp sheets, TSA maps, a partial-tile
+    # fragment, and an AP definition; CreditsCG does not index this region.
+    # `blob` remains the initial frontier-carve mode, after which asset-specific
+    # migrations split the provider into editable forms.
     "ending_cg": {
         "blob": True,
         "region_start": 0x08B27970,
