@@ -722,7 +722,6 @@ src/data/**/*.s
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1032.s
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1037.s
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1058.s
-!src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1652.s
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p762.s
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p763.s
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p768.s

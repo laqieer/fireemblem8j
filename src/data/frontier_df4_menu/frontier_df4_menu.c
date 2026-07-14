@@ -1197,12 +1197,22 @@ struct ProcCmd ProcScr_GlowCrossExit[] __attribute__((section(".data.frontier_df
     PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)GlowCrossExit_Init + 0x1)), PROC_REPEAT((void*)((u8*)GlowCrossExit_Loop + 0x1)), PROC_CALL((void*)((u8*)gap_0008359C + 0x1)),
     PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
 };
-/* frontier_df4_menu_001_A588C0 tail [0x15C8,0x1A9C): standard TSA header 0x1d 0x13
-   (30x20), 600 u16 tile-attr entries (all 0x001F) + 2-byte zero pad (1204 B total,
-   matching the fe8u cg_N.tsa.bin convention), then a 32-B 16-color palette that is
-   byte-identical to fe8u/fe8j's own Pal_GameOverText2 (src/data/A01CC4/dat_data_A01CC4_2.c)
-   -- a separate ROM copy at a different address, so it needs its own definition here. */
-u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", 0x0, 0x1218, "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_pal.gbapal");
+/* frontier_df4_menu_001_A588C0 head [0,0x1218): confirmed genuine LZ77 (0x10
+   header, decompressed size 0x5000 = 20480 B = 640 4bpp tiles) via gbagfx
+   decompress; PNG round-trip (256x160, 32x20 tiles) reproduces the identical
+   20480 decompressed bytes exactly, but no available gbagfx compressor preset
+   (-mindist 1..4, default) reproduces this exact 4632-byte compressed stream --
+   the original JP encoder used different match-selection heuristics. Kept as an
+   evidence-backed minimal raw floor (trimmed from the former 6812 B combined
+   file, which duplicated 2180 B already covered by the .4bpp.lz/tsa/palette
+   companions below; issue #143 coverage pass) rather than a generic opaque
+   blob. frontier_df4_menu_001_A588C0 tail [0x15C8,0x1A9C): standard TSA header
+   0x1d 0x13 (30x20), 600 u16 tile-attr entries (all 0x001F) + 2-byte zero pad
+   (1204 B total, matching the fe8u cg_N.tsa.bin convention), then a 32-B
+   16-color palette that is byte-identical to fe8u/fe8j's own
+   Pal_GameOverText2 (src/data/A01CC4/dat_data_A01CC4_2.c) -- a separate ROM
+   copy at a different address, so it needs its own definition here. */
+u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_pal.gbapal");
 /* frontier_df4_menu_002_A5D648: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 u32 frontier_df4_menu_002_A5D648[] __attribute__((section(".data.frontier_df4_menu.gap2"))) = {
@@ -6832,33 +6842,46 @@ u16 sSprite_BackButton[] __attribute__((section(".data.frontier_df4_menu.gap21b"
 /* #143 shiftability: gap21c embeds gUnknown_08A95E20 (ProcScr for sub_80A7650)
  * whose 7 interior ProcCmd pointer words were raw un-relocatable addresses. Split
  * the INCBIN blob around each pointer and emit .4byte <FuncSym> so the linker emits
- * an R_ARM_ABS32 (Thumb bit re-ORed for the FUNC targets). Byte-exact: the .bin base
- * is ROM 0xA95B4E; slices 0x50+4+4+4+4+4+4+0xC+4+4+4+0x5F4 + 7*4 = 0x680. */
-u8 frontier_df4_menu_021c_A95DDC[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x28E, 0x50);
+ * an R_ARM_ABS32 (Thumb bit re-ORed for the FUNC targets). Byte-exact: original .bin
+ * base was ROM 0xA95B4E; slices 0x50+4+4+4+4+4+4+0xC+4+4+4+0x5F4 + 7*4 = 0x680.
+ * issue #143 coverage pass: the combined 2318 B file has exactly TWO disjoint live
+ * spans read anywhere -- [0,0x22) 34 B by src/data/frontier_df4_menu/
+ * frontier_df4_menu_asm.s (gap21 head: DrawSupportBannerSprites_Init/_Loop pointers)
+ * and this array's own original [0x28E,0x31A) 140 B (7 INCBIN reads, 112 B,
+ * interleaved with the 7 relocated pointer words above, 28 B). Trimmed the file
+ * to just those two spans concatenated back-to-back (0x22 + 0x8C = 0xAE = 174 B
+ * total; one residual resource for the whole blob), so offsets here are now
+ * relative-to-0x22 (add 0x22 to get the position in the trimmed file; subtract
+ * 0x28E from the original ROM-relative comments before adding 0x22). The
+ * remaining ~2144 B of the old file were either handled by
+ * gProcScr_SupportUnitSubScreen_ref (a separate file) or already re-typed as
+ * literal C (sSprite_* SpriteEx tables at [0x102,0x146),
+ * frontier_df4_menu_021c_A95E68[12] at the tail) -- true duplicates, now removed. */
+u8 frontier_df4_menu_021c_A95DDC[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x22, 0x50);
 u32 frontier_df4_menu_021c_A95DDC_1[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&sub_80A74D4,
 };
-u8 frontier_df4_menu_021c_A95DDC_2[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x2E2, 0x4);
+u8 frontier_df4_menu_021c_A95DDC_2[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x76, 0x4);
 u32 frontier_df4_menu_021c_A95DDC_3[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&StartMidFadeFromBlack,
 };
-u8 frontier_df4_menu_021c_A95DDC_4[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x2EA, 0x4);
+u8 frontier_df4_menu_021c_A95DDC_4[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x7E, 0x4);
 u32 frontier_df4_menu_021c_A95DDC_5[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&WaitForFade,
 };
-u8 frontier_df4_menu_021c_A95DDC_6[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x2F2, 0x4);
+u8 frontier_df4_menu_021c_A95DDC_6[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x86, 0x4);
 u32 frontier_df4_menu_021c_A95DDC_7[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&nullsub_82,
 };
-u8 frontier_df4_menu_021c_A95DDC_8[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x2FA, 0xC);
+u8 frontier_df4_menu_021c_A95DDC_8[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x8E, 0xC);
 u32 frontier_df4_menu_021c_A95DDC_9[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&StartMidFadeToBlack,
 };
-u8 frontier_df4_menu_021c_A95DDC_10[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x30A, 0x4);
+u8 frontier_df4_menu_021c_A95DDC_10[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x9E, 0x4);
 u32 frontier_df4_menu_021c_A95DDC_11[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&WaitForFade,
 };
-u8 frontier_df4_menu_021c_A95DDC_12[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x312, 0x4);
+u8 frontier_df4_menu_021c_A95DDC_12[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0xA6, 0x4);
 u32 frontier_df4_menu_021c_A95DDC_13[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = {
     (u32)&sub_80A7620,
 };
@@ -7237,16 +7260,29 @@ u32 data_08A9CFC4[] __attribute__((section(".data.frontier_df4_menu.gap26"))) = 
  * become R_ARM_ABS32 relocations. Keep only the 0x172 B head here; the tail
  * (0x1EA onward, incl. data_08A9D688) moves to a new gap27c section placed at
  * 0x08A9D64C, so the carved scripts can sit in their own 4-aligned section
- * without bumping this 2-aligned (base 0x08A9D462) blob's alignment. */
-u8 frontier_df4_menu_027b_A9D64C[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x1EA, 0x20);
+ * without bumping this 2-aligned (base 0x08A9D462) blob's alignment.
+ * issue #143 coverage pass: the combined 1012 B file has exactly TWO disjoint
+ * live spans read anywhere -- [0,0x11A) 282 B by src/data/frontier_df4_menu/
+ * frontier_df4_menu_asm.s (gap27 head: struct ProcCmd literal stream, followed
+ * by many Sprite_Savedraw_7+offset pointers not read from the file) and this
+ * array's own original [0x1EA,0x226) 60 B (3 INCBIN reads, 52 B, interleaved
+ * with 2 relocated pointer words: SaveDrawCursorYOffsetLut+0x1B, SqMask_Loop).
+ * Trimmed the file to just those two spans concatenated back-to-back
+ * (0x11A + 0x3C = 0x156 = 342 B total; one residual resource for the whole
+ * blob), so offsets here are relative-to-0x11A (subtract 0x1EA from the
+ * original ROM-relative comment, then add 0x11A). The remaining ~670 B of the
+ * old file are the already-typed gSprite_SavemenuData_0..16 SpriteEx tables
+ * ([0x246,0x3F4) literal C, decoded via OAM macros) and the already-carved
+ * SpriteArray_SavemenuData_0/1 pointer arrays -- true duplicates, now removed. */
+u8 frontier_df4_menu_027b_A9D64C[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x11A, 0x20);
 u32 frontier_df4_menu_027b_A9D64C_1[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
     (u32)&SaveDrawCursorYOffsetLut + 0x1B,
 };
-u8 frontier_df4_menu_027b_A9D64C_2[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x20E, 0xC);
+u8 frontier_df4_menu_027b_A9D64C_2[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x13E, 0xC);
 u32 frontier_df4_menu_027b_A9D64C_3[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
     (u32)&SqMask_Loop,
 };
-u8 frontier_df4_menu_027b_A9D64C_4[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x21E, 0x8);
+u8 frontier_df4_menu_027b_A9D64C_4[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x14E, 0x8);
 struct ProcCmd ProcScr_CallExtraMap[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
     PROC_NAME((void*)((u8*)SaveDrawCursorYOffsetLut + 0x23)),
     PROC_SLEEP(0x1),
@@ -8525,8 +8561,9 @@ u32 frontier_df4_menu_036_AB0D18[] __attribute__((section(".data.frontier_df4_me
 };
 /* multi-slice atomic relocation carve of frontier_df4_menu_037_AB7144: the graphics
    prefix [0,0x5624) is a DECORATIVE FONT container -- fully split into editable PNGs:
-   [0,0x20) 1 palette verbatim, then a 320t Latin-alphabet sheet (_00), [0xF00,0xF60) 3 palettes
-   verbatim, then 92 self-delimiting 16t class-name glyph sheets (_01.._92, e.g. Lord/Mercenary/
+   [0,0x20) Pal_MenuFontGlyphs0 (1 palette, JASC round-trip exact), then a 320t Latin-alphabet
+   sheet (_00), [0xF00,0xF60) Pal_MenuFontGlyphs1/2/3 (3 palettes, JASC round-trip exact each),
+   then 92 self-delimiting 16t class-name glyph sheets (_01.._92, e.g. Lord/Mercenary/
    Hero/Myrmidon kanji). Each LZ sub-stream is png->4bpp->.4bpp.lz at -mindist 2 (reproduces the
    ROM block byte-for-byte incl. %4 padding). [0x5624,0x5650) (the true shop-data range
    gDefaultShopInventory/gShopDialogueOffsetLut/gShopPortraitLut + gProcScr_ShopFadeIn's first
@@ -8534,11 +8571,16 @@ u32 frontier_df4_menu_036_AB0D18[] __attribute__((section(".data.frontier_df4_me
    layout/carved_rom.d/data_frontier4_df4_menu.tsv). The shop/menu ProcScr tail beyond that keeps
    its remaining func pointers + 2 self-ref child-ProcScr pointers (blob+0x5984) as
    .4byte Sym(+addend); the 11 coincidental ROM-range words there are NOT pointers (mid-func /
-   mid-data offsets) and stay raw. byte-exact; make compare is the oracle. */
+   mid-data offsets) and stay raw. byte-exact; make compare is the oracle. No portion of this
+   array reads the original combined frontier_df4_menu_037_AB7144.bin anymore (issue #143
+   coverage pass); that file is deleted once all four .bin->.gbapal palette slices are
+   confirmed byte-identical (see docs/decisions.md). */
 u8 frontier_df4_menu_037_AB7144[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = INCBIN_U8(
-    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0x0, 0x20,
+    "graphics/frontier_df4_menu/Pal_MenuFontGlyphs0.gbapal",
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_00.4bpp.lz",
-    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0xF00, 0x60,
+    "graphics/frontier_df4_menu/Pal_MenuFontGlyphs1.gbapal",
+    "graphics/frontier_df4_menu/Pal_MenuFontGlyphs2.gbapal",
+    "graphics/frontier_df4_menu/Pal_MenuFontGlyphs3.gbapal",
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_01.4bpp.lz",
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_02.4bpp.lz",
     "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_03.4bpp.lz",

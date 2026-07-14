@@ -18,7 +18,7 @@
  * reached these bytes via frontier_df4_banim_b_073_907F78 + 0x1D4/0x204/0x20C/
  * 0x214/0x21C/0x224 base+offset arithmetic; repointed to these named symbols. */
 
-/* [0x0890814C,0x08908178): UnitDef_Event_PrologueAlly[0].redas, redaCount=6. */
+/* [0x0890814C,0x0890817C): UnitDef_Event_PrologueAlly[0].redas, redaCount=6. */
 u32 REDAs_PrologueAlly1[] __attribute__((section(".data.prologue_event_udefs"))) = {
     0x0001820D, 0x0000FFFF,
     0x0001820A, 0x0000FFFF,

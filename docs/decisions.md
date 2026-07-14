@@ -11708,3 +11708,139 @@ ROM bytes throughout). Issue #143 remains open; `main` was not merged; no
 force-push occurred. If a concurrently-integrated sibling branch has
 already claimed D381, the integrator should renumber this entry, not the
 work it describes.
+
+## D382 — menu source-coverage completion: duplicate-original elimination, FLOOR reclassification, exact lookup typing (issue #143 menu lane; maps to D389 at integration onto origin/main D388-tip) (2026-07-14)
+
+**Scope.** Final verifier-driven coverage/type-safety pass on
+`feat/issue-143-menu-assets`. Branch-local decision numbering continues this
+branch's own sequence (D378-D382); `origin/main` has independently advanced
+to D388 by the time of this entry (tip `4b7d16d8dcec8ee92e05099dd5db7718d081be2f`,
+confirmed via `git rev-parse origin/main`). Per the verifier's own
+instruction, these entries are **not renumbered on the feature branch** --
+the branch-local D378/D379/D380/D381 map to D389/D390/D391/D392 at
+integration (as the verifier specified), so this new entry, D382, maps to
+**D393**.
+
+**1) Eliminated four duplicated full opaque originals.** Each of
+001/021/027/037 still carried its full original combined `.bin` even though
+only a fraction of its bytes were still read by any INCBIN/incbin consumer
+(the rest had already been extracted into separate PNG/TSA/palette/typed-C
+companions in earlier D378 work, but the OLD full file was never trimmed or
+deleted, so its now-redundant bytes were physically duplicated on disk).
+Verified the *complete* consumer set for each via `git grep` across every
+`.c` **and** `.s` file (not just the C provider) -- this caught a real gap in
+the first attempt: `src/data/frontier_df4_menu/frontier_df4_menu_asm.s` (a
+tracked, hand-written asm file, not a preproc-generated intermediate) reads
+its own additional byte ranges from `frontier_df4_menu_021_A95B4E.bin` and
+`frontier_df4_menu_027_A9D462.bin` that the `.c` file's `INCBIN_U8` calls
+never touch. The first attempt at trimming 021 (assuming only the `.c` file
+was a consumer) broke `make compare` (diff in the unrelated `gap21` ROM
+region at `0x08A95B4E`); root-caused via `cmp -l` + `nm`/`.map` lookup,
+reverted via `git checkout --`, and redone correctly with both consumers'
+byte ranges concatenated into one file.
+
+- `frontier_df4_menu_001_A588C0.bin` (6812 B -> 4632 B, in place): sole live
+  range `[0,0x1218)`. Verified via `gbagfx` decompress: genuine LZ77 (0x10
+  header, decompressed size 0x5000=20480 B=640 4bpp tiles). PNG round-trip
+  (256x160, 32x20 tiles) reproduces the exact 20480 decompressed bytes, but
+  no gbagfx compressor preset (`-mindist 1..4`, default) reproduces the
+  original 4632-byte compressed stream (the JP encoder used different
+  match-selection heuristics) -- kept as an evidence-backed minimal raw
+  floor, not a further-reducible asset and not a duplicated full file.
+- `frontier_df4_menu_021_A95B4E.bin` (2318 B -> 174 B): two disjoint live
+  spans concatenated -- `[0,0x22)` (34 B, read by `frontier_df4_menu_asm.s`'s
+  gap21 head, interleaved with `DrawSupportBannerSprites_Init`/`_Loop`
+  pointers) and the original `[0x28E,0x31A)` (140 B, read by
+  `frontier_df4_menu.c`'s gap21c, interleaved with 7 relocated pointers).
+  All INCBIN offsets in both files renumbered relative to the new 174 B
+  file.
+- `frontier_df4_menu_027_A9D462.bin` (1012 B -> 342 B): same pattern --
+  `[0,0x11A)` (282 B, `frontier_df4_menu_asm.s` gap27 head: a `struct
+  ProcCmd` literal stream followed by many un-read `Sprite_Savedraw_7+off`
+  pointers) concatenated with the original `[0x1EA,0x226)` (60 B,
+  `frontier_df4_menu.c` gap27c, interleaved with 2 relocated pointers).
+- `frontier_df4_menu_037_AB7144.bin` (22924 B -> **deleted entirely**): its
+  only two live ranges (`[0,0x20)` + `[0xF00,0xF60)`, exactly matching the
+  128 B the verifier reported) are four 16-color font palettes; all four
+  JASC round-trip exact (`gbagfx .gbapal->.pal->.gbapal`, byte-identical).
+  Converted to `Pal_MenuFontGlyphs0.pal`..`Pal_MenuFontGlyphs3.pal` (new
+  editable JASC sources, consumed via the existing generic `%.gbapal: %.pal`
+  Makefile rule), repointed the `INCBIN_U8` call to the four rebuilt
+  `.gbapal` files, and deleted the combined file -- it has zero remaining
+  readers.
+
+No relocation slot or pointer-bearing schema was hidden in any residual:
+every interior ROM pointer word in the four trimmed spans (021's 9, 027's 2,
+plus the many already-named pointers immediately outside each span in the
+`.s`/`.c` sources) is already an existing named `.4byte Sym(+addend)`
+relocation, verified present before and after the trim. After all four
+fixes: `python3 scripts/gen_layout.py` reports **0 baseline gaps** and
+**100.0000%** decompiled ROM bytes (zero gaps/overlaps/duplicates across the
+full owned ROM range), and `make compare` passed after each individual file
+fix (not just at the end).
+
+**2) Audit classification closed for the menu lane.** Added narrow,
+evidence-backed **FLOOR** classification (not the generic `UNCERTAIN`
+catch-all) to `scripts/audit_bin_forms.py` for the accepted 005 floor and the
+three trimmed residuals (001/021/027), each with a citation-backed comment
+distinguishing this from the script's existing "fe8u-parity FLOOR" rationale
+(TSA/.map.bin etc.): these four are **RE-complete** (every byte's role
+proven) even though there is no fe8u twin to compare against, which is a
+different but equally legitimate "do not fake-extract further" floor
+rationale. Added 4 new `expect(..., "FLOOR")` self-tests. 037 needed no
+override (fully deleted, so it no longer appears in the audit at all).
+Regenerated `docs/bin_audit.md`: **MISS=0, FLOOR=1429, UNCERTAIN=16,
+TOTAL=1445** (repo-wide). Menu-lane UNCERTAIN is now confirmed **0** (`awk`
+scoped to the UNCERTAIN section, grepped for `frontier_df4_menu`: zero
+matches). This differs from the verifier's own "approximately
+MISS0/FLOOR1449/UNCERTAIN8/TOTAL1457" prediction (a ~12-entry gap in both
+FLOOR and TOTAL, and 8 more UNCERTAIN than expected here): the delta is
+consistent with the verifier's simulation running against a different,
+more-integrated tree (their instructions describe simulating this branch
+merged onto a `origin/main` D388 tip that includes other lanes' D382-D388
+work touching additional `.bin` files elsewhere in the repo, which are not
+present in this isolated worktree's checkout of `feat/issue-143-menu-assets`
+alone). The exact totals here are reproducible from this branch tip alone;
+the true post-merge totals depend on the integrator's actual merge.
+
+**3) Exact lookup type safety restored.** Reverted the D381 stylistic
+`const void *` weakening: `Events_WM_BeginningTail`/`Events_WM_ChapterIntro`
+in `src/data/data_chapter_asset_table.c` are again typed exactly
+`const EventScr * const [58]`/`[59]` (pointee-typed AND pointer-slot-const),
+with `event.h` already included in that defining TU. Removed the D381
+`variables.h` declarations entirely (no weaker fallback type was needed) and
+restored a local exact extern
+(`extern const EventScr * const Events_WM_Beginning[59];`/`ChapterIntro[59];`)
+in the sole real consumer, `src/worldmap_main_080BF178.c` -- matching the
+verifier's "safest pattern" instruction. Did **not** reintroduce any of the
+28 dead `extern u16 * Events_WM_Beginning[]`/`ChapterIntro[]` declarations
+removed in D381 (confirmed via `git grep`: zero matches). Reconfirmed via
+`arm-none-eabi-objdump -r src/data/data_chapter_asset_table.o`, restricted to
+the real `.data` section: exactly 350 `R_ARM_ABS32` total (234 pre-existing
+`gChapterDataAssetTable` + 116 lookup), **zero** carry a nonzero addend
+(`grep -c '+0x'` on the reloc listing: 0) -- exactly 116 zero-addend lookup
+relocations, no offset targets, as required.
+
+**4) Small correctness/docs fixes.**
+- `src/data/data_prologue_event_udefs.c`: fixed the `REDAs_PrologueAlly1`
+  comment's end address from the typo'd `08908178` to the actual `0890817C`
+  (12 records * 4 B = 0x30; `0x0890814C + 0x30 = 0x0890817C`).
+- `.gitignore`: removed the stale
+  `!src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1652.s` exception (the
+  file was fully deleted in D379; confirmed via `find`/`git ls-files`: no
+  trace remains).
+- `docs/frontier.md`: fixed "all 8" (which actually listed 9 blobs:
+  001/005/017/021/023/024/027/030/033) to "all 9"; replaced the stale "139
+  arrays" with the corrected "136"; rewrote the section's audit
+  totals/UNCERTAIN claim to the current state (menu UNCERTAIN 0, not merely
+  "reduced"); added the D382 (this entry), D380, D381 references; removed
+  stale intermediate names/counts superseded by the D380 boundary
+  correction.
+
+**Verification.** `make clean && make compare` -> `fireemblem8.gba: OK` (sha1
+to be confirmed against `checksum.sha1`/`baserom.gba` in the final commit's
+gate run). `make shiftcheck` -> PASS, 0 HIGH suspects, across all sub-gates
+(build-system consistency, code-literal audit, talk-table relocations,
+cross-resource offsets, shiftable-region suspects). `check_incbin_deps.py` /
+`check_layout.py` -> OK. `git diff --check` clean. Issue #143 remains open;
+`main` was not merged; no force-push occurred.

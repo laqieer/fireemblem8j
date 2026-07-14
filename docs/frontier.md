@@ -816,40 +816,74 @@ and value by exactly `+0x40000` while all seven normalized function ranges stay
 otherwise byte-identical. This lane is complete and regression-guarded; it does
 **not** close reopened issue #143 as a whole.
 
-### frontier_df4_menu 14-file UNCERTAIN class — Phases A+B+C complete (issue #143 menu lane, D378/D379, 2026-07-14)
+### frontier_df4_menu 14-file UNCERTAIN class — full coverage, MISS=0/UNCERTAIN=0 for the menu lane (issue #143 menu lane, D378-D382, 2026-07-14)
 
 The menu provider's 14-file UNCERTAIN class (001/005/017/021/023/024/027/
-029/030/032/033/037/038/039) is reduced from **30 -> 21**. Phase A (all 8
-smaller blobs: 001/005/017/021/023/024/027/030/033) and Phase B (both large
-containers: 029/032) are fully done — every actionable byte converted to
-editable PNG/JASC/TSA/typed-C or ported byte-identical from `../fireemblem8u`
-where a named counterpart existed, each independently re-derived and diffed
-against the raw JP bytes before insertion, not just visually inspected. Blob
-005 keeps its now-precisely-sized (395 B, trimmed from a stale 587 B
-over-extraction) proc-script floor per the manifest's own gap5 row — an
-honest, evidence-backed residual, not a generic "needs RE".
-
+029/030/032/033/037/038/039) is now **fully resolved**: every actionable byte
+converted to editable PNG/JASC/TSA/typed-C or ported byte-identical from
+`../fireemblem8u` where a named counterpart existed, each independently
+re-derived and diffed against the raw JP bytes before insertion, not just
+visually inspected. Phase A (all 9 smaller blobs: 001/005/017/021/023/024/
+027/030/033) and Phase B (both large containers: 029/032) were done first;
 Phase C (037/038/039 EventScr/shop/ranking migration plus the world-map
-lookup/prologue-udef extension) is now **fully done**. blob 037's true
-shop-data recut (`gDefaultShopInventory`/`gShopDialogueOffsetLut`/
-`gShopPortraitLut`/`gProcScr_ShopFadeIn`/`Out`) resolved the earlier open
-question: the `gShopPortraitLut` "mismatch" was a RAM-NOLOAD/masked-overlay
-address binding, not a real discrepancy. The full 139-array (133 named + 6
-JP-only) EventScr world-map family now lives in `src/events_wm.c`, spanning
-exactly 13816 B with the proven 74-relocation contract (32
+lookup/prologue-udef extension) followed, including a boundary correction
+(see below) and a final source-coverage pass that eliminated four
+duplicated full opaque originals.
+
+Phase C highlights: blob 037's true shop-data recut
+(`gDefaultShopInventory`/`gShopDialogueOffsetLut`/`gShopPortraitLut`/
+`gProcScr_ShopFadeIn`/`Out`) resolved the earlier open question — the
+`gShopPortraitLut` "mismatch" was a RAM-NOLOAD/masked-overlay address
+binding, not a real discrepancy. The full **136-array** (133 named + 3
+inferred JP-only) EventScr world-map family lives in `src/events_wm.c`,
+spanning exactly 13816 B with the proven 74-relocation contract (32
 `RemoveBGIfNeeded` + 30 `EventScr_WM_FadeCommon` + 2
 `EventScr_CallOnTutorialMode` + 10 internal) and exactly 4 non-relocated
-TEXTSHOW words. The world-map lookup tables (`Events_WM_BeginningTail[58]`,
-`Events_WM_ChapterIntro[59]`) were appended to
-`src/data/data_chapter_asset_table.c` with a shiftable linker alias in
-`ldscript.template.txt`, and the prologue reinforcement/UnitDefinition data at
-`[0x0890814C,0x089081D8)` is now `src/data/data_prologue_event_udefs.c`
-(`REDAs_PrologueAlly1/2`, `REDAs_PrologueEnemy1/2/3`,
-`UnitDef_Event_PrologueAlly[3]`). Both blobs 038 and 039 are now fully
-deleted. See decisions.md **D378** (Phase A/B + shop/arena/rankings) and
-**D379** (full Phase C completion, including a documented `.rodata`-vs-`.data`
-section-placement lesson learned from a caught-and-fixed regression) for the
-full per-item breakdown and verification method.
+TEXTSHOW words — an externally-supplied boundary audit caught and corrected
+a real naming/boundary bug in an earlier 139-piece segmentation (byte-exact
+in aggregate but internally mis-split; see D380). The world-map lookup
+tables (`Events_WM_BeginningTail[58]`, `Events_WM_ChapterIntro[59]`,
+typed `const EventScr * const [59]`, zero-addend, exactly 116 relocations)
+were appended to `src/data/data_chapter_asset_table.c` with a shiftable
+linker alias in `ldscript.template.txt`, and the prologue
+reinforcement/UnitDefinition data at `[0x0890814C,0x089081D8)` is now
+`src/data/data_prologue_event_udefs.c` (`REDAs_PrologueAlly1/2`,
+`REDAs_PrologueEnemy1/2/3`, `UnitDef_Event_PrologueAlly[3]`). Blobs 038 and
+039 are fully deleted.
+
+Final source-coverage pass (D382): four blobs (001/021/027/037) still
+carried their full original opaque `.bin`, duplicating bytes already covered
+by separately-extracted companions. Each was reduced to its minimal
+still-live byte range (or, for 037, its four residual palettes converted to
+JASC — no raw bytes left at all):
+- **001** (`frontier_df4_menu_001_A588C0.bin`, 6812 B -> 4632 B): the only
+  live range left is `[0,0x1218)`, confirmed genuine LZ77 (640 4bpp tiles);
+  PNG round-trip reproduces the exact decompressed bytes, but no available
+  gbagfx compressor preset reproduces the exact compressed stream — kept as
+  an evidence-backed minimal floor, not a duplicated full file.
+- **021** (`frontier_df4_menu_021_A95B4E.bin`, 2318 B -> 174 B): two disjoint
+  live spans (found only by also checking the tracked
+  `frontier_df4_menu_asm.s`, which reads a *different* range than
+  `frontier_df4_menu.c`) concatenated into one file.
+- **027** (`frontier_df4_menu_027_A9D462.bin`, 1012 B -> 342 B): same pattern,
+  two disjoint live spans (asm + c) concatenated into one file.
+- **037** (`frontier_df4_menu_037_AB7144.bin`, 22924 B -> **deleted**): its
+  only two live ranges were four 16-color font palettes (32 B + 96 B), all
+  four JASC round-trip exact; converted to `Pal_MenuFontGlyphs0..3.pal`, so
+  the combined file has zero remaining readers and was removed outright.
+
+All five prior audit-UNCERTAIN menu paths (001/005/021/027 as evidence-backed
+RE-complete floors, plus 037 now fully deleted) are reclassified: **menu-path
+UNCERTAIN is 0**. `scripts/audit_bin_forms.py`: MISS=0, FLOOR=1429,
+UNCERTAIN=16, TOTAL=1445 (repo-wide; the 16 remaining UNCERTAIN entries are
+outside the frontier_df4_menu lane, e.g. `frontier_df4_uistuff`, owned by
+sibling agents). See decisions.md **D378** (Phase A/B + shop/arena/rankings),
+**D379** (full Phase C completion, including a documented
+`.rodata`-vs-`.data` section-placement lesson learned from a caught-and-fixed
+regression), **D380** (136-array boundary correction), **D381** (lookup
+type-safety follow-up/dead-extern cleanup), and **D382** (final
+source-coverage pass: duplicate-original elimination, FLOOR reclassification,
+exact lookup typing) for the full per-item breakdown and verification method.
 
 `make clean && make compare` -> `fireemblem8.gba: OK`; `make shiftcheck` -> no
 high-confidence suspects. Reopened issue #143 remains open; this closes the
