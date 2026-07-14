@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1448 | 99.5% |
-| **UNCERTAIN** | 8 | 0.5% |
-| **TOTAL** | 1456 | 100.0% |
+| **FLOOR** | 1449 | 99.6% |
+| **UNCERTAIN** | 6 | 0.4% |
+| **TOTAL** | 1455 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -49,11 +49,11 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1295 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1296 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 8 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 6 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1448) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1449) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1448 entries</summary>
+<details><summary>1449 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1409,6 +1409,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/misc_gfx2/gTsa_OpSubtitle_03.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_OpSubtitle_04.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_OpSubtitle_05.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_OpSubtitle_06.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_SupportSubScreen.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_WorldmapMinimap_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
@@ -1557,17 +1558,15 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (8) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (6) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>8 entries</summary>
+<details><summary>6 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
 | `graphics/frontier_df3_ending/dat_DfEnding002_PalGfx.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_tail_B3AFF4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |

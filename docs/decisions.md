@@ -13429,3 +13429,54 @@ new/typed content (all explained, none weakening a gate):
 layout-referenced objects, all git-tracked), `scripts/check_selfcontained.py`
 (100.00%, 0 baserom incbins) all pass; `git diff --check` and final
 `git status` are clean.
+
+## D397 — ending000 raw provider replaced by the typed JP ending tables (#143, 2026-07-14)
+
+The raw `0x08AC059C..0x08AC09E8` ending provider is now owned by
+`src/ending_details_080BB4AC.c(.data)`: `gpDefeatedEndingLocString` points to
+`gEndingTmScratchA`, followed by `gCharacterEndings_Eirika[68]`,
+`gCharacterEndings_Ephraim[68]`, and `gCharacterEndingsByRoute[2]`. All 134
+nonterminal text IDs are explicit JP literals derived from the semantic fe8u
+suffix minus `0x88`; `layout/msg_map.tsv` is unchanged and no `MSG_*`
+expression remains in the provider.
+
+Removed the GetPid raw-blob macro, the raw assembly provider and `.bin`, the
+duplicate NOLOAD placement, the old manifest row/comment, and the obsolete
+`.gitignore` exception. A task-specific ROM fragment now places the real
+`.data`, and a task-specific baseline drop suppresses only the former absolute
+`gpDefeatedEndingLocString` alias. Proof: object `.data` is exactly `0x44C`
+bytes and has exactly three `R_ARM_ABS32` relocations (`+0x000` scratch,
+`+0x444` Eirika, `+0x448` Ephraim); the linked 1100-byte range SHA256 is
+`7e9b966828fb2e8a58535b780a3a24d416e7370ff6d5ea3c37020f907e722eab`.
+
+## D398 — ending016 split into generated TSA + typed title CTC data (#143, 2026-07-14)
+
+The raw `0x08B3EC33..0x08B3EE00` provider is fully decomposed without
+duplicating its already-typed ProcCmd tail. Its head is now: one explicit zero
+pad; generated `gTsa_OpSubtitle_06` (`176` bytes); six exact JP `u16`
+PutSpriteExt CTC lists; and a two-byte zero pad. The committed 30x20 TSA source
+is 1202 bytes (SHA256
+`36b5c139de48967aaaa70ab1d465e2131f17def94ea504a7a7e4caa2c201c75d`);
+`gbagfx -mindist 2` regenerates the exact 176-byte LZ stream (SHA256
+`74da8a33a2b697a4698ac89c873c6c55d01974f2deceb730313f2c52f458a3db`).
+`DrawTitleSprites_Loop.o(.data)` is exactly `0xEC` bytes, with symbols at the
+authoritative JP boundaries through `gPad_TitleSprites_B3EDCE`.
+
+The subtitle voice table now carries one `R_ARM_ABS32` relocation directly to
+`gTsa_OpSubtitle_06`. The preserved ProcCmd tail at
+`0x08B3EDD0..0x08B3EE00` retains exactly the three callback relocations at
+`+0x04`, `+0x0C`, and `+0x24`; no pointer is baked or duplicated. The raw
+ending016 `.bin`, gap definition, old manifest row, and stale comments are
+removed. Full linked-range hashes match the former provider exactly: complete
+461-byte range
+`1e7bd479e63d83efa6a9cc850733a338c3f565229f503d268d312457c00891f2`,
+CTC+pad range
+`4c0f843b84d0e2d745f3a24b405e57ce5e9e355bf71137bd9578000c20865873`,
+and ProcCmd tail
+`f83076fa18c362b5c4524980f46a7012f97b5a61fa360db98970dee12cb4660c`.
+
+Canonical built-state audit moves from
+`MISS=0 FLOOR=1448 UNCERTAIN=8 TOTAL=1456` to
+`MISS=0 FLOOR=1449 UNCERTAIN=6 TOTAL=1455`: two raw UNCERTAIN providers are
+deleted and one committed TSA source becomes FLOOR. This closes only the two
+ending-provider actions; issue #143 remains open for its other residual lanes.

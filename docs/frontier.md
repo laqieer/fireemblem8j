@@ -976,6 +976,21 @@ menu lane's full 14-file scope, not the reopened issue as a whole (other
 concurrent lanes — glyph-relocs, uistuff-assets, ending-assets, tsa-outlier,
 map-mar-migration — are owned by sibling agents).
 
+### Ending raw-provider actions — ending000/ending016 migrated (#143, D397-D398, 2026-07-14)
+
+The two actionable raw providers from the final closure audit are no longer
+frontier items. `0x08AC059C..0x08AC09E8` is owned by the typed JP character
+ending tables (`0x44C`, three ABS32 relocations), and
+`0x08B3EC33..0x08B3EE00` is owned by a generated 30x20 TSA, six typed title
+CTC lists, and the existing typed ProcCmd tail. Both raw `.bin` providers,
+the ending000 raw assembly/NOLOAD duplicate, and both gap placements are
+gone; byte identity is documented in D397-D398.
+
+The built-state asset audit is now **MISS=0, FLOOR=1449, UNCERTAIN=6,
+TOTAL=1455** (from main's 0/1448/8/1456). This is a narrow provider-lane
+advance only: the five simple ending residual assets and `uistuff007` were
+not touched, and reopened issue #143 remains open.
+
 ### Banim/AnimScr beyond-gate residual — CLOSED (issue #166, D368, 2026-07-11)
 
 The D345/D346/D363/D365 banim/AnimScr residual is no longer live work. A fresh

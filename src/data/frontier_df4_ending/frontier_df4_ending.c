@@ -482,9 +482,6 @@ extern void sub_80CBD20();
 extern u8 data_081F611C[];
 extern u8 data_081F6D7C[];
 
-/* frontier_df4_ending_000_AC059C (gap0): self-referential struct moved to
- * frontier_df4_ending_asm.s so its two trailing self-pointers are RELOCATABLE
- * (R_ARM_ABS32) rather than baked hex — shift-safe, byte-identical (#152 pattern). */
 u32 frontier_df4_ending_001_AC0B90[] __attribute__((section(".data.frontier_df4_ending.gap1"))) = {
     0x020027A0, 0x0000000E, 0x00000000, 0x00000002, (u32)&CharacterEnding_Init, 0x00000002,
     (u32)&LoadNextCharacterEnding, 0x0000000B, 0x00000000, 0x00000002, (u32)&CharacterEnding_0, 0x00040018,
@@ -828,10 +825,6 @@ u32 frontier_df4_ending_gap15_r5[] __attribute__((section(".data.frontier_df4_en
     0x152C25D0, 0x000008A7,
 };
 
-/* #143: tail 48 B (JP 0x08B3EDD0..0x08B3EE00) typed out as gProcScr_DrawTitleSprites +
- * gProcScr_SkipTitleFxKeyListener in src/data/gProcScr_DrawTitleSprites_ref; keep only
- * the 413 B head here so its interior code pointers become R_ARM_ABS32 relocations. */
-u8 frontier_df4_ending_016_B3EC33[] __attribute__((section(".data.frontier_df4_ending.gap16"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin", 0, 413);
 u8 frontier_df4_ending_017b_B3F18C[] __attribute__((section(".data.frontier_df4_ending.gap17"))) = {
     0x02, 0x00, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x80, 0x10, 0x00, 0x04, 0x00, 0x06, 0x00,
     0x00, 0x40, 0x00, 0x80, 0x00, 0x00, 0x00, 0x40, 0x20, 0x80, 0x08, 0x00, 0x00, 0x40, 0x40, 0x80,

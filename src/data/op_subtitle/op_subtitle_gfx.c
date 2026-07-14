@@ -2,7 +2,7 @@
 
 /* JP operation subtitle graphics (region-different).
  * Migrated from asm/dat_gGfx_OpSubtitle_00..06_ref.s and
- * asm/dat_gTsa_OpSubtitle_00..05_ref.s.
+ * asm/dat_gTsa_OpSubtitle_00..06_ref.s.
  * Each symbol is placed in its own named rodata section to match the linker script.
  * Type matches extern declaration: u8 CONST_DATA (= u8 __attribute__((section(".data")))).
  * The per-variable section attribute below overrides the CONST_DATA section.
@@ -20,3 +20,6 @@ SECTION(".rodata.dat_gTsa_OpSubtitle_01_ref") u8 gTsa_OpSubtitle_01[] = INCBIN_U
 SECTION(".rodata.dat_gTsa_OpSubtitle_03_ref") u8 gTsa_OpSubtitle_03[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_03.bin.lz");
 SECTION(".rodata.dat_gTsa_OpSubtitle_04_ref") u8 gTsa_OpSubtitle_04[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_04.bin.lz");
 SECTION(".rodata.dat_gTsa_OpSubtitle_05_ref") u8 gTsa_OpSubtitle_05[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz");
+SECTION(".rodata.dat_gTsa_OpSubtitle_06_pad") u8 gPad_OpSubtitle_06_B3EC33[] = { 0 };
+SECTION(".rodata.dat_gTsa_OpSubtitle_06_ref") u8 gTsa_OpSubtitle_06[] =
+    INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_06.tsa.bin.lz");

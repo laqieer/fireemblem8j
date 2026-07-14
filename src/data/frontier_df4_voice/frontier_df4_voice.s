@@ -142,7 +142,7 @@ frontier_df4_voice_001_1F67BC:
 	.4byte 0x00000000, 0x00000000, 0x00000400, 0x00003400, gGfx_OpSubtitle_00, gTsa_OpSubtitle_00
 	.4byte 0x0000014F, gGfx_OpSubtitle_01, gTsa_OpSubtitle_01, 0x00000118, gGfx_OpSubtitle_02, gTsa_OpSubtitle_02
 	.4byte 0x00000078, gGfx_OpSubtitle_03, gTsa_OpSubtitle_03, 0x00000118, gGfx_OpSubtitle_04, gTsa_OpSubtitle_04
-	.4byte 0x0000014A, gGfx_OpSubtitle_05, gTsa_OpSubtitle_05, 0x0000012C, gGfx_OpSubtitle_06, frontier_df4_ending_016_B3EC33 + 0x1
+	.4byte 0x0000014A, gGfx_OpSubtitle_05, gTsa_OpSubtitle_05, 0x0000012C, gGfx_OpSubtitle_06, gTsa_OpSubtitle_06
 	.4byte 0x000000FA, 0x61726363, 0x7966696D, 0x00000000
 /* gap2 (0x211988-0x212360) is now built from editable source: the
  * sound/voicegroups/voicegroup076.s / voicegroup077.s / voicegroup078.s voice_*
