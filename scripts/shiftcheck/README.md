@@ -61,7 +61,7 @@ result is recorded in the V1 PR.
 | `make shiftcheck-codeliterals` | 1e | Lexically tokenizes every linked code C source (excluding `src/data/**`) for standalone hex integer literals, then rejects numeric values in `[0x08000000, 0x0A000000)`. This catches 7/8/extra-leading-zero and suffixed spellings of agbcc literal-pool words emitted **without** `R_ARM_ABS32`; only the three declaration/call-scoped packed-value contexts documented by D377 are accepted. |
 | `make shiftcheck-selfrefs` | 1f | Decodes every structureless-opaque symbol's built-ROM bytes for self-referential words and checks each hit against a narrow evidence manifest (`scripts/shiftcheck/opaque_selfref_evidence.json`); unresolved candidates or evidence drift fail `scripts/audit_pointers.py --true-debt --gate`. Zero-size symbols are never extended to the next global. |
 | `make shiftcheck-glyphs` | 1g | Structural glyph-table audit (issue #143): walks the ACTUAL `TextGlyphs_System`/`TextGlyphs_Talk` linked lists in the built ROM (schema-known 0xC0 heads + `struct Glyph.sjisNext` chains, cycle-detected, ROM-range-checked) and requires a real relocation at every non-null pointer word. Catches a blind spot Layers 1 and 1d both miss: a raw literal in a single-glyph residue object never looks "MIXED" to the Layer-1 classifier, and a plain C `u32[]` numeric initializer (agbcc never relocates it) is invisible to Layer 1d's `.4byte`-token text scan. `--shifted-gba` adds an optional A/B proof against a `+shift` ROM (`build_shifted_rom.sh`): every reachable glyph's links track `+shift` and its payload bytes stay identical. |
-| `make shiftcheck-procscr` | 1h | Structural `struct ProcCmd` script-array audit (issue #143 follow-up): for every GLOBAL source-declared `struct ProcCmd NAME[] = {...}` definition, requires a real relocation at every non-null pointer-bearing `dataPtr` field (the opcode set mirrors `include/proc.h`'s `PROC_*` macro table). Same blind spot as Layer 1g in a second consumer: `PROC_NAME((const void*)0x08..)` compiles to an unrelocated word. `--shifted-gba` adds the same optional A/B proof. |
+| `make shiftcheck-procscr` | 1h | Structural `struct ProcCmd` script audit (issue #143 follow-up, broadened per D385): strict-decodes a ProcCmd prefix from EVERY ROM object symbol's address (not just symbols the C source types as `struct ProcCmd` — some genuine scripts are declared as plain `u32[]` and only cast at the call site) and requires a real relocation at every non-null pointer-bearing `dataPtr` field (the opcode set mirrors `include/proc.h`'s `PROC_*` macro table). Same blind spot as Layer 1g in a second consumer: `PROC_NAME((const void*)0x08..)` compiles to an unrelocated word. `--shifted-gba` adds the same optional A/B proof. |
 | `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
 | `make shiftcheck` | static + tests | The complete non-emulator gate above. |
@@ -276,15 +276,21 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
 - `test_audit_glyph_relocs.py` — focused tests (synthetic ROM fixtures, no
   toolchain needed) for missing-relocation, cycle, malformed-target/truncated-read,
   and clean-chain traversal behavior.
-- `audit_procscr_relocs.py` — Layer 1f: structural `struct ProcCmd` script-array
-  relocation audit (issue #143 follow-up) + optional `--shifted-gba` A/B proof.
-  Source-scans for GLOBAL `struct ProcCmd NAME[] = {...}` DEFINITIONS (paren-aware,
-  so a bare `extern` forward declaration is never mistaken for one), resolves each
-  from the reference ELF, and walks only the schema-known pointer-bearing opcodes
-  from `include/proc.h`'s `PROC_*` table.
+- `audit_procscr_relocs.py` — Layer 1f: structural `struct ProcCmd` script
+  relocation audit (issue #143 follow-up, broadened per D378) + optional
+  `--shifted-gba` A/B proof. Strict-decodes a `struct ProcCmd` prefix (opcode
+  <=0x19; non-pointer op ptr must be zero; pointer op nonzero ptr must be
+  ROM-range; terminated by a valid zero PROC_END) from EVERY ROM object
+  symbol's address (deduplicated by address), not just symbols the C source
+  declares as `struct ProcCmd` -- some genuine scripts are declared as plain
+  `u32[]` and only cast at the `Proc_Start()` call site, invisible to a
+  source-type scan. Walks only the schema-known pointer-bearing opcodes from
+  `include/proc.h`'s `PROC_*` table.
 - `test_audit_procscr_relocs.py` — focused tests (synthetic ROM fixtures, no
-  toolchain needed) for missing-relocation, unknown-opcode, bad-size/out-of-range,
-  unexpected-relocation-on-non-pointer-field, and clean-array behavior.
+  toolchain needed) for missing-relocation, unknown-opcode, non-pointer-opcode-
+  with-nonzero-ptr, pointer-out-of-range, non-terminating/runaway decode,
+  unexpected-relocation-on-non-pointer-field, alias/dedup-by-address, and
+  clean-prefix behavior.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"

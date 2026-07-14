@@ -12209,3 +12209,115 @@ records the D383 closure; no additional edit needed there since the coarse
 gate count stays at 0 and no `calcprogress.py` axis changes.
 
 Tracked on the same issue #143 thread as D383.
+Tracked on the same issue #143 thread as D383.
+
+## D385 — D384 was INCOMPLETE: source-declaration enumeration missed 3 more disguised `u32[]` ProcCmd scripts; broadened the gate to a byte-level strict decode of every ROM object symbol (2026-07-13)
+
+**D384 undercounted.** Its gate enumerated only symbols the C source itself
+DECLARES as `struct ProcCmd`. An independent broader audit that instead
+strict-decodes a `struct ProcCmd` prefix from every ROM object symbol's raw
+bytes (regardless of declared C type) found **615 script prefixes and 6
+unique missing relocation slots, not 3**: the same three
+`ProcScr_efxThunderBG`/`BGCOL`/`efxFireOBJ` `PROC_NAME` literals D384 fixed,
+PLUS three more in the same file that D384's source-declaration scan could
+never see — `data_08601748`, `data_086019E0`, `data_086019F8` are genuine
+`struct ProcCmd` scripts (each is `(const struct ProcCmd *)`-cast and passed
+to `Proc_Start()` from a DIFFERENT translation unit: `src/sub_8066128.c`,
+`src/sub_8066E88.c` + `src/sub_8066F04.c`, `src/sub_8066F9C.c`) but were
+declared as plain `u32[]` blobs in their OWN defining file
+(`frontier_df4_banim_a.c`), holding `PROC_NAME` raw literals `0x080E33A4` /
+`0x080E35D0` / `0x080E35DC` with no relocation. This is the exact same
+C-type-vs-actual-schema mismatch as D383's glyph `u32[]` blind spot and the
+`sCpProcData`-style mistyped-extern class D384 itself already documented as a
+trap — just recurring a third time in this same consumer, because a
+source-text scan can only ever be as complete as every file's DECLARED types,
+and this codebase has multiple real precedents of a genuine typed-consumer
+value living behind a generic `u32[]`/`u8[]` residue array.
+
+**Fix.** All three targets carved in-place from raw `u32[]` to typed
+`struct ProcCmd[]` (byte/codegen-neutral: `make compare` OK), matching the
+file's own established `ProcScr_efxLuceBGCOL`-style carve precedent exactly —
+`data_08601748` (96 B / 12 records / 3 concatenated sub-scripts, using
+`PROC_NAME`/`PROC_SET_END_CB`/`PROC_REPEAT`/`PROC_MARK`/`PROC_END`) and the
+two single-script `data_086019E0`/`data_086019F8` (24 B / 3 records each).
+Each raw `PROC_NAME` literal became `(void*)((u8*)frontier_df4_misc_lo_00{7,8}_..
++ off)`, exactly the sibling-entry idiom already used throughout this file.
+The stale top-of-file `extern u32 data_0860{1748,19E0,19F8}[];` forward
+declarations (no longer needed — nothing else in this file used them, matching
+how the earlier `ProcScr_efxLuceBGCOL`-class carves also carry no forward
+extern) were removed; the OTHER files' `extern u8 data_0860####[];` + explicit
+`(const struct ProcCmd *)` cast at their `Proc_Start()` call sites are
+untouched and remain correct regardless of the definition's C type.
+
+**The gate, broadened (`scripts/shiftcheck/audit_procscr_relocs.py`,
+`shiftcheck-procscr` unchanged as the Makefile target name).** Replaced the
+source-declaration enumeration with a byte-level strict decode applied to
+EVERY ELF object symbol's address in the ROM range (`nm -S`, deliberately
+UNFILTERED by type/linkage — deduplicated by ADDRESS rather than name, which
+elegantly also retires D384's earlier "must restrict to GLOBAL symbols to
+avoid `static`-name collisions across translation units" workaround: keying
+by address means two distinct `static` locals that happen to share a source
+name, e.g. `sProc_BMVSync`/`sProc_DelayedBMapDispResume` in
+`src/bmio_08030{B90,344}.c`, are simply two different addresses, decoded and
+audited independently with no ambiguity at all). Decode validity per 8-byte
+record: `opcode <= 0x19`; a non-pointer-bearing opcode's `dataPtr` MUST be
+exactly `0`; a pointer-bearing opcode's non-null `dataPtr` MUST fall in
+`[ROM_LO, ROM_HI)`; termination requires a valid all-zero `PROC_END`
+(`opcode=0, dataImm=0, dataPtr=0`) within a `MAX_RECORDS=512` cap (the longest
+genuine in-tree script found is 184 records — the cap is bounded and
+deterministic, never a runaway decode over unrelated ROM content). A decode
+that fails any check, or that exceeds the cap without terminating, is simply
+excluded (not flagged as an error) — the overwhelming majority of the 22,741
+candidate addresses correctly fail this way, since a random 16-bit value has
+only ~26/65536 odds of passing as a valid opcode, making a multi-record false
+positive chain astronomically unlikely. A `min_records=2` floor drops the
+one remaining real noise source (a bare lone `PROC_END` trivially decodes at
+any all-zero word pair, e.g. ROM padding) without ever suppressing a genuine
+missing-relocation finding (such a trivial "script" has zero pointer slots to
+audit either way).
+
+**Verified result.** Fixed-tree baseline: **635 script prefixes** (663 name
+reports — the `ProcScr_efxFireOBJ` / `frontier_df4_banim_a_010_5FF7C8` alias
+contributes 2 names to 1 address, matching the reported "7 symbol reports"
+shape for the 6 originally-missing addresses), **6,161 records, 3,719
+pointer-bearing slots, 3,719 relocated, 0 missing, 0 malformed**. Re-running
+against a scratch rebuild of the pre-D385 source reproduces exactly the
+6 missing slots described above (0 elsewhere), confirming both the fix and
+the gate's precision. This repo's own count (635) differs modestly from the
+externally-reported 615 script prefixes, most plausibly from minor decode-
+policy differences (e.g. this implementation's exact `min_records`/opcode-
+strictness choices vs. the reporting tool's); both independently agree on the
+same 6 real misses and a clean 0-malformed floor after the fix, which is the
+property that matters, not exact prefix-count parity. 19 focused unit tests
+(`test_audit_procscr_relocs.py`, rewritten for the new byte-level decode
+API) cover missing-relocation, unknown-opcode, non-pointer-opcode-with-
+nonzero-ptr, pointer-out-of-range, non-terminating/runaway decode (bounded,
+does not hang), unexpected-relocation-on-non-pointer-field, alias/dedup-by-
+address, and clean-prefix cases.
+
+**Shifted A/B proof.** `--shifted-gba` mode re-proves all 3,719+ pointer-
+bearing `dataPtr` fields across all 635 prefixes track `+0x40000` (or stay
+NULL) against a freshly built shifted ROM: **0 mismatches**. Directly
+confirmed the three new targets shift `0x080E33A4`/`0x080E35D0`/`0x080E35DC`
+-> `0x081233A4`/`0x081235D0`/`0x081235DC`.
+
+**Lesson (generalizes D383 + D384).** A source-language type scan — whether
+"does this array's DECLARED type say `struct Glyph`/`struct ProcCmd`" or
+"does this extern forward-declaration say so" — is only ever a proxy for the
+true schema of the bytes. Three separate instances of the identical trap
+class now: `u32[]` hiding a `struct Glyph.sjisNext` (D383), an `extern struct
+ProcCmd` forward-declaring a symbol whose real definition is a `u32[]`
+elsewhere (D384's `sCpProcData`), and now a `u32[]` DEFINITION hiding real
+`struct ProcCmd` data consumed via an explicit cast in a different TU (D385).
+The durable fix is a gate that decodes actual ROM BYTES against the schema's
+byte-level invariants, never one that trusts a declared C type — this is now
+true for both the glyph and the ProcCmd consumers.
+
+**Scope note.** Same as D383/D384: a targeted class-wide closure (a third
+recurrence of the identical bug class, now gated at the byte level instead of
+the source-declaration level), not a new numeric scorecard axis. No
+`calcprogress.py` axis changes; `docs/frontier.md` axis-5 already documents
+the D383/D384 closures and its gate-count-stays-0 framing is unchanged by this
+broadening.
+
+Tracked on the same issue #143 thread as D383/D384.
