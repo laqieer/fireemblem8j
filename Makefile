@@ -571,9 +571,18 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
 # + packed talk-table false-relocation scan + pointer-classification audit +
 # graphics-payload relocation-slot audit.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit graphicscheck-relocs shiftcheck-tests
+# The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
+# + packed talk-table false-relocation scan + pointer-classification audit +
+# graphics-payload relocation-slot audit + the graphics audit's own unit tests.
+# `graphicscheck-tests` has NO dependency on $(RELOCS_ELF)/$(ELF) (pure Python,
+# no toolchain), so it runs independently of -- never racing -- the other
+# layers; make's default parallelism-within-a-recipe-list still runs each
+# prerequisite's RECIPE exactly once (this is a plain prerequisite list, not a
+# duplicate inclusion anywhere else), so CI's single `make shiftcheck` call
+# exercises the scripts/test_audit_graphics_forms.py cases exactly once.
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit graphicscheck-relocs graphicscheck-tests shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff graphicscheck-relocs
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff graphicscheck-relocs graphicscheck-tests
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a

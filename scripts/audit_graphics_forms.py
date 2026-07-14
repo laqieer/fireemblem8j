@@ -252,10 +252,36 @@ class Report:
 # git / filesystem helpers
 # --------------------------------------------------------------------------
 
+def clean_git_env():
+    """Strip GIT_* environment variables (GIT_DIR, GIT_WORK_TREE, GIT_INDEX_FILE,
+    GIT_COMMON_DIR, ...) before running a `git` subprocess against a specific
+    repo path.
+
+    Why this matters: this repo's own githooks/pre-commit hook invokes `make
+    compare`/`make shiftcheck` (which run this script) AS a git pre-commit
+    hook -- and git sets GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE in the
+    environment for hooks it runs. Those variables OVERRIDE `-C <path>`/`cwd`-
+    based repository discovery for any `git` subprocess a hook (or anything
+    it spawns) invokes, no matter what path is passed. Without stripping them,
+    a `git` command aimed at some OTHER path -- e.g. a throwaway
+    tempfile.TemporaryDirectory() test fixture -- would silently operate on
+    the WRAPPING repository's .git instead. (Caught by a real incident: an
+    early version of scripts/test_audit_graphics_forms.py's RepoGraphFixture
+    committed synthetic fixture files into this actual FE8J repository's
+    history when its tests ran from inside a `make shiftcheck` pre-commit
+    hook invocation -- recovered with `git reset --hard` before push. The
+    test module now also strips GIT_* from its OWN process environment at
+    import time as defense in depth, since ANY git subprocess call anywhere
+    in a test -- not just ones this function is explicitly threaded through --
+    is equally exposed.)
+    """
+    return {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+
+
 def git_ls_files(root, pattern):
     out = subprocess.run(
         ["git", "-C", root, "ls-files", "-z", pattern],
-        capture_output=True, text=True, check=True,
+        capture_output=True, text=True, check=True, env=clean_git_env(),
     ).stdout
     return sorted(p for p in out.split("\0") if p)
 
@@ -707,38 +733,71 @@ class JascPalError(ValueError):
     pass
 
 
+_JASC_MAX_LINE_LENGTH = 11  # tools/gbagfx/jasc_pal.c's MAX_LINE_LENGTH
+
+
+def _read_jasc_line(data, pos):
+    """Mirrors tools/gbagfx/jasc_pal.c::ReadJascPaletteLine BYTE FOR BYTE: a
+    line ends at a bare '\\n' OR a '\\r\\n' pair (gbagfx accepts EITHER, and
+    mixing them line-to-line within one file is fine -- the check is purely
+    per-terminator, not a whole-file CRLF-vs-LF mode); a lone '\\r' NOT
+    immediately followed by '\\n' is a fatal error ("CR line endings aren't
+    supported"); reaching EOF with no terminator yet is a fatal error
+    ("Unexpected EOF. No LF or CRLF at end of file."); a NUL byte inside a
+    line is a fatal error; and a line longer than MAX_LINE_LENGTH (11) chars
+    before its terminator is a fatal error ("line ... is too long").
+
+    Returns (line_bytes, next_pos, terminator_len) -- terminator_len is 1 for
+    a bare '\\n' or 2 for '\\r\\n' (only used by the top-level EOF check, which
+    mirrors gbagfx's raw `fgetc(fp) != EOF` -- i.e. no trailing bytes of ANY
+    kind, including no extra blank line, are tolerated after the last color
+    line)."""
+    n = len(data)
+    start = pos
+    while True:
+        if pos >= n:
+            raise JascPalError("Unexpected EOF. No LF or CRLF at end of file.")
+        c = data[pos]
+        if c == 0x0D:  # '\r'
+            if pos + 1 >= n or data[pos + 1] != 0x0A:
+                raise JascPalError("CR line endings aren't supported.")
+            return data[start:pos], pos + 2, 2
+        if c == 0x0A:  # '\n'
+            return data[start:pos], pos + 1, 1
+        if c == 0x00:
+            raise JascPalError("NUL character in file.")
+        if pos - start == _JASC_MAX_LINE_LENGTH:
+            raise JascPalError(f"line {data[start:pos]!r} is too long")
+        pos += 1
+
+
 def parse_jasc_pal(path):
-    """Parse a JASC-PAL file per tools/gbagfx/jasc_pal.c's exact grammar (CRLF
-    line endings, "JASC-PAL"/"0100" header, declared count on line 3 must equal
-    the actual number of trailing color lines, no garbage after). Returns a list
+    """Parse a JASC-PAL file per tools/gbagfx/jasc_pal.c::ReadJascPalette's
+    EXACT grammar (see _read_jasc_line() for the line-terminator rules this
+    mirrors byte-for-byte): "JASC-PAL"/"0100" header, declared count on line 3
+    must equal the actual number of trailing color lines, and the file must
+    end IMMEDIATELY after the last color line's terminator (gbagfx's raw
+    `fgetc(fp) != EOF` check -- no trailing bytes of any kind). Returns a list
     of (r, g, b) tuples. Raises JascPalError with a precise reason otherwise."""
     with open(path, "rb") as f:
         data = f.read()
-    if b"\r\n" not in data and b"\n" in data:
-        raise JascPalError("no CRLF line endings found (gbagfx requires \\r\\n)")
-    lines = data.split(b"\r\n")
-    if lines and lines[-1] == b"":
-        lines = lines[:-1]
-    else:
-        raise JascPalError("file does not end with a terminated CRLF line")
-    if len(lines) < 3:
-        raise JascPalError(f"only {len(lines)} lines, need at least signature+version+count")
-    if lines[0] != b"JASC-PAL":
-        raise JascPalError(f"bad signature {lines[0]!r}")
-    if lines[1] != b"0100":
-        raise JascPalError(f"unsupported version {lines[1]!r}")
+    pos = 0
+    line, pos, _term = _read_jasc_line(data, pos)
+    if line != b"JASC-PAL":
+        raise JascPalError(f"bad signature {line!r}")
+    line, pos, _term = _read_jasc_line(data, pos)
+    if line != b"0100":
+        raise JascPalError(f"unsupported version {line!r}")
+    line, pos, _term = _read_jasc_line(data, pos)
     try:
-        declared = int(lines[2])
+        declared = int(line)
     except ValueError:
-        raise JascPalError(f"cannot parse declared color count from {lines[2]!r}")
+        raise JascPalError(f"cannot parse declared color count from {line!r}")
     if not (1 <= declared <= 256):
         raise JascPalError(f"declared count {declared} outside [1, 256]")
-    color_lines = lines[3:]
-    if len(color_lines) != declared:
-        raise JascPalError(
-            f"declared count {declared} does not match actual color line count {len(color_lines)}")
     colors = []
-    for line in color_lines:
+    for _ in range(declared):
+        line, pos, _term = _read_jasc_line(data, pos)
         parts = line.split(b" ")
         if len(parts) != 3:
             raise JascPalError(f"malformed color line {line!r}")
@@ -749,6 +808,8 @@ def parse_jasc_pal(path):
         if not (0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255):
             raise JascPalError(f"color component out of [0,255] in {line!r}")
         colors.append((r, g, b))
+    if pos != len(data):
+        raise JascPalError("Garbage after color data.")
     return colors
 
 
@@ -904,22 +965,46 @@ def check_btl_bg_pair(root, n, report):
 # extraction this reuses).
 #
 # What it guards: a raw ROM word that COINCIDENTALLY looks like a pointer
-# inside a pure-payload byte array (graphics/palette/TSA/map/FETSA INCBIN data,
-# or an AnimSprite_* animation-command array) is harmless UNLESS the linker
-# actually placed a relocation AT that word's address -- that would mean an
-# actual pointer-typed field was carved to overlap live pixel/tilemap/command
-# bytes, which would corrupt the payload the moment the ROM's layout ever
-# shifts. Zero such overlaps currently exist (verified against the full
-# 59,503-entry ROM-range R_ARM_ABS32 set): 5,308 INCBIN payload names (this
-# audit's own regex-based classification of every tracked graphics/palette/
-# TSA/map/FETSA INCBIN_U8/16/32 declaration -- see find_incbin_payload_names())
-# and all 1,461 unique AnimSprite_* symbol names.
+# inside a pure-payload byte array (any `graphics/`-prefixed INCBIN scalar
+# array, or an AnimSprite_* animation-command array) is harmless UNLESS the
+# linker actually placed a relocation AT that word's address -- that would
+# mean an actual pointer-typed field was carved to overlap live pixel/
+# tilemap/command bytes, which would corrupt the payload the moment the ROM's
+# layout ever shifts.
+#
+# The payload denominator is EVERY `graphics/`-prefixed INCBIN_U8/16/32
+# declaration regardless of extension (find_incbin_graphics_names()) --
+# containment cares whether a byte range is a scalar array sourced from a
+# `graphics/` file at all, not what sub-format (TSA/map/FETSA/palette/plain
+# `.bin` residual data such as graphics/map/TileConfiguration7.bin.lz) it
+# holds; that finer classification is the FORMAT audit's job (_is_payload_path(),
+# used elsewhere in this file), not this one's. The declared-name set is then
+# intersected with the ACTUAL linked ELF symbol table (nm -S) so the reported
+# denominator is real, addressable byte ranges, not just source text --
+# reloc_payload_incbin_names_unlinked (asserted 0 on the current tree, and
+# reported/excluded rather than silently "covered" if it is ever nonzero).
+#
+# AnimSprite_* symbols split similarly into reloc_animsprite_names_explicit_size
+# (nm -S gave a real size directly -- true for most, since gcc-emitted C array
+# symbols always get an explicit .size directive) and _derived_size (hand-
+# assembled banim/*.s labels nm -S gives NO size for; derived from the next
+# DISTINCT address in the full symbol table, since these are laid out back-
+# to-back with no padding -- empirically cross-checked against the ones nm -S
+# DOES size: the same derivation independently reproduces 1,460 of 1,461 of
+# them exactly, the lone difference being a same-address alias the derivation
+# correctly skips past rather than accepting a bogus zero-size range).
+# reloc_animsprite_names_excluded_no_range (0 on the current tree) is reported
+# honestly rather than assumed away if a symbol can be neither sized nor
+# derived (e.g. the very last symbol in the whole table).
+#
+# These counts are DERIVED from the current tree, not asserted against a
+# fixed external number -- run the script to see the current totals.
 #
 # This intentionally does NOT flag a relocation that legitimately TARGETS a
 # payload symbol from elsewhere (a real pointer whose VALUE happens to point
-# at e.g. a tile array is completely normal and expected -- 4,388 such
-# relocations exist); it only checks whether the relocation SLOT's own
-# address lies inside a payload symbol's byte range.
+# at e.g. a tile array is completely normal and expected); it only checks
+# whether the relocation SLOT's own address lies inside a payload symbol's
+# byte range.
 # --------------------------------------------------------------------------
 
 _ABS32_LINE_RE = re.compile(r"^\s*([0-9a-fA-F]{8})\s+[0-9a-fA-F]{8}\s+R_ARM_ABS32\b")
@@ -964,6 +1049,65 @@ def parse_nm_sized_symbols(nm_s_n_output):
     return by_name
 
 
+_NM_PLAIN_LINE_RE = re.compile(r"^([0-9a-fA-F]+)\s+\S\s+(\S+)")
+
+
+def parse_nm_addr_name(nm_n_output):
+    """Parse plain `nm -n <elf>` text (NO -S -- every symbol, not just the
+    ones the assembler recorded an explicit size for), returning a list of
+    (addr, name) sorted by address. Used by derive_missing_symbol_sizes() to
+    infer a byte range for a symbol nm -S gives no size for (common for
+    hand-assembled banim/*.s labels -- gcc-emitted C array symbols always get
+    an explicit .size directive; raw asm labels usually don't)."""
+    entries = []
+    for line in nm_n_output.splitlines():
+        m = _NM_PLAIN_LINE_RE.match(line)
+        if not m:
+            continue
+        entries.append((int(m.group(1), 16), m.group(2)))
+    entries.sort(key=lambda e: e[0])
+    return entries
+
+
+def derive_missing_symbol_sizes(all_sorted_addr_name, names_needing_size, explicit_sizes):
+    """For every name in `names_needing_size` that has NO entry in
+    `explicit_sizes`, derive a byte range as (this symbol's address, NEXT
+    DISTINCT address in the whole sorted symbol table minus this address) --
+    valid because these symbols are laid out back-to-back in ROM with no
+    padding between them (empirically confirmed: for the 1,461 AnimSprite_
+    symbols nm -S DOES give an explicit size for, this same next-distinct-
+    address derivation independently reproduces that exact size in 1,460/1,461
+    cases -- the lone exception is a same-address alias, handled below by
+    skipping same-address entries rather than accepted as size 0).
+
+    Returns (derived, undeliverable): `derived` is {name: [(addr, size), ...]}
+    for every occurrence a size could be derived for; `undeliverable` is the
+    set of names where NO occurrence could be given a size (e.g. the very
+    last symbol in the table, or every remaining entry shares its address) --
+    these must be reported/excluded HONESTLY (not silently treated as
+    zero-size / "covered"), per the reviewed concern that a symbol without a
+    real byte range cannot actually be relocation-overlap-checked.
+    """
+    addrs = [e[0] for e in all_sorted_addr_name]
+    n = len(all_sorted_addr_name)
+    derived = {}
+    names_to_derive = names_needing_size - set(explicit_sizes)
+    attempted = {name: False for name in names_to_derive}
+    for i, (addr, name) in enumerate(all_sorted_addr_name):
+        if name not in names_needing_size or name in explicit_sizes:
+            continue
+        j = bisect.bisect_right(addrs, addr, lo=i)
+        if j >= n:
+            continue  # last symbol in the table -- no next address to derive from
+        next_addr = addrs[j]
+        size = next_addr - addr
+        if size > 0:
+            derived.setdefault(name, []).append((addr, size))
+            attempted[name] = True
+    undeliverable = {name for name, ok in attempted.items() if not ok}
+    return derived, undeliverable
+
+
 # Recognized "pure graphics/palette/TSA/map/FETSA payload" INCBIN path suffixes
 # (after stripping a trailing .lz). `.fk` ("fake compression", a 4-byte header
 # + raw bytes -- see the Makefile's `%.fk` rule) is matched via a second strip
@@ -971,15 +1115,24 @@ def parse_nm_sized_symbols(nm_s_n_output):
 _PAYLOAD_PLAIN_EXTS = (".4bpp", ".8bpp", ".1bpp", ".gbapal", ".agbpal", ".tsa.bin", ".map.bin")
 _PAYLOAD_FETSA_RE = re.compile(r"\.(?:fetsa|feimg)\d\.bin$")
 _INCBIN_DECL_RE = re.compile(
-    r"(\w+)\s*(?:\[[^\]]*\])+\s*"
-    r"(?:__attribute__\s*\(\([^;]*?\)\)\s*)?"
-    r"(?:SECTION\([^)]*\)\s*)?"
+    r"(\w+)\s*(?:\[[^\]\n]*\])+\s*"
+    r"(?:__attribute__\s*\(\([^;\n]*?\)\)\s*)?"
+    r"(?:SECTION\([^)\n]*\)\s*)?"
     r"=\s*INCBIN_U(?:8|16|32)\(\s*\"([^\"]+)\"",
     re.DOTALL,
 )
 
 
 def _is_payload_path(incbin_path):
+    """Semantic/format classifier (used by the PNG/palette/TSA/map/FETSA format
+    audit's own extension-based bucketing elsewhere in this file): recognizes
+    only the DOCUMENTED graphics/palette/TSA/map/FETSA extensions. Deliberately
+    NOT used for relocation-slot CONTAINMENT (see find_incbin_graphics_names()
+    below) -- containment cares whether a byte range is a scalar array
+    populated from a `graphics/` file at all, not what SUB-FORMAT it holds
+    (e.g. graphics/map/TileConfiguration7.bin.lz is a plain-`.bin` raw tile-
+    config blob, not a TSA/map/FETSA-shaped asset, but a relocation slot
+    landing inside it would be exactly as real a defect)."""
     p = incbin_path
     if p.endswith(".lz"):
         p = p[:-3]
@@ -1004,6 +1157,11 @@ def find_incbin_payload_names(root, extra_target_paths=()):
     exactly one of the FETSATOOL tilemap outputs already classified by the PNG
     audit above.
 
+    This is the FORMAT audit's semantic classifier (kept for documentation/
+    potential reuse; not currently called by the format checks, which instead
+    walk `git ls-files` per-extension directly). NOT used for relocation-slot
+    containment -- see find_incbin_graphics_names().
+
     NOTE (honest limitation): this is a regex-based best-effort C declaration
     parser, not a real C parser. It recognizes the declaration shapes actually
     used in this tree (checked against every non-comment INCBIN_U8/16/32 call
@@ -1020,6 +1178,29 @@ def find_incbin_payload_names(root, extra_target_paths=()):
             for name, path in _INCBIN_DECL_RE.findall(text):
                 stripped = path[:-3] if path.endswith(".lz") else path
                 if _is_payload_path(path) or os.path.normpath(stripped) in extra_norm:
+                    names.add(name)
+    return names
+
+
+def find_incbin_graphics_names(root):
+    """Scan every tracked src/**/*.c for `TYPE name[...] = INCBIN_U8/16/32("path")`
+    declarations and return the set of C symbol names for EVERY `graphics/`-
+    prefixed path, regardless of extension (`.bin`, `.bin.lz`, `.4bpp.lz`,
+    `.gbapal`, ... all included). This is the relocation-CONTAINMENT
+    denominator: unlike _is_payload_path()'s format-semantic allowlist, a
+    scalar byte array incbin'd from ANY `graphics/` source file is a
+    "shouldn't contain a relocation slot" candidate regardless of its
+    sub-format (e.g. graphics/map/TileConfiguration7.bin.lz, a raw tile-
+    config blob with a generic `.bin` extension, is just as real a payload
+    for this purpose as a `.tsa.bin`)."""
+    names = set()
+    for dirpath, _dirs, files in os.walk(os.path.join(root, "src")):
+        for fn in files:
+            if not fn.endswith(".c"):
+                continue
+            text = read_text(os.path.join(dirpath, fn))
+            for name, path in _INCBIN_DECL_RE.findall(text):
+                if path.startswith("graphics/"):
                     names.add(name)
     return names
 
@@ -1047,35 +1228,69 @@ def audit_payload_relocations(root, elf_path, relocs_elf_path, report,
     ).stdout
     reloc_offsets = parse_readelf_abs32_rom_offsets(readelf_out)
 
-    nm_out = subprocess.run(
+    nm_s_out = subprocess.run(
         [nm_bin, "-S", "-n", elf_path], capture_output=True, text=True, check=True,
     ).stdout
-    name_to_ranges = parse_nm_sized_symbols(nm_out)
+    name_to_ranges = parse_nm_sized_symbols(nm_s_out)
 
-    explicit_targets = set()
-    # Re-derive the explicit-renamed FETSATOOL rule TARGET paths (e.g.
-    # `graphics/misc_gfx/Tsa_OpAnimEphraim.bin`) directly from the same rule
-    # text parse_explicit_fetsatool_pngs() uses (that function returns
-    # png -> method, not the target path, so it's simplest to re-scan here).
-    for path in find_makefile_sources(root):
-        for line in _resolve_vars(read_text(path)):
-            m = _RULE_LINE_RE.match(line)
-            if not m:
-                continue
-            targets_str, _amp, prereqs_str = m.groups()
-            if "%" in targets_str or not any(t.endswith(".png") for t in prereqs_str.split()):
-                continue
-            explicit_targets.update(targets_str.split())
+    # --- INCBIN payload denominator: EVERY graphics/-prefixed scalar-array
+    # declaration, regardless of extension (containment cares about "is this a
+    # byte array incbin'd from a graphics/ file", not the sub-format) ---
+    payload_names_declared = find_incbin_graphics_names(root)
+    # Intersect with the ACTUAL linked ELF symbol table (nm -S) -- a source
+    # declaration that never made it into this build (dead code, an object
+    # outside ALL_OBJECTS, etc.) has no real byte range to overlap-check, so
+    # it must not be silently counted as "covered". Empirically, every
+    # currently-tracked declaration IS linked with a real size (0 excluded),
+    # but this is verified explicitly rather than assumed.
+    payload_names = payload_names_declared & set(name_to_ranges.keys())
+    payload_names_unlinked = payload_names_declared - payload_names
+    report.count("reloc_payload_incbin_names_declared", len(payload_names_declared))
+    report.count("reloc_payload_incbin_names_linked", len(payload_names))
+    report.count("reloc_payload_incbin_names_unlinked", len(payload_names_unlinked))
+    if payload_names_unlinked:
+        report.fail(
+            f"{len(payload_names_unlinked)} graphics/ INCBIN declaration(s) have no "
+            f"corresponding sized symbol in the linked ELF (excluded from relocation-"
+            f"containment coverage, not silently counted as covered): "
+            f"{sorted(payload_names_unlinked)[:10]}"
+            f"{'...' if len(payload_names_unlinked) > 10 else ''}")
 
-    payload_names = find_incbin_payload_names(root, extra_target_paths=explicit_targets)
-    animsprite_names = {name for name in name_to_ranges if name.startswith("AnimSprite_")}
+    # --- AnimSprite_* denominator: nm -S gives an explicit size for MOST of
+    # them (gcc-emitted C arrays always get a .size directive), but hand-
+    # assembled banim/*.s labels often don't. Rather than silently limiting
+    # coverage to whichever symbols happen to have an explicit size, derive a
+    # range for the rest from the next DISTINCT address in the FULL symbol
+    # table (contiguous back-to-back layout; see derive_missing_symbol_sizes()
+    # for the empirical validation) and report the true breakdown. ---
+    nm_n_out = subprocess.run(
+        [nm_bin, "-n", elf_path], capture_output=True, text=True, check=True,
+    ).stdout
+    all_sorted = parse_nm_addr_name(nm_n_out)
+    animsprite_all_names = {name for _addr, name in all_sorted if name.startswith("AnimSprite_")}
+    animsprite_explicit = {n for n in animsprite_all_names if n in name_to_ranges}
+    animsprite_needing_derivation = animsprite_all_names - animsprite_explicit
+    derived, undeliverable = derive_missing_symbol_sizes(
+        all_sorted, animsprite_needing_derivation, name_to_ranges)
+    for name, ranges in derived.items():
+        name_to_ranges.setdefault(name, []).extend(ranges)
+    animsprite_covered = animsprite_explicit | set(derived.keys())
+
+    report.count("reloc_animsprite_names_total", len(animsprite_all_names))
+    report.count("reloc_animsprite_names_explicit_size", len(animsprite_explicit))
+    report.count("reloc_animsprite_names_derived_size", len(derived))
+    report.count("reloc_animsprite_names_excluded_no_range", len(undeliverable))
+    if undeliverable:
+        report.fail(
+            f"{len(undeliverable)} AnimSprite_* symbol(s) have no explicit nm size "
+            f"AND no derivable next-address range (excluded from relocation-"
+            f"containment coverage, not silently counted as covered): "
+            f"{sorted(undeliverable)[:10]}{'...' if len(undeliverable) > 10 else ''}")
 
     report.count("reloc_rom_abs32_total", len(reloc_offsets))
-    report.count("reloc_payload_incbin_names", len(payload_names))
-    report.count("reloc_animsprite_names", len(animsprite_names))
 
     violations = check_payload_reloc_overlap(reloc_offsets, name_to_ranges,
-                                              payload_names | animsprite_names)
+                                              payload_names | animsprite_covered)
     if violations:
         for name, addr, size, reloc_addr in violations:
             report.fail(

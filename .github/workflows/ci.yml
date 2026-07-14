@@ -115,7 +115,11 @@ jobs:
         # pointer (a raw 0x08xxxxxx literal that would break a layout shift). Never
         # touches the matching build / $(ROM). Layer-2 differential shift is N/A to
         # fe8j's packed layout and intentionally excluded (see scripts/shiftcheck/
-        # README.md and docs/decisions.md D313).
+        # README.md and docs/decisions.md D313). Also runs the graphics/source-format
+        # audit's payload-relocation companion (issue #143 `graphicscheck-relocs`,
+        # reusing this SAME --emit-relocs relink) and its unit test suite
+        # (`graphicscheck-tests`, scripts/test_audit_graphics_forms.py) -- both are
+        # Makefile prerequisites of `shiftcheck`, so this one step exercises them too.
         run: make shiftcheck
 
       # ---- Progress reports (non-blocking, reuse the built objects) ----
