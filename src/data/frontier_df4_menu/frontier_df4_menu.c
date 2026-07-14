@@ -5174,12 +5174,19 @@ u8 frontier_df4_menu_016_A74CEC[] __attribute__((section(".data.frontier_df4_men
  * compressed -> 0x360 B/432 u16 entries), consumed by sub_801FAA0 as a 24x18 map
  * with tilebase 0x5000 + palette 5 into gBG2TilemapBuffer -- was baseline symbol
  * gUnknown_08A7AE50 (layout/baseline_syms.d/zfix_801FAA0.tsv), now real typed data.
+ * The decompressed 864 B source is a HEADERLESS raw BG screen tilemap (432 u16
+ * tile-attr entries, no width/height header bytes -- sub_801FAA0 hardcodes the
+ * 24x18 grid itself) and is named/repointed to this repository's generic
+ * `*_map.bin` convention (Tsa_ChapterIntroCrestJp_map.bin, structurally
+ * discovered by scripts/audit_graphics_forms.py's `*_map.bin`/`*.map.bin`
+ * family -- no named exception needed), not the `.tsa.bin` suffix (reserved for
+ * headered standard-TSA payloads elsewhere in this provider, e.g. blob001/030/033).
  * Pal_ChapterIntroCrestJp [0x11E8:0x1208]: matching 16-color palette; 3 of 16
  * entries have bit15 set so a JASC/.gbapal round-trip would clear that bit --
  * emitted as exact editable u16 literals instead. Both LZ streams reproduce
  * byte-exact at gbagfx's default (mindist 2). */
 u8 Img_ChapterIntroCrestJp[] __attribute__((section(".data.frontier_df4_menu.gap17"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.4bpp.lz");
-u8 Tsa_ChapterIntroCrestJp[] __attribute__((section(".data.frontier_df4_menu.gap17"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90_tsa.tsa.bin.lz");
+u8 Tsa_ChapterIntroCrestJp[] __attribute__((section(".data.frontier_df4_menu.gap17"))) = INCBIN_U8("graphics/frontier_df4_menu/Tsa_ChapterIntroCrestJp_map.bin.lz");
 u16 Pal_ChapterIntroCrestJp[16] __attribute__((section(".data.frontier_df4_menu.gap17"))) = {
     0x0000, 0x0C00, 0x2400, 0x1800, 0xAC22, 0x1C00, 0xB063, 0x38A5,
     0x3CE7, 0x4529, 0x496A, 0xCDCE, 0x49AD, 0x4A0F, 0x4A52, 0x0000,

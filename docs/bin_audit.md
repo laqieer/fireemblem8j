@@ -1085,6 +1085,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/Tsa_WmHightLightMap5.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_ending/Tsa_WmHightLightMap7.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_ending/Tsa_WmHightLightMap8.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df4_menu/Tsa_ChapterIntroCrestJp_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_menu/Tsa_ChapterStatusUi.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_menu/Tsa_CommGameBgScreenInShop.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_menu/Tsa_DifficultyMenuObjs.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
@@ -1096,7 +1097,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (4632 B, trimmed from a 6812 B combined file): confirmed genuine LZ77 640-tile stream (0x10 header, PNG round-trip exact for the decompressed 20480 B), but no gbagfx compressor preset reproduces the exact compressed bytes; JP-exclusive, no fe8u twin (issue #143) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90_tsa.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B combined file): two disjoint live spans (gap21 head + gap21c interior) concatenated, every non-pointer byte a proven ProcCmd/SpriteEx field, all 9 interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (342 B, trimmed from a 1012 B combined file): two disjoint live spans (gap27 head + gap27c interior) concatenated, every non-pointer byte a proven ProcCmd field, all interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
