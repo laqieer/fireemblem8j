@@ -229,7 +229,6 @@ extern u32 frontier_df4_banim_b_070_901138[];
 extern u32 frontier_df4_banim_b_070_902538[];
 extern u8 frontier_df4_banim_b_071_903564[];
 extern u32 frontier_df4_banim_b_072_903A50[];
-extern u32 frontier_df4_banim_b_073_907F78[];
 extern u32 frontier_df4_banim_b_074_909DE8[];
 extern u32 frontier_df4_banim_b_076_90B4DC[];
 extern u32 frontier_df4_banim_b_078_90E58C[];
@@ -7279,35 +7278,6 @@ u32 frontier_df4_banim_b_072_903A50[] __attribute__((section(".data.frontier_df4
     0x00000040, 0x00000000, 0x00000001, 0x000200A9, 0x0000FFFF, 0x00000000,
     0x00000001, 0x000200AA, 0x00000013, 0x00000000, 0x00000001, 0x0002FFFF,
     0x0000FFFF, 0x00000000, 0x00000001,
-};
-/* frontier_df4_banim_b_073_907F78: atomic relocation carve (was INCBIN); every embedded ROM pointer in coherent pointer tables expressed as .4byte Sym(+addend), byte-exact. */
-u32 frontier_df4_banim_b_073_907F78[] __attribute__((section(".data.frontier_df4_banim_b.gap73"))) = {
-    (u32)&EventScrWM_Prologue_Beginning, (u32)&EventScrWM_Ch1_Beginning, (u32)&EventScrWM_Ch2_Beginning, (u32)&EventScrWM_Ch3_Beginning, (u32)&EventScrWM_Ch4_Beginning, (u32)&EventScrWM_Ch21ax_Beginning,
-    (u32)&EventScrWM_Ch5_Beginning, (u32)&EventScrWM_Ch6_Beginning, (u32)&EventScrWM_Ch7_Beginning, (u32)&EventScrWM_Ch8_Beginning, (u32)&EventScrWM_Ch9a_Beginning, (u32)&EventScrWM_Ch10a_Beginning,
-    (u32)&EventScrWM_Ch12a_Beginning, (u32)&EventScrWM_Ch13a_Beginning, (u32)&EventScrWM_Ch14a_Beginning, (u32)&EventScrWM_Ch15a_Beginning + 0x8, (u32)&EventScrWM_Ch16a_Beginning + 0x8, (u32)&EventScrWM_Ch17a_Beginning + 0x8,
-    (u32)&EventScrWM_Ch18a_Beginning + 0x8, (u32)&EventScrWM_Ch19a_Beginning + 0x8, (u32)&EventScrWM_Ch20a_Beginning + 0x8, (u32)&EventScrWM_JPOnly_3 + 0x8, (u32)&EventScrWM_Ch21bx_Beginning, (u32)&EventScrWM_Ch9b_Beginning,
-    (u32)&EventScrWM_Ch10b_Beginning, (u32)&EventScrWM_Ch12b_Beginning, (u32)&EventScrWM_Ch13b_Beginning, (u32)&EventScrWM_Ch14b_Beginning, (u32)&EventScrWM_Ch15b_Beginning + 0x8, (u32)&EventScrWM_Ch16b_Beginning + 0x8,
-    (u32)&EventScrWM_Ch17b_Beginning + 0x8, (u32)&EventScrWM_Ch18b_Beginning + 0x8, (u32)&EventScrWM_Ch19b_Beginning + 0x8, (u32)&EventScrWM_Ch20b_Beginning + 0x8, (u32)&EventScrWM_JPOnly_5 + 0x8, (u32)&EventScrWM_Ch11a_Beginning,
-    (u32)&EventScrWM_MessedEventscr_11, (u32)&EventScrWM_ValniTower3_Beginning, (u32)&EventScrWM_ValniTower4_Beginning, (u32)&EventScrWM_ValniTower5_Beginning, (u32)&EventScrWM_ValniTower6_Beginning, (u32)&EventScrWM_ValniTower7_Beginning,
-    (u32)&EventScrWM_ValniTower8_Beginning, (u32)&EventScrWM_MessedEventscr_19, (u32)&EventScrWM_MessedEventscr_23 + 0x4, (u32)&EventScrWM_LagdouRuins3_Beginning, (u32)&EventScrWM_LagdouRuins4_Beginning, (u32)&EventScrWM_LagdouRuins5_Beginning,
-    (u32)&EventScrWM_LagdouRuins6_Beginning, (u32)&EventScrWM_LagdouRuins7_Beginning, (u32)&EventScrWM_LagdouRuins8_Beginning, (u32)&EventScrWM_LagdouRuins9_Beginning, (u32)&EventScrWM_LagdouRuins10_Beginning, (u32)&EventScrWM_MessedEventscr_33,
-    (u32)&EventScrWM_CastleFrelia_Beginning + 0x8, (u32)&EventScrWM_MelkaenCoast_Beginning, (u32)&EventScrWM_Ch11a_Beginning + 0x8, (u32)&EventScrWM_Ch11b_Beginning + 0x8, 0x00000000, (u32)&EventScrWM_Prologue_ChapterIntro,
-    (u32)&EventScrWM_Ch1_ChapterIntro, (u32)&EventScrWM_Ch2_ChapterIntro, (u32)&EventScrWM_Ch3_ChapterIntro, (u32)&EventScrWM_Ch4_ChapterIntro, (u32)&EventScrWM_MessedEventscr_55, (u32)&EventScrWM_Ch5_ChapterIntro,
-    (u32)&EventScrWM_Ch6_ChapterIntro, (u32)&EventScrWM_Ch7_ChapterIntro, (u32)&EventScrWM_Ch8_ChapterIntro, (u32)&EventScrWM_Ch9a_ChapterIntro, (u32)&EventScrWM_MessedEventscr_1, (u32)&EventScrWM_MessedEventscr_2,
-    (u32)&EventScrWM_MessedEventscr_3, (u32)&EventScrWM_MessedEventscr_4, (u32)&EventScrWM_Ch16a_Beginning, (u32)&EventScrWM_MessedEventscr_38 + 0x8, (u32)&EventScrWM_MessedEventscr_39 + 0x8, (u32)&EventScrWM_MessedEventscr_40 + 0x8,
-    (u32)&EventScrWM_MessedEventscr_41 + 0x8, (u32)&EventScrWM_MessedEventscr_42 + 0x8, (u32)&EventScrWM_JPOnly_4 + 0x8, (u32)&EventScrWM_MessedEventscr_56, (u32)&EventScrWM_MessedEventscr_5, (u32)&EventScrWM_MessedEventscr_6,
-    (u32)&EventScrWM_MessedEventscr_7, (u32)&EventScrWM_MessedEventscr_8, (u32)&EventScrWM_MessedEventscr_9, (u32)&EventScrWM_MessedEventscr_44 + 0x8, (u32)&EventScrWM_MessedEventscr_45 + 0x8, (u32)&EventScrWM_MessedEventscr_46 + 0x8,
-    (u32)&EventScrWM_MessedEventscr_47 + 0x8, (u32)&EventScrWM_MessedEventscr_48 + 0x8, (u32)&EventScrWM_MessedEventscr_49 + 0x8, (u32)&EventScrWM_JPOnly_6 + 0x8, (u32)&EventScrWM_Ch11a_Beginning + 0x4, (u32)&EventScrWM_MessedEventscr_11 + 0x8,
-    (u32)&EventScrWM_MessedEventscr_13, (u32)&EventScrWM_MessedEventscr_14, (u32)&EventScrWM_MessedEventscr_15, (u32)&EventScrWM_MessedEventscr_16, (u32)&EventScrWM_MessedEventscr_17, (u32)&EventScrWM_MessedEventscr_18,
-    (u32)&EventScrWM_MessedEventscr_20, (u32)&EventScrWM_MessedEventscr_23 + 0x8, (u32)&EventScrWM_MessedEventscr_25, (u32)&EventScrWM_MessedEventscr_26, (u32)&EventScrWM_MessedEventscr_27, (u32)&EventScrWM_MessedEventscr_28,
-    (u32)&EventScrWM_MessedEventscr_29, (u32)&EventScrWM_MessedEventscr_30, (u32)&EventScrWM_MessedEventscr_31, (u32)&EventScrWM_MessedEventscr_32, (u32)&EventScrWM_MessedEventscr_34, (u32)&EventScrWM_Ch5x_Beginning,
-    (u32)&EventScrWM_MessedEventscr_10, (u32)&EventScrWM_MessedEventscr_57 + 0x8, (u32)&EventScrWM_MessedEventscr_58 + 0x8, 0x0001820D, 0x0000FFFF, 0x0001820A,
-    0x0000FFFF, 0x000181CA, 0x0000FFFF, 0x000181C9, 0x0000FFFF, 0x00018149,
-    0x0000FFFF, 0x00018148, 0x0000FFFF, 0x02010149, 0x0000FFFF, 0x0000020A,
-    0x0000FFFF, 0x00000188, 0x0000FFFF, 0x00000189, 0x0010FFFF, 0x08000702,
-    0x0600024D, (u32)&frontier_df4_banim_b_073_907F78 + 0x1D4, 0x006C1703, 0x00000000, 0x08000201, 0x01000148,
-    (u32)&frontier_df4_banim_b_073_907F78 + 0x204, 0x0000006C, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000,
 };
 /* frontier_df4_banim_b_074_909DE8: banim pointer/command table carve (was INCBIN);
    data/proc-script pointers as .4byte Sym(+addend), STT_FUNC pointers raw hex (ld ORs Thumb bit), byte-exact. */

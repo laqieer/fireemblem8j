@@ -319,7 +319,6 @@ extern void ClassReel_OnEnd(ProcPtr proc);
 #include "eventinfo.h"
 #include "EAstdlib.h"
 
-extern u8 frontier_df4_menu_038_ABCD24_1[];
 extern u32 frontier_df4_menu_gap13_2941[];
 extern u32 frontier_df4_menu_gap20_3536[];
 extern u32 frontier_df4_menu_gap34_4422[];

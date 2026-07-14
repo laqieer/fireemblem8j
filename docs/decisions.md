@@ -12777,3 +12777,133 @@ remaining raw regions keep the class above zero). `make clean && make compare`
 force-push occurred. If a concurrently-integrated sibling branch has already
 claimed D389, the integrator should renumber this entry, not the work it
 describes.
+
+## D390 — frontier_df4_menu 14-file UNCERTAIN class: Phase C completion (issue #143 menu lane, integration-renumerable) (2026-07-14)
+
+**Scope.** Direct follow-up to D389 on the same isolated worktree/branch
+`feat/issue-143-menu-assets`. The prior pass explicitly deferred three items as
+"out of scope for this checkpoint"; this pass completes all three per the
+user's explicit instruction that already-supplied research resolves them, using
+independent from-scratch verification (byte extraction, relocation counting,
+sibling-file cross-checks) rather than blind trust, since the referenced
+`menu-descriptor-re` sibling agent's output was not actually retrievable via
+`read_agent`/`write_agent` in this session.
+
+**Part A — blob037 shop recut (commit `538e872d0`).** Confirmed the
+`gShopPortraitLut` "mismatch" was explained by the RAM-NOLOAD/masked-overlay
+mechanism (`layout/carved_ram.d/masked_layer.tsv`): the symbol's address
+binding lived in a NOLOAD row while its real bytes were supplied elsewhere.
+Decoded `[0x08ABC768,0x08ABC790)` word-by-word from raw ROM bytes against
+`include/proc.h` opcodes: `gDefaultShopInventory[8]`,
+`gShopDialogueOffsetLut[3]`, `gShopPortraitLut[3]={0x66,0x67,0x69}` (JP
+literals, not FE8U FID constants), followed immediately by
+`gProcScr_ShopFadeIn[7]`/`gProcScr_ShopFadeOut[8]` in `src/bmshop_080B8CF0.c`
+(kept consecutive since `StartShopScreen` reads 21 halfwords across the
+boundary). Removed the duplicate `gShopPortraitLut` definition from
+`src/masked_080b8cdc.c` and the two RAM-NOLOAD rows.
+
+**Part B — blobs 038/039 full EventScr migration (commit `12d2b6315`).**
+Built an independent byte-alignment tool comparing FE8U's `src/events_wm.c`
+against raw JP ROM bytes (not naive offset copying, since JP inserts extra
+content); found and fixed a stub-cluster bug (Valni Tower/Lagdou Ruins tiny
+placeholder arrays). Final segmentation: 139 pieces (133 named + 6
+`EventScrWM_JPOnly_N` JP-only gaps) spanning exactly 13816 B
+(`0x08ABCD44`-`0x08AC033C`), landing precisely on the pre-existing
+gamerankings boundary. Verified exactly 74 ABS32 relocations (32
+`RemoveBGIfNeeded` via the existing `data_085B9BBC + 0x168` idiom, 30
+`EventScr_WM_FadeCommon`, 2 `EventScr_CallOnTutorialMode`, 10 internal script
+pointers) and exactly 4 non-relocated TEXTSHOW command words — matching the
+user's claimed contract exactly. Cross-validated against the pre-existing
+`dat_worldmap_gmapunit_p1652.s` (defining `EventScrWM_MessedEventscr_52`),
+which matched the generated content byte-for-byte before being deleted as
+superseded. Repointed 116 `frontier_df4_banim_b.c` base+offset references to
+the new named symbols. Hit and fixed a `make shiftcheck` cross-resource
+false-positive by using the existing `data_085B9BBC + 0x168` idiom instead of
+a new competing symbol; added `ALLOW_TEXTSHOW` to
+`scripts/shiftcheck/scan_code_rom_literals.py` with a unit test.
+
+**Part C — world-map lookup + prologue udefs (this commit).** Extracted all 59
+`Events_WM_Beginning` and 59 `Events_WM_ChapterIntro` raw pointer words
+directly from ROM and matched every one against the `src/events_wm.c` array
+segmentation from Part B (some targets landed a few bytes into an array,
+expressed as `(EventScr*)((u8*)Name + 0xN)`, matching the sibling
+`dat_worldmap_gmapunit_p1652.s`-era `frontier_df4_banim_b_073_907F78` array's
+own pre-existing pointer stream byte-for-byte — independent confirmation).
+Appended `Events_WM_BeginningTail[58]` (entries 1..58; entry 0 is the shared
+final NULL word of `gChapterDataAssetTable`, not duplicated) and
+`Events_WM_ChapterIntro[59]` to `src/data/data_chapter_asset_table.c`, and
+added a linker-script alias
+(`Events_WM_Beginning = gChapterDataAssetTable + 0x3AC;` in
+`ldscript.template.txt`) so the two arrays overlay into one 59-entry view for
+`worldmap_main_080BF178.c` without duplicating the NULL. Both new arrays
+needed an explicit `__attribute__((section(".data")))`: `const EventScr *
+const arr[]` is a const-qualified array, so agbcc/gas default it to
+`.rodata`, silently violating the `.data`-section manifest row and shifting
+every symbol after it in the ROM (caught via a `make clean && make compare`
+regression — see the "residual floor / lesson learned" note below).
+
+Decoded `[0x0890814C,0x089081D8)` (140 B) directly from ROM bytes against
+`struct UnitDefinition` (`include/bmunit.h`) and the sibling `struct REDA`
+precedent already established by `src/data/data/data_08908228.c` (which uses
+plain `u32[]` word-pair streams, not the generic bitfield `struct REDA` in
+`include/muctrl.h`, for exactly this reason): new
+`src/data/data_prologue_event_udefs.c` defines `REDAs_PrologueAlly1[12]`,
+`REDAs_PrologueAlly2[2]`, `REDAs_PrologueEnemy1/2/3[2]` (raw `u32` word-pair
+streams; `eventcall.h`'s pre-existing extern declarations for these exact
+names, using the aspirational `struct REDA` type, template-match this task
+directly), and `UnitDef_Event_PrologueAlly[3]` (2 real level-1 prologue-ally
+units + the standard all-zero terminator entry, decoded via the same
+bitfield layout already proven byte-exact by the pre-existing
+`UnitDef_Event_PrologueEnemy_ref.c`). Repointed all base+offset consumers:
+`EventScr_Prologue_BeginningScene_ref.c`'s `LOAD1` operand,
+`PrologueEvents_ref.c`'s two duplicate shift-table entries, and
+`UnitDef_Event_PrologueEnemy_ref.c`'s three `.redas` pointers, plus deleted
+the superseded `frontier_df4_banim_b_073_907F78` raw array (its entire
+608-byte range is now covered by the two new typed sources) and its RAM/ROM
+manifest row.
+
+**Lesson learned (residual note for future carves in this codebase):** a
+`T * const array[]` (const-qualified pointer ARRAY, as opposed to a plain
+`T * array[]` of possibly-const-pointee) defaults to `.rodata` under
+agbcc/gas even with no explicit `const T`; if the surrounding manifest row
+names a `.data`-section object (matching a sibling non-const array in the
+same translation unit, e.g. `gChapterDataAssetTable`), the new array silently
+lands in `.rodata` instead, and this project's `ldscript.template.txt`
+ROM_BODY has no automatic size assertion between a manifest row's declared
+span and an object's actual linked size — the object is placed by pure
+`SECTIONS` concatenation order, so a section mismatch silently shifts every
+subsequent symbol in the ROM by the size difference, producing a
+`make compare` failure whose diffs are scattered thumb-BL-encoding deltas
+across nearly the entire downstream ROM (not a single localized diff) because
+every relative branch/call whose target moved re-encodes a different
+displacement. Diagnosed here by bisecting against a `git checkout -- .` build
+of the prior commit (passed) vs. the working tree (failed), then checking
+`fireemblem8.map` for where a new symbol's linked address diverged from its
+manifest-declared address. Fix: give any such array an explicit
+`__attribute__((section("...")))` matching its manifest row regardless of
+qualifiers.
+
+**Verification.** `make clean && make compare` -> `fireemblem8.gba: OK`
+(sha1 `7da0456035366aa18414faa79d8fe7649f03c1ed`, matching `checksum.sha1` and
+`baserom.gba`) both before and after the Part C fix, confirmed via a genuine
+from-scratch clean rebuild (not incremental-only) after the size-shift bug was
+found and fixed. `make shiftcheck` -> PASS on all five sub-gates (build-system
+consistency, code-literal audit, talk-table relocations, cross-resource
+offsets, shiftable-region suspects), 0 HIGH suspects.
+`scripts/check_incbin_deps.py` / `scripts/check_layout.py` -> OK.
+`git diff --check` clean. Deleted `graphics/frontier_df4_menu/
+frontier_df4_menu_038_ABCD24.bin` and `_039_AC00A8.bin` (confirmed zero
+remaining references beyond one stale comment, also removed) now that both
+blobs are fully typed. `scripts/audit_bin_forms.py`: menu-class UNCERTAIN
+21 (of 1446 total; down from 23), all remaining `frontier_df4_menu_{001,
+005,021,027,037}.bin` entries are files this task's own scope explicitly
+preserves as partial-coverage sources (001's head PNG sheet, 021/027's
+non-residual LZ/image regions, 037's 93-PNG font/graphics provider, and 005's
+evidence-backed floor) — the audit script's opaque/"DEFERRED" heuristic
+cannot distinguish a still-legitimate partial raw source from a genuine
+unresolved blob, so these are not new residual mysteries.
+
+**Result:** all three items explicitly deferred by D389 are now complete.
+Issue #143 remains open; `main` was not merged; no force-push occurred. If a
+concurrently-integrated sibling branch has already claimed D390, the
+integrator should renumber this entry, not the work it describes.

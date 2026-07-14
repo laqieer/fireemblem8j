@@ -18,7 +18,7 @@ extern const u8 EventListScr_Prologue_Misc[];
 extern const u8 EventListScr_Prologue_SelectUnit[];
 extern const u8 EventListScr_Prologue_SelectDestination[];
 extern const u8 EventListScr_Prologue_UnitMove[];
-extern const u8 frontier_df4_banim_b_073_907F78[];
+extern const u8 UnitDef_Event_PrologueAlly[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -33,8 +33,8 @@ SECTION(".rodata.dat_PrologueEvents_ref") static const u32 PrologueEvents__shift
     (u32)&EventListScr_Prologue_Tutorial,
     (u32)&gUidebug_2 + 0x310,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x24,
-    (u32)&frontier_df4_banim_b_073_907F78 + 0x224,
-    (u32)&frontier_df4_banim_b_073_907F78 + 0x224,
+    (u32)&UnitDef_Event_PrologueAlly,
+    (u32)&UnitDef_Event_PrologueAlly,
     0x00000000,
     0x00000000,
     0x00000000,

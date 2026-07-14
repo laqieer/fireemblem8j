@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event.h"
 
 extern const u8 gChDAsset_1[];
 extern const u8 gChDAsset_2[];
@@ -479,4 +480,252 @@ const void* gChapterDataAssetTable[] =
     gChDAsset_233, /* US GradoShrineMapPresent */
     gChDAsset_234, /* US Ch5TownPalettePast */
     0, /* US Ch5TownMapPast (absent in FE8J) */
+};
+
+/* Externs for the world-map EventScr family defined in src/events_wm.c,
+   referenced only by pointer here (lookup tables below). */
+extern EventScr EventScrWM_CastleFrelia_Beginning[];
+extern EventScr EventScrWM_Ch10a_Beginning[];
+extern EventScr EventScrWM_Ch10b_Beginning[];
+extern EventScr EventScrWM_Ch11a_Beginning[];
+extern EventScr EventScrWM_Ch11b_Beginning[];
+extern EventScr EventScrWM_Ch12a_Beginning[];
+extern EventScr EventScrWM_Ch12b_Beginning[];
+extern EventScr EventScrWM_Ch13a_Beginning[];
+extern EventScr EventScrWM_Ch13b_Beginning[];
+extern EventScr EventScrWM_Ch14a_Beginning[];
+extern EventScr EventScrWM_Ch14b_Beginning[];
+extern EventScr EventScrWM_Ch15a_Beginning[];
+extern EventScr EventScrWM_Ch15b_Beginning[];
+extern EventScr EventScrWM_Ch16a_Beginning[];
+extern EventScr EventScrWM_Ch16b_Beginning[];
+extern EventScr EventScrWM_Ch17a_Beginning[];
+extern EventScr EventScrWM_Ch17b_Beginning[];
+extern EventScr EventScrWM_Ch18a_Beginning[];
+extern EventScr EventScrWM_Ch18b_Beginning[];
+extern EventScr EventScrWM_Ch19a_Beginning[];
+extern EventScr EventScrWM_Ch19b_Beginning[];
+extern EventScr EventScrWM_Ch1_Beginning[];
+extern EventScr EventScrWM_Ch1_ChapterIntro[];
+extern EventScr EventScrWM_Ch20a_Beginning[];
+extern EventScr EventScrWM_Ch20b_Beginning[];
+extern EventScr EventScrWM_Ch21ax_Beginning[];
+extern EventScr EventScrWM_Ch21bx_Beginning[];
+extern EventScr EventScrWM_Ch2_Beginning[];
+extern EventScr EventScrWM_Ch2_ChapterIntro[];
+extern EventScr EventScrWM_Ch3_Beginning[];
+extern EventScr EventScrWM_Ch3_ChapterIntro[];
+extern EventScr EventScrWM_Ch4_Beginning[];
+extern EventScr EventScrWM_Ch4_ChapterIntro[];
+extern EventScr EventScrWM_Ch5_Beginning[];
+extern EventScr EventScrWM_Ch5_ChapterIntro[];
+extern EventScr EventScrWM_Ch5x_Beginning[];
+extern EventScr EventScrWM_Ch6_Beginning[];
+extern EventScr EventScrWM_Ch6_ChapterIntro[];
+extern EventScr EventScrWM_Ch7_Beginning[];
+extern EventScr EventScrWM_Ch7_ChapterIntro[];
+extern EventScr EventScrWM_Ch8_Beginning[];
+extern EventScr EventScrWM_Ch8_ChapterIntro[];
+extern EventScr EventScrWM_Ch9a_Beginning[];
+extern EventScr EventScrWM_Ch9a_ChapterIntro[];
+extern EventScr EventScrWM_Ch9b_Beginning[];
+extern EventScr EventScrWM_JPOnly_3[];
+extern EventScr EventScrWM_JPOnly_4[];
+extern EventScr EventScrWM_JPOnly_5[];
+extern EventScr EventScrWM_JPOnly_6[];
+extern EventScr EventScrWM_LagdouRuins10_Beginning[];
+extern EventScr EventScrWM_LagdouRuins3_Beginning[];
+extern EventScr EventScrWM_LagdouRuins4_Beginning[];
+extern EventScr EventScrWM_LagdouRuins5_Beginning[];
+extern EventScr EventScrWM_LagdouRuins6_Beginning[];
+extern EventScr EventScrWM_LagdouRuins7_Beginning[];
+extern EventScr EventScrWM_LagdouRuins8_Beginning[];
+extern EventScr EventScrWM_LagdouRuins9_Beginning[];
+extern EventScr EventScrWM_MelkaenCoast_Beginning[];
+extern EventScr EventScrWM_MessedEventscr_1[];
+extern EventScr EventScrWM_MessedEventscr_10[];
+extern EventScr EventScrWM_MessedEventscr_11[];
+extern EventScr EventScrWM_MessedEventscr_13[];
+extern EventScr EventScrWM_MessedEventscr_14[];
+extern EventScr EventScrWM_MessedEventscr_15[];
+extern EventScr EventScrWM_MessedEventscr_16[];
+extern EventScr EventScrWM_MessedEventscr_17[];
+extern EventScr EventScrWM_MessedEventscr_18[];
+extern EventScr EventScrWM_MessedEventscr_19[];
+extern EventScr EventScrWM_MessedEventscr_2[];
+extern EventScr EventScrWM_MessedEventscr_20[];
+extern EventScr EventScrWM_MessedEventscr_23[];
+extern EventScr EventScrWM_MessedEventscr_25[];
+extern EventScr EventScrWM_MessedEventscr_26[];
+extern EventScr EventScrWM_MessedEventscr_27[];
+extern EventScr EventScrWM_MessedEventscr_28[];
+extern EventScr EventScrWM_MessedEventscr_29[];
+extern EventScr EventScrWM_MessedEventscr_3[];
+extern EventScr EventScrWM_MessedEventscr_30[];
+extern EventScr EventScrWM_MessedEventscr_31[];
+extern EventScr EventScrWM_MessedEventscr_32[];
+extern EventScr EventScrWM_MessedEventscr_33[];
+extern EventScr EventScrWM_MessedEventscr_34[];
+extern EventScr EventScrWM_MessedEventscr_38[];
+extern EventScr EventScrWM_MessedEventscr_39[];
+extern EventScr EventScrWM_MessedEventscr_4[];
+extern EventScr EventScrWM_MessedEventscr_40[];
+extern EventScr EventScrWM_MessedEventscr_41[];
+extern EventScr EventScrWM_MessedEventscr_42[];
+extern EventScr EventScrWM_MessedEventscr_44[];
+extern EventScr EventScrWM_MessedEventscr_45[];
+extern EventScr EventScrWM_MessedEventscr_46[];
+extern EventScr EventScrWM_MessedEventscr_47[];
+extern EventScr EventScrWM_MessedEventscr_48[];
+extern EventScr EventScrWM_MessedEventscr_49[];
+extern EventScr EventScrWM_MessedEventscr_5[];
+extern EventScr EventScrWM_MessedEventscr_55[];
+extern EventScr EventScrWM_MessedEventscr_56[];
+extern EventScr EventScrWM_MessedEventscr_57[];
+extern EventScr EventScrWM_MessedEventscr_58[];
+extern EventScr EventScrWM_MessedEventscr_6[];
+extern EventScr EventScrWM_MessedEventscr_7[];
+extern EventScr EventScrWM_MessedEventscr_8[];
+extern EventScr EventScrWM_MessedEventscr_9[];
+extern EventScr EventScrWM_Prologue_Beginning[];
+extern EventScr EventScrWM_Prologue_ChapterIntro[];
+extern EventScr EventScrWM_ValniTower3_Beginning[];
+extern EventScr EventScrWM_ValniTower4_Beginning[];
+extern EventScr EventScrWM_ValniTower5_Beginning[];
+extern EventScr EventScrWM_ValniTower6_Beginning[];
+extern EventScr EventScrWM_ValniTower7_Beginning[];
+extern EventScr EventScrWM_ValniTower8_Beginning[];
+
+/* Events_WM_Beginning[0] is the shared final NULL entry of
+   gChapterDataAssetTable above (0x08907F74); Events_WM_BeginningTail holds
+   entries [1..58] immediately following it in ROM. The full 59-entry
+   Events_WM_Beginning view used by consumers is a linker alias
+   (Events_WM_Beginning = gChapterDataAssetTable + 0x3AC in
+   ldscript.template.txt) so the shared NULL word is not duplicated. */
+const EventScr * const Events_WM_BeginningTail[58] __attribute__((section(".data"))) =
+{
+    EventScrWM_Prologue_Beginning, /* Events_WM_Beginning[1] */
+    EventScrWM_Ch1_Beginning, /* Events_WM_Beginning[2] */
+    EventScrWM_Ch2_Beginning, /* Events_WM_Beginning[3] */
+    EventScrWM_Ch3_Beginning, /* Events_WM_Beginning[4] */
+    EventScrWM_Ch4_Beginning, /* Events_WM_Beginning[5] */
+    EventScrWM_Ch21ax_Beginning, /* Events_WM_Beginning[6] */
+    EventScrWM_Ch5_Beginning, /* Events_WM_Beginning[7] */
+    EventScrWM_Ch6_Beginning, /* Events_WM_Beginning[8] */
+    EventScrWM_Ch7_Beginning, /* Events_WM_Beginning[9] */
+    EventScrWM_Ch8_Beginning, /* Events_WM_Beginning[10] */
+    EventScrWM_Ch9a_Beginning, /* Events_WM_Beginning[11] */
+    EventScrWM_Ch10a_Beginning, /* Events_WM_Beginning[12] */
+    EventScrWM_Ch12a_Beginning, /* Events_WM_Beginning[13] */
+    EventScrWM_Ch13a_Beginning, /* Events_WM_Beginning[14] */
+    EventScrWM_Ch14a_Beginning, /* Events_WM_Beginning[15] */
+    (EventScr*)((u8*)EventScrWM_Ch15a_Beginning + 0x8), /* Events_WM_Beginning[16] */
+    (EventScr*)((u8*)EventScrWM_Ch16a_Beginning + 0x8), /* Events_WM_Beginning[17] */
+    (EventScr*)((u8*)EventScrWM_Ch17a_Beginning + 0x8), /* Events_WM_Beginning[18] */
+    (EventScr*)((u8*)EventScrWM_Ch18a_Beginning + 0x8), /* Events_WM_Beginning[19] */
+    (EventScr*)((u8*)EventScrWM_Ch19a_Beginning + 0x8), /* Events_WM_Beginning[20] */
+    (EventScr*)((u8*)EventScrWM_Ch20a_Beginning + 0x8), /* Events_WM_Beginning[21] */
+    (EventScr*)((u8*)EventScrWM_JPOnly_3 + 0x8), /* Events_WM_Beginning[22] */
+    EventScrWM_Ch21bx_Beginning, /* Events_WM_Beginning[23] */
+    EventScrWM_Ch9b_Beginning, /* Events_WM_Beginning[24] */
+    EventScrWM_Ch10b_Beginning, /* Events_WM_Beginning[25] */
+    EventScrWM_Ch12b_Beginning, /* Events_WM_Beginning[26] */
+    EventScrWM_Ch13b_Beginning, /* Events_WM_Beginning[27] */
+    EventScrWM_Ch14b_Beginning, /* Events_WM_Beginning[28] */
+    (EventScr*)((u8*)EventScrWM_Ch15b_Beginning + 0x8), /* Events_WM_Beginning[29] */
+    (EventScr*)((u8*)EventScrWM_Ch16b_Beginning + 0x8), /* Events_WM_Beginning[30] */
+    (EventScr*)((u8*)EventScrWM_Ch17b_Beginning + 0x8), /* Events_WM_Beginning[31] */
+    (EventScr*)((u8*)EventScrWM_Ch18b_Beginning + 0x8), /* Events_WM_Beginning[32] */
+    (EventScr*)((u8*)EventScrWM_Ch19b_Beginning + 0x8), /* Events_WM_Beginning[33] */
+    (EventScr*)((u8*)EventScrWM_Ch20b_Beginning + 0x8), /* Events_WM_Beginning[34] */
+    (EventScr*)((u8*)EventScrWM_JPOnly_5 + 0x8), /* Events_WM_Beginning[35] */
+    EventScrWM_Ch11a_Beginning, /* Events_WM_Beginning[36] */
+    EventScrWM_MessedEventscr_11, /* Events_WM_Beginning[37] */
+    EventScrWM_ValniTower3_Beginning, /* Events_WM_Beginning[38] */
+    EventScrWM_ValniTower4_Beginning, /* Events_WM_Beginning[39] */
+    EventScrWM_ValniTower5_Beginning, /* Events_WM_Beginning[40] */
+    EventScrWM_ValniTower6_Beginning, /* Events_WM_Beginning[41] */
+    EventScrWM_ValniTower7_Beginning, /* Events_WM_Beginning[42] */
+    EventScrWM_ValniTower8_Beginning, /* Events_WM_Beginning[43] */
+    EventScrWM_MessedEventscr_19, /* Events_WM_Beginning[44] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_23 + 0x4), /* Events_WM_Beginning[45] */
+    EventScrWM_LagdouRuins3_Beginning, /* Events_WM_Beginning[46] */
+    EventScrWM_LagdouRuins4_Beginning, /* Events_WM_Beginning[47] */
+    EventScrWM_LagdouRuins5_Beginning, /* Events_WM_Beginning[48] */
+    EventScrWM_LagdouRuins6_Beginning, /* Events_WM_Beginning[49] */
+    EventScrWM_LagdouRuins7_Beginning, /* Events_WM_Beginning[50] */
+    EventScrWM_LagdouRuins8_Beginning, /* Events_WM_Beginning[51] */
+    EventScrWM_LagdouRuins9_Beginning, /* Events_WM_Beginning[52] */
+    EventScrWM_LagdouRuins10_Beginning, /* Events_WM_Beginning[53] */
+    EventScrWM_MessedEventscr_33, /* Events_WM_Beginning[54] */
+    (EventScr*)((u8*)EventScrWM_CastleFrelia_Beginning + 0x8), /* Events_WM_Beginning[55] */
+    EventScrWM_MelkaenCoast_Beginning, /* Events_WM_Beginning[56] */
+    (EventScr*)((u8*)EventScrWM_Ch11a_Beginning + 0x8), /* Events_WM_Beginning[57] */
+    (EventScr*)((u8*)EventScrWM_Ch11b_Beginning + 0x8), /* Events_WM_Beginning[58] */
+};
+
+/* 0x08908060..0x0890814C: per-chapter "return to map" intro scripts run
+   after Events_WM_Beginning; entry 0 is unused (no chapter uses gmapEventId
+   0 for this table) and stays NULL like the JP ROM word at that address. */
+const EventScr * const Events_WM_ChapterIntro[59] __attribute__((section(".data"))) =
+{
+    0, /* Events_WM_ChapterIntro[0]: unused */
+    EventScrWM_Prologue_ChapterIntro, /* Events_WM_ChapterIntro[1] */
+    EventScrWM_Ch1_ChapterIntro, /* Events_WM_ChapterIntro[2] */
+    EventScrWM_Ch2_ChapterIntro, /* Events_WM_ChapterIntro[3] */
+    EventScrWM_Ch3_ChapterIntro, /* Events_WM_ChapterIntro[4] */
+    EventScrWM_Ch4_ChapterIntro, /* Events_WM_ChapterIntro[5] */
+    EventScrWM_MessedEventscr_55, /* Events_WM_ChapterIntro[6] */
+    EventScrWM_Ch5_ChapterIntro, /* Events_WM_ChapterIntro[7] */
+    EventScrWM_Ch6_ChapterIntro, /* Events_WM_ChapterIntro[8] */
+    EventScrWM_Ch7_ChapterIntro, /* Events_WM_ChapterIntro[9] */
+    EventScrWM_Ch8_ChapterIntro, /* Events_WM_ChapterIntro[10] */
+    EventScrWM_Ch9a_ChapterIntro, /* Events_WM_ChapterIntro[11] */
+    EventScrWM_MessedEventscr_1, /* Events_WM_ChapterIntro[12] */
+    EventScrWM_MessedEventscr_2, /* Events_WM_ChapterIntro[13] */
+    EventScrWM_MessedEventscr_3, /* Events_WM_ChapterIntro[14] */
+    EventScrWM_MessedEventscr_4, /* Events_WM_ChapterIntro[15] */
+    EventScrWM_Ch16a_Beginning, /* Events_WM_ChapterIntro[16] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_38 + 0x8), /* Events_WM_ChapterIntro[17] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_39 + 0x8), /* Events_WM_ChapterIntro[18] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_40 + 0x8), /* Events_WM_ChapterIntro[19] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_41 + 0x8), /* Events_WM_ChapterIntro[20] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_42 + 0x8), /* Events_WM_ChapterIntro[21] */
+    (EventScr*)((u8*)EventScrWM_JPOnly_4 + 0x8), /* Events_WM_ChapterIntro[22] */
+    EventScrWM_MessedEventscr_56, /* Events_WM_ChapterIntro[23] */
+    EventScrWM_MessedEventscr_5, /* Events_WM_ChapterIntro[24] */
+    EventScrWM_MessedEventscr_6, /* Events_WM_ChapterIntro[25] */
+    EventScrWM_MessedEventscr_7, /* Events_WM_ChapterIntro[26] */
+    EventScrWM_MessedEventscr_8, /* Events_WM_ChapterIntro[27] */
+    EventScrWM_MessedEventscr_9, /* Events_WM_ChapterIntro[28] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_44 + 0x8), /* Events_WM_ChapterIntro[29] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_45 + 0x8), /* Events_WM_ChapterIntro[30] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_46 + 0x8), /* Events_WM_ChapterIntro[31] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_47 + 0x8), /* Events_WM_ChapterIntro[32] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_48 + 0x8), /* Events_WM_ChapterIntro[33] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_49 + 0x8), /* Events_WM_ChapterIntro[34] */
+    (EventScr*)((u8*)EventScrWM_JPOnly_6 + 0x8), /* Events_WM_ChapterIntro[35] */
+    (EventScr*)((u8*)EventScrWM_Ch11a_Beginning + 0x4), /* Events_WM_ChapterIntro[36] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_11 + 0x8), /* Events_WM_ChapterIntro[37] */
+    EventScrWM_MessedEventscr_13, /* Events_WM_ChapterIntro[38] */
+    EventScrWM_MessedEventscr_14, /* Events_WM_ChapterIntro[39] */
+    EventScrWM_MessedEventscr_15, /* Events_WM_ChapterIntro[40] */
+    EventScrWM_MessedEventscr_16, /* Events_WM_ChapterIntro[41] */
+    EventScrWM_MessedEventscr_17, /* Events_WM_ChapterIntro[42] */
+    EventScrWM_MessedEventscr_18, /* Events_WM_ChapterIntro[43] */
+    EventScrWM_MessedEventscr_20, /* Events_WM_ChapterIntro[44] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_23 + 0x8), /* Events_WM_ChapterIntro[45] */
+    EventScrWM_MessedEventscr_25, /* Events_WM_ChapterIntro[46] */
+    EventScrWM_MessedEventscr_26, /* Events_WM_ChapterIntro[47] */
+    EventScrWM_MessedEventscr_27, /* Events_WM_ChapterIntro[48] */
+    EventScrWM_MessedEventscr_28, /* Events_WM_ChapterIntro[49] */
+    EventScrWM_MessedEventscr_29, /* Events_WM_ChapterIntro[50] */
+    EventScrWM_MessedEventscr_30, /* Events_WM_ChapterIntro[51] */
+    EventScrWM_MessedEventscr_31, /* Events_WM_ChapterIntro[52] */
+    EventScrWM_MessedEventscr_32, /* Events_WM_ChapterIntro[53] */
+    EventScrWM_MessedEventscr_34, /* Events_WM_ChapterIntro[54] */
+    EventScrWM_Ch5x_Beginning, /* Events_WM_ChapterIntro[55] */
+    EventScrWM_MessedEventscr_10, /* Events_WM_ChapterIntro[56] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_57 + 0x8), /* Events_WM_ChapterIntro[57] */
+    (EventScr*)((u8*)EventScrWM_MessedEventscr_58 + 0x8), /* Events_WM_ChapterIntro[58] */
 };
