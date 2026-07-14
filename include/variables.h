@@ -961,7 +961,7 @@ extern u16 Pal_SoundRoomVolumeGraph[];
 // extern ??? gMenuSoundroom_3
 // extern ??? gMenuSoundroom_4
 // extern ??? Img_SoundRoomUiElements
-// extern ??? Pal_SoundRoomUiElements
+extern u16 Pal_SoundRoomUiElements[];
 extern u8 Img_PlayStatusSprites[]; // Gfx
 extern u16 Pal_PlayStatusSprites[]; // Pal
 extern u8 Img_ChapterStatusSelectorSprite[]; // Gfx

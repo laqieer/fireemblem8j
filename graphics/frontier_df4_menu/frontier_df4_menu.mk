@@ -13,7 +13,8 @@ graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz: LZ_FLAGS := -mi
 # (an off-by-4-padding measurement error). Each starts with a GBA-BIOS-LZ77 4bpp sheet
 # -> editable PNG whose png->.4bpp->.4bpp.lz at -mindist 2 reproduces the JP compressed
 # bytes exactly. 017/024/033 keep a trailing raw block verbatim; 032's sheet is the whole
-# symbol (its trailing block is the separate data_08AAB440 symbol). Sheet boundaries:
+# symbol (its trailing region is now fully typed: Pal_SoundRoomUiElements + the
+# UnusedMusicSelect* assets, issue #143). Sheet boundaries:
 # 017 -> 0xFC0, 024 -> 0x3DC, 032 -> 0x7F4 (full), 033 -> 0x33C.
 graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.4bpp.lz: LZ_FLAGS := -mindist 2
 graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.4bpp.lz: LZ_FLAGS := -mindist 2

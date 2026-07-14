@@ -7622,10 +7622,59 @@ u8 Tsa_CommGameBgScreenInShop[] __attribute__((section(".data.frontier_df4_menu.
  * via gbagfx default) + 32B raw 16-color palette tail. */
 u8 frontier_df4_menu_031_AA9F98[] __attribute__((section(".data.frontier_df4_menu.gap31"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98_pal.gbapal");
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x7F4] is a self-contained
- * 122t 4bpp LZ sheet -> editable PNG. The [0x7F4:0x300C] trailing raw block is a
- * separate symbol (data_08AAB440) still sliced verbatim from the original .bin. */
+ * 122t 4bpp LZ sheet -> editable PNG. The [0x7F4:0x300C] trailing region (issue
+ * #143 menu pass) has zero uncovered bytes and no real code: only the first 0x60
+ * B are live (SoundRoomUi_Init's Pal_SoundRoomUiElements); the rest is a fully
+ * sourceable but UNUSED Music Select UI (never reached by any code path), kept
+ * under conservative `UnusedMusicSelect*` names. */
 u8 frontier_df4_menu_032_AAAC4C[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.4bpp.lz");
-u8 data_08AAB440[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin", 0x7F4, 0x2818);
+/* [0,0x60) Pal_SoundRoomUiElements: 3x16-color palette banks, LIVE (consumer
+ * SoundRoomUi_Init via ApplyPalettes(..., 0x13, 3)); JP differs from fe8u at one
+ * color. Each 16-color bank round-trips exactly via JASC. */
+u16 Pal_SoundRoomUiElements[48] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U16(
+    "graphics/frontier_df4_menu/Pal_SoundRoomUiElements_0.gbapal",
+    "graphics/frontier_df4_menu/Pal_SoundRoomUiElements_1.gbapal",
+    "graphics/frontier_df4_menu/Pal_SoundRoomUiElements_2.gbapal");
+/* [0x60,0x7E0) UnusedMusicSelectUiText: LZ77 4bpp ->128x64 PNG, default gbagfx
+ * (mindist 2) exact. [0x7E0,0x800) UnusedMusicSelectUiTextPal: matching 16-color
+ * palette, clean JASC round-trip. */
+u8 UnusedMusicSelectUiText[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectUiText.4bpp.lz");
+u16 UnusedMusicSelectUiTextPal[16] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U16("graphics/frontier_df4_menu/UnusedMusicSelectUiTextPal.gbapal");
+/* [0x800,0xCB2) UnusedMusicSelectTsa0 + [0xCB2,0xCB4) 2-B pad: raw TSA (hdr
+ * 0x131d = 30x20, 1202 B). [0xCB4,0x1166) UnusedMusicSelectTsa1 + [0x1166,0x1168)
+ * 2-B pad: second raw TSA frame, same dims. */
+u8 UnusedMusicSelectTsa0[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectTsa0.tsa.bin");
+u16 frontier_df4_menu_032_pad0[1] __attribute__((section(".data.frontier_df4_menu.gap32"))) = { 0x0000 };
+u8 UnusedMusicSelectTsa1[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectTsa1.tsa.bin");
+u16 frontier_df4_menu_032_pad1[1] __attribute__((section(".data.frontier_df4_menu.gap32"))) = { 0x0000 };
+/* [0x1168,0x1674) UnusedMusicSelectWindowSheet: LZ77 4bpp ->128x64 PNG, default
+ * gbagfx exact. [0x1674,0x1694) UnusedMusicSelectWindowPal: matching 16-color
+ * palette, clean JASC round-trip. */
+u8 UnusedMusicSelectWindowSheet[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectWindowSheet.4bpp.lz");
+u16 UnusedMusicSelectWindowPal[16] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U16("graphics/frontier_df4_menu/UnusedMusicSelectWindowPal.gbapal");
+/* [0x1694,0x1B46) UnusedMusicSelectTsa2 + [0x1B46,0x1B48) 2-B pad, [0x1B48,0x1FFA)
+ * UnusedMusicSelectTsa3 + [0x1FFA,0x1FFC) 2-B pad: two more raw 30x20 TSA frames. */
+u8 UnusedMusicSelectTsa2[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectTsa2.tsa.bin");
+u16 frontier_df4_menu_032_pad2[1] __attribute__((section(".data.frontier_df4_menu.gap32"))) = { 0x0000 };
+u8 UnusedMusicSelectTsa3[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectTsa3.tsa.bin");
+u16 frontier_df4_menu_032_pad3[1] __attribute__((section(".data.frontier_df4_menu.gap32"))) = { 0x0000 };
+/* Twelve LZ77 4bpp chapter labels (all default gbagfx/mindist 2 exact): 6x 40x16
+ * (0xF0/0xF4-B compressed) + 6x 24x8 (0x58/0x64-B compressed), alternating. */
+u8 UnusedMusicSelectChapterLabel0[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel0.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel1[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel1.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel2[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel2.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel3[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel3.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel4[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel4.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel5[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel5.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel6[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel6.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel7[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel7.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel8[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel8.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel9[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel9.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel10[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel10.4bpp.lz");
+u8 UnusedMusicSelectChapterLabel11[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabel11.4bpp.lz");
+/* [0x27F8,0x2818) UnusedMusicSelectChapterLabelPal: final chapter-label palette,
+ * clean JASC round-trip. */
+u16 UnusedMusicSelectChapterLabelPal[16] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U16("graphics/frontier_df4_menu/UnusedMusicSelectChapterLabelPal.gbapal");
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x33C] 52t 4bpp sheet ->
  * editable PNG; [0x33C:0x810] trailing raw kept verbatim. */
 /* blob 033 (AAEB40) tail fully split (issue #143 menu pass), no floor remains:
