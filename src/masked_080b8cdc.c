@@ -33,11 +33,7 @@
 
 
 
-int CONST_DATA gShopPortraitLut[] = {
-    [SHOP_TYPE_ARMORY]      = FID_SHOP_ARMORY,
-    [SHOP_TYPE_VENDOR]      = FID_SHOP_VENDOR,
-    [SHOP_TYPE_SECRET_SHOP] = FID_SHOP_SECRET
-};
+extern int gShopPortraitLut[];
 
 
 
