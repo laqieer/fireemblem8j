@@ -816,6 +816,39 @@ and value by exactly `+0x40000` while all seven normalized function ranges stay
 otherwise byte-identical. This lane is complete and regression-guarded; it does
 **not** close reopened issue #143 as a whole.
 
+### frontier_df4_menu 14-file UNCERTAIN class — Phase A+B done, Phase C partial (issue #143 menu lane, D378, 2026-07-14)
+
+The menu provider's 14-file UNCERTAIN class (001/005/017/021/023/024/027/
+029/030/032/033/037/038/039) is reduced from **30 -> 23**. Phase A (all 8
+smaller blobs: 001/005/017/021/023/024/027/030/033) and Phase B (both large
+containers: 029/032) are fully done — every actionable byte converted to
+editable PNG/JASC/TSA/typed-C or ported byte-identical from `../fireemblem8u`
+where a named counterpart existed, each independently re-derived and diffed
+against the raw JP bytes before insertion, not just visually inspected. Blob
+005 keeps its now-precisely-sized (395 B, trimmed from a stale 587 B
+over-extraction) proc-script floor per the manifest's own gap5 row — an
+honest, evidence-backed residual, not a generic "needs RE".
+
+Phase C (037/038/039 EventScr/shop/ranking migration) is only partially
+done: `gProcScr_ArenaUiResultBgm` (blob 038 head) and the gamerankings
+rank-weight/threshold tables (blob 039) are carved into `src/uiarena.c` /
+`src/gamerankings.c` respectively, each as its own object with its own
+manifest row split out of the surrounding gap section. The much larger
+136-array EventScr migration, the world-map lookup extension, the prologue
+event udefs, and blob 037's true shop-data recut (`gDefaultShopInventory`/
+`gShopDialogueOffsetLut`/`gShopPortraitLut`/`gProcScr_ShopFadeIn`/`Out`) are
+explicitly deferred — the shop-data recut in particular surfaced a genuine
+open question (compiled `gShopPortraitLut` uses `FID_SHOP_*` values that do
+not match the raw JP ROM bytes at its apparent linked address, yet `make
+compare` passes today, meaning it is not actually linked where `nm` suggests)
+that needs a careful read of the "masked"-file placement mechanism
+(`layout/us_jp_funcmap.tsv`) before being touched. See decisions.md **D378**
+for the full per-item breakdown and verification method.
+
+`make clean && make compare` -> `fireemblem8.gba: OK`; `make shiftcheck` -> no
+high-confidence suspects. Reopened issue #143 remains open; this closes only
+the menu lane's Phase A/B plus two Phase C items, not the lane as a whole.
+
 ### Banim/AnimScr beyond-gate residual — CLOSED (issue #166, D368, 2026-07-11)
 
 The D345/D346/D363/D365 banim/AnimScr residual is no longer live work. A fresh
