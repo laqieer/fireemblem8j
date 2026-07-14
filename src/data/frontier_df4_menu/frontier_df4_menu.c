@@ -393,7 +393,6 @@ extern const u8 DemonKingSummonShake_Loop[];
 extern const u8 DirectSoundData_btl_mon_magic1_13k[];
 extern const u8 DirectSoundData_sys_chapter_start3_13k[];
 extern const u8 EndManimLevelUpStatGainLabels[];
-extern const u8 EventScrWM_MessedEventscr_52[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 EventScr_Ch21b_BeginningScene[];
 extern const u8 EventScr_EphraimModeGameEnd[];
