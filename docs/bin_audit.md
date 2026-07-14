@@ -33,16 +33,16 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1429 | 98.9% |
+| **FLOOR** | 1428 | 98.9% |
 | **UNCERTAIN** | 16 | 1.1% |
-| **TOTAL** | 1445 | 100.0% |
+| **TOTAL** | 1444 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
 | battle-anim | MISS | 0 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 4 | fe8u graphics/**/*.png |
+| pixel-gfx | MISS | 3 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 0 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 0 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 0 | fe8u C literals (src/menu_def.c) |
@@ -71,7 +71,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 - `graphics/banim/_us/banim/assets/tsa/005DD518_Tsa_BreathBgBase.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/banim/efxbattle/TsaConf_BanimTmA1.map.bin` → **FLOOR** (efx-effect-bins) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
-- `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` → **FLOOR** (pixel-gfx) — proof: RE-COMPLETE evidence-backed floor (4632 B, trimmed from a 6812 B combined file): confirmed genuine LZ77 640-tile stream (0x10 header, PNG round-trip exact for the decompressed 20480 B), but no gbagfx compressor preset reproduces the exact compressed bytes; JP-exclusive, no fe8u twin (issue #143)
+- `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` → **FLOOR** (pixel-gfx) — proof: RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143)
 - `graphics/opanim/OpAnimCharacterBG.map.bin` → **FLOOR** (opanim-tilemaps) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/banim/_us/banim/assets/tsa/005DDAF4_Tsa_085DDAF4.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/banim/_us/banim/assets/tsa/005E64D8_Tsa_085E64D8.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1429) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1428) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1429 entries</summary>
+<details><summary>1428 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1094,7 +1094,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/UnusedMusicSelectTsa1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/UnusedMusicSelectTsa2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/UnusedMusicSelectTsa3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (4632 B, trimmed from a 6812 B combined file): confirmed genuine LZ77 640-tile stream (0x10 header, PNG round-trip exact for the decompressed 20480 B), but no gbagfx compressor preset reproduces the exact compressed bytes; JP-exclusive, no fe8u twin (issue #143) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (395 B, trimmed from a 587 B over-extraction): proc-script leaf with 8 relocated function pointers, every byte's role proven; JP-exclusive, no fe8u twin to compare (D362, issue #143) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | pixel-gfx | RE-COMPLETE evidence-backed floor (174 B, trimmed from a 2318 B combined file): two disjoint live spans (gap21 head + gap21c interior) concatenated, every non-pointer byte a proven ProcCmd/SpriteEx field, all 9 interior pointers already relocated .4byte Sym; JP-exclusive, no fe8u twin (issue #143) |

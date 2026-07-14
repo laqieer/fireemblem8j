@@ -1197,22 +1197,37 @@ struct ProcCmd ProcScr_GlowCrossExit[] __attribute__((section(".data.frontier_df
     PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)GlowCrossExit_Init + 0x1)), PROC_REPEAT((void*)((u8*)GlowCrossExit_Loop + 0x1)), PROC_CALL((void*)((u8*)gap_0008359C + 0x1)),
     PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
 };
-/* frontier_df4_menu_001_A588C0 head [0,0x1218): confirmed genuine LZ77 (0x10
-   header, decompressed size 0x5000 = 20480 B = 640 4bpp tiles) via gbagfx
-   decompress; PNG round-trip (256x160, 32x20 tiles) reproduces the identical
-   20480 decompressed bytes exactly, but no available gbagfx compressor preset
-   (-mindist 1..4, default) reproduces this exact 4632-byte compressed stream --
-   the original JP encoder used different match-selection heuristics. Kept as an
-   evidence-backed minimal raw floor (trimmed from the former 6812 B combined
-   file, which duplicated 2180 B already covered by the .4bpp.lz/tsa/palette
-   companions below; issue #143 coverage pass) rather than a generic opaque
-   blob. frontier_df4_menu_001_A588C0 tail [0x15C8,0x1A9C): standard TSA header
+/* frontier_df4_menu_001_A588C0 head, fully split into three editable pieces
+ * (issue #143 coverage pass -- corrects an earlier false "no compressor
+ * preset reproduces this" floor claim: that conclusion fed an over-large
+ * 4632 B window straight to gbagfx's LZ77 decompressor, which silently
+ * stopped once it had the declared 20480 decompressed bytes and never
+ * verified how many *input* bytes it actually consumed, hiding the true
+ * 3300 B LZ boundary -- a path name is not evidence of irreducibility):
+ *  - [0,0xCE4) 3300 B: genuine LZ77 (0x10 header, decompressed size 0x5000 =
+ *    20480 B = 640 4bpp tiles). A dedicated 256x160 (32x20 tile) PNG, DISTINCT
+ *    from the existing 64x96 PNG used by the 944 B middle sheet below,
+ *    round-trips png->4bpp->4bpp.lz at -mindist 2 to the exact 3300 B.
+ *  - [0xCE4,0x1198) 1204 B: standard TSA, header 0x1D13 = 30x20, 600 u16
+ *    tile-attr entries + 2-byte zero pad -- raw/uncompressed (no LZ header),
+ *    stored as an ordinary named .tsa.bin source.
+ *  - [0x1198,0x1218) 128 B: four 16-color palettes. Palette 0 has 7/16
+ *    entries with bit15 set (a JASC round-trip would clear it), so it is
+ *    kept as an exact typed u16[16] literal; palettes 1-3 round-trip exact
+ *    via JASC and are stored as ordinary .pal sources.
+ * frontier_df4_menu_001_A588C0 tail [0x15C8,0x1A9C): standard TSA header
    0x1d 0x13 (30x20), 600 u16 tile-attr entries (all 0x001F) + 2-byte zero pad
    (1204 B total, matching the fe8u cg_N.tsa.bin convention), then a 32-B
    16-color palette that is byte-identical to fe8u/fe8j's own
    Pal_GameOverText2 (src/data/A01CC4/dat_data_A01CC4_2.c) -- a separate ROM
    copy at a different address, so it needs its own definition here. */
-u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_pal.gbapal");
+u8 frontier_df4_menu_001_A588C0_head_img[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head.4bpp.lz");
+u8 frontier_df4_menu_001_A588C0_head_tsa[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head_tsa.tsa.bin");
+u16 frontier_df4_menu_001_A588C0_head_pal0[16] __attribute__((section(".data.frontier_df4_menu.gap1"))) = {
+    0x5355, 0xFFFF, 0xF7BD, 0xEF7B, 0xE739, 0xDEF7, 0xD6B5, 0xCA52,
+    0x39CE, 0x318C, 0x294A, 0x2108, 0x18C6, 0x1084, 0x0842, 0x0000,
+};
+u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head_pal1.gbapal", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head_pal2.gbapal", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_head_pal3.gbapal", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_tail.tsa.bin", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0_pal.gbapal");
 /* frontier_df4_menu_002_A5D648: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 u32 frontier_df4_menu_002_A5D648[] __attribute__((section(".data.frontier_df4_menu.gap2"))) = {

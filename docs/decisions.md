@@ -11709,7 +11709,7 @@ force-push occurred. If a concurrently-integrated sibling branch has
 already claimed D381, the integrator should renumber this entry, not the
 work it describes.
 
-## D382 — menu source-coverage completion: duplicate-original elimination, FLOOR reclassification, exact lookup typing (issue #143 menu lane; maps to D389 at integration onto origin/main D388-tip) (2026-07-14)
+## D382 — menu source-coverage completion: duplicate-original elimination, FLOOR reclassification, exact lookup typing (issue #143 menu lane; maps to D393 at integration onto origin/main D388-tip) (2026-07-14)
 
 **Scope.** Final verifier-driven coverage/type-safety pass on
 `feat/issue-143-menu-assets`. Branch-local decision numbering continues this
@@ -11892,3 +11892,80 @@ suspects. `scripts/check_incbin_deps.py` / `scripts/check_layout.py` /
 tracked or generated file referenced the old filename outside the two
 auto-regenerated ones. Issue #143 remains open; `main` was not merged; no
 force-push occurred.
+
+## D384 — blob001's false floor fully eliminated; pinned drift-safe FLOOR guards (issue #143 menu lane; maps to D395 at integration onto origin/main D388-tip) (2026-07-14)
+
+**Scope.** Direct correction to D382's blob001 treatment, per the verifier's
+final finding: "blob001's claimed 4632B floor is fully reducible, and the
+current floor tests are pathname-only." Both halves fixed in this entry.
+
+**1) blob001 fully eliminated (no floor at all).** D382 fed the full 4632 B
+`[0,0x1218)` window directly to gbagfx's LZ77 decompressor and observed it
+succeed at producing the declared 20480-byte decompressed output, concluding
+the whole window was one irreducible LZ stream since no compressor preset
+reproduced the full 4632 compressed bytes. This was methodologically wrong:
+gbagfx's decompressor stops consuming input the moment it has produced the
+declared decompressed size, and never reports (or was checked for) how many
+*input* bytes it actually used -- so the "success" silently masked a much
+smaller true LZ boundary followed by unrelated trailing data still sitting
+in the over-large window. Independently re-derived precisely from raw ROM
+bytes:
+- `[0,0xCE4)` 3300 B: the real LZ77 stream (0x10 header, decompressed size
+  0x5000 = 20480 B = 640 4bpp tiles). Built a NEW dedicated 256x160 (32x20
+  tile) PNG -- explicitly distinct from the existing 64x96 (96-tile) PNG
+  already used for the 944 B middle sheet, to avoid conflating two unrelated
+  images -- and proved png->4bpp->4bpp.lz at `-mindist 2` reproduces the
+  exact 3300 B, byte-for-byte (`cmp` against the raw ROM extraction).
+- `[0xCE4,0x1198)` 1204 B: an ordinary standard TSA (header bytes `0x1D 0x13`
+  = 30x20, 600 u16 tile-attr entries + 2-byte zero pad), raw/uncompressed
+  (no LZ header) -- stored as an ordinary named `.tsa.bin` source
+  (`frontier_df4_menu_001_A588C0_head_tsa.tsa.bin`), matching the existing
+  provider's convention for its other (already-correct) TSA companion.
+- `[0x1198,0x1218)` 128 B: four 16-color palettes. Palette 0 has 7/16 entries
+  with bit15 set (confirmed empirically that a JASC round-trip clears it),
+  so it is kept as an exact typed `u16[16]` C literal
+  (`frontier_df4_menu_001_A588C0_head_pal0`); palettes 1-3 have no bit15-set
+  entries and round-trip exact via JASC (`_head_pal1/2/3.pal`).
+
+Split the single `frontier_df4_menu_001_A588C0[]` INCBIN_U8 concatenation
+into four sequential declarations (image, TSA, typed palette-0, then the
+continuing array for palettes 1-3 + the pre-existing untouched middle sheet
++ tail TSA + tail palette), all in the same `.data.frontier_df4_menu.gap1`
+section to preserve exact byte ordering. Deleted
+`graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` (the former
+4632 B "floor") entirely -- confirmed zero remaining references in any
+tracked `.c`/`.s`/`.mk` file before removal. `make compare` verified
+byte-exact after the split and again after the deletion.
+
+**2) Pinned, drift-safe, fail-closed FLOOR guards for the three genuine
+residuals.** Replaced the bare-pathname `NAME_CLASS_RULES` regex entries for
+005/021/027 with `PINNED_RESIDUAL_FLOORS` (a dict of path -> (exact size,
+exact sha256, proof)) and `pinned_residual_floor_classify()`, checked in
+`classify()` *before* any name-based rule. A file only classifies FLOOR on
+an exact (size, sha256) match; any drift -- wrong size, same-size content
+tamper, or a missing file -- returns `UNCERTAIN` with an explicit
+"VERIFICATION FAILED" proof naming the exact mismatch, never a silent
+pass-through. Added `run_pinned_residual_floor_self_tests()` (synthetic
+fixtures, independent of the real tracked files): valid case (exact match ->
+no error), wrong-size case, wrong-content/same-size-tamper case, and
+missing-file case, plus a `classify()`-level wiring check. All four
+synthetic cases pass. Additionally proved this end-to-end against the REAL
+tracked file: flipped one byte of `frontier_df4_menu_021_A95B4E.bin`,
+reran the audit, confirmed the self-test suite itself caught the resulting
+UNCERTAIN reclassification (proving the fail-closed path is wired all the
+way from a real file edit through to a build-breaking self-test failure),
+then restored the original bytes and reconfirmed the sha256 matches the pin
+and `make compare` passes.
+
+**Verification.** `make compare` -> `fireemblem8.gba: OK` after each
+sub-step (split, deletion, pinned-guard rewrite, tamper-and-restore).
+`scripts/audit_bin_forms.py` (branch-local): MISS=0, FLOOR=1428,
+UNCERTAIN=16, TOTAL=1444 (down one FLOOR/TOTAL from D382's 1429/1445, since
+blob001 is no longer a `.bin` at all -- not reclassified, removed). Menu-path
+UNCERTAIN confirmed 0. Full verification (clean rebuild, shiftcheck, layout
+reconstruction, fresh throwaway simulation onto the current `origin/main`
+D388 tip) recorded in this commit's push message. Issue #143 remains open;
+`main` was not merged; no force-push occurred. If a concurrently-integrated
+sibling branch has already claimed D384, the integrator should renumber this
+entry (and the D378-D383 entries per the six-entry mapping in D382/D383/this
+entry), not the work it describes.
