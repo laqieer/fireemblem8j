@@ -1,5 +1,6 @@
 #include "global.h"
 #include "proc.h"
+#include "ctc.h"
 
 /* #148 gProcScr_SoundRoomUi externs (gap28, batch 6f). */
 extern void ExtramenuUnk_Init();
@@ -7254,7 +7255,128 @@ struct ProcCmd ProcScr_CallExtraMap[] __attribute__((section(".data.frontier_df4
     PROC_END,
 };
 extern const u32 data_08A9D688 __attribute__((alias("ProcScr_CallExtraMap")));
-u8 frontier_df4_menu_gap27c_4090[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x246, 0x1AE);
+/* gSprite_SavemenuData_0..16: 17 SpriteEx OAM tables (issue #143 menu pass), decoded
+ * from raw [0x246,0x3F4) via the OAM0_SHAPE_x, OAM1_SIZE_x, OAM1_X, OAM2_CHR,
+ * OAM2_LAYER macros (fe8u ctc.h); counts+CHR values are JP-specific except
+ * gSprite_SavemenuData_11 which is byte-identical to fe8u's own (src/savemenu_data.c).
+ * Pointed to by SpriteArray_SavemenuData_0/_1 (src/data/data_08A9D904/data_08A9D904.c). */
+u16 gSprite_SavemenuData_0[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x100) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(32), OAM2_CHR(0x104) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(64), OAM2_CHR(0x108) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(96), OAM2_CHR(0x10C) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_1[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    5,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x186) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(32), OAM2_CHR(0x18A) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(48), OAM2_CHR(0x106) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(80), OAM2_CHR(0x10A) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(112), OAM2_CHR(0x10E) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_2[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    3,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(16), OAM2_CHR(0x110) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(48), OAM2_CHR(0x114) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(80), OAM2_CHR(0x118) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_3[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    6,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(16), OAM2_CHR(0x110) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(48), OAM2_CHR(0x114) + OAM2_LAYER(2),
+    OAM0_SHAPE_8x16, OAM1_SIZE_8x16 + OAM1_X(64), OAM2_CHR(0x116) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(72), OAM2_CHR(0x15D) + OAM2_LAYER(2),
+    OAM0_SHAPE_8x16, OAM1_SIZE_8x16 + OAM1_X(88), OAM2_CHR(0x15F) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(96), OAM2_CHR(0x11A) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_4[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    5,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x180) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(32), OAM2_CHR(0x184) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(48), OAM2_CHR(0x106) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(80), OAM2_CHR(0x10A) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(112), OAM2_CHR(0x10E) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_5[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    3,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(16), OAM2_CHR(0xD0) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(48), OAM2_CHR(0xD4) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(80), OAM2_CHR(0xD8) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_6[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    3,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(24), OAM2_CHR(0x18C) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(56), OAM2_CHR(0x190) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(88), OAM2_CHR(0x194) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_7[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    3,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(16), OAM2_CHR(0xC0) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(48), OAM2_CHR(0xC4) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(80), OAM2_CHR(0xC8) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_8[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0xC0) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(32), OAM2_CHR(0xC4) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(64), OAM2_CHR(0xC8) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(96), OAM2_CHR(0xCC) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_9[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x18E) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(32), OAM2_CHR(0x192) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(64), OAM2_CHR(0x196) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(96), OAM2_CHR(0x19A) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_10[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(8), OAM2_CHR(0x28E) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(40), OAM2_CHR(0x292) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(72), OAM2_CHR(0x296) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(104), OAM2_CHR(0x29A) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_11[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(8), OAM2_CHR(0x280) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(40), OAM2_CHR(0x284) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(72), OAM2_CHR(0x288) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(104), OAM2_CHR(0x28C) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_12[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(24), OAM2_CHR(0x256) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(56), OAM2_CHR(0x25A) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(88), OAM2_CHR(0x25E) + OAM2_LAYER(2),
+    OAM0_SHAPE_8x16, OAM1_SIZE_8x16 + OAM1_X(104), OAM2_CHR(0x29F) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_13[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    3,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(24), OAM2_CHR(0x24C) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(56), OAM2_CHR(0x250) + OAM2_LAYER(2),
+    OAM0_SHAPE_16x16, OAM1_SIZE_16x16 + OAM1_X(88), OAM2_CHR(0x254) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_14[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    3,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(16), OAM2_CHR(0x240) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(48), OAM2_CHR(0x244) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(80), OAM2_CHR(0x248) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_15[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x200) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(32), OAM2_CHR(0x204) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(64), OAM2_CHR(0x208) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(96), OAM2_CHR(0x20C) + OAM2_LAYER(2),
+};
+u16 gSprite_SavemenuData_16[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    4,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x210) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(32), OAM2_CHR(0x214) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(64), OAM2_CHR(0x218) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(96), OAM2_CHR(0x21C) + OAM2_LAYER(2),
+};
 u32 frontier_df4_menu_028_A9E244[] __attribute__((section(".data.frontier_df4_menu.gap28"))) = {
     0x02021188,
     0x02021388,

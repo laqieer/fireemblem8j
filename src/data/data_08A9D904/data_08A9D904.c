@@ -1,9 +1,23 @@
 #include "global.h"
 #include "proc.h"
 
-extern u8 frontier_df4_menu_gap27c_4090[];
-
-extern const u8 data_08A9D688[];
+extern u16 gSprite_SavemenuData_0[];
+extern u16 gSprite_SavemenuData_1[];
+extern u16 gSprite_SavemenuData_2[];
+extern u16 gSprite_SavemenuData_3[];
+extern u16 gSprite_SavemenuData_4[];
+extern u16 gSprite_SavemenuData_5[];
+extern u16 gSprite_SavemenuData_6[];
+extern u16 gSprite_SavemenuData_7[];
+extern u16 gSprite_SavemenuData_8[];
+extern u16 gSprite_SavemenuData_9[];
+extern u16 gSprite_SavemenuData_10[];
+extern u16 gSprite_SavemenuData_11[];
+extern u16 gSprite_SavemenuData_12[];
+extern u16 gSprite_SavemenuData_13[];
+extern u16 gSprite_SavemenuData_14[];
+extern u16 gSprite_SavemenuData_15[];
+extern u16 gSprite_SavemenuData_16[];
 extern const u8 gSprite_SavemenuData_17[];
 extern const u8 gSprite_SavemenuData_18[];
 extern const u8 gSprite_SavemenuData_19[];
@@ -61,26 +75,37 @@ struct ProcCmd gProcScr_SaveBgUp[] __attribute__((section(".rodata.dat_gProcScr_
 /* Byte-neutral external alias: data_08A9D978 == gProcScr_SaveBgUp. */
 extern const u32 data_08A9D978 __attribute__((alias("gProcScr_SaveBgUp")));
 
-/* residue [08A9D904,08A9D978) (116 B): byte-identical. */
-u32 data_08A9D904[] __attribute__((section(".data.residue.08A9D904"))) = {
-    (u32)&data_08A9D688 + 0x124,
-    (u32)&data_08A9D688 + 0x13E,
-    (u32)&data_08A9D688 + 0x158,
-    (u32)&data_08A9D688 + 0x172,
-    (u32)&data_08A9D688 + 0x186,
-    (u32)&data_08A9D688 + 0x19A,
-    (u32)&data_08A9D688 + 0x1B4,
-    (u32)&frontier_df4_menu_gap27c_4090,
-    (u32)&data_08A9D688 + 0x3A,
-    (u32)&data_08A9D688 + 0x5A,
-    (u32)&data_08A9D688 + 0x6E,
-    (u32)&data_08A9D688 + 0x94,
-    (u32)&data_08A9D688 + 0xB4,
-    (u32)&data_08A9D688 + 0xC8,
-    (u32)&data_08A9D688 + 0x3A,
-    (u32)&data_08A9D688 + 0xF0,
-    (u32)&data_08A9D688 + 0x10A,
-    (u32)&data_08A9D688 + 0xDC,
+/* SpriteArray_SavemenuData_0/_1 (issue #143 menu pass): u16* pointer tables into
+ * gSprite_SavemenuData_0..16 (src/data/frontier_df4_menu/frontier_df4_menu.c),
+ * proven by fe8u's own src/savemenu_data.c pointer arrays of the same name/order
+ * (fe8u's _1 array also repeats index _1 at slot 7 and places _7 last). Consumers:
+ * src/savedraw.c, src/extramenu_unk_080B51DC.c. */
+u16 *SpriteArray_SavemenuData_0[] __attribute__((section(".data.residue.08A9D904"))) = {
+    gSprite_SavemenuData_10,
+    gSprite_SavemenuData_11,
+    gSprite_SavemenuData_12,
+    gSprite_SavemenuData_13,
+    gSprite_SavemenuData_14,
+    gSprite_SavemenuData_15,
+    gSprite_SavemenuData_16,
+};
+u16 *SpriteArray_SavemenuData_1[] __attribute__((section(".data.residue.08A9D904"))) = {
+    gSprite_SavemenuData_0,
+    gSprite_SavemenuData_1,
+    gSprite_SavemenuData_2,
+    gSprite_SavemenuData_3,
+    gSprite_SavemenuData_4,
+    gSprite_SavemenuData_5,
+    gSprite_SavemenuData_6,
+    gSprite_SavemenuData_1,
+    gSprite_SavemenuData_8,
+    gSprite_SavemenuData_9,
+    gSprite_SavemenuData_7,
+};
+/* residue [08A9D94C,08A9D978) (44 B): out of scope for this pass (task explicitly
+ * excludes the SpriteArray_SavemenuData_2 0x18-B interval and the DifficultyMenu/
+ * SysHandCtrl region beyond it) -- kept byte-identical, untouched. */
+u32 data_08A9D94C[] __attribute__((section(".data.residue.08A9D904"))) = {
     (u32)&gSprite_SavemenuData_20,
     (u32)&gSprite_SavemenuData_21,
     (u32)&gSprite_SavemenuData_22,
