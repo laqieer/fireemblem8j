@@ -976,26 +976,25 @@ menu lane's full 14-file scope, not the reopened issue as a whole (other
 concurrent lanes — glyph-relocs, uistuff-assets, ending-assets, tsa-outlier,
 map-mar-migration — are owned by sibling agents).
 
-### Remaining binary-form residuals after ending000/ending016 (#143, D397, 2026-07-14)
+### Remaining binary-form residuals after ending providers + uistuff glyph (#143, D397-D398, 2026-07-14)
 
 The two migrated raw ending providers are no longer frontier items:
 `frontier_df4_ending_000_AC059C.bin` is now the typed JP ending tables, and
 `frontier_df4_ending_016_B3EC33.bin` is now a generated subtitle TSA plus
 typed title CTC lists and the existing typed ProcCmd tail. The canonical
-built-state audit is now **MISS=0, FLOOR=1449, UNCERTAIN=6, TOTAL=1455**
-(from **0/1448/8/1456**).
+built-state audit is now **MISS=0, FLOOR=1449, UNCERTAIN=5, TOTAL=1454**
+after D398 removed the typed `SjisGlyphs_0859140C` raw mirror.
 
-The exact remaining `UNCERTAIN` work-list is six files:
+The exact remaining `UNCERTAIN` work-list is five files:
 
 - `graphics/frontier_df3_ending/dat_DfEnding002_PalGfx.bin`
 - `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin`
 - `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin`
-- `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin`
 - `graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin`
 - `graphics/frontier_ending_cg/frontier_ending_cg_tail_B3AFF4.bin`
 
-This provider integration does not close reopened issue #143 and does not
-consume the separately re-verifying uistuff glyph lane.
+These provider integrations do not close reopened issue #143. The active
+`ending-simple-fix` lane is not included in this work-list update.
 
 ### Banim/AnimScr beyond-gate residual — CLOSED (issue #166, D368, 2026-07-11)
 

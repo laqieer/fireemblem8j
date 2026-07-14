@@ -13455,3 +13455,30 @@ deleted and the new TSA source adds one legitimate binary floor. Full cold
 `make compare`, shiftcheck/graphics tests, dependency/layout/self-contained
 gates, and exact byte/relocation checks are the integration oracle. Issue
 #143 remains open; the separate uistuff glyph branch is not part of D397.
+
+## D398 — bank the typed System-SJIS glyph run and fail-closed audit hardening (#143, 2026-07-14)
+
+Serial integration accepted source commit
+`2e639427a543d0e774add07eccc9990efb415cd7` and audit follow-up
+`39d00b299e0a0a8dd16cb7715a4fa36f2ae442cc` as cherry-picks
+`e69d7565860c68f66ce1efb800fc27842da7d2a7` and
+`ddc14421a19644f4a9283c00d064a515d5648995`. The independent verifier
+verdict is **MATCH**.
+
+`SjisGlyphs_0859140C[152]` now owns
+`0x0859140C..0x08593ECC` (`0x2AC0` bytes), with linked-range SHA256
+`760e855fd5b0b76d8cf2dd7b9084e25686b6dd811dea690027d908033d36f8af`.
+Its complete inbound relocation proof is **152 = 109 external table/consumer
+links + 43 internal `sjisNext` edges**, all backed by `R_ARM_ABS32`; the
+strict named-run contract also verifies the 108 C consumers plus ASM record
+139, exact symbol extent, no raw mirror, and 19 targeted tests.
+
+The audit follow-up removes vacuous success: all 16 positive bin-form
+expectations now require at least one tracked match, while three explicit
+absence guards reject reintroduction of the migrated glyph, decoded SJIS
+pool, and symbolic music-player-table raw providers. Canonically regenerated
+asm-in-C reports remain **0 blocks in 0 files**. Combined with D397, the
+built-state bin audit moves exactly from
+`MISS=0 FLOOR=1449 UNCERTAIN=6 TOTAL=1455` to
+`MISS=0 FLOOR=1449 UNCERTAIN=5 TOTAL=1454`. Issue #143 remains open; the
+active `ending-simple-fix` branch is outside D398.
