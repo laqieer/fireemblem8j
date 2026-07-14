@@ -7584,7 +7584,19 @@ u8 frontier_df4_menu_032_AAAC4C[] __attribute__((section(".data.frontier_df4_men
 u8 data_08AAB440[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin", 0x7F4, 0x2818);
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x33C] 52t 4bpp sheet ->
  * editable PNG; [0x33C:0x810] trailing raw kept verbatim. */
-u8 frontier_df4_menu_033_AAEB40[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin", 0x33C, 0x4D4);
+/* blob 033 (AAEB40) tail fully split (issue #143 menu pass), no floor remains:
+ * [0x33C,0x35C) Pal_StatusScreenLabelSprites: 16-color palette (JP color0/1 both
+ * 0x7FFF vs fe8u), clean JASC round-trip; consumer uichapterstatus_08090A88. Was
+ * layout/baseline_syms.d/perfrag_uichapterstatus.tsv. [0x35C,0x80E)
+ * Tsa_ChapterStatusUi: byte-exact raw TSA (hdr 0x131d = 30x20, 1202 B), consumer
+ * ChapterStatus_Init -- intentionally uncompressed in JP, so kept as a raw .tsa.bin
+ * source rather than a fake compressed one. Was
+ * layout/baseline_syms.d/uichapterstatus_0809020C-4bfb09c1.tsv. [0x80E,0x810)
+ * explicit 2-B zero pad. The existing 52-tile PNG head [0,0x33C) is untouched. */
+u8 frontier_df4_menu_033_AAEB40[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.4bpp.lz");
+u16 Pal_StatusScreenLabelSprites[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U16("graphics/frontier_df4_menu/Pal_StatusScreenLabelSprites.gbapal");
+u8 Tsa_ChapterStatusUi[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U8("graphics/frontier_df4_menu/Tsa_ChapterStatusUi.tsa.bin");
+u16 frontier_df4_menu_033_pad[1] __attribute__((section(".data.frontier_df4_menu.gap33"))) = { 0x0000 };
 struct ProcCmd gProcScr_RedrawConfigHelpText[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = { /* @0x08AAF9EC 32B */
     PROC_NAME(&frontier_df4_voice_000a2_1F5840[0x28]), /* 0x081F5868 "E_CfExplReWrite" */
     PROC_SLEEP(1),
