@@ -393,7 +393,7 @@ class TsaBinClassifyTest(unittest.TestCase):
             path = os.path.join(tmp, "t.tsa.bin")
             with open(path, "wb") as f:
                 f.write(b"\x01\x02\x03")  # garbage size, wouldn't match either formula
-            kind, reason = a.classify_tsa_bin(path, "graphics/misc/gMenuSoundroom_4.tsa.bin")
+            kind, reason = a.classify_tsa_bin(path, "graphics/misc/gUnkData_26.tsa.bin")
             self.assertEqual(kind, "named_exception")
 
     def test_garbage_size_is_unknown(self):
@@ -404,6 +404,183 @@ class TsaBinClassifyTest(unittest.TestCase):
             kind, reason = a.classify_tsa_bin(path, "graphics/x/t.tsa.bin")
             self.assertEqual(kind, "unknown")
             self.assertIsNotNone(reason)
+
+
+class GtsaUnkData0TransitionalTest(unittest.TestCase):
+    """graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin's narrowly-scoped, structurally
+    validated transitional shape (276B: standard 242B TSA + 2 zero bytes + a
+    16-color trailing GBA-palette-shaped remnant), pending a separate worker's
+    split into a 244B plain TSA + Pal_ChapterTitleFire.pal."""
+
+    def _make(self, tmp, w=29, h=3, tail_words=None, zero_pad=b"\x00\x00"):
+        if tail_words is None:
+            tail_words = [0x1234] * 16  # all bit-15 clear -> valid GBA colors
+        payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+        tail = b"".join(struct.pack("<H", wd) for wd in tail_words)
+        path = os.path.join(tmp, "t.tsa.bin")
+        with open(path, "wb") as f:
+            f.write(bytes([w, h]) + payload + zero_pad + tail)
+        return path
+
+    def test_valid_transitional_shape_passes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._make(tmp)
+            kind, reason = a.classify_tsa_bin(path, a.GTSA_UNKDATA_0_TRANSITIONAL_PATH)
+            self.assertEqual(kind, "transitional_palette_tail")
+            self.assertIsNone(reason)
+
+    def test_only_applies_to_the_exact_named_path(self):
+        # The SAME 276B bytes at a DIFFERENT path must NOT get a free pass --
+        # this is not a generic "oversized TSA is fine" bypass.
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._make(tmp)
+            kind, reason = a.classify_tsa_bin(path, "graphics/x/some_other.tsa.bin")
+            self.assertEqual(kind, "unknown")
+
+    def test_bit15_set_in_tail_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tail = [0x1234] * 15 + [0x8000]  # last color has bit 15 set -- invalid
+            path = self._make(tmp, tail_words=tail)
+            kind, reason = a.classify_tsa_bin(path, a.GTSA_UNKDATA_0_TRANSITIONAL_PATH)
+            self.assertEqual(kind, "unknown")
+            self.assertIn("bit 15 set", reason)
+
+    def test_wrong_size_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._make(tmp, tail_words=[0x1234] * 15)  # one color short
+            kind, reason = a.classify_tsa_bin(path, a.GTSA_UNKDATA_0_TRANSITIONAL_PATH)
+            self.assertEqual(kind, "unknown")
+
+    def test_missing_zero_padding_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = self._make(tmp, zero_pad=b"\x01\x00")
+            kind, reason = a.classify_tsa_bin(path, a.GTSA_UNKDATA_0_TRANSITIONAL_PATH)
+            self.assertEqual(kind, "unknown")
+
+    def test_post_migration_244_byte_file_uses_plain_plus2_not_transitional(self):
+        # Once the split lands (242B standard TSA + 2 zero bytes, no palette
+        # tail), the plain "plus2" formula takes over -- the transitional
+        # branch must not (and structurally cannot) match a 244B file.
+        with tempfile.TemporaryDirectory() as tmp:
+            w, h = 29, 3
+            payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+            path = os.path.join(tmp, "t.tsa.bin")
+            with open(path, "wb") as f:
+                f.write(bytes([w, h]) + payload + b"\x00\x00")
+            kind, reason = a.classify_tsa_bin(path, a.GTSA_UNKDATA_0_TRANSITIONAL_PATH)
+            self.assertEqual(kind, "plus2")
+
+
+class MenuSoundroom4ManifestTest(unittest.TestCase):
+    """graphics/misc/gMenuSoundroom_4.tsa.bin's evidence manifest: a concatenated
+    one-row TSA template library (not a malformed single TSA) -- every record
+    must decode exactly as documented, and the terminal 4 bytes must be the
+    exact proven truncated remnant."""
+
+    def _build_valid_bytes(self):
+        out = bytearray()
+        for offset, w, h in a.MENU_SOUNDROOM_4_RECORDS:
+            self.assertEqual(offset, len(out))
+            out += bytes([w - 1, h - 1])
+            out += b"\x00" * (w * h * 2)
+        self.assertEqual(len(out), a.MENU_SOUNDROOM_4_REMNANT_OFFSET)
+        out += a.MENU_SOUNDROOM_4_REMNANT_BYTES
+        self.assertEqual(len(out), a.MENU_SOUNDROOM_4_TOTAL_SIZE)
+        return bytes(out)
+
+    def test_exact_manifest_passes(self):
+        data = self._build_valid_bytes()
+        self.assertIsNone(a.validate_menu_soundroom_4(data))
+
+    def test_classify_tsa_bin_routes_to_manifest_check(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "t.tsa.bin")
+            with open(path, "wb") as f:
+                f.write(self._build_valid_bytes())
+            kind, reason = a.classify_tsa_bin(path, a.MENU_SOUNDROOM_4_PATH)
+            self.assertEqual(kind, "menu_soundroom_4_manifest")
+            self.assertIsNone(reason)
+
+    def test_wrong_record_dims_rejected(self):
+        data = bytearray(self._build_valid_bytes())
+        data[0] = 99  # corrupt record 0's declared width
+        err = a.validate_menu_soundroom_4(bytes(data))
+        self.assertIsNotNone(err)
+        self.assertIn("offset 0", err)
+
+    def test_wrong_terminal_remnant_rejected(self):
+        data = bytearray(self._build_valid_bytes())
+        data[-1] = 0xFF  # corrupt the proven truncated remnant's last byte
+        err = a.validate_menu_soundroom_4(bytes(data))
+        self.assertIsNotNone(err)
+        self.assertIn("remnant", err)
+
+    def test_wrong_total_size_rejected(self):
+        data = self._build_valid_bytes() + b"\x00"
+        err = a.validate_menu_soundroom_4(data)
+        self.assertIsNotNone(err)
+        self.assertIn("total size", err)
+
+
+class MultibootSplitTargetsTest(unittest.TestCase):
+    """gUnkData_26.tsa.bin's successors are DORMANT until each path is actually
+    committed by the migration worker -- a fresh tree without them must not
+    fail, and each must be validated the instant it appears."""
+
+    def test_dormant_when_no_successor_paths_exist(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            os.makedirs(os.path.join(tmp, "graphics", "misc"))
+            report = a.Report()
+            a.check_multiboot_split_targets(tmp, report)
+            self.assertEqual(report.failures, [])
+            self.assertNotIn("multiboot_split_target_ok", report.counts)
+
+    def test_validates_narrow_bar_the_instant_it_appears(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d = os.path.join(tmp, "graphics", "misc")
+            os.makedirs(d)
+            # 156B = 154B standard 19x4 (w=18,h=3 zero-based) + 2 zero bytes.
+            w, h = 18, 3
+            payload = b"\x00" * ((w + 1) * (h + 1) * 2)
+            with open(os.path.join(d, "Tsa_MultiBootSendListBarNarrow.bin"), "wb") as f:
+                f.write(bytes([w, h]) + payload + b"\x00\x00")
+            report = a.Report()
+            a.check_multiboot_split_targets(tmp, report)
+            self.assertEqual(report.failures, [])
+            self.assertEqual(report.counts.get("multiboot_split_target_ok"), 1)
+
+    def test_wrong_size_narrow_bar_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d = os.path.join(tmp, "graphics", "misc")
+            os.makedirs(d)
+            with open(os.path.join(d, "Tsa_MultiBootSendListBarNarrow.bin"), "wb") as f:
+                f.write(b"\x00" * 100)  # wrong size
+            report = a.Report()
+            a.check_multiboot_split_targets(tmp, report)
+            self.assertTrue(any("156" in msg for msg in report.failures))
+
+    def test_raw_tilemap_is_not_tsa_header_parsed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d = os.path.join(tmp, "graphics", "misc")
+            os.makedirs(d)
+            # A plausible flat u16 tilemap: 1280 bytes, all tile ids in range.
+            data = struct.pack("<640H", *([0] * 640))
+            with open(os.path.join(d, "Tilemap_MultiBootSendBg.bin"), "wb") as f:
+                f.write(data)
+            report = a.Report()
+            a.check_multiboot_split_targets(tmp, report)
+            self.assertEqual(report.failures, [])
+            self.assertEqual(report.counts.get("multiboot_split_target_ok"), 1)
+
+    def test_raw_tilemap_odd_length_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d = os.path.join(tmp, "graphics", "misc")
+            os.makedirs(d)
+            with open(os.path.join(d, "Tilemap_MultiBootSendBg.bin"), "wb") as f:
+                f.write(b"\x00" * 1279)  # odd length, wrong size too
+            report = a.Report()
+            a.check_multiboot_split_targets(tmp, report)
+            self.assertTrue(report.failures)
 
 
 class MapBinTest(unittest.TestCase):
