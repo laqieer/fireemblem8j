@@ -13482,3 +13482,52 @@ built-state bin audit moves exactly from
 `MISS=0 FLOOR=1449 UNCERTAIN=6 TOTAL=1455` to
 `MISS=0 FLOOR=1449 UNCERTAIN=5 TOTAL=1454`. Issue #143 remains open; the
 active `ending-simple-fix` branch is outside D398.
+
+## D399 — bank the ending-simple asset closure wave with repaired trailers (#143, 2026-07-14)
+
+Serial integration accepted worker checkpoints
+`ae5f259fc7b6811697a050d8c2b4498d1473a96e`,
+`964cbd5f506bc5aead458f120184c818a52398b4`, and
+`736e83d451e356771aac28989e264d955f967dbe` with the independent verifier
+verdict **MATCH**. Their malformed, blank-line-separated trailer blocks were
+not rewritten; the same content was replayed as
+`d7fa13a67c4d1a1224acaf6029ae0e40edf22fd4`,
+`a6beff076227dbf7f3a48f1b6519a6df9b0c05d2`, and
+`71fca95b51646669e8f257cd421ebbf664b09b02`, each with both trailers parsed
+from one contiguous block.
+
+The verified coverage is **8,024/8,024 bytes**. Player-rank graphics now own
+`0x08AC5558..0x08AC6C98` (`0x1740` bytes, SHA256
+`da5288fd5f3e35d997c22b1286ef56167ee3f4056fa6a228c1ed8c5c31a8fbb9`) as
+five typed `u16` palette arrays plus a reproducible PNG -> 4bpp LZ image;
+all six consumer uses are symbolic, including the required
+`Pal_PlayerRankSpritesJp_Obj7Anim + 16` second-palette pointer. StaffReel
+entries 6 and 7 are named 2,050-byte TSA sources whose exact compressed ROM
+forms are respectively `0x1FC` bytes/SHA256
+`061d30a89d9e551db18d6156c7b1d9f637cf789a5af91897fb78d1aba71139d2` and
+`0x224` bytes/SHA256
+`7794943e1aa55cd9b9011b6078a46b4373cc08d620e603410b3ce926f55f2ecb`;
+the voice table now relocates against both named symbols.
+
+The 24-byte `frontier_ending_cg_pad_B352D4.bin` remains a narrowly pinned
+**FLOOR**, SHA256
+`ea5540a7a4c6d18612397d714e9ce29ef77928d28ac240eaefda6f6a8567e0e9`:
+it is a partial 4bpp fragment with no symbol, relocation, xref, semantic
+`u16` structure, CreditsCG indexing, or fe8u twin. The adjacent
+`0x08B3AFF4..0x08B3B3D4` tail is fully migrated to a typed 16-color palette
+(`0x20` bytes, SHA256
+`f58513e5f70a09eff6fca8fc7341e2a8b1ac8a5224ebd4144db59b81d7b0e6de`),
+a PNG -> 4bpp LZ image (`0x320` bytes, SHA256
+`d4c6637b1bac1e8eece1900332aa5f08131eb1295b94073019a6c2097f16f5d8`),
+and typed AP source (`0xA0` bytes, SHA256
+`6a8c32b083b620c35e85ee6dd38341368d81a1ac4e3d79428c91bcbbb6b5d4b4`).
+
+The canonically regenerated built-state audit moves exactly from
+`MISS=0 FLOOR=1449 UNCERTAIN=5 TOTAL=1454` to
+`MISS=0 FLOOR=1452 UNCERTAIN=0 TOTAL=1452`: three evidence-backed FLOOR
+promotions (StaffReel TSA 6/7 and the ending-CG pad) and two deleted raw
+providers (player-rank and ending-CG tail). Zero `UNCERTAIN` here means zero
+actionable binary-form closure residuals, not zero opaque/FLOOR debt. Full
+cold compare, shiftcheck, graphics, dependency/layout/self-contained,
+bin-form/asm-in-C, and exact range/relocation checks are the serial
+integration gate. Issue #143 remains open.
