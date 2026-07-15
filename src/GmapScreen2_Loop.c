@@ -1,39 +1,3 @@
-/* NON_MATCHING: byte source is asm/sub_80C05C8.s @ JP 0x080C05C8 (region-different,
- * gbadisasm descriptive asm; carved_rom places those bytes). This C DOCUMENTS the
- * reconstruction and is NOT in make-compare: compiled only by `make nonmatching`.
- *
- * PROPOSED NAME: GmapScreen2_Loop  (worldmap-screen node-icon display proc _Loop).
- * Twin in fe8u: src/worldmap_screen2.c GmapScreen2_Loop @ US 0x080BB798.
- *
- * Adopted from community decomp.me fork SaCCn by user TsilaAllaoui. This source
- * shape preserves default nonmatching CFLAGS and improves the match rate from the
- * old local reconstruction while remaining proved-equivalent to the JP byte source:
- *   prove_nonmatching.py sub_80C05C8 -> PROVEN-BOUNDED(2)
- *   differential_test.py sub_80C05C8 --trials 60 -> EQUIV
- *
- * 2026-07-13 allocator trace: a point-scoped, zero-byte clobber after the
- * phase-2 OAM coordinates are defined makes only those two pseudos conflict
- * with r4/r5. GCC 2.95 therefore assigns yOam0 to r6 and xOam1 to r7, matching
- * the AP_Update carriers without disturbing proc=r9, i=r8, or outX=sl.
- * decomp.me R7AaX: 1410 -> 1380.
- *
- * 2026-07-13 follow-up: `uintptr_t phaseRole` is one GCC user pseudo across
- * both phases (greg pseudo 24, 21 refs / live length 396) and therefore keeps
- * r8 when its role changes from loop index to `&proc->nodeId`. A short r3
- * nodeId-address scratch plus destination readback of `&gGMData` orders the
- * target boundary as `add r7,r2; mov r8,r3`; the r4/r5 clobber still preserves
- * the exact AP_Update r7/r6 carriers. decomp.me R7AaX: 1380 -> 1175.
- *
- * 2026-07-13 pressure follow-up: phase-1 indexes unk_34 directly with phaseRole,
- * while a real phase-role alias becomes the signed X carrier and X/Y are kept
- * live across the screen-position call by a zero-byte input. Together with the
- * point-scoped r7 and AP r4/r5 masks this removes the phase-1 sp+8 spill, keeps
- * both solved anchors, and reaches the target 544-byte size. R7AaX: 1175 -> 480.
- *
- * On a 0-score fork: move to src/GmapScreen2_Loop.c, flip carved_rom row to
- * src/GmapScreen2_Loop.o(.text), delete asm. `make compare` is the ONLY oracle.
- */
-#ifndef FE8J_DECOMPME_CONTEXT
 #include "global.h"
 
 #include "ap.h"
@@ -42,12 +6,19 @@
 #include "eventinfo.h"
 
 #include "worldmap.h"
-#endif
+
+/*
+ * Matched by decomp.me fork KxTCq from the R7AaX family. The decisive source
+ * shapes are ABI-wide coordinate arguments, literalizing the phase-1 palette
+ * mask at its only use, and reversing an equivalent node-array subscript to
+ * select the target's commutative add encoding.
+ */
 
 /* Sibling GmapScreen2_GetNodeScreenPos (JP 0x080C0574) is carved to src/ but not
  * yet in the shared header; declare locally to keep worldmap.h untouched (same
  * style as src/GmapScreen2_GetNodeScreenPos.c which also omits the prototype). */
-extern s8 GmapScreen2_GetNodeScreenPos(struct GmScreenProc * proc, s16 xIn, s16 yIn, s16 * xOut, s16 * yOut);
+extern s8 GmapScreen2_GetNodeScreenPos(
+    struct GmScreenProc * proc, int xIn, int yIn, s16 * xOut, s16 * yOut);
 
 //! FE8U = 0x080BB798  (JP 0x080C05C8)
 void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
@@ -93,8 +64,6 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 
         new_var = icon;
         ;
-        new_var4 = 0xF;
-        ;
         phaseAlias = (s16) (node->x - new_var->xCenter);
         y1 = (s16) ((*node).y - new_var->yCenter);
 
@@ -114,7 +83,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
                 local_2c,
                 local_2a,
                 new_var->pSpriteData,
-                ((chr + new_var->sheetTileId) + ((proc->pal & new_var4) << 12)) + (((2 & 0x3) << 9) << 1)
+                ((chr + new_var->sheetTileId) + ((proc->pal & 0xF) << 12)) + (((2 & 0x3) << 9) << 1)
             );
         }
     }
@@ -142,7 +111,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
             do
             {
                 gm->nodes[*(u8 *) phaseRole].state += 0;
-                if (gm->nodes[*(u8 *) phaseRole].state & 2)
+                if ((*(u8 *) phaseRole)[gm->nodes].state & 2)
                 {
                     xOam1 = local_2c & 0x01FF;
                 }

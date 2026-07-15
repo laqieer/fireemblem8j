@@ -210,7 +210,7 @@ an effective score 0 without pretending the stock compiler produced raw score 0.
 
 ## 12. Match patterns — community forks plus local oracle wins (D292/D366/D369/D370)
 
-Fifteen FE8J reg-coloring NEARs were driven to **score 0** on decomp.me forks by
+Sixteen FE8J reg-coloring NEARs were driven to **score 0** on decomp.me forks by
 community matcher **TsilaAllaoui**, then integrated to
 `src/` byte-exact here. Diffing each non-matching parent (proxied from the in-repo
 `src/nonmatching/*` stubs, git history, and the fe8u natural form — the decomp.me parents
@@ -224,7 +224,7 @@ sweeps could not. Four local-oracle matches add clean/scoped source levers:
 `DecodeAndVerifyArenaRecord` (P1/P4/P13), and
 `DecodeLinkArenaRecordHeader` (P14).
 
-The 19 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 20 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -248,6 +248,7 @@ The 19 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 | local `GetUnitDefinitionFormEventScr` (sub_800FAD0, 464 B) | 2 | 3 | 2 | 0 | **P23** ABI-wide stacked arg + delayed local re-narrow; direct arg2 lifetime; paired stack homes; r5 tail readback |
+| KxTCq `GmapScreen2_Loop` (sub_80C05C8, 544 B) | 0 | 0 | 0 | 3 empty | **P24** caller-side ABI widening + single-use literal + P14 commutative subscript spelling |
 
 **LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
 The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
@@ -531,6 +532,31 @@ linked-ROM byte identity, CBMC 0/374, and differential EQUIV over 200 trials.
 The flattened upload and the project-form source are deliberately not
 text-identical.
 
+**P24 — widen caller-side narrow formals, inline single-use constants, then
+spell the final commutative DAG.** A callee can consume word-wide register
+arguments even when its natural C declaration uses `s16`. If the JP caller
+passes already-word-sized values and schedules the fifth stack argument before
+materializing r1/r2, a caller-local `int` prototype can remove premature
+narrowing pressure without changing the ABI. Also remove a one-use constant
+pseudo by placing the literal at its use, and choose an equivalent array
+subscript spelling when only the two-address add encoding remains:
+```c
+extern s8 GetPos(struct Proc *, int x, int y, s16 *outX, s16 *outY);
+
+PutSpriteExt(..., (proc->pal & 0xF) << 12);
+
+if (index[base].state & 2) /* equivalent to base[index], different add DAG */
+    ...
+```
+On `GmapScreen2_Loop`, KxTCq moved hosted score 480 -> 390 by inlining `0xF`,
+390 -> 40 by widening the two coordinate formals, and 40 -> relocation-only 30
+by reversing the final node-array subscript. Its three `.set` aliases were
+scratch-only; stripping them and linking real project symbols produced the
+exact 544-byte ROM range. This is not a generic stack-call cure:
+`sub_800A34C` retained its 10-byte call-order residual when its fourth pointer
+formal was widened to `int`, and passing the fifth argument directly worsened
+the residual to 12 bytes, so neither transfer variant was adopted.
+
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
    slots differ) — objdiff / the region `cmp`. If opcodes differ, it's a §1–§9 shape issue.
@@ -550,7 +576,7 @@ across compilers. Prefer P8/P7/P5/P6 (real source levers) and escalate to asm-co
 for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
 justified end of the spectrum; jmNW8's zero-asm form is the ideal). The community-fork
 patterns above are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples,
-including `l4bts`/P13 and the Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest.
+including `l4bts`/P13, KxTCq/P24, and the Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest.
 
 ### Field application and later harvested outcomes (D292 Phase 4)
 Applying the above to the ~21 `DECOMP_THEN_UPDATE` registry functions confirmed they are the

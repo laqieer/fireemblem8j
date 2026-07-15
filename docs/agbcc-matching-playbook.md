@@ -412,6 +412,9 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    locally matched owned h2W8F (`DecodeAndVerifyArenaRecord`): all eleven
    owned/community scratch pages report raw score 0, and exactly the six owned
    registry rows were removed.
+   R7AaX/KxTCq (`GmapScreen2_Loop`) later completed the same raw-score lifecycle:
+   the project adaptation stripped three `.set` aliases, passed the linked ROM
+   and shiftability gates, updated owned R7AaX to score 0, and retired its row.
 
    **Do not simplify a harvested source before measuring it.** In `l4bts`, reading
    the sine value through the reused `data` pointer looked equivalent to replacing
@@ -427,6 +430,15 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    its real callback alias to r9 and likewise compiles to `_call_via_r9`. Neither
    substitutes a fixed callee or contains a raw branch opcode. A fixed target or
    scripted `bl` may match bytes while changing semantics and must be rejected.
+
+   **Audit the real ABI before trusting score 0.** A scratch can match because
+   undefined behavior or an incorrect declaration happens to reuse the target
+   stack bytes. BVOBw (`sub_800A34C`) declared and called the real five-argument
+   `sub_800A194` with only four arguments; its apparent fifth word was a
+   coincidental outgoing-stack local. Keep such results out of the actionable
+   harvest via `scripts/tools/decompme/rejected_matches.tsv`, add a focused
+   classifier test, and leave the owned family active. Score 0 is a candidate;
+   semantic ABI review plus the project oracle is the acceptance gate.
 
 ### Proven nonzero improvements: synchronize before committing
 

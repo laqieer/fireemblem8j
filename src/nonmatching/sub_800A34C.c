@@ -18,6 +18,11 @@
  * count to [sp]; JP performs that same tx load after materializing r0-r2.
  * Every other instruction and the trailing aligned halfword match.
  *
+ * 2026-07-15 P24 transfer check after the KxTCq harvest: passing count directly
+ * worsened the object residual from 10 to 12 bytes, while declaring the fourth
+ * pointer argument as ABI-wide int left the same 10-byte residual. Neither
+ * moved the tx load after r0-r2, so both variants were rejected.
+ *
  * The integer-address rebases below are delayed casts only: each final pointer
  * resolves back inside work (tan, sub[1], or sub[last]).  No intermediate
  * pointer is dereferenced, no raw opcode/fake call is used, and all five solver
