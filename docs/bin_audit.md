@@ -1572,4 +1572,4 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 ---
 
-_Regenerate: `python3 scripts/audit_bin_forms.py`. Oracle: `../../fireemblem8u`._
+_Regenerate: `python3 scripts/audit_bin_forms.py`. Oracle: `../fireemblem8u`._
