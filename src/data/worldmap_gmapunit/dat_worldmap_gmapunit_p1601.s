@@ -10,6 +10,8 @@
 @ Byte-identical to the ROM, verified by `make compare`.
 
 	.global AP_DrawPreparationsBanner
+	.type AP_DrawPreparationsBanner, %object
+	.size AP_DrawPreparationsBanner, Img_PrepFunds - AP_DrawPreparationsBanner
 AP_DrawPreparationsBanner:
 AP_DrawPreparationsBanner_motion:
 	.2byte (AP_DrawPreparationsBanner_frame_list - AP_DrawPreparationsBanner_motion), (AP_DrawPreparationsBanner_anim_list - AP_DrawPreparationsBanner_motion) @ header
@@ -57,5 +59,8 @@ AP_DrawPreparationsBanner_anim_1: @ +$5C
 	.endif
 
 	.global Img_PrepFunds
+	.type Img_PrepFunds, %object
+	.size Img_PrepFunds, .L_opaque_extent_end_dat_worldmap_gmapunit_p1601 - Img_PrepFunds
 Img_PrepFunds:
 	.incbin "graphics/gmapunit/Img_PrepFunds.4bpp.lz"
+.L_opaque_extent_end_dat_worldmap_gmapunit_p1601:

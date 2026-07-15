@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_banim_ekrtriangle_7, "a", %progbits
 	.global AnimSprite_Tri_16
+	.type AnimSprite_Tri_16, %object
 AnimSprite_Tri_16:
 	.short 0x4000, 0x8000, 0x0000, -32, -16, 0
 	.short 0x0000, 0x4000, 0x0004, 0, -16, 0
@@ -14,8 +15,10 @@ AnimSprite_Tri_16:
 	.short 0x4000, 0x0000, 0x002D, 16, -16, 0
 	.short 0x0000, 0x0000, 0x002F, 32, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_Tri_16, . - AnimSprite_Tri_16
 	.section .rodata.dat_banim_ekrtriangle_7, "a", %progbits
 	.global AnimSprite_TriGenerial_4
+	.type AnimSprite_TriGenerial_4, %object
 AnimSprite_TriGenerial_4:
 	.short 0x4000, 0x8000, 0x0040, -39, 0, 0
 	.short 0x8000, 0x0000, 0x0044, -7, 0, 0
@@ -28,8 +31,11 @@ AnimSprite_TriGenerial_4:
 	.short 0x4000, 0x0000, 0x0052, -63, -13, 0
 	.short 0x0000, 0x0000, 0x0054, -47, -13, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_TriGenerial_4, . - AnimSprite_TriGenerial_4
 	.section .rodata.dat_banim_ekrtriangle_7, "a", %progbits
 	.global AnimSprite_TriGenerial_5
+	.type AnimSprite_TriGenerial_5, %object
 AnimSprite_TriGenerial_5:
 	.short 0x0000, 0x0000, 0x001F, 0, -8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_TriGenerial_5, . - AnimSprite_TriGenerial_5

@@ -1,6 +1,8 @@
 .section .rodata.dat_anim_mapanim_torchfx,"aw"
 
 	.global gMapanimTorchfx_0
+	.type gMapanimTorchfx_0, %object
+	.size gMapanimTorchfx_0, ApConf_MapAnimTorchfx - gMapanimTorchfx_0
 gMapanimTorchfx_0:  @ 0x089A5A6C
 gMapanimTorchfx_motion:
 	.2byte (gMapanimTorchfx_frame_list - gMapanimTorchfx_motion), (gMapanimTorchfx_anim_list - gMapanimTorchfx_motion) @ header
@@ -552,6 +554,8 @@ gMapanimTorchfx_anim_3: @ +$75C
 	.endif
 
 	.global ApConf_MapAnimTorchfx
+	.type ApConf_MapAnimTorchfx, %object
+	.size ApConf_MapAnimTorchfx, .L_opaque_extent_end_dat_anim_mapanim_torchfx - ApConf_MapAnimTorchfx
 ApConf_MapAnimTorchfx:  @ 0x089A61F8
 ApConf_MapAnimTorchfx_motion:
 	.2byte (ApConf_MapAnimTorchfx_frame_list - ApConf_MapAnimTorchfx_motion), (ApConf_MapAnimTorchfx_anim_list - ApConf_MapAnimTorchfx_motion) @ header
@@ -598,3 +602,4 @@ ApConf_MapAnimTorchfx_anim_0: @ +$46
 	.if (.L_end_ApConf_MapAnimTorchfx - ApConf_MapAnimTorchfx) != 92
 	.error "ApConf_MapAnimTorchfx size mismatch"
 	.endif
+.L_opaque_extent_end_dat_anim_mapanim_torchfx:

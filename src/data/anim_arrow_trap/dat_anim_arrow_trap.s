@@ -1,6 +1,7 @@
 .section .rodata.dat_anim_arrow_trap,"aw"
 
 	.global SpriteAnim_ArrowTrap
+	.type SpriteAnim_ArrowTrap, %object
 SpriteAnim_ArrowTrap:  @ 0x085A2384
 SpriteAnim_ArrowTrap_motion:
 	.2byte (SpriteAnim_ArrowTrap_frame_list - SpriteAnim_ArrowTrap_motion), (SpriteAnim_ArrowTrap_anim_list - SpriteAnim_ArrowTrap_motion) @ header
@@ -331,3 +332,4 @@ SpriteAnim_ArrowTrap_anim_0: @ +$568
 	.if (.L_end_SpriteAnim_ArrowTrap - SpriteAnim_ArrowTrap) != 1468
 	.error "SpriteAnim_ArrowTrap size mismatch"
 	.endif
+	.size SpriteAnim_ArrowTrap, . - SpriteAnim_ArrowTrap

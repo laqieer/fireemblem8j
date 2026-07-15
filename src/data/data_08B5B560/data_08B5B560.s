@@ -3,6 +3,7 @@
  */
 	.section .data.residue.08B5B560, "aw", %progbits
 	.global data_08B5B560
+	.type data_08B5B560, %object
 data_08B5B560:
 	.4byte 0x00050010
 	.4byte 0xF000003F
@@ -66,3 +67,4 @@ data_08B5B560:
 	.4byte 0xB001F01F
 	.4byte 0x00000001
 /* audited slice data_08B5B560: ptr=0 data=61 skip=0 */
+	.size data_08B5B560, . - data_08B5B560

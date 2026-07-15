@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_worldmap_gmapunit_p1058, "a", %progbits
 	.global AnimSprite_TriGenerial_6
+	.type AnimSprite_TriGenerial_6, %object
 AnimSprite_TriGenerial_6:
 	.short 0x4000, 0x8000, 0x0000, -26, -32, 0
 	.short 0x8000, 0x0000, 0x0004, 6, -32, 0
@@ -11,8 +12,10 @@ AnimSprite_TriGenerial_6:
 	.short 0x4000, 0x8000, 0x000A, -22, 0, 0
 	.short 0x8000, 0x0000, 0x000E, 10, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_TriGenerial_6, . - AnimSprite_TriGenerial_6
 	.section .rodata.dat_worldmap_gmapunit_p1058, "a", %progbits
 	.global AnimSprite_TriGenerial_7
+	.type AnimSprite_TriGenerial_7, %object
 AnimSprite_TriGenerial_7:
 	.short 0x4000, 0x8000, 0x0040, -68, -24, 0
 	.short 0x4000, 0x8000, 0x0044, -36, -32, 0
@@ -25,3 +28,4 @@ AnimSprite_TriGenerial_7:
 	.short 0x4000, 0x0000, 0x0053, -60, -8, 0
 	.short 0x0000, 0x0000, 0x0055, -44, -8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_TriGenerial_7, . - AnimSprite_TriGenerial_7

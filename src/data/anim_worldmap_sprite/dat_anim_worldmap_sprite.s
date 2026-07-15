@@ -5,6 +5,8 @@
 	.align 2
 
 	.global Sprite_0
+	.type Sprite_0, %object
+	.size Sprite_0, gImg_WorldmapNodeRevealEffect - Sprite_0
 	Sprite_0:  @ 0x08B1CD80
 	@ AP animation definition (frame_list +0x4, anim_list +0x26); flat halfword table, 428 bytes
 	.2byte 0x0004, 0x0026, 0x0026, 0x0034, 0x0042, 0x0056, 0x0070, 0x0090
@@ -36,14 +38,20 @@
 	.2byte 0x000F, 0x000D, 0x0010, 0x0000, 0xFFFF, 0x0000
 
 	.global gImg_WorldmapNodeRevealEffect
+	.type gImg_WorldmapNodeRevealEffect, %object
+	.size gImg_WorldmapNodeRevealEffect, gPal_WorldmapNodeRevealEffect - gImg_WorldmapNodeRevealEffect
 	gImg_WorldmapNodeRevealEffect:  @ 0x08B1CF2C
 	.incbin "graphics/worldmap/gImg_WorldmapNodeRevealEffect.4bpp.lz"
 
 	.global gPal_WorldmapNodeRevealEffect
+	.type gPal_WorldmapNodeRevealEffect, %object
+	.size gPal_WorldmapNodeRevealEffect, gWorldmapSprite_0 - gPal_WorldmapNodeRevealEffect
 	gPal_WorldmapNodeRevealEffect:  @ 0x08B1D0BC
 	.incbin "graphics/worldmap/gPal_WorldmapNodeRevealEffect.gbapal"
 
 	.global gWorldmapSprite_0
+	.type gWorldmapSprite_0, %object
+	.size gWorldmapSprite_0, Img_GmapPath - gWorldmapSprite_0
 	gWorldmapSprite_0:  @ 0x08B1D0DC
 	@ RGB15 color/palette table (72 u16 entries, 144 bytes)
 	.2byte 0x7BC7, 0x7EE3, 0x7622, 0x7EE3, 0x7BC7, 0x6D43, 0x48E7, 0x48E7
@@ -57,14 +65,20 @@
 	.2byte 0x3DEF, 0x4A52, 0x5294, 0x5AD6, 0x6739, 0x6F7B, 0x77BD, 0x7FFF
 
 	.global Img_GmapPath
+	.type Img_GmapPath, %object
+	.size Img_GmapPath, gWorldmapSprite_1 - Img_GmapPath
 	Img_GmapPath:  @ 0x08B1D16C
 	.incbin "graphics/worldmap/Img_GmapPath.4bpp.lz"
 
 	.global gWorldmapSprite_1
+	.type gWorldmapSprite_1, %object
+	.size gWorldmapSprite_1, gWorldmapSprite_2 - gWorldmapSprite_1
 	gWorldmapSprite_1:  @ 0x08B1D238
 	.incbin "graphics/reuse/gWorldmapSprite_1.4bpp"
 
 	.global gWorldmapSprite_2
+	.type gWorldmapSprite_2, %object
+	.size gWorldmapSprite_2, gWorldmapSprite_3 - gWorldmapSprite_2
 	gWorldmapSprite_2:  @ 0x08B1D258
 	.byte 12, 8, 3, 1  @ rect 0: x=12 y=8 w=3 h=1
 	.2byte 0x0001, 0x0001, 0x0007
@@ -78,6 +92,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_3
+	.type gWorldmapSprite_3, %object
+	.size gWorldmapSprite_3, gWorldmapSprite_4 - gWorldmapSprite_3
 	gWorldmapSprite_3:  @ 0x08B1D28C
 	.byte 11, 9, 2, 1  @ rect 0: x=11 y=9 w=2 h=1
 	.2byte 0x0006, 0x0007
@@ -95,6 +111,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_4
+	.type gWorldmapSprite_4, %object
+	.size gWorldmapSprite_4, gWorldmapSprite_5 - gWorldmapSprite_4
 	gWorldmapSprite_4:  @ 0x08B1D2C4
 	.byte 14, 15, 2, 1  @ rect 0: x=14 y=15 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -108,6 +126,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_5
+	.type gWorldmapSprite_5, %object
+	.size gWorldmapSprite_5, gWorldmapSprite_6 - gWorldmapSprite_5
 	gWorldmapSprite_5:  @ 0x08B1D2E8
 	.byte 16, 18, 3, 1  @ rect 0: x=16 y=18 w=3 h=1
 	.2byte 0x0001, 0x0001, 0x0001
@@ -117,6 +137,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_6
+	.type gWorldmapSprite_6, %object
+	.size gWorldmapSprite_6, gWorldmapSprite_7 - gWorldmapSprite_6
 	gWorldmapSprite_6:  @ 0x08B1D300
 	.byte 18, 19, 2, 1  @ rect 0: x=18 y=19 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -130,6 +152,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_7
+	.type gWorldmapSprite_7, %object
+	.size gWorldmapSprite_7, gWorldmapSprite_8 - gWorldmapSprite_7
 	gWorldmapSprite_7:  @ 0x08B1D324
 	.byte 20, 22, 4, 1  @ rect 0: x=20 y=22 w=4 h=1
 	.2byte 0x0001, 0x0001, 0x0001, 0x0007
@@ -141,6 +165,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_8
+	.type gWorldmapSprite_8, %object
+	.size gWorldmapSprite_8, gWorldmapSprite_9 - gWorldmapSprite_8
 	gWorldmapSprite_8:  @ 0x08B1D348
 	.byte 22, 25, 2, 1  @ rect 0: x=22 y=25 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -152,6 +178,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_9
+	.type gWorldmapSprite_9, %object
+	.size gWorldmapSprite_9, gWorldmapSprite_10 - gWorldmapSprite_9
 	gWorldmapSprite_9:  @ 0x08B1D370
 	.byte 22, 25, 2, 1  @ rect 0: x=22 y=25 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -163,10 +191,14 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_10
+	.type gWorldmapSprite_10, %object
+	.size gWorldmapSprite_10, gWorldmapSprite_11 - gWorldmapSprite_10
 	gWorldmapSprite_10:  @ 0x08B1D398
 	.incbin "graphics/reuse/gWorldmapSprite_10.4bpp"
 
 	.global gWorldmapSprite_11
+	.type gWorldmapSprite_11, %object
+	.size gWorldmapSprite_11, gWorldmapSprite_12 - gWorldmapSprite_11
 	gWorldmapSprite_11:  @ 0x08B1D3D8
 	.byte 18, 7, 2, 1  @ rect 0: x=18 y=7 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -180,6 +212,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_12
+	.type gWorldmapSprite_12, %object
+	.size gWorldmapSprite_12, gWorldmapSprite_13 - gWorldmapSprite_12
 	gWorldmapSprite_12:  @ 0x08B1D3FC
 	.byte 26, 7, 2, 1  @ rect 0: x=26 y=7 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -197,10 +231,14 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_13
+	.type gWorldmapSprite_13, %object
+	.size gWorldmapSprite_13, gWorldmapSprite_14 - gWorldmapSprite_13
 	gWorldmapSprite_13:  @ 0x08B1D430
 	.incbin "graphics/reuse/gWorldmapSprite_13.4bpp"
 
 	.global gWorldmapSprite_14
+	.type gWorldmapSprite_14, %object
+	.size gWorldmapSprite_14, gWorldmapSprite_15 - gWorldmapSprite_14
 	gWorldmapSprite_14:  @ 0x08B1D450
 	.byte 33, 12, 4, 1  @ rect 0: x=33 y=12 w=4 h=1
 	.2byte 0x0001, 0x0001, 0x0001, 0x0007
@@ -216,6 +254,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_15
+	.type gWorldmapSprite_15, %object
+	.size gWorldmapSprite_15, gWorldmapSprite_16 - gWorldmapSprite_15
 	gWorldmapSprite_15:  @ 0x08B1D488
 	.byte 38, 17, 2, 1  @ rect 0: x=38 y=17 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -233,6 +273,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_16
+	.type gWorldmapSprite_16, %object
+	.size gWorldmapSprite_16, gWorldmapSprite_17 - gWorldmapSprite_16
 	gWorldmapSprite_16:  @ 0x08B1D4BC
 	.byte 9, 9, 3, 1  @ rect 0: x=9 y=9 w=3 h=1
 	.2byte 0x0407, 0x0406, 0x0807
@@ -258,6 +300,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_17
+	.type gWorldmapSprite_17, %object
+	.size gWorldmapSprite_17, gWorldmapSprite_18 - gWorldmapSprite_17
 	gWorldmapSprite_17:  @ 0x08B1D510
 	.byte 8, 20, 2, 1  @ rect 0: x=8 y=20 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -283,10 +327,14 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_18
+	.type gWorldmapSprite_18, %object
+	.size gWorldmapSprite_18, gWorldmapSprite_19 - gWorldmapSprite_18
 	gWorldmapSprite_18:  @ 0x08B1D568
 	.incbin "graphics/reuse/gWorldmapSprite_18.4bpp"
 
 	.global gWorldmapSprite_19
+	.type gWorldmapSprite_19, %object
+	.size gWorldmapSprite_19, gWorldmapSprite_20 - gWorldmapSprite_19
 	gWorldmapSprite_19:  @ 0x08B1D5A8
 	.byte 19, 30, 2, 1  @ rect 0: x=19 y=30 w=2 h=1
 	.2byte 0x0001, 0x0007
@@ -300,6 +348,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_20
+	.type gWorldmapSprite_20, %object
+	.size gWorldmapSprite_20, gWorldmapSprite_21 - gWorldmapSprite_20
 	gWorldmapSprite_20:  @ 0x08B1D5D8
 	.byte 25, 32, 7, 1  @ rect 0: x=25 y=32 w=7 h=1
 	.2byte 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001
@@ -309,6 +359,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_21
+	.type gWorldmapSprite_21, %object
+	.size gWorldmapSprite_21, gWorldmapSprite_22 - gWorldmapSprite_21
 	gWorldmapSprite_21:  @ 0x08B1D600
 	.byte 38, 25, 2, 1  @ rect 0: x=38 y=25 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -332,6 +384,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_22
+	.type gWorldmapSprite_22, %object
+	.size gWorldmapSprite_22, gWorldmapSprite_23 - gWorldmapSprite_22
 	gWorldmapSprite_22:  @ 0x08B1D650
 	.byte 28, 26, 3, 1  @ rect 0: x=28 y=26 w=3 h=1
 	.2byte 0x0001, 0x0001, 0x0007
@@ -347,6 +401,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_23
+	.type gWorldmapSprite_23, %object
+	.size gWorldmapSprite_23, gWorldmapSprite_24 - gWorldmapSprite_23
 	gWorldmapSprite_23:  @ 0x08B1D684
 	.byte 26, 19, 2, 1  @ rect 0: x=26 y=19 w=2 h=1
 	.2byte 0x0006, 0x0007
@@ -366,6 +422,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_24
+	.type gWorldmapSprite_24, %object
+	.size gWorldmapSprite_24, gWorldmapSprite_25 - gWorldmapSprite_24
 	gWorldmapSprite_24:  @ 0x08B1D6DC
 	.byte 38, 17, 2, 1  @ rect 0: x=38 y=17 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -383,6 +441,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_25
+	.type gWorldmapSprite_25, %object
+	.size gWorldmapSprite_25, gWorldmapSprite_26 - gWorldmapSprite_25
 	gWorldmapSprite_25:  @ 0x08B1D710
 	.byte 18, 11, 2, 1  @ rect 0: x=18 y=11 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -406,6 +466,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_26
+	.type gWorldmapSprite_26, %object
+	.size gWorldmapSprite_26, gWorldmapSprite_27 - gWorldmapSprite_26
 	gWorldmapSprite_26:  @ 0x08B1D768
 	.byte 44, 21, 2, 1  @ rect 0: x=44 y=21 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -421,6 +483,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_27
+	.type gWorldmapSprite_27, %object
+	.size gWorldmapSprite_27, gWorldmapSprite_28 - gWorldmapSprite_27
 	gWorldmapSprite_27:  @ 0x08B1D7A0
 	.byte 44, 15, 2, 1  @ rect 0: x=44 y=15 w=2 h=1
 	.2byte 0x0003, 0x0004
@@ -438,6 +502,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_28
+	.type gWorldmapSprite_28, %object
+	.size gWorldmapSprite_28, gWorldmapSprite_29 - gWorldmapSprite_28
 	gWorldmapSprite_28:  @ 0x08B1D7D4
 	.byte 47, 11, 2, 1  @ rect 0: x=47 y=11 w=2 h=1
 	.2byte 0x0407, 0x0406
@@ -451,6 +517,8 @@
 	.byte 0x00  @ align pad
 
 	.global gWorldmapSprite_29
+	.type gWorldmapSprite_29, %object
+	.size gWorldmapSprite_29, gWorldmapSprite_30 - gWorldmapSprite_29
 	gWorldmapSprite_29:  @ 0x08B1D7FC
 	.byte 42, 8, 6, 1  @ rect 0: x=42 y=8 w=6 h=1
 	.2byte 0x0407, 0x0001, 0x0001, 0x0001, 0x0001, 0x0001
@@ -464,6 +532,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_30
+	.type gWorldmapSprite_30, %object
+	.size gWorldmapSprite_30, gWorldmapSprite_31 - gWorldmapSprite_30
 	gWorldmapSprite_30:  @ 0x08B1D838
 	.byte 48, 11, 3, 1  @ rect 0: x=48 y=11 w=3 h=1
 	.2byte 0x0C07, 0x0006, 0x0007
@@ -489,10 +559,14 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_31
+	.type gWorldmapSprite_31, %object
+	.size gWorldmapSprite_31, gWorldmapSprite_32 - gWorldmapSprite_31
 	gWorldmapSprite_31:  @ 0x08B1D890
 	.incbin "graphics/reuse/gWorldmapSprite_31.4bpp"
 
 	.global gWorldmapSprite_32
+	.type gWorldmapSprite_32, %object
+	.size gWorldmapSprite_32, gWorldmapSprite_33 - gWorldmapSprite_32
 	gWorldmapSprite_32:  @ 0x08B1D8D0
 	.byte 32, 4, 11, 1  @ rect 0: x=32 y=4 w=11 h=1
 	.2byte 0x040E, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008, 0x0008
@@ -508,6 +582,8 @@
 	.byte 0x00, 0x00, 0x00  @ align pad
 
 	.global gWorldmapSprite_33
+	.type gWorldmapSprite_33, %object
+	.size gWorldmapSprite_33, .L_opaque_extent_end_dat_anim_worldmap_sprite - gWorldmapSprite_33
 	gWorldmapSprite_33:  @ 0x08B1D928
 	.byte 42, 8, 2, 1  @ rect 0: x=42 y=8 w=2 h=1
 	.2byte 0x0407, 0x0001
@@ -519,3 +595,4 @@
 	.2byte 0x0002, 0x0002, 0x0002, 0x0807
 	.byte 0xFF  @ terminator
 	.byte 0x00, 0x00, 0x00  @ align pad
+.L_opaque_extent_end_dat_anim_worldmap_sprite:

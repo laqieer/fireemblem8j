@@ -1,6 +1,8 @@
 .section .rodata.dat_anim_mapanim_berserk_silence,"aw"
 
 	.global ApConf_MapAnimBerserkfx
+	.type ApConf_MapAnimBerserkfx, %object
+	.size ApConf_MapAnimBerserkfx, Img_ManimSilenceObjfx - ApConf_MapAnimBerserkfx
 ApConf_MapAnimBerserkfx:  @ 0x089B2108
 ApConf_MapAnimBerserkfx_motion:
 	.2byte (ApConf_MapAnimBerserkfx_frame_list - ApConf_MapAnimBerserkfx_motion), (ApConf_MapAnimBerserkfx_anim_list - ApConf_MapAnimBerserkfx_motion) @ header
@@ -81,18 +83,26 @@ ApConf_MapAnimBerserkfx_anim_0: @ +$66
 	.endif
 
 	.global Img_ManimSilenceObjfx
+	.type Img_ManimSilenceObjfx, %object
+	.size Img_ManimSilenceObjfx, Img_ManimSilenceBgfx - Img_ManimSilenceObjfx
 Img_ManimSilenceObjfx:  @ 0x089B21D8
 	.incbin "graphics/misc_gfx3/Img_ManimSilenceObjfx.4bpp.lz"
 
 	.global Img_ManimSilenceBgfx
+	.type Img_ManimSilenceBgfx, %object
+	.size Img_ManimSilenceBgfx, Pal_ManimSilencefx - Img_ManimSilenceBgfx
 Img_ManimSilenceBgfx:  @ 0x089B2618
     .incbin "graphics/misc_gfx3/Img_ManimSilenceBgfx.4bpp.lz"
 
 	.global Pal_ManimSilencefx
+	.type Pal_ManimSilencefx, %object
+	.size Pal_ManimSilencefx, ApConf_ManimSilencefx - Pal_ManimSilencefx
 Pal_ManimSilencefx:  @ 0x089B2728
 	.incbin "graphics/misc_gfx3/Pal_ManimSilencefx.gbapal"
 
 	.global ApConf_ManimSilencefx
+	.type ApConf_ManimSilencefx, %object
+	.size ApConf_ManimSilencefx, .L_opaque_extent_end_dat_anim_mapanim_berserk_silence - ApConf_ManimSilencefx
 ApConf_ManimSilencefx:  @ 0x089B2748
 ApConf_ManimSilencefx_motion:
 	.2byte (ApConf_ManimSilencefx_frame_list - ApConf_ManimSilencefx_motion), (ApConf_ManimSilencefx_anim_list - ApConf_ManimSilencefx_motion) @ header
@@ -218,3 +228,4 @@ ApConf_ManimSilencefx_anim_0: @ +$B0
 	.if (.L_end_ApConf_ManimSilencefx - ApConf_ManimSilencefx) != 312
 	.error "ApConf_ManimSilencefx size mismatch"
 	.endif
+.L_opaque_extent_end_dat_anim_mapanim_berserk_silence:

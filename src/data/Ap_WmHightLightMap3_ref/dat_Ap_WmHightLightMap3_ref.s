@@ -10,6 +10,7 @@
 @ shiftable.
 
 	.global Ap_WmHightLightMap3
+	.type Ap_WmHightLightMap3, %object
 Ap_WmHightLightMap3:
 Ap_WmHightLightMap3_motion:
 	.2byte (Ap_WmHightLightMap3_frame_list - Ap_WmHightLightMap3_motion), (Ap_WmHightLightMap3_anim_list - Ap_WmHightLightMap3_motion) @ header
@@ -51,3 +52,4 @@ Ap_WmHightLightMap3_anim_1: @ +$54
 	.if (.L_end_Ap_WmHightLightMap3 - Ap_WmHightLightMap3) != 92
 	.error "Ap_WmHightLightMap3 size mismatch"
 	.endif
+	.size Ap_WmHightLightMap3, . - Ap_WmHightLightMap3

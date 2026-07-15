@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p150, "a", %progbits
 	.global AnimSprite_EfxHammarneOBJ_29
+	.type AnimSprite_EfxHammarneOBJ_29, %object
 AnimSprite_EfxHammarneOBJ_29:
 	.short 0x0000, 0x1000, 0x0019, -12, 9, 0
 	.short 0x0000, 0x1000, 0x0019, -8, 13, 0
@@ -26,8 +27,10 @@ AnimSprite_EfxHammarneOBJ_29:
 	.short 0x0000, 0x1000, 0x001B, 3, -34, 0
 	.short 0x0000, 0x1000, 0x001B, -2, -29, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxHammarneOBJ_29, . - AnimSprite_EfxHammarneOBJ_29
 	.section .rodata.dat_data_banim_p150, "a", %progbits
 	.global AnimSprite_EfxHammarneOBJ_30
+	.type AnimSprite_EfxHammarneOBJ_30, %object
 AnimSprite_EfxHammarneOBJ_30:
 	.short 0x0000, 0x1000, 0x0019, -8, 13, 0
 	.short 0x0000, 0x1000, 0x001A, 16, -15, 0
@@ -49,3 +52,4 @@ AnimSprite_EfxHammarneOBJ_30:
 	.short 0x0000, 0x1000, 0x001B, 3, -34, 0
 	.short 0x0000, 0x1000, 0x001B, -2, -29, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxHammarneOBJ_30, . - AnimSprite_EfxHammarneOBJ_30

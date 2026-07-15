@@ -7,6 +7,7 @@
 @ OAM attr1/attr2 data, NOT pointers — the table is fully shiftable.
 
 	.global unit_icon_move_Journeyman_T2_motion
+	.type unit_icon_move_Journeyman_T2_motion, %object
 unit_icon_move_Journeyman_T2_motion:
 	.2byte (unit_icon_move_Journeyman_T2_frame_list - unit_icon_move_Journeyman_T2_motion), (unit_icon_move_Journeyman_T2_anim_list - unit_icon_move_Journeyman_T2_motion) @ header
 
@@ -177,3 +178,4 @@ unit_icon_move_Journeyman_T2_anim_4: @ +$14A
 
 	.align 2, 0
 
+	.size unit_icon_move_Journeyman_T2_motion, . - unit_icon_move_Journeyman_T2_motion

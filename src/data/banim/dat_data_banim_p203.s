@@ -3,20 +3,25 @@
  */
 	.section .rodata.dat_data_banim_p203, "a", %progbits
 	.global AnimSprite_efxGorgon_5
+	.type AnimSprite_efxGorgon_5, %object
 AnimSprite_efxGorgon_5:
 	.short 0x0001, 0xFFFF, 0x00AA, 0x0000, 0x0000, 0x00AA
 	.short 0x0300, 0x4000, 0x0058, -16, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxGorgon_5, . - AnimSprite_efxGorgon_5
 	.section .rodata.dat_data_banim_p203, "a", %progbits
 	.global AnimSprite_efxGorgon_6
+	.type AnimSprite_efxGorgon_6, %object
 AnimSprite_efxGorgon_6:
 	.short 0x0000, 0x4000, 0x005A, -16, -16, 0
 	.short 0x0000, 0x6000, 0x005A, -16, 0, 0
 	.short 0x0000, 0x7000, 0x005A, 0, 0, 0
 	.short 0x0000, 0x5000, 0x005A, 0, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxGorgon_6, . - AnimSprite_efxGorgon_6
 	.section .rodata.dat_data_banim_p203, "a", %progbits
 	.global AnimSprite_efxGorgon_7
+	.type AnimSprite_efxGorgon_7, %object
 AnimSprite_efxGorgon_7:
 	.short 0x0004, 0xFFFF, 0x00AA, 0x0000, 0x0000, 0x00AA
 	.short 0x0004, 0xFFFF, 0x00AA, 0x0000, 0x0000, 0xFF56
@@ -27,8 +32,10 @@ AnimSprite_efxGorgon_7:
 	.short 0x0300, 0x4400, 0x005A, -5, -5, 0
 	.short 0x0300, 0x4600, 0x005A, -5, -28, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxGorgon_7, . - AnimSprite_efxGorgon_7
 	.section .rodata.dat_data_banim_p203, "a", %progbits
 	.global AnimSprite_efxGorgon_8
+	.type AnimSprite_efxGorgon_8, %object
 AnimSprite_efxGorgon_8:
 	.short 0x0004, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0080
 	.short 0x0004, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF80
@@ -39,8 +46,10 @@ AnimSprite_efxGorgon_8:
 	.short 0x0300, 0x4400, 0x005A, -1, -1, 0
 	.short 0x0300, 0x4600, 0x005A, -1, -32, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxGorgon_8, . - AnimSprite_efxGorgon_8
 	.section .rodata.dat_data_banim_p203, "a", %progbits
 	.global AnimSprite_efxGorgon_9
+	.type AnimSprite_efxGorgon_9, %object
 AnimSprite_efxGorgon_9:
 	.short 0x4000, 0x8000, 0x0015, -29, -44, 0
 	.short 0x4000, 0x8000, 0x0019, -4, -44, 0
@@ -69,8 +78,10 @@ AnimSprite_efxGorgon_9:
 	.short 0x0000, 0x4000, 0x0012, 8, -16, 0
 	.short 0x0000, 0x4000, 0x0012, 8, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxGorgon_9, . - AnimSprite_efxGorgon_9
 	.section .rodata.dat_data_banim_p203, "a", %progbits
 	.global AnimSprite_efxGorgon_10
+	.type AnimSprite_efxGorgon_10, %object
 AnimSprite_efxGorgon_10:
 	.short 0x4000, 0x8000, 0x0015, -32, -50, 0
 	.short 0x4000, 0x8000, 0x0019, 0, -50, 0
@@ -111,3 +122,4 @@ AnimSprite_efxGorgon_10:
 	.short 0x4000, 0x4000, 0x0010, -24, 28, 0
 	.short 0x4000, 0x0000, 0x0010, 8, -36, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxGorgon_10, . - AnimSprite_efxGorgon_10

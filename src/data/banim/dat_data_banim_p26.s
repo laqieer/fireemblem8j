@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_1
+	.type AnimSprite_HurtmutEff00OBJ2_1, %object
 AnimSprite_HurtmutEff00OBJ2_1:
 	.short 0x0000, 0x0000, 0x007E, 22, -10, 0
 	.short 0x0000, 0x0000, 0x007D, 6, -16, 0
@@ -10,35 +11,45 @@ AnimSprite_HurtmutEff00OBJ2_1:
 	.short 0x0000, 0x0000, 0x007F, -13, -22, 0
 	.short 0x4000, 0x1000, 0x007A, 52, 3, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_1, . - AnimSprite_HurtmutEff00OBJ2_1
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_2
+	.type AnimSprite_HurtmutEff00OBJ2_2, %object
 AnimSprite_HurtmutEff00OBJ2_2:
 	.short 0x0000, 0x2000, 0x007E, 8, -20, 0
 	.short 0x4000, 0x8000, 0x0040, 22, -6, 0
 	.short 0x0000, 0x1000, 0x007D, -10, -23, 0
 	.short 0x0000, 0x1000, 0x007F, 57, 2, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_2, . - AnimSprite_HurtmutEff00OBJ2_2
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_3
+	.type AnimSprite_HurtmutEff00OBJ2_3, %object
 AnimSprite_HurtmutEff00OBJ2_3:
 	.short 0x4000, 0x8000, 0x0044, 22, -5, 0
 	.short 0x0000, 0x1000, 0x007E, -9, -23, 0
 	.short 0x0000, 0x3000, 0x007E, 59, -3, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_3, . - AnimSprite_HurtmutEff00OBJ2_3
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_4
+	.type AnimSprite_HurtmutEff00OBJ2_4, %object
 AnimSprite_HurtmutEff00OBJ2_4:
 	.short 0x4000, 0x8000, 0x0000, 21, -3, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_4, . - AnimSprite_HurtmutEff00OBJ2_4
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_5
+	.type AnimSprite_HurtmutEff00OBJ2_5, %object
 AnimSprite_HurtmutEff00OBJ2_5:
 	.short 0x0000, 0x4000, 0x0008, 19, -25, 0
 	.short 0x8000, 0x8000, 0x000A, 35, -25, 0
 	.short 0x8000, 0x0000, 0x0001, 47, 3, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_5, . - AnimSprite_HurtmutEff00OBJ2_5
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_6
+	.type AnimSprite_HurtmutEff00OBJ2_6, %object
 AnimSprite_HurtmutEff00OBJ2_6:
 	.short 0x4000, 0x0000, 0x0077, 0, -53, 0
 	.short 0x4000, 0x0000, 0x0077, -25, -56, 0
@@ -51,8 +62,10 @@ AnimSprite_HurtmutEff00OBJ2_6:
 	.short 0x0000, 0x0000, 0x004D, -30, -38, 0
 	.short 0x4000, 0x4000, 0x0013, -30, -62, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_6, . - AnimSprite_HurtmutEff00OBJ2_6
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_7
+	.type AnimSprite_HurtmutEff00OBJ2_7, %object
 AnimSprite_HurtmutEff00OBJ2_7:
 	.short 0x8000, 0x0000, 0x001D, -40, -48, 0
 	.short 0x0000, 0x4000, 0x0038, -38, -28, 0
@@ -63,11 +76,14 @@ AnimSprite_HurtmutEff00OBJ2_7:
 	.short 0x4000, 0x2000, 0x0077, -27, -56, 0
 	.short 0x0000, 0x0000, 0x007C, -30, -4, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_7, . - AnimSprite_HurtmutEff00OBJ2_7
 	.section .rodata.dat_data_banim_p26, "a", %progbits
 	.global AnimSprite_HurtmutEff00OBJ2_8
+	.type AnimSprite_HurtmutEff00OBJ2_8, %object
 AnimSprite_HurtmutEff00OBJ2_8:
 	.short 0x4000, 0x0000, 0x003E, -8, -56, 0
 	.short 0x4000, 0x2000, 0x003E, -32, -54, 0
 	.short 0x0000, 0x0000, 0x005E, -40, -40, 0
 	.short 0x0000, 0x0000, 0x001C, -32, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_HurtmutEff00OBJ2_8, . - AnimSprite_HurtmutEff00OBJ2_8

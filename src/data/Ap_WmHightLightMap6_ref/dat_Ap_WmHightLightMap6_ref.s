@@ -9,6 +9,7 @@
 @ `.2byte` words are OAM attr0/attr1/attr2 data, NOT pointers — fully shiftable.
 
 	.global Ap_WmHightLightMap6
+	.type Ap_WmHightLightMap6, %object
 Ap_WmHightLightMap6:
 Ap_WmHightLightMap6_motion:
 	.2byte (Ap_WmHightLightMap6_frame_list - Ap_WmHightLightMap6_motion), (Ap_WmHightLightMap6_anim_list - Ap_WmHightLightMap6_motion) @ header
@@ -48,3 +49,4 @@ Ap_WmHightLightMap6_anim_1: @ +$48
 	.if (.L_end_Ap_WmHightLightMap6 - Ap_WmHightLightMap6) != 80
 	.error "Ap_WmHightLightMap6 size mismatch"
 	.endif
+	.size Ap_WmHightLightMap6, . - Ap_WmHightLightMap6

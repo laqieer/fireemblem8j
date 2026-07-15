@@ -1,6 +1,7 @@
 .section .rodata.dat_anim_worldmap_skirmish,"aw"
 
 	.global SpriteAnim_WorldmapSkirmish
+	.type SpriteAnim_WorldmapSkirmish, %object
 SpriteAnim_WorldmapSkirmish:  @ 0x08AA1C70
 SpriteAnim_WorldmapSkirmish_motion:
 	.2byte (SpriteAnim_WorldmapSkirmish_frame_list - SpriteAnim_WorldmapSkirmish_motion), (SpriteAnim_WorldmapSkirmish_anim_list - SpriteAnim_WorldmapSkirmish_motion) @ header
@@ -278,3 +279,4 @@ SpriteAnim_WorldmapSkirmish_anim_0: @ +$36C
 	.if (.L_end_SpriteAnim_WorldmapSkirmish - SpriteAnim_WorldmapSkirmish) != 980
 	.error "SpriteAnim_WorldmapSkirmish size mismatch"
 	.endif
+	.size SpriteAnim_WorldmapSkirmish, . - SpriteAnim_WorldmapSkirmish

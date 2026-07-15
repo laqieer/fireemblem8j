@@ -6,6 +6,7 @@
  * (u8[] def matches the established UnitDef pattern); section unchanged => same ROM bytes. */
 	.section .data.residue.08925DD8, "aw", %progbits
 	.global UnitDef_UnusedAlly_4
+	.type UnitDef_UnusedAlly_4, %object
 UnitDef_UnusedAlly_4:
 	.4byte 0x08000F14
 	.4byte 0x00000112
@@ -62,3 +63,4 @@ UnitDef_UnusedAlly_4:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.size UnitDef_UnusedAlly_4, . - UnitDef_UnusedAlly_4

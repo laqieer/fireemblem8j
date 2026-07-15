@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_worldmap_gmapunit_p763, "a", %progbits
 	.global AnimSprite_EkrMainMini_R_Far
+	.type AnimSprite_EkrMainMini_R_Far, %object
 AnimSprite_EkrMainMini_R_Far:
 	.short 0x4000, 0x9000, 0x0000, 16, 8, 0
 	.short 0x4000, 0x9000, 0x0004, -16, 8, 0
@@ -15,3 +16,4 @@ AnimSprite_EkrMainMini_R_Far:
 	.short 0x4000, 0x1000, 0x001D, 0, -16, 0
 	.short 0x4000, 0x5000, 0x0039, -32, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EkrMainMini_R_Far, . - AnimSprite_EkrMainMini_R_Far

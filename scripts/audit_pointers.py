@@ -1254,7 +1254,10 @@ def emit_true_debt():
     print(f"  pointer slots. The evidence manifest validates format, provenance, byte hash,")
     print(f"  exact size and hit set; any drift becomes unresolved and fails this gate.")
     print(f"  SCOPE: the self-ref gate covers exact nonzero ELF extents plus independently")
-    print(f"  proven exact extents; zero-size symbols above remain an explicit blind spot.")
+    if selfref_skipped:
+        print(f"  proven exact extents; zero-size symbols above remain an explicit blind spot.")
+    else:
+        print(f"  proven exact extents; no zero-size opaque symbols lack an exact extent.")
     if "--gate" in sys.argv:
         print("  -- residual real/unclassified DATA-pointer words (.bin) --")
         for (n, O, v, sym, off) in real_data:

@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_worldmap_gmapunit_p781, "a", %progbits
 	.global AnimSprite_EkrBaseKaiten_73
+	.type AnimSprite_EkrBaseKaiten_73, %object
 AnimSprite_EkrBaseKaiten_73:
 	.short 0x8000, 0x0000, 0x009C, -13, -12, 0
 	.short 0x0000, 0x0000, 0x009D, -13, 4, 0
@@ -17,8 +18,10 @@ AnimSprite_EkrBaseKaiten_73:
 	.short 0x8000, 0x0000, 0x0001, -1, -12, 0
 	.short 0x4000, 0x0000, 0x0060, -5, 12, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EkrBaseKaiten_73, . - AnimSprite_EkrBaseKaiten_73
 	.section .rodata.dat_worldmap_gmapunit_p781, "a", %progbits
 	.global AnimSprite_EkrBaseKaiten_74
+	.type AnimSprite_EkrBaseKaiten_74, %object
 AnimSprite_EkrBaseKaiten_74:
 	.short 0x8000, 0x2000, 0x009C, -13, -2, 0
 	.short 0x0000, 0x2000, 0x009D, -13, -10, 0
@@ -34,8 +37,10 @@ AnimSprite_EkrBaseKaiten_74:
 	.short 0x0000, 0x1000, 0x005B, 1, -18, 0
 	.short 0x0000, 0x1000, 0x005C, -5, -18, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EkrBaseKaiten_74, . - AnimSprite_EkrBaseKaiten_74
 	.section .rodata.dat_worldmap_gmapunit_p781, "a", %progbits
 	.global AnimSprite_EkrBaseKaiten_75
+	.type AnimSprite_EkrBaseKaiten_75, %object
 AnimSprite_EkrBaseKaiten_75:
 	.short 0x8000, 0x3000, 0x009C, 5, -2, 0
 	.short 0x0000, 0x3000, 0x009D, 5, -10, 0
@@ -51,8 +56,10 @@ AnimSprite_EkrBaseKaiten_75:
 	.short 0x0000, 0x0000, 0x005B, -9, -18, 0
 	.short 0x0000, 0x0000, 0x005C, -3, -18, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EkrBaseKaiten_75, . - AnimSprite_EkrBaseKaiten_75
 	.section .rodata.dat_worldmap_gmapunit_p781, "a", %progbits
 	.global AnimSprite_EkrBaseKaiten_76
+	.type AnimSprite_EkrBaseKaiten_76, %object
 AnimSprite_EkrBaseKaiten_76:
 	.short 0x8000, 0x1000, 0x009C, 6, -13, 0
 	.short 0x0000, 0x1000, 0x009D, 6, 3, 0
@@ -67,3 +74,4 @@ AnimSprite_EkrBaseKaiten_76:
 	.short 0x8000, 0x1000, 0x0001, -6, -13, 0
 	.short 0x4000, 0x1000, 0x0060, -10, 11, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EkrBaseKaiten_76, . - AnimSprite_EkrBaseKaiten_76

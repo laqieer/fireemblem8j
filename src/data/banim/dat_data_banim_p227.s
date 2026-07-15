@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_9
+	.type AnimSprite_EfxExcalibur_9, %object
 AnimSprite_EfxExcalibur_9:
 	.short 0x0003, 0xFFFF, 0x002B, 0x0078, 0xFF88, 0x002B
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0080
@@ -11,8 +12,10 @@ AnimSprite_EfxExcalibur_9:
 	.short 0x0300, 0x8200, 0x000C, -33, -60, 0
 	.short 0x0300, 0x8400, 0x0008, 14, -22, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_9, . - AnimSprite_EfxExcalibur_9
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_10
+	.type AnimSprite_EfxExcalibur_10, %object
 AnimSprite_EfxExcalibur_10:
 	.short 0x0003, 0xFFFF, 0x0000, 0x007F, 0xFF81, 0x0000
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x00AA
@@ -21,8 +24,10 @@ AnimSprite_EfxExcalibur_10:
 	.short 0x0300, 0x8200, 0x000C, -33, -67, 0
 	.short 0x0300, 0x8400, 0x0008, 12, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_10, . - AnimSprite_EfxExcalibur_10
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_11
+	.type AnimSprite_EfxExcalibur_11, %object
 AnimSprite_EfxExcalibur_11:
 	.short 0x0003, 0xFFFF, 0xFFD5, 0x0078, 0xFF88, 0xFFD5
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0100
@@ -31,8 +36,10 @@ AnimSprite_EfxExcalibur_11:
 	.short 0x0300, 0x8200, 0x000C, -33, -73, 0
 	.short 0x0300, 0x8400, 0x0008, -3, -11, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_11, . - AnimSprite_EfxExcalibur_11
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_12
+	.type AnimSprite_EfxExcalibur_12, %object
 AnimSprite_EfxExcalibur_12:
 	.short 0x0003, 0xFFFF, 0xFFAE, 0x0062, 0xFF9E, 0xFFAE
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0200
@@ -41,8 +48,10 @@ AnimSprite_EfxExcalibur_12:
 	.short 0x0300, 0x8200, 0x000C, -33, -78, 0
 	.short 0x0300, 0x8400, 0x0008, -12, -11, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_12, . - AnimSprite_EfxExcalibur_12
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_13
+	.type AnimSprite_EfxExcalibur_13, %object
 AnimSprite_EfxExcalibur_13:
 	.short 0x0003, 0xFFFF, 0xFF82, 0x0016, 0xFFEA, 0xFF82
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFE00
@@ -51,8 +60,10 @@ AnimSprite_EfxExcalibur_13:
 	.short 0x0300, 0x8200, 0x000C, -33, -80, 0
 	.short 0x0300, 0x8400, 0x0008, -23, -7, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_13, . - AnimSprite_EfxExcalibur_13
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_14
+	.type AnimSprite_EfxExcalibur_14, %object
 AnimSprite_EfxExcalibur_14:
 	.short 0x0003, 0xFFFF, 0xFF92, 0xFFC1, 0x003F, 0xFF92
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF00
@@ -61,8 +72,10 @@ AnimSprite_EfxExcalibur_14:
 	.short 0x0300, 0x8200, 0x000C, -31, -74, 0
 	.short 0x0300, 0x8400, 0x0008, -31, -17, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_14, . - AnimSprite_EfxExcalibur_14
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_15
+	.type AnimSprite_EfxExcalibur_15, %object
 AnimSprite_EfxExcalibur_15:
 	.short 0x0003, 0xFFFF, 0xFFD4, 0xFF88, 0x0078, 0xFFD4
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF56
@@ -71,8 +84,10 @@ AnimSprite_EfxExcalibur_15:
 	.short 0x0300, 0x8200, 0x000C, -29, -66, 0
 	.short 0x0300, 0x8400, 0x0008, -43, -22, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_15, . - AnimSprite_EfxExcalibur_15
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_16
+	.type AnimSprite_EfxExcalibur_16, %object
 AnimSprite_EfxExcalibur_16:
 	.short 0x0003, 0xFFFF, 0xFFEA, 0xFF82, 0x007E, 0xFFEA
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF80
@@ -81,8 +96,10 @@ AnimSprite_EfxExcalibur_16:
 	.short 0x0300, 0x8200, 0x000C, -28, -57, 0
 	.short 0x0300, 0x8400, 0x0008, -52, -38, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_16, . - AnimSprite_EfxExcalibur_16
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_17
+	.type AnimSprite_EfxExcalibur_17, %object
 AnimSprite_EfxExcalibur_17:
 	.short 0x0003, 0xFFFF, 0xFFC0, 0xFF92, 0x006E, 0xFFC0
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF80
@@ -91,8 +108,10 @@ AnimSprite_EfxExcalibur_17:
 	.short 0x0300, 0x8200, 0x000C, -28, -46, 0
 	.short 0x0300, 0x8400, 0x0008, -57, -47, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_17, . - AnimSprite_EfxExcalibur_17
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_18
+	.type AnimSprite_EfxExcalibur_18, %object
 AnimSprite_EfxExcalibur_18:
 	.short 0x0003, 0xFFFF, 0xFF88, 0xFFD5, 0x002B, 0xFF88
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF80
@@ -101,8 +120,10 @@ AnimSprite_EfxExcalibur_18:
 	.short 0x0300, 0x8200, 0x000C, -28, -32, 0
 	.short 0x0300, 0x8400, 0x0008, -66, -50, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_18, . - AnimSprite_EfxExcalibur_18
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_19
+	.type AnimSprite_EfxExcalibur_19, %object
 AnimSprite_EfxExcalibur_19:
 	.short 0x0003, 0xFFFF, 0xFF88, 0x002B, 0xFFD5, 0xFF88
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF80
@@ -111,8 +132,10 @@ AnimSprite_EfxExcalibur_19:
 	.short 0x0300, 0x8200, 0x000C, -28, -20, 0
 	.short 0x0300, 0x8400, 0x0008, -84, -47, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_19, . - AnimSprite_EfxExcalibur_19
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_20
+	.type AnimSprite_EfxExcalibur_20, %object
 AnimSprite_EfxExcalibur_20:
 	.short 0x0003, 0xFFFF, 0xFFC1, 0x006E, 0xFF92, 0xFFC1
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF56
@@ -121,8 +144,10 @@ AnimSprite_EfxExcalibur_20:
 	.short 0x0300, 0x8200, 0x000C, -28, -12, 0
 	.short 0x0300, 0x8400, 0x0008, -92, -30, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_20, . - AnimSprite_EfxExcalibur_20
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_21
+	.type AnimSprite_EfxExcalibur_21, %object
 AnimSprite_EfxExcalibur_21:
 	.short 0x0003, 0xFFFF, 0x0000, 0x007F, 0xFF81, 0x0000
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFF00
@@ -131,8 +156,10 @@ AnimSprite_EfxExcalibur_21:
 	.short 0x0300, 0x8200, 0x000C, -28, -5, 0
 	.short 0x0300, 0x8400, 0x0008, -92, -8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_21, . - AnimSprite_EfxExcalibur_21
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_22
+	.type AnimSprite_EfxExcalibur_22, %object
 AnimSprite_EfxExcalibur_22:
 	.short 0x0003, 0xFFFF, 0x0052, 0x0062, 0xFF9E, 0x0052
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0xFE00
@@ -141,8 +168,10 @@ AnimSprite_EfxExcalibur_22:
 	.short 0x0300, 0x8200, 0x000C, -28, 1, 0
 	.short 0x0300, 0x8400, 0x0008, -72, 4, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_22, . - AnimSprite_EfxExcalibur_22
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_23
+	.type AnimSprite_EfxExcalibur_23, %object
 AnimSprite_EfxExcalibur_23:
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0080
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0200
@@ -151,8 +180,10 @@ AnimSprite_EfxExcalibur_23:
 	.short 0x0300, 0x8200, 0x000C, -28, 1, 0
 	.short 0x0300, 0x8400, 0x0008, -47, -7, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_23, . - AnimSprite_EfxExcalibur_23
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_24
+	.type AnimSprite_EfxExcalibur_24, %object
 AnimSprite_EfxExcalibur_24:
 	.short 0x0003, 0xFFFF, 0x0078, 0xFFD4, 0x002C, 0x0078
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0200
@@ -161,8 +192,10 @@ AnimSprite_EfxExcalibur_24:
 	.short 0x0300, 0x8200, 0x000C, -28, 1, 0
 	.short 0x0300, 0x8400, 0x0010, -36, -10, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_24, . - AnimSprite_EfxExcalibur_24
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_25
+	.type AnimSprite_EfxExcalibur_25, %object
 AnimSprite_EfxExcalibur_25:
 	.short 0x0003, 0xFFFF, 0x006E, 0xFFC0, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0100
@@ -171,8 +204,10 @@ AnimSprite_EfxExcalibur_25:
 	.short 0x0300, 0x8200, 0x000C, -28, -13, 0
 	.short 0x0300, 0x8400, 0x0010, -25, -29, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_25, . - AnimSprite_EfxExcalibur_25
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_26
+	.type AnimSprite_EfxExcalibur_26, %object
 AnimSprite_EfxExcalibur_26:
 	.short 0x0002, 0xFFFF, 0x00DD, 0xFF80, 0x0080, 0x00DD
 	.short 0x0002, 0xFFFF, 0x0100, 0x0000, 0x0000, 0x0100
@@ -180,8 +215,10 @@ AnimSprite_EfxExcalibur_26:
 	.short 0x0100, 0x8200, 0x0010, -12, -19, 0
 	.short 0x0100, 0x8200, 0x000C, -16, -21, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_26, . - AnimSprite_EfxExcalibur_26
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_27
+	.type AnimSprite_EfxExcalibur_27, %object
 AnimSprite_EfxExcalibur_27:
 	.short 0x0003, 0xFFFF, 0x006E, 0xFFC0, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0x007A, 0xFFB9, 0x0047, 0x007A
@@ -190,8 +227,10 @@ AnimSprite_EfxExcalibur_27:
 	.short 0x0300, 0x8200, 0x0010, -11, -46, 0
 	.short 0x0300, 0x8400, 0x000C, -37, -51, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_27, . - AnimSprite_EfxExcalibur_27
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_28
+	.type AnimSprite_EfxExcalibur_28, %object
 AnimSprite_EfxExcalibur_28:
 	.short 0x0003, 0xFFFF, 0x00DD, 0xFF80, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0x0046, 0xFF85, 0x007B, 0x0046
@@ -200,8 +239,10 @@ AnimSprite_EfxExcalibur_28:
 	.short 0x0300, 0x8200, 0x0010, -9, -65, 0
 	.short 0x0300, 0x8400, 0x0000, -52, -60, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_28, . - AnimSprite_EfxExcalibur_28
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_29
+	.type AnimSprite_EfxExcalibur_29, %object
 AnimSprite_EfxExcalibur_29:
 	.short 0x0003, 0xFFFF, 0x01BA, 0xFEFF, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0x0000, 0xFF73, 0x008D, 0x0000
@@ -210,8 +251,10 @@ AnimSprite_EfxExcalibur_29:
 	.short 0x0300, 0x8200, 0x0010, -14, -81, 0
 	.short 0x0300, 0x8400, 0x0000, -56, -77, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_29, . - AnimSprite_EfxExcalibur_29
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_30
+	.type AnimSprite_EfxExcalibur_30, %object
 AnimSprite_EfxExcalibur_30:
 	.short 0x0003, 0xFFFF, 0xFE46, 0x0101, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0xFF72, 0x0000, 0x0000, 0x008E
@@ -220,8 +263,10 @@ AnimSprite_EfxExcalibur_30:
 	.short 0x0300, 0x8200, 0x0010, -30, -84, 0
 	.short 0x0300, 0x8400, 0x0000, -61, -90, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_30, . - AnimSprite_EfxExcalibur_30
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_31
+	.type AnimSprite_EfxExcalibur_31, %object
 AnimSprite_EfxExcalibur_31:
 	.short 0x0003, 0xFFFF, 0xFF23, 0x0080, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0xFF7B, 0x0030, 0x0030, 0x0085
@@ -230,8 +275,10 @@ AnimSprite_EfxExcalibur_31:
 	.short 0x0300, 0x8200, 0x0010, -37, -84, 0
 	.short 0x0300, 0x8400, 0x0000, -61, -90, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_31, . - AnimSprite_EfxExcalibur_31
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_32
+	.type AnimSprite_EfxExcalibur_32, %object
 AnimSprite_EfxExcalibur_32:
 	.short 0x0003, 0xFFFF, 0xFF6E, 0x0055, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0xFFBA, 0x007B, 0x007B, 0x0046
@@ -240,8 +287,10 @@ AnimSprite_EfxExcalibur_32:
 	.short 0x0300, 0x8200, 0x0010, -43, -79, 0
 	.short 0x0300, 0x8400, 0x0000, -57, -84, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_32, . - AnimSprite_EfxExcalibur_32
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_33
+	.type AnimSprite_EfxExcalibur_33, %object
 AnimSprite_EfxExcalibur_33:
 	.short 0x0003, 0xFFFF, 0xFF92, 0x0040, 0x0040, 0x006E
 	.short 0x0003, 0xFFFF, 0x0018, 0x008B, 0x008B, 0xFFE8
@@ -250,8 +299,10 @@ AnimSprite_EfxExcalibur_33:
 	.short 0x0300, 0x8200, 0x0010, -43, -79, 0
 	.short 0x0300, 0x8400, 0x0000, -52, -74, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_33, . - AnimSprite_EfxExcalibur_33
 	.section .rodata.dat_data_banim_p227, "a", %progbits
 	.global AnimSprite_EfxExcalibur_34
+	.type AnimSprite_EfxExcalibur_34, %object
 AnimSprite_EfxExcalibur_34:
 	.short 0x0003, 0xFFFF, 0x0000, 0xFF81, 0x007F, 0x0000
 	.short 0x0003, 0xFFFF, 0xFF92, 0x0040, 0x0040, 0x006E
@@ -260,3 +311,4 @@ AnimSprite_EfxExcalibur_34:
 	.short 0x0300, 0x8200, 0x0000, -45, -27, 0
 	.short 0x0300, 0x8400, 0x0000, -48, -62, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxExcalibur_34, . - AnimSprite_EfxExcalibur_34

@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p168, "a", %progbits
 	.global AnimSprite_EfxMshield_46
+	.type AnimSprite_EfxMshield_46, %object
 AnimSprite_EfxMshield_46:
 	.short 0x0000, 0x1000, 0x000E, 21, -16, 0
 	.short 0x0000, 0x1000, 0x000E, 34, -13, 0
@@ -19,8 +20,10 @@ AnimSprite_EfxMshield_46:
 	.short 0x0000, 0x1000, 0x000B, 43, 4, 0
 	.short 0x0000, 0x0000, 0x0012, 14, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMshield_46, . - AnimSprite_EfxMshield_46
 	.section .rodata.dat_data_banim_p168, "a", %progbits
 	.global AnimSprite_EfxMshield_47
+	.type AnimSprite_EfxMshield_47, %object
 AnimSprite_EfxMshield_47:
 	.short 0x0000, 0x1000, 0x000E, 21, -14, 0
 	.short 0x0000, 0x1000, 0x000E, 34, -13, 0
@@ -39,8 +42,10 @@ AnimSprite_EfxMshield_47:
 	.short 0x0000, 0x3000, 0x000B, 38, 7, 0
 	.short 0x0000, 0x0000, 0x0012, 14, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMshield_47, . - AnimSprite_EfxMshield_47
 	.section .rodata.dat_data_banim_p168, "a", %progbits
 	.global AnimSprite_EfxMshield_48
+	.type AnimSprite_EfxMshield_48, %object
 AnimSprite_EfxMshield_48:
 	.short 0x0000, 0x1000, 0x000E, 34, -13, 0
 	.short 0x0000, 0x1000, 0x000E, 44, -6, 0
@@ -59,3 +64,4 @@ AnimSprite_EfxMshield_48:
 	.short 0x0000, 0x3000, 0x000B, 38, 7, 0
 	.short 0x0000, 0x1000, 0x000C, 32, 9, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMshield_48, . - AnimSprite_EfxMshield_48

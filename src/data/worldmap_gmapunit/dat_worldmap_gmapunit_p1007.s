@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_worldmap_gmapunit_p1007, "a", %progbits
 	.global AnimSprite_efxNaglfarOBJ2_5
+	.type AnimSprite_efxNaglfarOBJ2_5, %object
 AnimSprite_efxNaglfarOBJ2_5:
 	.short 0x8000, 0x4000, 0x0012, 104, -120, 0
 	.short 0x8000, 0x8000, 0x0013, 104, -88, 0
@@ -25,3 +26,4 @@ AnimSprite_efxNaglfarOBJ2_5:
 	.short 0x8000, 0x8000, 0x0005, 0, -56, 0
 	.short 0x8000, 0x8000, 0x0007, 0, -24, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_efxNaglfarOBJ2_5, . - AnimSprite_efxNaglfarOBJ2_5

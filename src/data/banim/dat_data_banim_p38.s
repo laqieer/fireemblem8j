@@ -3,493 +3,619 @@
  */
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_1
+	.type AnimSprite_YushaSpinShield2_1, %object
 AnimSprite_YushaSpinShield2_1:
 	.short 0x0000, 0xB000, 0x001C, 0, -51, 0
 	.short 0x0000, 0x2000, 0x009F, 11, -27, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_1, . - AnimSprite_YushaSpinShield2_1
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_2
+	.type AnimSprite_YushaSpinShield2_2, %object
 AnimSprite_YushaSpinShield2_2:
 	.short 0x0002, 0xFFFF, 0x00F7, 0xFFBF, 0xFFBF, 0xFF09
 	.short 0x0002, 0xFFFF, 0x00E8, 0xFF95, 0xFF95, 0xFF18
 	.short 0x0100, 0x8000, 0x001C, -1, -54, 0
 	.short 0x0100, 0x0200, 0x009F, 15, -30, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_2, . - AnimSprite_YushaSpinShield2_2
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_3
+	.type AnimSprite_YushaSpinShield2_3, %object
 AnimSprite_YushaSpinShield2_3:
 	.short 0x0002, 0xFFFF, 0x00A4, 0xFF3D, 0xFF3D, 0xFF5C
 	.short 0x0002, 0xFFFF, 0x00B5, 0xFF4C, 0xFF4C, 0xFF4B
 	.short 0x0100, 0x8000, 0x001C, -1, -56, 0
 	.short 0x0100, 0x0200, 0x009F, 21, -36, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_3, . - AnimSprite_YushaSpinShield2_3
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_4
+	.type AnimSprite_YushaSpinShield2_4, %object
 AnimSprite_YushaSpinShield2_4:
 	.short 0x0001, 0xFFFF, 0x0058, 0xFF10, 0xFF10, 0xFFA8
 	.short 0x0100, 0x8000, 0x001C, -1, -58, 0
 	.short 0x0100, 0x0000, 0x009F, 23, -42, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_4, . - AnimSprite_YushaSpinShield2_4
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_5
+	.type AnimSprite_YushaSpinShield2_5, %object
 AnimSprite_YushaSpinShield2_5:
 	.short 0x0002, 0xFFFF, 0xFFBF, 0xFF09, 0xFF09, 0x0041
 	.short 0x0002, 0xFFFF, 0xFFAA, 0xFF10, 0xFF10, 0x0056
 	.short 0x0100, 0x8000, 0x001C, 0, -60, 0
 	.short 0x0100, 0x0200, 0x009F, 24, -52, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_5, . - AnimSprite_YushaSpinShield2_5
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_6
+	.type AnimSprite_YushaSpinShield2_6, %object
 AnimSprite_YushaSpinShield2_6:
 	.short 0x0002, 0xFFFF, 0xFF6E, 0xFF2E, 0xFF2E, 0x0092
 	.short 0x0002, 0xFFFF, 0xFF63, 0xFF36, 0xFF36, 0x009D
 	.short 0x0100, 0x8000, 0x001C, 0, -62, 0
 	.short 0x0100, 0x0200, 0x009F, 22, -58, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_6, . - AnimSprite_YushaSpinShield2_6
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_7
+	.type AnimSprite_YushaSpinShield2_7, %object
 AnimSprite_YushaSpinShield2_7:
 	.short 0x0002, 0xFFFF, 0xFF19, 0xFF94, 0xFF94, 0x00E7
 	.short 0x0002, 0xFFFF, 0xFF1D, 0xFF8C, 0xFF8C, 0x00E3
 	.short 0x0100, 0x8000, 0x001C, 1, -64, 0
 	.short 0x0100, 0x0200, 0x009F, 17, -64, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_7, . - AnimSprite_YushaSpinShield2_7
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_8
+	.type AnimSprite_YushaSpinShield2_8, %object
 AnimSprite_YushaSpinShield2_8:
 	.short 0x0000, 0x9000, 0x001C, 2, -66, 0
 	.short 0x0000, 0x0000, 0x009F, 13, -67, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_8, . - AnimSprite_YushaSpinShield2_8
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_9
+	.type AnimSprite_YushaSpinShield2_9, %object
 AnimSprite_YushaSpinShield2_9:
 	.short 0x0002, 0xFFFF, 0xFF10, 0x0057, 0x0057, 0x00F0
 	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9
 	.short 0x0100, 0x8000, 0x001C, 1, -68, 0
 	.short 0x0100, 0x0200, 0x009F, 7, -67, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_9, . - AnimSprite_YushaSpinShield2_9
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_10
+	.type AnimSprite_YushaSpinShield2_10, %object
 AnimSprite_YushaSpinShield2_10:
 	.short 0x0002, 0xFFFF, 0xFF52, 0x00BB, 0x00BB, 0x00AE
 	.short 0x0002, 0xFFFF, 0xFF4B, 0x00B4, 0x00B4, 0x00B5
 	.short 0x0100, 0x8000, 0x001C, 2, -71, 0
 	.short 0x0100, 0x0200, 0x009F, 4, -67, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_10, . - AnimSprite_YushaSpinShield2_10
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_11
+	.type AnimSprite_YushaSpinShield2_11, %object
 AnimSprite_YushaSpinShield2_11:
 	.short 0x0002, 0xFFFF, 0xFFA9, 0x00F0, 0x00F0, 0x0057
 	.short 0x0002, 0xFFFF, 0xFFAD, 0x00F2, 0x00F2, 0x0053
 	.short 0x0100, 0x8000, 0x001C, 2, -74, 0
 	.short 0x0100, 0x0200, 0x009F, 2, -66, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_11, . - AnimSprite_YushaSpinShield2_11
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_12
+	.type AnimSprite_YushaSpinShield2_12, %object
 AnimSprite_YushaSpinShield2_12:
 	.short 0x0002, 0xFFFF, 0x0042, 0x00F7, 0x00F7, 0xFFBE
 	.short 0x0002, 0xFFFF, 0x000D, 0x00FF, 0x00FF, 0xFFF3
 	.short 0x0100, 0x8000, 0x001C, 2, -76, 0
 	.short 0x0100, 0x0200, 0x009F, 2, -60, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_12, . - AnimSprite_YushaSpinShield2_12
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_13
+	.type AnimSprite_YushaSpinShield2_13, %object
 AnimSprite_YushaSpinShield2_13:
 	.short 0x0002, 0xFFFF, 0x0092, 0x00D1, 0x00D1, 0xFF6E
 	.short 0x0002, 0xFFFF, 0x0099, 0x00CC, 0x00CC, 0xFF67
 	.short 0x0100, 0x8000, 0x001C, 2, -79, 0
 	.short 0x0100, 0x0200, 0x009F, 4, -59, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_13, . - AnimSprite_YushaSpinShield2_13
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_14
+	.type AnimSprite_YushaSpinShield2_14, %object
 AnimSprite_YushaSpinShield2_14:
 	.short 0x0002, 0xFFFF, 0x00DD, 0x0080, 0x0080, 0xFF23
 	.short 0x0002, 0xFFFF, 0x00D8, 0x0087, 0x0087, 0xFF28
 	.short 0x0100, 0x8000, 0x001C, 2, -81, 0
 	.short 0x0100, 0x0200, 0x009F, 8, -58, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_14, . - AnimSprite_YushaSpinShield2_14
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_15
+	.type AnimSprite_YushaSpinShield2_15, %object
 AnimSprite_YushaSpinShield2_15:
 	.short 0x0001, 0xFFFF, 0x00FF, 0x0000, 0x0000, 0xFF01
 	.short 0x0100, 0x8000, 0x001C, 2, -83, 0
 	.short 0x0100, 0x0000, 0x009F, 16, -59, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_15, . - AnimSprite_YushaSpinShield2_15
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_16
+	.type AnimSprite_YushaSpinShield2_16, %object
 AnimSprite_YushaSpinShield2_16:
 	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10
 	.short 0x0002, 0xFFFF, 0x00EA, 0xFF99, 0xFF99, 0xFF16
 	.short 0x0100, 0x8000, 0x001C, 3, -86, 0
 	.short 0x0100, 0x0200, 0x009F, 20, -62, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_16, . - AnimSprite_YushaSpinShield2_16
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_17
+	.type AnimSprite_YushaSpinShield2_17, %object
 AnimSprite_YushaSpinShield2_17:
 	.short 0x0002, 0xFFFF, 0x00A4, 0xFF3D, 0xFF3D, 0xFF5C
 	.short 0x0002, 0xFFFF, 0x00B5, 0xFF4C, 0xFF4C, 0xFF4B
 	.short 0x0100, 0x8000, 0x001C, 3, -88, 0
 	.short 0x0100, 0x0200, 0x009F, 24, -67, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_17, . - AnimSprite_YushaSpinShield2_17
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_18
+	.type AnimSprite_YushaSpinShield2_18, %object
 AnimSprite_YushaSpinShield2_18:
 	.short 0x0002, 0xFFFF, 0x0058, 0xFF10, 0xFF10, 0xFFA8
 	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84
 	.short 0x0100, 0x8000, 0x001C, 3, -91, 0
 	.short 0x0100, 0x0200, 0x009F, 27, -75, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_18, . - AnimSprite_YushaSpinShield2_18
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_19
+	.type AnimSprite_YushaSpinShield2_19, %object
 AnimSprite_YushaSpinShield2_19:
 	.short 0x0001, 0xFFFF, 0xFFAA, 0xFF10, 0xFF10, 0x0056
 	.short 0x0100, 0x8000, 0x001C, 3, -94, 0
 	.short 0x0100, 0x0000, 0x009F, 26, -87, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_19, . - AnimSprite_YushaSpinShield2_19
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_20
+	.type AnimSprite_YushaSpinShield2_20, %object
 AnimSprite_YushaSpinShield2_20:
 	.short 0x0002, 0xFFFF, 0xFF5C, 0xFF3C, 0xFF3C, 0x00A4
 	.short 0x0002, 0xFFFF, 0xFF63, 0xFF36, 0xFF36, 0x009D
 	.short 0x0100, 0x8000, 0x001C, 3, -95, 0
 	.short 0x0100, 0x0200, 0x009F, 24, -92, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_20, . - AnimSprite_YushaSpinShield2_20
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_21
+	.type AnimSprite_YushaSpinShield2_21, %object
 AnimSprite_YushaSpinShield2_21:
 	.short 0x0002, 0xFFFF, 0xFF19, 0xFF94, 0xFF94, 0x00E7
 	.short 0x0002, 0xFFFF, 0xFF1D, 0xFF8C, 0xFF8C, 0x00E3
 	.short 0x0100, 0x8000, 0x001C, 4, -96, 0
 	.short 0x0100, 0x0200, 0x009F, 21, -95, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_21, . - AnimSprite_YushaSpinShield2_21
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_22
+	.type AnimSprite_YushaSpinShield2_22, %object
 AnimSprite_YushaSpinShield2_22:
 	.short 0x0000, 0x9000, 0x001C, 4, -98, 0
 	.short 0x0000, 0x0000, 0x009F, 15, -99, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_22, . - AnimSprite_YushaSpinShield2_22
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_23
+	.type AnimSprite_YushaSpinShield2_23, %object
 AnimSprite_YushaSpinShield2_23:
 	.short 0x0002, 0xFFFF, 0xFF10, 0x0057, 0x0057, 0x00F0
 	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9
 	.short 0x0100, 0x8000, 0x001C, 4, -100, 0
 	.short 0x0100, 0x0200, 0x009F, 10, -99, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_23, . - AnimSprite_YushaSpinShield2_23
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_24
+	.type AnimSprite_YushaSpinShield2_24, %object
 AnimSprite_YushaSpinShield2_24:
 	.short 0x0002, 0xFFFF, 0xFF5C, 0x00C4, 0x00C4, 0x00A4
 	.short 0x0002, 0xFFFF, 0xFF4B, 0x00B4, 0x00B4, 0x00B5
 	.short 0x0100, 0x8000, 0x001C, 5, -102, 0
 	.short 0x0100, 0x0200, 0x009F, 7, -98, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_24, . - AnimSprite_YushaSpinShield2_24
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_25
+	.type AnimSprite_YushaSpinShield2_25, %object
 AnimSprite_YushaSpinShield2_25:
 	.short 0x0002, 0xFFFF, 0xFFBE, 0x00F7, 0x00F7, 0x0042
 	.short 0x0002, 0xFFFF, 0xFFAD, 0x00F2, 0x00F2, 0x0053
 	.short 0x0100, 0x8000, 0x001C, 5, -102, 0
 	.short 0x0100, 0x0200, 0x009F, 4, -92, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_25, . - AnimSprite_YushaSpinShield2_25
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_26
+	.type AnimSprite_YushaSpinShield2_26, %object
 AnimSprite_YushaSpinShield2_26:
 	.short 0x0002, 0xFFFF, 0x006B, 0x00E8, 0x00E8, 0xFF95
 	.short 0x0002, 0xFFFF, 0x000D, 0x00FF, 0x00FF, 0xFFF3
 	.short 0x0100, 0x8000, 0x001C, 5, -102, 0
 	.short 0x0100, 0x0200, 0x009F, 5, -85, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_26, . - AnimSprite_YushaSpinShield2_26
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_27
+	.type AnimSprite_YushaSpinShield2_27, %object
 AnimSprite_YushaSpinShield2_27:
 	.short 0x0002, 0xFFFF, 0x00A4, 0x00C4, 0x00C4, 0xFF5C
 	.short 0x0002, 0xFFFF, 0x0099, 0x00CC, 0x00CC, 0xFF67
 	.short 0x0100, 0x8000, 0x001C, 6, -104, 0
 	.short 0x0100, 0x0200, 0x009F, 9, -83, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_27, . - AnimSprite_YushaSpinShield2_27
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_28
+	.type AnimSprite_YushaSpinShield2_28, %object
 AnimSprite_YushaSpinShield2_28:
 	.short 0x0002, 0xFFFF, 0x00F0, 0x0057, 0x0057, 0xFF10
 	.short 0x0002, 0xFFFF, 0x00D8, 0x0087, 0x0087, 0xFF28
 	.short 0x0100, 0x8000, 0x001C, 6, -105, 0
 	.short 0x0100, 0x0200, 0x009F, 14, -81, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_28, . - AnimSprite_YushaSpinShield2_28
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_29
+	.type AnimSprite_YushaSpinShield2_29, %object
 AnimSprite_YushaSpinShield2_29:
 	.short 0x0002, 0xFFFF, 0x00FC, 0x002C, 0x002C, 0xFF04
 	.short 0x0002, 0xFFFF, 0x00FE, 0x001B, 0x001B, 0xFF02
 	.short 0x0100, 0x8000, 0x001C, 6, -105, 0
 	.short 0x0100, 0x0200, 0x009F, 17, -80, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_29, . - AnimSprite_YushaSpinShield2_29
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_30
+	.type AnimSprite_YushaSpinShield2_30, %object
 AnimSprite_YushaSpinShield2_30:
 	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04
 	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10
 	.short 0x0100, 0x8000, 0x001C, 7, -106, 0
 	.short 0x0100, 0x0200, 0x009F, 22, -82, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_30, . - AnimSprite_YushaSpinShield2_30
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_31
+	.type AnimSprite_YushaSpinShield2_31, %object
 AnimSprite_YushaSpinShield2_31:
 	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10
 	.short 0x0002, 0xFFFF, 0x00EA, 0xFF99, 0xFF99, 0xFF16
 	.short 0x0100, 0x8000, 0x001C, 7, -107, 0
 	.short 0x0100, 0x0200, 0x009F, 24, -83, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_31, . - AnimSprite_YushaSpinShield2_31
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_32
+	.type AnimSprite_YushaSpinShield2_32, %object
 AnimSprite_YushaSpinShield2_32:
 	.short 0x0002, 0xFFFF, 0x00DD, 0xFF81, 0xFF81, 0xFF23
 	.short 0x0002, 0xFFFF, 0x00D1, 0xFF6E, 0xFF6E, 0xFF2F
 	.short 0x0100, 0x8000, 0x001C, 8, -107, 0
 	.short 0x0100, 0x0200, 0x009F, 27, -84, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_32, . - AnimSprite_YushaSpinShield2_32
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_33
+	.type AnimSprite_YushaSpinShield2_33, %object
 AnimSprite_YushaSpinShield2_33:
 	.short 0x0002, 0xFFFF, 0x00C4, 0xFF5C, 0xFF5C, 0xFF3C
 	.short 0x0002, 0xFFFF, 0x00B5, 0xFF4C, 0xFF4C, 0xFF4B
 	.short 0x0100, 0x8000, 0x001C, 8, -107, 0
 	.short 0x0100, 0x0200, 0x009F, 28, -85, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_33, . - AnimSprite_YushaSpinShield2_33
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_34
+	.type AnimSprite_YushaSpinShield2_34, %object
 AnimSprite_YushaSpinShield2_34:
 	.short 0x0002, 0xFFFF, 0x0080, 0xFF23, 0xFF23, 0xFF80
 	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84
 	.short 0x0100, 0x8000, 0x001C, 8, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 31, -89, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_34, . - AnimSprite_YushaSpinShield2_34
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_35
+	.type AnimSprite_YushaSpinShield2_35, %object
 AnimSprite_YushaSpinShield2_35:
 	.short 0x0002, 0xFFFF, 0x0058, 0xFF10, 0xFF10, 0xFFA8
 	.short 0x0002, 0xFFFF, 0x0053, 0xFF0F, 0xFF0F, 0xFFAD
 	.short 0x0100, 0x8000, 0x001C, 9, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 32, -91, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_35, . - AnimSprite_YushaSpinShield2_35
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_36
+	.type AnimSprite_YushaSpinShield2_36, %object
 AnimSprite_YushaSpinShield2_36:
 	.short 0x0001, 0xFFFF, 0x0000, 0xFF01, 0xFF01, 0x0000
 	.short 0x0100, 0x8000, 0x001C, 9, -109, 0
 	.short 0x0100, 0x0000, 0x009F, 33, -100, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_36, . - AnimSprite_YushaSpinShield2_36
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_37
+	.type AnimSprite_YushaSpinShield2_37, %object
 AnimSprite_YushaSpinShield2_37:
 	.short 0x0002, 0xFFFF, 0xFFD5, 0xFF04, 0xFF04, 0x002B
 	.short 0x0002, 0xFFFF, 0xFFEB, 0xFF01, 0xFF01, 0x0015
 	.short 0x0100, 0x8000, 0x001C, 9, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 33, -100, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_37, . - AnimSprite_YushaSpinShield2_37
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_38
+	.type AnimSprite_YushaSpinShield2_38, %object
 AnimSprite_YushaSpinShield2_38:
 	.short 0x0002, 0xFFFF, 0xFFAA, 0xFF10, 0xFF10, 0x0056
 	.short 0x0002, 0xFFFF, 0xFF81, 0xFF22, 0xFF22, 0x007F
 	.short 0x0100, 0x8000, 0x001C, 10, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 33, -101, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_38, . - AnimSprite_YushaSpinShield2_38
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_39
+	.type AnimSprite_YushaSpinShield2_39, %object
 AnimSprite_YushaSpinShield2_39:
 	.short 0x0002, 0xFFFF, 0xFF5C, 0xFF3C, 0xFF3C, 0x00A4
 	.short 0x0002, 0xFFFF, 0xFF63, 0xFF36, 0xFF36, 0x009D
 	.short 0x0100, 0x8000, 0x001C, 10, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 31, -105, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_39, . - AnimSprite_YushaSpinShield2_39
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_40
+	.type AnimSprite_YushaSpinShield2_40, %object
 AnimSprite_YushaSpinShield2_40:
 	.short 0x0002, 0xFFFF, 0xFF2F, 0xFF6D, 0xFF6D, 0x00D1
 	.short 0x0002, 0xFFFF, 0xFF1D, 0xFF8C, 0xFF8C, 0x00E3
 	.short 0x0100, 0x8000, 0x001C, 10, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 28, -107, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_40, . - AnimSprite_YushaSpinShield2_40
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_41
+	.type AnimSprite_YushaSpinShield2_41, %object
 AnimSprite_YushaSpinShield2_41:
 	.short 0x0002, 0xFFFF, 0xFF0D, 0xFFB1, 0xFFB1, 0x00F3
 	.short 0x0002, 0xFFFF, 0xFF1D, 0xFF8C, 0xFF8C, 0x00E3
 	.short 0x0100, 0x8000, 0x001C, 11, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 27, -108, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_41, . - AnimSprite_YushaSpinShield2_41
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_42
+	.type AnimSprite_YushaSpinShield2_42, %object
 AnimSprite_YushaSpinShield2_42:
 	.short 0x0002, 0xFFFF, 0xFF05, 0xFFD3, 0xFFD3, 0x00FB
 	.short 0x0002, 0xFFFF, 0xFF01, 0xFFF2, 0xFFF2, 0x00FF
 	.short 0x0100, 0x8000, 0x001C, 11, -108, 0
 	.short 0x0100, 0x0200, 0x009F, 26, -108, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_42, . - AnimSprite_YushaSpinShield2_42
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_43
+	.type AnimSprite_YushaSpinShield2_43, %object
 AnimSprite_YushaSpinShield2_43:
 	.short 0x0002, 0xFFFF, 0xFF04, 0x002C, 0x002C, 0x00FC
 	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9
 	.short 0x0100, 0x8000, 0x001C, 11, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 19, -109, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_43, . - AnimSprite_YushaSpinShield2_43
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_44
+	.type AnimSprite_YushaSpinShield2_44, %object
 AnimSprite_YushaSpinShield2_44:
 	.short 0x0002, 0xFFFF, 0xFF10, 0x0057, 0x0057, 0x00F0
 	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9
 	.short 0x0100, 0x8000, 0x001C, 12, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 18, -108, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_44, . - AnimSprite_YushaSpinShield2_44
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_45
+	.type AnimSprite_YushaSpinShield2_45, %object
 AnimSprite_YushaSpinShield2_45:
 	.short 0x0002, 0xFFFF, 0xFF23, 0x007F, 0x007F, 0x00DD
 	.short 0x0002, 0xFFFF, 0xFF42, 0x00AB, 0x00AB, 0x00BE
 	.short 0x0100, 0x8000, 0x001C, 12, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 16, -107, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_45, . - AnimSprite_YushaSpinShield2_45
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_46
+	.type AnimSprite_YushaSpinShield2_46, %object
 AnimSprite_YushaSpinShield2_46:
 	.short 0x0002, 0xFFFF, 0xFF3C, 0x00A4, 0x00A4, 0x00C4
 	.short 0x0002, 0xFFFF, 0xFF4B, 0x00B4, 0x00B4, 0x00B5
 	.short 0x0100, 0x8000, 0x001C, 13, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 16, -106, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_46, . - AnimSprite_YushaSpinShield2_46
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_47
+	.type AnimSprite_YushaSpinShield2_47, %object
 AnimSprite_YushaSpinShield2_47:
 	.short 0x0002, 0xFFFF, 0xFF6E, 0x00D1, 0x00D1, 0x0092
 	.short 0x0002, 0xFFFF, 0xFF4B, 0x00B4, 0x00B4, 0x00B5
 	.short 0x0100, 0x8000, 0x001C, 13, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 14, -104, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_47, . - AnimSprite_YushaSpinShield2_47
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_48
+	.type AnimSprite_YushaSpinShield2_48, %object
 AnimSprite_YushaSpinShield2_48:
 	.short 0x0002, 0xFFFF, 0xFFA9, 0x00F0, 0x00F0, 0x0057
 	.short 0x0002, 0xFFFF, 0xFF8C, 0x00E4, 0x00E4, 0x0074
 	.short 0x0100, 0x8000, 0x001C, 14, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 14, -101, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_48, . - AnimSprite_YushaSpinShield2_48
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_49
+	.type AnimSprite_YushaSpinShield2_49, %object
 AnimSprite_YushaSpinShield2_49:
 	.short 0x0002, 0xFFFF, 0x0000, 0x00FF, 0x00FF, 0x0000
 	.short 0x0002, 0xFFFF, 0x0004, 0x00FF, 0x00FF, 0xFFFC
 	.short 0x0100, 0x8000, 0x001C, 14, -109, 0
 	.short 0x0100, 0x0200, 0x009F, 13, -95, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_49, . - AnimSprite_YushaSpinShield2_49
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_50
+	.type AnimSprite_YushaSpinShield2_50, %object
 AnimSprite_YushaSpinShield2_50:
 	.short 0x0002, 0xFFFF, 0x0042, 0x00F7, 0x00F7, 0xFFBE
 	.short 0x0002, 0xFFFF, 0x000D, 0x00FF, 0x00FF, 0xFFF3
 	.short 0x0100, 0x8000, 0x001C, 15, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 15, -94, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_50, . - AnimSprite_YushaSpinShield2_50
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_51
+	.type AnimSprite_YushaSpinShield2_51, %object
 AnimSprite_YushaSpinShield2_51:
 	.short 0x0002, 0xFFFF, 0x007F, 0x00DD, 0x00DD, 0xFF81
 	.short 0x0002, 0xFFFF, 0x0099, 0x00CC, 0x00CC, 0xFF67
 	.short 0x0100, 0x8000, 0x001C, 15, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 17, -90, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_51, . - AnimSprite_YushaSpinShield2_51
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_52
+	.type AnimSprite_YushaSpinShield2_52, %object
 AnimSprite_YushaSpinShield2_52:
 	.short 0x0002, 0xFFFF, 0x00B4, 0x00B5, 0x00B5, 0xFF4C
 	.short 0x0002, 0xFFFF, 0x00B1, 0x00B8, 0x00B8, 0xFF4F
 	.short 0x0100, 0x8000, 0x001C, 15, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 19, -88, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_52, . - AnimSprite_YushaSpinShield2_52
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_53
+	.type AnimSprite_YushaSpinShield2_53, %object
 AnimSprite_YushaSpinShield2_53:
 	.short 0x0002, 0xFFFF, 0x00D1, 0x0093, 0x0093, 0xFF2F
 	.short 0x0002, 0xFFFF, 0x00D8, 0x0087, 0x0087, 0xFF28
 	.short 0x0100, 0x8000, 0x001C, 16, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 21, -87, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_53, . - AnimSprite_YushaSpinShield2_53
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_54
+	.type AnimSprite_YushaSpinShield2_54, %object
 AnimSprite_YushaSpinShield2_54:
 	.short 0x0002, 0xFFFF, 0x00E7, 0x006C, 0x006C, 0xFF19
 	.short 0x0002, 0xFFFF, 0x00E3, 0x0074, 0x0074, 0xFF1D
 	.short 0x0100, 0x8000, 0x001C, 16, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 23, -86, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_54, . - AnimSprite_YushaSpinShield2_54
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_55
+	.type AnimSprite_YushaSpinShield2_55, %object
 AnimSprite_YushaSpinShield2_55:
 	.short 0x0002, 0xFFFF, 0x00FC, 0x002C, 0x002C, 0xFF04
 	.short 0x0002, 0xFFFF, 0x00FE, 0x001B, 0x001B, 0xFF02
 	.short 0x0100, 0x8000, 0x001C, 17, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 28, -85, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_55, . - AnimSprite_YushaSpinShield2_55
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_56
+	.type AnimSprite_YushaSpinShield2_56, %object
 AnimSprite_YushaSpinShield2_56:
 	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04
 	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10
 	.short 0x0100, 0x8000, 0x001C, 17, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 31, -85, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_56, . - AnimSprite_YushaSpinShield2_56
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_57
+	.type AnimSprite_YushaSpinShield2_57, %object
 AnimSprite_YushaSpinShield2_57:
 	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10
 	.short 0x0002, 0xFFFF, 0x00EA, 0xFF99, 0xFF99, 0xFF16
 	.short 0x0100, 0x8000, 0x001C, 18, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 35, -86, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_57, . - AnimSprite_YushaSpinShield2_57
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_58
+	.type AnimSprite_YushaSpinShield2_58, %object
 AnimSprite_YushaSpinShield2_58:
 	.short 0x0001, 0xFFFF, 0x00D1, 0xFF6E, 0xFF6E, 0xFF2F
 	.short 0x0100, 0x8000, 0x001C, 18, -110, 0
 	.short 0x0100, 0x0000, 0x009F, 38, -88, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_58, . - AnimSprite_YushaSpinShield2_58
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_59
+	.type AnimSprite_YushaSpinShield2_59, %object
 AnimSprite_YushaSpinShield2_59:
 	.short 0x0002, 0xFFFF, 0x00A4, 0xFF3D, 0xFF3D, 0xFF5C
 	.short 0x0002, 0xFFFF, 0x00B5, 0xFF4C, 0xFF4C, 0xFF4B
 	.short 0x0100, 0x8000, 0x001C, 18, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 39, -89, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_59, . - AnimSprite_YushaSpinShield2_59
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_60
+	.type AnimSprite_YushaSpinShield2_60, %object
 AnimSprite_YushaSpinShield2_60:
 	.short 0x0002, 0xFFFF, 0x0080, 0xFF23, 0xFF23, 0xFF80
 	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84
 	.short 0x0100, 0x8000, 0x001C, 18, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 41, -91, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_60, . - AnimSprite_YushaSpinShield2_60
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_61
+	.type AnimSprite_YushaSpinShield2_61, %object
 AnimSprite_YushaSpinShield2_61:
 	.short 0x0002, 0xFFFF, 0x0042, 0xFF09, 0xFF09, 0xFFBE
 	.short 0x0002, 0xFFFF, 0x0053, 0xFF0F, 0xFF0F, 0xFFAD
 	.short 0x0100, 0x8000, 0x001C, 19, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 43, -94, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_61, . - AnimSprite_YushaSpinShield2_61
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_62
+	.type AnimSprite_YushaSpinShield2_62, %object
 AnimSprite_YushaSpinShield2_62:
 	.short 0x0001, 0xFFFF, 0x0000, 0xFF01, 0xFF01, 0x0000
 	.short 0x0100, 0x8000, 0x001C, 20, -110, 0
 	.short 0x0100, 0x0000, 0x009F, 44, -100, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_62, . - AnimSprite_YushaSpinShield2_62
 	.section .rodata.dat_data_banim_p38, "a", %progbits
 	.global AnimSprite_YushaSpinShield2_63
+	.type AnimSprite_YushaSpinShield2_63, %object
 AnimSprite_YushaSpinShield2_63:
 	.short 0x0002, 0xFFFF, 0xFFD5, 0xFF04, 0xFF04, 0x002B
 	.short 0x0002, 0xFFFF, 0x0000, 0xFF01, 0xFF01, 0x0000
 	.short 0x0100, 0x8000, 0x001C, 21, -110, 0
 	.short 0x0100, 0x0200, 0x009F, 45, -101, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_YushaSpinShield2_63, . - AnimSprite_YushaSpinShield2_63

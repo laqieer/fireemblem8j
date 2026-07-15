@@ -5,6 +5,7 @@
 .section .data.frontier_df4_menu.gap29, "aw", %progbits
 
 	.global gSaveScreen_0
+	.type gSaveScreen_0, %object
 gSaveScreen_0:  @ 0x08AA52FC
 gSaveScreen_motion:
 	.2byte (gSaveScreen_frame_list - gSaveScreen_motion), (gSaveScreen_anim_list - gSaveScreen_motion) @ header
@@ -65,3 +66,4 @@ gSaveScreen_anim_0: @ +$66
 	.if (.L_end_gUnknown_08A280A8 - gSaveScreen_0) != 132
 	.error "gSaveScreen_0 size mismatch"
 	.endif
+	.size gSaveScreen_0, . - gSaveScreen_0

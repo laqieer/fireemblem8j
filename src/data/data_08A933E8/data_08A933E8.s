@@ -4,6 +4,7 @@
 /* carved from data_08A933E8 [0x0..0x20) -> data_08A933E8 */
 	.section .data.residue.08A933E8, "aw", %progbits
 	.global data_08A933E8
+	.type data_08A933E8, %object
 data_08A933E8:
 	.short 0x0001
 	.short 0x0018
@@ -21,3 +22,4 @@ data_08A933E8:
 	.short 0x001e
 	.short 0x001f
 	.short 0x0000
+	.size data_08A933E8, . - data_08A933E8

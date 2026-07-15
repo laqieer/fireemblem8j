@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_3
+	.type AnimSprite_EfxThunderstormOBJ_3, %object
 AnimSprite_EfxThunderstormOBJ_3:
 	.short 0x0000, 0x0000, 0x0004, -8, 8, 0
 	.short 0x0000, 0x0000, 0x0004, 0, 8, 0
@@ -11,8 +12,10 @@ AnimSprite_EfxThunderstormOBJ_3:
 	.short 0x0000, 0x0000, 0x0005, -10, 6, 0
 	.short 0x0000, 0x0000, 0x0005, 4, 7, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_3, . - AnimSprite_EfxThunderstormOBJ_3
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_4
+	.type AnimSprite_EfxThunderstormOBJ_4, %object
 AnimSprite_EfxThunderstormOBJ_4:
 	.short 0x0000, 0x0000, 0x0004, -9, 7, 0
 	.short 0x0000, 0x0000, 0x0004, 1, 7, 0
@@ -21,8 +24,10 @@ AnimSprite_EfxThunderstormOBJ_4:
 	.short 0x0000, 0x0000, 0x0005, -11, 5, 0
 	.short 0x0000, 0x0000, 0x0005, 5, 6, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_4, . - AnimSprite_EfxThunderstormOBJ_4
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_5
+	.type AnimSprite_EfxThunderstormOBJ_5, %object
 AnimSprite_EfxThunderstormOBJ_5:
 	.short 0x0000, 0x0000, 0x0004, -11, 6, 0
 	.short 0x0000, 0x0000, 0x0004, 2, 5, 0
@@ -33,8 +38,10 @@ AnimSprite_EfxThunderstormOBJ_5:
 	.short 0x0000, 0x0000, 0x0005, 0, 8, 0
 	.short 0x0000, 0x0000, 0x0005, -8, 8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_5, . - AnimSprite_EfxThunderstormOBJ_5
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_6
+	.type AnimSprite_EfxThunderstormOBJ_6, %object
 AnimSprite_EfxThunderstormOBJ_6:
 	.short 0x0000, 0x0000, 0x0004, -13, 5, 0
 	.short 0x0000, 0x0000, 0x0004, 3, 3, 0
@@ -45,8 +52,10 @@ AnimSprite_EfxThunderstormOBJ_6:
 	.short 0x0000, 0x0000, 0x0005, 2, 7, 0
 	.short 0x0000, 0x0000, 0x0005, -9, 6, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_6, . - AnimSprite_EfxThunderstormOBJ_6
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_7
+	.type AnimSprite_EfxThunderstormOBJ_7, %object
 AnimSprite_EfxThunderstormOBJ_7:
 	.short 0x0000, 0x0000, 0x0004, -13, 2, 0
 	.short 0x0000, 0x0000, 0x0004, 4, 1, 0
@@ -58,8 +67,10 @@ AnimSprite_EfxThunderstormOBJ_7:
 	.short 0x0000, 0x0000, 0x0005, -7, 5, 0
 	.short 0x0000, 0x0000, 0x0004, -5, 8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_7, . - AnimSprite_EfxThunderstormOBJ_7
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_8
+	.type AnimSprite_EfxThunderstormOBJ_8, %object
 AnimSprite_EfxThunderstormOBJ_8:
 	.short 0x0000, 0x0000, 0x0004, -12, 0, 0
 	.short 0x0000, 0x0000, 0x0004, 5, -1, 0
@@ -71,8 +82,10 @@ AnimSprite_EfxThunderstormOBJ_8:
 	.short 0x0000, 0x0000, 0x0005, -6, 3, 0
 	.short 0x0000, 0x0000, 0x0004, -5, 6, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_8, . - AnimSprite_EfxThunderstormOBJ_8
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_9
+	.type AnimSprite_EfxThunderstormOBJ_9, %object
 AnimSprite_EfxThunderstormOBJ_9:
 	.short 0x0000, 0x0000, 0x0004, -13, -2, 0
 	.short 0x0000, 0x0000, 0x0004, 5, -3, 0
@@ -84,8 +97,10 @@ AnimSprite_EfxThunderstormOBJ_9:
 	.short 0x0000, 0x0000, 0x0005, -7, 2, 0
 	.short 0x0000, 0x0000, 0x0004, -4, 4, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_9, . - AnimSprite_EfxThunderstormOBJ_9
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_10
+	.type AnimSprite_EfxThunderstormOBJ_10, %object
 AnimSprite_EfxThunderstormOBJ_10:
 	.short 0x0000, 0x0000, 0x0004, -14, -4, 0
 	.short 0x0000, 0x0000, 0x0004, 3, -4, 0
@@ -97,8 +112,10 @@ AnimSprite_EfxThunderstormOBJ_10:
 	.short 0x0000, 0x0000, 0x0005, -9, 1, 0
 	.short 0x0000, 0x0000, 0x0004, -6, 3, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_10, . - AnimSprite_EfxThunderstormOBJ_10
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_11
+	.type AnimSprite_EfxThunderstormOBJ_11, %object
 AnimSprite_EfxThunderstormOBJ_11:
 	.short 0x0000, 0x0000, 0x0004, -13, -6, 0
 	.short 0x0000, 0x0000, 0x0004, 4, -6, 0
@@ -110,8 +127,10 @@ AnimSprite_EfxThunderstormOBJ_11:
 	.short 0x0000, 0x0000, 0x0005, -9, -2, 0
 	.short 0x0000, 0x0000, 0x0004, -5, 1, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_11, . - AnimSprite_EfxThunderstormOBJ_11
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_12
+	.type AnimSprite_EfxThunderstormOBJ_12, %object
 AnimSprite_EfxThunderstormOBJ_12:
 	.short 0x0000, 0x0000, 0x0004, -14, -8, 0
 	.short 0x0000, 0x0000, 0x0004, 5, -8, 0
@@ -123,8 +142,10 @@ AnimSprite_EfxThunderstormOBJ_12:
 	.short 0x0000, 0x0000, 0x0005, -9, -5, 0
 	.short 0x0000, 0x0000, 0x0004, -4, -1, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_12, . - AnimSprite_EfxThunderstormOBJ_12
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_13
+	.type AnimSprite_EfxThunderstormOBJ_13, %object
 AnimSprite_EfxThunderstormOBJ_13:
 	.short 0x0000, 0x0000, 0x0004, -15, -10, 0
 	.short 0x0000, 0x0000, 0x0004, 5, -11, 0
@@ -136,8 +157,10 @@ AnimSprite_EfxThunderstormOBJ_13:
 	.short 0x0000, 0x0000, 0x0005, -8, -7, 0
 	.short 0x0000, 0x0000, 0x0004, -4, -3, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_13, . - AnimSprite_EfxThunderstormOBJ_13
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_14
+	.type AnimSprite_EfxThunderstormOBJ_14, %object
 AnimSprite_EfxThunderstormOBJ_14:
 	.short 0x0000, 0x0000, 0x0004, -14, -12, 0
 	.short 0x0000, 0x0000, 0x0004, 5, -14, 0
@@ -149,8 +172,10 @@ AnimSprite_EfxThunderstormOBJ_14:
 	.short 0x0000, 0x0000, 0x0005, -10, -8, 0
 	.short 0x0000, 0x0000, 0x0004, -5, -5, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_14, . - AnimSprite_EfxThunderstormOBJ_14
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_15
+	.type AnimSprite_EfxThunderstormOBJ_15, %object
 AnimSprite_EfxThunderstormOBJ_15:
 	.short 0x0000, 0x0000, 0x0004, -15, -14, 0
 	.short 0x0000, 0x0000, 0x0004, 7, -15, 0
@@ -162,8 +187,10 @@ AnimSprite_EfxThunderstormOBJ_15:
 	.short 0x0000, 0x0000, 0x0005, -12, -9, 0
 	.short 0x0000, 0x0000, 0x0004, -3, -6, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_15, . - AnimSprite_EfxThunderstormOBJ_15
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_16
+	.type AnimSprite_EfxThunderstormOBJ_16, %object
 AnimSprite_EfxThunderstormOBJ_16:
 	.short 0x0000, 0x0000, 0x0004, -17, -15, 0
 	.short 0x0000, 0x0000, 0x0004, 8, -17, 0
@@ -175,8 +202,10 @@ AnimSprite_EfxThunderstormOBJ_16:
 	.short 0x0000, 0x0000, 0x0005, -11, -11, 0
 	.short 0x0000, 0x0000, 0x0004, -3, -8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_16, . - AnimSprite_EfxThunderstormOBJ_16
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_17
+	.type AnimSprite_EfxThunderstormOBJ_17, %object
 AnimSprite_EfxThunderstormOBJ_17:
 	.short 0x0000, 0x0000, 0x0004, -18, -17, 0
 	.short 0x0000, 0x0000, 0x0004, 7, -19, 0
@@ -188,8 +217,10 @@ AnimSprite_EfxThunderstormOBJ_17:
 	.short 0x0000, 0x0000, 0x0005, -10, -13, 0
 	.short 0x0000, 0x0000, 0x0004, -4, -10, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_17, . - AnimSprite_EfxThunderstormOBJ_17
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_18
+	.type AnimSprite_EfxThunderstormOBJ_18, %object
 AnimSprite_EfxThunderstormOBJ_18:
 	.short 0x0000, 0x0000, 0x0004, -19, -19, 0
 	.short 0x0000, 0x0000, 0x0004, 8, -21, 0
@@ -201,13 +232,17 @@ AnimSprite_EfxThunderstormOBJ_18:
 	.short 0x0000, 0x0000, 0x0005, -13, -13, 0
 	.short 0x0000, 0x0000, 0x0004, -4, -13, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_18, . - AnimSprite_EfxThunderstormOBJ_18
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_19
+	.type AnimSprite_EfxThunderstormOBJ_19, %object
 AnimSprite_EfxThunderstormOBJ_19:
 	.short 0x0000, 0x0000, 0x0021, 0, -8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_19, . - AnimSprite_EfxThunderstormOBJ_19
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_20
+	.type AnimSprite_EfxThunderstormOBJ_20, %object
 AnimSprite_EfxThunderstormOBJ_20:
 	.short 0x0000, 0x0000, 0x0004, -20, -21, 0
 	.short 0x0000, 0x0000, 0x0004, 8, -24, 0
@@ -219,8 +254,10 @@ AnimSprite_EfxThunderstormOBJ_20:
 	.short 0x0000, 0x0000, 0x0005, -16, -13, 0
 	.short 0x0000, 0x0000, 0x0004, -3, -15, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_20, . - AnimSprite_EfxThunderstormOBJ_20
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_21
+	.type AnimSprite_EfxThunderstormOBJ_21, %object
 AnimSprite_EfxThunderstormOBJ_21:
 	.short 0x0000, 0x0000, 0x0004, -22, -22, 0
 	.short 0x0000, 0x0000, 0x0004, 10, -25, 0
@@ -232,8 +269,10 @@ AnimSprite_EfxThunderstormOBJ_21:
 	.short 0x0000, 0x0000, 0x0005, -19, -13, 0
 	.short 0x0000, 0x0000, 0x0004, -5, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_21, . - AnimSprite_EfxThunderstormOBJ_21
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_22
+	.type AnimSprite_EfxThunderstormOBJ_22, %object
 AnimSprite_EfxThunderstormOBJ_22:
 	.short 0x0000, 0x0000, 0x0004, -22, -25, 0
 	.short 0x0000, 0x0000, 0x0004, 13, -25, 0
@@ -245,8 +284,10 @@ AnimSprite_EfxThunderstormOBJ_22:
 	.short 0x0000, 0x0000, 0x0005, -20, -15, 0
 	.short 0x0000, 0x0000, 0x0004, -3, -17, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_22, . - AnimSprite_EfxThunderstormOBJ_22
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_23
+	.type AnimSprite_EfxThunderstormOBJ_23, %object
 AnimSprite_EfxThunderstormOBJ_23:
 	.short 0x0000, 0x0000, 0x0004, -23, -27, 0
 	.short 0x0000, 0x0000, 0x0004, 12, -27, 0
@@ -258,8 +299,10 @@ AnimSprite_EfxThunderstormOBJ_23:
 	.short 0x0000, 0x0000, 0x0005, -19, -17, 0
 	.short 0x0000, 0x0000, 0x0004, -5, -18, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_23, . - AnimSprite_EfxThunderstormOBJ_23
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_24
+	.type AnimSprite_EfxThunderstormOBJ_24, %object
 AnimSprite_EfxThunderstormOBJ_24:
 	.short 0x0000, 0x0000, 0x0004, -24, -29, 0
 	.short 0x0000, 0x0000, 0x0004, 15, -27, 0
@@ -271,8 +314,10 @@ AnimSprite_EfxThunderstormOBJ_24:
 	.short 0x0000, 0x0000, 0x0005, -20, -19, 0
 	.short 0x0000, 0x0000, 0x0004, -5, -20, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_24, . - AnimSprite_EfxThunderstormOBJ_24
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_25
+	.type AnimSprite_EfxThunderstormOBJ_25, %object
 AnimSprite_EfxThunderstormOBJ_25:
 	.short 0x0000, 0x0000, 0x0004, -25, -31, 0
 	.short 0x0000, 0x0000, 0x0004, 16, -29, 0
@@ -286,8 +331,10 @@ AnimSprite_EfxThunderstormOBJ_25:
 	.short 0x0000, 0x0000, 0x0006, 4, -21, 0
 	.short 0x0000, 0x0000, 0x0006, -6, -31, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_25, . - AnimSprite_EfxThunderstormOBJ_25
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_26
+	.type AnimSprite_EfxThunderstormOBJ_26, %object
 AnimSprite_EfxThunderstormOBJ_26:
 	.short 0x0000, 0x0000, 0x0004, -26, -33, 0
 	.short 0x0000, 0x0000, 0x0004, 17, -31, 0
@@ -301,8 +348,10 @@ AnimSprite_EfxThunderstormOBJ_26:
 	.short 0x0000, 0x0000, 0x0006, -7, -33, 0
 	.short 0x0000, 0x0000, 0x0006, 6, -22, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_26, . - AnimSprite_EfxThunderstormOBJ_26
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_27
+	.type AnimSprite_EfxThunderstormOBJ_27, %object
 AnimSprite_EfxThunderstormOBJ_27:
 	.short 0x0000, 0x0000, 0x0004, -27, -35, 0
 	.short 0x0000, 0x0000, 0x0004, 18, -33, 0
@@ -319,8 +368,10 @@ AnimSprite_EfxThunderstormOBJ_27:
 	.short 0x0000, 0x0000, 0x0006, 24, -18, 0
 	.short 0x0000, 0x0000, 0x0006, -30, -27, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_27, . - AnimSprite_EfxThunderstormOBJ_27
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_28
+	.type AnimSprite_EfxThunderstormOBJ_28, %object
 AnimSprite_EfxThunderstormOBJ_28:
 	.short 0x0000, 0x0000, 0x0004, -28, -37, 0
 	.short 0x0000, 0x0000, 0x0004, 20, -34, 0
@@ -337,8 +388,10 @@ AnimSprite_EfxThunderstormOBJ_28:
 	.short 0x0000, 0x0000, 0x0006, 25, -20, 0
 	.short 0x0000, 0x0000, 0x0006, -31, -29, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_28, . - AnimSprite_EfxThunderstormOBJ_28
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_29
+	.type AnimSprite_EfxThunderstormOBJ_29, %object
 AnimSprite_EfxThunderstormOBJ_29:
 	.short 0x0000, 0x0000, 0x0004, -30, -39, 0
 	.short 0x0000, 0x0000, 0x0004, 20, -37, 0
@@ -355,8 +408,10 @@ AnimSprite_EfxThunderstormOBJ_29:
 	.short 0x0000, 0x0000, 0x0006, 27, -21, 0
 	.short 0x0000, 0x0000, 0x0006, -32, -31, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_29, . - AnimSprite_EfxThunderstormOBJ_29
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_30
+	.type AnimSprite_EfxThunderstormOBJ_30, %object
 AnimSprite_EfxThunderstormOBJ_30:
 	.short 0x0000, 0x0000, 0x0004, -33, -39, 0
 	.short 0x0000, 0x0000, 0x0004, 19, -39, 0
@@ -373,8 +428,10 @@ AnimSprite_EfxThunderstormOBJ_30:
 	.short 0x0000, 0x0000, 0x0006, 30, -21, 0
 	.short 0x0000, 0x0000, 0x0006, -31, -33, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_30, . - AnimSprite_EfxThunderstormOBJ_30
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_31
+	.type AnimSprite_EfxThunderstormOBJ_31, %object
 AnimSprite_EfxThunderstormOBJ_31:
 	.short 0x0000, 0x0000, 0x0007, -29, -34, 0
 	.short 0x0000, 0x0000, 0x0007, 12, -29, 0
@@ -391,8 +448,10 @@ AnimSprite_EfxThunderstormOBJ_31:
 	.short 0x0000, 0x0000, 0x0025, 21, -25, 0
 	.short 0x0000, 0x0000, 0x0025, 36, -31, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_31, . - AnimSprite_EfxThunderstormOBJ_31
 	.section .rodata.dat_data_banim_p77, "a", %progbits
 	.global AnimSprite_EfxThunderstormOBJ_32
+	.type AnimSprite_EfxThunderstormOBJ_32, %object
 AnimSprite_EfxThunderstormOBJ_32:
 	.short 0x0000, 0x0000, 0x0008, -28, -36, 0
 	.short 0x0000, 0x0000, 0x0008, -17, -30, 0
@@ -409,3 +468,4 @@ AnimSprite_EfxThunderstormOBJ_32:
 	.short 0x0000, 0x0000, 0x0027, 38, -30, 0
 	.short 0x0000, 0x0000, 0x0027, 19, -26, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxThunderstormOBJ_32, . - AnimSprite_EfxThunderstormOBJ_32

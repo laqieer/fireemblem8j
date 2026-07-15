@@ -4,28 +4,40 @@
 	.section .rodata.dat_anim_worldmap_highlight, "a", %progbits
 	.align 2
 	.global Pal_WmHighLightNationMap
+	.type Pal_WmHighLightNationMap, %object
+	.size Pal_WmHighLightNationMap, Img_WmHightLightMapFrecia - Pal_WmHighLightNationMap
 	Pal_WmHighLightNationMap:  @ 0x08B23F00
 	.incbin "graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal"
 
 	.global Img_WmHightLightMapFrecia
+	.type Img_WmHightLightMapFrecia, %object
+	.size Img_WmHightLightMapFrecia, Ap_WmHightLightMapFrecia - Img_WmHightLightMapFrecia
 	Img_WmHightLightMapFrecia:
 	.incbin "graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz"
 
 	.global Ap_WmHightLightMapFrecia_motion
+	.type Ap_WmHightLightMapFrecia_motion, %object
+	.size Ap_WmHightLightMapFrecia_motion, Img_WmHightLightMap2 - Ap_WmHightLightMapFrecia_motion
 	Ap_WmHightLightMapFrecia_motion:
 	.2byte (Ap_WmHightLightMapFrecia_frame_list - Ap_WmHightLightMapFrecia_motion), (Ap_WmHightLightMapFrecia_anim_list - Ap_WmHightLightMapFrecia_motion) @ header
 
 	.global Ap_WmHightLightMapFrecia_frame_list
+	.type Ap_WmHightLightMapFrecia_frame_list, %object
+	.size Ap_WmHightLightMapFrecia_frame_list, Ap_WmHightLightMapFrecia_anim_list - Ap_WmHightLightMapFrecia_frame_list
 	Ap_WmHightLightMapFrecia_frame_list: @ +$4
 	.2byte (Ap_WmHightLightMapFrecia_frame_0 - Ap_WmHightLightMapFrecia_frame_list)
 	.2byte (Ap_WmHightLightMapFrecia_frame_1 - Ap_WmHightLightMapFrecia_frame_list)
 
 	.global Ap_WmHightLightMapFrecia_anim_list
+	.type Ap_WmHightLightMapFrecia_anim_list, %object
+	.size Ap_WmHightLightMapFrecia_anim_list, Ap_WmHightLightMapFrecia_frame_0 - Ap_WmHightLightMapFrecia_anim_list
 	Ap_WmHightLightMapFrecia_anim_list: @ +$8
 	.2byte (Ap_WmHightLightMapFrecia_anim_0 - Ap_WmHightLightMapFrecia_anim_list)
 	.2byte (Ap_WmHightLightMapFrecia_anim_1 - Ap_WmHightLightMapFrecia_anim_list)
 
 	.global Ap_WmHightLightMapFrecia_frame_0
+	.type Ap_WmHightLightMapFrecia_frame_0, %object
+	.size Ap_WmHightLightMapFrecia_frame_0, Ap_WmHightLightMapFrecia_frame_1 - Ap_WmHightLightMapFrecia_frame_0
 	Ap_WmHightLightMapFrecia_frame_0: @ +$C
 	.2byte 10 @ oam entries
 	.2byte 0x40DF, 0xC1C9, 0x0 @ OAM Data #0
@@ -40,6 +52,8 @@
 	.2byte 0x1F, 0x1D1, 0x1F @ OAM Data #9
 
 	.global Ap_WmHightLightMapFrecia_frame_1
+	.type Ap_WmHightLightMapFrecia_frame_1, %object
+	.size Ap_WmHightLightMapFrecia_frame_1, Ap_WmHightLightMapFrecia_anim_0 - Ap_WmHightLightMapFrecia_frame_1
 	Ap_WmHightLightMapFrecia_frame_1: @ +$4A
 	.2byte 3 @ oam entries
 	.2byte 0x40F9, 0x81E6, 0x56 @ OAM Data #0
@@ -47,12 +61,16 @@
 	.2byte 0x80F9, 0x16, 0x5C @ OAM Data #2
 
 	.global Ap_WmHightLightMapFrecia_anim_0
+	.type Ap_WmHightLightMapFrecia_anim_0, %object
+	.size Ap_WmHightLightMapFrecia_anim_0, Ap_WmHightLightMapFrecia_anim_1 - Ap_WmHightLightMapFrecia_anim_0
 	Ap_WmHightLightMapFrecia_anim_0: @ +$5E
 	.2byte  4,  0
 
 	.2byte 0, (-1) @ loop back to start
 
 	.global Ap_WmHightLightMapFrecia_anim_1
+	.type Ap_WmHightLightMapFrecia_anim_1, %object
+	.size Ap_WmHightLightMapFrecia_anim_1, Img_WmHightLightMap2 - Ap_WmHightLightMapFrecia_anim_1
 	Ap_WmHightLightMapFrecia_anim_1: @ +$66
 	.2byte  4,  1
 
@@ -61,24 +79,34 @@
 	.byte 0x00, 0x00  @ trailing anim data not decoded by apdump
 
 	.global Img_WmHightLightMap2
+	.type Img_WmHightLightMap2, %object
+	.size Img_WmHightLightMap2, Ap_WmHightLightMap2 - Img_WmHightLightMap2
 	Img_WmHightLightMap2:
 	.incbin "graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz"
 
 	.global Ap_WmHightLightMap2_motion
+	.type Ap_WmHightLightMap2_motion, %object
+	.size Ap_WmHightLightMap2_motion, .L_opaque_extent_end_dat_anim_worldmap_highlight - Ap_WmHightLightMap2_motion
 	Ap_WmHightLightMap2_motion:
 	.2byte (Ap_WmHightLightMap2_frame_list - Ap_WmHightLightMap2_motion), (Ap_WmHightLightMap2_anim_list - Ap_WmHightLightMap2_motion) @ header
 
 	.global Ap_WmHightLightMap2_frame_list
+	.type Ap_WmHightLightMap2_frame_list, %object
+	.size Ap_WmHightLightMap2_frame_list, Ap_WmHightLightMap2_anim_list - Ap_WmHightLightMap2_frame_list
 	Ap_WmHightLightMap2_frame_list: @ +$4
 	.2byte (Ap_WmHightLightMap2_frame_0 - Ap_WmHightLightMap2_frame_list)
 	.2byte (Ap_WmHightLightMap2_frame_1 - Ap_WmHightLightMap2_frame_list)
 
 	.global Ap_WmHightLightMap2_anim_list
+	.type Ap_WmHightLightMap2_anim_list, %object
+	.size Ap_WmHightLightMap2_anim_list, Ap_WmHightLightMap2_frame_0 - Ap_WmHightLightMap2_anim_list
 	Ap_WmHightLightMap2_anim_list: @ +$8
 	.2byte (Ap_WmHightLightMap2_anim_0 - Ap_WmHightLightMap2_anim_list)
 	.2byte (Ap_WmHightLightMap2_anim_1 - Ap_WmHightLightMap2_anim_list)
 
 	.global Ap_WmHightLightMap2_frame_0
+	.type Ap_WmHightLightMap2_frame_0, %object
+	.size Ap_WmHightLightMap2_frame_0, Ap_WmHightLightMap2_frame_1 - Ap_WmHightLightMap2_frame_0
 	Ap_WmHightLightMap2_frame_0: @ +$C
 	.2byte 41 @ oam entries
 	.2byte 0x40F8, 0x81B7, 0x40 @ OAM Data #0
@@ -124,6 +152,8 @@
 	.2byte 0x4028, 0x2F, 0x64 @ OAM Data #40
 
 	.global Ap_WmHightLightMap2_frame_1
+	.type Ap_WmHightLightMap2_frame_1, %object
+	.size Ap_WmHightLightMap2_frame_1, Ap_WmHightLightMap2_anim_0 - Ap_WmHightLightMap2_frame_1
 	Ap_WmHightLightMap2_frame_1: @ +$104
 	.2byte 6 @ oam entries
 	.2byte 0x40F9, 0x41E7, 0x80 @ OAM Data #0
@@ -134,12 +164,16 @@
 	.2byte 0x1, 0x17, 0x8D @ OAM Data #5
 
 	.global Ap_WmHightLightMap2_anim_0
+	.type Ap_WmHightLightMap2_anim_0, %object
+	.size Ap_WmHightLightMap2_anim_0, Ap_WmHightLightMap2_anim_1 - Ap_WmHightLightMap2_anim_0
 	Ap_WmHightLightMap2_anim_0: @ +$12A
 	.2byte  4,  0
 
 	.2byte 0, (-1) @ loop back to start
 
 	.global Ap_WmHightLightMap2_anim_1
+	.type Ap_WmHightLightMap2_anim_1, %object
+	.size Ap_WmHightLightMap2_anim_1, .L_opaque_extent_end_dat_anim_worldmap_highlight - Ap_WmHightLightMap2_anim_1
 	Ap_WmHightLightMap2_anim_1: @ +$132
 	.2byte  4,  1
 
@@ -147,6 +181,11 @@
 
 	.byte 0x00, 0x00  @ trailing anim data not decoded by apdump
 	.global Ap_WmHightLightMapFrecia
+	.type Ap_WmHightLightMapFrecia, %object
+	.size Ap_WmHightLightMapFrecia, Img_WmHightLightMap2 - Ap_WmHightLightMapFrecia
 	.set Ap_WmHightLightMapFrecia, Ap_WmHightLightMapFrecia_motion
 	.global Ap_WmHightLightMap2
+	.type Ap_WmHightLightMap2, %object
+	.size Ap_WmHightLightMap2, .L_opaque_extent_end_dat_anim_worldmap_highlight - Ap_WmHightLightMap2
 	.set Ap_WmHightLightMap2, Ap_WmHightLightMap2_motion
+.L_opaque_extent_end_dat_anim_worldmap_highlight:

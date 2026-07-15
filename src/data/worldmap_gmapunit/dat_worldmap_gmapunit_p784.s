@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_worldmap_gmapunit_p784, "a", %progbits
 	.global AnimSprite_EkrBaseKaiten_86
+	.type AnimSprite_EkrBaseKaiten_86, %object
 AnimSprite_EkrBaseKaiten_86:
 	.short 0x4000, 0x1000, 0x005E, -20, -11, 0
 	.short 0x4000, 0x1000, 0x007E, -20, 13, 0
@@ -18,3 +19,4 @@ AnimSprite_EkrBaseKaiten_86:
 	.short 0x0000, 0x1000, 0x0082, -28, -4, 0
 	.short 0x8000, 0x1000, 0x0058, 28, -20, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EkrBaseKaiten_86, . - AnimSprite_EkrBaseKaiten_86

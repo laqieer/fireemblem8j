@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p139, "a", %progbits
 	.global AnimSprite_EfxRestOBJ_29
+	.type AnimSprite_EfxRestOBJ_29, %object
 AnimSprite_EfxRestOBJ_29:
 	.short 0x0000, 0x0000, 0x0019, 4, 9, 0
 	.short 0x0000, 0x0000, 0x0019, 0, 13, 0
@@ -26,8 +27,10 @@ AnimSprite_EfxRestOBJ_29:
 	.short 0x0000, 0x0000, 0x001B, -11, -34, 0
 	.short 0x0000, 0x0000, 0x001B, -6, -29, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxRestOBJ_29, . - AnimSprite_EfxRestOBJ_29
 	.section .rodata.dat_data_banim_p139, "a", %progbits
 	.global AnimSprite_EfxRestOBJ_30
+	.type AnimSprite_EfxRestOBJ_30, %object
 AnimSprite_EfxRestOBJ_30:
 	.short 0x0000, 0x0000, 0x0019, 0, 13, 0
 	.short 0x0000, 0x0000, 0x001A, -24, -15, 0
@@ -49,3 +52,4 @@ AnimSprite_EfxRestOBJ_30:
 	.short 0x0000, 0x0000, 0x001B, -11, -34, 0
 	.short 0x0000, 0x0000, 0x001B, -6, -29, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxRestOBJ_30, . - AnimSprite_EfxRestOBJ_30

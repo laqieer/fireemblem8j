@@ -3,20 +3,25 @@
  */
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_19
+	.type AnimSprite_EfxElfireOBJ_19, %object
 AnimSprite_EfxElfireOBJ_19:
 	.short 0x8000, 0x0000, 0x0000, -44, -64, 0
 	.short 0x8000, 0x1000, 0x0000, 36, -64, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_19, . - AnimSprite_EfxElfireOBJ_19
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_20
+	.type AnimSprite_EfxElfireOBJ_20, %object
 AnimSprite_EfxElfireOBJ_20:
 	.short 0x0000, 0x4000, 0x0000, -50, -73, 0
 	.short 0x8000, 0x0000, 0x0002, -44, -63, 0
 	.short 0x0000, 0x5000, 0x0000, 34, -73, 0
 	.short 0x8000, 0x1000, 0x0002, 36, -63, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_20, . - AnimSprite_EfxElfireOBJ_20
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_21
+	.type AnimSprite_EfxElfireOBJ_21, %object
 AnimSprite_EfxElfireOBJ_21:
 	.short 0x0000, 0x4000, 0x0000, -43, -79, 0
 	.short 0x0000, 0x4000, 0x0002, -50, -73, 0
@@ -25,8 +30,10 @@ AnimSprite_EfxElfireOBJ_21:
 	.short 0x0000, 0x5000, 0x0002, 34, -73, 0
 	.short 0x8000, 0x1000, 0x0004, 36, -63, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_21, . - AnimSprite_EfxElfireOBJ_21
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_22
+	.type AnimSprite_EfxElfireOBJ_22, %object
 AnimSprite_EfxElfireOBJ_22:
 	.short 0x0000, 0x4000, 0x0000, -35, -82, 0
 	.short 0x0000, 0x4000, 0x0002, -43, -79, 0
@@ -37,8 +44,10 @@ AnimSprite_EfxElfireOBJ_22:
 	.short 0x0000, 0x5000, 0x0004, 34, -73, 0
 	.short 0x8000, 0x1000, 0x0006, 36, -63, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_22, . - AnimSprite_EfxElfireOBJ_22
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_23
+	.type AnimSprite_EfxElfireOBJ_23, %object
 AnimSprite_EfxElfireOBJ_23:
 	.short 0x0000, 0x4000, 0x0000, -26, -85, 0
 	.short 0x0000, 0x4000, 0x0002, -35, -82, 0
@@ -51,8 +60,10 @@ AnimSprite_EfxElfireOBJ_23:
 	.short 0x0000, 0x5000, 0x0006, 34, -73, 0
 	.short 0x8000, 0x1000, 0x0008, 36, -63, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_23, . - AnimSprite_EfxElfireOBJ_23
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_24
+	.type AnimSprite_EfxElfireOBJ_24, %object
 AnimSprite_EfxElfireOBJ_24:
 	.short 0x0000, 0x4000, 0x0000, -17, -87, 0
 	.short 0x0000, 0x4000, 0x0002, -26, -85, 0
@@ -65,8 +76,10 @@ AnimSprite_EfxElfireOBJ_24:
 	.short 0x0000, 0x5000, 0x0006, 27, -79, 0
 	.short 0x0000, 0x5000, 0x0008, 34, -73, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_24, . - AnimSprite_EfxElfireOBJ_24
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_25
+	.type AnimSprite_EfxElfireOBJ_25, %object
 AnimSprite_EfxElfireOBJ_25:
 	.short 0x0000, 0x4000, 0x0000, 3, -92, 0
 	.short 0x0000, 0x4000, 0x0002, -6, -90, 0
@@ -79,8 +92,10 @@ AnimSprite_EfxElfireOBJ_25:
 	.short 0x0000, 0x5000, 0x0006, 9, -85, 0
 	.short 0x0000, 0x5000, 0x0008, 19, -81, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_25, . - AnimSprite_EfxElfireOBJ_25
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_26
+	.type AnimSprite_EfxElfireOBJ_26, %object
 AnimSprite_EfxElfireOBJ_26:
 	.short 0x0000, 0x4000, 0x0000, -5, -89, 0
 	.short 0x0000, 0x4000, 0x0002, -14, -87, 0
@@ -93,8 +108,10 @@ AnimSprite_EfxElfireOBJ_26:
 	.short 0x0000, 0x5000, 0x0006, 18, -82, 0
 	.short 0x0000, 0x5000, 0x0008, 27, -79, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_26, . - AnimSprite_EfxElfireOBJ_26
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_27
+	.type AnimSprite_EfxElfireOBJ_27, %object
 AnimSprite_EfxElfireOBJ_27:
 	.short 0x0000, 0x4000, 0x0000, 11, -95, 0
 	.short 0x0000, 0x4000, 0x0002, 2, -93, 0
@@ -107,8 +124,10 @@ AnimSprite_EfxElfireOBJ_27:
 	.short 0x0000, 0x5000, 0x0006, 1, -88, 0
 	.short 0x0000, 0x5000, 0x0008, 11, -84, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_27, . - AnimSprite_EfxElfireOBJ_27
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_28
+	.type AnimSprite_EfxElfireOBJ_28, %object
 AnimSprite_EfxElfireOBJ_28:
 	.short 0x0000, 0x4000, 0x0000, 21, -102, 0
 	.short 0x0000, 0x4000, 0x0002, 12, -97, 0
@@ -121,8 +140,10 @@ AnimSprite_EfxElfireOBJ_28:
 	.short 0x0000, 0x5000, 0x0006, -9, -91, 0
 	.short 0x0000, 0x5000, 0x0008, 1, -87, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_28, . - AnimSprite_EfxElfireOBJ_28
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_29
+	.type AnimSprite_EfxElfireOBJ_29, %object
 AnimSprite_EfxElfireOBJ_29:
 	.short 0x0000, 0x4000, 0x0000, 31, -110, 0
 	.short 0x0000, 0x4000, 0x0002, 22, -103, 0
@@ -135,8 +156,10 @@ AnimSprite_EfxElfireOBJ_29:
 	.short 0x0000, 0x5000, 0x0006, -19, -95, 0
 	.short 0x0000, 0x5000, 0x0008, -9, -91, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_29, . - AnimSprite_EfxElfireOBJ_29
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_30
+	.type AnimSprite_EfxElfireOBJ_30, %object
 AnimSprite_EfxElfireOBJ_30:
 	.short 0x0000, 0x4000, 0x0000, 34, -121, 0
 	.short 0x0000, 0x4000, 0x0002, 31, -112, 0
@@ -149,8 +172,10 @@ AnimSprite_EfxElfireOBJ_30:
 	.short 0x0000, 0x5000, 0x0006, -29, -100, 0
 	.short 0x0000, 0x5000, 0x0008, -19, -96, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_30, . - AnimSprite_EfxElfireOBJ_30
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_31
+	.type AnimSprite_EfxElfireOBJ_31, %object
 AnimSprite_EfxElfireOBJ_31:
 	.short 0x8000, 0x0000, 0x0001, 36, -128, 0
 	.short 0x0000, 0x4000, 0x0002, 36, -122, 0
@@ -163,8 +188,10 @@ AnimSprite_EfxElfireOBJ_31:
 	.short 0x0000, 0x5000, 0x0006, -42, -103, 0
 	.short 0x0000, 0x5000, 0x0008, -32, -99, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_31, . - AnimSprite_EfxElfireOBJ_31
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_32
+	.type AnimSprite_EfxElfireOBJ_32, %object
 AnimSprite_EfxElfireOBJ_32:
 	.short 0x8000, 0x0000, 0x0003, 36, -128, 0
 	.short 0x0000, 0x4000, 0x0004, 36, -122, 0
@@ -175,8 +202,10 @@ AnimSprite_EfxElfireOBJ_32:
 	.short 0x0000, 0x5000, 0x0006, -50, -111, 0
 	.short 0x0000, 0x5000, 0x0008, -42, -105, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_32, . - AnimSprite_EfxElfireOBJ_32
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_33
+	.type AnimSprite_EfxElfireOBJ_33, %object
 AnimSprite_EfxElfireOBJ_33:
 	.short 0x8000, 0x0000, 0x0005, 36, -128, 0
 	.short 0x0000, 0x4000, 0x0006, 36, -122, 0
@@ -185,9 +214,12 @@ AnimSprite_EfxElfireOBJ_33:
 	.short 0x0000, 0x5000, 0x0006, -52, -122, 0
 	.short 0x0000, 0x5000, 0x0008, -50, -111, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_33, . - AnimSprite_EfxElfireOBJ_33
 	.section .rodata.dat_data_banim_p72, "a", %progbits
 	.global AnimSprite_EfxElfireOBJ_34
+	.type AnimSprite_EfxElfireOBJ_34, %object
 AnimSprite_EfxElfireOBJ_34:
 	.short 0x8000, 0x0000, 0x0009, 36, -128, 0
 	.short 0x8000, 0x1000, 0x0009, -44, -128, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxElfireOBJ_34, . - AnimSprite_EfxElfireOBJ_34

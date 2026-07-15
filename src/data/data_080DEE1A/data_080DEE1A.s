@@ -4,6 +4,7 @@
 /* carved from data_080DEE1A [0x0..0x66) -> data_080DEE1A */
 	.section .data.residue.080DEE1A, "aw", %progbits
 	.global data_080DEE1A
+	.type data_080DEE1A, %object
 data_080DEE1A:
 	.byte 0x03, 0x07, 0x0f, 0x00, 0x00, 0x00
 	.asciz "SIOPRA"
@@ -18,3 +19,4 @@ data_080DEE1A:
 	.asciz "SIOTERM"
 	.asciz "SIORESULT"
 	.byte 0x00, 0x00
+	.size data_080DEE1A, . - data_080DEE1A

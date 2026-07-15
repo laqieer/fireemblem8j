@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p167, "a", %progbits
 	.global AnimSprite_EfxMshield_43
+	.type AnimSprite_EfxMshield_43, %object
 AnimSprite_EfxMshield_43:
 	.short 0x0000, 0x0000, 0x0015, -33, -19, 0
 	.short 0x0000, 0x0000, 0x0015, -25, -16, 0
@@ -18,8 +19,10 @@ AnimSprite_EfxMshield_43:
 	.short 0x0000, 0x1000, 0x000B, 38, -4, 0
 	.short 0x0000, 0x0000, 0x0012, 14, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMshield_43, . - AnimSprite_EfxMshield_43
 	.section .rodata.dat_data_banim_p167, "a", %progbits
 	.global AnimSprite_EfxMshield_44
+	.type AnimSprite_EfxMshield_44, %object
 AnimSprite_EfxMshield_44:
 	.short 0x0000, 0x0000, 0x0015, -25, -16, 0
 	.short 0x0000, 0x1000, 0x000E, 21, -16, 0
@@ -35,3 +38,4 @@ AnimSprite_EfxMshield_44:
 	.short 0x0000, 0x1000, 0x000B, 38, -4, 0
 	.short 0x0000, 0x0000, 0x0012, 14, -16, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMshield_44, . - AnimSprite_EfxMshield_44

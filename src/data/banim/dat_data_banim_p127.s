@@ -3,6 +3,7 @@
  */
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_28
+	.type AnimSprite_EfxReblowOBJ_R_28, %object
 AnimSprite_EfxReblowOBJ_R_28:
 	.short 0x0001, 0xFFFF, 0x002B, 0xFF04, 0x00FC, 0x002B
 	.short 0x0100, 0x4000, 0x0040, -6, -59, 0
@@ -14,8 +15,10 @@ AnimSprite_EfxReblowOBJ_R_28:
 	.short 0x0000, 0x4000, 0x0000, 24, -11, 0
 	.short 0x0000, 0x0000, 0x0044, 56, -9, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_28, . - AnimSprite_EfxReblowOBJ_R_28
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_29
+	.type AnimSprite_EfxReblowOBJ_R_29, %object
 AnimSprite_EfxReblowOBJ_R_29:
 	.short 0x0001, 0xFFFF, 0x007F, 0xFF22, 0x00DE, 0x007F
 	.short 0x0100, 0x4000, 0x0040, -16, -57, 0
@@ -24,8 +27,10 @@ AnimSprite_EfxReblowOBJ_R_29:
 	.short 0x0000, 0x0000, 0x0044, 50, -6, 0
 	.short 0x0000, 0x4000, 0x0000, 11, -17, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_29, . - AnimSprite_EfxReblowOBJ_R_29
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_30
+	.type AnimSprite_EfxReblowOBJ_R_30, %object
 AnimSprite_EfxReblowOBJ_R_30:
 	.short 0x0001, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3
 	.short 0x0100, 0x4000, 0x0040, -24, -66, 0
@@ -34,8 +39,10 @@ AnimSprite_EfxReblowOBJ_R_30:
 	.short 0x0000, 0x4000, 0x0000, 2, -30, 0
 	.short 0x0000, 0x0000, 0x0044, 40, -9, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_30, . - AnimSprite_EfxReblowOBJ_R_30
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_31
+	.type AnimSprite_EfxReblowOBJ_R_31, %object
 AnimSprite_EfxReblowOBJ_R_31:
 	.short 0x0001, 0xFFFF, 0x00F0, 0xFFA8, 0x0058, 0x00F0
 	.short 0x0100, 0x4000, 0x0040, -28, -77, 0
@@ -44,8 +51,10 @@ AnimSprite_EfxReblowOBJ_R_31:
 	.short 0x0000, 0x4000, 0x0000, -4, -39, 0
 	.short 0x0000, 0x0000, 0x0044, 32, -8, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_31, . - AnimSprite_EfxReblowOBJ_R_31
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_32
+	.type AnimSprite_EfxReblowOBJ_R_32, %object
 AnimSprite_EfxReblowOBJ_R_32:
 	.short 0x0001, 0xFFFF, 0x0000, 0xFF01, 0x00FF, 0x0000
 	.short 0x0100, 0x4000, 0x0040, -31, -88, 0
@@ -53,8 +62,10 @@ AnimSprite_EfxReblowOBJ_R_32:
 	.short 0x0000, 0x4000, 0x0000, -16, -56, 0
 	.short 0x0000, 0x0000, 0x0044, 15, -13, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_32, . - AnimSprite_EfxReblowOBJ_R_32
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_33
+	.type AnimSprite_EfxReblowOBJ_R_33, %object
 AnimSprite_EfxReblowOBJ_R_33:
 	.short 0x0001, 0xFFFF, 0x0056, 0xFF10, 0x00F0, 0x0056
 	.short 0x0100, 0x4000, 0x0040, -36, -99, 0
@@ -62,36 +73,49 @@ AnimSprite_EfxReblowOBJ_R_33:
 	.short 0x0000, 0x0000, 0x0044, 6, -63, 0
 	.short 0x0000, 0x0000, 0x0044, 6, -36, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_33, . - AnimSprite_EfxReblowOBJ_R_33
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_34
+	.type AnimSprite_EfxReblowOBJ_R_34, %object
 AnimSprite_EfxReblowOBJ_R_34:
 	.short 0x0000, 0x4000, 0x0000, -28, -77, 0
 	.short 0x0000, 0x0000, 0x0044, 0, -53, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_34, . - AnimSprite_EfxReblowOBJ_R_34
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_35
+	.type AnimSprite_EfxReblowOBJ_R_35, %object
 AnimSprite_EfxReblowOBJ_R_35:
 	.short 0x0000, 0x0000, 0x0044, -8, -53, 0
 	.short 0x0000, 0x4000, 0x0000, -32, -88, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_35, . - AnimSprite_EfxReblowOBJ_R_35
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_36
+	.type AnimSprite_EfxReblowOBJ_R_36, %object
 AnimSprite_EfxReblowOBJ_R_36:
 	.short 0x0000, 0x4000, 0x0000, -38, -99, 0
 	.short 0x0000, 0x0000, 0x0044, -16, -62, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_36, . - AnimSprite_EfxReblowOBJ_R_36
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_37
+	.type AnimSprite_EfxReblowOBJ_R_37, %object
 AnimSprite_EfxReblowOBJ_R_37:
 	.short 0x0000, 0x0000, 0x0044, -21, -73, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_37, . - AnimSprite_EfxReblowOBJ_R_37
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_38
+	.type AnimSprite_EfxReblowOBJ_R_38, %object
 AnimSprite_EfxReblowOBJ_R_38:
 	.short 0x0000, 0x0000, 0x0044, -24, -84, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_38, . - AnimSprite_EfxReblowOBJ_R_38
 	.section .rodata.dat_data_banim_p127, "a", %progbits
 	.global AnimSprite_EfxReblowOBJ_R_39
+	.type AnimSprite_EfxReblowOBJ_R_39, %object
 AnimSprite_EfxReblowOBJ_R_39:
 	.short 0x0000, 0x0000, 0x0044, -30, -95, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxReblowOBJ_R_39, . - AnimSprite_EfxReblowOBJ_R_39

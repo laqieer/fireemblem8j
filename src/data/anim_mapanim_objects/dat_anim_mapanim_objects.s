@@ -1,6 +1,8 @@
 .section .rodata.dat_anim_mapanim_objects,"aw"
 
 	.global Obj_PoisonAnim
+	.type Obj_PoisonAnim, %object
+	.size Obj_PoisonAnim, Obj_WallBreakAnim - Obj_PoisonAnim
 Obj_PoisonAnim:  @ 0x089A6F40
 Obj_PoisonAnim_motion:
 	.2byte (Obj_PoisonAnim_frame_list - Obj_PoisonAnim_motion), (Obj_PoisonAnim_anim_list - Obj_PoisonAnim_motion) @ header
@@ -78,6 +80,8 @@ Obj_PoisonAnim_anim_0: @ +$60
 	.endif
 
 	.global Obj_WallBreakAnim
+	.type Obj_WallBreakAnim, %object
+	.size Obj_WallBreakAnim, ApHandle_GmapSoguSprites - Obj_WallBreakAnim
 @ AP object-animation definition. Two packed sub-definitions (def0 is
 @ APProc_Create'd from trapfx.c / mapanim_specialeffect.c with anim 0/1;
 @ Obj_WallBreakAnim_2 is unreferenced spare data kept for byte-identity).
@@ -1833,6 +1837,8 @@ Obj_WallBreakAnim_2_anim_1: @ +$DF4
 	.endif
 
 	.global ApHandle_GmapSoguSprites
+	.type ApHandle_GmapSoguSprites, %object
+	.size ApHandle_GmapSoguSprites, Pal_MapAnimManaketeMu - ApHandle_GmapSoguSprites
 ApHandle_GmapSoguSprites:  @ 0x089A8EF8
 ApHandle_GmapSoguSprites_motion:
 	.2byte (ApHandle_GmapSoguSprites_frame_list - ApHandle_GmapSoguSprites_motion), (ApHandle_GmapSoguSprites_anim_list - ApHandle_GmapSoguSprites_motion) @ header
@@ -1885,26 +1891,38 @@ ApHandle_GmapSoguSprites_anim_0: @ +$38
 	.endif
 
 	.global Pal_MapAnimManaketeMu
+	.type Pal_MapAnimManaketeMu, %object
+	.size Pal_MapAnimManaketeMu, gGfx_ArenaBuildingFront - Pal_MapAnimManaketeMu
 Pal_MapAnimManaketeMu:  @ 0x089A8F74
 	.incbin "graphics/mapanim/Pal_MapAnimManaketeMu.gbapal"
 
 	.global gGfx_ArenaBuildingFront
+	.type gGfx_ArenaBuildingFront, %object
+	.size gGfx_ArenaBuildingFront, gTsa_ArenaBuildingFront - gGfx_ArenaBuildingFront
 gGfx_ArenaBuildingFront:  @ 0x089A8F94
 	.incbin "graphics/mapanim/gGfx_ArenaBuildingFront.4bpp.lz"
 
 	.global gTsa_ArenaBuildingFront
+	.type gTsa_ArenaBuildingFront, %object
+	.size gTsa_ArenaBuildingFront, gPal_ArenaBuildingFront - gTsa_ArenaBuildingFront
 gTsa_ArenaBuildingFront:  @ 0x089ABB70
 	.incbin "graphics/mapanim/gTsa_ArenaBuildingFront.tsa.bin"
 
 	.global gPal_ArenaBuildingFront
+	.type gPal_ArenaBuildingFront, %object
+	.size gPal_ArenaBuildingFront, Img_MapAnimMISS - gPal_ArenaBuildingFront
 gPal_ArenaBuildingFront:  @ 0x089AC024
 	.incbin "graphics/mapanim/gPal_ArenaBuildingFront.gbapal"
 
 	.global Img_MapAnimMISS
+	.type Img_MapAnimMISS, %object
+	.size Img_MapAnimMISS, Obj_MapAnimMISS - Img_MapAnimMISS
 Img_MapAnimMISS:  @ 0x089AC0A4
 	.incbin "graphics/mapanim/Img_MapAnimMISS.4bpp.lz"
 
 	.global Obj_MapAnimMISS
+	.type Obj_MapAnimMISS, %object
+	.size Obj_MapAnimMISS, Img_MapAnimNODAMAGE - Obj_MapAnimMISS
 Obj_MapAnimMISS:  @ 0x089AC194
 Obj_MapAnimMISS_motion:
 	.2byte (Obj_MapAnimMISS_frame_list - Obj_MapAnimMISS_motion), (Obj_MapAnimMISS_anim_list - Obj_MapAnimMISS_motion) @ header
@@ -2036,10 +2054,14 @@ Obj_MapAnimMISS_anim_0: @ +$12A
 	.endif
 
 	.global Img_MapAnimNODAMAGE
+	.type Img_MapAnimNODAMAGE, %object
+	.size Img_MapAnimNODAMAGE, obj_MapAnimNODAMAGE - Img_MapAnimNODAMAGE
 Img_MapAnimNODAMAGE:  @ 0x089AC2FC
 	.incbin "graphics/mapanim/Img_MapAnimNODAMAGE.4bpp.lz"
 
 	.global obj_MapAnimNODAMAGE
+	.type obj_MapAnimNODAMAGE, %object
+	.size obj_MapAnimNODAMAGE, .L_opaque_extent_end_dat_anim_mapanim_objects - obj_MapAnimNODAMAGE
 obj_MapAnimNODAMAGE:  @ 0x089AC440
 obj_MapAnimNODAMAGE_motion:
 	.2byte (obj_MapAnimNODAMAGE_frame_list - obj_MapAnimNODAMAGE_motion), (obj_MapAnimNODAMAGE_anim_list - obj_MapAnimNODAMAGE_motion) @ header
@@ -2171,3 +2193,4 @@ obj_MapAnimNODAMAGE_anim_0: @ +$154
 	.if (.L_end_obj_MapAnimNODAMAGE - obj_MapAnimNODAMAGE) != 396
 	.error "obj_MapAnimNODAMAGE size mismatch"
 	.endif
+.L_opaque_extent_end_dat_anim_mapanim_objects:

@@ -7,6 +7,7 @@
 @ OAM attr1/attr2 data, NOT pointers — the table is fully shiftable.
 
 	.global unit_icon_move_Draco_Zombie_motion
+	.type unit_icon_move_Draco_Zombie_motion, %object
 unit_icon_move_Draco_Zombie_motion:
 	.2byte (unit_icon_move_Draco_Zombie_frame_list - unit_icon_move_Draco_Zombie_motion), (unit_icon_move_Draco_Zombie_anim_list - unit_icon_move_Draco_Zombie_motion) @ header
 
@@ -177,3 +178,4 @@ unit_icon_move_Draco_Zombie_anim_4: @ +$14A
 
 	.align 2, 0
 
+	.size unit_icon_move_Draco_Zombie_motion, . - unit_icon_move_Draco_Zombie_motion

@@ -3,87 +3,109 @@
  */
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_1
+	.type AnimSprite_EfxMistyRainObj4_1, %object
 AnimSprite_EfxMistyRainObj4_1:
 	.short 0x0002, 0xFFFF, 0x0505, 0x0000, 0x0000, 0x0505
 	.short 0x0002, 0xFFFF, 0xFAFB, 0x0000, 0x0000, 0x0505
 	.short 0x0100, 0x8000, 0x0000, -20, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -13, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_1, . - AnimSprite_EfxMistyRainObj4_1
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_2
+	.type AnimSprite_EfxMistyRainObj4_2, %object
 AnimSprite_EfxMistyRainObj4_2:
 	.short 0x0002, 0xFFFF, 0x035E, 0x0000, 0x0000, 0x035E
 	.short 0x0002, 0xFFFF, 0xFCA2, 0x0000, 0x0000, 0x035E
 	.short 0x0100, 0x8000, 0x0000, -21, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -12, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_2, . - AnimSprite_EfxMistyRainObj4_2
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_3
+	.type AnimSprite_EfxMistyRainObj4_3, %object
 AnimSprite_EfxMistyRainObj4_3:
 	.short 0x0002, 0xFFFF, 0x0282, 0x0000, 0x0000, 0x0282
 	.short 0x0002, 0xFFFF, 0xFD7E, 0x0000, 0x0000, 0x0282
 	.short 0x0100, 0x8000, 0x0000, -23, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -10, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_3, . - AnimSprite_EfxMistyRainObj4_3
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_4
+	.type AnimSprite_EfxMistyRainObj4_4, %object
 AnimSprite_EfxMistyRainObj4_4:
 	.short 0x0002, 0xFFFF, 0x0200, 0x0000, 0x0000, 0x0200
 	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200
 	.short 0x0100, 0x8000, 0x0000, -24, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -9, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_4, . - AnimSprite_EfxMistyRainObj4_4
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_5
+	.type AnimSprite_EfxMistyRainObj4_5, %object
 AnimSprite_EfxMistyRainObj4_5:
 	.short 0x0002, 0xFFFF, 0x01AC, 0x0000, 0x0000, 0x01AC
 	.short 0x0002, 0xFFFF, 0xFE51, 0x0000, 0x0000, 0x01AF
 	.short 0x0100, 0x8000, 0x0000, -26, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -7, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_5, . - AnimSprite_EfxMistyRainObj4_5
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_6
+	.type AnimSprite_EfxMistyRainObj4_6, %object
 AnimSprite_EfxMistyRainObj4_6:
 	.short 0x0002, 0xFFFF, 0x016E, 0x0000, 0x0000, 0x016E
 	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E
 	.short 0x0100, 0x8000, 0x0000, -28, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -5, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_6, . - AnimSprite_EfxMistyRainObj4_6
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_7
+	.type AnimSprite_EfxMistyRainObj4_7, %object
 AnimSprite_EfxMistyRainObj4_7:
 	.short 0x0002, 0xFFFF, 0x0141, 0x0000, 0x0000, 0x0141
 	.short 0x0002, 0xFFFF, 0xFEBF, 0x0000, 0x0000, 0x0141
 	.short 0x0100, 0x8000, 0x0000, -29, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -4, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_7, . - AnimSprite_EfxMistyRainObj4_7
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_8
+	.type AnimSprite_EfxMistyRainObj4_8, %object
 AnimSprite_EfxMistyRainObj4_8:
 	.short 0x0002, 0xFFFF, 0x011C, 0x0000, 0x0000, 0x011C
 	.short 0x0002, 0xFFFF, 0xFEE4, 0x0000, 0x0000, 0x011C
 	.short 0x0100, 0x8000, 0x0000, -31, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -2, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_8, . - AnimSprite_EfxMistyRainObj4_8
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_9
+	.type AnimSprite_EfxMistyRainObj4_9, %object
 AnimSprite_EfxMistyRainObj4_9:
 	.short 0x0002, 0xFFFF, 0x0113, 0x0000, 0x0000, 0x0113
 	.short 0x0002, 0xFFFF, 0xFEED, 0x0000, 0x0000, 0x0113
 	.short 0x0100, 0x8000, 0x0000, -31, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -2, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_9, . - AnimSprite_EfxMistyRainObj4_9
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_10
+	.type AnimSprite_EfxMistyRainObj4_10, %object
 AnimSprite_EfxMistyRainObj4_10:
 	.short 0x0002, 0xFFFF, 0x010D, 0x0000, 0x0000, 0x010D
 	.short 0x0002, 0xFFFF, 0xFEF3, 0x0000, 0x0000, 0x010D
 	.short 0x0100, 0x8000, 0x0000, -32, 0, 0
 	.short 0x0100, 0x8200, 0x0000, -1, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_10, . - AnimSprite_EfxMistyRainObj4_10
 	.section .rodata.dat_data_banim_p100, "a", %progbits
 	.global AnimSprite_EfxMistyRainObj4_11
+	.type AnimSprite_EfxMistyRainObj4_11, %object
 AnimSprite_EfxMistyRainObj4_11:
 	.short 0x0000, 0x8000, 0x0000, -32, 0, 0
 	.short 0x0000, 0x9000, 0x0000, 0, 0, 0
 	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+	.size AnimSprite_EfxMistyRainObj4_11, . - AnimSprite_EfxMistyRainObj4_11

@@ -4,6 +4,7 @@
 /* carved from gProcScr_SALLYCURSOR_pool [0x0..0xd6) -> gProcScr_SALLYCURSOR_pool */
 	.section .data.residue.080DCCB2, "aw", %progbits
 	.global gProcScr_SALLYCURSOR_pool
+	.type gProcScr_SALLYCURSOR_pool, %object
 gProcScr_SALLYCURSOR_pool:
 	.byte 0x00, 0x00
 	.asciz "SALLYCURSOR"
@@ -27,3 +28,4 @@ gProcScr_SALLYCURSOR_pool:
 	.byte 0x00, 0x00
 	.asciz "E_BSKPHASE"
 	.byte 0x00
+	.size gProcScr_SALLYCURSOR_pool, . - gProcScr_SALLYCURSOR_pool

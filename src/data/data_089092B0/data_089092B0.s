@@ -6,6 +6,7 @@
  * (u8[] def matches the established UnitDef pattern, cf data_08908CA0); section unchanged. */
 	.section .data.residue.089092B0, "aw", %progbits
 	.global UnitDef_Ch4Ally_3
+	.type UnitDef_Ch4Ally_3, %object
 UnitDef_Ch4Ally_3:
 	.4byte 0x08000201
 	.4byte 0x00000148
@@ -22,3 +23,4 @@ UnitDef_Ch4Ally_3:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.size UnitDef_Ch4Ally_3, . - UnitDef_Ch4Ally_3

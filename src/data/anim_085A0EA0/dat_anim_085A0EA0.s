@@ -8,6 +8,7 @@
 @ The frame `.2byte` words are OAM/rotscale attr data, NOT pointers -> shiftable.
 
 	.global gUnkData_2
+	.type gUnkData_2, %object
 gUnkData_2:  @ 0x085C93C0
 g085A0EA0_motion:
 	.2byte (g085A0EA0_frame_list - g085A0EA0_motion), (g085A0EA0_anim_list - g085A0EA0_motion) @ header
@@ -116,3 +117,4 @@ g085A0EA0_anim_1: @ +$14A
 	.if (.L_end_g085A0EA0 - gUnkData_2) != 344
 	.error "gUnkData_2 size mismatch"
 	.endif
+	.size gUnkData_2, . - gUnkData_2

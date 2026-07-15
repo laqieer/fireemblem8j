@@ -3,6 +3,7 @@
  */
 	.section .data.residue.08A9A8D4, "aw", %progbits
 	.global Tsa_SupportScreenWindow
+	.type Tsa_SupportScreenWindow, %object
 Tsa_SupportScreenWindow:
 	.4byte 0x0004B210
 	.4byte 0x00131D0F
@@ -118,3 +119,4 @@ Tsa_SupportScreenWindow:
 	.4byte 0xF0E001F0
 	.4byte 0x4001F001
 	.4byte 0x00000001
+	.size Tsa_SupportScreenWindow, . - Tsa_SupportScreenWindow
