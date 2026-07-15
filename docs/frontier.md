@@ -8,9 +8,9 @@
 ## Canonical snapshot
 
 Recomputed on 2026-07-15 from
-`main@9a291a0cf4e6d748f273e14f8bbd064178de9056` after `make layout` and
-`make compare` (`fireemblem8.gba: OK`). Refresh this section by running the
-commands, not by copying its numbers:
+`main@5001cb56e6e91aff2534329b901612be687d47d0` after
+`make clean && make compare` (`fireemblem8.gba: OK`) and `make shiftcheck`.
+Refresh this section by running the commands, not by copying its numbers:
 
 ```sh
 python3 scripts/calcprogress.py
@@ -56,13 +56,15 @@ report 8,562/8,565 rather than 8,689/8,692.
   list is empty**. It does **not** mean complete decompilation, zero opaque
   assets, or zero binary-form debt: **1,452 evidence-backed FLOOR entries
   remain**.
-- Pointer audit: **59,524** ROM `R_ARM_ABS32` relocations; 5,678 function
+- Pointer audit: **59,526** ROM `R_ARM_ABS32` relocations; 5,678 function
   targets (5,672 Thumb + 6 even); 0 function interiors; 0 header-domain,
   large-addend, compressed-anchor, AREA-scalar, or placement-anchor failures.
 - Opaque self-reference evidence: 8 resolved symbols / 267 hit words,
-  0 unresolved, completion gate 0 **within the exact-extent population**.
-  The explicit blind spot remains: **1,075 zero-size opaque symbols have no
-  proven extent and are skipped, including 865 `AnimSprite_*` labels**.
+  0 unresolved, **0 zero-size symbols skipped**, completion gate 0. D402 gives
+  exact source-owned extents to the former 1,075-symbol blind population:
+  865 `AnimSprite_*` labels plus 210 other opaque symbols. The fixed
+  name/address census SHA-256 is
+  `2439c803dc47ce64466a0fcda8601290d71c8aaf6af5732a98de5b467d5bc7eb`.
 - Glyph relocation coverage:
   `TextGlyphs_System` **1488/1488 relocated**, `TextGlyphs_Talk`
   **2085/2085 relocated**, 0 missing/malformed. The typed
@@ -75,7 +77,7 @@ report 8,562/8,565 rather than 8,689/8,692.
 - Code-literal gate: 6,209 linked code C sources scanned, 263 packed-value
   tokens classified, 0 unexplained raw ROM literals.
 - Graphics gate: **1,062/1,062** map binaries valid; 2,346
-  `AnimSprite_*`/`AnimScr_*` labels covered (1,461 explicit + 885 derived);
+  `AnimSprite_*`/`AnimScr_*` labels covered (2,326 explicit + 20 derived);
   **5,444/5,444** linked graphics-payload INCBIN names, 0 unlinked and
   0 relocation-slot overlap violations.
 - Layout/dependencies: 10,487 ROM sections, 0 baseline gaps, 246 RAM sections,
@@ -109,20 +111,28 @@ ending-CG-tail providers are historical D397-D399 evidence, not active targets.
 The 24-byte ending-CG partial-tile fragment remains a pinned FLOOR and must not
 be relisted as actionable.
 
+### Opaque extent frontier
+
+There are no skipped structureless-opaque symbols to dispatch. D402 closes the
+historical 1,075-symbol extent blind spot with source-boundary ELF metadata and
+regressions that pin the original identities, object sections, layout rows, and
+record grammars. This is an extent/audit closure, not a claim that every ELF
+symbol globally has a nonzero size: for example, `sBanimEkrPopupProcNames`
+still uses its independently proven exact provider extent.
+
 ### Issue #143 status
 
-This snapshot supports a **candidate documentation handoff only**:
+GitHub issue [#143](https://github.com/laqieer/fireemblem8j/issues/143) is
+closed. Its final shifted-ROM manual validation was recorded on 2026-07-15.
+The current post-closure state is:
 
 - the binary-form actionable list is zero;
 - all current public gates above pass;
-- 1,452 FLOOR entries and the zero-size-symbol/`AnimSprite_*` extent blind spot
-  are explicitly retained;
-- D400 records only the immutable-trailer metadata waiver; no final closure
-  verdict has yet been issued.
-
-An independent verifier and the sole integrator decide whether the evidence is
-sufficient to close issue #143. Do not label the issue final-MATCH from this
-document.
+- 1,452 evidence-backed FLOOR entries remain explicitly retained;
+- the former zero-size-symbol/`AnimSprite_*` extent blind spot is closed by
+  D402 with zero skipped and zero unresolved opaque self-reference symbols;
+- D400 remains only the immutable-trailer metadata waiver, not the issue
+  closure verdict.
 
 ## Frontier maintenance rules
 

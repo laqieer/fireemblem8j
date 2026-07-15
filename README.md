@@ -73,8 +73,10 @@ including the **1,452 evidence-backed FLOOR** files. It does not mean zero
 `.bin` files, zero FLOOR inventory, or that every byte is strict typed/
 structured source. Current binary-form audit: **MISS=0, FLOOR=1452,
 UNCERTAIN=0, TOTAL=1452**. Here `UNCERTAIN=0` means no actionable tracked
-binary-form residuals; the explicit zero-size-symbol/`AnimSprite_*` extent
-blind spot also remains, as documented in [`docs/frontier.md`](docs/frontier.md).
+binary-form residuals. The former 1,075-symbol opaque self-reference extent
+blind spot now has exact source-owned extents and the audit skips zero symbols;
+the 1,452 evidence-backed FLOOR inventory remains, as documented in
+[`docs/frontier.md`](docs/frontier.md).
 
 Named 2,599/2,599 is the current literal `.global` assembly-label census used
 by `calcprogress.py`; it is not a census of every ELF/C symbol and is not

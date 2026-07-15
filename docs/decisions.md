@@ -13570,3 +13570,56 @@ zero HIGH failures. `scripts/calcprogress.py` now reports matching-C
 2,599/2,599 because the promoted assembly provider's `.global` disappears; it
 remains 100% named. Issue #165 stays open for `sub_800A34C`, `sub_800A594`, and
 `sub_807D3BC`.
+
+## D402 — close the 1,075-symbol opaque extent blind spot with source-owned ELF metadata (2026-07-15)
+
+**Problem.** D378 correctly forbade extending a zero-size opaque symbol to the
+next unrelated final-ELF global, but the fail-closed policy left 1,075 symbols
+outside the opaque self-reference scan: 865 `AnimSprite_*` labels and 210
+others. Gate 0 was therefore honest only within the exact-extent population,
+and the skipped population remained a documented completeness blind spot.
+
+**Decision.** Attach byte-neutral `.type SYMBOL, %object` and source-owned
+`.size` expressions to the defining assembly labels. Every size is derived from
+an owned source boundary (`. - SYMBOL` or an explicit end-symbol difference);
+none is inferred from the next final-ELF global or encoded as a numeric extent.
+Cross-object metadata was rejected because it does not survive linker symbol
+resolution. Implementation commit
+`5001cb56e6e91aff2534329b901612be687d47d0` adds 1,078 type/size pairs: the
+1,075 historical symbols plus three same-address motion aliases.
+
+The proof is split by source grammar:
+
+- **865 `AnimSprite_*` symbols in 80 providers.** Their exact extents total
+  `0xDCEC` bytes / 4,713 twelve-byte records. Every range is record-aligned,
+  ends with the exact `{ header=1, eight zero bytes }` terminator, and has no
+  interior terminator-shaped record.
+- **118 singleton symbols.** Their source-boundary ranges partition the exact
+  input sections, and each section size equals its sole carved-layout span.
+- **92 remaining original symbols in nine multi-symbol providers.** Their
+  intervals union-cover every byte of ten exact input sections.
+  `sCcramifyProcData` is additionally present in the singleton census, and
+  three full-object motion aliases are sized at `0x94`, `0x70`, and `0x13C`.
+
+The original 1,075 name/address identities are pinned by SHA-256
+`2439c803dc47ce64466a0fcda8601290d71c8aaf6af5732a98de5b467d5bc7eb`.
+The regression reconstructs that census from source metadata, then
+cross-checks linked `nm -S` sizes, object sections, carved-layout rows, and ROM
+record bytes. The D378 synthetic test still proves that an unrelated next
+global is never annexed.
+
+**Result and scope.** `make clean && make compare` remains
+`fireemblem8.gba: OK`; `make shiftcheck` runs 116 focused tests and reports
+8 resolved / 267 hit words, 0 unresolved, **0 zero-size opaque symbols
+skipped**, and completion gate 0. An independent read-only verifier returned
+MATCH/PASS after reproducing the identity, grammar, section, layout, checksum,
+and gate evidence and confirming that the auditor's scan/classification/gate
+logic was unchanged. Only its terminal SCOPE prose is conditional so a zero
+skip count no longer prints that a blind spot remains.
+
+This closes the historical structureless-opaque extent blind spot. It does not
+claim that every ELF symbol globally has a nonzero size:
+`sBanimEkrPopupProcNames`, for example, remains ELF-size zero but is covered by
+the independently proven exact provider extent introduced by D378. The 1,452
+evidence-backed binary-form FLOOR files are unchanged and remain legitimate
+non-actionable inventory.
