@@ -22,16 +22,16 @@ stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
 oracle.
 
-> **Cohort status (2026-07-13, updated from the 2026-07-11 note below):** this
-> document records the original 16-function proof cohort. Twelve members have
+> **Cohort status (2026-07-15, updated from the 2026-07-13 note below):** this
+> document records the original 16-function proof cohort. Thirteen members have
 > since graduated to byte-matching C: `PrepareBattleGraphicsMaybe`,
 > `AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`,
 > `PutDivinationRankSprite`, `Event18_ColorFade`, `AdjustNewUnitPosition`,
 > `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`, `DecodeAndVerifyArenaRecord`,
-> `DecodeLinkArenaRecordHeader`, and `GetUnitDefinitionFormEventScr`. The live
-> `src/nonmatching/` frontier is now **4** (verified: `find src/nonmatching
-> -maxdepth 1 -name '*.c'` returns `sub_800A34C`, `sub_800A594`,
-> `sub_807D3BC`, `sub_80C05C8` — see the authoritative list in
+> `DecodeLinkArenaRecordHeader`, `GetUnitDefinitionFormEventScr`, and
+> `GmapScreen2_Loop`. The live `src/nonmatching/` frontier is now **3**
+> (verified: `find src/nonmatching -maxdepth 1 -name '*.c'` returns
+> `sub_800A34C`, `sub_800A594`, and `sub_807D3BC` — see the authoritative list in
 > `docs/frontier.md`); the 16-based proof ratios below remain historical
 > results for that fixed cohort. The stale (2026-07-11) note previously said
 > "frontier is now 6" — superseded by the two further graduations above.
@@ -45,9 +45,10 @@ oracle.
 > (the integration base) inside an isolated worktree; every stage produced
 > exactly its documented expected verdict, and the shared adversarial trust
 > gate (`scripts/tools/thumb_equiv/cbmc_spike/run_cbmc_spike.py`) passed all 12
-> cases with no wrong expected verdict. **All four functions remain unmatched**
-> (`UNSOLVED` under `make compare`); nothing here changes the byte-match
-> frontier or the oracle.
+> cases with no wrong expected verdict. At that checkpoint all four functions
+> remained unmatched. `sub_80C05C8` later graduated through KxTCq; its package
+> remains historical proof evidence, while the other three stay `UNSOLVED`
+> under `make compare`.
 >
 > | function | ARM-vs-ARM result | CBMC proposition / domain | mutation result | differential evidence | trust / caveat label | package |
 > |---|---|---|---|---|---|---|
@@ -388,7 +389,7 @@ bounded-proven or stronger; 1 (`sub_8057F80`) remains at the dynamic tier.**
 
 | tier | how | which of the 16 |
 | --- | --- | --- |
-| byte-matching | in `make compare` (SHA-1) | 10 of the original 16 have graduated, including `sub_80A6F1C`; 6 remained at the time this table was written. **[Updated 2026-07-13]** 2 more (`DecodeLinkArenaRecordHeader`, `GetUnitDefinitionFormEventScr`) have since graduated; the live frontier is now **4** — see the "Cohort status" note and "final four contract-assisted validation" table near the top of this document |
+| byte-matching | in `make compare` (SHA-1) | 10 of the original 16 had graduated when this table was written. `DecodeLinkArenaRecordHeader`, `GetUnitDefinitionFormEventScr`, and `GmapScreen2_Loop` later graduated; the live frontier is now **3** — see the cohort-status note near the top of this document |
 | **unbounded-proven** (cut-point / loop-invariant) | CBMC loop contracts, ∀-iterations | `sub_80A6F1C` (de-obf loop, full u16 domain) — first at this tier |
 | **bounded-proven** (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM, compiler-free) + `PROVEN-BOUNDED-CBMC-CVC` (CBMC C-vs-C, trusts m2c+agbcc) | **14**: 12 ARM-vs-ARM + `sub_800A34C` + `sub_800FAD0` (CBMC C-vs-C); (`sub_80A6F1C` also has a bounded proof but sits above at unbounded) |
 | differential / dynamic | mGBA live-state | `sub_8057F80` (115/115 writes+ret; a *sound* bounded CBMC proof is a solver-sink — full write-set observable + 204-call anti-masking blows up, narrower closes are degenerate; documented in `focused/sub_8057F80/README.md`) |

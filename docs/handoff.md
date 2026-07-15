@@ -5,6 +5,19 @@ source.** This file is a historical matching-campaign handoff; its dated SHAs,
 denominators, and per-promotion metrics are retained as evidence, not live
 progress. See also [`docs/maintenance.md`](maintenance.md).
 
+> **[CURRENT UPDATE 2026-07-15 — KxTCq harvest.]**
+> `GmapScreen2_Loop` (`sub_80C05C8`) now compiles byte-exact from
+> `src/GmapScreen2_Loop.c` at
+> `9a291a0cf4e6d748f273e14f8bbd064178de9056`. Owned R7AaX reports raw score 0
+> after synchronization from KxTCq, and its registry row is retired. Ground
+> truth is matching-C **99.97% (8689/8692, 3 still-asm)** with
+> `sub_800A34C`, `sub_800A594`, and `sub_807D3BC` remaining.
+>
+> The latest issue #165 claim for BVOBw was rejected: it calls the real
+> five-argument `sub_800A194` with only four arguments and accidentally sources
+> the fifth word from an outgoing-stack local. The owned ABtKz family remains
+> active at score 60.
+
 > **[HISTORICAL FINAL REFRESH 2026-07-13 — matching campaign stopped.]**
 > The campaign snapshot's `origin/main` was
 > `5b35c7635a847b70cca70f4bff77418801a209b6`.

@@ -1,4 +1,11 @@
-# The 4 remaining unmatched functions — understanding report
+# The 3 remaining unmatched functions — understanding report
+
+> **CURRENT UPDATE 2026-07-15.** `GmapScreen2_Loop` (`sub_80C05C8`) graduated
+> from this cohort through decomp.me fork KxTCq and is now matching C at
+> `main@9a291a0cf4e6d748f273e14f8bbd064178de9056`. Axis 2 is **99.97%
+> (8689/8692), 3 still-asm**. The live survivors are `sub_800A34C`,
+> `sub_800A594`, and `sub_807D3BC`; use [`frontier.md`](frontier.md) for the
+> authoritative work list.
 
 > **HISTORICAL CAMPAIGN SNAPSHOT 2026-07-13 (`origin/main`
 > `5b35c7635a847b70cca70f4bff77418801a209b6`).**
@@ -19,7 +26,7 @@
 > `DecodeAndVerifyArenaRecord`, `DecodeLinkArenaRecordHeader`, and
 > `GetUnitDefinitionFormEventScr`.
 >
-> Current proven state of the four survivors:
+> Historical proven state of the four survivors at that snapshot:
 > - `sub_800A34C`: score **60**, real five-argument solver ABI,
 >   `PROVEN-BOUNDED(3)`, active `ABtKz`; only the costly-argument
 >   precompute/load ordering before `sub_800A194` remains. **46,080** targeted
@@ -64,10 +71,11 @@
 > reports remain below as historical analysis because their live/dead and
 > cross-game findings are still useful.
 >
-> **Purpose of this document.** Understand (not merely classify) the 4 functions
-> whose bytes still come from `asm/*.s` (the authoritative `src/nonmatching/*.c`
-> set). For each: correspondence, purpose, behavior, reachability, callers/callees,
-> and current blocking-diff class. The authoritative work list remains
+> **Purpose of this document.** Preserve the original four-function study while
+> tracking the 3 functions whose bytes still come from `asm/*.s` (the
+> authoritative `src/nonmatching/*.c` set). For each: correspondence, purpose,
+> behavior, reachability, callers/callees, and current blocking-diff class. The
+> authoritative work list remains
 > [`frontier.md`](frontier.md) → *Code frontier — the 4 remaining functions*.
 >
 > Detailed section numbers below retain the original 16-function study IDs so old

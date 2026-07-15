@@ -1,15 +1,15 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **FINAL CURRENT SNAPSHOT 2026-07-13:** axis-2 is **99.95% (8688/8692),
-> 4 still-asm**. The final A594/C05C8 changes are nonmatching seed
-> improvements, so this aggregate does not move.
+> **CURRENT SNAPSHOT 2026-07-15:** axis-2 is **99.97% (8689/8692),
+> 3 still-asm**. `GmapScreen2_Loop` (`sub_80C05C8`) matched through KxTCq:
+> caller-side ABI widening, a use-site `0xF` literal, and an equivalent reversed
+> node-array subscript. Owned R7AaX reports raw score 0 and is retired.
 >
 > | function | current project metric | hosted metric / active scratch |
 > |---|---|---|
 > | `sub_800A34C` | proven score **60**; corrected five-argument ABI; only costly-arg precompute/load order remains; 46,080 targeted trees found no lower form | [`ABtKz`](https://decomp.me/scratch/ABtKz) **60** |
 > | `sub_800A594` | **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`, `EQUIV 60/60` | exact-source/provenance [`Sp10a`](https://decomp.me/scratch/Sp10a) **8906** under stock flags; not comparable to local 369 |
 > | `sub_807D3BC` | local **550**, linked **61/392**, size 392/frame 0x90; compaction matched, reject/register order remains | function-body-exact [`J1ka1`](https://decomp.me/scratch/J1ka1) **10499** because hosted agbcc lacks `-mjp-promote` |
-> | `sub_80C05C8` | local **230**, size **544 B**; phase-1 spill removed, phase/AP anchors exact | exact-source/provenance [`R7AaX`](https://decomp.me/scratch/R7AaX) **480** |
 >
 > **PRIOR UPDATE 2026-07-13:** axis-2 became **99.95% (8688/8692),
 > 4 still-asm** when `sub_800FAD0` matched.

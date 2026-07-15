@@ -61,9 +61,9 @@ assets.
 | Axis | Current canonical result | Target |
 |---|---:|---:|
 | **Build self-containment** | **100.00%** (16,777,216 / 16,777,216; 0 baserom incbins) | 100% |
-| **Matching-C functions** | **99.95%** (8,688 / 8,692; 4 descriptive asm) | 100% |
+| **Matching-C functions** | **99.97%** (8,689 / 8,692; 3 descriptive asm) | 100% |
 | **Extracted data, source-form** | **100.00%** (13,937,336 / 13,937,336) | 100% |
-| **Named symbols** | **100.00%** (2,600 / 2,600; 0 placeholders) | 100% |
+| **Named symbols** | **100.00%** (2,599 / 2,599; 0 placeholders) | 100% |
 
 The supplemental strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336); valid banim and sound source forms are outside that
@@ -76,13 +76,13 @@ UNCERTAIN=0, TOTAL=1452**. Here `UNCERTAIN=0` means no actionable tracked
 binary-form residuals; the explicit zero-size-symbol/`AnimSprite_*` extent
 blind spot also remains, as documented in [`docs/frontier.md`](docs/frontier.md).
 
-Named 2,600/2,600 is the current literal `.global` assembly-label census used
+Named 2,599/2,599 is the current literal `.global` assembly-label census used
 by `calcprogress.py`; it is not a census of every ELF/C symbol and is not
 directly comparable to historical 12,688-style denominators. Run
 `calcprogress.py` only after the project toolchain and libraries are installed
 and populated, especially `tools/agbcc/lib`. Without that library, its 127
 linked functions are omitted and the function result can misleadingly read
-8,561/8,565 instead of 8,688/8,692.
+8,562/8,565 instead of 8,689/8,692.
 
 Run `python3 scripts/calcprogress.py` for the scorecard,
 `python3 scripts/check_selfcontained.py` for self-containment, and
@@ -93,7 +93,7 @@ only in [`docs/frontier.md`](docs/frontier.md); historical carve evidence is in
 
 ## Help decompile
 
-The current contributor frontier is the 4 remaining nonmatching `sub_*`
+The current contributor frontier is the 3 remaining nonmatching `sub_*`
 functions. Start from the decomp.me scratch table in
 [`docs/nonmatching.md`](docs/nonmatching.md), and use
 [`docs/frontier.md`](docs/frontier.md) as the single source of truth for the live

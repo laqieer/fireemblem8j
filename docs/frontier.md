@@ -7,8 +7,8 @@
 
 ## Canonical snapshot
 
-Recomputed on 2026-07-14 from
-`origin/main@48d7226bb9f6b3a1da11cc916e380dabf94ddcf3` after `make layout` and
+Recomputed on 2026-07-15 from
+`main@9a291a0cf4e6d748f273e14f8bbd064178de9056` after `make layout` and
 `make compare` (`fireemblem8.gba: OK`). Refresh this section by running the
 commands, not by copying its numbers:
 
@@ -26,9 +26,9 @@ python3 scripts/check_layout.py
 | Axis | Current canonical result | Target |
 |---|---:|---:|
 | Build self-containment | **100.00%** (16,777,216 / 16,777,216; 0 baserom incbins) | 100% |
-| Matching-C functions | **99.95%** (8,688 / 8,692; 8,561 compiled C + 127 library; 4 descriptive asm) | 100% |
+| Matching-C functions | **99.97%** (8,689 / 8,692; 8,562 compiled C + 127 library; 3 descriptive asm) | 100% |
 | Extracted data, source-form | **100.00%** (13,937,336 / 13,937,336) | 100% |
-| Named symbols | **100.00%** (2,600 / 2,600; 0 placeholders) | 100% |
+| Named symbols | **100.00%** (2,599 / 2,599; 0 placeholders) | 100% |
 
 Supplemental data metric: the strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336). It intentionally excludes valid banim and sound
@@ -40,13 +40,13 @@ legitimate binary inputs, including the 1,452 evidence-backed FLOOR files.
 Therefore it means neither zero `.bin` files, zero FLOOR inventory, nor that
 every credited byte is strict typed/structured source.
 
-Named 2,600/2,600 is specifically the current literal `.global`
+Named 2,599/2,599 is specifically the current literal `.global`
 assembly-label census performed by `calcprogress.py`. It is not all ELF/C
 symbols and cannot be compared directly with historical 12,688-style
 denominators. Run the script only after the project toolchain/library build is
 installed and populated, especially `tools/agbcc/lib`; otherwise its 127
 linked library functions disappear and the function line can misleadingly
-report 8,561/8,565 rather than 8,688/8,692.
+report 8,562/8,565 rather than 8,689/8,692.
 
 ### Current issue-143 and shiftability evidence
 
@@ -91,12 +91,11 @@ remains non-gating/not applicable under D313.
 
 ### Matching-C frontier
 
-Ground truth is the four tracked `src/nonmatching/*.c` files:
+Ground truth is the three tracked `src/nonmatching/*.c` files:
 
 1. `sub_800A34C.c`
 2. `sub_800A594.c`
 3. `sub_807D3BC.c`
-4. `sub_80C05C8.c`
 
 Use `docs/nonmatching.md` for their current scratch/provenance details.
 `make compare` is the only byte-match oracle. Treat compiler-wall labels as

@@ -13526,3 +13526,47 @@ independent MATCH evidence, cold build/shiftcheck results, and exact-SHA CI
 remain unchanged. This waiver is specific to the two immutable historical
 commits and is not precedent for omitting or malformed trailers in future
 work.
+
+## D401 — harvest KxTCq, reject ABI-invalid BVOBw, and reduce matching-C frontier to three (#165, 2026-07-15)
+
+The latest issue #165 comment reported score-zero community fork BVOBw for
+`sub_800A34C`. The mandatory full-family harvest rejected that result through
+the checked-in provenance guard: BVOBw declares and calls the real
+five-argument `sub_800A194` with only four arguments, so its apparent fifth
+word is a coincidental outgoing-stack local rather than a semantic call
+argument. `scripts/tools/decompme/rejected_matches.tsv` and its focused unit
+test keep BVOBw non-actionable; owned ABtKz remains active at score 60.
+
+The same harvest found score-zero KxTCq for `sub_80C05C8`
+(`GmapScreen2_Loop`). The project adaptation removes the fork's three
+scratch-only `.set` aliases and retains real linker symbols. Relative to the
+score-480 staging source, the decisive P24 shapes are: inline the single-use
+palette mask literal (`480 -> 390`), widen the caller-local coordinate formals
+from `s16` to ABI-wide `int` so the fifth stack argument is scheduled like JP
+(`390 -> 40`), and reverse an equivalent node-array subscript to select the
+target's commutative add encoding (`40 -> relocation-only 30`). Real project
+relocations close that last scratch-only delta, and the linked 544-byte range
+at `0x080C05C8..0x080C07E8` is exact.
+
+Owned R7AaX was synchronized from KxTCq and independently re-read at raw score
+0 with `match_override=false`; only then was its registry row removed. The
+first synchronization attempt exposed a lifecycle-tool bug: the downloaded
+context is 165,012 bytes, above Linux's per-argument/environment-string
+`MAX_ARG_STRLEN`, so exporting the full JSON caused `Argument list too long`.
+Commit `9611aa412` makes `mark_solved.sh` pass source and target JSON through
+temporary files instead of environment values. The accepted promotion is
+commit `9a291a0cf4e6d748f273e14f8bbd064178de9056`.
+
+P24 was immediately tested against the closest remaining call-order wall,
+`sub_800A34C`. Passing the fifth argument directly worsened its object residual
+from 10 to 12 bytes; widening the fourth pointer formal to `int` left the same
+10-byte residual. Both variants were reverted, proving this lever does not
+generically move the evaluator's `tx` load after r0-r2 materialization.
+
+`make compare` remains `fireemblem8.gba: OK`; `make shiftcheck` passes with
+zero HIGH failures. `scripts/calcprogress.py` now reports matching-C
+**99.97% (8689/8692)**, **3** descriptive-asm/nonmatching functions, and
+899,952/901,428 source-form code bytes. The literal assembly-label census is
+2,599/2,599 because the promoted assembly provider's `.global` disappears; it
+remains 100% named. Issue #165 stays open for `sub_800A34C`, `sub_800A594`, and
+`sub_807D3BC`.

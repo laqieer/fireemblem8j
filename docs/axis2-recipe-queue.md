@@ -1,9 +1,14 @@
-# Axis #2 (matching-C) — final 4 still-asm status (matching stopped)
+# Axis #2 (matching-C) — current 3 still-asm; historical final-4 record
 
 > **HISTORICAL/SUPERSEDED MATCHING-C CAMPAIGN RECORD.** All queues, ordering,
 > scores, and target suggestions in this document are retained only as dated
 > evidence and must not be used for dispatch. [`docs/frontier.md`](frontier.md)
 > is the sole current work list.
+>
+> **[CURRENT UPDATE 2026-07-15.]** `GmapScreen2_Loop` (`sub_80C05C8`) matched
+> through KxTCq/P24 and owned R7AaX is closed at raw score 0. Axis 2 is now
+> **99.97% (8689/8692), 3 still-asm**: `sub_800A34C`, `sub_800A594`, and
+> `sub_807D3BC`. The queue below remains historical and is not reactivated.
 >
 > **[HISTORICAL FINAL STATUS 2026-07-13.]** This session byte-matched **11
 > functions**, then integrated two proven nonmatching seed improvements. Because
