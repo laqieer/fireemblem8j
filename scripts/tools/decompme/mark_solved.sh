@@ -48,14 +48,18 @@ done
 
 get() { curl -sS --max-time 30 -H "User-Agent: $UA" -H "Accept: application/json" -H "Referer: https://decomp.me/" "$@"; }
 
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+
 # Resolve the matched source + compiler/flags.
 if [ "$mode" = scratch ]; then
     [ -n "$src_slug" ] || die "--from-scratch needs a slug"
-    j="$(get "$API/scratch/$src_slug")"
-    score="$(printf '%s' "$j" | python3 -c 'import json,sys;print(json.load(sys.stdin).get("score"))')"
+    src_json_file="$tmpdir/source.json"
+    get "$API/scratch/$src_slug" > "$src_json_file"
+    score="$(python3 -c 'import json,sys;print(json.load(sys.stdin).get("score"))' < "$src_json_file")"
     [ "$score" = "0" ] || die "source scratch $src_slug is score=$score (not a confirmed match); refusing."
-    export SRC_JSON="$j"
-    [ -n "$credit" ] || credit="$(printf '%s' "$j" | python3 -c 'import json,sys;print((json.load(sys.stdin).get("owner") or {}).get("username") or "")')"
+    export SRC_JSON_FILE="$src_json_file"
+    [ -n "$credit" ] || credit="$(python3 -c 'import json,sys;print((json.load(sys.stdin).get("owner") or {}).get("username") or "")' < "$src_json_file")"
 elif [ "$mode" = file ]; then
     [ -f "$src_file" ] || die "--from-file not found: $src_file"
     [ -n "$flags" ] || die "--from-file requires --flags \"<compiler_flags>\""
@@ -67,21 +71,25 @@ fi
 # Verify we own the target scratch (and get its current name).
 whoami="$(get -H "Cookie: sessionid=$DECOMPME_SESSION; csrftoken=${DECOMPME_CSRF:-}" "$API/user" | python3 -c 'import json,sys;d=json.load(sys.stdin);print("ANON" if d.get("is_anonymous") else d.get("username",""))')"
 [ -n "$whoami" ] && [ "$whoami" != "ANON" ] || die "not authenticated (decomp.me sees you as anonymous)."
-tgt="$(get "$API/scratch/$slug")"
-owner="$(printf '%s' "$tgt" | python3 -c 'import json,sys;print((json.load(sys.stdin).get("owner") or {}).get("username") or "")')"
+tgt_json_file="$tmpdir/target.json"
+get "$API/scratch/$slug" > "$tgt_json_file"
+owner="$(python3 -c 'import json,sys;print((json.load(sys.stdin).get("owner") or {}).get("username") or "")' < "$tgt_json_file")"
 [ "$owner" = "$whoami" ] || die "you ($whoami) do not own scratch $slug (owner=$owner) — cannot mark it solved."
-export TGT_JSON="$tgt" CREDIT="$credit"
+export TGT_JSON_FILE="$tgt_json_file" CREDIT="$credit"
 
 # Build the PATCH body and send it (auth via Cookie + X-CSRFToken).
 CSRF="${DECOMPME_CSRF:-}" SESS="$DECOMPME_SESSION" SLUG="$slug" API="$API" UA="$UA" python3 - <<'PY'
 import os, json, urllib.request
 def get_src():
-    if os.environ.get("SRC_JSON"):
-        d=json.loads(os.environ["SRC_JSON"])
+    if os.environ.get("SRC_JSON_FILE"):
+        with open(os.environ["SRC_JSON_FILE"]) as f:
+            d=json.load(f)
         return d.get("source_code",""), d.get("context","") or "", d.get("compiler","agbcc"), d.get("compiler_flags","")
     return open(os.environ["SRC_FILE"]).read(), "", "agbcc", os.environ["SRC_FLAGS"]
 src, ctx, comp, flags = get_src()
-tgt=json.loads(os.environ["TGT_JSON"]); name=tgt.get("name") or ""
+with open(os.environ["TGT_JSON_FILE"]) as f:
+    tgt=json.load(f)
+name=tgt.get("name") or ""
 credit=os.environ.get("CREDIT","")
 if "SOLVED" not in name:
     name = name.split(" — ")[0].strip() + " — SOLVED" + (f" (match credit: {credit})" if credit else "")
