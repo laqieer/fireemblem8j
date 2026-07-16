@@ -5,7 +5,16 @@ source.** This file is a historical matching-campaign handoff; its dated SHAs,
 denominators, and per-promotion metrics are retained as evidence, not live
 progress. See also [`docs/maintenance.md`](maintenance.md).
 
-> **[CURRENT UPDATE 2026-07-15 — KxTCq harvest.]**
+> **[CURRENT UPDATE 2026-07-16 — fHkHP harvest.]**
+> `SplineEvalCatmullRom` (`sub_800A34C`) now compiles byte-exact from
+> `src/SplineEvalCatmullRom.c`. Owned ABtKz reports raw score 0 after
+> synchronization from fHkHP, and its registry row is retired. Ground truth is
+> matching-C **99.98% (8690/8692, 2 still-asm)** with `sub_800A594` and
+> `sub_807D3BC` remaining. P25 did not transfer to `sub_800A594`: its clean
+> aggregate variants matched only 68/500 and 79/500 bytes, so the 369/500 seed
+> remains. Issue #165 stays open for the two remaining functions.
+>
+> **[PRIOR UPDATE 2026-07-15 — KxTCq harvest.]**
 > `GmapScreen2_Loop` (`sub_80C05C8`) now compiles byte-exact from
 > `src/GmapScreen2_Loop.c` at
 > `9a291a0cf4e6d748f273e14f8bbd064178de9056`. Owned R7AaX reports raw score 0

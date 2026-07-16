@@ -145,26 +145,28 @@ decide. `sub_80A6F1C` = 118/120 in-domain trials identical (`INCONCLUSIVE-CB`);
 `sub_8057F80` needs a live battle-anim frame (research-grade). This never touches
 the build path — `make compare` stays green and remains the sole oracle.
 
-## Final-four contract-assisted CBMC packages (`cbmc_spike/final4/`)
+## Historical final-four contract-assisted CBMC packages (`cbmc_spike/final4/`)
 
-The four functions still in `src/nonmatching/*.c` (`sub_800A34C`, `sub_800A594`,
-`sub_807D3BC`, `sub_80C05C8`) each have a self-contained, fail-closed
+The historical final four (`sub_800A34C`, `sub_800A594`, `sub_807D3BC`,
+`sub_80C05C8`) each have a self-contained, fail-closed
 contract-assisted relational-equivalence package under
 `scripts/tools/thumb_equiv/cbmc_spike/final4/<function>/`, using
 [CBMC](https://www.cprover.org/cbmc/) instead of Z3 to discharge a *relational*
 proof between the candidate reconstruction and an independent hand-derived
 reference transcription of the JP asm, plus a mutation harness that must
-refute. See `docs/equivalence_proving.md`'s "final four contract-assisted
-validation" table for the exact per-target results.
+refute. `sub_80C05C8` and `sub_800A34C` have since graduated to matching C;
+their packages are historical evidence and their hash-pinned drivers require
+the removed historical asm/nonmatching inputs. The live frontier packages are
+`sub_800A594` and `sub_807D3BC`. See `docs/equivalence_proving.md`'s
+"final four contract-assisted validation" table for the exact per-target
+results.
 
 Run one package (sequentially — CBMC is memory-heavy, do **not** run more than
 one at a time):
 
 ```bash
-scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A34C/run.sh
 scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A594/run.sh
 scripts/tools/thumb_equiv/cbmc_spike/final4/sub_807D3BC/run.sh
-scripts/tools/thumb_equiv/cbmc_spike/final4/sub_80C05C8/run.sh
 ```
 
 Each `run.sh` is fail-closed: it first hash-pins its own `src/nonmatching/*.c`

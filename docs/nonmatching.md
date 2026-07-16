@@ -274,14 +274,20 @@ effective score 0 through the supported `match_override` state.
 `GmapScreen2_Loop` (`sub_80C05C8`) matched on community fork KxTCq on
 2026-07-15. The project adaptation strips three scratch-only `.set` aliases,
 links the real JP globals, and reproduces the exact 544-byte range. Owned
-R7AaX now reports raw score 0 and its registry row is retired. Current ground
-truth is **8689/8692 matching-C, 3 still descriptive asm**. Local and hosted
+R7AaX now reports raw score 0 and its registry row is retired.
+
+`SplineEvalCatmullRom` (`sub_800A34C`) matched on community fork fHkHP on
+2026-07-16. The clean aggregate source replaces the score-60 pin/barrier
+reconstruction; signed denominator casts plus a scoped real-symbol
+`__divsi3 -> DivArm` alias preserve the ROM's six signed fixed-point division
+calls without disturbing the matched allocation. Owned ABtKz reports raw score
+0 and its registry row is retired. Current ground truth is **8690/8692
+matching-C, 2 still descriptive asm**. Local and hosted
 scores below are deliberately separate; different compiler flags make them
 non-comparable.
 
 | function | current project evidence | hosted scratch evidence | remaining block |
 |---|---|---|---|
-| `sub_800A34C` | score **60**; exact 0x248 size/frame/stack/coloring; corrected real five-argument ABI; `PROVEN-BOUNDED(3)` | active [`ABtKz`](https://decomp.me/scratch/ABtKz), score **60** | sole costly-argument precompute/load order before `sub_800A194`; 46,080 targeted trees found no lower form |
 | `sub_800A594` | integrated local **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`Sp10a`](https://decomp.me/scratch/Sp10a), exact guarded source/provenance, hosted **8906** under stock flags | early `pts` allocation and resulting register/schedule permutation; local uses `-fno-rerun-cse-after-loop` |
 | `sub_807D3BC` | integrated local **550**, linked **61/392**, size 392/frame 0x90; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`J1ka1`](https://decomp.me/scratch/J1ka1), function body diff-zero, hosted **10499** because stock decomp.me lacks `-mjp-promote` | compaction core matches; reject materialization and outer-loop register order remain |
 
@@ -294,7 +300,7 @@ masquerade as a match. Honesty is mandatory (PUA: no fake matches).
 `calcprogress.py` today (verified): bytes come from carved_rom rows by section
 name (`.text` ⇒ code), and functions are counted **only** from text symbols of
 `src/*.o` objects that appear in a carved_rom row (the oracle, matching C).
-The current JP denominator is **8692** functions: **8689 matching-C + 3
+The current JP denominator is **8692** functions: **8690 matching-C + 2
 nonmatching/still-asm**. Do not use the smaller US-ROM function count.
 
 | Metric | Source | Effect of NON_MATCHING C | Change |

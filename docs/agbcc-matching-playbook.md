@@ -513,7 +513,7 @@ uses hosted stock `-O2`, and records local score **655**, linked residual
 flag sets. The `J1ka1` registry row remains active. This is a successful source
 sync with a documented toolchain mismatch, not a score regression failure.
 
-### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
+### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol or libcall
 
 decomp.me resolves each `bl` against **its context's** symbol addresses. If the author's
 context maps a callee to the wrong address, the scratch scores 0 *there* but the byte source
@@ -543,6 +543,19 @@ bytes**. Diagnose and fix:
   corrected.)*
 - **Fix:** repoint the call(s) to the correctly-named symbol; re-`make compare`. Then also
   **fix the source funcmap row** so the misID doesn't bite the next carve (fix-the-class).
+
+Compiler-generated division helpers need the same audit. fHkHP
+(`SplineEvalCatmullRom`) produced an instruction-exact score-0 body whose six
+nested `/` expressions carried `__udivsi3` relocations in the project, while
+the ROM calls the signed `DivArm` wrapper; the hosted context had normalized
+that distinction away. Writing explicit `DivArm(...)` calls changed the entire
+allocation and frame-home schedule. The accepted adaptation kept the division
+operators, cast only the six polynomial denominators to `s32` (selecting
+`__divsi3`), and used a byte-neutral real-symbol alias
+`asm(".set __divsi3, DivArm")`. The initial time-fraction division remains
+unsigned and still calls `__udivsi3`. Therefore, when a score-0 body is
+instruction-exact but linked calls differ, inspect `readelf -r <object>` as
+well as named source callees; compiler libcalls can be the hidden mapping error.
 
 ---
 

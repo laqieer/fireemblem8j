@@ -13623,3 +13623,51 @@ claim that every ELF symbol globally has a nonzero size:
 the independently proven exact provider extent introduced by D378. The 1,452
 evidence-backed binary-form FLOOR files are unchanged and remain legitimate
 non-actionable inventory.
+
+## D403 — harvest fHkHP, correct the hidden division-libcall mapping, and reduce matching-C frontier to two (#165, 2026-07-16)
+
+The mandatory full decomp.me family harvest found score-zero fHkHP by
+Mc-muffin for `sub_800A34C` (`SplineEvalCatmullRom`). Unlike the previously
+rejected BVOBw fork, fHkHP calls the real five-argument `sub_800A194` solver and
+passes its fifth word explicitly at `[sp]`; the semantic ABI review therefore
+accepted it as an integration candidate.
+
+The clean fork replaces the 445-line score-60 allocator script with four
+parallel stack arrays, ordinary loops, and direct indexed expressions. That
+source naturally reproduces the 0x78 frame, 584-byte extent, register coloring,
+and solver-call schedule. The first linked project build nevertheless failed:
+the hosted score had normalized six compiler-generated unsigned-division
+relocations to the ROM's signed `DivArm` target. In the real project,
+`__udivsi3` and `DivArm` are distinct symbols. Replacing the operators with
+explicit `DivArm(...)` calls was rejected because it rotated the entire
+allocation and stack-home schedule.
+
+The accepted P25 adaptation preserves the division-expression DAG. The initial
+time-fraction division remains unsigned and calls `__udivsi3`; only the six
+polynomial denominators are cast to `s32`, selecting `__divsi3`. A scoped,
+byte-neutral real-symbol alias,
+`asm(".set __divsi3, DivArm")`, then sends those relocations to the target's
+actual BIOS wrapper without raw addresses or emitted instructions. The final
+linked range `0x0800A34C..0x0800A594` is byte-exact.
+
+P25 was immediately applied to the sole same-family `NONE` target,
+`sub_800A594`. Its clean tracked reconstruction compiled to 496 bytes and
+matched only 68/500 bytes (16/250 halfwords) with
+`-fno-rerun-cse-after-loop`; stock `-O2` produced 488 bytes and matched 79/500
+bytes (20/250 halfwords). Both are far worse than the retained 500-byte,
+369/500-byte seed, so the transfer variants were rejected and recorded rather
+than ground further.
+
+Owned ABtKz was synchronized from fHkHP, re-read at raw score 0 with
+`match_override=false`, and only then removed from the active registry. The
+same full harvest reported a nonzero `sub_807D3BC` improvement on NPt7d; it
+remains active and is not labeled solved because the required local
+proof/equivalence and exact-source synchronization transaction was not part of
+this byte-match promotion.
+
+`make compare` reports `fireemblem8.gba: OK`; `make shiftcheck` reports zero
+HIGH failures. `scripts/calcprogress.py` now reports matching-C
+**99.98% (8690/8692)**, **2** descriptive-asm/nonmatching functions, and
+900,536/901,428 source-form code bytes. The literal assembly-label census is
+2,598/2,598 and remains 100% named. Issue #165 stays open for `sub_800A594`
+and `sub_807D3BC`.

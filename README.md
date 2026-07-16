@@ -61,9 +61,9 @@ assets.
 | Axis | Current canonical result | Target |
 |---|---:|---:|
 | **Build self-containment** | **100.00%** (16,777,216 / 16,777,216; 0 baserom incbins) | 100% |
-| **Matching-C functions** | **99.97%** (8,689 / 8,692; 3 descriptive asm) | 100% |
+| **Matching-C functions** | **99.98%** (8,690 / 8,692; 2 descriptive asm) | 100% |
 | **Extracted data, source-form** | **100.00%** (13,937,336 / 13,937,336) | 100% |
-| **Named symbols** | **100.00%** (2,599 / 2,599; 0 placeholders) | 100% |
+| **Named symbols** | **100.00%** (2,598 / 2,598; 0 placeholders) | 100% |
 
 The supplemental strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336); valid banim and sound source forms are outside that
@@ -78,7 +78,7 @@ blind spot now has exact source-owned extents and the audit skips zero symbols;
 the 1,452 evidence-backed FLOOR inventory remains, as documented in
 [`docs/frontier.md`](docs/frontier.md).
 
-Named 2,599/2,599 is the current literal `.global` assembly-label census used
+Named 2,598/2,598 is the current literal `.global` assembly-label census used
 by `calcprogress.py`; it is not a census of every ELF/C symbol and is not
 directly comparable to historical 12,688-style denominators. Run
 `calcprogress.py` only after the project toolchain and libraries are installed

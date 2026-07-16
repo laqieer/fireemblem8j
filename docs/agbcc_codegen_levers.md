@@ -219,12 +219,10 @@ primary evidence) against its matched fork yields a reusable lever set. These ex
 §1–§9 with a new, more surgical family: **inline-asm constraint scripting** — directly
 commanding agbcc's register allocator / instruction selector without changing behaviour.
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
-sweeps could not. Four local-oracle matches add clean/scoped source levers:
-`AddAttr2dBitMap` (P9), `Augury_InitResultScreen` (P12),
-`DecodeAndVerifyArenaRecord` (P1/P4/P13), and
-`DecodeLinkArenaRecordHeader` (P14).
+sweeps could not. Later community matches KxTCq and fHkHP, plus local-oracle
+matches, add clean/scoped source and relocation levers.
 
-The 20 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 22 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -249,6 +247,7 @@ The 20 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 | local `GetUnitDefinitionFormEventScr` (sub_800FAD0, 464 B) | 2 | 3 | 2 | 0 | **P23** ABI-wide stacked arg + delayed local re-narrow; direct arg2 lifetime; paired stack homes; r5 tail readback |
 | KxTCq `GmapScreen2_Loop` (sub_80C05C8, 544 B) | 0 | 0 | 0 | 3 empty | **P24** caller-side ABI widening + single-use literal + P14 commutative subscript spelling |
+| fHkHP `SplineEvalCatmullRom` (sub_800A34C, 584 B) | 0 | 0 | 0 | 0 emitted | **P25** restore clean parallel arrays/natural loops; signed denominator casts + scoped real-symbol `__divsi3 -> DivArm` alias |
 
 **LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
 The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
@@ -557,10 +556,43 @@ exact 544-byte ROM range. This is not a generic stack-call cure:
 formal was widened to `int`, and passing the fifth argument directly worsened
 the residual to 12 bytes, so neither transfer variant was adopted.
 
+**P25 — remove allocator scripting, restore the natural aggregate lifetime
+graph, and retarget only the proven compiler libcall.** A heavily pinned
+near-match can hide the source shape that stock agbcc naturally allocates.
+fHkHP replaced the 445-line score-60 `sub_800A34C` reconstruction (dozens of
+pins, volatile homes, pointer rebases, and barriers) with four parallel stack
+arrays, ordinary loops, and direct indexed expressions. That clean declaration
+and use order alone reproduces the target 0x78 frame, 584-byte extent, register
+coloring, and solver-call schedule.
+
+The hosted score also exposed a relocation trap. The interpolation fraction is
+genuinely unsigned and must call `__udivsi3`, but the six nested fixed-point
+polynomial divisions call the signed BIOS `DivArm` wrapper in the ROM. Keep the
+division operators (explicit `DivArm(...)` calls perturb the allocation), cast
+only those six denominators to `s32` so agbcc emits `__divsi3`, then bind that
+compiler helper to the real project symbol without emitting instructions:
+```c
+asm(".set __divsi3, DivArm");
+
+out[0] = 0x1000 /
+             (s32)((0x1000 /
+                        (s32)((0x1000 / (s32)(t0 * u) + t1) * u) +
+                    tangent) *
+                   u) +
+         point;
+```
+This is not permission to alias arbitrary helpers: use it only when linked ROM
+disassembly proves the target's signed/unsigned split and the alias names a real
+project symbol. The immediate transfer test on sibling `sub_800A594` rejected
+the clean form: 496 bytes and 68/500 exact bytes with its current flag, or 488
+bytes and 79/500 under stock `-O2`, both far worse than the retained 500-byte,
+369/500 seed. P25 is therefore a source-shape lever, not a blanket
+"remove all pins" rule.
+
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
    slots differ) — objdiff / the region `cmp`. If opcodes differ, it's a §1–§9 shape issue.
-2. **P8 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable). If the
+2. **P8/P25 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable). If the
    `.text` *size* differs by the width of a repeated `(T)cast`, apply **P11** (materialize-once).
    If JP holds one table/destination address across phases, try **P12/P13 readback** before pins.
 3. **P5/P6** if the diff is a signed sub-field / re-extended loop counter (shift-domain).
@@ -572,11 +604,12 @@ the residual to 12 bytes, so neither transfer variant was adopted.
 
 **Caveat / provenance.** P1–P3 (inline-asm constraints) are *match-forcing*, not idiomatic
 decomp — they encode the answer rather than discovering the source shape, and are non-portable
-across compilers. Prefer P8/P7/P5/P6 (real source levers) and escalate to asm-constraints only
+across compilers. Prefer P8/P25/P7/P5/P6 (real source levers) and escalate to asm-constraints only
 for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
 justified end of the spectrum; jmNW8's zero-asm form is the ideal). The community-fork
 patterns above are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples,
 including `l4bts`/P13, KxTCq/P24, and the Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest.
+fHkHP/P25 is credited to **Mc-muffin**.
 
 ### Field application and later harvested outcomes (D292 Phase 4)
 Applying the above to the ~21 `DECOMP_THEN_UPDATE` registry functions confirmed they are the

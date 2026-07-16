@@ -1,11 +1,19 @@
-# Axis #2 (matching-C) — current 3 still-asm; historical final-4 record
+# Axis #2 (matching-C) — current 2 still-asm; historical final-4 record
 
 > **HISTORICAL/SUPERSEDED MATCHING-C CAMPAIGN RECORD.** All queues, ordering,
 > scores, and target suggestions in this document are retained only as dated
 > evidence and must not be used for dispatch. [`docs/frontier.md`](frontier.md)
 > is the sole current work list.
 >
-> **[CURRENT UPDATE 2026-07-15.]** `GmapScreen2_Loop` (`sub_80C05C8`) matched
+> **[CURRENT UPDATE 2026-07-16.]** `SplineEvalCatmullRom`
+> (`sub_800A34C`) matched through fHkHP/P25 and owned ABtKz is closed at raw
+> score 0. Axis 2 is now **99.98% (8690/8692), 2 still-asm**:
+> `sub_800A594` and `sub_807D3BC`. The immediate P25 transfer test on
+> `sub_800A594` was rejected: the clean aggregate form reached only 68/500
+> exact bytes with its current flag and 79/500 under stock `-O2`, both far
+> below the retained 369/500 seed. The queue below remains historical.
+>
+> **[PRIOR UPDATE 2026-07-15.]** `GmapScreen2_Loop` (`sub_80C05C8`) matched
 > through KxTCq/P24 and owned R7AaX is closed at raw score 0. Axis 2 is now
 > **99.97% (8689/8692), 3 still-asm**: `sub_800A34C`, `sub_800A594`, and
 > `sub_807D3BC`. The queue below remains historical and is not reactivated.

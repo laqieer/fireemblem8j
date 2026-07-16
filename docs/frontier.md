@@ -7,8 +7,7 @@
 
 ## Canonical snapshot
 
-Recomputed on 2026-07-15 from
-`main@5001cb56e6e91aff2534329b901612be687d47d0` after
+Recomputed on 2026-07-16 from the post-fHkHP integration tree after
 `make clean && make compare` (`fireemblem8.gba: OK`) and `make shiftcheck`.
 Refresh this section by running the commands, not by copying its numbers:
 
@@ -26,9 +25,9 @@ python3 scripts/check_layout.py
 | Axis | Current canonical result | Target |
 |---|---:|---:|
 | Build self-containment | **100.00%** (16,777,216 / 16,777,216; 0 baserom incbins) | 100% |
-| Matching-C functions | **99.97%** (8,689 / 8,692; 8,562 compiled C + 127 library; 3 descriptive asm) | 100% |
+| Matching-C functions | **99.98%** (8,690 / 8,692; 8,563 compiled C + 127 library; 2 descriptive asm) | 100% |
 | Extracted data, source-form | **100.00%** (13,937,336 / 13,937,336) | 100% |
-| Named symbols | **100.00%** (2,599 / 2,599; 0 placeholders) | 100% |
+| Named symbols | **100.00%** (2,598 / 2,598; 0 placeholders) | 100% |
 
 Supplemental data metric: the strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336). It intentionally excludes valid banim and sound
@@ -40,7 +39,7 @@ legitimate binary inputs, including the 1,452 evidence-backed FLOOR files.
 Therefore it means neither zero `.bin` files, zero FLOOR inventory, nor that
 every credited byte is strict typed/structured source.
 
-Named 2,599/2,599 is specifically the current literal `.global`
+Named 2,598/2,598 is specifically the current literal `.global`
 assembly-label census performed by `calcprogress.py`. It is not all ELF/C
 symbols and cannot be compared directly with historical 12,688-style
 denominators. Run the script only after the project toolchain/library build is
@@ -93,11 +92,10 @@ remains non-gating/not applicable under D313.
 
 ### Matching-C frontier
 
-Ground truth is the three tracked `src/nonmatching/*.c` files:
+Ground truth is the two tracked `src/nonmatching/*.c` files:
 
-1. `sub_800A34C.c`
-2. `sub_800A594.c`
-3. `sub_807D3BC.c`
+1. `sub_800A594.c`
+2. `sub_807D3BC.c`
 
 Use `docs/nonmatching.md` for their current scratch/provenance details.
 `make compare` is the only byte-match oracle. Treat compiler-wall labels as

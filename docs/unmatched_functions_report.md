@@ -1,6 +1,12 @@
-# The 3 remaining unmatched functions — understanding report
+# The 2 remaining unmatched functions — understanding report
 
-> **CURRENT UPDATE 2026-07-15.** `GmapScreen2_Loop` (`sub_80C05C8`) graduated
+> **CURRENT UPDATE 2026-07-16.** `SplineEvalCatmullRom`
+> (`sub_800A34C`) graduated through decomp.me fork fHkHP/P25. Axis 2 is
+> **99.98% (8690/8692), 2 still-asm**. The live survivors are
+> `sub_800A594` and `sub_807D3BC`; use [`frontier.md`](frontier.md) for the
+> authoritative work list.
+>
+> **PRIOR UPDATE 2026-07-15.** `GmapScreen2_Loop` (`sub_80C05C8`) graduated
 > from this cohort through decomp.me fork KxTCq and is now matching C at
 > `main@9a291a0cf4e6d748f273e14f8bbd064178de9056`. Axis 2 is **99.97%
 > (8689/8692), 3 still-asm**. The live survivors are `sub_800A34C`,
@@ -72,7 +78,7 @@
 > cross-game findings are still useful.
 >
 > **Purpose of this document.** Preserve the original four-function study while
-> tracking the 3 functions whose bytes still come from `asm/*.s` (the
+> tracking the 2 functions whose bytes still come from `asm/*.s` (the
 > authoritative `src/nonmatching/*.c` set). For each: correspondence, purpose,
 > behavior, reachability, callers/callees, and current blocking-diff class. The
 > authoritative work list remains
@@ -193,7 +199,7 @@ JP-only DEAD spline island
   `mov ip,r6` / `mov r8,r2` saves appear in JP order. The prior “source-invariant”
   verdict is retracted.
 
-## 2. SplineEvalCatmullRom — `0x0800A34C`  (DEAD by transitivity)
+## Resolved study #2. SplineEvalCatmullRom — `0x0800A34C`  ✅ MATCHED 2026-07-16
 
 - **fe8u twin:** **none.** JP-only Catmull-Rom / natural-cubic-spline 2-D evaluator. The
   fe8u `spline.c` library (`Spline_Ease`, `Spline_Eval`, `Spline_BuildCubicCoeffs`, …) is a
@@ -202,7 +208,7 @@ JP-only DEAD spline island
   build, tridiagonal solve, then a fixed-point cubic (Horner) evaluation for x and y.
 - **Logic:** `ti = t>>12`; do/while segment search; build `coeffA/coeffB/sub/tan` arrays;
   `sub_800A194(...)` solves the tridiagonal system (Thomas algorithm); clamp `i>=last`;
-  compute the cubic coefficients and evaluate via three nested `sub_80D6378(0x1000, u*…)`
+  compute the cubic coefficients and evaluate via three nested `DivArm(0x1000, u*…)`
   fixed-point (`>>12`) multiplies per axis. (The uninitialized `int r;` return is intentional —
   the asm epilogue reuses r0 as the branch target; the caller ignores the return.)
 - **Callees:** `sub_800A194` (tridiagonal solver — itself reachable *only* from here),
@@ -210,17 +216,13 @@ JP-only DEAD spline island
 - **Callers (1):** `SplineSampleAtTime` only (internal call site `_0800A758`).
 - **Verdict:** **DEAD** — its sole caller is the unreferenced root #3, so the whole island is
   unreachable.
-- **Current proven seed / why still asm:** active scratch
-  [`ABtKz`](https://decomp.me/scratch/ABtKz) scores **60** with the target
-  0x248-byte extent, frame 0x78, stack map, coloring, control flow, and
-  relocations. The corrected source and proof use the real five-argument
-  `sub_800A194(int *, int *, int *, struct SplineVec2 *, int)` ABI; the fifth
-  argument is genuinely passed at `[sp]`, not supplied accidentally by a local.
-  `PROVEN-BOUNDED(3)` and the differential harness cover all five arguments.
-  The sole residual is GCC's costly-argument precompute/load ordering immediately
-  before the solver call: the candidate reloads `tx` before placing `count` at
-  `[sp]`, while JP materializes r0-r2 first. A bounded **46,080-tree** targeted
-  search found no lower candidate.
+- **Match:** fHkHP replaced the score-60 allocator script with clean parallel
+  arrays, natural loops, and direct indexed expressions while retaining the
+  real five-argument solver ABI. The project adaptation casts only the six
+  polynomial denominators to `s32` and uses a scoped real-symbol
+  `__divsi3 -> DivArm` alias; the initial time-fraction division remains
+  unsigned. The linked 584-byte range is exact, ABtKz reports raw score 0, and
+  its registry row is retired.
 
 ## 3. SplineSampleAtTime — `0x0800A594`  (DEAD — unreferenced root)
 
@@ -231,7 +233,7 @@ JP-only DEAD spline island
   resulting (x,y), and return the segment index.
 - **Logic:** `loop` branch uses `sub_80D6384` (BIOS `DivArm` remainder = `v % m`) to wrap `t`;
   both branches binary-walk the control points, fill `lpts/ltimes`, then
-  `sub_800A34C(lpts, lout, ltimes, t, 3)` and write `out->x/y`.
+  `SplineEvalCatmullRom(lpts, lout, ltimes, t, 3)` and write `out->x/y`.
 - **Callees:** `SplineEvalCatmullRom` (#2), `sub_80D6384` (BIOS DivArm remainder).
 - **Callers:** **none.** Zero Thumb/ARM `BL`, zero pointer words (`0x0800A594`/`0x0800A595`),
   zero literal-pool references anywhere in the 16 MB ROM.
@@ -251,6 +253,9 @@ JP-only DEAD spline island
   **369 and 8906 are not directly comparable**. The remaining root is
   allocator/scheduling: JP has the direct early r0→r7 `pts` placement, while the
   retained safe source reaches r7 later and leaves a register-role permutation.
+  P25 was tested immediately after the sibling match: the clean aggregate source
+  produced 496 bytes and 68/500 exact bytes with the current flag, or 488 bytes
+  and 79/500 under stock `-O2`, so both variants were rejected.
 
 ## Resolved study #4. Event18_ColorFade — `0x0800E1FC`  ✅ MATCHED 2026-07-11
 

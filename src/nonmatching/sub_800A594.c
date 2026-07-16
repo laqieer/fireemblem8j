@@ -5,17 +5,17 @@
  * Proposed name: SplineSampleAtTime.
  * JP-only spline driver (no fe8u twin), reconstructed from asm + IDA.
  *
- * Sits directly above its sibling evaluator sub_800A34C (JP-only Catmull-Rom /
+ * Sits directly above its sibling evaluator SplineEvalCatmullRom (JP-only Catmull-Rom /
  * natural-cubic-spline 2D evaluator) and DRIVES it: given an (x,y,time) control-point
  * array it optionally wraps the query time modulo the spline period (loop mode via the
  * BIOS DivArm remainder helper sub_80D6384 == v % m), binary-walks the control points to
  * find the segment containing (t >> 12), materialises a 3-point window (wrap-around for
  * the closed/loop case, clamped for the open case) into scratch buffers, calls
- * sub_800A34C(lpts, lout, ltimes, t, 3) to interpolate, stores the resulting (x,y) into
+ * SplineEvalCatmullRom(lpts, lout, ltimes, t, 3) to interpolate, stores the resulting (x,y) into
  * *out, and returns the segment index it settled on.
  *
  * Callees:
- *   sub_800A34C = JP-only spline evaluator (asm-carved neighbour; a real global).
+ *   SplineEvalCatmullRom = JP-only spline evaluator (C-carved neighbour; a real global).
  *   sub_80D6384 = GBA BIOS DivArm (SWI 7) *remainder* wrapper: `svc 7; adds r0,r1,#0; bx lr`
  *                 => sub_80D6384(m, v) == v % m  (wraps the query time into [0, lastTime<<12)).
  *                 (Its neighbour sub_80D6378 `svc 7; bx lr` is the DivArm *quotient* == v/m
@@ -66,6 +66,14 @@
  * base/best 9946. The retained source was synchronized to the owned scratch and recompiles
  * there at 9281; the active registry row remains owned by this target.
  *
+ * 2026-07-16 P25 transfer after the fHkHP sibling match: the clean aggregate
+ * reconstruction in scripts/tools/decompme/pending/sub_800A594.c compiled to
+ * 496 bytes with the current -fno-rerun-cse-after-loop flag and matched only
+ * 68/500 bytes (16/250 halfwords). Stock -O2 produced 488 bytes and matched
+ * 79/500 bytes (20/250 halfwords). Both are far worse than this retained
+ * 500-byte, 369/500-byte seed, so the clean-array/division-DAG lever does not
+ * transfer across the driver's two-branch window-building CFG.
+ *
  * Semantic and build evidence for the retained form:
  *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py
  *       sub_800A594                                -> PROVEN-BOUNDED(1)
@@ -100,7 +108,7 @@ struct Vec2s16
     /* 0x2 */ s16 y;
 };
 
-extern int sub_800A34C(int *pts, int *out, u16 *times, unsigned int t, int count);
+extern void SplineEvalCatmullRom(int * pts, int * out, u16 * times, unsigned int t, int count);
 extern int sub_80D6384(int m, int v); /* BIOS DivArm remainder: v % m */
 
 int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, struct Vec2s16 *out, u8 loop)
@@ -231,7 +239,7 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, s
     }
 
     call_out = outp;
-    sub_800A34C(lpts, call_out, ltimesp, t, 3);
+    SplineEvalCatmullRom(lpts, call_out, ltimesp, t, 3);
     out->x = call_out[0];
     out->y = call_out[1];
     return i;
