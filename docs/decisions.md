@@ -13663,7 +13663,8 @@ Owned ABtKz was synchronized from fHkHP, re-read at raw score 0 with
 same full harvest reported a nonzero `sub_807D3BC` improvement on NPt7d; it
 remains active and is not labeled solved because the required local
 proof/equivalence and exact-source synchronization transaction was not part of
-this byte-match promotion.
+this byte-match promotion. The accepted promotion commit is
+`d3e706254efa1e058d6f3f6d4e97693947849579`.
 
 `make compare` reports `fireemblem8.gba: OK`; `make shiftcheck` reports zero
 HIGH failures. `scripts/calcprogress.py` now reports matching-C

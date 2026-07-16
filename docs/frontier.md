@@ -7,7 +7,8 @@
 
 ## Canonical snapshot
 
-Recomputed on 2026-07-16 from the post-fHkHP integration tree after
+Recomputed on 2026-07-16 from
+`main@d3e706254efa1e058d6f3f6d4e97693947849579` after
 `make clean && make compare` (`fireemblem8.gba: OK`) and `make shiftcheck`.
 Refresh this section by running the commands, not by copying its numbers:
 
