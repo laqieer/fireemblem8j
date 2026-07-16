@@ -11,7 +11,10 @@
 > `sub_800A594` and `sub_807D3BC`. The immediate P25 transfer test on
 > `sub_800A594` was rejected: the clean aggregate form reached only 68/500
 > exact bytes with its current flag and 79/500 under stock `-O2`, both far
-> below the retained 369/500 seed. The queue below remains historical.
+> below the retained 369/500 seed. NPt7d's apparent `sub_807D3BC` improvement
+> was also rejected during semantic review because it writes every candidate
+> coordinate to `array[0]` instead of `array[count]`. The queue below remains
+> historical.
 >
 > **[PRIOR UPDATE 2026-07-15.]** `GmapScreen2_Loop` (`sub_80C05C8`) matched
 > through KxTCq/P24 and owned R7AaX is closed at raw score 0. Axis 2 is now

@@ -106,6 +106,13 @@
  *   +0x30 and score 1945+, body forms moved too late to +0x4A/+0x4E, and the
  *   y-readback form reached only +0x34 with frame 0x8C.
  *
+ * NPt7d REVIEW (2026-07-16): REJECTED before local adoption. The fork writes
+ * every candidate coordinate through array[0].x/y instead of array[count].x/y,
+ * while the JP bytes explicitly advance the destination slot with count. With
+ * two passing cells, NPt7d either overwrites slot 0 or selects slot 1 with
+ * uninitialized coordinates, so its lower hosted score is not semantically
+ * admissible. scripts/tools/decompme/rejected_matches.tsv now filters it.
+ *
  * VERDICT: UNSOLVED, objectively improved and proven-equivalent. The next useful
  * lever must delay reject materialization from +0x30 to JP's +0x3A without
  * disturbing the now-target compaction core, while preserving the 0x90 frame,

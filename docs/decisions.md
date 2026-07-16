@@ -13672,3 +13672,23 @@ HIGH failures. `scripts/calcprogress.py` now reports matching-C
 900,536/901,428 source-form code bytes. The literal assembly-label census is
 2,598/2,598 and remains 100% named. Issue #165 stays open for `sub_800A594`
 and `sub_807D3BC`.
+
+## D404 — reject semantically invalid NPt7d despite its lower hosted score (#165, 2026-07-16)
+
+The next mandatory family harvest reported NPt7d as a hosted-score improvement
+for `sub_807D3BC` (`3655 < 10499`). Source review rejected it before local
+adoption or execution. The JP assembly and the independently checked
+contract-proof cross-reference both write candidate coordinates to
+`array[count].x/y` before validation. NPt7d instead reads
+`array[count].boolAvailable` but writes every coordinate to `array[0].x/y`.
+
+This is observably wrong whenever at least two cells pass. The second pass
+either overwrites slot 0 or leaves slot 1's coordinates uninitialized; the
+later random selection can return either divergent slot. Its lower hosted
+compiler score therefore cannot qualify as an adoptable nonmatching
+improvement, regardless of codegen proximity.
+
+NPt7d is now listed in `scripts/tools/decompme/rejected_matches.tsv`, and a
+focused classifier regression proves the family reports `INVALID_MATCH`
+instead of `IMPROVED`. Owned J1ka1 remains active, the score-550/61-byte proven
+local source remains unchanged, and no oracle build input was modified.

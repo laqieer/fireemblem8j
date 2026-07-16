@@ -1,2 +1,3 @@
 # fn<TAB>slug<TAB>reason
 sub_800A34C	BVOBw	Declares/calls real five-argument sub_800A194 with only four arguments and relies on a coincidental outgoing-stack local.
+sub_807D3BC	NPt7d	Writes every candidate coordinate to array[0] instead of array[count], so any multi-candidate result diverges from the JP target.
