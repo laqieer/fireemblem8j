@@ -13735,3 +13735,48 @@ while still rejecting additional trailing-content differences. The saved
 selects `gba`, `agbcc-fe8j`, no libraries, and the verified baseline project
 flags; `-mjp-promote` remains a per-TU opt-in. This completes the issue #168
 compiler-and-preset decision.
+
+## D406 — harvest 0O7nM/hgL9F and complete matching-C axis 2 (#165, 2026-07-20)
+
+The mandatory full-family harvest classified 0O7nM by Mc-muffin as raw score 0
+for `sub_800A594` (`SplineSampleAtTime`) and hgL9F by testyourmine as score 30
+for `sub_807D3BC` (`SelectSummonPos`). Both sources passed semantic review
+before entering the project.
+
+0O7nM replaces the 500-byte spline driver's score-369 allocator script with
+the target-shaped stack grammar: three typed two-word points, three halfword
+times, two word outputs, ordinary phase-local `i`/`j` loops, and one shared
+word segment index. The hosted source used `%` with a context mapping to the
+reverse-argument BIOS remainder wrapper. The project adaptation calls the real
+`sub_80D6384(period, t)` symbol directly, preserving both the target's
+`t % period` semantics and its exact r0/r1 call sequence. Stock `-O2` matches
+the complete `0x0800A594..0x0800A788` range; the former
+`-fno-rerun-cse-after-loop` override is removed. This pattern is P26.
+
+hgL9F removes the summon function's synthetic reject lifetime, reverse-pointer
+zero-fill, and compaction clobber. Ordered `if`/`else if` rejection blocks,
+direct `boolAvailable |= -1`, and a word IV over the nine-byte index array
+naturally reproduce the target under `-mjp-promote`. Its hosted score 30 was
+entirely unresolved relocations: six RAM literals and three Thumb calls. The
+clean linked project source matches the complete
+`0x0807D3BC..0x0807D544` range. A disposable scratch copy added six data
+aliases and three odd-address Thumb aliases, proving raw score 0 without
+polluting the project source. This pattern is P27.
+
+`mark_solved.sh` now supports `--from-file ... --compiler-settings-from <slug>`
+for this relocation-only lifecycle. It inherits the fork's compiler and
+context, preflight-compiles against the owned target, refuses any nonzero
+result, patches only after raw score 0, and fresh-GET verifies score 0 plus the
+`SOLVED` marker. Sp10a was synchronized from 0O7nM and J1ka1 from the
+score-zero hgL9F scratch form; both report raw score 0 with
+`match_override=false`, credit their matchers, and are retired from
+`registry.tsv`.
+
+The integrated source commit is `d76625844`. `make compare` reports
+`fireemblem8.gba: OK`, `make shiftcheck` reports zero HIGH failures, and
+`scripts/calcprogress.py` reports matching-C **100.00% (8692/8692)**:
+8,565 project C functions plus 127 linked runtime functions, zero descriptive
+function asm, and zero `src/nonmatching/*.c` files. The learned clean
+source-shape family was applied to the only remaining same-pattern target;
+there are no further axis-2 candidates. Issue #165 is complete pending
+exact-SHA main CI publication.

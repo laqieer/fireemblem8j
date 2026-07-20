@@ -22,18 +22,16 @@ stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
 oracle.
 
-> **Cohort status (2026-07-16, updated from the 2026-07-13 note below):** this
-> document records the original 16-function proof cohort. Fourteen members have
-> since graduated to byte-matching C: `PrepareBattleGraphicsMaybe`,
+> **Cohort status (2026-07-20, updated from the 2026-07-13 note below):** this
+> document records the original 16-function proof cohort. All sixteen members
+> have since graduated to byte-matching C: `PrepareBattleGraphicsMaybe`,
 > `AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`,
 > `PutDivinationRankSprite`, `Event18_ColorFade`, `AdjustNewUnitPosition`,
 > `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`, `DecodeAndVerifyArenaRecord`,
 > `DecodeLinkArenaRecordHeader`, `GetUnitDefinitionFormEventScr`,
-> `GmapScreen2_Loop`, and `SplineEvalCatmullRom`. The live
-> `src/nonmatching/` frontier is now **2**
-> (verified: `find src/nonmatching -maxdepth 1 -name '*.c'` returns
-> `sub_800A594` and `sub_807D3BC` — see the authoritative list in
-> `docs/frontier.md`); the 16-based proof ratios below remain historical
+> `GmapScreen2_Loop`, `SplineEvalCatmullRom`, `SplineSampleAtTime`, and
+> `SelectSummonPos`. The live `src/nonmatching/` frontier is now **0**; the
+> 16-based proof ratios below remain historical
 > results for that fixed cohort. The stale (2026-07-11) note previously said
 > "frontier is now 6" — superseded by the two further graduations above.
 >
@@ -47,15 +45,16 @@ oracle.
 > exactly its documented expected verdict, and the shared adversarial trust
 > gate (`scripts/tools/thumb_equiv/cbmc_spike/run_cbmc_spike.py`) passed all 12
 > cases with no wrong expected verdict. At that checkpoint all four functions
-> remained unmatched. `sub_80C05C8` later graduated through KxTCq and
-> `sub_800A34C` through fHkHP; their packages remain historical proof evidence,
-> while the other two stay `UNSOLVED` under `make compare`.
+> remained unmatched. `sub_80C05C8` later graduated through KxTCq,
+> `sub_800A34C` through fHkHP, `sub_800A594` through 0O7nM, and
+> `sub_807D3BC` through hgL9F. All four packages now remain historical proof
+> evidence.
 >
 > | function | ARM-vs-ARM result | CBMC proposition / domain | mutation result | differential evidence | trust / caveat label | package |
 > |---|---|---|---|---|---|---|
 > | `sub_800A34C` (SplineEvalCatmullRom) | `PROVEN-BOUNDED(3)` | relational contract, `harness.c`, unwind 17 — `0 of 681 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c`: `VERIFICATION FAILED` on `out[1] equal` (non-vacuous) | — (ARM-vs-ARM bounded proof is the differential evidence for this package) | **MATCHED 2026-07-16 via fHkHP; historical proof evidence retained** | [`final4/sub_800A34C/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A34C/README.md) |
-> | `sub_800A594` | `PROVEN-BOUNDED(1)` | `harness.c`, unwind 10, count in `[4,5]` — `0 of 841 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c` (output-copy swap): `VERIFICATION FAILED`; `harness_mut_arg.c` (callee-argument corruption): `VERIFICATION FAILED` at the oracle's own anti-masking assert | `EQUIV` (100 trials, `ret4B` args=[]) | `PROVEN-BOUNDED` (ARM-vs-ARM, unwind=1) + `PROVEN-BOUNDED-CBMC-CVC` (C-vs-C) | [`final4/sub_800A594/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A594/README.md) |
-> | `sub_807D3BC` (SelectSummonPos) | `PROVEN-BOUNDED(1)` | `harness.c` — `0 of 257 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c`: `VERIFICATION FAILED` on `result.y equal` | `EQUIV` (100 trials, `ret1B` args=['val','val','ptr']) | **`UNSOLVED` (byte-match) / `PROVEN-BOUNDED-CBMC-CVC` for the modeled domain — disclosed domain-bounds and trust-boundary caveats retained (bounded 9-cell neighborhood + bounded call-trace domain; see the package README "Exact proposition" and "caveats" sections)** | [`final4/sub_807D3BC/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_807D3BC/README.md) |
+> | `sub_800A594` | `PROVEN-BOUNDED(1)` | `harness.c`, unwind 10, count in `[4,5]` — `0 of 841 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c` (output-copy swap): `VERIFICATION FAILED`; `harness_mut_arg.c` (callee-argument corruption): `VERIFICATION FAILED` at the oracle's own anti-masking assert | `EQUIV` (100 trials, `ret4B` args=[]) | **MATCHED 2026-07-20 via 0O7nM; historical proof evidence retained** | [`final4/sub_800A594/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A594/README.md) |
+> | `sub_807D3BC` (SelectSummonPos) | `PROVEN-BOUNDED(1)` | `harness.c` — `0 of 257 failed`, `VERIFICATION SUCCESSFUL` | `harness_mut.c`: `VERIFICATION FAILED` on `result.y equal` | `EQUIV` (100 trials, `ret1B` args=['val','val','ptr']) | **MATCHED 2026-07-20 via hgL9F; historical bounded-domain/trust-boundary caveats retained** | [`final4/sub_807D3BC/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_807D3BC/README.md) |
 > | `sub_80C05C8` (GmapScreen2_Loop) | `PROVEN-BOUNDED(2)` | `harness.c` — `VERIFICATION SUCCESSFUL` | `harness_mut.c` (attr `0x800`→`0x400`): `VERIFICATION FAILED`; `harness_mut_cleanup.c` (regressed m2c cleanup fix): `VERIFICATION FAILED` (`1 of 302 failed`) | `EQUIV` (60 trials, `ret4B` args=[], dead-ret: mem-effects only) | `PROVEN-BOUNDED-CBMC-CVC` (relational, contract-assisted) | [`final4/sub_80C05C8/README.md`](../scripts/tools/thumb_equiv/cbmc_spike/final4/sub_80C05C8/README.md) |
 >
 > Every package's `run.sh` also re-ran `make compare`, which stayed

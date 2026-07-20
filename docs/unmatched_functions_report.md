@@ -1,6 +1,12 @@
-# The 2 remaining unmatched functions — understanding report
+# Historical unmatched-functions understanding report
 
-> **CURRENT UPDATE 2026-07-16.** `SplineEvalCatmullRom`
+> **CURRENT UPDATE 2026-07-20.** All functions in this study now compile from
+> byte-matching C. Axis 2 is **100.00% (8692/8692), 0 still-asm**:
+> `SplineSampleAtTime` graduated through 0O7nM/P26 and `SelectSummonPos`
+> through hgL9F/P27. This document is retained as historical behavior and
+> reachability analysis; [`frontier.md`](frontier.md) has no live code targets.
+>
+> **PRIOR UPDATE 2026-07-16.** `SplineEvalCatmullRom`
 > (`sub_800A34C`) graduated through decomp.me fork fHkHP/P25. Axis 2 is
 > **99.98% (8690/8692), 2 still-asm**. The live survivors are
 > `sub_800A594` and `sub_807D3BC`; use [`frontier.md`](frontier.md) for the
@@ -77,12 +83,10 @@
 > reports remain below as historical analysis because their live/dead and
 > cross-game findings are still useful.
 >
-> **Purpose of this document.** Preserve the original four-function study while
-> tracking the 2 functions whose bytes still come from `asm/*.s` (the
-> authoritative `src/nonmatching/*.c` set). For each: correspondence, purpose,
-> behavior, reachability, callers/callees, and current blocking-diff class. The
-> authoritative work list remains
-> [`frontier.md`](frontier.md) → *Code frontier — the 4 remaining functions*.
+> **Purpose of this document.** Preserve the original four-function study:
+> correspondence, purpose, behavior, reachability, callers/callees, and the
+> historical blocking-diff class that preceded each match. The authoritative
+> current work list remains [`frontier.md`](frontier.md).
 >
 > Detailed section numbers below retain the original 16-function study IDs so old
 > cross-references remain readable; resolved studies are clearly marked.
@@ -107,17 +111,16 @@
 
 ## Summary
 
-| # | JP addr | Name | Subsystem | fe8u twin? | Live / Dead | Callers | Current blocker |
+| # | JP addr | Name | Subsystem | fe8u twin? | Live / Dead | Callers | Resolution |
 |---|---|---|---|---|---|---|---|
-| 2 | 0x0800A34C | SplineEvalCatmullRom | JP-only Catmull-Rom eval | no | **DEAD** (transitive) | 1 (SplineSampleAtTime) | whole-fn reg-coloring/spill |
-| 3 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | spill/reg-coloring |
-| 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | spill/frame decision |
-| 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
+| 2 | 0x0800A34C | SplineEvalCatmullRom | JP-only Catmull-Rom eval | no | **DEAD** (transitive) | 1 (SplineSampleAtTime) | matched 2026-07-16 via fHkHP/P25 |
+| 3 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | matched 2026-07-20 via 0O7nM/P26 |
+| 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | matched 2026-07-20 via hgL9F/P27 |
+| 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | matched 2026-07-15 via KxTCq/P24 |
 
 
 **Headline results (2 live / 2 dead)**
-- **2 of 4 are live, actively reachable game code.** Their remaining asm status is
-  a byte-generation problem, not an understanding gap.
+- **2 of 4 are live, actively reachable game code.** All four are now matching C.
 - **2 of 5 are unreachable dead code**, forming the spline island found by the
   original study:
   - **Spline island** — `SplineSampleAtTime` [study #3] →

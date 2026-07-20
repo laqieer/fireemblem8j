@@ -1,11 +1,16 @@
-# Axis #2 (matching-C) — current 2 still-asm; historical final-4 record
+# Axis #2 (matching-C) — complete; historical final-4 record
 
 > **HISTORICAL/SUPERSEDED MATCHING-C CAMPAIGN RECORD.** All queues, ordering,
 > scores, and target suggestions in this document are retained only as dated
 > evidence and must not be used for dispatch. [`docs/frontier.md`](frontier.md)
 > is the sole current work list.
 >
-> **[CURRENT UPDATE 2026-07-16.]** `SplineEvalCatmullRom`
+> **[CURRENT UPDATE 2026-07-20.]** Axis 2 is complete at **100.00%
+> (8692/8692), 0 still-asm**. `SplineSampleAtTime` matched through 0O7nM/P26
+> and `SelectSummonPos` through hgL9F/P27; owned Sp10a and J1ka1 report raw
+> score 0 and are retired. There is no matching queue to dispatch.
+>
+> **[PRIOR UPDATE 2026-07-16.]** `SplineEvalCatmullRom`
 > (`sub_800A34C`) matched through fHkHP/P25 and owned ABtKz is closed at raw
 > score 0. Axis 2 is now **99.98% (8690/8692), 2 still-asm**:
 > `sub_800A594` and `sub_807D3BC`. The immediate P25 transfer test on

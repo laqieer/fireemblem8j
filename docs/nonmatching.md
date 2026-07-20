@@ -6,6 +6,10 @@
 > deterministic levers. Before parking a function as permanently non-matching, apply
 > `docs/agbcc_codegen_levers.md`. For the current live frontier of genuinely
 > unmatched functions, see `docs/frontier.md` (single source of truth — not tsv caches).
+> **Current status (2026-07-20):** the staging tier is empty. All 8,692
+> functions are matching C/library code and `src/nonmatching/` contains no C
+> files. The design and historical evidence below remain useful if a future
+> regression or newly split function needs this tier again.
 
 ## Core thesis
 
@@ -285,16 +289,19 @@ R7AaX now reports raw score 0 and its registry row is retired.
 reconstruction; signed denominator casts plus a scoped real-symbol
 `__divsi3 -> DivArm` alias preserve the ROM's six signed fixed-point division
 calls without disturbing the matched allocation. Owned ABtKz reports raw score
-0 and its registry row is retired. Current ground truth is **8690/8692
-matching-C, 2 still descriptive asm**. Local and hosted
-scores below are deliberately separate; flags or scoring pipelines may differ
-even when the hosted compiler profile is faithful.
+0 and its registry row is retired. At that checkpoint ground truth was
+**8690/8692 matching-C, 2 still descriptive asm**. The historical local and
+hosted scores below are deliberately separate; flags or scoring pipelines may
+differ even when the hosted compiler profile is faithful.
 
-| function | current project evidence | hosted scratch evidence | remaining block |
+| function | historical project evidence | historical hosted evidence | former block |
 |---|---|---|---|
-| `sub_800A594` | integrated local **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`Sp10a`](https://decomp.me/scratch/Sp10a), exact guarded source/provenance, hosted **8906** under stock flags | early `pts` allocation and resulting register/schedule permutation; local uses `-fno-rerun-cse-after-loop` |
-| `sub_807D3BC` | integrated local **550**, linked **61/392**, size 392/frame 0x90; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`J1ka1`](https://decomp.me/scratch/J1ka1), exact normalized project source, hosted **655** under `agbcc-fe8j -mjp-promote`, no override | compaction core matches; reject materialization and outer-loop register order remain |
+| `sub_800A594` | integrated local **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | then-active [`Sp10a`](https://decomp.me/scratch/Sp10a), exact guarded source/provenance, hosted **8906** under stock flags | early `pts` allocation and resulting register/schedule permutation; local used `-fno-rerun-cse-after-loop` |
+| `sub_807D3BC` | integrated local **550**, linked **61/392**, size 392/frame 0x90; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | then-active [`J1ka1`](https://decomp.me/scratch/J1ka1), exact normalized project source, hosted **655** under `agbcc-fe8j -mjp-promote`, no override | compaction core matched; reject materialization and outer-loop register order remained |
 
+Both rows graduated on 2026-07-20: `sub_800A594` through 0O7nM/P26 and
+`sub_807D3BC` through hgL9F/P27. Sp10a and J1ka1 now report raw score 0 and
+their registry rows are retired.
 
 ## Metrics
 
@@ -304,7 +311,7 @@ masquerade as a match. Honesty is mandatory (PUA: no fake matches).
 `calcprogress.py` today (verified): bytes come from carved_rom rows by section
 name (`.text` ⇒ code), and functions are counted **only** from text symbols of
 `src/*.o` objects that appear in a carved_rom row (the oracle, matching C).
-The current JP denominator is **8692** functions: **8690 matching-C + 2
+The current JP denominator is **8692** functions: **8692 matching-C + 0
 nonmatching/still-asm**. Do not use the smaller US-ROM function count.
 
 | Metric | Source | Effect of NON_MATCHING C | Change |

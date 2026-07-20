@@ -154,15 +154,14 @@ contract-assisted relational-equivalence package under
 [CBMC](https://www.cprover.org/cbmc/) instead of Z3 to discharge a *relational*
 proof between the candidate reconstruction and an independent hand-derived
 reference transcription of the JP asm, plus a mutation harness that must
-refute. `sub_80C05C8` and `sub_800A34C` have since graduated to matching C;
-their packages are historical evidence and their hash-pinned drivers require
-the removed historical asm/nonmatching inputs. The live frontier packages are
-`sub_800A594` and `sub_807D3BC`. See `docs/equivalence_proving.md`'s
-"final four contract-assisted validation" table for the exact per-target
-results.
+refute. All four have since graduated to matching C. Their packages are historical
+evidence, and their hash-pinned drivers require removed historical
+asm/nonmatching inputs. See `docs/equivalence_proving.md`'s "final four
+contract-assisted validation" table for the exact per-target results.
 
-Run one package (sequentially — CBMC is memory-heavy, do **not** run more than
-one at a time):
+The commands below are retained only for historical checkout reproduction; they
+fail closed on current `main` because the pinned asm/nonmatching inputs were
+removed:
 
 ```bash
 scripts/tools/thumb_equiv/cbmc_spike/final4/sub_800A594/run.sh

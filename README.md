@@ -61,9 +61,9 @@ assets.
 | Axis | Current canonical result | Target |
 |---|---:|---:|
 | **Build self-containment** | **100.00%** (16,777,216 / 16,777,216; 0 baserom incbins) | 100% |
-| **Matching-C functions** | **99.98%** (8,690 / 8,692; 2 descriptive asm) | 100% |
+| **Matching-C functions** | **100.00%** (8,692 / 8,692; 0 descriptive asm) | 100% |
 | **Extracted data, source-form** | **100.00%** (13,937,336 / 13,937,336) | 100% |
-| **Named symbols** | **100.00%** (2,598 / 2,598; 0 placeholders) | 100% |
+| **Named symbols** | **100.00%** (2,596 / 2,596; 0 placeholders) | 100% |
 
 The supplemental strict C/PNG-under-`src/` subset is **79.91%**
 (11,137,425 / 13,937,336); valid banim and sound source forms are outside that
@@ -78,13 +78,13 @@ blind spot now has exact source-owned extents and the audit skips zero symbols;
 the 1,452 evidence-backed FLOOR inventory remains, as documented in
 [`docs/frontier.md`](docs/frontier.md).
 
-Named 2,598/2,598 is the current literal `.global` assembly-label census used
+Named 2,596/2,596 is the current literal `.global` assembly-label census used
 by `calcprogress.py`; it is not a census of every ELF/C symbol and is not
 directly comparable to historical 12,688-style denominators. Run
 `calcprogress.py` only after the project toolchain and libraries are installed
 and populated, especially `tools/agbcc/lib`. Without that library, its 127
 linked functions are omitted and the function result can misleadingly read
-8,562/8,565 instead of 8,689/8,692.
+8,565/8,565 instead of 8,692/8,692.
 
 Run `python3 scripts/calcprogress.py` for the scorecard,
 `python3 scripts/check_selfcontained.py` for self-containment, and
@@ -95,12 +95,10 @@ only in [`docs/frontier.md`](docs/frontier.md); historical carve evidence is in
 
 ## Help decompile
 
-The current contributor frontier is the 3 remaining nonmatching `sub_*`
-functions. Start from the decomp.me scratch table in
-[`docs/nonmatching.md`](docs/nonmatching.md), and use
-[`docs/frontier.md`](docs/frontier.md) as the single source of truth for the live
-function list and blocking notes. These are help-wanted WIP scratches, not solved
-matches; `make compare` remains the final oracle.
+The matching-C frontier is complete: `src/nonmatching/` contains no staged
+functions and all 8,692 functions build from matching C or the linked runtime
+libraries. Use [`docs/frontier.md`](docs/frontier.md) as the single source of
+truth for any future refinement work; `make compare` remains the final oracle.
 
 
 ## Building

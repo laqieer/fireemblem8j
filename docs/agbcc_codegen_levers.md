@@ -225,7 +225,7 @@ They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 sai
 sweeps could not. Later community matches KxTCq and fHkHP, plus local-oracle
 matches, add clean/scoped source and relocation levers.
 
-The 22 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 24 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -251,6 +251,8 @@ The 22 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | local `GetUnitDefinitionFormEventScr` (sub_800FAD0, 464 B) | 2 | 3 | 2 | 0 | **P23** ABI-wide stacked arg + delayed local re-narrow; direct arg2 lifetime; paired stack homes; r5 tail readback |
 | KxTCq `GmapScreen2_Loop` (sub_80C05C8, 544 B) | 0 | 0 | 0 | 3 empty | **P24** caller-side ABI widening + single-use literal + P14 commutative subscript spelling |
 | fHkHP `SplineEvalCatmullRom` (sub_800A34C, 584 B) | 0 | 0 | 0 | 0 emitted | **P25** restore clean parallel arrays/natural loops; signed denominator casts + scoped real-symbol `__divsi3 -> DivArm` alias |
+| 0O7nM `SplineSampleAtTime` (sub_800A594, 500 B) | 0 | 0 | 0 | 0 | **P26** restore exact typed stack aggregates + natural phase-local IVs; call the real reverse-remainder wrapper instead of keeping allocator fences |
+| hgL9F `SelectSummonPos` (sub_807D3BC, 392 B) | 0 | 0 | 0 | 0 project / 9 scratch-only aliases | **P27** split the rejection chain + use a word IV for natural zero-fill; resolve hosted relocation-only residue with disposable `.set` aliases |
 
 **LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
 The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
@@ -592,10 +594,41 @@ bytes and 79/500 under stock `-O2`, both far worse than the retained 500-byte,
 369/500 seed. P25 is therefore a source-shape lever, not a blanket
 "remove all pins" rule.
 
+**P26 — restore the exact stack aggregate grammar and let phase-local IVs own
+their natural lifetimes.** 0O7nM replaced `sub_800A594`'s pinned r7/r8/r9/sl
+aliases, forced stack homes, and empty clobbers with the target-shaped local
+objects: three `{s32 x,y}` points, three `u16` times, and two `s32` outputs.
+Separate `while` loops use ordinary `i`/`j` IVs in each branch, while one
+word-sized `var_sb` carries the selected segment across phases. Stock `-O2`
+then reproduces the target 0x3C frame and 500-byte body without the old
+`-fno-rerun-cse-after-loop` override.
+
+The hosted source spelled the wrap as a `%` libcall whose context mapped onto
+the reverse-argument BIOS wrapper. In the real project, preserve semantics and
+bytes by calling `sub_80D6384(period, t)` directly: the wrapper executes
+`DivArm`, returns its remainder, and therefore computes `t % period`. This is
+the same lesson as P25's helper audit: keep the winning expression/lifetime
+shape, but bind it to the real project ABI rather than inheriting a context
+fiction.
+
+**P27 — split short-circuit rejection into target basic blocks, then use a
+word IV for a byte zero-fill.** hgL9F removes `SelectSummonPos`'s synthetic
+`reject` lifetime, reverse pointer loop, compaction clobber, and pinned
+promotion scaffolding. Four ordered `if`/`else if` rejection groups reproduce
+the target's early-exit blocks; `array[count].boolAvailable |= -1` naturally
+keeps the failure value in r2; and `s32 var_0` over `indices[9]` compiles into
+the ROM's reverse stack-byte zero-fill under `-mjp-promote`.
+
+The hosted score 30 was not an instruction residual: six data literals and
+three Thumb calls were unresolved relocations. Scratch-only `.set` aliases
+close that display gap (Thumb function aliases use odd addresses); the project
+source must omit them and let the linker resolve the real symbols. The linked
+392-byte range is the acceptance proof.
+
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
    slots differ) — objdiff / the region `cmp`. If opcodes differ, it's a §1–§9 shape issue.
-2. **P8/P25 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable). If the
+2. **P8/P25/P26/P27 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable). If the
    `.text` *size* differs by the width of a repeated `(T)cast`, apply **P11** (materialize-once).
    If JP holds one table/destination address across phases, try **P12/P13 readback** before pins.
 3. **P5/P6** if the diff is a signed sub-field / re-extended loop counter (shift-domain).
@@ -607,12 +640,14 @@ bytes and 79/500 under stock `-O2`, both far worse than the retained 500-byte,
 
 **Caveat / provenance.** P1–P3 (inline-asm constraints) are *match-forcing*, not idiomatic
 decomp — they encode the answer rather than discovering the source shape, and are non-portable
-across compilers. Prefer P8/P25/P7/P5/P6 (real source levers) and escalate to asm-constraints only
+across compilers. Prefer P8/P25/P26/P27/P7/P5/P6 (real source levers) and escalate to asm-constraints only
 for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
 justified end of the spectrum; jmNW8's zero-asm form is the ideal). The community-fork
 patterns above are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples,
 including `l4bts`/P13, KxTCq/P24, and the Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest.
 fHkHP/P25 is credited to **Mc-muffin**.
+0O7nM/P26 is also credited to **Mc-muffin**; hgL9F/P27 is credited to
+**testyourmine**.
 
 ### Field application and later harvested outcomes (D292 Phase 4)
 Applying the above to the ~21 `DECOMP_THEN_UPDATE` registry functions confirmed they are the

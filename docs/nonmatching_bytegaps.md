@@ -1,16 +1,18 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **CURRENT SNAPSHOT 2026-07-16:** axis-2 is **99.98% (8690/8692),
-> 2 still-asm**. `SplineEvalCatmullRom` (`sub_800A34C`) matched through
-> fHkHP/P25: clean parallel arrays and natural loops replace the score-60
-> allocator script, while signed denominator casts plus the scoped real-symbol
-> `__divsi3 -> DivArm` alias preserve the ROM's division targets. Owned ABtKz
-> reports raw score 0 and is retired.
+> **CURRENT SNAPSHOT 2026-07-20:** axis 2 is **100.00% (8692/8692),
+> 0 still-asm**. `SplineSampleAtTime` matched through 0O7nM/P26 and
+> `SelectSummonPos` through hgL9F/P27. Owned Sp10a and J1ka1 both report raw
+> score 0 and are retired. The table below is the immediately preceding
+> historical nonmatching snapshot, not a live frontier.
 >
-> | function | current project metric | hosted metric / active scratch |
+> | function | historical project metric | then-hosted metric / scratch |
 > |---|---|---|
 > | `sub_800A594` | **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`, `EQUIV 60/60` | exact-source/provenance [`Sp10a`](https://decomp.me/scratch/Sp10a) **8906** under stock flags; not comparable to local 369 |
 > | `sub_807D3BC` | local **550**, linked **61/392**, size 392/frame 0x90; compaction matched, reject/register order remains | exact-source [`J1ka1`](https://decomp.me/scratch/J1ka1) **655** under `agbcc-fe8j -mjp-promote`, no override |
+>
+> **PRIOR UPDATE 2026-07-16:** axis-2 was **99.98% (8690/8692),
+> 2 still-asm** after `SplineEvalCatmullRom` matched through fHkHP/P25.
 >
 > **PRIOR UPDATE 2026-07-15:** axis-2 was **99.97% (8689/8692),
 > 3 still-asm** when `GmapScreen2_Loop` matched through KxTCq/P24.

@@ -233,7 +233,9 @@ def main():
     for k in ("MATCHED", "IMPROVED", "INVALID_MATCH", "STALE", "NONE", "ERROR"):
         if counts.get(k):
             print(f"  {k:<9} {counts[k]}")
-    if counts.get("MATCHED"):
+    if not results:
+        print("\n  No active registry entries; the decomp.me matching frontier is empty.")
+    elif counts.get("MATCHED"):
         print("\n  ACTIONABLE: integrate the MATCHED score-0 fork(s) into main "
               "(playbook §7), then learn+cookbook, then APPLY the lever to same-"
               "pattern NONE functions, then mark the scratch solved on decomp.me.")

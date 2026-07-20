@@ -34,7 +34,7 @@ ENV_FILE="${DECOMPME_ENV:-$HOME/.config/fe8j-decomp/decompme.env}"
 set -a; . "$ENV_FILE"; set +a
 [ -n "${DECOMPME_SESSION:-}" ] || die "DECOMPME_SESSION missing in $ENV_FILE"
 
-slug="${1:?usage: mark_solved.sh <your_slug> --from-scratch <matched_slug> | --from-file <c> --flags <flags> [--credit <name>]}"
+slug="${1:?usage: mark_solved.sh <your_slug> --from-scratch <matched_slug> | --from-file <c> (--flags <flags> | --compiler-settings-from <slug>) [--credit <name>]}"
 shift
 mode=""; src_slug=""; src_file=""; settings_slug=""; flags=""; credit=""
 while [ $# -gt 0 ]; do
@@ -73,7 +73,7 @@ elif [ "$mode" = file ]; then
     fi
     export SRC_FILE="$src_file" SRC_FLAGS="$flags"
 else
-    die "specify --from-scratch <slug> or --from-file <c> --flags <flags>"
+    die "specify --from-scratch <slug> or --from-file <c> with flags or compiler settings"
 fi
 
 # Verify we own the target scratch (and get its current name).
@@ -87,7 +87,7 @@ export TGT_JSON_FILE="$tgt_json_file" CREDIT="$credit"
 
 # Build the PATCH body and send it (auth via Cookie + X-CSRFToken).
 CSRF="${DECOMPME_CSRF:-}" SESS="$DECOMPME_SESSION" SLUG="$slug" API="$API" UA="$UA" python3 - <<'PY'
-import os, json, urllib.request
+import os, json, time, urllib.request
 def get_src():
     if os.environ.get("SRC_JSON_FILE"):
         with open(os.environ["SRC_JSON_FILE"]) as f:
@@ -144,7 +144,7 @@ try:
 except urllib.error.HTTPError as e:
     raise SystemExit("PATCH failed HTTP %s: %s" % (e.code, e.read().decode()[:300]))
 fresh_req=urllib.request.Request(
-    os.environ["API"]+"/scratch/"+os.environ["SLUG"]+"?verify=1",
+    os.environ["API"]+"/scratch/"+os.environ["SLUG"]+"?verify="+str(time.time_ns()),
     headers={"User-Agent":os.environ["UA"],"Referer":"https://decomp.me/","Accept":"application/json"},
 )
 with urllib.request.urlopen(fresh_req,timeout=30) as r:

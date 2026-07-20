@@ -392,6 +392,21 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
 4. **Close the owned registry family before deleting its row.**
    - If a decomp.me family member has raw `score == 0`, use
      `scripts/tools/decompme/mark_solved.sh <owned-base> --from-scratch <matched-member>`.
+   - A fork can be instruction-exact but retain a small **relocation-only**
+     hosted score because its external data words or calls are unresolved.
+     First require linked `make compare` and `make shiftcheck` to pass with the
+     clean project source. Then make a disposable scratch copy with `.set`
+     aliases for every unresolved external (Thumb function aliases use the odd
+     entry address), preflight it to raw score 0, and synchronize the owned
+     family with:
+     ```sh
+     scripts/tools/decompme/mark_solved.sh <owned-base> \
+       --from-file /tmp/score0.c \
+       --compiler-settings-from <fork> --credit <matcher>
+     ```
+     The helper inherits the fork compiler/context, refuses unless the target
+     compile endpoint reports raw score 0, and fresh-GET verifies score 0 plus
+     `SOLVED`. Strip all aliases from the project source.
    - If the byte-exact source is a **local oracle match** that the exact hosted
      compiler profile still cannot reproduce because of isolated-context or
      linker differences, publish the local solution text/link on the owned
@@ -418,6 +433,10 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    R7AaX/KxTCq (`GmapScreen2_Loop`) later completed the same raw-score lifecycle:
    the project adaptation stripped three `.set` aliases, passed the linked ROM
    and shiftability gates, updated owned R7AaX to score 0, and retired its row.
+   Sp10a/0O7nM (`SplineSampleAtTime`) and J1ka1/hgL9F (`SelectSummonPos`)
+   completed the frontier on 2026-07-20. The latter is the relocation-only
+   worked example: clean project linking closed hgL9F's score 30, while nine
+   disposable scratch aliases exposed raw score 0 on owned J1ka1.
 
    **Do not simplify a harvested source before measuring it.** In `l4bts`, reading
    the sine value through the reused `data` pointer looked equivalent to replacing
@@ -508,11 +527,11 @@ configuration. **Score monotonicity is not proof of synchronization.** The proof
 is matching normalized source hashes plus the verified metadata record. Older
 adopted seeds must add the guard and be backfilled with this same sequence.
 
-**FE8J compiler profile (`J1ka1`, `sub_807D3BC`).** Keep the exact normalized
-source and local flags, including `-mjp-promote`, and select `agbcc-fe8j`.
-The `J1ka1` registry row remains active while its raw score is nonzero; hosted
-and local results now use the same compiler profile instead of a documented
-toolchain fallback.
+**FE8J compiler profile (`J1ka1`, `sub_807D3BC`).** For a nonzero
+`-mjp-promote` seed, keep the exact normalized source and local flags and select
+`agbcc-fe8j`; its registry row remains active until a real match is published.
+J1ka1 followed that rule at raw 655, then graduated through hgL9F/P27 and is now
+retired at raw score 0.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol or libcall
 

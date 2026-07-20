@@ -5,7 +5,16 @@ source.** This file is a historical matching-campaign handoff; its dated SHAs,
 denominators, and per-promotion metrics are retained as evidence, not live
 progress. See also [`docs/maintenance.md`](maintenance.md).
 
-> **[CURRENT UPDATE 2026-07-20 — decomp.me FE8J compiler profile.]**
+> **[CURRENT UPDATE 2026-07-20 — issue #165 / matching-C complete.]**
+> `SplineSampleAtTime` (`sub_800A594`) matched through decomp.me fork 0O7nM,
+> with the hosted modulo expression adapted to the real reverse-remainder
+> wrapper ABI. `SelectSummonPos` (`sub_807D3BC`) matched through hgL9F; its
+> hosted score 30 was entirely unresolved external relocations, and scratch-only
+> Thumb/data aliases expose raw score 0 without entering the project source.
+> Owned Sp10a and J1ka1 both report raw score 0 and are retired. Ground truth is
+> matching-C **100.00% (8692/8692, 0 still-asm)**; issue #165 can close.
+>
+> **[PRIOR UPDATE 2026-07-20 — decomp.me FE8J compiler profile.]**
 > Issue #168 landed `agbcc-fe8j` through decompme/compilers#75 and
 > decompme/decomp.me#2046. Production exposes the compiler, and the complete
 > known stock-compiler mismatch class is migrated: ABitG raw **100**
@@ -15,7 +24,7 @@ progress. See also [`docs/maintenance.md`](maintenance.md).
 > J1ka1's local **550** and hosted **655** use different scoring pipelines,
 > despite the same `agbcc-fe8j -mjp-promote` compiler profile.
 >
-> **[CURRENT UPDATE 2026-07-16 — fHkHP harvest.]**
+> **[PRIOR UPDATE 2026-07-16 — fHkHP harvest.]**
 > `SplineEvalCatmullRom` (`sub_800A34C`) now compiles byte-exact from
 > `src/SplineEvalCatmullRom.c`. Owned ABtKz reports raw score 0 after
 > synchronization from fHkHP, and its registry row is retired. Ground truth is
