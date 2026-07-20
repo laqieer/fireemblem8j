@@ -4,6 +4,7 @@
 import contextlib
 import io
 import unittest
+import urllib.error
 from unittest import mock
 
 import verify_compile as verify
@@ -187,6 +188,60 @@ class RepairSettingsTest(unittest.TestCase):
         )
         self.assertEqual(get_scratch.call_count, 2)
         compile_scratch.assert_called_once()
+
+    @mock.patch.object(verify, "compile_scratch")
+    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "_req")
+    def test_repair_transaction_restores_after_recompile_http_error(
+        self, request, get_scratch, compile_scratch
+    ):
+        scratch = {
+            "owner": {"username": "laqieer"},
+            "compiler": "agbcc",
+            "compiler_flags": "-O2",
+            "source_code": "int func(void) { return 1; }\n",
+            "context": "",
+            "name": "func",
+            "description": "",
+            "match_override": False,
+            "libraries": [],
+            "diff_flags": [],
+            "diff_label": "func",
+        }
+        stored = dict(
+            scratch,
+            compiler="agbcc-fe8j",
+            compiler_flags="-O2 -mjp-promote",
+        )
+        compile_scratch.side_effect = [
+            {"success": True},
+            urllib.error.HTTPError(
+                "https://decomp.me/api/scratch/J1ka1/compile",
+                500,
+                "server error",
+                None,
+                io.BytesIO(b"failure"),
+            ),
+        ]
+        get_scratch.side_effect = [stored, scratch]
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertFalse(
+                verify.apply_repair(
+                    "J1ka1",
+                    scratch,
+                    "agbcc-fe8j",
+                    "-O2 -mjp-promote",
+                    ["compiler agbcc -> agbcc-fe8j", "added -mjp-promote"],
+                    "cookie",
+                    "csrf",
+                    "laqieer",
+                )
+            )
+
+        self.assertEqual(request.call_count, 2)
+        self.assertEqual(get_scratch.call_count, 2)
+        self.assertEqual(compile_scratch.call_count, 2)
 
 
 if __name__ == "__main__":

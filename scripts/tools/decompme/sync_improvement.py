@@ -196,7 +196,7 @@ def sync_description(
 ):
     local_flags_normalized = " ".join(local_flags.split())
     remote_flags_normalized = " ".join(settings["compiler_flags"].split())
-    comparable = local_flags_normalized == remote_flags_normalized
+    flags_match = local_flags_normalized == remote_flags_normalized
     record = {
         "normalized_source_sha256": source_digest(source),
         "local_score": local_score,
@@ -207,9 +207,11 @@ def sync_description(
         "decompme_score": score,
         "decompme_compiler": settings["compiler"],
         "decompme_compiler_flags": remote_flags_normalized,
-        "scores_directly_comparable": comparable,
+        "compiler_flags_match": flags_match,
+        "scores_directly_comparable": False,
+        "score_note": "Local and decomp.me scores use different scoring pipelines.",
     }
-    if not comparable:
+    if not flags_match:
         record["toolchain_note"] = (
             "Local and decomp.me flags differ; the remote score does not measure "
             "the project-only toolchain."
@@ -400,6 +402,8 @@ def main(argv=None):
     )
     if local_flags != remote_flags:
         print("NOTE: toolchain flags differ; local and decomp.me scores are not comparable")
+    else:
+        print("NOTE: compiler flags match, but local and decomp.me score scales differ")
     if new_score >= old_score:
         print(
             "NOTE: non-improving decomp.me score is allowed; "

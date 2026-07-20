@@ -119,7 +119,12 @@ class J1ka1FE8JCompilerTest(unittest.TestCase):
         self.assertEqual(record["equivalence_result"], "EQUIV 60/60")
         self.assertEqual(record["decompme_score"], 550)
         self.assertEqual(record["decompme_compiler"], "agbcc-fe8j")
-        self.assertTrue(record["scores_directly_comparable"])
+        self.assertTrue(record["compiler_flags_match"])
+        self.assertFalse(record["scores_directly_comparable"])
+        self.assertEqual(
+            record["score_note"],
+            "Local and decomp.me scores use different scoring pipelines.",
+        )
 
         scratch = dict(self.target)
         scratch.update(

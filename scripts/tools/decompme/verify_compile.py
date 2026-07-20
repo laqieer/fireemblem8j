@@ -312,13 +312,41 @@ def apply_repair(
         )
         return False
 
-    persisted = compile_scratch(
-        slug,
-        stored["compiler"],
-        stored["compiler_flags"],
-        stored["source_code"],
-        stored.get("context", ""),
-    )
+    try:
+        persisted = compile_scratch(
+            slug,
+            stored["compiler"],
+            stored["compiler_flags"],
+            stored["source_code"],
+            stored.get("context", ""),
+        )
+    except urllib.error.HTTPError as e:
+        print(
+            "           -> persisted recompilation failed HTTP "
+            f"{e.code}: {e.read().decode()[:160]}"
+        )
+        restore_original_settings(
+            slug,
+            scratch,
+            stored,
+            newcompiler,
+            newflags,
+            cookie,
+            csrf,
+        )
+        return False
+    except urllib.error.URLError as e:
+        print(f"           -> persisted recompilation request failed: {e.reason}")
+        restore_original_settings(
+            slug,
+            scratch,
+            stored,
+            newcompiler,
+            newflags,
+            cookie,
+            csrf,
+        )
+        return False
     if not persisted.get("success"):
         print(
             "           -> persisted settings fail recompilation: "
