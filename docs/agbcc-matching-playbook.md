@@ -494,24 +494,22 @@ local adoption only after this succeeds. Keep the registry row active and do
 
 For a locally discovered improvement, omit `--compiler-settings-from` to retain
 the owned base's compiler settings. Always try the exact local flags through
-`--compiler-flags "$LOCAL_FLAGS"` first. If stock decomp.me rejects a project-only
-flag such as `-mjp-promote`, rerun without that override or with a supported
-subset, while leaving `--local-flags "$LOCAL_FLAGS"` unchanged. The helper then
-retains the exact source, records the toolchain mismatch, verifies the score
-decomp.me actually produced, and keeps the row active.
+`--compiler-flags "$LOCAL_FLAGS"` first. A scratch using `-mjp-promote` must use
+the hosted `agbcc-fe8j` compiler; migrate an older stock-`agbcc` scratch rather
+than dropping the flag. `verify_compile.py --fix` handles the known
+stock-`agbcc` + `-mjp-promote` failure by changing the compiler while preserving
+the exact flags and source.
 
 The remote score may be equal or worse because it measures a different compiler
 configuration. **Score monotonicity is not proof of synchronization.** The proof
 is matching normalized source hashes plus the verified metadata record. Older
 adopted seeds must add the guard and be backfilled with this same sequence.
 
-**Confirmed fallback (`J1ka1`, `sub_807D3BC`).** The exact project flags fail
-decomp.me preflight with `"Invalid option 'jp-promote'"`; no compatible hosted
-compiler is exposed. The expected fallback retains the exact normalized source,
-uses hosted stock `-O2`, and records local score **655**, linked residual
-**82/392**, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`, hosted score **10499**, and both
-flag sets. The `J1ka1` registry row remains active. This is a successful source
-sync with a documented toolchain mismatch, not a score regression failure.
+**FE8J compiler profile (`J1ka1`, `sub_807D3BC`).** Keep the exact normalized
+source and local flags, including `-mjp-promote`, and select `agbcc-fe8j`.
+The `J1ka1` registry row remains active while its raw score is nonzero; hosted
+and local results now use the same compiler profile instead of a documented
+toolchain fallback.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol or libcall
 

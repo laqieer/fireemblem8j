@@ -24,10 +24,9 @@ Usage:
     [--compiler-settings-from <fork>] [--compiler-flags <remote-flags>] \
     --expected-score <dry-run-score>
 
-Confirmed fallback fixture: J1ka1 rejects local ``-mjp-promote`` and has no
-compatible hosted compiler. The stock ``-O2`` sync records local score 655,
-82/392 residual, PROVEN-BOUNDED(1), EQUIV 60/60, and hosted score 10499 while
-retaining the registry row.
+FE8J scratches that use ``-mjp-promote`` must select the hosted
+``agbcc-fe8j`` compiler so the exact local flags can be preflighted instead of
+recording a toolchain mismatch.
 """
 
 import argparse

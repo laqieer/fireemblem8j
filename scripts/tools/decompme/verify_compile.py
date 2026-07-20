@@ -2,24 +2,21 @@
 """verify_compile.py — make sure every FE8J decomp.me scratch actually COMPILES.
 
 A scratch that fails to compile on decomp.me is dead weight: the community can't
-even start matching it. This happened with the project-local ``-mjp-promote``
-agbcc flag (built by ``scripts/build_jp_agbcc.sh``) — it is unknown to the stock
-agbcc decomp.me ships, so any scratch carrying it errors out immediately with::
-
-    Compiler error: agbcc: Invalid option `jp-promote'
+even start matching it. FE8J uses the hosted ``agbcc-fe8j`` compiler, which is
+stock-compatible by default and accepts the project's per-TU ``-mjp-promote``
+flag.
 
 This tool walks every slug in ``registry.tsv``, compiles it through decomp.me's
-own compile endpoint, and reports pass/fail. With ``--fix`` it repairs scratches
-that fail *because of an invalid compiler option* by stripping the offending
-flag and PATCHing the scratch (you must own it; auth via ``setup_auth.sh``),
-then re-verifies. Stripping a local-only flag never changes the source, so the
-scratch still documents the same reconstruction — it just compiles on decomp.me.
+own compile endpoint, and reports pass/fail. With ``--fix`` it repairs known
+compiler/flag failures and PATCHes scratches you own (auth via ``setup_auth.sh``),
+then re-verifies. In particular, an older scratch using stock ``agbcc`` with
+``-mjp-promote`` is migrated to ``agbcc-fe8j`` without dropping the flag.
 
 Usage:
   # audit only (no writes, no auth needed):
   scripts/tools/decompme/verify_compile.py
 
-  # audit + auto-repair invalid-option failures on scratches you own:
+  # audit + auto-repair known compiler/flag failures on scratches you own:
   scripts/tools/decompme/verify_compile.py --fix
 
   # limit to specific slugs:
@@ -49,14 +46,16 @@ INVALID_OPT_RE = re.compile(r"Invalid option `([^']+)'")
 # agbcc + -Werror turns any warning (e.g. a builtin-conflicting strcpy decl in a
 # scratch's context) into a hard compile failure decomp.me can't get past.
 WERROR_RE = re.compile(r"warnings being treated as errors")
+STOCK_AGBCC = "agbcc"
+FE8J_AGBCC = "agbcc-fe8j"
+JP_PROMOTE_FLAG = "-mjp-promote"
 
 
 def repair_flags(flags, compiler_output):
     """Return (new_flags, removed_list) that make the scratch compile, or (None, []).
 
-    Two classes of decomp.me-only build breakage are handled by *flag* changes
-    (never touching the source, so the documented reconstruction is unchanged):
-      1. an invalid/project-local option (e.g. ``-mjp-promote``) -> strip it;
+    Two classes of build breakage are handled by flag changes:
+      1. an invalid option -> strip it;
       2. ``-Werror`` promoting a benign warning to an error -> strip ``-Werror``.
     """
     m = INVALID_OPT_RE.search(compiler_output)
@@ -74,6 +73,25 @@ def repair_flags(flags, compiler_output):
         kept = [f for f in flags.split() if f != "-Werror"]
         return " ".join(kept), ["-Werror"]
     return None, []
+
+
+def repair_settings(compiler, flags, compiler_output):
+    """Return (compiler, flags, changes), or (None, None, []) when unknown."""
+    invalid = INVALID_OPT_RE.search(compiler_output)
+    if (
+        compiler == STOCK_AGBCC
+        and invalid
+        and invalid.group(1) == "jp-promote"
+        and JP_PROMOTE_FLAG in flags.split()
+    ):
+        return FE8J_AGBCC, flags, [
+            "compiler %s -> %s" % (STOCK_AGBCC, FE8J_AGBCC)
+        ]
+
+    newflags, removed = repair_flags(flags, compiler_output)
+    if removed:
+        return compiler, newflags, ["removed %s" % flag for flag in removed]
+    return None, None, []
 
 
 def load_auth():
@@ -135,7 +153,7 @@ def read_registry():
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("slugs", nargs="*", help="limit to these slugs (default: all in registry.tsv)")
-    ap.add_argument("--fix", action="store_true", help="PATCH scratches failing on an invalid option (needs auth + ownership)")
+    ap.add_argument("--fix", action="store_true", help="PATCH known compiler/flag failures (needs auth + ownership)")
     args = ap.parse_args()
 
     rows = read_registry()
@@ -184,32 +202,40 @@ def main():
         fails.append((slug, fn, reason))
 
         if args.fix:
-            newflags, removed = repair_flags(flags, out)
-            if not removed:
-                print(f"           -> no known flag-only repair for this error; skipping")
+            newcompiler, newflags, changes = repair_settings(d["compiler"], flags, out)
+            if not changes:
+                print(f"           -> no known compiler/flag repair for this error; skipping")
                 continue
             owner = (d.get("owner") or {}).get("username")
             if owner != whoami:
                 print(f"           -> owned by {owner!r}, not you ({whoami!r}); skipping PATCH")
                 continue
-            # verify the repaired flags compile before writing
-            chk = compile_scratch(slug, d["compiler"], newflags, d["source_code"], d.get("context", ""))
+            # Verify the repaired settings compile before writing.
+            chk = compile_scratch(slug, newcompiler, newflags, d["source_code"], d.get("context", ""))
             if not chk.get("success"):
-                print(f"           -> removing {removed} still fails: {(chk.get('compiler_output') or '')[:120]!r}")
+                print(f"           -> repair still fails: {(chk.get('compiler_output') or '')[:120]!r}")
                 continue
             cookie = f"sessionid={sess}; csrftoken={csrf or ''}"
+            patch = {}
+            if newcompiler != d["compiler"]:
+                patch["compiler"] = newcompiler
+            if newflags != flags:
+                patch["compiler_flags"] = newflags
             try:
-                _req(f"/scratch/{slug}", data={"compiler_flags": newflags}, method="PATCH", cookie=cookie, csrf=csrf)
+                _req(f"/scratch/{slug}", data=patch, method="PATCH", cookie=cookie, csrf=csrf)
             except urllib.error.HTTPError as e:
                 print(f"           -> PATCH failed HTTP {e.code}: {e.read().decode()[:160]}")
                 continue
-            print(f"           -> FIXED: removed {removed}; flags now: {newflags}")
+            print(
+                f"           -> FIXED: {'; '.join(changes)}; "
+                f"compiler={newcompiler}; flags={newflags}"
+            )
             fixed.append((slug, fn))
             time.sleep(0.3)
 
     print(f"\nsummary: {passes} ok, {len(fails)} failed" + (f", {len(fixed)} fixed" if args.fix else ""))
     if fails and not args.fix:
-        print("re-run with --fix to repair scratches you own (strip invalid options / -Werror).")
+        print("re-run with --fix to repair known compiler/flag failures on scratches you own.")
     # exit non-zero if anything is still broken after (optional) fixing
     still_broken = len(fails) - len(fixed)
     return 1 if still_broken > 0 else 0
