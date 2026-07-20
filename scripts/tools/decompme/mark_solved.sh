@@ -19,7 +19,8 @@
 #
 # Usage:
 #   scripts/tools/decompme/mark_solved.sh <your_slug> --from-scratch <matched_slug> [--credit <name>]
-#   scripts/tools/decompme/mark_solved.sh <your_slug> --from-file <matched.c> --flags "<compiler_flags>" [--credit <name>]
+#   scripts/tools/decompme/mark_solved.sh <your_slug> --from-file <matched.c> \
+#       --compiler-settings-from <scratch_slug> [--flags "<compiler_flags>"] [--credit <name>]
 #
 set -euo pipefail
 
@@ -35,11 +36,12 @@ set -a; . "$ENV_FILE"; set +a
 
 slug="${1:?usage: mark_solved.sh <your_slug> --from-scratch <matched_slug> | --from-file <c> --flags <flags> [--credit <name>]}"
 shift
-mode=""; src_slug=""; src_file=""; flags=""; credit=""
+mode=""; src_slug=""; src_file=""; settings_slug=""; flags=""; credit=""
 while [ $# -gt 0 ]; do
     case "$1" in
         --from-scratch) mode=scratch; src_slug="$2"; shift 2 ;;
         --from-file)    mode=file; src_file="$2"; shift 2 ;;
+        --compiler-settings-from) settings_slug="$2"; shift 2 ;;
         --flags)        flags="$2"; shift 2 ;;
         --credit)       credit="$2"; shift 2 ;;
         *) die "unknown arg: $1" ;;
@@ -62,7 +64,13 @@ if [ "$mode" = scratch ]; then
     [ -n "$credit" ] || credit="$(python3 -c 'import json,sys;print((json.load(sys.stdin).get("owner") or {}).get("username") or "")' < "$src_json_file")"
 elif [ "$mode" = file ]; then
     [ -f "$src_file" ] || die "--from-file not found: $src_file"
-    [ -n "$flags" ] || die "--from-file requires --flags \"<compiler_flags>\""
+    if [ -n "$settings_slug" ]; then
+        settings_json_file="$tmpdir/settings.json"
+        get "$API/scratch/$settings_slug" > "$settings_json_file"
+        export SRC_SETTINGS_JSON_FILE="$settings_json_file"
+    else
+        [ -n "$flags" ] || die "--from-file requires --flags \"<compiler_flags>\" or --compiler-settings-from <slug>"
+    fi
     export SRC_FILE="$src_file" SRC_FLAGS="$flags"
 else
     die "specify --from-scratch <slug> or --from-file <c> --flags <flags>"
@@ -85,7 +93,17 @@ def get_src():
         with open(os.environ["SRC_JSON_FILE"]) as f:
             d=json.load(f)
         return d.get("source_code",""), d.get("context","") or "", d.get("compiler","agbcc"), d.get("compiler_flags","")
-    return open(os.environ["SRC_FILE"]).read(), "", "agbcc", os.environ["SRC_FLAGS"]
+    settings={}
+    if os.environ.get("SRC_SETTINGS_JSON_FILE"):
+        with open(os.environ["SRC_SETTINGS_JSON_FILE"]) as f:
+            settings=json.load(f)
+    flags=os.environ.get("SRC_FLAGS") or settings.get("compiler_flags","")
+    return (
+        open(os.environ["SRC_FILE"]).read(),
+        settings.get("context","") or "",
+        settings.get("compiler","agbcc"),
+        flags,
+    )
 src, ctx, comp, flags = get_src()
 with open(os.environ["TGT_JSON_FILE"]) as f:
     tgt=json.load(f)
@@ -95,6 +113,27 @@ if "SOLVED" not in name:
     name = name.split(" — ")[0].strip() + " — SOLVED" + (f" (match credit: {credit})" if credit else "")
 body={"name":name,"source_code":src,"compiler":comp,"compiler_flags":flags}
 if ctx: body["context"]=ctx
+compile_body={"source_code":src,"context":ctx,"compiler":comp,"compiler_flags":flags}
+compile_req=urllib.request.Request(
+    os.environ["API"]+"/scratch/"+os.environ["SLUG"]+"/compile",
+    data=json.dumps(compile_body).encode(),
+    method="POST",
+    headers={
+        "User-Agent":os.environ["UA"],
+        "Referer":"https://decomp.me/",
+        "Content-Type":"application/json",
+        "Accept":"application/json",
+    },
+)
+with urllib.request.urlopen(compile_req,timeout=90) as r:
+    compiled=json.load(r)
+score=((compiled.get("diff_output") or {}).get("current_score"))
+if not compiled.get("success") or score != 0:
+    raise SystemExit("preflight compile did not match: success=%r score=%r output=%s" % (
+        compiled.get("success"),
+        score,
+        (compiled.get("compiler_output") or "")[:300],
+    ))
 req=urllib.request.Request(os.environ["API"]+"/scratch/"+os.environ["SLUG"], data=json.dumps(body).encode(),
     method="PATCH", headers={"User-Agent":os.environ["UA"],"Referer":"https://decomp.me/",
     "Content-Type":"application/json","Accept":"application/json","X-CSRFToken":os.environ["CSRF"],
@@ -104,7 +143,17 @@ try:
         d=json.load(r); print("PATCHed", os.environ["SLUG"], "->", (d.get('name') or '')[:70])
 except urllib.error.HTTPError as e:
     raise SystemExit("PATCH failed HTTP %s: %s" % (e.code, e.read().decode()[:300]))
+fresh_req=urllib.request.Request(
+    os.environ["API"]+"/scratch/"+os.environ["SLUG"]+"?verify=1",
+    headers={"User-Agent":os.environ["UA"],"Referer":"https://decomp.me/","Accept":"application/json"},
+)
+with urllib.request.urlopen(fresh_req,timeout=30) as r:
+    fresh=json.load(r)
+if fresh.get("score") != 0 or "SOLVED" not in (fresh.get("name") or ""):
+    raise SystemExit("fresh verification failed: score=%r name=%r" % (
+        fresh.get("score"),
+        fresh.get("name"),
+    ))
 PY
 
-echo "Done. Re-check score in a few seconds:"
-echo "  curl -s -H 'User-Agent: $UA' -H 'Accept: application/json' -H 'Referer: https://decomp.me/' $API/scratch/$slug | python3 -c 'import json,sys;print(\"score\",json.load(sys.stdin).get(\"score\"))'"
+echo "Done. Fresh GET verified score 0 and SOLVED state."
