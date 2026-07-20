@@ -88,7 +88,7 @@ def normalize_transport_text(text):
 
 
 def source_digest(source):
-    return hashlib.sha256(normalize_source(source).encode()).hexdigest()
+    return hashlib.sha256(normalize_transport_text(source).encode()).hexdigest()
 
 
 def request(path, data=None, method="GET", cookie=None, csrf=None, fresh=False):

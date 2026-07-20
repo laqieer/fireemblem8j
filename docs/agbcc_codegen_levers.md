@@ -193,12 +193,13 @@ only sub_80BCD74 (PERMUTER_FLAGS=none) compiles + diffs live (1855/11300, a genu
 > [SUPERSEDED 2026-07-03: sub_80A730C (DrawArenaRosterNames) and sub_80A73D4 (ArenaScoreboard_DrawRecord)
 > in this list have since MATCHED byte-exact in-repo (banked, removed from `src/nonmatching/`); their
 > scratches are reference-only now.]
-LIMITATION for community iteration: decomp.me stock agbcc has no -mjp-promote; to reproduce the
-same raw score there, the fork flag would need upstreaming OR the function must be re-derived without it.
-**Closure is still supported:** after the local source passes `make compare`, publish/link that source on the
-owned scratch and set decomp.me's official `match_override` (“matched elsewhere”) field. The family then exposes
-an effective score 0 without pretending the stock compiler produced raw score 0. `ABitG` is the worked example
-(2026-07-10); see `docs/agbcc-matching-playbook.md §7`.
+COMMUNITY ITERATION PROFILE: select `agbcc-fe8j` and preserve
+`-mjp-promote`; never drop the flag to fit stock `agbcc`. Use
+`match_override` only when the exact hosted compiler profile still has an
+isolated-context/linker residual after the local source passes `make compare`.
+`ABitG` is the worked example: raw score 100 under `agbcc-fe8j -mjp-promote`
+with the supported matched-elsewhere override retained. See
+`docs/agbcc-matching-playbook.md §7`.
 
 ### decomp.me scratches posted 2026-06-26 (this session's reconstructed/permuter-base NEARs; checked: NO community-fork match yet)
   Event0F_CounterOps   https://decomp.me/scratch/aNjcw   (decomp.me score 620)

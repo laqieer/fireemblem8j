@@ -143,6 +143,51 @@ class RepairSettingsTest(unittest.TestCase):
         get_scratch.assert_called_once_with("J1ka1", fresh=True)
         compile_scratch.assert_called_once()
 
+    @mock.patch.object(verify, "compile_scratch")
+    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "_req")
+    def test_repair_transaction_restores_partial_patch(
+        self, request, get_scratch, compile_scratch
+    ):
+        scratch = {
+            "owner": {"username": "laqieer"},
+            "compiler": "agbcc",
+            "compiler_flags": "-O2",
+            "source_code": "int func(void) { return 1; }\n",
+            "context": "",
+            "name": "func",
+            "description": "",
+            "match_override": False,
+            "libraries": [],
+            "diff_flags": [],
+            "diff_label": "func",
+        }
+        partial = dict(scratch, compiler_flags="-O2 -mjp-promote")
+        compile_scratch.return_value = {"success": True}
+        get_scratch.side_effect = [partial, scratch]
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertFalse(
+                verify.apply_repair(
+                    "J1ka1",
+                    scratch,
+                    "agbcc-fe8j",
+                    "-O2 -mjp-promote",
+                    ["compiler agbcc -> agbcc-fe8j", "added -mjp-promote"],
+                    "cookie",
+                    "csrf",
+                    "laqieer",
+                )
+            )
+
+        self.assertEqual(request.call_count, 2)
+        self.assertEqual(
+            request.call_args_list[1].kwargs["data"],
+            {"compiler": "agbcc", "compiler_flags": "-O2"},
+        )
+        self.assertEqual(get_scratch.call_count, 2)
+        compile_scratch.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()

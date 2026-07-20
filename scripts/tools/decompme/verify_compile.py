@@ -52,6 +52,16 @@ STOCK_AGBCC = "agbcc"
 FE8J_AGBCC = "agbcc-fe8j"
 JP_PROMOTE_FLAG = "-mjp-promote"
 JP_PROMOTE_PROFILE = "jp-promote"
+REPAIR_PROTECTED_FIELDS = (
+    "source_code",
+    "context",
+    "name",
+    "description",
+    "match_override",
+    "libraries",
+    "diff_flags",
+    "diff_label",
+)
 
 
 def repair_flags(flags, compiler_output):
@@ -181,6 +191,68 @@ def read_registry():
     return rows
 
 
+def normalize_flags(flags):
+    return " ".join((flags or "").split())
+
+
+def protected_fields_match(left, right):
+    return all(left.get(field) == right.get(field) for field in REPAIR_PROTECTED_FIELDS)
+
+
+def restore_original_settings(
+    slug,
+    original,
+    current,
+    newcompiler,
+    newflags,
+    cookie,
+    csrf,
+):
+    original_flags = normalize_flags(original.get("compiler_flags", ""))
+    candidate_flags = normalize_flags(newflags)
+    current_flags = normalize_flags(current.get("compiler_flags", ""))
+    if not protected_fields_match(original, current):
+        print("           -> concurrent/unknown non-compiler state; no rollback")
+        return False
+    if current.get("compiler") not in {original["compiler"], newcompiler} or (
+        current_flags not in {original_flags, candidate_flags}
+    ):
+        print("           -> concurrent/unknown compiler state; no rollback")
+        return False
+    if (
+        current.get("compiler") == original["compiler"]
+        and current_flags == original_flags
+    ):
+        print("           -> original compiler settings are unchanged")
+        return True
+
+    try:
+        _req(
+            f"/scratch/{slug}",
+            data={
+                "compiler": original["compiler"],
+                "compiler_flags": original.get("compiler_flags", ""),
+            },
+            method="PATCH",
+            cookie=cookie,
+            csrf=csrf,
+        )
+        restored = get_scratch(slug, fresh=True)
+    except urllib.error.HTTPError as e:
+        print(f"           -> ROLLBACK failed HTTP {e.code}: {e.read().decode()[:160]}")
+        return False
+
+    if (
+        restored.get("compiler") != original["compiler"]
+        or normalize_flags(restored.get("compiler_flags", "")) != original_flags
+        or not protected_fields_match(original, restored)
+    ):
+        print("           -> ROLLBACK verification failed")
+        return False
+    print("           -> original compiler settings restored")
+    return True
+
+
 def apply_repair(
     slug,
     scratch,
@@ -208,21 +280,36 @@ def apply_repair(
         patch["compiler"] = newcompiler
     if newflags != scratch.get("compiler_flags", ""):
         patch["compiler_flags"] = newflags
+    patch_error = None
     try:
         _req(f"/scratch/{slug}", data=patch, method="PATCH", cookie=cookie, csrf=csrf)
+    except urllib.error.HTTPError as e:
+        patch_error = f"HTTP {e.code}: {e.read().decode()[:160]}"
+    try:
         stored = get_scratch(slug, fresh=True)
     except urllib.error.HTTPError as e:
-        print(f"           -> PATCH/GET failed HTTP {e.code}: {e.read().decode()[:160]}")
+        print(f"           -> fresh GET failed HTTP {e.code}: {e.read().decode()[:160]}")
         return False
 
-    stored_flags = " ".join((stored.get("compiler_flags") or "").split())
-    expected_flags = " ".join(newflags.split())
+    stored_flags = normalize_flags(stored.get("compiler_flags", ""))
+    expected_flags = normalize_flags(newflags)
     if (
-        stored.get("compiler") != newcompiler
+        patch_error is not None
+        or stored.get("compiler") != newcompiler
         or stored_flags != expected_flags
-        or stored.get("source_code") != source
+        or not protected_fields_match(scratch, stored)
     ):
-        print("           -> persisted compiler/flags/source differ after PATCH")
+        reason = patch_error or "persisted compiler/flags/state differ after PATCH"
+        print(f"           -> repair verification failed: {reason}")
+        restore_original_settings(
+            slug,
+            scratch,
+            stored,
+            newcompiler,
+            newflags,
+            cookie,
+            csrf,
+        )
         return False
 
     persisted = compile_scratch(
@@ -236,6 +323,15 @@ def apply_repair(
         print(
             "           -> persisted settings fail recompilation: "
             f"{(persisted.get('compiler_output') or '')[:120]!r}"
+        )
+        restore_original_settings(
+            slug,
+            scratch,
+            stored,
+            newcompiler,
+            newflags,
+            cookie,
+            csrf,
         )
         return False
 

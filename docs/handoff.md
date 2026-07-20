@@ -11,7 +11,7 @@ progress. See also [`docs/maintenance.md`](maintenance.md).
 > known stock-compiler mismatch class is migrated: ABitG raw **100**
 > (`match_override=true`), eZzgG raw **5** (`match_override=true`), jeBp5 raw
 > **0**, and active J1ka1 raw **655** with exact normalized project source hash
-> `ff66d78151e641c5bb73974963b3c6793ad0e4bca8732437755ae4a5a1d6fd62`.
+> `a276596f8b46699d595fe138bc250ce74499e3726c4982ae1fff3f25819f9fe5`.
 > J1ka1's local **550** and hosted **655** use different scoring pipelines,
 > despite the same `agbcc-fe8j -mjp-promote` compiler profile.
 >

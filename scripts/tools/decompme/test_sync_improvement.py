@@ -150,6 +150,10 @@ class J1ka1FE8JCompilerTest(unittest.TestCase):
         )
 
         sync.verify(scratch, self.source, self.settings, description, 550)
+        self.assertEqual(
+            sync.source_digest(self.source),
+            sync.source_digest(sync.normalize_source(self.source).rstrip("\n")),
+        )
 
     def test_transport_does_not_hide_extra_blank_line(self):
         self.assertNotEqual(
