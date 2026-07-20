@@ -1,11 +1,12 @@
-# fn<TAB>slug<TAB>name  — decomp.me scratches for FE8J still-asm functions.
+# fn<TAB>slug<TAB>name<TAB>profile  — decomp.me scratches for FE8J still-asm functions.
+# profile is optional; `jp-promote` requires agbcc-fe8j + -mjp-promote.
 # Maintained by the decomp.me workflow (scripts/tools/decompme/decomp_status.py).
 # DONE (carved as src/SplineEvalCatmullRom.c; ABtKz marked SOLVED @ score 0 from fHkHP):
 # sub_800A34C	ABtKz	sub_800A34C
 # DONE (carved in-repo as src/LoadClassReelFontPalette.c, D307; scratch marked SOLVED to avoid wasted community effort):
 # sub_80D17C8	VAkhM	sub_80D17C8
 sub_800A594	Sp10a	sub_800A594
-sub_807D3BC	J1ka1	SelectSummonPos
+sub_807D3BC	J1ka1	SelectSummonPos	jp-promote
 # DONE (carved in-repo + decomp.me scratch marked SOLVED @ score 0 — Bravo decomp.me-sync 2026-07-03):
 # sub_80B8B28	mOclN	ClassStatsDisplay_Loop  (SOLVED@0)
 # sub_80D1844	VzzCC	LoadClassNameInClassReelFont  (SOLVED@0)

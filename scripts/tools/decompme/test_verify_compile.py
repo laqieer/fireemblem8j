@@ -1,12 +1,29 @@
 #!/usr/bin/env python3
 """Focused regression tests for decomp.me compile repair settings."""
 
+import contextlib
+import io
 import unittest
+from unittest import mock
 
 import verify_compile as verify
 
 
 class RepairSettingsTest(unittest.TestCase):
+    def test_profile_migrates_compiling_legacy_settings(self):
+        compiler, repaired_flags, changes = verify.required_profile_settings(
+            "jp-promote",
+            "agbcc",
+            "-mthumb-interwork -O2",
+        )
+
+        self.assertEqual(compiler, "agbcc-fe8j")
+        self.assertEqual(repaired_flags, "-mthumb-interwork -O2 -mjp-promote")
+        self.assertEqual(
+            changes,
+            ["compiler agbcc -> agbcc-fe8j", "added -mjp-promote"],
+        )
+
     def test_migrates_jp_promote_from_stock_agbcc(self):
         flags = "-mthumb-interwork -O2 -mjp-promote"
 
@@ -52,6 +69,79 @@ class RepairSettingsTest(unittest.TestCase):
         self.assertEqual(compiler, "agbcc-fe8j")
         self.assertEqual(repaired_flags, "-O2")
         self.assertEqual(changes, ["removed -Werror"])
+
+    @mock.patch.object(verify, "compile_scratch")
+    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "_req")
+    def test_repair_transaction_rechecks_persisted_settings(
+        self, request, get_scratch, compile_scratch
+    ):
+        scratch = {
+            "owner": {"username": "laqieer"},
+            "compiler": "agbcc",
+            "compiler_flags": "-O2",
+            "source_code": "int func(void) { return 1; }\n",
+            "context": "",
+        }
+        stored = dict(
+            scratch,
+            compiler="agbcc-fe8j",
+            compiler_flags="-O2 -mjp-promote",
+        )
+        compile_scratch.return_value = {"success": True}
+        get_scratch.return_value = stored
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertTrue(
+                verify.apply_repair(
+                    "J1ka1",
+                    scratch,
+                    "agbcc-fe8j",
+                    "-O2 -mjp-promote",
+                    ["compiler agbcc -> agbcc-fe8j", "added -mjp-promote"],
+                    "cookie",
+                    "csrf",
+                    "laqieer",
+                )
+            )
+
+        request.assert_called_once()
+        get_scratch.assert_called_once_with("J1ka1", fresh=True)
+        self.assertEqual(compile_scratch.call_count, 2)
+
+    @mock.patch.object(verify, "compile_scratch")
+    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "_req")
+    def test_repair_transaction_rejects_ignored_patch(
+        self, request, get_scratch, compile_scratch
+    ):
+        scratch = {
+            "owner": {"username": "laqieer"},
+            "compiler": "agbcc",
+            "compiler_flags": "-O2",
+            "source_code": "int func(void) { return 1; }\n",
+            "context": "",
+        }
+        compile_scratch.return_value = {"success": True}
+        get_scratch.return_value = scratch
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertFalse(
+                verify.apply_repair(
+                    "J1ka1",
+                    scratch,
+                    "agbcc-fe8j",
+                    "-O2 -mjp-promote",
+                    ["compiler agbcc -> agbcc-fe8j", "added -mjp-promote"],
+                    "cookie",
+                    "csrf",
+                    "laqieer",
+                )
+            )
+
+        request.assert_called_once()
+        get_scratch.assert_called_once_with("J1ka1", fresh=True)
+        compile_scratch.assert_called_once()
 
 
 if __name__ == "__main__":
