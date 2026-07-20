@@ -10,7 +10,7 @@
 > | function | current project metric | hosted metric / active scratch |
 > |---|---|---|
 > | `sub_800A594` | **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`, `EQUIV 60/60` | exact-source/provenance [`Sp10a`](https://decomp.me/scratch/Sp10a) **8906** under stock flags; not comparable to local 369 |
-> | `sub_807D3BC` | local **550**, linked **61/392**, size 392/frame 0x90; compaction matched, reject/register order remains | function-body-exact [`J1ka1`](https://decomp.me/scratch/J1ka1) **10499** because hosted agbcc lacks `-mjp-promote` |
+> | `sub_807D3BC` | local **550**, linked **61/392**, size 392/frame 0x90; compaction matched, reject/register order remains | exact-source [`J1ka1`](https://decomp.me/scratch/J1ka1) **655** under `agbcc-fe8j -mjp-promote`, no override |
 >
 > **PRIOR UPDATE 2026-07-15:** axis-2 was **99.97% (8689/8692),
 > 3 still-asm** when `GmapScreen2_Loop` matched through KxTCq/P24.
@@ -20,9 +20,9 @@
 > `GetUnitDefinitionFormEventScr` (`sub_800FAD0`) matched byte-exact through
 > P23: direct arg2, ABI-wide fifth argument with delayed `(s8)` narrowing,
 > target stack homes at `[sp,#0x40]/[sp,#0x44]`, and r5 build-flag readback.
-> Owned `eZzgG` reports raw score 2843 under hosted stock agbcc, with the exact
-> synchronized source and supported `match_override=true` yielding effective
-> score 0; its registry row is retired.
+> Owned `eZzgG` reports raw score **5** under
+> `agbcc-fe8j -mjp-promote`, with the exact synchronized source and supported
+> `match_override=true` yielding effective score 0; its registry row is retired.
 >
 > **PRIOR UPDATE 2026-07-13:** axis-2 was **99.94% (8687/8692), 5 still-asm**.
 > `DecodeLinkArenaRecordHeader` (`sub_80A6D34`) matched byte-exact after

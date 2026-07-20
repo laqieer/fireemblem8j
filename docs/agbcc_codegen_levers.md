@@ -174,15 +174,17 @@ Per-NEAR probe order (cheapest first): -Os, -fno-caller-saves, -fno-strict-alias
 then source idioms (a)-(e); then the permuter; the linked make compare is the only oracle.
 
 ## 10. decomp.me scratches posted (D286) — community matching enabled
-The 6 hardest spill-NEARs are public decomp.me scratches (platform=gba, compiler=agbcc; the 2 -mjp-promote ones
-show a ~2-instr delta since stock decomp.me agbcc lacks the fork flag):
+The 6 hardest spill-NEARs are public decomp.me scratches. Since issue #168,
+promotion-profile scratches use `agbcc-fe8j -mjp-promote`; the original stock
+compiler caveat is historical:
   sub_800A34C  https://decomp.me/scratch/5sdMe   Event18_ColorFade https://decomp.me/scratch/WmsgZ
   AdjustNewUnitPosition https://decomp.me/scratch/FtYfC   sub_80A2E64 https://decomp.me/scratch/3IquK
   sub_80A3528  https://decomp.me/scratch/0I8PP   sub_80CAEF4 https://decomp.me/scratch/kKWJ0
 
 ## 11. decomp.me scratches — round 2 (the next-tier reg-coloring NEARs)
-8 more posted (14 total). Note: decomp.me's STOCK agbcc rejects -mjp-promote (the repo's fork flag), so the
-7 -mjp-promote ones cannot produce the same raw compiler score there (target+near-match C, ~1-3 instr residual documented in each desc);
+8 more posted (14 total). Promotion-profile scratches can now use
+`agbcc-fe8j -mjp-promote`; older stock-compiler scores are historical
+(target+near-match C, ~1-3 instruction residual documented in each description);
 only sub_80BCD74 (PERMUTER_FLAGS=none) compiles + diffs live (1855/11300, a genuine community-iterable near).
   AddAttr2dBitMap https://decomp.me/scratch/az2Co   sub_80A3300 https://decomp.me/scratch/UbRNK
   sub_80A6E4C https://decomp.me/scratch/fFDjv        sub_80A730C https://decomp.me/scratch/34H33
@@ -519,14 +521,14 @@ On `GetUnitDefinitionFormEventScr`, using `arg2` directly completes its r7
 extension first; `buildFlag` owns `[sp,#0x40]`; a scoped word-sized `iSpill`
 owns `[sp,#0x44]` around `NextRN_N`; and a tied empty-asm reload preserves the
 known-u16 value without adding a narrowing pair. A final r5 readback of
-`buildFlag` reproduces the callback test. The stock decomp.me compiler cannot
-raw-score this project-local `-mjp-promote` match, so owned family `eZzgG` is
-closed with the supported `match_override` state. The synchronized flattened
+`buildFlag` reproduces the callback test. Owned family `eZzgG` now uses
+`agbcc-fe8j -mjp-promote` and reports raw score **5**; it remains closed with
+the supported `match_override` state for the isolated-context residual. The synchronized flattened
 scorer source has SHA-256
 `c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`;
-its hosted compiler is `agbcc` with
-`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`, its raw score is
-2843, and `match_override=true` is the valid effective score 0 after local
+its hosted compiler is `agbcc-fe8j` with
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -mjp-promote`, and
+`match_override=true` is the valid effective score 0 after local
 linked-ROM byte identity, CBMC 0/374, and differential EQUIV over 200 trials.
 The flattened upload and the project-form source are deliberately not
 text-identical.

@@ -75,6 +75,18 @@ With no FE8J flag it keeps stock codegen. `-mjp-promote` enables the signed
 sub-word and declaration-order argument-promotion profile used by selected
 FE8J translation units.
 
+**Live deployment evidence (2026-07-20, issue #168):**
+
+- decompme/compilers#75 published
+  `ghcr.io/decompme/compilers/gba/agbcc-fe8j:latest` at digest
+  `sha256:8c32b82006d422315f9bc92ce2555ee3ceed4f3d357e4224315f9fc1f8fab231`.
+- decompme/decomp.me#2046 registered the compiler; the full upstream matrix
+  downloaded it in dev/prod/docker-compose jobs and production `/api/compiler`
+  now exposes `agbcc-fe8j`.
+- Known promotion-profile scratch migrations are ABitG raw 100 with override,
+  eZzgG raw 5 with override, jeBp5 raw 0, and J1ka1 raw 655 with exact source
+  and no override.
+
 This is essentially the same `cpp → agbcc → arm-none-eabi-as` pipeline as our
 `Makefile` (`CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2
 -fhex-asm -ffix-debug-line -g`), **with one JP-specific difference**: our local C
@@ -97,6 +109,10 @@ text. The matching preset for FE8J work is therefore:
 (The full list of available GBA compilers is registered in
 `backend/coreapp/compilers.py`: `AGBCC`, `AGBCC_FE8J`, `OLD_AGBCC`,
 `AGBCC_ARM`, `AGBCCPP`, and the other GBA toolchains.)
+
+The saved game preset is tracked in
+[decompme/decomp.me#2047](https://github.com/decompme/decomp.me/issues/2047);
+record its live preset id here once the maintainer creates it.
 
 ## CP932 caveat — non-ASCII string literals
 

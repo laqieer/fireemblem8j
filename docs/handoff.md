@@ -5,6 +5,16 @@ source.** This file is a historical matching-campaign handoff; its dated SHAs,
 denominators, and per-promotion metrics are retained as evidence, not live
 progress. See also [`docs/maintenance.md`](maintenance.md).
 
+> **[CURRENT UPDATE 2026-07-20 — decomp.me FE8J compiler profile.]**
+> Issue #168 landed `agbcc-fe8j` through decompme/compilers#75 and
+> decompme/decomp.me#2046. Production exposes the compiler, and the complete
+> known stock-compiler mismatch class is migrated: ABitG raw **100**
+> (`match_override=true`), eZzgG raw **5** (`match_override=true`), jeBp5 raw
+> **0**, and active J1ka1 raw **655** with exact normalized project source hash
+> `ff66d78151e641c5bb73974963b3c6793ad0e4bca8732437755ae4a5a1d6fd62`.
+> J1ka1's local **550** and hosted **655** use different scoring pipelines,
+> despite the same `agbcc-fe8j -mjp-promote` compiler profile.
+>
 > **[CURRENT UPDATE 2026-07-16 — fHkHP harvest.]**
 > `SplineEvalCatmullRom` (`sub_800A34C`) now compiles byte-exact from
 > `src/SplineEvalCatmullRom.c`. Owned ABtKz reports raw score 0 after
@@ -53,8 +63,9 @@ progress. See also [`docs/maintenance.md`](maintenance.md).
 > 2. `sub_800A594` — local 369, hosted 8906; early `pts` allocator/scheduling
 >    wall. Do not conflate the two toolchain metrics.
 > 3. `sub_807D3BC` — local 550, residual 61/392, frame 0x90/size 392; active
->    J1ka1 hosted 10499 because stock decomp.me lacks `-mjp-promote`; compaction
->    matches, reject/register order remains.
+>    J1ka1 now hosts exact source at raw 655 under
+>    `agbcc-fe8j -mjp-promote`; compaction matches, reject/register order
+>    remains.
 > 4. `sub_80C05C8` — hosted 480/local 230; remaining allocator/scheduling
 >    residual outside the solved spill/phase/AP anchors.
 >

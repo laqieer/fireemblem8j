@@ -71,6 +71,15 @@
  *     countdown zero-fill: score 1700 -> 820, linked residual 176.
  *   No score 0. No unbounded run, remote execution, or raw-opcode asm.
  *
+ * HOSTED PROFILE UPDATE (2026-07-20, issue #168):
+ *   decomp.me now exposes agbcc-fe8j. Owned J1ka1 carries this exact source
+ *   (normalized SHA-256
+ *   ff66d78151e641c5bb73974963b3c6793ad0e4bca8732437755ae4a5a1d6fd62),
+ *   the exact -O2 -mjp-promote profile, raw score 655, and
+ *   match_override=false. Local 550 and hosted 655 use different scoring
+ *   pipelines. The 10499 stock-compiler notes below are retained as dated
+ *   campaign history only.
+ *
  * H/I/J/K FOLLOW-UP (2026-07-12, deterministic caps respected):
  *   Mandatory live harvest found only owned J1ka1 (no forks), hosted stock score
  *   10499 because `-mjp-promote` is unsupported. Tested H=6 archaeology/CFG

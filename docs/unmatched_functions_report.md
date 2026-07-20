@@ -43,8 +43,8 @@
 >   flags. Local 369 and hosted 8906 are different toolchain metrics.
 > - `sub_807D3BC`: local score **550**, linked residual **61/392**, exact
 >   size **392** and frame **0x90**, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`.
->   Active `J1ka1` hosts score **10499** because decomp.me lacks the project's
->   `-mjp-promote`; its function body is diff-zero against the integrated source.
+>   Active `J1ka1` hosts exact normalized project source at score **655** under
+>   `agbcc-fe8j -mjp-promote`, with no override.
 > - `sub_80C05C8`: local score **230**, hosted `R7AaX` score **480**, target and
 >   candidate size **544 B**, `PROVEN-BOUNDED(2)`. The phase-1 spill is removed,
 >   the phase transition and AP_Update r7/r6 carriers are exact, and the active
@@ -365,9 +365,10 @@ JP-only DEAD spline island
   reject materialization/register order — the candidate forms `0xff` in r2 at
   +0x30, while JP does so at +0x3A after loading `gBmMapSize`, rotating the outer
   loop's remaining register roles. Active scratch
-  [`J1ka1`](https://decomp.me/scratch/J1ka1) has a function body diff-zero against
-  the integrated source and remains registered; its hosted score is **10499**
-  because stock decomp.me agbcc does not implement `-mjp-promote`.
+  [`J1ka1`](https://decomp.me/scratch/J1ka1) has exact normalized project source
+  and remains registered; its hosted score is **655** under the same
+  `agbcc-fe8j -mjp-promote` profile, with no override. The local score **550**
+  and hosted score **655** use different scoring pipelines.
 
 ## Resolved study #9. DivinationRankSpriteUpdate — `0x080A2E64`  ✅ MATCHED 2026-07-11
 

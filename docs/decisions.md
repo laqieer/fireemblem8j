@@ -13692,3 +13692,43 @@ NPt7d is now listed in `scripts/tools/decompme/rejected_matches.tsv`, and a
 focused classifier regression proves the family reports `INVALID_MATCH`
 instead of `IMPROVED`. Owned J1ka1 remains active, the score-550/61-byte proven
 local source remains unchanged, and no oracle build input was modified.
+
+## D405 — publish the default-off FE8J agbcc profile on decomp.me and migrate the complete known mismatch class (#168, 2026-07-20)
+
+Issue #168 removed the hosted-toolchain blind spot without changing the ROM
+compiler default. A dedicated `agbcc-fe8j` package is built from pinned
+pret/agbcc `da598c1d918402c42c0c0d7128ba14567f3175e9` plus the checked-in
+default-off target-flag patch. No FE8J flag keeps stock codegen;
+`-mjp-promote` opts into the signed sub-word and declaration-order argument
+promotion profile. Source/release is `laqieer/agbcc@fe8j-v1`;
+decompme/compilers#75 and decompme/decomp.me#2046 are merged.
+
+Validation is byte- and production-path grounded:
+
+- stock-mode `.text` matches stock agbcc on the known project case, while
+  `-mjp-promote` produces the target argument-extension order;
+- the packaged toolchain passed a clean full `make compare`
+  (`fireemblem8.gba: OK`);
+- the official image digest is
+  `sha256:8c32b82006d422315f9bc92ce2555ee3ceed4f3d357e4224315f9fc1f8fab231`;
+- decomp.me's own downloader extracted the official image and the compiler
+  accepted `-mjp-promote`;
+- the full decomp.me dev/prod/docker-compose, MyPy, Ruff, Biome, and Vercel
+  matrix passed, and production `/api/compiler` exposes `agbcc-fe8j`.
+
+The complete known stock-compiler mismatch class was migrated transactionally:
+
+| scratch | hosted result |
+|---|---|
+| ABitG / AddAttr2dBitMap | raw 100, `match_override=true` retained for the isolated-context residual |
+| eZzgG / GetUnitDefinitionFormEventScr | raw 5, `match_override=true` retained for the isolated-context residual |
+| jeBp5 / Event2F_MoveUnit | raw 0, no override |
+| J1ka1 / SelectSummonPos | exact normalized project source, raw 655, no override |
+
+J1ka1 remains active because score 655 is nonzero. Its local score 550 and
+hosted score 655 use different scoring pipelines despite identical
+`agbcc-fe8j -mjp-promote` flags. Synchronization verification now tolerates
+exactly one final newline stripped by decomp.me transport for source/context,
+while still rejecting additional trailing-content differences. The saved game
+preset remains tracked by decompme/decomp.me#2047; this decision is complete
+only after its live id is recorded.

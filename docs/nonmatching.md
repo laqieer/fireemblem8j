@@ -256,8 +256,10 @@ rows are no longer active. `PrepareBattleGraphicsMaybe` was likewise retired aft
 on 2026-07-11 after owned family `qksQG` and community fork `l4bts` both verified
 raw score 0 and the project source passed the ROM oracle. The five-function harvest then
 retired ENay1/nlJVc/taZrH/MaiDT/g7FXU after each owned family and its
-Br4VJ/uVVvN/gdTId/vdXu7/XOT5k fork verified raw score 0. Stock decomp.me may still
-show NEAR progress that cannot reproduce project-local compiler context, so
+Br4VJ/uVVvN/gdTId/vdXu7/XOT5k fork verified raw score 0. Issue #168 later
+published `agbcc-fe8j` and migrated the known promotion-profile families:
+ABitG raw 100 with override, eZzgG raw 5 with override, jeBp5 raw 0, and
+J1ka1 raw 655. Hosted evidence is now compiler-profile faithful, but
 `make compare` remains the final oracle.
 
 `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) was then matched locally and published
@@ -269,7 +271,9 @@ at raw score 0 with `match_override=false`; its canonical function payload is
 identical to the promoted project source, and its registry row is retired.
 `GetUnitDefinitionFormEventScr` (`sub_800FAD0`) was then retired after its local
 P23 source passed the linked ROM oracle and owned family `eZzgG` exposed
-effective score 0 through the supported `match_override` state.
+raw score 5 under `agbcc-fe8j -mjp-promote`; the supported
+`match_override=true` state remains its effective score 0 for the isolated
+context residual.
 
 `GmapScreen2_Loop` (`sub_80C05C8`) matched on community fork KxTCq on
 2026-07-15. The project adaptation strips three scratch-only `.set` aliases,
@@ -283,13 +287,13 @@ reconstruction; signed denominator casts plus a scoped real-symbol
 calls without disturbing the matched allocation. Owned ABtKz reports raw score
 0 and its registry row is retired. Current ground truth is **8690/8692
 matching-C, 2 still descriptive asm**. Local and hosted
-scores below are deliberately separate; different compiler flags make them
-non-comparable.
+scores below are deliberately separate; flags or scoring pipelines may differ
+even when the hosted compiler profile is faithful.
 
 | function | current project evidence | hosted scratch evidence | remaining block |
 |---|---|---|---|
 | `sub_800A594` | integrated local **369/500 bytes, 208/250 halfwords**; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`Sp10a`](https://decomp.me/scratch/Sp10a), exact guarded source/provenance, hosted **8906** under stock flags | early `pts` allocation and resulting register/schedule permutation; local uses `-fno-rerun-cse-after-loop` |
-| `sub_807D3BC` | integrated local **550**, linked **61/392**, size 392/frame 0x90; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`J1ka1`](https://decomp.me/scratch/J1ka1), function body diff-zero, hosted **10499** because stock decomp.me lacks `-mjp-promote` | compaction core matches; reject materialization and outer-loop register order remain |
+| `sub_807D3BC` | integrated local **550**, linked **61/392**, size 392/frame 0x90; `PROVEN-BOUNDED(1)`; `EQUIV 60/60` | active [`J1ka1`](https://decomp.me/scratch/J1ka1), exact normalized project source, hosted **655** under `agbcc-fe8j -mjp-promote`, no override | compaction core matches; reject materialization and outer-loop register order remain |
 
 
 ## Metrics
