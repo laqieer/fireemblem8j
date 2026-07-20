@@ -13778,5 +13778,9 @@ The integrated source commit is `d76625844`. `make compare` reports
 8,565 project C functions plus 127 linked runtime functions, zero descriptive
 function asm, and zero `src/nonmatching/*.c` files. The learned clean
 source-shape family was applied to the only remaining same-pattern target;
-there are no further axis-2 candidates. Issue #165 is complete pending
-exact-SHA main CI publication.
+there are no further axis-2 candidates. Publication SHA
+`1d6c832c5cdadcb861f56d393a02e0cc6c635d3b` passed
+[CI run 29742919543](https://github.com/laqieer/fireemblem8j/actions/runs/29742919543)
+and
+[secret-scan run 29742919410](https://github.com/laqieer/fireemblem8j/actions/runs/29742919410).
+Issue #165 is complete.
