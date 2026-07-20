@@ -103,15 +103,38 @@ truth for any future refinement work; `make compare` remains the final oracle.
 
 ## Building
 
-You need the ARM toolchain (`binutils-arm-none-eabi`) and, for C decompilation,
-`agbcc` installed into `tools/agbcc` (same as the US decomp).
+Since all data is now extracted to source form, a full build needs the ARM
+toolchain plus the full asset toolchain that regenerates graphics/sound/text
+from committed PNG/`.pal`/`.mid`/`.aif` sources — mirroring exactly what
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) does on a clean
+checkout with no `baserom.gba`:
 
 ```bash
+# Host packages (Ubuntu/Debian)
+sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev bash
+python3 -m pip install ttp requests numpy Pillow   # asset-generator scripts
+
+# agbcc with the JP -mjp-promote flag baked in -> installed into tools/agbcc
+bash scripts/build_jp_agbcc.sh
+
+# Asset toolchain (gbagfx/bin2c/preproc/aif2pcm/mid2agb/scaninc), vendored+built
+# locally from the sibling US decomp; each setup.sh is idempotent
+git clone --depth 1 https://github.com/laqieer/fireemblem8u.git ../fireemblem8u
+scripts/tools/gbagfx/setup.sh
+scripts/tools/bin2c/setup.sh
+scripts/tools/preproc/setup.sh
+scripts/tools/aif2pcm/setup.sh
+scripts/tools/mid2agb/setup.sh
+scripts/tools/scaninc/setup.sh
+
+# FE6 SIO multiboot payload source (mgfembp submodule; builds its own agbcc)
+git submodule update --init --recursive
+
 # baserom.gba is NOT required: make compare builds fireemblem8.gba entirely from
 # committed source and verifies it with `sha1sum -c checksum.sha1`.
 make compare       # builds fireemblem8.gba from source and verifies the sha1
 # Optional: a local ./baserom.gba (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed) is
-# only for RE/diff tooling (asm-differ/objdiff targets) or one-time asset re-extraction.
+# only for RE/diff tooling (asm-differ/objdiff targets), never a build input.
 ```
 
 Success ends with:
@@ -135,11 +158,13 @@ Check the current self-containment with `python3 scripts/check_selfcontained.py`
 | Path             | Purpose                                                        |
 |------------------|----------------------------------------------------------------|
 | `baserom.gba`    | Original JP ROM — optional (you provide; gitignored); only for RE/diff tooling, not the build. |
-| `asm/*.s`        | Carved/descriptive assembly + data. **0 `.incbin "baserom.gba"`** (self-containment is 100%); the bulk is descriptive asm + committed `data/*.bin` references not yet decompiled to C / extracted as named assets — converted to real source as matching-C and extraction progress (see [`docs/frontier.md`](docs/frontier.md)). |
+| `asm/*.s`        | Carved/descriptive assembly. **0 `.incbin "baserom.gba"`** — matching-C and data extraction are both 100%, so only a handful of legitimately hand-written files remain (FE6 SIO glue, small padding/pilot fragments); see [`docs/frontier.md`](docs/frontier.md) for the live tally. |
 | `src/`           | Decompiled C (ported/adapted from the US decomp).              |
 | `include/`       | Headers (ported from the US decomp).                           |
+| `graphics/`, `sound/` | Extracted, editable source assets (PNG/`.pal` graphics, `.mid`/`.aif` music) compiled by the asset toolchain into the ROM's binary graphics/sound data. |
 | `ldscript.txt`   | ROM layout; decompiled objects are placed ahead of the incbin. |
-| `tools/agbcc`    | The GCC 2.95 ARM compiler (install locally; gitignored).       |
+| `tools/agbcc`, `tools/gbagfx`, ... | The GCC 2.95 ARM compiler and the vendored asset toolchain (install locally via `scripts/build_jp_agbcc.sh` / `scripts/tools/*/setup.sh`; gitignored). |
+| `mgfembp/`       | Git submodule providing the FE6 SIO multiboot payload source.  |
 | `docs/`          | Strategy & methodology notes.                                  |
 
 ## Reverse engineering
