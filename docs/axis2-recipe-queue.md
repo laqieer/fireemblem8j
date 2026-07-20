@@ -39,9 +39,9 @@
 >    different toolchain metrics.
 > 3. `sub_807D3BC` — integrated local **550**, linked residual **61/392**,
 >    size 392/frame 0x90, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`; active
->    [`J1ka1`](https://decomp.me/scratch/J1ka1) has the exact function body but
->    hosted score **10499** because decomp.me lacks project `-mjp-promote`.
->    Compaction is matched; reject/register ordering remains.
+>    [`J1ka1`](https://decomp.me/scratch/J1ka1) has the exact normalized project
+>    source and hosted score **655** under `agbcc-fe8j -mjp-promote`, with no
+>    override. Compaction is matched; reject/register ordering remains.
 > 4. `sub_80C05C8` — integrated hosted **480** / local **230**, exact target
 >    size **544 B**, `PROVEN-BOUNDED(2)`; active
 >    [`R7AaX`](https://decomp.me/scratch/R7AaX) has exact source/provenance.
@@ -193,8 +193,8 @@ transmuter infeasible for pure reg-coloring).
 - **sub_80A73D4**: the "7290→4070 deep reg-coloring wall" call is RETRACTED — reconstructed directly
   (no control flow; the "EASIEST augury fn" of #8/#30). Banked byte-exact; decomp.me 6rBHq SOLVED@0.
 - **sub_800FF08** (Event2F_MoveUnit): NOT a wall — matched byte-exact in-repo with `-mjp-promote`.
-  decomp.me jeBp5 can't reach 0 only because decomp.me stock agbcc lacks `-mjp-promote` (documented
-  there, non-SOLVED). Banked byte-exact.
+  decomp.me jeBp5 now reports raw score 0 under `agbcc-fe8j -mjp-promote`.
+  Banked byte-exact.
 - **ClassStatsDisplay_Loop** (sub_80B8B28): the "#4 slot-rotation / permuter base 3885→1450 NEAR"
   call is RETRACTED — MATCHED byte-exact in-repo 2026-07-03 (banked), removed from `src/nonmatching/`.
 - **LoadClassNameInClassReelFont** (sub_80D1844): the "#5 best clean 25/140 / moving-pointer wall"

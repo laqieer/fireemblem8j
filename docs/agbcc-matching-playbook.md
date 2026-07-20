@@ -324,14 +324,15 @@ to a concrete target live range and stack offset.
 `iSpill@[sp,#0x44]`, delayed `(s8)arg4`, and an r5 tail readback. The exact
 flattened scorer source synchronized to owned scratch `eZzgG` has SHA-256
 `c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`.
-Its hosted compiler is `agbcc` with
-`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`; raw score 2843 is
-expected because stock decomp.me agbcc lacks the project-local `-mjp-promote`
-flag. After local linked-ROM byte identity, CBMC 0/374, and differential EQUIV
-over 200 trials, `match_override=true` gives the supported effective score 0
-and the registry row is retired. The flattened scorer source is exact to the
-upstream upload, but intentionally is not text-identical to the project-form
-source with real includes and naming.
+Its hosted compiler profile must be `agbcc-fe8j` with
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -mjp-promote`.
+The earlier stock-`agbcc` score and `match_override` were a legacy toolchain
+fallback, not the desired endpoint once the FE8J compiler is available. After
+local linked-ROM byte identity, CBMC 0/374, and differential EQUIV over 200
+trials, migrate the owned scratch to the exact compiler profile and prefer a
+verified raw score. The flattened scorer source is exact to the upstream
+upload, but intentionally is not text-identical to the project-form source
+with real includes and naming.
 
 ---
 
@@ -391,11 +392,13 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
 4. **Close the owned registry family before deleting its row.**
    - If a decomp.me family member has raw `score == 0`, use
      `scripts/tools/decompme/mark_solved.sh <owned-base> --from-scratch <matched-member>`.
-   - If the byte-exact source is a **local oracle match** that decomp.me's stock compiler or
-     isolated context cannot reproduce (notably the project-local `-mjp-promote` flag), publish
-     the local solution text/link on the owned scratch and set decomp.me's supported
-     `match_override=true` (“matched elsewhere”) field. Do **not** forge the read-only raw score;
-     verify the family exposes an effective match with
+   - If the byte-exact source is a **local oracle match** that the exact hosted
+     compiler profile still cannot reproduce because of isolated-context or
+     linker differences, publish the local solution text/link on the owned
+     scratch and set decomp.me's supported `match_override=true` (“matched
+     elsewhere”) field. `-mjp-promote` by itself is not a reason to use this
+     fallback: migrate the scratch to `agbcc-fe8j` and keep the flag. Do **not**
+     forge the read-only raw score; verify the family exposes an effective match with
      `member.score == 0 || member.match_override`.
    - Only after that upstream check succeeds, remove the exact row from
      `scripts/tools/decompme/registry.tsv`.
@@ -494,24 +497,22 @@ local adoption only after this succeeds. Keep the registry row active and do
 
 For a locally discovered improvement, omit `--compiler-settings-from` to retain
 the owned base's compiler settings. Always try the exact local flags through
-`--compiler-flags "$LOCAL_FLAGS"` first. If stock decomp.me rejects a project-only
-flag such as `-mjp-promote`, rerun without that override or with a supported
-subset, while leaving `--local-flags "$LOCAL_FLAGS"` unchanged. The helper then
-retains the exact source, records the toolchain mismatch, verifies the score
-decomp.me actually produced, and keeps the row active.
+`--compiler-flags "$LOCAL_FLAGS"` first. A scratch using `-mjp-promote` must use
+the hosted `agbcc-fe8j` compiler; migrate an older stock-`agbcc` scratch rather
+than dropping the flag. `verify_compile.py --fix` handles the known
+stock-`agbcc` + `-mjp-promote` failure by changing the compiler while preserving
+the exact flags and source.
 
 The remote score may be equal or worse because it measures a different compiler
 configuration. **Score monotonicity is not proof of synchronization.** The proof
 is matching normalized source hashes plus the verified metadata record. Older
 adopted seeds must add the guard and be backfilled with this same sequence.
 
-**Confirmed fallback (`J1ka1`, `sub_807D3BC`).** The exact project flags fail
-decomp.me preflight with `"Invalid option 'jp-promote'"`; no compatible hosted
-compiler is exposed. The expected fallback retains the exact normalized source,
-uses hosted stock `-O2`, and records local score **655**, linked residual
-**82/392**, `PROVEN-BOUNDED(1)`, `EQUIV 60/60`, hosted score **10499**, and both
-flag sets. The `J1ka1` registry row remains active. This is a successful source
-sync with a documented toolchain mismatch, not a score regression failure.
+**FE8J compiler profile (`J1ka1`, `sub_807D3BC`).** Keep the exact normalized
+source and local flags, including `-mjp-promote`, and select `agbcc-fe8j`.
+The `J1ka1` registry row remains active while its raw score is nonzero; hosted
+and local results now use the same compiler profile instead of a documented
+toolchain fallback.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol or libcall
 

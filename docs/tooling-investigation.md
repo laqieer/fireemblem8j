@@ -23,7 +23,7 @@ e2e in the main tree.
 | WhenGryphonsFly/**decomp-permuter-agbcc** | decomp-permuter fork w/ agbcc defaults | native | **keep upstream** | fork is ~10 mo behind upstream; its one real fix (pipefail) is the single cherry-pick worth taking into our active `compiler_command` |
 | JRickey/**frog-adv-temple** | sibling AI-driven agbcc GBA decomp | exact twin | **learn** | playbook captured in [frog-adv-temple-lessons.md](tools/frog-adv-temple-lessons.md); feeds the parallelization plan |
 | macabeus/**kappa** | VS Code AI-decomp extension | via m2c/objdiff | **learn** | borrow ideas (AST-grep offset/`STRUCT_PAD` fixes, embeddings search); not a fit for our headless flow |
-| decompme/**decomp.me** | collaborative scratch platform | hosted GBA+agbcc ✓ | **learn / hosted** | use hosted for hard functions; helper `scripts/tools/decompme/new_scratch.sh` (opt-in publish); no self-host (no docker) |
+| decompme/**decomp.me** | collaborative scratch platform | hosted GBA+agbcc-fe8j ✓ | **learn / hosted** | use hosted for hard functions; helper `scripts/tools/decompme/new_scratch.sh` (opt-in publish); no self-host (no docker) |
 | neuromancer/**binary-comp** | MSVC 32-bit PE reconstruction verifier | x86 only ✗ | **skip** | n/a — no ARM/Thumb |
 
 ## Set up and in use
@@ -75,7 +75,7 @@ e2e in the main tree.
 - **kappa** ([doc](tools/kappa.md)) — borrow ideas (AST-grep offset/`STRUCT_PAD` code-fixes,
   embeddings "find similar decompiled function", one-click decomp.me scratch); don't install
   (IDE-bound).
-- **decomp.me** ([doc](tools/decomp-me.md)) — hosted GBA/agbcc scratches as an occasional aid;
+- **decomp.me** ([doc](tools/decomp-me.md)) — hosted GBA/agbcc-fe8j scratches as an occasional aid;
   opt-in `new_scratch.sh` helper; no self-host.
 - **binary-comp** ([doc](tools/binary-comp.md)) — **skip**; x86/MSVC-PE only, no ARM/Thumb,
   and it verifies an annotated reconstruction rather than matching two ROMs.

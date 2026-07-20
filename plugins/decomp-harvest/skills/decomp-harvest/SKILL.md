@@ -126,30 +126,27 @@ scripts/tools/decompme/sync_improvement.py <registry_slug> \
   --proof-result "PROVEN-BOUNDED(n)" --equiv-result "EQUIV 60/60" \
   --expected-score <dry-run-score>
 ```
-Try the exact local flags first. If stock decomp.me rejects a project-only flag
-(notably `-mjp-promote`), rerun the dry-run/live pair without
-`--compiler-flags` or with a supported subset; keep `--local-flags` unchanged so
-the mismatch is recorded. The helper flattens trusted project headers (it never
-executes downloaded source), PATCHes only after authenticating ownership, and
-verifies **normalized source identity**, settings, score, and the recorded local
-score/residual plus both toolchains' flags. It restores the original scratch if
-verification fails.
+Use the exact local flags. A scratch carrying `-mjp-promote` must select
+`agbcc-fe8j`; migrate an older stock-`agbcc` scratch rather than dropping the
+flag (`verify_compile.py --fix` handles the known invalid-option migration).
+The helper flattens trusted project headers (it never executes downloaded
+source), PATCHes only after authenticating ownership, and verifies **normalized
+source identity**, settings, score, and the recorded local score/residual plus
+both toolchains' flags. It restores the original scratch if verification fails.
 
 The decomp.me score may stay equal or become worse under its different compiler;
 score monotonicity is neither source-sync proof nor a completion gate. Keep the
 registry row active and do **not** mark a score>0 scratch solved. This does
 **not** touch the oracle — `make nonmatching` only. Local adoption or commit
 without successful upstream synchronization is **incomplete**. Revert if a
-local proof/EQUIV gate fails; if only the exact remote flags are unsupported,
-retain the source, use the supported fallback, record the mismatch, and keep
-the registry row.
+local proof/EQUIV gate fails. If `agbcc-fe8j` rejects `-mjp-promote`, treat that
+as a compiler packaging/deployment regression and stop; never silently remove
+the flag.
 
-**Confirmed fallback — J1ka1 (`sub_807D3BC`):** exact `-mjp-promote` preflight
-fails with `"Invalid option 'jp-promote'"`, and decomp.me exposes no compatible
-compiler. Synchronize the same normalized source under hosted stock `-O2` and
-record: local score **655**, linked residual **82/392**,
-`PROVEN-BOUNDED(1)`, `EQUIV 60/60`, hosted score **10499**, and both flag sets.
-Keeping the `J1ka1` registry row is the expected successful fallback.
+**J1ka1 (`sub_807D3BC`) profile:** synchronize the exact normalized source with
+hosted `agbcc-fe8j` and the local `-mjp-promote` flags. Keep the registry row
+while the raw score is nonzero; do not accept the historical stock-compiler
+score as the final hosted state.
 
 ## 3. Learn — save the pattern to the cookbook (ALWAYS after a new match)
 Diff the matched source against the old `src/nonmatching/<fn>.c` (from git):

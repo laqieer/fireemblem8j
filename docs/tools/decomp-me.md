@@ -16,7 +16,7 @@ It is an **occasional aid**, not part of the build. Our oracle remains
 `make compare` in this repo; decomp.me is only a place to *develop* a matching
 function body before committing it here.
 
-## GBA + agbcc support is confirmed (from source)
+## GBA + agbcc-fe8j support is confirmed (from source)
 
 A fresh clone of <https://github.com/decompme/decomp.me> was inspected. The
 backend defines exactly the platform and compilers we need.
@@ -43,21 +43,23 @@ ARM7TDMI / Thumb target this project uses.
 
 ### agbcc compiler presets
 
-`backend/coreapp/compilers.py` (lines 284–310) defines four GBA compilers, all
-with `platform=GBA`:
+`backend/coreapp/compilers.py` defines the GBA compilers, all with
+`platform=GBA`:
 
 | Compiler `id` | What it is |
 | --- | --- |
-| `agbcc`     | the standard agbcc (GCC 2.95-based) — **this is the one this repo uses** |
+| `agbcc`     | the standard agbcc (GCC 2.95-based) |
+| `agbcc-fe8j` | the default-off-compatible FE8J build — **this is the one this repo uses** |
 | `old_agbcc` | older agbcc build (`base_compiler=AGBCC`) |
 | `agbcc_arm` | agbcc emitting ARM (non-Thumb) code (`base_compiler=AGBCC`) |
 | `agbccpp`   | the agbcc C++ front-end (`language=Language.CXX`) |
 
-The `agbcc` preset's compile command:
+The `agbcc-fe8j` compile command is the standard agbcc pipeline with its own
+compiler package:
 
 ```python
-AGBCC = GCCCompiler(
-    id="agbcc",
+AGBCC_FE8J = GCCCompiler(
+    id="agbcc-fe8j",
     platform=GBA,
     cc='/usr/bin/cpp -E -I "${COMPILER_DIR}"/include -iquote include -nostdinc -undef "$INPUT" '
        '| "${COMPILER_DIR}"/bin/agbcc $COMPILER_FLAGS -o - '
@@ -65,35 +67,61 @@ AGBCC = GCCCompiler(
 )
 ```
 
+The package is built from pinned pret/agbcc source plus
+[`scripts/agbcc_jp_promote.patch`](../../scripts/agbcc_jp_promote.patch); the
+published source and artifact are at
+[`laqieer/agbcc` release `fe8j-v1`](https://github.com/laqieer/agbcc/releases/tag/fe8j-v1).
+With no FE8J flag it keeps stock codegen. `-mjp-promote` enables the signed
+sub-word and declaration-order argument-promotion profile used by selected
+FE8J translation units.
+
+**Live deployment evidence (2026-07-20, issue #168):**
+
+- decompme/compilers#75 published
+  `ghcr.io/decompme/compilers/gba/agbcc-fe8j:latest` at digest
+  `sha256:8c32b82006d422315f9bc92ce2555ee3ceed4f3d357e4224315f9fc1f8fab231`.
+- decompme/decomp.me#2046 registered the compiler; the full upstream matrix
+  downloaded it in dev/prod/docker-compose jobs and production `/api/compiler`
+  now exposes `agbcc-fe8j`.
+- Known promotion-profile scratch migrations are ABitG raw 100 with override,
+  eZzgG raw 5 with override, jeBp5 raw 0, and J1ka1 raw 655 with exact source
+  and no override.
+
 This is essentially the same `cpp → agbcc → arm-none-eabi-as` pipeline as our
 `Makefile` (`CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2
 -fhex-asm -ffix-debug-line -g`), **with one JP-specific difference**: our local C
 rule inserts an `iconv -f UTF-8 -t CP932` step *between* `cpp` and `agbcc`
-(`Makefile:98–100`), and decomp.me's hosted `agbcc` preset does **not** — it
+(`Makefile:98–100`), and decomp.me's hosted compiler does **not** — it
 pipes `cpp` straight into `agbcc`. See the
 [CP932 caveat](#cp932-caveat--non-ascii-string-literals) below before using
 decomp.me for any function whose source or context contains non-ASCII / Japanese
 text. The matching preset for FE8J work is therefore:
 
 - **platform id**: `gba`
-- **compiler id**: `agbcc`
+- **compiler id**: `agbcc-fe8j`
 - **compiler_flags**: `-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`
   (drop `-fhex-asm`/`-ffix-debug-line`/`-g`; those are local debug/format flags,
   not codegen — keep `-O2 -mthumb-interwork`, which are the ones that affect
-  matching. Use the in-browser flag UI to tweak if a function was built at a
-  different `-O` level: this repo's `Makefile` currently uses a single global
-  `-O2` for every C TU, but the US reference Makefile carries per-file overrides
-  — e.g. `../fireemblem8u/Makefile` builds `src/agb_sram.o` at `-O1` — so when
-  porting such a TU here, match the US optimization level rather than the JP
-  global default.)
+  matching). Add `-mjp-promote` only for a TU whose Makefile rule enables that
+  profile. Use the in-browser flag UI to tweak if a function was built at a
+  different `-O` level.
 
 (The full list of available GBA compilers is registered in
-`backend/coreapp/compilers.py` around lines 1684–1688: `AGBCC`, `OLD_AGBCC`,
-`AGBCC_ARM`, `AGBCCPP`.)
+`backend/coreapp/compilers.py`: `AGBCC`, `AGBCC_FE8J`, `OLD_AGBCC`,
+`AGBCC_ARM`, `AGBCCPP`, and the other GBA toolchains.)
+
+The saved game preset is
+[`Fire Emblem: The Sacred Stones (JP)` (id 247)](https://decomp.me/preset/247),
+created through
+[decompme/decomp.me#2047](https://github.com/decompme/decomp.me/issues/2047).
+It selects `gba`, `agbcc-fe8j`, no libraries, and the baseline flags
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+-ffix-debug-line -g`. Add `-mjp-promote` only for the per-TU profile that
+requires it.
 
 ## CP932 caveat — non-ASCII string literals
 
-This is the one place decomp.me's hosted `agbcc` preset is **not** byte-for-byte
+This is the one place decomp.me's hosted `agbcc-fe8j` preset is **not** byte-for-byte
 identical to our local build. Our C rule is:
 
 ```
@@ -132,7 +160,7 @@ The normal, recommended path is the **website UI**, not the API:
    symbol sizes. In practice this is a trimmed paste of the relevant
    `include/*.h` from this repo (or `../fireemblem8u`).
 3. Go to <https://decomp.me/new>, choose **Platform → Game Boy Advance** and
-   **Compiler → agbcc**, set the flags above, paste the **target asm** in the
+   **Compiler → agbcc (Fire Emblem 8 JP)**, set the flags above, paste the
    "Target assembly" box and the headers in the "Context" box, and create the
    scratch.
 4. Iterate on the C in the editor. decomp.me recompiles and re-diffs on every
@@ -164,7 +192,7 @@ JSON fields:
 | Field | Type | Notes |
 | --- | --- | --- |
 | `platform` | string | e.g. `"gba"`. Optional if `compiler` implies it; if given it must match the compiler's platform. |
-| `compiler` | string | e.g. `"agbcc"`. **Required when `preset` is omitted.** |
+| `compiler` | string | e.g. `"agbcc-fe8j"`. **Required when `preset` is omitted.** |
 | `compiler_flags` | string | e.g. `"-mthumb-interwork -O2"`. |
 | `target_asm` | string | the function's assembly (the thing to match). |
 | `context` | string | headers / declarations. Defaults to `""`. |
@@ -193,7 +221,7 @@ Minimal example body:
 ```json
 {
   "platform": "gba",
-  "compiler": "agbcc",
+  "compiler": "agbcc-fe8j",
   "compiler_flags": "-mthumb-interwork -O2",
   "diff_label": "SomeFeFunc",
   "target_asm": "SomeFeFunc:\n    push {lr}\n    ...\n    pop {pc}\n",
@@ -201,10 +229,10 @@ Minimal example body:
 }
 ```
 
-To enumerate live preset ids without creating anything, `GET /api/compiler`
-returns `{ "compilers": {...}, "platforms": {...} }`
-(`backend/coreapp/views/compiler.py:61` `CompilerDetail.get`); look for the
-`gba` platform and the `agbcc` compiler keys.
+To enumerate live compiler ids without creating anything, `GET /api/compiler`
+returns `{ "compilers": {...}, "platforms": {...} }`; look for the `gba`
+platform and the `agbcc-fe8j` compiler key. Query `GET /api/preset?search=...`
+to resolve saved preset ids and verify their compiler/flags.
 
 ## Smoke test (read-only) — result
 
@@ -264,7 +292,7 @@ Two operator facts worth keeping in mind:
 - **Use the hosted site (decomp.me) as an occasional human/AI aid** for the few
   genuinely region-different FE8J functions where a live, instant diff helps more
   than the local loop — and for sharing a stuck function with a collaborator.
-  GBA + `agbcc` are first-class there and match this project's toolchain (the
+  GBA + `agbcc-fe8j` are first-class there and match this project's toolchain (the
   one caveat being the missing `iconv` step — see the CP932 caveat above —
   which is irrelevant for the ASCII-only logic TUs this is most useful for).
 - **Do NOT self-host.** decomp.me's only supported deployment is Docker

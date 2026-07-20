@@ -12,7 +12,7 @@
 #
 #     DECOMPME_PUBLISH=1
 #
-# Defaults to the GBA platform + agbcc compiler (this project's toolchain).
+# Defaults to the GBA platform + agbcc-fe8j compiler (this project's toolchain).
 # See docs/tools/decomp-me.md for the full rationale and API field reference.
 #
 # Usage:
@@ -22,7 +22,7 @@
 #       [--label FuncName] \
 #       [--name "Scratch name"] \
 #       [--source path/to/initial.c] \
-#       [--compiler agbcc] \
+#       [--compiler agbcc-fe8j] \
 #       [--platform gba] \
 #       [--flags "-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2"]
 #
@@ -78,7 +78,7 @@ usage() {
 
 # ---- Defaults matching this project's toolchain --------------------------
 platform="gba"
-compiler="agbcc"
+compiler="agbcc-fe8j"
 # Mirrors the local CC1FLAGS minus local-only debug/format flags
 # (-fhex-asm/-ffix-debug-line/-g), so a scratch that builds here also builds
 # under the repo's -Werror rule. -O2/-mthumb-interwork drive matching; the -W*
@@ -114,20 +114,16 @@ while [ "$#" -gt 0 ]; do
     esac
 done
 
-# ---- Sanitize flags for decomp.me ---------------------------------------
-# decomp.me ships the stock pret agbcc, which does NOT know this project's
-# custom `-mjp-promote` option (built by scripts/build_jp_agbcc.sh). A scratch
-# carrying it fails to compile there with "Invalid option `jp-promote'" (#151),
-# so the community can't even start on it. Strip such local-only flags here so a
-# scratch always compiles on decomp.me. (Re-audit anytime with verify_compile.py.)
-sanitized_flags=""
+# ---- Validate compiler-specific flags -----------------------------------
+# agbcc-fe8j is default-off compatible with stock agbcc and additionally accepts
+# the project's per-TU -mjp-promote profile. Keep that flag intact so hosted and
+# local codegen stay comparable; reject an explicit incompatible compiler rather
+# than silently changing the requested toolchain.
 for _f in $flags; do
-    case "$_f" in
-        -mjp-promote) echo "note: dropping local-only flag $_f (unsupported on decomp.me)" >&2 ;;
-        *)            sanitized_flags="${sanitized_flags:+$sanitized_flags }$_f" ;;
-    esac
+    if [ "$_f" = "-mjp-promote" ] && [ "$compiler" != "agbcc-fe8j" ]; then
+        die "-mjp-promote requires --compiler agbcc-fe8j"
+    fi
 done
-flags="$sanitized_flags"
 
 # ---- Hard opt-in gate (prevents accidental publishing) -------------------
 if [ "${DECOMPME_PUBLISH:-}" != "1" ]; then

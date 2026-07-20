@@ -11,7 +11,7 @@ from unittest import mock
 import sync_improvement as sync
 
 
-class J1ka1FallbackTest(unittest.TestCase):
+class J1ka1FE8JCompilerTest(unittest.TestCase):
     source = (
         "#ifndef FE8J_DECOMPME_CONTEXT\r\n"
         '#include "global.h"\r\n'
@@ -21,9 +21,9 @@ class J1ka1FallbackTest(unittest.TestCase):
     local_flags = (
         "-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -mjp-promote"
     )
-    hosted_flags = "-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2"
+    hosted_flags = local_flags
     settings = {
-        "compiler": "agbcc",
+        "compiler": "agbcc-fe8j",
         "compiler_flags": hosted_flags,
         "context": "#define FE8J_DECOMPME_CONTEXT 1\n",
         "diff_flags": [],
@@ -46,9 +46,9 @@ class J1ka1FallbackTest(unittest.TestCase):
             "--source",
             "src/nonmatching/sub_807D3BC.c",
             "--local-score",
-            "655",
+            "550",
             "--local-residual",
-            "82/392 linked bytes",
+            "61/392 linked bytes",
             "--local-flags",
             self.local_flags,
             "--proof-result",
@@ -66,9 +66,9 @@ class J1ka1FallbackTest(unittest.TestCase):
         return settings
 
     def compile_score(self, slug, source, settings):
-        if "-mjp-promote" in settings["compiler_flags"].split():
-            raise sync.SyncError("agbcc: Invalid option 'jp-promote'")
-        return 10499, 18700
+        self.assertEqual(settings["compiler"], "agbcc-fe8j")
+        self.assertIn("-mjp-promote", settings["compiler_flags"].split())
+        return 550, 18700
 
     def patches(self):
         return (
@@ -79,32 +79,32 @@ class J1ka1FallbackTest(unittest.TestCase):
             mock.patch.object(sync, "compile_score", side_effect=self.compile_score),
         )
 
-    def test_exact_flag_rejection_then_stock_fallback(self):
+    def test_exact_flags_use_fe8j_compiler(self):
         patches = self.patches()
         with patches[0], patches[1], patches[2], patches[3], patches[4]:
-            with self.assertRaisesRegex(sync.SyncError, "Invalid option 'jp-promote'"):
-                sync.main(self.args("--compiler-flags", self.local_flags))
-
             output = io.StringIO()
             with contextlib.redirect_stdout(output):
-                self.assertEqual(sync.main(self.args()), 0)
+                self.assertEqual(
+                    sync.main(self.args("--compiler-flags", self.local_flags)), 0
+                )
 
         text = output.getvalue()
-        self.assertIn("local_score=655", text)
-        self.assertIn("local_residual=82/392 linked bytes", text)
-        self.assertIn("toolchain flags differ", text)
+        self.assertIn("local_score=550", text)
+        self.assertIn("local_residual=61/392 linked bytes", text)
+        self.assertIn("decompme_compiler=agbcc-fe8j", text)
+        self.assertNotIn("toolchain flags differ", text)
         self.assertIn("registry row remains active", text)
 
     def test_provenance_and_normalized_source_identity(self):
         description = sync.sync_description(
             "",
             self.source,
-            "655",
-            "82/392 linked bytes",
+            "550",
+            "61/392 linked bytes",
             self.local_flags,
             "PROVEN-BOUNDED(1)",
             "EQUIV 60/60",
-            10499,
+            550,
             self.settings,
         )
         match = re.search(
@@ -113,19 +113,58 @@ class J1ka1FallbackTest(unittest.TestCase):
             re.DOTALL,
         )
         record = json.loads(match.group(1))
-        self.assertEqual(record["local_score"], "655")
-        self.assertEqual(record["local_residual"], "82/392 linked bytes")
+        self.assertEqual(record["local_score"], "550")
+        self.assertEqual(record["local_residual"], "61/392 linked bytes")
         self.assertEqual(record["proof_result"], "PROVEN-BOUNDED(1)")
         self.assertEqual(record["equivalence_result"], "EQUIV 60/60")
-        self.assertEqual(record["decompme_score"], 10499)
+        self.assertEqual(record["decompme_score"], 550)
+        self.assertEqual(record["decompme_compiler"], "agbcc-fe8j")
+        self.assertTrue(record["compiler_flags_match"])
         self.assertFalse(record["scores_directly_comparable"])
+        self.assertEqual(
+            record["score_note"],
+            "Local and decomp.me scores use different scoring pipelines.",
+        )
 
         scratch = dict(self.target)
         scratch.update(
             source_code=sync.normalize_source(self.source),
             description=description,
         )
-        sync.verify(scratch, self.source, self.settings, description, 10499)
+        scratch["score"] = 550
+        sync.verify(scratch, self.source, self.settings, description, 550)
+
+    def test_transport_may_strip_one_final_newline(self):
+        description = sync.sync_description(
+            "",
+            self.source,
+            "550",
+            "61/392 linked bytes",
+            self.local_flags,
+            "PROVEN-BOUNDED(1)",
+            "EQUIV 60/60",
+            550,
+            self.settings,
+        )
+        scratch = dict(
+            self.target,
+            score=550,
+            source_code=sync.normalize_source(self.source).rstrip("\n"),
+            context=self.settings["context"].rstrip("\n"),
+            description=description,
+        )
+
+        sync.verify(scratch, self.source, self.settings, description, 550)
+        self.assertEqual(
+            sync.source_digest(self.source),
+            sync.source_digest(sync.normalize_source(self.source).rstrip("\n")),
+        )
+
+    def test_transport_does_not_hide_extra_blank_line(self):
+        self.assertNotEqual(
+            sync.normalize_transport_text("context\n\n"),
+            sync.normalize_transport_text("context\n"),
+        )
 
 
 if __name__ == "__main__":

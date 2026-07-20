@@ -24,10 +24,9 @@ Usage:
     [--compiler-settings-from <fork>] [--compiler-flags <remote-flags>] \
     --expected-score <dry-run-score>
 
-Confirmed fallback fixture: J1ka1 rejects local ``-mjp-promote`` and has no
-compatible hosted compiler. The stock ``-O2`` sync records local score 655,
-82/392 residual, PROVEN-BOUNDED(1), EQUIV 60/60, and hosted score 10499 while
-retaining the registry row.
+FE8J scratches that use ``-mjp-promote`` must select the hosted
+``agbcc-fe8j`` compiler so the exact local flags can be preflighted instead of
+recording a toolchain mismatch.
 """
 
 import argparse
@@ -81,8 +80,15 @@ def normalize_source(source):
     return re.sub(r"\r\n?", "\n", source)
 
 
+def normalize_transport_text(text):
+    normalized = normalize_source(text)
+    if normalized.endswith("\n"):
+        return normalized[:-1]
+    return normalized
+
+
 def source_digest(source):
-    return hashlib.sha256(normalize_source(source).encode()).hexdigest()
+    return hashlib.sha256(normalize_transport_text(source).encode()).hexdigest()
 
 
 def request(path, data=None, method="GET", cookie=None, csrf=None, fresh=False):
@@ -190,7 +196,7 @@ def sync_description(
 ):
     local_flags_normalized = " ".join(local_flags.split())
     remote_flags_normalized = " ".join(settings["compiler_flags"].split())
-    comparable = local_flags_normalized == remote_flags_normalized
+    flags_match = local_flags_normalized == remote_flags_normalized
     record = {
         "normalized_source_sha256": source_digest(source),
         "local_score": local_score,
@@ -201,9 +207,11 @@ def sync_description(
         "decompme_score": score,
         "decompme_compiler": settings["compiler"],
         "decompme_compiler_flags": remote_flags_normalized,
-        "scores_directly_comparable": comparable,
+        "compiler_flags_match": flags_match,
+        "scores_directly_comparable": False,
+        "score_note": "Local and decomp.me scores use different scoring pipelines.",
     }
-    if not comparable:
+    if not flags_match:
         record["toolchain_note"] = (
             "Local and decomp.me flags differ; the remote score does not measure "
             "the project-only toolchain."
@@ -239,7 +247,9 @@ def payload(source, settings, description, match_override=False):
 
 def verify(scratch, source, settings, description, score):
     problems = []
-    if normalize_source(scratch.get("source_code") or "") != normalize_source(source):
+    if normalize_transport_text(
+        scratch.get("source_code") or ""
+    ) != normalize_transport_text(source):
         problems.append(
             "normalized source hash %s != %s"
             % (source_digest(scratch.get("source_code") or ""), source_digest(source))
@@ -251,7 +261,14 @@ def verify(scratch, source, settings, description, score):
     if scratch.get("match_override"):
         problems.append("match_override became true")
     for field, expected in settings.items():
-        if scratch.get(field, DEFAULTS[field]) != expected:
+        actual = scratch.get(field, DEFAULTS[field])
+        if field == "context":
+            matches = normalize_transport_text(actual) == normalize_transport_text(
+                expected
+            )
+        else:
+            matches = actual == expected
+        if not matches:
             problems.append("%s differs" % field)
     if problems:
         raise SyncError("; ".join(problems))
@@ -270,11 +287,22 @@ def fingerprint(scratch):
 
 
 def has_candidate_content(scratch, source, settings, description):
+    settings_match = True
+    for field, expected in settings.items():
+        actual = scratch.get(field, DEFAULTS[field])
+        if field == "context":
+            if normalize_transport_text(actual) != normalize_transport_text(expected):
+                settings_match = False
+                break
+        elif actual != expected:
+            settings_match = False
+            break
     return (
-        normalize_source(scratch.get("source_code") or "") == normalize_source(source)
+        normalize_transport_text(scratch.get("source_code") or "")
+        == normalize_transport_text(source)
         and scratch.get("description") == description
         and not scratch.get("match_override")
-        and all(scratch.get(field, DEFAULTS[field]) == value for field, value in settings.items())
+        and settings_match
     )
 
 
@@ -374,6 +402,8 @@ def main(argv=None):
     )
     if local_flags != remote_flags:
         print("NOTE: toolchain flags differ; local and decomp.me scores are not comparable")
+    else:
+        print("NOTE: compiler flags match, but local and decomp.me score scales differ")
     if new_score >= old_score:
         print(
             "NOTE: non-improving decomp.me score is allowed; "
