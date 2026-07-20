@@ -31,6 +31,17 @@ class RepairSettingsTest(unittest.TestCase):
         self.assertEqual(repaired_flags, "-O2")
         self.assertEqual(changes, ["removed -fbogus"])
 
+    def test_never_drops_jp_promote_from_fe8j_compiler(self):
+        compiler, repaired_flags, changes = verify.repair_settings(
+            "agbcc-fe8j",
+            "-O2 -mjp-promote",
+            "agbcc: Invalid option `jp-promote'",
+        )
+
+        self.assertIsNone(compiler)
+        self.assertIsNone(repaired_flags)
+        self.assertEqual(changes, [])
+
     def test_removes_werror_for_warning_failure(self):
         compiler, repaired_flags, changes = verify.repair_settings(
             "agbcc-fe8j",

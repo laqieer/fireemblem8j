@@ -61,6 +61,8 @@ def repair_flags(flags, compiler_output):
     m = INVALID_OPT_RE.search(compiler_output)
     if m:
         reported = m.group(1)
+        if reported == "jp-promote" and JP_PROMOTE_FLAG in flags.split():
+            return None, []
         kept, removed = [], []
         for f in flags.split():
             if f in ("-m" + reported, "-f" + reported) or f.lstrip("-") == reported:
@@ -79,14 +81,15 @@ def repair_settings(compiler, flags, compiler_output):
     """Return (compiler, flags, changes), or (None, None, []) when unknown."""
     invalid = INVALID_OPT_RE.search(compiler_output)
     if (
-        compiler == STOCK_AGBCC
-        and invalid
+        invalid
         and invalid.group(1) == "jp-promote"
         and JP_PROMOTE_FLAG in flags.split()
     ):
-        return FE8J_AGBCC, flags, [
-            "compiler %s -> %s" % (STOCK_AGBCC, FE8J_AGBCC)
-        ]
+        if compiler == STOCK_AGBCC:
+            return FE8J_AGBCC, flags, [
+                "compiler %s -> %s" % (STOCK_AGBCC, FE8J_AGBCC)
+            ]
+        return None, None, []
 
     newflags, removed = repair_flags(flags, compiler_output)
     if removed:

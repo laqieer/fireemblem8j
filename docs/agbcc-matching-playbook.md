@@ -324,14 +324,15 @@ to a concrete target live range and stack offset.
 `iSpill@[sp,#0x44]`, delayed `(s8)arg4`, and an r5 tail readback. The exact
 flattened scorer source synchronized to owned scratch `eZzgG` has SHA-256
 `c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`.
-Its hosted compiler is `agbcc` with
-`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2`; raw score 2843 is
-expected because stock decomp.me agbcc lacks the project-local `-mjp-promote`
-flag. After local linked-ROM byte identity, CBMC 0/374, and differential EQUIV
-over 200 trials, `match_override=true` gives the supported effective score 0
-and the registry row is retired. The flattened scorer source is exact to the
-upstream upload, but intentionally is not text-identical to the project-form
-source with real includes and naming.
+Its hosted compiler profile must be `agbcc-fe8j` with
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -mjp-promote`.
+The earlier stock-`agbcc` score and `match_override` were a legacy toolchain
+fallback, not the desired endpoint once the FE8J compiler is available. After
+local linked-ROM byte identity, CBMC 0/374, and differential EQUIV over 200
+trials, migrate the owned scratch to the exact compiler profile and prefer a
+verified raw score. The flattened scorer source is exact to the upstream
+upload, but intentionally is not text-identical to the project-form source
+with real includes and naming.
 
 ---
 
@@ -391,11 +392,13 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
 4. **Close the owned registry family before deleting its row.**
    - If a decomp.me family member has raw `score == 0`, use
      `scripts/tools/decompme/mark_solved.sh <owned-base> --from-scratch <matched-member>`.
-   - If the byte-exact source is a **local oracle match** that decomp.me's stock compiler or
-     isolated context cannot reproduce (notably the project-local `-mjp-promote` flag), publish
-     the local solution text/link on the owned scratch and set decomp.me's supported
-     `match_override=true` (“matched elsewhere”) field. Do **not** forge the read-only raw score;
-     verify the family exposes an effective match with
+   - If the byte-exact source is a **local oracle match** that the exact hosted
+     compiler profile still cannot reproduce because of isolated-context or
+     linker differences, publish the local solution text/link on the owned
+     scratch and set decomp.me's supported `match_override=true` (“matched
+     elsewhere”) field. `-mjp-promote` by itself is not a reason to use this
+     fallback: migrate the scratch to `agbcc-fe8j` and keep the flag. Do **not**
+     forge the read-only raw score; verify the family exposes an effective match with
      `member.score == 0 || member.match_override`.
    - Only after that upstream check succeeds, remove the exact row from
      `scripts/tools/decompme/registry.tsv`.
