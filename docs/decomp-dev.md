@@ -19,17 +19,21 @@ same mechanism the US sibling decomp (`../fireemblem8u`,
 > See "Relationship to the other progress steps" below for exactly which
 > conditions gate which step.
 
-`ci.yml` runs on every push (`main` and pull requests) and on
-`workflow_dispatch`. The steps below are gated by `github.event_name !=
-'pull_request'` — i.e. they run on a push to **any** branch and on
-`workflow_dispatch` on any branch, and are skipped only for pull-request runs
-(unlike GitHub Pages generation/deploy, which is additionally restricted to
-`main`-push — see below):
+`ci.yml` triggers on push (only to `main` — `on.push.branches: [main]`), on
+`pull_request` (any branch/PR), and on `workflow_dispatch` (manual, can target
+any branch/ref). The steps below are gated by `github.event_name !=
+'pull_request'` — i.e. they run whenever the job is invoked by a non-PR event
+(a push, which per the trigger is always to `main`, or a manual
+`workflow_dispatch` run, which may be on any branch) and are skipped only for
+pull-request runs (unlike GitHub Pages generation/deploy, which is
+additionally restricted to `push`-to-`main` — see below):
 
 1. Installs `agbcc` + `binutils-arm-none-eabi` (the C toolchain) and runs
-   `make compare` / `make shiftcheck` (these two gate every push and PR).
-2. Non-PR only: `scripts/calcprogress.py` → `progress.txt` — coarse
-   progress (code/data bytes from the carve manifest `layout/*.tsv`;
+   `make compare` / `make shiftcheck` (these two run, ungated, on every
+   invocation the workflow trigger allows: push-to-`main`, any PR, or
+   `workflow_dispatch`).
+2. Non-PR invocations only: `scripts/calcprogress.py` → `progress.txt` —
+   coarse progress (code/data bytes from the carve manifest `layout/*.tsv`;
    functions/symbols from the decompiled `src/*.o`). **No `baserom.gba` is
    needed** — building `src/*.o` needs only agbcc + binutils, not the ROM incbin.
 3. `scripts/gen-report.py progress.txt report.json` — converts that into an
@@ -86,10 +90,10 @@ gating condition:
 
 | Step in `ci.yml` | Destination | Secret | Gating condition |
 | --- | --- | --- | --- |
-| `make compare` / `make shiftcheck` | — (byte-match + shiftability CI) | none (build is self-contained; no `BASEROM_URL`) | every push (any branch) and every PR |
-| "Generate/Upload decomp.dev report artifact" | decomp.dev | none | `event_name != 'pull_request'` — push to any branch or `workflow_dispatch`, not PRs |
+| `make compare` / `make shiftcheck` | — (byte-match + shiftability CI) | none (build is self-contained; no `BASEROM_URL`) | ungated: every invocation the workflow trigger allows (push-to-`main`, any PR, or `workflow_dispatch`) |
+| "Generate/Upload decomp.dev report artifact" | decomp.dev | none | `event_name != 'pull_request'` — push-to-`main` (the only branch the `push` trigger fires on) or `workflow_dispatch` on any branch, not PRs |
 | "Publish progress to frogress" | frogress portal (progress.deco.mp) | `PROGRESS_API_KEY` | `event_name != 'pull_request'` (same as above) **and** the secret being set |
-| "Generate/Upload Pages site" + `deploy` job | GitHub Pages | `pages: write` (separate least-privilege job) | `github.ref == 'refs/heads/main' && event_name == 'push'` — main-push only, stricter than the steps above |
+| "Generate/Upload Pages site" + `deploy` job | GitHub Pages | `pages: write` (separate least-privilege job) | `github.ref == 'refs/heads/main' && event_name == 'push'` — push-to-`main` only; excludes `workflow_dispatch`, stricter than the steps above |
 
 `backfill-progress.yml` remains a separate, manually-triggered
 (`workflow_dispatch`) workflow: it replays the entire git history once to seed
