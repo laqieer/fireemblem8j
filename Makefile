@@ -10,6 +10,8 @@
 # `sha1sum -c checksum.sha1` (7da0456035366aa18414faa79d8fe7649f03c1ed). A local
 # baserom.gba is needed ONLY for optional dev-only re-extraction, never to build.
 
+.DEFAULT_GOAL := compare
+
 #### Parallelism ####
 # The build is per-object (`%.o: %.c/.s`) and embarrassingly parallel: a clean
 # `make -j$(nproc)` is byte-identical to a serial build (verified) and ~6-8x faster
