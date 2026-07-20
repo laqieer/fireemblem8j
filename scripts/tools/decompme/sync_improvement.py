@@ -80,6 +80,13 @@ def normalize_source(source):
     return re.sub(r"\r\n?", "\n", source)
 
 
+def normalize_transport_text(text):
+    normalized = normalize_source(text)
+    if normalized.endswith("\n"):
+        return normalized[:-1]
+    return normalized
+
+
 def source_digest(source):
     return hashlib.sha256(normalize_source(source).encode()).hexdigest()
 
@@ -238,7 +245,9 @@ def payload(source, settings, description, match_override=False):
 
 def verify(scratch, source, settings, description, score):
     problems = []
-    if normalize_source(scratch.get("source_code") or "") != normalize_source(source):
+    if normalize_transport_text(
+        scratch.get("source_code") or ""
+    ) != normalize_transport_text(source):
         problems.append(
             "normalized source hash %s != %s"
             % (source_digest(scratch.get("source_code") or ""), source_digest(source))
@@ -250,7 +259,14 @@ def verify(scratch, source, settings, description, score):
     if scratch.get("match_override"):
         problems.append("match_override became true")
     for field, expected in settings.items():
-        if scratch.get(field, DEFAULTS[field]) != expected:
+        actual = scratch.get(field, DEFAULTS[field])
+        if field == "context":
+            matches = normalize_transport_text(actual) == normalize_transport_text(
+                expected
+            )
+        else:
+            matches = actual == expected
+        if not matches:
             problems.append("%s differs" % field)
     if problems:
         raise SyncError("; ".join(problems))
@@ -269,11 +285,22 @@ def fingerprint(scratch):
 
 
 def has_candidate_content(scratch, source, settings, description):
+    settings_match = True
+    for field, expected in settings.items():
+        actual = scratch.get(field, DEFAULTS[field])
+        if field == "context":
+            if normalize_transport_text(actual) != normalize_transport_text(expected):
+                settings_match = False
+                break
+        elif actual != expected:
+            settings_match = False
+            break
     return (
-        normalize_source(scratch.get("source_code") or "") == normalize_source(source)
+        normalize_transport_text(scratch.get("source_code") or "")
+        == normalize_transport_text(source)
         and scratch.get("description") == description
         and not scratch.get("match_override")
-        and all(scratch.get(field, DEFAULTS[field]) == value for field, value in settings.items())
+        and settings_match
     )
 
 

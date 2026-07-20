@@ -129,6 +129,34 @@ class J1ka1FE8JCompilerTest(unittest.TestCase):
         scratch["score"] = 550
         sync.verify(scratch, self.source, self.settings, description, 550)
 
+    def test_transport_may_strip_one_final_newline(self):
+        description = sync.sync_description(
+            "",
+            self.source,
+            "550",
+            "61/392 linked bytes",
+            self.local_flags,
+            "PROVEN-BOUNDED(1)",
+            "EQUIV 60/60",
+            550,
+            self.settings,
+        )
+        scratch = dict(
+            self.target,
+            score=550,
+            source_code=sync.normalize_source(self.source).rstrip("\n"),
+            context=self.settings["context"].rstrip("\n"),
+            description=description,
+        )
+
+        sync.verify(scratch, self.source, self.settings, description, 550)
+
+    def test_transport_does_not_hide_extra_blank_line(self):
+        self.assertNotEqual(
+            sync.normalize_transport_text("context\n\n"),
+            sync.normalize_transport_text("context\n"),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
