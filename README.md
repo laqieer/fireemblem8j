@@ -111,6 +111,7 @@ checkout with no `baserom.gba`:
 
 ```bash
 # Host packages (Ubuntu/Debian)
+sudo apt-get update
 sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev bash
 python3 -m pip install ttp requests numpy Pillow   # asset-generator scripts
 
