@@ -110,9 +110,14 @@ text. The matching preset for FE8J work is therefore:
 `backend/coreapp/compilers.py`: `AGBCC`, `AGBCC_FE8J`, `OLD_AGBCC`,
 `AGBCC_ARM`, `AGBCCPP`, and the other GBA toolchains.)
 
-The saved game preset is tracked in
-[decompme/decomp.me#2047](https://github.com/decompme/decomp.me/issues/2047);
-record its live preset id here once the maintainer creates it.
+The saved game preset is
+[`Fire Emblem: The Sacred Stones (JP)` (id 247)](https://decomp.me/preset/247),
+created through
+[decompme/decomp.me#2047](https://github.com/decompme/decomp.me/issues/2047).
+It selects `gba`, `agbcc-fe8j`, no libraries, and the baseline flags
+`-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+-ffix-debug-line -g`. Add `-mjp-promote` only for the per-TU profile that
+requires it.
 
 ## CP932 caveat — non-ASCII string literals
 
@@ -224,10 +229,10 @@ Minimal example body:
 }
 ```
 
-To enumerate live preset ids without creating anything, `GET /api/compiler`
-returns `{ "compilers": {...}, "platforms": {...} }`
-(`backend/coreapp/views/compiler.py:61` `CompilerDetail.get`); look for the
-`gba` platform and the `agbcc-fe8j` compiler key.
+To enumerate live compiler ids without creating anything, `GET /api/compiler`
+returns `{ "compilers": {...}, "platforms": {...} }`; look for the `gba`
+platform and the `agbcc-fe8j` compiler key. Query `GET /api/preset?search=...`
+to resolve saved preset ids and verify their compiler/flags.
 
 ## Smoke test (read-only) — result
 

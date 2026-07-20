@@ -13729,6 +13729,9 @@ J1ka1 remains active because score 655 is nonzero. Its local score 550 and
 hosted score 655 use different scoring pipelines despite identical
 `agbcc-fe8j -mjp-promote` flags. Synchronization verification now tolerates
 exactly one final newline stripped by decomp.me transport for source/context,
-while still rejecting additional trailing-content differences. The saved game
-preset remains tracked by decompme/decomp.me#2047; this decision is complete
-only after its live id is recorded.
+while still rejecting additional trailing-content differences. The saved
+`Fire Emblem: The Sacred Stones (JP)` preset is live as id **247**
+(`https://decomp.me/preset/247`), created through decompme/decomp.me#2047. It
+selects `gba`, `agbcc-fe8j`, no libraries, and the verified baseline project
+flags; `-mjp-promote` remains a per-TU opt-in. This completes the issue #168
+compiler-and-preset decision.
