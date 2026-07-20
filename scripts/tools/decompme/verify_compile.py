@@ -199,6 +199,18 @@ def protected_fields_match(left, right):
     return all(left.get(field) == right.get(field) for field in REPAIR_PROTECTED_FIELDS)
 
 
+def get_scratch_after_write(slug, attempts=3):
+    error = None
+    for attempt in range(attempts):
+        try:
+            return get_scratch(slug, fresh=True)
+        except (urllib.error.HTTPError, urllib.error.URLError) as current_error:
+            error = current_error
+            if attempt + 1 < attempts:
+                time.sleep(0.3)
+    raise error
+
+
 def restore_original_settings(
     slug,
     original,
@@ -237,9 +249,12 @@ def restore_original_settings(
             cookie=cookie,
             csrf=csrf,
         )
-        restored = get_scratch(slug, fresh=True)
+        restored = get_scratch_after_write(slug)
     except urllib.error.HTTPError as e:
         print(f"           -> ROLLBACK failed HTTP {e.code}: {e.read().decode()[:160]}")
+        return False
+    except urllib.error.URLError as e:
+        print(f"           -> ROLLBACK request failed: {e.reason}")
         return False
 
     if (
@@ -285,17 +300,21 @@ def apply_repair(
         _req(f"/scratch/{slug}", data=patch, method="PATCH", cookie=cookie, csrf=csrf)
     except urllib.error.HTTPError as e:
         patch_error = f"HTTP {e.code}: {e.read().decode()[:160]}"
+    except urllib.error.URLError as e:
+        patch_error = f"request failed: {e.reason}"
     try:
-        stored = get_scratch(slug, fresh=True)
+        stored = get_scratch_after_write(slug)
     except urllib.error.HTTPError as e:
         print(f"           -> fresh GET failed HTTP {e.code}: {e.read().decode()[:160]}")
+        return False
+    except urllib.error.URLError as e:
+        print(f"           -> fresh GET request failed: {e.reason}")
         return False
 
     stored_flags = normalize_flags(stored.get("compiler_flags", ""))
     expected_flags = normalize_flags(newflags)
     if (
-        patch_error is not None
-        or stored.get("compiler") != newcompiler
+        stored.get("compiler") != newcompiler
         or stored_flags != expected_flags
         or not protected_fields_match(scratch, stored)
     ):
@@ -311,6 +330,8 @@ def apply_repair(
             csrf,
         )
         return False
+    if patch_error is not None:
+        print(f"           -> PATCH response lost, persisted candidate verified: {patch_error}")
 
     try:
         persisted = compile_scratch(

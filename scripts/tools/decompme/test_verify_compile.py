@@ -72,10 +72,10 @@ class RepairSettingsTest(unittest.TestCase):
         self.assertEqual(changes, ["removed -Werror"])
 
     @mock.patch.object(verify, "compile_scratch")
-    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "get_scratch_after_write")
     @mock.patch.object(verify, "_req")
     def test_repair_transaction_rechecks_persisted_settings(
-        self, request, get_scratch, compile_scratch
+        self, request, get_scratch_after_write, compile_scratch
     ):
         scratch = {
             "owner": {"username": "laqieer"},
@@ -90,7 +90,7 @@ class RepairSettingsTest(unittest.TestCase):
             compiler_flags="-O2 -mjp-promote",
         )
         compile_scratch.return_value = {"success": True}
-        get_scratch.return_value = stored
+        get_scratch_after_write.return_value = stored
 
         with contextlib.redirect_stdout(io.StringIO()):
             self.assertTrue(
@@ -107,14 +107,14 @@ class RepairSettingsTest(unittest.TestCase):
             )
 
         request.assert_called_once()
-        get_scratch.assert_called_once_with("J1ka1", fresh=True)
+        get_scratch_after_write.assert_called_once_with("J1ka1")
         self.assertEqual(compile_scratch.call_count, 2)
 
     @mock.patch.object(verify, "compile_scratch")
-    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "get_scratch_after_write")
     @mock.patch.object(verify, "_req")
     def test_repair_transaction_rejects_ignored_patch(
-        self, request, get_scratch, compile_scratch
+        self, request, get_scratch_after_write, compile_scratch
     ):
         scratch = {
             "owner": {"username": "laqieer"},
@@ -124,7 +124,7 @@ class RepairSettingsTest(unittest.TestCase):
             "context": "",
         }
         compile_scratch.return_value = {"success": True}
-        get_scratch.return_value = scratch
+        get_scratch_after_write.return_value = scratch
 
         with contextlib.redirect_stdout(io.StringIO()):
             self.assertFalse(
@@ -141,14 +141,14 @@ class RepairSettingsTest(unittest.TestCase):
             )
 
         request.assert_called_once()
-        get_scratch.assert_called_once_with("J1ka1", fresh=True)
+        get_scratch_after_write.assert_called_once_with("J1ka1")
         compile_scratch.assert_called_once()
 
     @mock.patch.object(verify, "compile_scratch")
-    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "get_scratch_after_write")
     @mock.patch.object(verify, "_req")
     def test_repair_transaction_restores_partial_patch(
-        self, request, get_scratch, compile_scratch
+        self, request, get_scratch_after_write, compile_scratch
     ):
         scratch = {
             "owner": {"username": "laqieer"},
@@ -165,7 +165,7 @@ class RepairSettingsTest(unittest.TestCase):
         }
         partial = dict(scratch, compiler_flags="-O2 -mjp-promote")
         compile_scratch.return_value = {"success": True}
-        get_scratch.side_effect = [partial, scratch]
+        get_scratch_after_write.side_effect = [partial, scratch]
 
         with contextlib.redirect_stdout(io.StringIO()):
             self.assertFalse(
@@ -186,14 +186,14 @@ class RepairSettingsTest(unittest.TestCase):
             request.call_args_list[1].kwargs["data"],
             {"compiler": "agbcc", "compiler_flags": "-O2"},
         )
-        self.assertEqual(get_scratch.call_count, 2)
+        self.assertEqual(get_scratch_after_write.call_count, 2)
         compile_scratch.assert_called_once()
 
     @mock.patch.object(verify, "compile_scratch")
-    @mock.patch.object(verify, "get_scratch")
+    @mock.patch.object(verify, "get_scratch_after_write")
     @mock.patch.object(verify, "_req")
     def test_repair_transaction_restores_after_recompile_http_error(
-        self, request, get_scratch, compile_scratch
+        self, request, get_scratch_after_write, compile_scratch
     ):
         scratch = {
             "owner": {"username": "laqieer"},
@@ -223,7 +223,7 @@ class RepairSettingsTest(unittest.TestCase):
                 io.BytesIO(b"failure"),
             ),
         ]
-        get_scratch.side_effect = [stored, scratch]
+        get_scratch_after_write.side_effect = [stored, scratch]
 
         with contextlib.redirect_stdout(io.StringIO()):
             self.assertFalse(
@@ -240,7 +240,53 @@ class RepairSettingsTest(unittest.TestCase):
             )
 
         self.assertEqual(request.call_count, 2)
-        self.assertEqual(get_scratch.call_count, 2)
+        self.assertEqual(get_scratch_after_write.call_count, 2)
+        self.assertEqual(compile_scratch.call_count, 2)
+
+    @mock.patch.object(verify, "compile_scratch")
+    @mock.patch.object(verify, "get_scratch_after_write")
+    @mock.patch.object(verify, "_req")
+    def test_repair_transaction_accepts_lost_patch_response_after_verification(
+        self, request, get_scratch_after_write, compile_scratch
+    ):
+        scratch = {
+            "owner": {"username": "laqieer"},
+            "compiler": "agbcc",
+            "compiler_flags": "-O2",
+            "source_code": "int func(void) { return 1; }\n",
+            "context": "",
+            "name": "func",
+            "description": "",
+            "match_override": False,
+            "libraries": [],
+            "diff_flags": [],
+            "diff_label": "func",
+        }
+        stored = dict(
+            scratch,
+            compiler="agbcc-fe8j",
+            compiler_flags="-O2 -mjp-promote",
+        )
+        request.side_effect = urllib.error.URLError("connection lost")
+        get_scratch_after_write.return_value = stored
+        compile_scratch.return_value = {"success": True}
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertTrue(
+                verify.apply_repair(
+                    "J1ka1",
+                    scratch,
+                    "agbcc-fe8j",
+                    "-O2 -mjp-promote",
+                    ["compiler agbcc -> agbcc-fe8j", "added -mjp-promote"],
+                    "cookie",
+                    "csrf",
+                    "laqieer",
+                )
+            )
+
+        request.assert_called_once()
+        get_scratch_after_write.assert_called_once_with("J1ka1")
         self.assertEqual(compile_scratch.call_count, 2)
 
 
