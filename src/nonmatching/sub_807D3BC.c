@@ -119,6 +119,7 @@
  * scan r1, fail-path r2, and the existing source scope.
  */
 
+#ifndef FE8J_DECOMPME_CONTEXT
 #include "global.h"
 #include "functions.h"
 #include "variables.h"
@@ -126,6 +127,7 @@
 #include "bmbattle.h"
 #include "rng.h"
 #include "mapanim.h"
+#endif
 
 extern int DivRem(int, int);
 
