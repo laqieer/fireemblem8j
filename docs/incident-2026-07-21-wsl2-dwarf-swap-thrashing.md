@@ -1,4 +1,4 @@
-# Incident postmortem — WSL2 DWARF swap thrashing (2026-07-21)
+# Incident postmortem — WSL2 memory pressure and swap thrashing during DWARF tooling (2026-07-21)
 
 **Severity:** low (single-developer environment availability incident). Impact: the
 active WSL2 guest stopped making recorded progress at approximately 03:28 UTC, interrupting
@@ -34,7 +34,7 @@ All times below are UTC.
 
 | Time | Observation | Interpretation and limit |
 |---|---|---|
-| 03:10:48 | FE8J `nm -l` PIDs 5357 and 6672 used 2,374,816 and 2,374,248 KiB RSS: 4,749,064 KiB (4.529 GiB) combined. A Python process used 112,140 KiB. | Visible lower bound including Python: 4,861,204 KiB (4.64 GiB). This is far below the 24 GiB guest limit. The snapshot was filtered, RSS is not private/PSS, and total system RSS, PSS, and working set are unknown. |
+| 03:10:48 | FE8J `nm -l` PIDs 5357 and 6672 used 2,374,816 and 2,374,248 KiB RSS: 4,749,064 KiB (4.529 GiB) combined. A Python process used 112,140 KiB. | Visible lower bound including Python: 4,861,204 KiB (4.636 GiB). This is far below the 24 GiB guest limit. The snapshot was filtered, RSS is not private/PSS, and total system RSS, PSS, and working set are unknown. |
 | Through 03:19:50 | Both `nm` readers were confirmed present. | Confirms overlap, not their complete lifetimes. |
 | 03:27:40 | PID 5357 was sampled at 2,374,816 KiB RSS and 99.6% CPU. | PID 6672 had no recorded completion, but it was not directly sampled at 03:27; do not infer that both were observed then. |
 | 03:27:42 | Expansion session `335511d9…` started the full Python tests. | No completion appears in the logs. Timing permits a marginal contribution but does not establish this as the final trigger. |
@@ -54,7 +54,7 @@ collapsed into a single continuously observed failure mechanism.
 
 | Check | Result | What it establishes |
 |---|---|---|
-| Process RSS snapshots | The two `nm -l` readers totaled 4,749,064 KiB (4.529 GiB) RSS; with sampled Python the visible lower bound was 4.64 GiB at 03:10:48. Comparable dual-`nm` concurrency had completed earlier. | The DWARF work had material residency and is a probable contributor, but its sampled RSS was far below 24 GiB and does not deterministically explain the incident. Filtered RSS cannot recover aggregate PSS or working set. |
+| Process RSS snapshots | The two `nm -l` readers totaled 4,749,064 KiB (4.529 GiB) RSS; with sampled Python the visible lower bound was 4.636 GiB at 03:10:48. Comparable dual-`nm` concurrency had completed earlier. | The DWARF work had material residency and is a probable contributor, but its sampled RSS was far below 24 GiB and does not deterministically explain the incident. Filtered RSS cannot recover aggregate PSS or working set. |
 | Guest journal | Final record at 03:28:11 says journald was under memory pressure and flushing caches. | Direct evidence of guest memory pressure immediately before recorded progress stopped; it does not record why responsiveness was lost. |
 | Host VHDMP Event 301 | Large swap write/read volumes and hundreds-of-milliseconds average write latency in three 3604-second reports. | Direct evidence of severe swap I/O across reported intervals, not a lifetime total, continuous-activity proof, or direct causal record for lost responsiveness. |
 | VHDMP lifecycle events | Old swap/ext4 VHD unsurfacing, close, and destruction at 05:58:03. | Establishes later host-side VHD teardown, not its cause. |
