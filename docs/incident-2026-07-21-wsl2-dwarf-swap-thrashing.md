@@ -9,8 +9,8 @@ post-incident full hash was run.
 **One-line:** Two concurrent `nm -l` readers of the unusually large FE8J DWARF ELF were a
 strongly supported, probable contributor to observed memory pressure and severe swap I/O;
 swap thrashing is the best-supported explanation for the loss of responsiveness, not a
-directly proven causal event, and the exact final trigger and later VHD teardown remain
-unresolved.
+directly proven causal event, and the exact final trigger remains unresolved. Direct
+operator testimony identifies the later VHD teardown and new boot as manual recovery.
 
 ## Context
 
@@ -43,12 +43,13 @@ All times below are UTC.
 | 03:32:20 | VHDMP Event 301 reported 12,648,833,024 swap-write bytes in a 3604-second interval, across 943,027 writes at 328 ms average latency. | Direct host evidence of high-volume, high-latency swap I/O. |
 | 04:32:24 | Event 301 reported 34,045,960,192 write bytes and 7,027,535,872 read bytes in a 3604-second interval, with 3,369,449 writes at 339 ms average latency. | Host VHD interval reporting continued after guest progress disappeared. |
 | 05:32:28 | Event 301 reported 8,297,996,288 write bytes and 5,548,089,344 read bytes in a 3604-second interval. | Continued interval-level swap traffic. These Event 301 values are neither lifetime cumulative counters nor proof of uninterrupted guest activity. |
-| 05:58:03 | VHDMP Events 18/27/28/16 recorded the old swap and ext4 VHDs unsurfacing, closing, and being destroyed. | Host-side teardown occurred about 2.5 hours after the final guest journal entry; its initiating reason is not recorded in the available evidence. |
-| 06:01:25 | A new WSL kernel boot began; the journal characterized the preceding shutdown as unclean. | Establishes a guest lifecycle boundary, but not whether memory pressure directly caused the later teardown. |
+| 05:58:03 | VHDMP Events 18/27/28/16 recorded the old swap and ext4 VHDs unsurfacing, closing, and being destroyed. | The operator reported after the initial RCA that they manually ran `wsl --shutdown` in PowerShell to recover the unresponsive guest. The command time was not independently logged, but the observed teardown aligns with that sequence. |
+| 06:01:25 | A new WSL kernel boot began; the journal characterized the preceding shutdown as unclean. | The operator reported then running `wsl`. Its exact command time was not independently logged; the observed new boot aligns with the reported sequence. |
 
 The guest loss-of-progress boundary, the subsequent host VHD interval reports, the
 05:58:03 VHD teardown, and the 06:01:25 boot are separate observations. They must not be
-collapsed into a single continuously observed failure mechanism.
+collapsed into a single continuously observed failure mechanism. The manual shutdown ended
+the degraded instance; it did not cause the approximately 03:28 loss of responsiveness.
 
 ## Investigation and evidence
 
@@ -57,8 +58,9 @@ collapsed into a single continuously observed failure mechanism.
 | Process RSS snapshots | The two `nm -l` readers totaled 4,749,064 KiB (4.529 GiB) RSS; with sampled Python the visible lower bound was 4.636 GiB at 03:10:48. Comparable dual-`nm` concurrency had completed earlier. | The DWARF work had material residency and is a probable contributor, but its sampled RSS was far below 24 GiB and does not deterministically explain the incident. Filtered RSS cannot recover aggregate PSS or working set. |
 | Guest journal | Final record at 03:28:11 says journald was under memory pressure and flushing caches. | Direct evidence of guest memory pressure immediately before recorded progress stopped; it does not record why responsiveness was lost. |
 | Host VHDMP Event 301 | Large swap write/read volumes and hundreds-of-milliseconds average write latency in three 3604-second reports. | Direct evidence of severe swap I/O across reported intervals, not a lifetime total, continuous-activity proof, or direct causal record for lost responsiveness. |
-| VHDMP lifecycle events | Old swap/ext4 VHD unsurfacing, close, and destruction at 05:58:03. | Establishes later host-side VHD teardown, not its cause. |
-| New guest journal | Kernel boot at 06:01:25; prior shutdown marked unclean. | Establishes restart and unclean prior shutdown. |
+| Operator testimony supplied after the initial RCA | The operator manually ran `wsl --shutdown` in PowerShell to recover the unresponsive guest, then ran `wsl`. Exact command timestamps were not independently logged. | Identifies who initiated teardown and why, and identifies the requested restart; it does not explain the earlier loss of responsiveness. |
+| VHDMP lifecycle events | Old swap/ext4 VHD unsurfacing, close, and destruction at 05:58:03. | Establishes teardown mechanics and corroborates the reported `wsl --shutdown` sequence without fixing the command to that exact timestamp. |
+| New guest journal | Kernel boot at 06:01:25; prior shutdown marked unclean. | Establishes the new boot and corroborates the reported subsequent `wsl` command without fixing its exact timestamp. |
 | Linux OOM evidence | No OOM-killer record, cgroup OOM, or allocation failure in the inspected window. | A recorded OOM event was not found; absence does not identify an alternative final trigger or exclude records lost before persistence. |
 | Windows memory-pressure evidence | No Event 2004 in the inspected window. | No inspected Windows resource-exhaustion diagnosis or proof that the host killed `vmmem`; uninstrumented host actions remain possible. |
 | Kernel failure evidence | No panic, watchdog, or hung-task record in the inspected window. | A persisted Linux kernel crash/hang record was not found. |
@@ -67,8 +69,8 @@ collapsed into a single continuously observed failure mechanism.
 | Workload logs | Python tests and Node/Rollup started in different sessions just before the final guest entry and never logged completion. | Possible marginal load only; neither is proven to be the trigger. |
 
 Absence findings are bounded by the inspected guest and host windows. They cannot exclude
-records lost before persistence, events outside those windows, or uninstrumented host
-actions.
+records lost before persistence, events outside those windows, or other uninstrumented
+host actions before the reported manual recovery.
 
 ## ELF anatomy and safe measurements
 
@@ -107,11 +109,11 @@ completed earlier and therefore was not a deterministic failure condition.
 | **Probable amplification** | Concurrent parsing/private objects, repeatedly touched file-backed pages, page cache, and any retained/captured output could compete with the rest of the guest. Full tests and Node/Rollup in separate sessions may have added marginal load, but the logs cannot quantify any of these aggregate effects. |
 | **Best-supported probable mechanism** | Memory pressure and severe swap I/O are confirmed observations. Swap thrashing causing loss of useful responsiveness is the best fit for their timing and magnitude, but no preserved event directly proves that causal link or the exact threshold crossing. |
 | **Observed effect** | Recorded guest progress ended at approximately 03:28; in-flight verification, tests, and build work did not complete in their logs. |
-| **Later teardown** | At 05:58:03 Windows unsurfaced, closed, and destroyed the old swap/ext4 VHDs; a new guest booted at 06:01:25 after an unclean shutdown. Why teardown occurred at that time is unresolved. |
+| **Manual recovery and later teardown** | The operator reported running `wsl --shutdown` in PowerShell to recover the unresponsive guest and then running `wsl`. VHD teardown at 05:58:03 and a new boot at 06:01:25 align with that sequence, although exact command timestamps were not independently logged. This recovery ended the degraded instance; it did not cause the approximately 03:28 loss of responsiveness. |
 
 This chain deliberately stops where the evidence stops. It does not turn temporal
 proximity into proof of a Linux OOM kill, host `vmmem` kill, kernel crash, Node/test
-trigger, storage failure, or a specific teardown mechanism.
+trigger, or storage failure behind the earlier loss of responsiveness.
 
 ## Findings and confidence
 
@@ -122,6 +124,7 @@ trigger, storage failure, or a specific teardown mechanism.
 | The guest recorded memory pressure immediately before logging stopped. | **High** | Final journald pressure message at 03:28:11. |
 | Host reports recorded severe swap I/O in three 3604-second intervals. | **High** | High write/read volumes and 328/339 ms average write latency where reported. |
 | Two FE8J `nm -l` readers overlapped and totaled 4.529 GiB sampled RSS at 03:10:48. | **High** | Direct process snapshots, with the RSS/PSS and filtering limitations stated above. |
+| The operator manually initiated WSL teardown to recover the unresponsive guest, then requested a new start. | **High** | Direct operator testimony supplied after the initial RCA, corroborated by VHDMP teardown and new-boot chronology; exact command timestamps were not independently logged. |
 | The VHDs were torn down later and the next boot followed an unclean shutdown. | **High** | VHDMP IDs 18/27/28/16 at 05:58:03 and new kernel boot at 06:01:25. |
 
 ### Probable
@@ -137,7 +140,6 @@ trigger, storage failure, or a specific teardown mechanism.
 | Finding | Confidence | Evidence gap |
 |---|---|---|
 | Full Python tests and/or Node/Rollup supplied marginal load near the threshold. | **Low** | Start times and missing completions only; no matching RSS/PSS samples or causal event. |
-| A manual action, host policy, or unrecorded WSL condition initiated the 05:58:03 teardown. | **Unknown** | Lifecycle events describe what was torn down, not who or why. |
 
 ### Not evidenced in the inspected window
 
@@ -170,8 +172,9 @@ persistence, and host actions may not have been instrumented.
    admission check.
 5. **Contributing observability gap: only filtered process snapshots survived.** Without
    total PSS, PSI, cgroup counters, swap rates, complete command lifetimes, and host
-   lifecycle context, the exact threshold crossing and teardown initiator cannot be
-   reconstructed.
+   lifecycle context, the exact threshold crossing and final workload trigger cannot be
+   reconstructed. The recovery initiator is now known from direct testimony, but exact
+   `wsl --shutdown` and `wsl` command timestamps were not independently logged.
 6. **Possible swap-capacity tradeoff, not a proven cause.** The 32 GiB swap setting and
    interval reports are consistent with swap allowing prolonged high-latency I/O. No
    counterfactual run established that less swap would have improved recovery, and more
@@ -244,7 +247,9 @@ complete descriptor and mapping telemetry.
 3. Preserve process PSS, cgroup events, PSI, `vmstat`, journal, and host event timestamps.
    Avoid new full ELF/DWARF probes during diagnosis.
 4. If the guest is no longer interactive, use host-side WSL controls deliberately and
-   record the command/time. Do not infer a host kill merely because a later boot occurred.
+   record the command/time. If recovery requires `wsl --shutdown` followed by `wsl`, record
+   both timestamps and distinguish that deliberate recovery from the earlier failure
+   mechanism. Do not infer a host kill merely because a later boot occurred.
 
 ### After recovery
 
@@ -267,5 +272,7 @@ empty Linux `dmesg` implies a host `vmmem` kill, its deterministic dual-DWARF ca
 its conclusion that more swap/`.wslconfig` is “the real fix.” The incidents are not known
 to have identical teardown mechanisms. For 2026-07-21, memory pressure and severe VHD swap
 I/O are observed, swap thrashing is the best-supported probable explanation for lost
-responsiveness, concurrent FE8J `nm -l` is a strongly supported probable contributor, and
-the exact threshold and 05:58 teardown remain unresolved.
+responsiveness, and concurrent FE8J `nm -l` is a strongly supported probable contributor.
+The exact threshold and final workload trigger remain unresolved; direct operator testimony
+identifies `wsl --shutdown` followed by `wsl` as the later recovery sequence, corroborated
+by the VHD teardown and new-boot chronology without independently logged command times.
